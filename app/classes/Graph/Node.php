@@ -1,0 +1,508 @@
+<?php
+
+/**
+ * Reprezentuje węzeł w strukturze drzewiastej
+ */
+class Node implements ArrayAccess
+{
+    private $data = [];
+    private $parent = null;
+    private $children = [];
+
+    public function __construct(array $data)
+    {
+        $this->data = $data;
+    }
+
+    public function __call($offset, $params)
+    {
+        throw new BadMethodCallException(
+            sprintf(
+                "Class (%s) does not contain method named (%s)",
+                get_class($this),
+                $offset
+            )
+        );
+    }
+
+    public function &__get($offset)
+    {
+        if (!isset($this->data[$offset]) and !array_key_exists($offset, $this->data)) {
+            throw new UnexpectedValueException(
+                sprintf(
+                    "Class (%s) does not contain property named (%s)",
+                    get_class($this), $offset
+                )
+            );
+        }
+
+        return $this->data[$offset];
+    }
+
+    public function __isset($offset)
+    {
+        return isset($this->data[$offset]);
+    }
+
+    public function __set($offset, $value)
+    {
+        if (!isset($this->data[$offset])) {
+            throw new UnexpectedValueException(
+                sprintf(
+                    "Class (%s) does not contain property named (%s)",
+                    get_class($this), $offset
+                )
+            );
+        }
+        $this->data[$offset] = $value;
+    }
+
+    public function __unset($offset)
+    {
+        unset($this->data[$offset]);
+    }
+
+    public function &getData()
+    {
+        return $this->data;
+    }
+
+    public function getProperty($property, $default = null)
+    {
+        if (!isset($this->data[$property])) {
+            return $default;
+        }
+
+        return $this->data[$property];
+    }
+
+    public function hasData(array $data)
+    {
+        foreach ($data as $key => $value) {
+            if (!isset($this->data[$key]) or $this->data[$key] !== $value) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public function offsetExists($offset)
+    {
+        return $this->__isset($offset);
+    }
+
+    public function &offsetGet($offset)
+    {
+        return $this->__get($offset);
+    }
+
+    public function offsetSet($offset, $value)
+    {
+        $this->__set($offset, $value);
+    }
+
+    public function offsetUnset($offset)
+    {
+        $this->__unset($offset);
+    }
+
+    public function addChildAtPosition(Node $child, $position)
+    {
+        if (isset($this->children[$position])) {
+            throw new UnexpectedValueException(
+                sprintf('Child on position (%s) already exists', $position)
+            );
+        }
+
+        $child->depriveParent();
+        $this->children[$position] = $child;
+
+        return $this;
+    }
+
+    public function countChildren()
+    {
+        return count($this->children);
+    }
+
+    public function countDescendants()
+    {
+        return count($this->getDescendants());
+    }
+
+    public function debug(array $display = [])
+    {
+        $getName = function ($node) use ($display) {
+            $data = $node->getData();
+            if (count($display)) {
+                $data = [];
+                foreach ($display as $field) {
+                    $data[] = $node->getProperty($field, '');
+                }
+            }
+            return implode('; ', $data);
+        };
+
+        $debug = function ($node, $structure = '') use (&$debug, $getName) {
+
+            $children = $node->getChildren();
+            $iterator = new \ArrayIterator($children);
+            $structure .= empty($structure) ? '' : '   ';
+
+            while ($iterator->valid()) {
+                $child = $iterator->current();
+                $iterator->next();
+                $isLast = $iterator->valid();
+
+                $childrenStructure = $structure.($isLast ? '|' : ' ');
+                $nodeStructure = $structure.($isLast ? '|': '`');
+                echo "\n{$nodeStructure}-- ".$getName($child);
+
+                $debug($child, $childrenStructure);
+            }
+        };
+
+        ob_start();
+        echo "\n".$getName($this);
+        $debug($this->getRoot());
+        $buffer = ob_get_clean();
+
+        return $buffer;
+    }
+
+    private function depriveParent()
+    {
+        if ($this->hasParent()) {
+            $almostNoParent = $this->getParent();
+            $this->parent = null;
+            $almostNoParent->removeChild($this);
+        }
+
+        return $this;
+    }
+
+    public function getAncestors()
+    {
+        $ancestors = [];
+        $node = $this;
+
+        while ($node->hasParent()) {
+            $parent = $node->getParent();
+            $ancestors[] = $parent;
+            $node = $parent;
+        }
+
+        return $ancestors;
+    }
+
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    public function getDepth()
+    {
+        if ($this->isRoot()) {
+            return 0;
+        }
+
+        return $this->getParent()->getDepth() + 1;
+    }
+
+    public function getDescendants()
+    {
+        $getDescendants = function ($node, &$descendants) use (&$getDescendants) {
+            foreach ($node->children as $child) {
+                $descendants[] = $child;
+                $getDescendants($child, $descendants);
+            }
+        };
+
+        $descendants = [];
+        $getDescendants($this, $descendants);
+
+        return $descendants;
+    }
+
+    public function getHeight()
+    {
+        $max = 0;
+        $getHeight = function ($node, $max) use (&$getHeight) {
+            $currentMax = $max;
+            foreach ($node->children as $child) {
+                $returnedMax = $getHeight($child, $max+1);
+                if ($returnedMax > $currentMax) {
+                    $currentMax = $returnedMax;
+                }
+            }
+
+            return $currentMax;
+        };
+
+        return $getHeight($this, $max);
+    }
+
+    public function getLevel()
+    {
+        return $this->getDepth() + 1;
+    }
+
+    public function getMaxDepth()
+    {
+        return $this->getDepth() + $this->getHeight();
+    }
+
+    public function getMaxLevel()
+    {
+        return $this->getMaxDepth() + 1;
+    }
+
+    public function getParent()
+    {
+        if ($this->parent === null) {
+            throw new RuntimeException(
+                "Node does not have parent"
+            );
+        }
+
+        return $this->parent;
+    }
+
+    public function getRoot()
+    {
+        if ($this->hasParent() === false) {
+            return $this;
+        }
+
+        return $this->getParent()->getRoot();
+    }
+
+    public function getSiblings()
+    {
+        if ($this->hasParent() === false) {
+            return [];
+        }
+
+        $parent = $this->getParent();
+        $siblings = [];
+        foreach ($parent->getChildren() as $child) {
+            if ($child !== $this) {
+                $siblings[] = $child;
+            }
+        }
+
+        return $siblings;
+    }
+
+    public function hasChild(Node $node)
+    {
+        return $this->isParentFor($node);
+    }
+
+    public function hasChildren()
+    {
+        return count($this->children) > 0;
+    }
+
+    public function isChildFor(Node $node)
+    {
+        foreach ($node->getChildren() as $child) {
+            if ($this === $child) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function hasParent()
+    {
+        return $this->parent !== null;
+    }
+
+    public function isDescendantFor(Node $node)
+    {
+        foreach ($node->getChildren() as $child) {
+            if ($this === $child) {
+                return true;
+            }
+            if ($this->isDescendantFor($child) === true) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function isInner()
+    {
+        return $this->hasParent() and $this->hasChildren();
+    }
+
+    public function isOuter()
+    {
+        return $this->isRoot() or $this->isLeaf();
+    }
+
+    public function isParentFor(Node $node)
+    {
+        foreach ($this->children as $child) {
+            if ($node === $child) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function isRoot()
+    {
+        return $this->parent === null;
+    }
+
+    public function isLeaf()
+    {
+        return count($this->children) == 0;
+    }
+
+    public function popChild()
+    {
+        if ($this->isLeaf()) {
+            throw new UnderflowException(
+                "Node does not have children"
+            );
+        }
+
+        $child = array_pop($this->children);
+        $child->depriveParent();
+
+        return $child;
+    }
+
+    public function pushChild(Node $child)
+    {
+        if ($this->hasChild($child)) {
+            return $this;
+        }
+
+        array_push($this->children, $child);
+        $child->setParent($this);
+
+        return $this;
+    }
+
+    public function pushChildren(array $children)
+    {
+        foreach ($children as $child) {
+            $this->pushChild($child);
+        }
+
+        return $this;
+    }
+
+    public function removeAllChildren()
+    {
+        while ($this->hasChildren()) {
+            $this->popChild();
+        }
+    }
+
+    public function removeChild(Node $node)
+    {
+        foreach ($this->children as $key => $child) {
+            if ($child === $node) {
+                $node->depriveParent();
+                unset($this->children[$key]);
+                break;
+            }
+        }
+
+        return $this;
+    }
+
+    public function selectFirstChildByData(array $data)
+    {
+        foreach ($this->getChildren() as $child) {
+            if ($child->hasData($data)) {
+                return $child;
+            }
+        }
+
+        return null;
+    }
+
+    public function selectFirstDescendantByData(array $data)
+    {
+        foreach ($this->getDescendants() as $descendant) {
+            if ($descendant->hasData($data)) {
+                return $descendant;
+            }
+        }
+
+        return null;
+    }
+
+    public function selectChildrenByData(array $data)
+    {
+        $correct = [];
+        foreach ($this->getChildren() as $child) {
+            if ($child->hasData($data)) {
+                $correct[] = $child;
+            }
+        }
+
+        return $correct;
+    }
+
+    public function selectDescendantsByData(array $data)
+    {
+        $correct = [];
+        foreach ($this->getDescendants() as $descendant) {
+            if ($descendant->hasData($data)) {
+                $correct[] = $descendant;
+            }
+        }
+
+        return $correct;
+    }
+
+    public function setParent(Node $newParent)
+    {
+        if ($this->hasParent() and $this->getParent() === $newParent) {
+            return $this;
+        }
+
+        $this->depriveParent();
+        $this->parent = $newParent;
+        $this->parent->pushChild($this);
+
+        return $this;
+    }
+
+    public function shiftChild()
+    {
+        if ($this->isLeaf()) {
+            throw new UnderflowException(
+                "Node does not have children"
+            );
+        }
+
+        $child = array_shift($this->children);
+        $child->depriveParent();
+
+        return $child;
+    }
+
+    public function unshiftChild(Node $child)
+    {
+        if ($this->hasChild($child)) {
+            return $this;
+        }
+
+        array_unshift($this->children, $child);
+        $child->setParent($this);
+
+        return $this;
+    }
+}
