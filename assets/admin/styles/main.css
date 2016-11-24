@@ -19,6 +19,37 @@
 }
 
 
+/** Modules */
+
+.grid-stack {
+    margin: 0px -10px;
+}
+
+.grid-stack>.grid-stack-item>.grid-stack-item-content {
+    box-shadow: 3px 3px 5px #ddd;
+    overflow: hidden;
+}
+
+.panel.panel-module {
+    height: 100%;
+    margin-bottom: 0;
+    border-radius: 0;
+}
+.module-gallery-preview-row {
+    margin: -10px;
+}
+
+.module-gallery-preview-wrapper {
+    float: left;
+    padding: 5px;
+}
+
+.module-gallery-preview-image {
+    width: auto;
+    height: 70px;
+}
+
+
 /** Sortable */
 
 .sortable, .sortable ol {

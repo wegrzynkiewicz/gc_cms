@@ -101,7 +101,11 @@ $(function() {
         $('[name=ids]').val(JSON.stringify(sortedIDs));
     });
 
-    $('#select_images').elfinderInputMultiple(function(filePaths) {
+    $('#select_images').elfinderInputMultiple({
+        title: '<?=trans('Wybierz wiele zdjęć')?>',
+        lang: '<?=$config['lang']?>',
+        url: '<?=rootUrl('/admin/elfinder/connector')?>'
+    }, function(filePaths) {
         $.post("<?=url("/admin/gallery-images/api/new/$gallery_id")?>", {
             filePaths: filePaths
         }, function(data) {

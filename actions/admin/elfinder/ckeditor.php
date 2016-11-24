@@ -1,3 +1,6 @@
+<?php
+checkPermissions();
+?>
 <!DOCTYPE html>
 <html>
 <head>

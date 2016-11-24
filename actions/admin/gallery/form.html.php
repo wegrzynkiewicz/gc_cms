@@ -40,13 +40,13 @@ $(function () {
     $('#form').validate({
         rules: {
             name: {
-                minlength: 6,
+                minlength: 4,
                 required: true
             },
         },
         messages: {
             name: {
-                minlength: "<?=trans('Nazwa galerii musi być dłuższa niż 6 znaków')?>",
+                minlength: "<?=trans('Nazwa galerii musi być dłuższa niż 4 znaki')?>",
                 required: "<?=trans('Nazwa galerii jest wymagana')?>"
             }
         },

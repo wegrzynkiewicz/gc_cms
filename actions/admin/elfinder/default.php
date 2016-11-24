@@ -1,3 +1,6 @@
+<?php
+checkPermissions();
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -33,7 +36,7 @@
 			// https://github.com/Studio-42/elFinder/wiki/Client-configuration-options
 			$(document).ready(function() {
 				$('#elfinder').elfinder({
-					url : '/elfinder/connector',   // connector URL (REQUIRED)
+					url : '/admin/elfinder/connector',   // connector URL (REQUIRED)
 					 lang: 'pl',                    // language (OPTIONAL)
                      height: $(window).height()-2,
 				});

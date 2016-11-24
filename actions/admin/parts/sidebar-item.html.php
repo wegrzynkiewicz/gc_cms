@@ -1,6 +1,7 @@
 <?php foreach($menu as $name => $node): ?>
     <li>
-        <a href="<?=empty($node['path']) ? '#' : url($node['path'])?>">
+        <a href="<?=empty($node['path']) ? '#' : url($node['path'])?>"
+            <?=isset($node['id']) ? sprintf('id="%s"', $node['id']) : '' ?> >
             <i class="<?=$node['icon']?>"></i>
             <?=trans($name)?>
 

@@ -28,60 +28,52 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-lg-12 ">
+<div class="grid-stack">
         <?php if (empty($modules)): ?>
             <p>
                 <?=trans('Nie znaleziono modułów')?>
             </p>
         <?php else: foreach ($modules as $module_id => $module): ?>
-            <div class="panel panel-success">
+
+        <div class="grid-stack-item"
+            data-gs-x="0" data-gs-y="0"
+            data-gs-width="2" data-gs-height="1"
+            data-gs-min-width="2"
+            data-gs-max-height="1"
+            >
+                <div class="grid-stack-item-content">
+
+            <div class="panel panel-default panel-module">
                 <div class="panel-heading">
-                    <h2 class="panel-title pull-left">
-                        <?=trans($config['modules'][$module['type']])?>
-                    </h2>
-                    <div class="pull-right">
 
-                        <?php if ($module['position'] > 1): ?>
-                            <a href=<?=url("/admin/module/move-up/$module_id/$page_id")?>
-                                title="<?=trans('Przenieś do góry')?>" class="btn btn-primary btn-sm">
-                                <i class="fa fa-arrow-up fa-fw"></i>
-                            </a>
-                        <?php endif ?>
-
-                        <?php if ($module['position'] < count($modules)): ?>
-                            <a href="<?=url("/admin/module/move-down/$module_id/$page_id")?>"
-                                title="<?=trans('Przenieś w dół')?>" class="btn btn-primary btn-sm">
-                                <i class="fa fa-arrow-down fa-fw"></i>
-                            </a>
-                        <?php endif ?>
-
-                        <a href="<?=url("/admin/module/edit/$module_id/$page_id")?>"
-                            class="btn btn-success btn-sm">
-                            <i class="fa fa-file-text-o fa-fw"></i>
-                            <?=trans('Edytuj')?>
+                        <a href="<?=url("/admin/module/edit/$module_id/$page_id")?>">
+                            <?=trans($config['modules'][$module['type']])?>
                         </a>
 
-                        <a data-toggle="modal"
+                        <button data-toggle="modal"
                             data-id="<?=$module_id?>"
                             data-target="#deleteModal"
                             title="<?=trans('Usuń moduł')?>"
-                            class="btn btn-danger btn-sm">
-                            <i class="fa fa-times fa-fw"></i>
-                        </a>
-                    </div>
-                    <div class="clearfix"></div>
+                            type="button"
+                            class="close pull-right">
+                            <span>&times;</span>
+                        </button>
                 </div>
 
                 <div class="panel-body">
                     <?php require sprintf(ACTIONS_PATH.'/admin/module/previews/%s.php', $module['type']); ?>
                 </div>
-
             </div>
             <div class="clearfix"></div>
-        <?php endforeach; endif ?>
+        </div>
     </div>
+        <?php endforeach; endif ?>
 </div>
+
+<?=view('/admin/parts/input/submitButtons.html.php', [
+    'cancelHref' => "/admin/module/list/$page_id",
+    'saveLabel' => 'Dodaj nowy moduł',
+])?>
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -115,6 +107,10 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 <script>
     $('#deleteModal').on('show.bs.modal', function(e) {
         $(this).find('[name="module_id"]').val($(e.relatedTarget).data('id'));
+    });
+    $('.grid-stack').gridstack({
+        cellHeight: 215,
+        verticalMargin: 20
     });
 </script>
 

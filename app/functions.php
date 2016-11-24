@@ -356,7 +356,7 @@ function array_partition(array $list, $p)
  */
 function thumb($filePath, $width, $height)
 {
-    $phThumbs = 'cache/thumbs';
+    $phThumbs = '/tmp/thumbs';
 
     $extensionConfigs = array(
         'jpg' => array(
@@ -377,18 +377,19 @@ function thumb($filePath, $width, $height)
 
     $filePath = urldecode(trim($filePath, '/ '));
 
-    $extension = pathinfo($filePath, PATHINFO_EXTENSION);
+    $extension = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
     if (!isset($extensionConfigs[$extension])) {
         return $filePath;
     }
     $extensionParams = $extensionConfigs[$extension];
 
     $prefix = '_'.$width.'x'.$height;
-    $filePath = normalizeFilename($filePath);
+    $filePath = Normalizer::normalize($filePath);
     $dir = trim(dirname($filePath), '/');
     $filename = pathinfo($filePath, PATHINFO_FILENAME);
 
-    $destFilePath = $phThumbs.'/'.$dir.'/'.$filename.$prefix.'.'.$extension;
+    $destFileUrl = $phThumbs.'/'.$dir.'/'.$filename.$prefix.'.'.$extension;
+    $destFilePath = "./$destFileUrl";
 
     if (!is_readable($destFilePath)) {
         $sourceFile = $filePath;
@@ -432,7 +433,7 @@ function thumb($filePath, $width, $height)
         chmod($destFilePath, 0775);
     }
 
-    return $destFilePath;
+    return $destFileUrl;
 }
 
 /**

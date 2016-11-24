@@ -1,53 +1,53 @@
 <?php
-    $menu = [
-
-        'Dashboard' => [
-            'path' => '/admin',
-            'icon' => 'fa fa-dashboard fa-fw',
-        ],
-
-        'Strony' => [
-            'path' => '',
-            'icon' => 'fa fa-files-o fa-fw',
-            'children' => [
-                'Wyświetl wszystkie strony' => [
-                    'path' => '/admin/page/list',
-                    'icon' => '',
-                ],
-                'Dodaj nową stronę' => [
-                    'path' => '/admin/page/new',
-                    'icon' => '',
-                ],
+$menu = [
+    'Dashboard' => [
+        'path' => '/admin',
+        'icon' => 'fa fa-dashboard fa-fw',
+    ],
+    'Strony' => [
+        'path' => '',
+        'icon' => 'fa fa-files-o fa-fw',
+        'children' => [
+            'Wyświetl wszystkie strony' => [
+                'path' => '/admin/page/list',
+                'icon' => '',
+            ],
+            'Dodaj nową stronę' => [
+                'path' => '/admin/page/new',
+                'icon' => '',
             ],
         ],
-
-        'Nawigacja' => [
-            'path' => '',
-            'icon' => 'fa fa-picture-o fa-fw',
-            'children' => [
-                'Wyświetl wszystkie nawigacje' => [
-                    'path' => '/admin/nav/list',
-                    'icon' => '',
-                ],
+    ],
+    'Nawigacja' => [
+        'path' => '',
+        'icon' => 'fa fa fa-sitemap fa-fw',
+        'children' => [
+            'Wyświetl wszystkie nawigacje' => [
+                'path' => '/admin/nav/list',
+                'icon' => '',
             ],
         ],
-
-        'Galerie zdjęć' => [
-            'path' => '',
-            'icon' => 'fa fa-picture-o fa-fw',
-            'children' => [
-                'Wyświetl wszystkie galerie' => [
-                    'path' => '/admin/gallery/list',
-                    'icon' => '',
-                ],
-                'Dodaj nową galerie' => [
-                    'path' => '/admin/gallery/new',
-                    'icon' => '',
-                ],
+    ],
+    'Galerie zdjęć' => [
+        'path' => '',
+        'icon' => 'fa fa-picture-o fa-fw',
+        'children' => [
+            'Wyświetl wszystkie galerie' => [
+                'path' => '/admin/gallery/list',
+                'icon' => '',
+            ],
+            'Dodaj nową galerie' => [
+                'path' => '/admin/gallery/new',
+                'icon' => '',
             ],
         ],
-
-    ];
+    ],
+    'Pliki' => [
+        'id' => 'navViewFiles',
+        'path' => '',
+        'icon' => 'fa fa-files-o fa-fw',
+    ],
+];
 ?>
 
 
@@ -74,3 +74,14 @@
         </ul>
     </div>
 </div>
+<script>
+    $(function() {
+        $('#navViewFiles').elfinderInput({
+            title: '<?=trans('Przeglądaj pliki')?>',
+            lang: '<?=$config['lang']?>',
+            url: '<?=rootUrl('/admin/elfinder/connector')?>'
+        }, function() {
+
+        });
+    });
+</script>
