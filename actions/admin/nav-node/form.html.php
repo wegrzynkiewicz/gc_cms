@@ -41,7 +41,7 @@
 <script>
 $(function() {
     function refreshType(nodeType) {
-        $.get("<?=url("/admin/nav-node/edit-views")?>/"+nodeType+"/<?=$node_id?>", function(data) {
+        $.get("<?=url("/admin/nav-node/edit-views")?>/"+nodeType+"/<?=$menu_id?>", function(data) {
             $('#nodeType').html(data);
         });
     }

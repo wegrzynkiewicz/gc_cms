@@ -6,13 +6,21 @@ class MenuTreeBuilder extends AbstractTreeBuilder
 
     public function __construct()
     {
-        parent::__construct('node_id', 'parent_id');
+        parent::__construct('menu_id', 'parent_id');
 
         $navs = NavModel::selectAll();
-        foreach ($navs as $nav_id => $nav) {
+        foreach ($navs as $group_id => $nav) {
             $name = $nav['workname'].'_'.$nav['lang'];
-            $this->cache[$name] = $nav_id;
+            $this->cache[$name] = $group_id;
         }
+    }
+
+    public function buildTreeByGroupId($group_id)
+    {
+        $flatList = NavMenuModel::selectNodesByGroupId($group_id);
+        $nodes = $this->createTree($flatList);
+
+        return $nodes;
     }
 
     public function buildTree($workname, $language)
@@ -22,9 +30,9 @@ class MenuTreeBuilder extends AbstractTreeBuilder
             trigger_error("Nav not found $name");
             return;
         }
-        $nav_id = $this->cache[$name];
+        $group_id = $this->cache[$name];
 
-        $flatList = NavNodeModel::selectNodesByGroupId($nav_id);
+        $flatList = NavMenuModel::selectNodesByGroupId($group_id);
         $nodes = $this->createTree($flatList);
 
         return $nodes;

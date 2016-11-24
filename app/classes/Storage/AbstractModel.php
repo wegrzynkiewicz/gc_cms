@@ -4,6 +4,12 @@ abstract class AbstractModel
 {
     public static function __callStatic($methodName, array $arguments)
     {
+        if (!method_exists(get_called_class(), $methodName)) {
+            throw new BadMethodCallException (sprintf(
+                "Method named %s does not exists", $methodName
+            ));
+        }
+
         if (Database::$pdo->inTransaction()) {
             return call_user_func_array(['static', $methodName], $arguments);
         }

@@ -4,11 +4,11 @@ $headTitle = trans("Edycja węzła w nawigacji");
 
 checkPermissions();
 
-$node_id = intval(array_shift($_SEGMENTS));
+$menu_id = intval(array_shift($_SEGMENTS));
 $nav_id = intval(array_shift($_SEGMENTS));
 
 if(wasSentPost($_POST)) {
-    NavNodeModel::update($node_id, [
+    NavMenuModel::update($menu_id, [
         'name' => $_POST['name'],
         'type' => $_POST['type'],
         'destination' => $_POST['destination'],
@@ -17,7 +17,7 @@ if(wasSentPost($_POST)) {
 	redirect("/admin/nav-node/list/$nav_id");
 }
 
-$node = NavNodeModel::selectByPrimaryId($node_id);
+$node = NavMenuModel::selectByPrimaryId($menu_id);
 $nav = NavModel::selectByPrimaryId($nav_id);
 $headTitle .= makeLink("/admin/nav-node/list/$nav_id", $nav['name']);
 $nodeType = $node['type'];

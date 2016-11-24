@@ -11,13 +11,15 @@ if (wasSentPost()) {
     $positions = array_filter($positions, function ($node) {
         return isset($node['id']);
     });
-    NavNodeModel::updatePositions($nav_id, $positions);
+    NavMenuModel::updatePositions($nav_id, $positions);
     redirect("/admin/nav/list");
 }
 
 $nav = NavModel::selectByPrimaryId($nav_id);
-$pages = PageModel::selectAll();
-$nodes = NavNodeModel::buildTreeByParentId($nav_id);
+$pages = PageModel::selectAllWithFrames();
+$menuTreeBuilder = new MenuTreeBuilder();
+$menuTree = $menuTreeBuilder->buildTreeByGroupId($nav_id);
+
 $headTitle .= makeLink("/admin/nav/list", $nav['name']);
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
@@ -40,18 +42,18 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">
-        <?php if (empty($nodes)):?>
-            <p>
-                <?=trans('Brak węzłów nawigacji')?>
-            </p>
-        <?php else:?>
+        <?php if ($menuTree->hasChildren()):?>
             <ol id="sortable" class="sortable">
                 <?=view('/admin/nav-node/list-item.html.php', [
-                    'menu' => $nodes,
+                    'menu' => $menuTree,
                     'nav_id' => $nav_id,
                     'pages' => $pages,
                 ])?>
             </ol>
+        <?php else:?>
+            <p>
+                <?=trans('Brak węzłów nawigacji')?>
+            </p>
         <?php endif?>
     </div>
 </div>
@@ -76,7 +78,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <form id="deleteModalForm" method="post" action="<?=url("/admin/nav-node/delete/$nav_id")?>" class="modal-content">
-            <input name="node_id" type="hidden" value="">
+            <input name="menu_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span>&times;</span>
@@ -105,7 +107,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 <script>
     $('#deleteModal').on('show.bs.modal', function(e) {
         $(this).find('#name').html($(e.relatedTarget).data('name'));
-        $(this).find('[name="node_id"]').val($(e.relatedTarget).data('id'));
+        $(this).find('[name="menu_id"]').val($(e.relatedTarget).data('id'));
     });
 </script>
 

@@ -46,6 +46,7 @@ $config = [
     'nodeTypes' => [ # rodzaje węzłów nawigacji
         'page'                 => 'Kieruj na istniejącą stronę',
         'external'             => 'Kieruj na adres',
+        'homepage'             => 'Kieruj na stronę główną',
         'empty'                => 'Nieklikalny węzeł',
     ],
     'navNodeTargets' => [ # dostępne atrybuty target dla węzłów nawigacji

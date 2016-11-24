@@ -1,6 +1,4 @@
-<?php if (empty($topMenu->getChildren())): ?>
-
-<?php else: ?>
+<?php if ($topMenu->hasChildren()): ?>
     <div class="blog-masthead">
         <div class="container">
             <nav class="blog-nav">
@@ -12,4 +10,6 @@
             </nav>
         </div>
     </div>
+<?php else: ?>
+
 <?php endif ?>

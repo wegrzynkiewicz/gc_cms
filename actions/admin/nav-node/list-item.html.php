@@ -1,6 +1,6 @@
-<?php foreach ($menu as $node): $node_id = $node['node_id']; ?>
+<?php foreach ($menu->getChildren() as $node): $menu_id = $node['menu_id']; ?>
 
-    <li id="node_<?=$node_id?>" data-id="<?=$node_id?>">
+    <li id="node_<?=$menu_id?>" data-id="<?=$menu_id?>">
         <div class="sortable-content">
             <div class="col-lg-4">
                 <?=escape($node['name'])?>
@@ -8,7 +8,7 @@
 
             <div class="pull-right">
                 <a data-toggle="modal"
-                    data-id="<?=$node_id?>"
+                    data-id="<?=$menu_id?>"
                     data-name="<?=$node['name']?>"
                     data-target="#deleteModal"
                     title="<?=trans('Usuń węzeł')?>"
@@ -18,7 +18,7 @@
             </div>
 
             <div class="pull-right" style="margin-right: 10px">
-                <a href="<?=url("/admin/nav-node/edit/$node_id/$nav_id")?>" class="btn btn-primary btn-xs">
+                <a href="<?=url("/admin/nav-node/edit/$menu_id/$nav_id")?>" class="btn btn-primary btn-xs">
                     <i class="fa fa-cog fa-fw"></i>
                     <?=trans('Edytuj')?>
                 </a>
@@ -41,10 +41,10 @@
             <div class="clearfix"></div>
         </div>
 
-        <?php if (isset($node['children'])): ?>
+        <?php if ($node->hasChildren()): ?>
             <ol>
                 <?=view('/admin/nav-node/list-item.html.php', [
-                    'menu' => $node['children'],
+                    'menu' => $node,
                     'nav_id' => $nav_id,
                     'pages' => $pages,
                 ])?>

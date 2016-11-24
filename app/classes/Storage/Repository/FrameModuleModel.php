@@ -11,7 +11,7 @@ class FrameModuleModel extends AbstractModel
 
     protected static function updateGridByGroupId($group_id, array $grid)
     {
-        static::deleteAllMergeByGroupId($group_id);
+        static::deleteAllJoinsByGroupId($group_id);
 
         foreach ($grid as $module) {
 

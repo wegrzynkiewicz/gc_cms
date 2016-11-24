@@ -5,10 +5,10 @@ $headTitle = trans("Tworzenie węzeła w nawigacji");
 checkPermissions();
 
 $nav_id = intval(array_shift($_SEGMENTS));
-$node_id = 0;
+$menu_id = 0;
 
 if(wasSentPost($_POST)) {
-    NavNodeModel::insertToNav($nav_id, [
+    NavMenuModel::insertToGroupId($nav_id, [
         'name' => $_POST['name'],
         'type' => $_POST['type'],
         'destination' => $_POST['destination'],

@@ -2,12 +2,12 @@
 
 checkPermissions();
 
-$node_id = intval(array_shift($_SEGMENTS));
-$node = NavNodeModel::selectByPrimaryId($node_id);
+$menu_id = intval(array_shift($_SEGMENTS));
+$node = NavMenuModel::selectByPrimaryId($menu_id);
 
 $_POST = $node;
 
-$pages = PageModel::selectAllFrames();
+$pages = PageModel::selectAllWithFrames();
 $pageOptions = [];
 foreach($pages as $page_id => $page) {
     $pageOptions[$page_id] = $page['name'];

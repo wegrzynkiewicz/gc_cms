@@ -11,7 +11,7 @@ trait HasFrameModelTrait
     /**
      * Pobiera wszystkie (strony) z ich rusztowaniami
      */
-    public static function selectAllFrames()
+    public static function selectAllWithFrames()
     {
         # pobierz wszystkie rusztowania dla (stron)
         $sql = self::sql("SELECT * FROM ::table AS b JOIN ::frames AS f USING(frame_id) ORDER BY f.name ASC");
@@ -23,7 +23,7 @@ trait HasFrameModelTrait
     /**
      * Pobiera (stronę) razem z rusztowaniem
      */
-    public static function selectFrameByPrimaryId($primary_id)
+    public static function selectWithFrameByPrimaryId($primary_id)
     {
         # pobierz dane rusztowania dla (strony) o id podstawowego
         $sql = self::sql("SELECT * FROM ::table AS b JOIN ::frames AS f USING(frame_id) WHERE ::primary = ? LIMIT 1");
@@ -37,7 +37,7 @@ trait HasFrameModelTrait
      */
     protected static function deleteFrameByPrimaryId($primary_id)
     {
-        $row = self::selectFrameByPrimaryId($primary_id);
+        $row = self::selectWithFrameByPrimaryId($primary_id);
 
         # usuń wszystkie moduły dla rusztowania o id podstawowego
         $sql = self::sql("DELETE m FROM gc_frame_modules AS m LEFT JOIN gc_frame_positions AS p USING (module_id) WHERE frame_id = ?");

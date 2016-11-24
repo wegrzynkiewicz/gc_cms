@@ -245,17 +245,25 @@ function templateView($templateName, array $arguments = [])
  */
 function startlinkAttributesFromMenuNode($node, $extend = "")
 {
-    $id = sprintf('id="navNode_%s" %s', $node['node_id'], $extend);
+    $id = sprintf('id="navNode_%s" %s', $node['menu_id'], $extend);
 
     if ($node['type'] === 'empty') {
         return sprintf('<div %s>', $id);
     }
 
-    $target = sprintf('target="%s"', $node['target']);
+    if ($node['type'] === 'homepage') {
+        $href = rootUrl("/");
+    }
+
+    if ($node['type'] === 'page') {
+        $href = rootUrl("/page/".$node['destination']);
+    }
 
     if ($node['type'] === 'external') {
-        return sprintf('<a %s href="%s" %s> ', $id, $node['destination'], $target);
+        $href = $node['destination'];
     }
+
+    return sprintf('<a %s href="%s" target="%s"> ', $id, $href, $node['target']);
 }
 
 /**

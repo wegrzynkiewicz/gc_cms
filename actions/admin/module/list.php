@@ -5,7 +5,7 @@ $headTitle = trans("Moduły na stronie");
 checkPermissions();
 
 $page_id = intval(array_shift($_SEGMENTS));
-$page = PageModel::selectFrameByPrimaryId($page_id);
+$page = PageModel::selectWithFrameByPrimaryId($page_id);
 $frame_id = $page['frame_id'];
 
 if (wasSentPost()) {

@@ -122,14 +122,14 @@ if (file_exists($customFile)) {
 }
 
 # jeżeli istnieje strona w systemie o zadanym id
-$page = $pageModel->selectFrameByPrimaryId($id);
+$page = $pageModel->selectWithFrameByPrimaryId($id);
 if ($page) {
     logger("[ROUTING] Page :: $id", $page);
     return require_once ACTIONS_PATH."/frontend/frames/page.php";
 }
 
 # jeżeli cały adres znalazł się w tablicy przekierowań
-/*$page = $slugModel->selectFrameByPrimaryId($absoluteSlug);
+/*$page = $slugModel->selectWithFrameByPrimaryId($absoluteSlug);
 if ($page) {
     return require_once ACTIONS_PATH."/frontend/frames/page.php";
 }*/
