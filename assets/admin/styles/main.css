@@ -36,7 +36,8 @@
     border-radius: 0;
 }
 .module-gallery-preview-row {
-    margin: -10px;
+    margin: -10px;    
+    margin-right: -50px;
 }
 
 .module-gallery-preview-wrapper {

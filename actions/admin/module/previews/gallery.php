@@ -15,6 +15,7 @@ if (isset($settings['gallery_id'])) {
                     class="module-gallery-preview-image"/>
             </div>
         <?php endforeach ?>
+        <div class="clearfix"></div>
     </div>
 <?php else: ?>
     <div class="text-center">

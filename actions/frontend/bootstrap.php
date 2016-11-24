@@ -1,6 +1,6 @@
 <?php
 
-/* Plik pobiera i przygotowuje najważniejsze dane z bazy */
+/* Plik pobiera i przygotowuje najważniejsze dane z bazy dla frontend */
 
 $lang = $config['lang'];
 

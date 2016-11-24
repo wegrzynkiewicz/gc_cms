@@ -44,8 +44,8 @@ trait GroupModelTrait
 
     protected static function deleteAllMergeByGroupId($group_id)
     {
-        $sql = self::sql("DELETE t FROM ::table AS t LEFT JOIN ::groupTable AS p USING (::primary) WHERE p.::groupName = ?");
-        Database::execute($sql, [intval($group_id)]);
+        $sql = self::sql("DELETE FROM ::groupTable WHERE ::groupName = ?");
+        Database::execute($sql, [$group_id]);
     }
 
     protected static function moveUp($primary_id)
@@ -72,8 +72,7 @@ trait GroupModelTrait
 
     protected static function updatePositionsByGroupId($group_id, array $positions)
     {
-        $sql = self::sql("DELETE FROM ::groupTable WHERE ::groupName = ?");
-        Database::execute($sql, [$group_id]);
+        static::deleteAllMergeByGroupId($group_id);
 
         $pos = 1;
         foreach ($positions as $primary_id) {
