@@ -205,7 +205,7 @@ function redirect($location, $code = 303)
 /**
  * Tłumaczy wprowadzony ciąg na inny znaleziony w plikach tłumaczeń
  */
-function trans($string)
+function trans($string, array $params = [])
 {
     return $string;
 }
@@ -238,40 +238,6 @@ function templateView($templateName, array $arguments = [])
     require TEMPLATE_PATH.$templateName;
 
     return ob_get_clean();
-}
-
-/**
- * Na podstawie węzła nawigacji drukuje link do strony na którą kieruje
- */
-function startlinkAttributesFromMenuNode($node, $extend = "")
-{
-    $id = sprintf('id="navNode_%s" %s', $node['menu_id'], $extend);
-
-    if ($node['type'] === 'empty') {
-        return sprintf('<div %s>', $id);
-    }
-
-    if ($node['type'] === 'homepage') {
-        $href = rootUrl("/");
-    }
-
-    if ($node['type'] === 'page') {
-        $href = rootUrl("/page/".$node['destination']);
-    }
-
-    if ($node['type'] === 'external') {
-        $href = $node['destination'];
-    }
-
-    return sprintf('<a %s href="%s" target="%s"> ', $id, $href, $node['target']);
-}
-
-/**
- * Drukuje HTMLowy tag zamknięcia; używana z startlinkAttributesFromMenuNode
- */
-function endlinkAttributesFromMenuNode($node)
-{
-    return $node['type'] === 'empty' ? '</div>' : '</a>';
 }
 
 /**

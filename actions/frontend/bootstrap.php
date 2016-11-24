@@ -4,6 +4,5 @@
 
 $lang = $config['lang'];
 
-$menuTreeBuilder = new MenuTreeBuilder();
-$topMenu = $menuTreeBuilder->buildTree('top', $lang);
-$sideMenu = $menuTreeBuilder->buildTree('side', $lang);
+$topMenu = Menu::buildTree('top', $lang);
+$sideMenu = Menu::buildTree('side', $lang);

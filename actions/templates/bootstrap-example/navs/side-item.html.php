@@ -1,8 +1,8 @@
 <?php foreach ($menu->getChildren() as $node): ?>
     <li>
-        <?=startlinkAttributesFromMenuNode($node)?>
+        <?=$node->getOpenTag()?>
             <?=$node['name']?>
-        <?=endlinkAttributesFromMenuNode($node)?>
+        <?=$node->getCloseTag()?>
         <ol class="list-unstyled" style="padding-left: 20px">
             <?=templateView("/navs/side-item.html.php", [
                 'menu' => $node,

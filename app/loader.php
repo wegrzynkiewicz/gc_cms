@@ -10,8 +10,13 @@ require_once __DIR__.'/config/config.php';
 require_once __DIR__.'/functions.php';
 //require_once __DIR__.'/error-handler.php';
 
-# ładuje rekursywnie wszystkie pliki w katalogu classes
-foreach (rglob(__DIR__.'/classes/*.php') as $file) {
+# dodaje dodatkowy autoloader do ładowania klas
+spl_autoload_register(function ($class) {
+    require_once __DIR__."/classes/$class.php";
+});
+
+# ładuje rekursywnie wszystkie pliki w katalogu models
+foreach (rglob(__DIR__.'/models/*.php') as $file) {
     require_once $file;
 }
 

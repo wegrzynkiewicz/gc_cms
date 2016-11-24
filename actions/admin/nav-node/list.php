@@ -17,8 +17,7 @@ if (wasSentPost()) {
 
 $nav = NavModel::selectByPrimaryId($nav_id);
 $pages = PageModel::selectAllWithFrames();
-$menuTreeBuilder = new MenuTreeBuilder();
-$menuTree = $menuTreeBuilder->buildTreeByGroupId($nav_id);
+$menuTree = Menu::buildTreeByGroupId($nav_id);
 
 $headTitle .= makeLink("/admin/nav/list", $nav['name']);
 

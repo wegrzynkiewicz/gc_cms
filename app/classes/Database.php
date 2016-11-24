@@ -53,22 +53,22 @@ class Database
         return self::wrapQuery($sql, $parameters, function ($statement) {
             return $statement->rowCount();
         });
+}
+
+public static function insertDataToTable($table, array $data)
+{
+    $filled = array_fill(0, count($data), '?');
+    $values = implode(', ', $filled);
+
+    $columns = array_keys($data);
+    foreach ($columns as &$column) {
+        $column = "`{$column}`";
     }
+    $columns = implode(', ', $columns);
+    $insert = "INSERT INTO `{$table}` ({$columns}) VALUES ({$values})";
 
-    public static function insertDataToTable($table, array $data)
-    {
-        $filled = array_fill(0, count($data), '?');
-        $values = implode(', ', $filled);
-
-        $columns = array_keys($data);
-        foreach ($columns as &$column) {
-            $column = "`{$column}`";
-        }
-        $columns = implode(', ', $columns);
-        $insert = "INSERT INTO `{$table}` ({$columns}) VALUES ({$values})";
-
-        return self::insert($insert, array_values($data));
-    }
+    return self::insert($insert, array_values($data));
+}
 
     public static function getUpdateSyntax(array $data)
     {

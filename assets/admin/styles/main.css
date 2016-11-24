@@ -35,8 +35,9 @@
     margin-bottom: 0;
     border-radius: 0;
 }
+
 .module-gallery-preview-row {
-    margin: -10px;    
+    margin: -10px;
     margin-right: -50px;
 }
 
@@ -48,6 +49,28 @@
 .module-gallery-preview-image {
     width: auto;
     height: 70px;
+}
+
+
+/** Modal */
+
+.modal {
+    text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+    .modal:before {
+        display: inline-block;
+        vertical-align: middle;
+        content: " ";
+        height: 100%;
+    }
+}
+
+.modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
 }
 
 
