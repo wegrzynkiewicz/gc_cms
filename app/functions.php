@@ -465,6 +465,14 @@ function outputCSS($parsed)
     return implode(';', $parts);
 }
 
+/**
+ * Generuje losowy kolor CSS
+ */
+function randomColor()
+{
+    return sprintf('#%06X', mt_rand(0, 0xFFFFFF));
+}
+
 function getXMLTag($tag, $content = null, $attributes = array())
 {
     $attrs = array();

@@ -42,6 +42,13 @@ abstract class AbstractModel
         return Database::fetchAllWithPrimaryId($sql, [$value], static::$primary);
     }
 
+    public static function selectSingleBy($fieldLabel, $value)
+    {
+        $sql = self::sql("SELECT * FROM ::table WHERE {$fieldLabel} = ? LIMIT 1");
+
+        return Database::fetchSingle($sql, [$value]);
+    }
+
     public static function selectByPrimaryId($id)
     {
         $sql = self::sql("SELECT * FROM ::table WHERE ::primary = ? LIMIT 1");

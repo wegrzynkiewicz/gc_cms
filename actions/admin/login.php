@@ -8,7 +8,7 @@ if (isset($_SESSION['admin'])) {
 
 if (wasSentPost()) {
     $passwordHash = sha1($_POST['password']);
-    $user = UserModel::selectByEmail($_POST['email']);
+    $user = UserModel::selectSingleBy('email', $_POST['email']);
 
     # jeżeli hasło w bazie nie jest zahaszowane, a zgadza się
     if (!isSha1($user['password']) and $_POST['password'] === $user['password']) {

@@ -17,15 +17,21 @@
             </div>
 
             <div class="col-md-10">
-                <input
-                    id="<?=$name?>_source"
-                    name="<?=$name?>"
-                    <?php if (isset($placeholder)): ?>
-                        placeholder="<?=trans($placeholder)?>"
-                    <?php endif ?>
-                    class="form-control input"
-                    value="<?=escape($value)?>"
-                    type="text">
+
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon2">
+                        <?=$_SERVER['HTTP_HOST']?>
+                    </span>
+                    <input
+                        id="<?=$name?>_source"
+                        name="<?=$name?>"
+                        <?php if (isset($placeholder)): ?>
+                            placeholder="<?=trans($placeholder)?>"
+                        <?php endif ?>
+                        class="form-control input"
+                        value="<?=escape($value)?>"
+                        type="text">
+                </div>
                 <br/>
                 <button type="button" id="<?=$name?>_select" class="btn btn-primary btn-xs">
                     <i class="fa fa-cog fa-fw"></i>
