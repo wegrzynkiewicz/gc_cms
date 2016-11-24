@@ -33,8 +33,6 @@ Database::initialize(
     $config["db"]["prefix"]
 );
 
-$menuTreeBuilder = new MenuTreeBuilder();
-
 require_once __DIR__.'/routing.php';
 
 logger(sprintf("[RESPONSE] %s :: ExecutionTime: %s",
