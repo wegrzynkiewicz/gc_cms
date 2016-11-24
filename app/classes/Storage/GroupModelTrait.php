@@ -42,6 +42,12 @@ trait GroupModelTrait
         Database::execute($sql, [intval($group_id)]);
     }
 
+    protected static function deleteAllMergeByGroupId($group_id)
+    {
+        $sql = self::sql("DELETE t FROM ::table AS t LEFT JOIN ::groupTable AS p USING (::primary) WHERE p.::groupName = ?");
+        Database::execute($sql, [intval($group_id)]);
+    }
+
     protected static function moveUp($primary_id)
     {
         $record = static::selectMergeByPrimaryId($primary_id);

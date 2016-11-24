@@ -4,6 +4,10 @@ abstract class AbstractModel
 {
     public static function __callStatic($methodName, array $arguments)
     {
+        if (Database::$pdo->inTransaction()) {
+            return call_user_func_array(['static', $methodName], $arguments);
+        }
+
         Database::$pdo->beginTransaction();
 
         try {

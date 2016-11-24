@@ -92,10 +92,6 @@ class Database
     {
         $sql = self::bindTableName($sql);
 
-        if (self::$pdo->inTransaction()) {
-
-        }
-
         logger(sprintf("[QUERY]%s $sql",
             self::$pdo->inTransaction() ? ' T ::' : ''
         ), $parameters);
