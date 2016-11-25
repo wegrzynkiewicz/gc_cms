@@ -58,7 +58,7 @@
         });
 
         $('#<?=$name?>_delete').click( function(){
-            $('#<?=$name?>_preview').attr('src', '<?=rootUrl($config['noImageUrl'])?>');
+            $('#<?=$name?>_preview').attr('src', '<?=assetsUrl($config['noImageUrl'])?>');
             $('#<?=$name?>_source').val('');
         })
     });

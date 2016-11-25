@@ -17,7 +17,6 @@ $config = [
     'adminHeadTitleBase' => 'Acme Panel Administracyjny', # nazwa doklejana do <title> strony w panelu admina
     'noImageUrl' => '/admin/images/no-image.jpg', # ścieżka do obrazka w przypadku braku obrazka
     'timezone' => 'Europe/Warsaw', # domyślna strefa czasowa
-    'template' => TEMPLATE, # używany szablon
     'avatar' => [
         #'useGravatarForStaff' => true, # czy wyświetlać avatary dla pracowników z gravatara?
         #'useGravatarForClient' => true, # czy wyświetlać avatary dla klientów gravatara?
@@ -29,7 +28,7 @@ $config = [
         'editor' => 'pl', # język używany podczas edycji w panelu admina
         'editorDefault' => 'pl', # domyślny język edytowania w panelu admina
     ],
-    'logger' => [ # ustawienia dla rejestrowania danych danych
+    'logger' => [ # ustawienia dla rejestrowania logów
         'enabled' => true, # uruchamia rejestrowanie logów
         'folder' => TMP_PATH.'/logs', # katalog do ktorego są zapisywane logi
     ],
@@ -53,17 +52,17 @@ $config = [
         'gallery' => 'Galeria zdjęć'
     ],
     'nodeTypes' => [ # rodzaje węzłów nawigacji
-        'page' => 'Kieruj na istniejącą stronę',
+        'empty' => 'Nieklikalny węzeł',
         'external' => 'Kieruj na adres',
         'homepage' => 'Kieruj na stronę główną',
-        'empty' => 'Nieklikalny węzeł',
+        'page' => 'Kieruj na istniejącą stronę',
     ],
     'navNodeTargets' => [ # dostępne atrybuty target dla węzłów nawigacji
         '_self'	 => 'Załaduj w tym samym oknie',
         '_blank' => 'Załaduj w nowym oknie',
     ],
     'thumb' => [ # ustawienia generatora miniaturek
-        'enabled' => false, # czy generować miniaturki?
+        'enabled' => true, # czy generować miniaturki?
         'thumbsUrl' => '/tmp/thumbs', # adres do katalogu z miniaturkami
         'thumbsPath' => TMP_PATH.'/thumbs', # adres do katalogu z miniaturkami
         'options' => [ # ustawienia dla generatora miniaturek

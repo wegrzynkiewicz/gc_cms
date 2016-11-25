@@ -7,7 +7,7 @@ $requestQuery = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 $rootUrl = dirname($_SERVER['SCRIPT_NAME']);
 $method = strtoupper($_SERVER['REQUEST_METHOD']);
 
-logger("[REQUEST] $method $request", $_REQUEST);
+logger(sprintf("[REQUEST] %s %s", $method, trim("$request?$requestQuery", '?')), $_REQUEST);
 
 # jeżeli aplikacja jest zainstalowana w katalogu, wtedy pomiń adres katalogu
 if ($rootUrl and strpos($request, $rootUrl) === 0) {
@@ -52,7 +52,7 @@ if (count($_SEGMENTS) === 0) {
 }
 
 # jeżeli któryś z niestandardowych rewritów okaże się pasować, wtedy przekieruj na właściwy adres
-$fullRequest = "$request?$requestQuery";
+$fullRequest = rtrim("$request?$requestQuery", '?');
 foreach ($config['rewrites'] as $pattern => $destination) {
     if (preg_match($pattern, $fullRequest)) {
         $result = preg_replace($pattern, $destination, $fullRequest);
@@ -110,7 +110,7 @@ $id = intval(count($_SEGMENTS) === 0 ? $slug : array_shift($_SEGMENTS));
 
 # jeżeli ostatni parametr nie jest prawidłową liczbą
 if ($id <= 0) {
-    logger("[ROUTING] Error :: 404");
+    logger("[ROUTING] Error invalid ID :: 404");
     return require_once TEMPLATE_PATH."/errors/404.html.php";
 }
 

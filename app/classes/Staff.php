@@ -41,13 +41,11 @@ class Staff extends Entity
     {
         global $config;
 
-        $href = $staff['avatar'];
-
         if (empty($staff['avatar'])) {
-            $href = assetsUrl($config['avatar']['noAvatarUrl']);
+            return assetsUrl($config['avatar']['noAvatarUrl']);
         }
 
-        return thumb($href, $size, $size);
+        return thumb($staff['avatar'], $size, $size);
     }
 
     /**
