@@ -21,9 +21,6 @@ CKEDITOR.editorConfig = function( config ) {
 
     config.allowedContent = true;
 
-
-
-    //config.filebrowserBrowseUrl = '/admin/elfinder/ckeditor';
     config.filebrowserBrowseUrl = '#';
 
 

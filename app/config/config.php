@@ -15,11 +15,15 @@ $config = [
     'debug'                    => true, # tryb developerski i wyświetlanie błędów
     'adminNavbarTitle'         => 'Panel Administracyjny', # wyświetlana w prawym gornym rogu panelu admina
     'adminHeadTitleBase'       => 'Acme Panel Administracyjny', # nazwa doklejana do <title> strony w panelu admina
-    'lang'                     => 'pl', # język użytkownika używany w systemie
-    'defaultLang'              => 'pl', # wykorzystywany gdy wszystkie inne sposoby określenia języka zawiodą
     'noImagePath'              => '/admin/images/no-image.jpg', # ściezka do obrazka w przypadku braku obrazka
     'timezone'                 => 'Europe/Warsaw', # domyślna strefa czasowa
     'template'                 => TEMPLATE, # używany szablon
+    'lang' => [
+        'client'               => 'pl', # język klienta używany w systemie
+        'clientDefault'        => 'pl', # wykorzystywany gdy wszystkie inne sposoby określenia języka klienta zawiodą
+        'editor'               => 'pl', # język używany podczas edycji w panelu admina
+        'editorDefault'        => 'pl', # domyślny język edytowania w panelu admina
+    ],
     'logger' => [ # ustawienia dla rejestrowania danych danych
         'enabled'              => true, # uruchamia rejestrowanie logów
         'folder'               => TMP_PATH.'/logs', # katalog do ktorego są zapisywane logi
@@ -32,8 +36,8 @@ $config = [
     ],
     'langs' => [ # zainstalowane wersje językowe
         'pl'                   => 'Polski',
-        'en'                   => 'Angielski',
-        'de'                   => 'Niemiecki',
+        'en'                   => 'English',
+        'de'                   => 'Deutsch',
     ],
     'frames' => [ # zainstalowane typy stron
         'page'                 => 'Zwykła strona', # zwykła strona z modułami
@@ -91,8 +95,8 @@ function url($path)
 
     $url = rootUrl(FRONT_CONTROLLER_URL); # generowane przez routing
 
-    if ($config['lang'] !== $config['defaultLang']) {
-        $url .= '/'.$config['lang'];
+    if ($config['lang']['client'] !== $config['lang']['clientDefault']) {
+        $url .= '/'.$config['lang']['client'];
     }
 
     return $url.$path;

@@ -31,33 +31,31 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 <?=trans('Nie znaleziono żadnej strony.')?>
             </p>
         <?php else: ?>
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-bordered table-hover" data-table="">
                 <thead>
                     <tr>
-                        <th class="col-md-7">
+                        <th class="col-md-11">
                             <?=trans('Nazwa strony:')?>
                         </th>
-                        <th class="col-md-3">
-                            <?=trans('Język:')?>
-                        </th>
-                        <th lass="col-md-2 text-right"></th>
+                        <th class="col-md-1 text-right"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($pages as $page_id => $page): ?>
                         <tr>
-                            <td><?=$page['name']?></td>
-                            <td><?=trans($config['langs'][$page['lang']])?></td>
+                            <td>
+                                <a href="<?=url("/admin/page/edit/$page_id")?>"
+                                    title="<?=trans('Edytuj stronę')?>">
+                                    <?=$page['name']?>
+                                </a>
+                            </td>
                             <td class="text-right">
 
-                                <a href="<?=url("/admin/module/list/$page_id")?>" title="<?=trans('Wyświetl moduły strony')?>" class="btn btn-success btn-md">
+                                <a href="<?=url("/admin/module/list/$page_id")?>"
+                                    title="<?=trans('Wyświetl moduły strony')?>"
+                                    class="btn btn-success btn-xs">
                                     <i class="fa fa-file-text-o fa-fw"></i>
                                     <?=trans("Moduły")?>
-                                </a>
-
-                                <a href="<?=url("/admin/page/edit/$page_id")?>" title="<?=trans('Edytuj stronę')?>" class="btn btn-primary btn-md">
-                                    <i class="fa fa-cog fa-fw"></i>
-                                    <?=trans("Edytuj")?>
                                 </a>
 
                                 <a data-toggle="modal"
@@ -65,7 +63,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                     data-name="<?=$page['name']?>"
                                     data-target="#deleteModal"
                                     title="<?=trans('Usuń stronę')?>"
-                                    class="btn btn-danger btn-md">
+                                    class="btn btn-danger btn-xs">
                                     <i class="fa fa-times fa-fw"></i>
                                 </a>
 
@@ -109,9 +107,12 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 </div>
 
 <script>
-    $('#deleteModal').on('show.bs.modal', function(e) {
-        $(this).find('#name').html($(e.relatedTarget).data('name'));
-        $(this).find('[name="page_id"]').val($(e.relatedTarget).data('id'));
+    $(function(){
+        $('#deleteModal').on('show.bs.modal', function(e) {
+            $(this).find('#name').html($(e.relatedTarget).data('name'));
+            $(this).find('[name="page_id"]').val($(e.relatedTarget).data('id'));
+        });
+        $('[data-table]').DataTable();
     });
 </script>
 

@@ -17,13 +17,6 @@
                 'label' => 'Nazwa galerii',
             ])?>
 
-            <?=view('/admin/parts/input/selectbox.html.php', [
-                'name' => 'lang',
-                'label' => 'Język galerii',
-                'help' => 'Wybierz język dla tytułów zdjęć nowej galerii',
-                'options' => $config['langs'],
-            ])?>
-
             <?=view('/admin/parts/input/submitButtons.html.php', [
                 'cancelHref' => "/admin/gallery/list",
                 'saveLabel' => 'Zapisz galerię',

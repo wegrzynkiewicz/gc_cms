@@ -36,9 +36,6 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                         <th class="col-md-7">
                             <?=trans('Nazwa galerii:')?>
                         </th>
-                        <th class="col-md-3">
-                            <?=trans('Język:')?>
-                        </th>
                         <th lass="col-md-2 text-right"></th>
                     </tr>
                 </thead>
@@ -46,7 +43,6 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     <?php foreach ($rows as $id => $row): ?>
                         <tr>
                             <td><?=$row['name']?></td>
-                            <td><?=trans($config['langs'][$row['lang']])?></td>
                             <td class="text-right">
 
                                 <a href="<?=url("/admin/gallery-images/list/$id")?>"

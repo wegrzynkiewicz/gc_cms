@@ -102,9 +102,7 @@ $(function() {
     });
 
     $('#select_images').elfinderInputMultiple({
-        title: '<?=trans('Wybierz wiele zdjęć')?>',
-        lang: '<?=$config['lang']?>',
-        url: '<?=rootUrl('/admin/elfinder/connector')?>'
+        title: '<?=trans('Wybierz wiele zdjęć')?>'
     }, function(filePaths) {
         $.post("<?=url("/admin/gallery-images/api/new/$gallery_id")?>", {
             filePaths: filePaths

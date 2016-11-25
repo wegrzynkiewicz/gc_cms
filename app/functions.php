@@ -52,6 +52,14 @@ function rglob($pattern, $flags = 0)
 }
 
 /**
+ * Sprawdza czy zadany string jest SHA1
+ */
+function isSha1($string)
+{
+    return (bool) preg_match('/^[0-9a-f]{40}$/i', $string);
+}
+
+/**
  * Ustawia mime type, jeżeli nagłówek nie został jeszcze wysłany
  */
 function setHeaderMimeType($mimeType)
@@ -59,14 +67,6 @@ function setHeaderMimeType($mimeType)
     if (!headers_sent()) {
         header("Content-Type: $mimeType; charset=utf-8");
     }
-}
-
-/**
- * Sprawdza czy zadany string jest SHA1
- */
-function isSha1($string)
-{
-    return (bool) preg_match('/^[0-9a-f]{40}$/i', $string);
 }
 
 /**
@@ -95,6 +95,16 @@ function makeLink($href, $name)
 function wasSentPost()
 {
     return $_SERVER['REQUEST_METHOD'] === 'POST';
+}
+
+/**
+ * Zwraca obiekt config; przydatne w miejscach niedostępnych
+ */
+function getConfig()
+{
+    global $config;
+
+    return $config;
 }
 
 /**
@@ -165,7 +175,7 @@ function microDateTime()
  */
 function checkPermissions(array $permissions = [])
 {
-    global $userModel;
+    global $config;
 
     if (!isset($_SESSION['admin']) or !isset($_SESSION['admin']['user'])) {
         unset($_SESSION['admin']);
@@ -178,6 +188,12 @@ function checkPermissions(array $permissions = [])
         unset($_SESSION['admin']);
         redirect('/admin/login');
     }
+
+    if (!isset($_SESSION['admin']['langEditor'])) {
+        $_SESSION['admin']['langEditor'] = $config['lang']['editorDefault'];
+    }
+
+    $config['lang']['editor'] = $_SESSION['admin']['langEditor'];
 
     logger(sprintf("[GRANT] %s <%s>",
         $_SESSION['admin']['user']['name'],

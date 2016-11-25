@@ -77,9 +77,7 @@ $menu = [
 <script>
     $(function() {
         $('#navViewFiles').elfinderInput({
-            title: '<?=trans('Przeglądaj pliki')?>',
-            lang: '<?=$config['lang']?>',
-            url: '<?=rootUrl('/admin/elfinder/connector')?>'
+            title: '<?=trans('Przeglądaj pliki')?>'
         }, function() {
 
         });

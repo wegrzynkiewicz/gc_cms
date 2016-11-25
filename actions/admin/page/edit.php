@@ -12,7 +12,7 @@ if (wasSentPost()) {
 
     FrameModel::update($frame_id, [
         'name' => $_POST['name'],
-        'lang' => $_POST['lang'],
+        'lang' => $config['lang']['editor'],
         'keywords' => $_POST['keywords'],
         'description' => $_POST['description'],
         'image' => $_POST['image'],

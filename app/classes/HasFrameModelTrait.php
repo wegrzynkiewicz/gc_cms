@@ -14,7 +14,7 @@ trait HasFrameModelTrait
     public static function selectAllWithFrames()
     {
         # pobierz wszystkie rusztowania dla (stron)
-        $sql = self::sql("SELECT * FROM ::table AS b JOIN ::frames AS f USING(frame_id) ORDER BY f.name ASC");
+        $sql = self::sql("SELECT * FROM ::table AS b JOIN ::frames AS f USING(frame_id) WHERE ::lang ORDER BY f.name ASC");
         $rows = Database::fetchAllWithPrimaryId($sql, [], static::$primary);
 
         return $rows;

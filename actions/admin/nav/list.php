@@ -29,9 +29,6 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                         <th class="col-md-7">
                             <?=trans('Nazwa nawigacji:')?>
                         </th>
-                        <th class="col-md-3">
-                            <?=trans('Język:')?>
-                        </th>
                         <th lass="col-md-2 text-right"></th>
                     </tr>
                 </thead>
@@ -39,7 +36,6 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     <?php foreach ($navs as $nav_id => $nav): ?>
                         <tr>
                             <td><?=escape($nav['name'])?></td>
-                            <td><?=trans($config['langs'][$nav['lang']])?></td>
                             <td class="text-right">
                                 <a href="<?=url("/admin/nav-node/list/$nav_id")?>" class="btn btn-success btn-md">
                                     <i class="fa fa-file-text-o fa-fw"></i>

@@ -38,7 +38,7 @@ $_SEGMENTS = explode('/', trim($request, '/'));
 if (strlen($_SEGMENTS[0]) == 2) {
     foreach(array_keys($config['langs']) as $lang) {
         if ($_SEGMENTS[0] == $lang) {
-            $config['gen']['lang'] = $lang;
+            $config['lang']['client'] = $lang;
             array_shift($_SEGMENTS);
             break;
         }

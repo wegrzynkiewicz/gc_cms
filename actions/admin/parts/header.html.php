@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<?=$config['lang']?>">
+<html lang="<?=$config['lang']['client']?>">
 <head>
     <meta charset="utf-8" >
 	<title><?=strip_tags($headTitle.' - '.$config['adminHeadTitleBase'])?></title>

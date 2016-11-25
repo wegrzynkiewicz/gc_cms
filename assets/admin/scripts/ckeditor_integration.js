@@ -17,14 +17,9 @@ $(function() {
                         "z-index": "100000"
                     });
                     elfNode.dialogelfinder({
-                        // modal: true,
-                        width: '80%',
-                        title: 'Wybierz plik',
+                        title: '',
                         useBrowserHistory: false,
                         resizable: false,
-                        //width: '100%',
-                        url: '/admin/elfinder/connector',
-                        lang: 'pl',
                         getFileCallback: function(file) {
                             var url = file.url;
                             var dialog = CKEDITOR.dialog.getCurrent();

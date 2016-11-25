@@ -17,13 +17,6 @@
                 'label' => 'Nazwa strony',
             ])?>
 
-            <?=view('/admin/parts/input/selectbox.html.php', [
-                'name' => 'lang',
-                'label' => 'Język strony',
-                'help' => 'Wybierz język dla swojej strony',
-                'options' => $config['langs'],
-            ])?>
-
             <?=view('/admin/parts/input/editbox.html.php', [
                 'name' => 'keywords',
                 'label' => 'Tagi i słowa kluczowe (meta keywords)',

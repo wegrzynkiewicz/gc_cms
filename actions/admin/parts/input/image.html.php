@@ -51,9 +51,7 @@
     $(function() {
 
         $('#<?=$name?>_select').elfinderInput({
-            title: '<?=trans('Wybierz pliki')?>',
-            lang: '<?=$config['lang']?>',
-            url: '<?=rootUrl('/admin/elfinder/connector')?>'
+            title: '<?=trans('Wybierz plik')?>'
         }, function(file) {
             $('#<?=$name?>_preview').attr('src', file);
             $('#<?=$name?>_source').val(file);

@@ -5,7 +5,7 @@ abstract class AbstractModel
     public static function __callStatic($methodName, array $arguments)
     {
         if (!method_exists(get_called_class(), $methodName)) {
-            throw new BadMethodCallException (sprintf(
+            throw new BadMethodCallException(sprintf(
                 "Method named %s does not exists", $methodName
             ));
         }
@@ -29,11 +29,15 @@ abstract class AbstractModel
 
     protected static function sql($pseudoQuery)
     {
-        return preg_replace_callback('/(::(\w+))/', function($matches) {
-            $staticProperty = $matches[2];
-            if (isset(static::$$staticProperty)) {
-                return static::$$staticProperty;
+        return preg_replace_callback('/(::(\w+))/', function ($matches) {
+            $property = $matches[2];
+            if ($property === 'lang') {
+                return sprintf("lang = '%s'", getConfig()['lang']['editor']);
             }
+            if (isset(static::$$property)) {
+                return static::$$property;
+            }
+
             return $matches[1];
         }, $pseudoQuery);
     }

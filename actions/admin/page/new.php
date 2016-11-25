@@ -8,7 +8,7 @@ if (wasSentPost()) {
 
     $frame_id = FrameModel::insert([
         'name' => $_POST['name'],
-        'lang' => $_POST['lang'],
+        'lang' => $config['lang']['editor'],
         'keywords' => $_POST['keywords'],
         'description' => $_POST['description'],
         'image' => $_POST['image'],

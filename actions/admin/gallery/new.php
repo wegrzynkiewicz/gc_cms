@@ -7,7 +7,7 @@ checkPermissions();
 if (wasSentPost()) {
     GalleryModel::insert([
         'name' => $_POST['name'],
-        'lang' => $_POST['lang'],
+        'lang' => $config['lang']['editor'],
     ]);
 
     redirect('/admin/gallery/list');

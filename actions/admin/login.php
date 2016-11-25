@@ -28,7 +28,7 @@ if (wasSentPost()) {
 
 ?>
 <!DOCTYPE html>
-<html lang="<?=$config['lang']?>">
+<html lang="<?=$config['lang']['client']?>">
 <head>
     <meta charset="utf-8" >
 	<title><?=$headTitle.' - '.$config['adminHeadTitleBase']?></title>

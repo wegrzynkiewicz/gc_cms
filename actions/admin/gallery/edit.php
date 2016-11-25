@@ -9,7 +9,7 @@ $id = intval(array_shift($_SEGMENTS));
 if (wasSentPost()) {
     GalleryModel::update($id, [
         'name' => $_POST['name'],
-        'lang' => $_POST['lang'],
+        'lang' => $config['lang']['editor'],
     ]);
     redirect('/admin/gallery/list');
 }
