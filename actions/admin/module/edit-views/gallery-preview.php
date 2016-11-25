@@ -2,7 +2,7 @@
 
 $headTitle = trans('Podgląd galerii');
 
-checkPermissions();
+Staff::createFromSession()->redirectIfUnauthorized();
 
 $gallery_id = intval(array_shift($_SEGMENTS));
 $gallery = GalleryModel::selectByPrimaryId($gallery_id);

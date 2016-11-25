@@ -2,16 +2,16 @@
 
 $headTitle = trans("Dodawanie nowej strony");
 
-checkPermissions();
+Staff::createFromSession()->redirectIfUnauthorized();
 
 if (wasSentPost()) {
 
     $frame_id = FrameModel::insert([
         'name' => $_POST['name'],
-        'lang' => $config['lang']['editor'],
+        'lang' => $_SESSION['staff']['editorLang'],
         'keywords' => $_POST['keywords'],
         'description' => $_POST['description'],
-        'image' => $_POST['image'],
+        'image' => uploadUrl($_POST['image']),
     ]);
 
     PageModel::insert([

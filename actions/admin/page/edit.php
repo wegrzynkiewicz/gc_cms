@@ -2,7 +2,7 @@
 
 $headTitle = trans("Edytowanie strony");
 
-checkPermissions();
+Staff::createFromSession()->redirectIfUnauthorized();
 
 $page_id = intval(array_shift($_SEGMENTS));
 $page = PageModel::selectWithFrameByPrimaryId($page_id);
@@ -12,7 +12,7 @@ if (wasSentPost()) {
 
     FrameModel::update($frame_id, [
         'name' => $_POST['name'],
-        'lang' => $config['lang']['editor'],
+        'lang' => $_SESSION['staff']['editorLang'],
         'keywords' => $_POST['keywords'],
         'description' => $_POST['description'],
         'image' => $_POST['image'],

@@ -2,7 +2,7 @@
 
 $headTitle = trans("Moduły na stronie");
 
-checkPermissions();
+Staff::createFromSession()->redirectIfUnauthorized();
 
 $page_id = intval(array_shift($_SEGMENTS));
 $page = PageModel::selectWithFrameByPrimaryId($page_id);

@@ -8,18 +8,18 @@ if (isset($_SESSION['admin'])) {
 
 if (wasSentPost()) {
     $passwordHash = sha1($_POST['password']);
-    $user = UserModel::selectSingleBy('email', $_POST['email']);
+    $user = StaffModel::selectSingleBy('email', $_POST['email']);
 
     # jeżeli hasło w bazie nie jest zahaszowane, a zgadza się
     if (!isSha1($user['password']) and $_POST['password'] === $user['password']) {
-        UserModel::update($user['user_id'], [
+        StaffModel::update($user['staff_id'], [
             'password' => $passwordHash,
         ]);
         $user['password'] = $passwordHash;
     }
 
     if ($passwordHash === $user['password']) {
-        $_SESSION['admin']['user'] = $user;
+        $_SESSION['staff'] = $user;
         redirect('/admin');
     } else {
         $error = trans('Nieprawidłowy login lub hasło');

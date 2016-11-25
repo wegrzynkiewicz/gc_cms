@@ -25,7 +25,7 @@ class FrameModuleModel extends AbstractModel
             Database::insertDataToTable(static::$groupTable, [
                 static::$groupName => $group_id,
                 static::$primary => $module['id'],
-                'position' => $position++,
+                'position' => $position,
             ]);
         }
     }

@@ -171,37 +171,6 @@ function microDateTime()
 }
 
 /**
- * Sprawdza czy aktualnie zalogowany użytkownik ma uprawnienia do wykonania zadanych akcji
- */
-function checkPermissions(array $permissions = [])
-{
-    global $config;
-
-    if (!isset($_SESSION['admin']) or !isset($_SESSION['admin']['user'])) {
-        unset($_SESSION['admin']);
-        redirect('/admin/login');
-    }
-
-    $user = UserModel::selectByPrimaryId($_SESSION['admin']['user']['user_id']);
-
-    if (!$user) {
-        unset($_SESSION['admin']);
-        redirect('/admin/login');
-    }
-
-    if (!isset($_SESSION['admin']['langEditor'])) {
-        $_SESSION['admin']['langEditor'] = $config['lang']['editorDefault'];
-    }
-
-    $config['lang']['editor'] = $_SESSION['admin']['langEditor'];
-
-    logger(sprintf("[GRANT] %s <%s>",
-        $_SESSION['admin']['user']['name'],
-        $_SESSION['admin']['user']['email']
-    ), $permissions);
-}
-
-/**
  * Przekierowuje na zadany adres
  */
 function redirect($location, $code = 303)
@@ -344,54 +313,42 @@ function array_partition(array $list, $p)
 /**
  * Tworzy i zapisuje miniaturkę dla pliku; zwraca ścieżkę miniaturki
  */
-function thumb($filePath, $width, $height)
+function thumb($imageUrl, $width, $height)
 {
-    $phThumbs = '/tmp/thumbs';
+    global $config;
 
-    $extensionConfigs = array(
-        'jpg' => array(
-            'loader' => 'imagecreatefromjpeg',
-            'saver' => 'imagejpeg',
-            'mime' => 'image/jpeg',
-            'transparent' => false,
-            'quality' => 90,
-        ),
-        'png' => array(
-            'loader' => 'imagecreatefrompng',
-            'saver' => 'imagepng',
-            'mime' => 'image/png',
-            'transparent' => true,
-            'quality' => 9,
-        ),
-    );
-
-    $filePath = urldecode(trim($filePath, '/ '));
-
-    $extension = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
-    if (!isset($extensionConfigs[$extension])) {
-        return $filePath;
+    if (!$config['thumb']['enabled']) {
+        return rootUrl($imageUrl);
     }
-    $extensionParams = $extensionConfigs[$extension];
 
-    $prefix = '_'.$width.'x'.$height;
-    $filePath = Normalizer::normalize($filePath);
-    $dir = trim(dirname($filePath), '/');
-    $filename = pathinfo($filePath, PATHINFO_FILENAME);
-
-    $destFileUrl = $phThumbs.'/'.$dir.'/'.$filename.$prefix.'.'.$extension;
-    $destFilePath = "./$destFileUrl";
+    $thumbsUrl      = $config['thumb']['thumbsUrl'];
+    $thumbsPath     = $config['thumb']['thumbsPath'];
+    $options        = $config['thumb']['options'];
+    $imageUrl       = urldecode($imageUrl);
+    $extension      = strtolower(pathinfo($imageUrl, PATHINFO_EXTENSION));
+    if (!isset($options[$extension])) {
+        return rootUrl($imageUrl);
+    }
+    $params         = $options[$extension];
+    $prefix         = '_'.$width.'x'.$height;
+    $imagePath      = Normalizer::normalize($imageUrl);
+    $filename       = pathinfo($imagePath, PATHINFO_FILENAME);
+    $folder         = dirname($imagePath);
+    $thumbUrl       = "{$thumbsUrl}{$folder}/{$filename}{$prefix}.{$extension}";
+    $destFilePath   = "{$thumbsPath}{$folder}/{$filename}{$prefix}.{$extension}";
+    $sourceFilePath = "./{$imagePath}";
 
     if (!is_readable($destFilePath)) {
-        $sourceFile = $filePath;
-        if (!is_readable($sourceFile)) {
-            return $filePath;
+
+        if (!is_readable($sourceFilePath)) {
+            return $sourceFilePath;
         }
 
         $pathDir = pathinfo($destFilePath, PATHINFO_DIRNAME);
         rmkdir($pathDir);
 
-        $loader = $extensionParams['loader'];
-        $sourceImage = $loader($sourceFile);
+        $loader = $params['loader'];
+        $sourceImage = $loader($sourceFilePath);
         $sourceWidth = imagesx($sourceImage);
         $sourceHeight = imagesy($sourceImage);
 
@@ -408,7 +365,7 @@ function thumb($filePath, $width, $height)
 
         $thumbImage = imagecreatetruecolor($distWidth, $distHeight);
 
-        if ($extensionParams['transparent'] === true) {
+        if ($params['transparent'] === true) {
             $backgroundColor = imagecolorallocate($thumbImage, 0, 0, 0);
             imagecolortransparent($thumbImage, $backgroundColor);
             imagealphablending($thumbImage, false);
@@ -418,12 +375,12 @@ function thumb($filePath, $width, $height)
         imagecopyresampled($thumbImage, $sourceImage, 0, 0, 0, 0, $distWidth,
                            $distHeight, $sourceWidth, $sourceHeight);
 
-        $saver = $extensionParams['saver'];
-        $saver($thumbImage, $destFilePath, $extensionParams['quality']);
+        $saver = $params['saver'];
+        $saver($thumbImage, $destFilePath, $params['quality']);
         chmod($destFilePath, 0775);
     }
 
-    return $destFileUrl;
+    return rootUrl($thumbUrl);
 }
 
 /**
@@ -454,6 +411,25 @@ function outputCSS($parsed)
     }
 
     return implode(';', $parts);
+}
+
+/**
+ * Get either a Gravatar URL or complete image tag for a specified email address.
+ *
+ * @param string $email The email address
+ * @param string $s Size in pixels, defaults to 80px [ 1 - 2048 ]
+ * @param string $d Default imageset to use [ 404 | mm | identicon | monsterid | wavatar ]
+ * @param string $r Maximum rating (inclusive) [ g | pg | r | x ]
+ * @return String containing either just a URL or a complete image tag
+ * @source https://gravatar.com/site/implement/images/php/
+ */
+function getGravatar($email, $s = 80, $d = 'mm', $r = 'g')
+{
+	$url = 'https://www.gravatar.com/avatar/';
+	$url .= md5( strtolower( trim( $email ) ) );
+	$url .= "?s=$s&d=$d&r=$r";
+
+	return $url;
 }
 
 /**

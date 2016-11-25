@@ -4,20 +4,20 @@
 
 $request = '/'.trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 $requestQuery = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
-$rootUri = dirname($_SERVER['SCRIPT_NAME']);
+$rootUrl = dirname($_SERVER['SCRIPT_NAME']);
 $method = strtoupper($_SERVER['REQUEST_METHOD']);
 
 logger("[REQUEST] $method $request", $_REQUEST);
 
-# jeżeli aplikacja jest zainstalowana w katalogu, wtedy pomiń adres katalogu i dodaj prefiks dla adresów
-if ($rootUri and strpos($request, $rootUri) === 0) {
-    $request = substr($request, strlen($rootUri));
-    define('ROOT_URL', $rootUri);
+# jeżeli aplikacja jest zainstalowana w katalogu, wtedy pomiń adres katalogu
+if ($rootUrl and strpos($request, $rootUrl) === 0) {
+    $request = substr($request, strlen($rootUrl));
+    define('ROOT_URL', $rootUrl);
 } else {
     define('ROOT_URL', '');
 }
 
-# jeżeli adres zawiera front controller, wtedy go usuń i dodaj prefiks dla adresów
+# jeżeli adres zawiera front controller, wtedy go usuń
 $frontController = '/index.php';
 if (strpos($request, $frontController) === 0) {
     $request = substr($request, strlen($frontController));
@@ -71,7 +71,7 @@ while (count($segments) > 0) {
 
     if (file_exists($file)) {
         $_SEGMENTS = $segments;
-        logger("[ROUTING] Nested :: $file");
+        logger("[ROUTING] Nested :: ".relativePath($file));
         return require_once $file;
     }
 
@@ -83,7 +83,7 @@ while (count($segments) > 0) {
 # jeżeli nie istnieje akcja to spróbuj załadować plik start w katalogu końcowym
 $file = $path.'/start.php';
 if (file_exists($file)) {
-    logger("[ROUTING] Start :: $file");
+    logger("[ROUTING] Start :: ".relativePath($file));
     return require_once $file;
 }
 
@@ -101,7 +101,7 @@ if (in_array($slug, $frameTypes)) {
 # jeżeli istnieje niestandardowy plik w folderze z szablonem
 $customFile = TEMPLATE_PATH."/custom/$slug.html.php";
 if (file_exists($customFile)) {
-    logger("[ROUTING] Custom slug :: $slug");
+    logger("[ROUTING] Custom slug :: ".relativePath($customFile));
     return require_once $customFile;
 }
 
@@ -117,7 +117,7 @@ if ($id <= 0) {
 # jeżeli istnieje niestandardowy plik w folderze z szablonem
 $customFile = TEMPLATE_PATH."/custom/$id.html.php";
 if (file_exists($customFile)) {
-    logger("[ROUTING] Custom id :: $customFile");
+    logger("[ROUTING] Custom id :: ".relativePath($customFile));
     return require_once $customFile;
 }
 

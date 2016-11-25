@@ -2,7 +2,7 @@
 
 $headTitle = trans("Tworzenie węzeła w nawigacji");
 
-checkPermissions();
+Staff::createFromSession()->redirectIfUnauthorized();
 
 $nav_id = intval(array_shift($_SEGMENTS));
 $menu_id = 0;

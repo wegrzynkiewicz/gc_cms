@@ -2,14 +2,14 @@
 
 $headTitle = trans("Edytowanie galerii");
 
-checkPermissions();
+Staff::createFromSession()->redirectIfUnauthorized();
 
 $id = intval(array_shift($_SEGMENTS));
 
 if (wasSentPost()) {
     GalleryModel::update($id, [
         'name' => $_POST['name'],
-        'lang' => $config['lang']['editor'],
+        'lang' => $_SESSION['staff']['editorLang'],
     ]);
     redirect('/admin/gallery/list');
 }

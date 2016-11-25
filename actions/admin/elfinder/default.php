@@ -1,5 +1,5 @@
 <?php
-checkPermissions();
+Staff::createFromSession()->redirectIfUnauthorized();
 ?>
 <!DOCTYPE html>
 <html>

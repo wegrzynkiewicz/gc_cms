@@ -2,7 +2,7 @@
 
 $headTitle = trans("Nawigacje");
 
-checkPermissions();
+Staff::createFromSession()->redirectIfUnauthorized();
 
 $navs = NavModel::selectAll();
 
@@ -23,13 +23,13 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 <?=trans('Nie znaleziono żadnej nawigacji.')?>
             </p>
         <?php else: ?>
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-bordered table-hover" data-table="">
                 <thead>
                     <tr>
-                        <th class="col-md-7">
+                        <th class="col-md-5">
                             <?=trans('Nazwa nawigacji:')?>
                         </th>
-                        <th lass="col-md-2 text-right"></th>
+                        <th lass="col-md-7 text-right"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,7 +37,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                         <tr>
                             <td><?=escape($nav['name'])?></td>
                             <td class="text-right">
-                                <a href="<?=url("/admin/nav-node/list/$nav_id")?>" class="btn btn-success btn-md">
+                                <a href="<?=url("/admin/nav-node/list/$nav_id")?>" class="btn btn-success btn-xs">
                                     <i class="fa fa-file-text-o fa-fw"></i>
                                     <?=trans('Węzły nawigacji')?>
                                 </a>
@@ -51,4 +51,11 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 </div>
 
 <?php require_once ACTIONS_PATH.'/admin/parts/assets.html.php'; ?>
+
+<script>
+    $(function(){
+        $('[data-table]').DataTable();
+    });
+</script>
+
 <?php require_once ACTIONS_PATH.'/admin/parts/footer.html.php'; ?>

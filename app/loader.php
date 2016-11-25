@@ -8,7 +8,7 @@ session_start();
 
 require_once __DIR__.'/config/config.php';
 require_once __DIR__.'/functions.php';
-//require_once __DIR__.'/error-handler.php';
+require_once __DIR__.'/error-handler.php';
 
 # dodaje dodatkowy autoloader do ładowania klas
 spl_autoload_register(function ($class) {

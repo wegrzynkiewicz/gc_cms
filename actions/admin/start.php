@@ -2,7 +2,7 @@
 
 $headTitle = trans('Dashboard');
 
-checkPermissions();
+Staff::createFromSession()->redirectIfUnauthorized();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php';
 ?>

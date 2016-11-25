@@ -54,7 +54,7 @@
 
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="fa fa-user fa-fw"></i>
-                <?=escape($_SESSION['admin']['user']['name'])?>
+                <?=escape($_SESSION['staff']['name'])?>
                 <b class="caret"></b>
             </a>
 

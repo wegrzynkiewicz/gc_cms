@@ -1,6 +1,6 @@
 <?php
 
-checkPermissions();
+Staff::createFromSession()->redirectIfUnauthorized();
 
 if (wasSentPost()) {
     $gallery_id = intval($_POST['id']);

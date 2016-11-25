@@ -2,7 +2,7 @@
 
 $headTitle = trans("Edytowanie zdjęcia w galerii");
 
-checkPermissions();
+Staff::createFromSession()->redirectIfUnauthorized();
 
 $image_id = intval(array_shift($_SEGMENTS));
 $gallery_id = intval(array_shift($_SEGMENTS));

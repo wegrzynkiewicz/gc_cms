@@ -2,7 +2,7 @@
 
 $headTitle = trans("Galerie zdjęć");
 
-checkPermissions();
+Staff::createFromSession()->redirectIfUnauthorized();
 $rows = GalleryModel::selectAll();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
@@ -30,33 +30,31 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 <?=trans('Nie znaleziono żadnej galerii.')?>
             </p>
         <?php else: ?>
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-bordered table-hover" data-table="">
                 <thead>
                     <tr>
-                        <th class="col-md-7">
+                        <th class="col-md-5 col-lg-4">
                             <?=trans('Nazwa galerii:')?>
                         </th>
-                        <th lass="col-md-2 text-right"></th>
+                        <th class="col-md-7 col-lg-8 text-right"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($rows as $id => $row): ?>
                         <tr>
-                            <td><?=$row['name']?></td>
+                            <td>
+                                <a href="<?=url("/admin/gallery/edit/$id")?>"
+                                    title="<?=trans('Edytuj galerię')?>">
+                                    <?=$row['name']?>
+                                </a>
+                            </td>
                             <td class="text-right">
 
                                 <a href="<?=url("/admin/gallery-images/list/$id")?>"
                                     title="<?=trans('Wyświetl zdjęcia galerii')?>"
-                                    class="btn btn-success btn-sm">
+                                    class="btn btn-success btn-xs">
                                     <i class="fa fa-file-text-o fa-fw"></i>
                                     <?=trans("Zdjęcia")?>
-                                </a>
-
-                                <a href="<?=url("/admin/gallery/edit/$id")?>"
-                                    title="<?=trans('Edytuj galerię')?>"
-                                    class="btn btn-primary btn-sm">
-                                    <i class="fa fa-cog fa-fw"></i>
-                                    <?=trans("Edytuj")?>
                                 </a>
 
                                 <a data-toggle="modal"
@@ -64,8 +62,9 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                     data-name="<?=$row['name']?>"
                                     data-target="#deleteModal"
                                     title="<?=trans('Usuń galerię')?>"
-                                    class="btn btn-danger btn-sm">
+                                    class="btn btn-danger btn-xs">
                                     <i class="fa fa-times fa-fw"></i>
+                                    <?=trans("Usuń")?>
                                 </a>
 
                             </td>
@@ -108,10 +107,15 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 <?php require_once ACTIONS_PATH.'/admin/parts/assets.html.php'; ?>
 
 <script>
+$(function(){
+
     $('#deleteModal').on('show.bs.modal', function(e) {
         $(this).find('#name').html($(e.relatedTarget).data('name'));
         $(this).find('[name="id"]').val($(e.relatedTarget).data('id'));
     });
+
+    $('[data-table]').DataTable();
+});
 </script>
 
 <?php require_once ACTIONS_PATH.'/admin/parts/footer.html.php'; ?>

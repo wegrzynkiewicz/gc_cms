@@ -11,7 +11,9 @@ if (isset($settings['gallery_id'])) {
     <div class="module-gallery-preview-row">
         <?php foreach ($images as $image): ?>
             <div class="module-gallery-preview-wrapper">
-                <img src="<?=rootUrl(thumb($image['file'], 120, 70))?>"
+                <img src="<?=thumb($image['file'], 120, 70)?>"
+                    width="120"
+                    width="70"
                     class="module-gallery-preview-image"/>
             </div>
         <?php endforeach ?>

@@ -1,6 +1,6 @@
 <?php
     $value = inputValue($name);
-    $preview = empty($value) ? assetsUrl($config['noImagePath']): $value;
+    $preview = empty($value) ? assetsUrl($config['noImageUrl']): $value;
 ?>
 
 <div class="form-group">
@@ -58,7 +58,7 @@
         });
 
         $('#<?=$name?>_delete').click( function(){
-            $('#<?=$name?>_preview').attr('src', '<?=rootUrl($config['noImagePath'])?>');
+            $('#<?=$name?>_preview').attr('src', '<?=rootUrl($config['noImageUrl'])?>');
             $('#<?=$name?>_source').val('');
         })
     });

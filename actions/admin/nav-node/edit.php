@@ -2,7 +2,7 @@
 
 $headTitle = trans("Edycja węzła w nawigacji");
 
-checkPermissions();
+Staff::createFromSession()->redirectIfUnauthorized();
 
 $menu_id = intval(array_shift($_SEGMENTS));
 $nav_id = intval(array_shift($_SEGMENTS));

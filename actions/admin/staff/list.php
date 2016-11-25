@@ -1,10 +1,10 @@
 <?php
 
-$headTitle = trans("Wszystkie strony");
+$headTitle = trans("Pracownicy");
 
 Staff::createFromSession()->redirectIfUnauthorized();
 
-$pages = PageModel::selectAllWithFrames();
+$staffList = StaffModel::selectAll();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
@@ -16,9 +16,9 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     </div>
     <div class="col-lg-4 text-right">
         <h1 class="page-header">
-            <a href="<?=url("/admin/page/new")?>" type="button" class="btn btn-success">
+            <a href="<?=url("/admin/staff/new")?>" type="button" class="btn btn-success">
                 <i class="fa fa-plus fa-fw"></i>
-                <?=trans('Dodaj nową stronę')?>
+                <?=trans('Dodaj nowego pracownika')?>
             </a>
         </h1>
     </div>
@@ -26,48 +26,42 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">
-        <?php if (empty($pages)): ?>
+        <?php if (empty($staffList)): ?>
             <p>
-                <?=trans('Nie znaleziono żadnej strony.')?>
+                <?=trans('Nie znaleziono żadnych pracowników.')?>
             </p>
         <?php else: ?>
             <table class="table table-striped table-bordered table-hover" data-table="">
                 <thead>
                     <tr>
                         <th class="col-md-5 col-lg-4">
-                            <?=trans('Nazwa strony:')?>
+                            <?=trans('Pracownik')?>
                         </th>
                         <th class="col-md-7 col-lg-8 text-right"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($pages as $page_id => $page): ?>
+                    <?php foreach ($staffList as $staff_id => $staff): ?>
                         <tr>
                             <td>
-                                <a href="<?=url("/admin/page/edit/$page_id")?>"
-                                    title="<?=trans('Edytuj stronę')?>">
-                                    <?=$page['name']?>
+                                <img src="<?=Staff::getAvatarUrl($staff, 30)?>"
+                                    height="30" style="margin-right:5px"/>
+
+                                <a href="<?=url("/admin/staff/edit/$staff_id")?>"
+                                    title="<?=trans('Edytuj pracownika')?>">
+                                    <?=$staff['name']?>
                                 </a>
                             </td>
                             <td class="text-right">
-
-                                <a href="<?=url("/admin/module/list/$page_id")?>"
-                                    title="<?=trans('Wyświetl moduły strony')?>"
-                                    class="btn btn-success btn-xs">
-                                    <i class="fa fa-file-text-o fa-fw"></i>
-                                    <?=trans("Moduły")?>
-                                </a>
-
                                 <a data-toggle="modal"
-                                    data-id="<?=$page_id?>"
-                                    data-name="<?=$page['name']?>"
+                                    data-id="<?=$staff_id?>"
+                                    data-name="<?=$staff['name']?>"
                                     data-target="#deleteModal"
-                                    title="<?=trans('Usuń stronę')?>"
-                                    class="btn btn-danger btn-xs">
+                                    title="<?=trans('Usuń pracownika')?>"
+                                    class="btn btn-danger btn-sm">
                                     <i class="fa fa-times fa-fw"></i>
                                     <?=trans("Usuń")?>
                                 </a>
-
                             </td>
                         </tr>
                     <?php endforeach ?>
@@ -77,12 +71,10 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     </div>
 </div>
 
-<?php require_once ACTIONS_PATH.'/admin/parts/assets.html.php'; ?>
-
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=url("/admin/page/delete")?>" class="modal-content">
-            <input name="page_id" type="hidden" value="">
+        <form id="deleteModalForm" method="post" action="<?=url("/admin/staff/delete")?>" class="modal-content">
+            <input name="id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span>&times;</span>
@@ -92,7 +84,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=trans("Czy jesteś pewien, że chcesz usunąć stronę")?>
+                <?=trans("Czy jesteś pewien, że chcesz usunąć pracownika")?>
                 <span id="name" style="font-weight:bold; color:red;"></span>?
             </div>
             <div class="modal-footer">
@@ -107,14 +99,17 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     </div>
 </div>
 
+<?php require_once ACTIONS_PATH.'/admin/parts/assets.html.php'; ?>
+
 <script>
-    $(function(){
-        $('#deleteModal').on('show.bs.modal', function(e) {
-            $(this).find('#name').html($(e.relatedTarget).data('name'));
-            $(this).find('[name="page_id"]').val($(e.relatedTarget).data('id'));
-        });
-        $('[data-table]').DataTable();
+$(function(){
+    $('#deleteModal').on('show.bs.modal', function(e) {
+        $(this).find('#name').html($(e.relatedTarget).data('name'));
+        $(this).find('[name="id"]').val($(e.relatedTarget).data('id'));
     });
+
+    $('[data-table]').DataTable();
+});
 </script>
 
 <?php require_once ACTIONS_PATH.'/admin/parts/footer.html.php'; ?>

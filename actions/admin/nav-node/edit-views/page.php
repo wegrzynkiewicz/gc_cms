@@ -1,6 +1,6 @@
 <?php
 
-checkPermissions();
+Staff::createFromSession()->redirectIfUnauthorized();
 
 $menu_id = intval(array_shift($_SEGMENTS));
 $node = NavMenuModel::selectByPrimaryId($menu_id);

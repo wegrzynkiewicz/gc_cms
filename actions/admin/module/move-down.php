@@ -1,6 +1,6 @@
 <?php
 
-checkPermissions();
+Staff::createFromSession()->redirectIfUnauthorized();
 
 $module_id = intval(array_shift($_SEGMENTS));
 $page_id = intval(array_shift($_SEGMENTS));

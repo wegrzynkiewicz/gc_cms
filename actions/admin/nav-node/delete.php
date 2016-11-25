@@ -1,6 +1,6 @@
 <?php
 
-checkPermissions();
+Staff::createFromSession()->redirectIfUnauthorized();
 
 $nav_id = intval(array_shift($_SEGMENTS));
 

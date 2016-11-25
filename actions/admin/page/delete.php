@@ -1,6 +1,6 @@
 <?php
 
-checkPermissions();
+Staff::createFromSession()->redirectIfUnauthorized();
 
 if (wasSentPost()) {
     $page_id = $_POST['page_id'];
