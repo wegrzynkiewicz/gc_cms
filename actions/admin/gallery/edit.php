@@ -2,7 +2,7 @@
 
 $headTitle = trans("Edytowanie galerii");
 
-Staff::createFromSession()->redirectIfUnauthorized();
+$staff->redirectIfUnauthorized();
 
 $id = intval(array_shift($_SEGMENTS));
 

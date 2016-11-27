@@ -28,7 +28,7 @@
             <div id="nodeType"></div>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'cancelHref' => "/admin/nav-node/list/$nav_id",
+                'cancelHref' => "/admin/nav/menu/list/$nav_id",
                 'saveLabel' => 'Zapisz stronę',
             ])?>
 
@@ -41,7 +41,7 @@
 <script>
 $(function() {
     function refreshType(nodeType) {
-        $.get("<?=url("/admin/nav-node/edit-views")?>/"+nodeType+"/<?=$menu_id?>", function(data) {
+        $.get("<?=url("/admin/nav/menu/edit-views")?>/"+nodeType+"/<?=$menu_id?>", function(data) {
             $('#nodeType').html(data);
         });
     }

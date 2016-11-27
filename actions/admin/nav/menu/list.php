@@ -2,7 +2,7 @@
 
 $headTitle = trans("Węzły nawigacji");
 
-Staff::createFromSession()->redirectIfUnauthorized();
+$staff->redirectIfUnauthorized();
 
 $nav_id = intval(array_shift($_SEGMENTS));
 
@@ -31,7 +31,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     </div>
     <div class="col-lg-4 text-right">
         <h1 class="page-header">
-            <a href="<?=url("/admin/nav-node/new/$nav_id")?>" type="button" class="btn btn-success">
+            <a href="<?=url("/admin/nav/menu/new/$nav_id")?>" type="button" class="btn btn-success">
                 <i class="fa fa-plus fa-fw"></i>
                 <?=trans('Dodaj nowy węzeł')?>
             </a>
@@ -43,7 +43,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="col-md-12">
         <?php if ($menuTree->hasChildren()):?>
             <ol id="sortable" class="sortable">
-                <?=view('/admin/nav-node/list-item.html.php', [
+                <?=view('/admin/nav/menu/list-item.html.php', [
                     'menu' => $menuTree,
                     'nav_id' => $nav_id,
                     'pages' => $pages,
@@ -76,7 +76,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=url("/admin/nav-node/delete/$nav_id")?>" class="modal-content">
+        <form id="deleteModalForm" method="post" action="<?=url("/admin/nav/menu/delete/$nav_id")?>" class="modal-content">
             <input name="menu_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

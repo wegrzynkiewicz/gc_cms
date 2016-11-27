@@ -1,6 +1,6 @@
 <?php
 
-Staff::createFromSession()->redirectIfUnauthorized();
+$staff->redirectIfUnauthorized();
 
 $positions = json_decode($_POST['ids'], true);
 $gallery_id = intval(array_shift($_SEGMENTS));

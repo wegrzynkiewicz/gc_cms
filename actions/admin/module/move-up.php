@@ -1,6 +1,6 @@
 <?php
 
-Staff::createFromSession()->redirectIfUnauthorized();
+$staff->redirectIfUnauthorized();
 
 $module_id = intval(array_shift($_SEGMENTS));
 $page_id = intval(array_shift($_SEGMENTS));

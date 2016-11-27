@@ -75,6 +75,13 @@ while (count($segments) > 0) {
         return require_once $file;
     }
 
+    # jeżeli istnieje plik "include" to załaduj, ale nie kończ pętli
+    $file = $path.'/include.php';
+    if (file_exists($file)) {
+        logger("[INCLUDE] ".relativePath($file));
+        require_once $file;
+    }
+
     if (!is_dir($path)) {
         break;
     }

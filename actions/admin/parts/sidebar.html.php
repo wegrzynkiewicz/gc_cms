@@ -3,24 +3,29 @@ $menu = [
     'Dashboard' => [
         'path' => '/admin',
         'icon' => 'fa fa-dashboard fa-fw',
+        'perms' => [],
     ],
     'Strony' => [
         'path' => '',
         'icon' => 'fa fa-files-o fa-fw',
+        'perms' => [],
         'children' => [
             'Wyświetl wszystkie strony' => [
                 'path' => '/admin/page/list',
                 'icon' => '',
+                'perms' => [],
             ],
             'Dodaj nową stronę' => [
                 'path' => '/admin/page/new',
                 'icon' => '',
+                'perms' => [],
             ],
         ],
     ],
     'Nawigacja' => [
         'path' => '',
         'icon' => 'fa fa fa-sitemap fa-fw',
+        'perms' => [],
         'children' => [
             'Wyświetl wszystkie nawigacje' => [
                 'path' => '/admin/nav/list',
@@ -31,21 +36,52 @@ $menu = [
     'Galerie zdjęć' => [
         'path' => '',
         'icon' => 'fa fa-picture-o fa-fw',
+        'perms' => [],
         'children' => [
             'Wyświetl wszystkie galerie' => [
                 'path' => '/admin/gallery/list',
                 'icon' => '',
+                'perms' => [],
             ],
             'Dodaj nową galerie' => [
                 'path' => '/admin/gallery/new',
                 'icon' => '',
+                'perms' => [],
             ],
         ],
     ],
     'Pliki' => [
         'id' => 'navViewFiles',
         'path' => '',
-        'icon' => 'fa fa-files-o fa-fw',
+        'icon' => 'fa fa-folder-open-o fa-fw',
+        'perms' => [],
+    ],
+    'Pracownicy' => [
+        'path' => '',
+        'icon' => 'fa fa-users fa-fw',
+        'perms' => ['manage_staff'],
+        'children' => [
+            'Wyświetl pracowników' => [
+                'path' => '/admin/staff/list',
+                'icon' => '',
+                'perms' => ['manage_staff'],
+            ],
+            'Dodaj nowego pracownika' => [
+                'path' => '/admin/staff/new',
+                'icon' => '',
+                'perms' => ['manage_staff'],
+            ],
+            'Wyświetl wszystkie grupy' => [
+                'path' => '/admin/staff/group/list',
+                'icon' => '',
+                'perms' => ['manage_staff_groups'],
+            ],
+            'Dodaj nową grupę' => [
+                'path' => '/admin/staff/group/new',
+                'icon' => '',
+                'perms' => ['manage_staff_groups'],
+            ],
+        ],
     ],
 ];
 ?>
@@ -68,7 +104,8 @@ $menu = [
 
             <?=view('/admin/parts/sidebar-item.html.php', [
                 'menu' => $menu,
-                'level' => 'nav nav-second-level'
+                'staff' => $staff,
+                'level' => 'nav nav-second-level',
             ])?>
 
         </ul>

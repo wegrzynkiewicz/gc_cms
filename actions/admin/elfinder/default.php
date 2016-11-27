@@ -1,5 +1,5 @@
 <?php
-Staff::createFromSession()->redirectIfUnauthorized();
+$staff->redirectIfUnauthorized();
 ?>
 <!DOCTYPE html>
 <html>

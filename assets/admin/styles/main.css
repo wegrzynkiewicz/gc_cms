@@ -9,6 +9,10 @@
     align-items: center;
 }
 
+.table.vertical-middle>tbody>tr>td {
+    vertical-align: middle;
+}
+
 .vertical_resize {
     resize: vertical;
 }

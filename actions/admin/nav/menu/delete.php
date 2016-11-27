@@ -1,6 +1,6 @@
 <?php
 
-Staff::createFromSession()->redirectIfUnauthorized();
+$staff->redirectIfUnauthorized();
 
 $nav_id = intval(array_shift($_SEGMENTS));
 
@@ -9,4 +9,4 @@ if (wasSentPost()) {
     NavMenuModel::deleteByPrimaryId($menu_id);
 }
 
-redirect("/admin/nav-node/list/$nav_id");
+redirect("/admin/nav/menu/list/$nav_id");

@@ -2,7 +2,7 @@
 
 $headTitle = trans("Dodawanie nowej galerii");
 
-Staff::createFromSession()->redirectIfUnauthorized();
+$staff->redirectIfUnauthorized();
 
 if (wasSentPost()) {
     GalleryModel::insert([

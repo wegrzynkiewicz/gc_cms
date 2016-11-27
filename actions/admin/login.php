@@ -2,7 +2,7 @@
 
 $headTitle = trans("Logowanie do panelu admina");
 
-if (isset($_SESSION['admin'])) {
+if (isset($_SESSION['staff'])) {
     redirect('/admin');
 }
 

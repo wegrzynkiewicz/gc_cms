@@ -61,6 +61,10 @@ $config = [
         '_self'	 => 'Załaduj w tym samym oknie',
         '_blank' => 'Załaduj w nowym oknie',
     ],
+    'permissions' => [ # zawiera uprawnienia dostępne dla pracownikow
+        'manage_staff' => 'Zarządzanie pracownikami',
+        'manage_staff_groups' => 'Zarządzanie grupami pracowników',
+    ],
     'thumb' => [ # ustawienia generatora miniaturek
         'enabled' => true, # czy generować miniaturki?
         'thumbsUrl' => '/tmp/thumbs', # adres do katalogu z miniaturkami

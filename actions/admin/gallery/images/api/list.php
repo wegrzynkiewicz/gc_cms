@@ -1,6 +1,6 @@
 <?php
 
-Staff::createFromSession()->redirectIfUnauthorized();
+$staff->redirectIfUnauthorized();
 
 $gallery_id = intval(array_shift($_SEGMENTS));
 $images = GalleryImageModel::selectAllByGroupId($gallery_id);
@@ -24,7 +24,7 @@ $images = GalleryImageModel::selectAllByGroupId($gallery_id);
 
                 <div class="pull-right">
 
-                    <a href="<?=url("/admin/gallery-images/edit/$id/$gallery_id/cycki")?>"
+                    <a href="<?=url("/admin/gallery/images/edit/$id/$gallery_id")?>"
                         data-toggle="modal"
                         title="<?=trans('Edytuj stronę')?>"
                         class="btn btn-primary btn-xs">

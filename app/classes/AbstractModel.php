@@ -78,11 +78,30 @@ abstract class AbstractModel
         return intval($maxOrder['maximum']) + 1;
     }
 
+    public static function selectAllAsOptions()
+    {
+        $rows = self::selectAll();
+
+        $options = [];
+        foreach($rows as $row) {
+            $options[$row[static::$primary]] = $row['name'];
+        }
+
+        return $options;
+    }
+
     protected static function deleteByPrimaryId($id)
     {
         $sql = self::sql("DELETE FROM ::table WHERE ::primary = ? LIMIT 1");
 
         return Database::execute($sql, [$id]);
+    }
+
+    protected static function deleteBy($field, $value)
+    {
+        $sql = self::sql("DELETE FROM ::table WHERE {$field} = ?");
+
+        return Database::execute($sql, [$value]);
     }
 
     protected static function update($id, array $data)

@@ -1,6 +1,6 @@
 <?php
 
-Staff::createFromSession()->redirectIfUnauthorized();
+$staff->redirectIfUnauthorized();
 
 $gallery_id = intval(array_shift($_SEGMENTS));
 

@@ -2,17 +2,16 @@
 
 class Staff extends Entity
 {
-    const URL_TO_REDIRECT = '/admin/login';
+    public $permissions = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data, array $permissions)
     {
         parent::__construct($data);
-
-        $config = getConfig();
+        $this->permissions = $permissions;
 
         # jeżeli w sesji nie ma języka edytora wtedy ustaw go z configa
         if (!isset($_SESSION['staff']['editorLang'])) {
-            $_SESSION['staff']['editorLang'] = $config['lang']['editorDefault'];
+            $_SESSION['staff']['editorLang'] = getConfig()['lang']['editorDefault'];
         }
     }
 
@@ -22,15 +21,27 @@ class Staff extends Entity
     public function redirectIfUnauthorized(array $permissions = [])
     {
         if (!$this->hasPermissions($permissions)) {
-            redirect(self::URL_TO_REDIRECT);
+            logger("[DENY] Not authorized", $permissions);
+            $perm = count($permissions) > 0 ? array_shift($permissions) : 'default';
+            redirect("/admin/deny/$perm");
         }
     }
 
     /**
      * Sprawdza czy pracownik ma uprawnienia do wykonania zadanych akcji
      */
-    public function hasPermissions(array $permissions = [])
+    public function hasPermissions(array $requiredPermissions = [])
     {
+        if ($this['root'] == 1) {
+            return true;
+        }
+
+        foreach ($requiredPermissions as $requiredPermission) {
+            if (!in_array($requiredPermission, $this->permissions)) {
+                return false;
+            }
+        }
+
         return true;
     }
 
@@ -63,8 +74,10 @@ class Staff extends Entity
             ));
         }
 
+        $permissions = StaffPermissionModel::selectPermissionsAsOptionsByStaffId($staff_id);
+
         # utworz obiekt reprezentujacy pracownika
-        $staff = new Staff($data);
+        $staff = new Staff($data, $permissions);
 
         return $staff;
     }
@@ -80,7 +93,7 @@ class Staff extends Entity
         if (!isset($_SESSION['staff'])) {
             unset($_SESSION['staff']);
             logger("[LOGOUT] Session does not exists");
-            redirect(self::URL_TO_REDIRECT);
+            redirect('/admin/login');
         }
 
         # spróbuj pobrać pracownika z bazy, jezeli go nie znajdzie wtedy przekieruj na logowanie
@@ -90,7 +103,7 @@ class Staff extends Entity
         } catch (RuntimeException $exception) {
             unset($_SESSION['staff']);
             logger("[LOGOUT] Not found user");
-            redirect(self::URL_TO_REDIRECT);
+            redirect('/admin/login');
         }
 
         logger(sprintf("[SESSION] %s <%s>",

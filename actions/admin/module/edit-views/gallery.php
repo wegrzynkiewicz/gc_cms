@@ -12,11 +12,7 @@ if (wasSentPost()) {
     redirect("/admin/module/list/$page_id");
 }
 
-$galleries = GalleryModel::selectAll();
-$galleriesOptions = [];
-foreach($galleries as $gallery) {
-    $galleriesOptions[$gallery['gallery_id']] = $gallery['name'];
-}
+$galleriesOptions = GalleryModel::selectAllAsOptions();
 
 $_POST = $settings;
 

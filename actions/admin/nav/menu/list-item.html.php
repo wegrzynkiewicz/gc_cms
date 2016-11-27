@@ -19,7 +19,7 @@
             </div>
 
             <div class="pull-right" style="margin-right: 10px">
-                <a href="<?=url("/admin/nav-node/edit/$menu_id/$nav_id")?>" class="btn btn-primary btn-xs">
+                <a href="<?=url("/admin/nav/menu/edit/$menu_id/$nav_id")?>" class="btn btn-primary btn-xs">
                     <i class="fa fa-cog fa-fw"></i>
                     <?=trans('Edytuj')?>
                 </a>
@@ -33,7 +33,7 @@
 
             <div class="pull-right" style="margin-right: 30px">
                 <?=trans($config['nodeTypes'][$node['type']])?>
-                <?=view('/admin/nav-node/list-preview/'.$node['type'].'.html.php', [
+                <?=view('/admin/nav/menu/list-preview/'.$node['type'].'.html.php', [
                     'node' => $node,
                     'pages' => $pages,
                 ])?>
@@ -44,7 +44,7 @@
 
         <?php if ($node->hasChildren()): ?>
             <ol>
-                <?=view('/admin/nav-node/list-item.html.php', [
+                <?=view('/admin/nav/menu/list-item.html.php', [
                     'menu' => $node,
                     'nav_id' => $nav_id,
                     'pages' => $pages,

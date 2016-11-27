@@ -2,9 +2,9 @@
 
 $headTitle = "Wylogowałeś się z panelu admina";
 
-Staff::createFromSession()->redirectIfUnauthorized();
+$staff->redirectIfUnauthorized();
 
-unset($_SESSION['admin']);
+unset($_SESSION['staff']);
 
 ?>
 

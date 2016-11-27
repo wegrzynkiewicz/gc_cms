@@ -2,7 +2,7 @@
 
 $headTitle = trans("Edytowanie strony");
 
-Staff::createFromSession()->redirectIfUnauthorized();
+$staff->redirectIfUnauthorized();
 
 $page_id = intval(array_shift($_SEGMENTS));
 $page = PageModel::selectWithFrameByPrimaryId($page_id);

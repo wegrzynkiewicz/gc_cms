@@ -2,7 +2,7 @@
 
 $headTitle = trans('Podgląd galerii');
 
-Staff::createFromSession()->redirectIfUnauthorized();
+$staff->redirectIfUnauthorized();
 
 $gallery_id = intval(array_shift($_SEGMENTS));
 $gallery = GalleryModel::selectByPrimaryId($gallery_id);
@@ -13,7 +13,7 @@ $images = GalleryImageModel::selectAllByGroupId($gallery_id);
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <a href="<?=url("/admin/gallery-images/list/$gallery_id")?>" class="pull-right">
+        <a href="<?=url("/admin/gallery/images/list/$gallery_id")?>" class="pull-right">
             <?=trans('Edytuj galerię')?>
         </a>
         <?=$headTitle?>

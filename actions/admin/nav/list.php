@@ -2,7 +2,7 @@
 
 $headTitle = trans("Nawigacje");
 
-Staff::createFromSession()->redirectIfUnauthorized();
+$staff->redirectIfUnauthorized();
 
 $navs = NavModel::selectAll();
 
@@ -37,7 +37,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                         <tr>
                             <td><?=escape($nav['name'])?></td>
                             <td class="text-right">
-                                <a href="<?=url("/admin/nav-node/list/$nav_id")?>" class="btn btn-success btn-xs">
+                                <a href="<?=url("/admin/nav/menu/list/$nav_id")?>" class="btn btn-success btn-xs">
                                     <i class="fa fa-file-text-o fa-fw"></i>
                                     <?=trans('Węzły nawigacji')?>
                                 </a>

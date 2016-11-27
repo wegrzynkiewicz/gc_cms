@@ -26,6 +26,18 @@ trait GroupModelTrait
         return $maxOrder['maximum'] + 1;
     }
 
+    public static function selectAllAsOptionsByGroupId($group_id)
+    {
+        $rows = self::selectAllByGroupId($group_id);
+
+        $options = [];
+        foreach($rows as $row) {
+            $options[$row[static::$primary]] = $row['name'];
+        }
+
+        return $options;
+    }
+
     protected static function deleteAndUpdatePositionByPrimaryId($primary_id)
     {
         $row = static::selectJoinByPrimaryId($primary_id);

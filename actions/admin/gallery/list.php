@@ -2,7 +2,7 @@
 
 $headTitle = trans("Galerie zdjęć");
 
-Staff::createFromSession()->redirectIfUnauthorized();
+$staff->redirectIfUnauthorized();
 $rows = GalleryModel::selectAll();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
@@ -50,7 +50,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                             </td>
                             <td class="text-right">
 
-                                <a href="<?=url("/admin/gallery-images/list/$id")?>"
+                                <a href="<?=url("/admin/gallery/images/list/$id")?>"
                                     title="<?=trans('Wyświetl zdjęcia galerii')?>"
                                     class="btn btn-success btn-xs">
                                     <i class="fa fa-file-text-o fa-fw"></i>

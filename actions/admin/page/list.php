@@ -2,7 +2,7 @@
 
 $headTitle = trans("Wszystkie strony");
 
-Staff::createFromSession()->redirectIfUnauthorized();
+$staff->redirectIfUnauthorized();
 
 $pages = PageModel::selectAllWithFrames();
 
