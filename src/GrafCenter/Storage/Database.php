@@ -1,26 +1,27 @@
 <?php
 
+/**
+ * Słuzy do wykonywania zapytań do bazy danych
+ */
 class Database
 {
     public static $pdo;
-    private static $prefix;
+    public static $langEditor;
+    public static $prefix;
 
-    public static function initialize(PDO $pdo, $prefix)
-    {
-        self::$pdo = $pdo;
-        self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        self::$prefix = $prefix;
-    }
-
+    /**
+     * Wykonuje zapytanie SQL i zwraca jeden wiersz z tego zapytania, przydatne dla pojedyńczych
+     */
     public static function fetchSingle($sql, array $parameters = [])
     {
         return self::wrapQuery($sql, $parameters, function ($statement) {
-            $record = $statement->fetch(PDO::FETCH_ASSOC);
-
-            return $record ? $record : null;
+            return $statement->fetch(PDO::FETCH_ASSOC);
         });
     }
 
+    /**
+     * Wykonuje zapytanie SQL i zwraca tablice wierszy z tego zapytania, przydatne dla wielu rekordow
+     */
     public static function fetchAll($sql, array $parameters = [])
     {
         return self::wrapQuery($sql, $parameters, function ($statement) {
@@ -28,26 +29,24 @@ class Database
         });
     }
 
+    /**
+     * Wykonuje zapytanie SQL i zwraca tablice wierszy z tego zapytania gdzie
+     * kluczem w tej tablicy jest columna przekazana jako $label,
+     * przydatne dla wielu rekordow z dostępem swobodnym po kluczu w tablicy
+     */
     public static function fetchAllWithPrimaryId($sql, array $parameters, $label)
     {
-        return self::wrapQuery($sql, $parameters, function ($statement) use ($label) {
-            $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
-            $data = array();
-            foreach ($rows as $row) {
-                $data[$row[$label]] = $row;
-            }
+        $data = [];
+        foreach (self::fetchAll($sql, $parameters) as $row) {
+            $data[$row[$label]] = $row;
+        }
 
-            return $data;
-        });
+        return $data;
     }
 
-    public static function insert($sql, array $parameters = [])
-    {
-        self::wrapQuery($sql, $parameters, function ($statement) {});
-
-        return intval(self::$pdo->lastInsertId());
-    }
-
+    /**
+     * Wykonuje zapytanie SQL i zwraca ilość zmodyfikowanych rekordow
+     */
     public static function execute($sql, array $parameters = [])
     {
         return self::wrapQuery($sql, $parameters, function ($statement) {
@@ -55,31 +54,19 @@ class Database
         });
     }
 
-    public static function insertDataToTable($table, array $data)
+    /**
+     * Wykonuje zapytanie SQL i zwraca ID ostatniego wstawionego rekordu
+     */
+    public static function insert($sql, array $parameters = [])
     {
-        $filled = array_fill(0, count($data), '?');
-        $values = implode(', ', $filled);
+        self::wrapQuery($sql, $parameters, function ($statement) {});
 
-        $columns = array_keys($data);
-        foreach ($columns as &$column) {
-            $column = "`{$column}`";
-        }
-        $columns = implode(', ', $columns);
-        $insert = "INSERT INTO `{$table}` ({$columns}) VALUES ({$values})";
-
-        return self::insert($insert, array_values($data));
+        return intval(self::$pdo->lastInsertId());
     }
 
-    public static function getUpdateSyntax(array $data)
-    {
-        $list = [];
-        foreach ($data as $field => $value) {
-            $list[] = "`{$field}` = ?";
-        }
-
-        return implode(', ', $list);
-    }
-
+    /**
+     * Przekazaną funkcje $callback otacza wewnątrz transakcji
+     */
     public static function wrapInTransaction($callback)
     {
         try {
@@ -95,14 +82,23 @@ class Database
         }
     }
 
+    /**
+     * Zamienia kazde napotkanie znaki :: na prefiks bazy danych
+     */
     private static function bindTableName($pseudoQuery)
     {
         return preg_replace_callback('/::(\w+)/', function($matches) {
-            $table = $matches[1];
-            return trim(self::$prefix.$table, '_');
+            $property = $matches[1];
+            if ($property === 'lang') {
+                return sprintf("lang = '%s'", self::$lang);
+            }
+            return trim(self::$prefix.$property, '_');
         }, $pseudoQuery);
     }
 
+    /**
+     * Wywołuje i loguje zapytania
+     */
     private static function wrapQuery($sql, array $parameters, $callback)
     {
         $sql = self::bindTableName($sql);

@@ -46,7 +46,7 @@ class StaffModel extends AbstractModel
 
         # wstaw na nowo grupy pracownika
         foreach ($groups as $group_id) {
-            Database::insertDataToTable(static::$groupTable, [
+            Database::buildInsert(static::$groupTable, [
                 static::$groupName => $group_id,
                 static::$primary => $staff_id,
             ]);

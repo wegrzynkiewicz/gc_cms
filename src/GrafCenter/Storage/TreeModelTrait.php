@@ -68,7 +68,7 @@ trait TreeModelTrait
 
         foreach ($positions as $node) {
             $parent_id = $node['parent_id'];
-            Database::insertDataToTable(static::$groupTable, [
+            Database::buildInsert(static::$groupTable, [
                 static::$groupName => $group_id,
                 static::$primary => $node['id'],
                 'parent_id' => $parent_id,
@@ -81,7 +81,7 @@ trait TreeModelTrait
     {
         $primary_id = parent::insert($data);
 
-        Database::insertDataToTable(static::$groupTable, [
+        Database::buildInsert(static::$groupTable, [
             static::$groupName => $group_id,
             static::$primary => $primary_id,
             'position' => static::selectMaxPositionNode($group_id, null),

@@ -1,12 +1,10 @@
 <?php
 
 /**
- * Reprezentuje rekord w bazie danych
+ * Reprezentuje pojedyńczy rekord z bazy danych
  */
-class Entity implements ArrayAccess
+abstract class Entity implements ArrayAccess
 {
-    private $data = [];
-
     public function __construct(array $data)
     {
         $this->data = $data;

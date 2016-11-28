@@ -1,6 +1,6 @@
 <?php
 
-class StaffPermissionModel extends AbstractModel
+class StaffPermission extends Model
 {
     public static $table = '::staff_permissions';
 

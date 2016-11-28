@@ -88,7 +88,7 @@ trait GroupModelTrait
 
         $pos = 1;
         foreach ($positions as $primary_id) {
-            Database::insertDataToTable(static::$groupTable, [
+            Database::buildInsert(static::$groupTable, [
                 static::$groupName => $group_id,
                 static::$primary => $primary_id,
                 'position' => $pos++,
@@ -100,7 +100,7 @@ trait GroupModelTrait
     {
         $primary_id = parent::insert($data);
 
-        Database::insertDataToTable(static::$groupTable, [
+        Database::buildInsert(static::$groupTable, [
             static::$groupName => $group_id,
             static::$primary => $primary_id,
             'position' => static::selectMaxPositionByGroupId($group_id),
