@@ -6,7 +6,7 @@
  * Przez (stronę) w nawiasach rozumiemy np. (strony, strony produktu, artykuły, widgety, wpisy)
  * Innymi słowy wszystko co zawiera moduły, powinno używać tej cechy
  */
-trait HasFrameModelTrait
+trait ContainFrameTrait
 {
     /**
      * Pobiera wszystkie (strony) z ich rusztowaniami
@@ -27,7 +27,7 @@ trait HasFrameModelTrait
     {
         # pobierz dane rusztowania dla (strony) o id podstawowego
         $sql = self::sql("SELECT * FROM ::table AS b JOIN ::frames AS f USING(frame_id) WHERE ::primary = ? LIMIT 1");
-        $row = Database::fetchSingle($sql, [$primary_id]);
+        $row = Database::fetchSingle($sql, [intval($primary_id)]);
 
         return $row;
     }
@@ -37,19 +37,16 @@ trait HasFrameModelTrait
      */
     protected static function deleteFrameByPrimaryId($primary_id)
     {
-        $row = self::selectWithFrameByPrimaryId($primary_id);
+        # pobierz informacje o rusztowaniu o id głownym
+        $row = static::selectWithFrameByPrimaryId($primary_id);
 
-        # usuń wszystkie moduły dla rusztowania o id podstawowego
-        $sql = self::sql("DELETE m FROM gc_frame_modules AS m LEFT JOIN gc_frame_positions AS p USING (module_id) WHERE frame_id = ?");
-        Database::execute($sql, [$row['frame_id']]);
+        # usuń wszystkie moduły dla rusztowania o frame_id
+        FrameModule::deleteAllByFrameId($row['frame_id']);
 
-        # usuń rusztowanie o id podstawowym (strony)
-        $sql = self::sql("DELETE f FROM ::table AS b JOIN gc_frames AS f USING(frame_id) WHERE ::primary = ?");
-        Database::execute($sql, [$primary_id]);
+        # usuń rusztowanie o id głownym (strony)
+        Frame::deleteByPrimaryId($row['frame_id']);
 
-        # usuń (stronę) o id podstawowym
-        self::deleteByPrimaryId($primary_id);
-
-        return $row;
+        # usuń (stronę) o id głownym
+        static::deleteByPrimaryId($primary_id);
     }
 }

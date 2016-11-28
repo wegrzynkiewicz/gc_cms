@@ -5,7 +5,7 @@ $headTitle = trans("Zdjęcia w galerii");
 $staff->redirectIfUnauthorized();
 
 $gallery_id = intval(array_shift($_SEGMENTS));
-$gallery = GalleryModel::selectByPrimaryId($gallery_id);
+$gallery = Gallery::selectByPrimaryId($gallery_id);
 
 $headTitle .= makeLink("/admin/gallery/list", $gallery['name']);
 

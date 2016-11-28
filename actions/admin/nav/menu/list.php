@@ -11,13 +11,13 @@ if (wasSentPost()) {
     $positions = array_filter($positions, function ($node) {
         return isset($node['id']);
     });
-    NavMenuModel::updatePositions($nav_id, $positions);
+    MenuPosition::update($nav_id, $positions);
     redirect("/admin/nav/list");
 }
 
-$nav = NavModel::selectByPrimaryId($nav_id);
-$pages = PageModel::selectAllWithFrames();
-$menuTree = Menu::buildTreeByGroupId($nav_id);
+$nav = Nav::selectByPrimaryId($nav_id);
+$pages = Page::selectAllWithFrames();
+$menuTree = Menu::buildTreeByNavId($nav_id);
 
 $headTitle .= makeLink("/admin/nav/list", $nav['name']);
 

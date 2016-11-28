@@ -3,7 +3,7 @@
 $staff->redirectIfUnauthorized();
 
 $gallery_id = intval(array_shift($_SEGMENTS));
-$images = GalleryImageModel::selectAllByGroupId($gallery_id);
+$images = GalleryImage::selectAllByGalleryId($gallery_id);
 
 ?>
 <?php if (empty($images)): ?>

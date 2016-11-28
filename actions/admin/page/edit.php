@@ -5,14 +5,14 @@ $headTitle = trans("Edytowanie strony");
 $staff->redirectIfUnauthorized();
 
 $page_id = intval(array_shift($_SEGMENTS));
-$page = PageModel::selectWithFrameByPrimaryId($page_id);
+$page = Page::selectWithFrameByPrimaryId($page_id);
 $frame_id = $page['frame_id'];
 
 if (wasSentPost()) {
 
-    FrameModel::update($frame_id, [
+    Frame::updateByFrameId($frame_id, [
         'name' => $_POST['name'],
-        'lang' => $_SESSION['staff']['editorLang'],
+        'lang' => $_SESSION['staff']['langEditor'],
         'keywords' => $_POST['keywords'],
         'description' => $_POST['description'],
         'image' => $_POST['image'],

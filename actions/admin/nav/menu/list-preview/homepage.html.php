@@ -1,0 +1,1 @@
+<?=trans($config['nodeTypes']['homepage'])?>

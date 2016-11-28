@@ -3,16 +3,15 @@
 $headTitle = trans("Edytujesz moduł galerii");
 
 if (wasSentPost()) {
-    $settings['gallery_id'] = intval($_POST['gallery_id']);
-    $settings['theme'] = 'default';
-
-    FrameModuleModel::update($module_id, [
+    FrameModule::updateByPrimaryId($module_id, [
+        'theme' => 'default',
+        'content' => intval($_POST['gallery_id']),
         'settings' => json_encode($settings),
     ]);
     redirect("/admin/module/list/$page_id");
 }
 
-$galleriesOptions = GalleryModel::selectAllAsOptions();
+$galleriesOptions = Gallery::selectAllAsOptionsWithPrimaryKey('name');
 
 $_POST = $settings;
 
@@ -30,13 +29,22 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="col-lg-12">
         <form action="" method="post" class="form-horizontal">
 
-            <?=view('/admin/parts/input/selectbox.html.php', [
-                'name' => 'gallery_id',
-                'label' => 'Z której galerii wyświetlać zdjęcia w module?',
-                'help' => 'Wybierz już istniejącą galerię zdjęć, albo utwórz nową',
-                'options' => $galleriesOptions,
-                'firstOption' => 'Wybierz galerię',
-            ])?>
+            <?php if (empty($galleriesOptions)): ?>
+                <p>
+                    <?=trans('Żadna galeria nie istnieje.')?>
+                    <a href="<?=url("/admin/gallery/new")?>">
+                        <?=trans('Dodaj nową galerię')?>
+                    </a>
+                </p>
+            <?php else: ?>
+                <?=view('/admin/parts/input/selectbox.html.php', [
+                    'name' => 'gallery_id',
+                    'label' => 'Z której galerii wyświetlać zdjęcia w module?',
+                    'help' => 'Wybierz już istniejącą galerię zdjęć, albo utwórz nową',
+                    'options' => $galleriesOptions,
+                    'firstOption' => 'Wybierz galerię',
+                ])?>
+            <?php endif ?>
 
             <div id='galleryPreview'></div>
 

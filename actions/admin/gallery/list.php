@@ -3,7 +3,7 @@
 $headTitle = trans("Galerie zdjęć");
 
 $staff->redirectIfUnauthorized();
-$rows = GalleryModel::selectAll();
+$rows = Gallery::selectAllWithPrimaryKey();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
@@ -79,7 +79,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <form id="deleteModalForm" method="post" action="<?=url("/admin/gallery/delete")?>" class="modal-content">
-            <input name="id" type="hidden" value="">
+            <input name="gallery_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span>&times;</span>
@@ -111,7 +111,7 @@ $(function(){
 
     $('#deleteModal').on('show.bs.modal', function(e) {
         $(this).find('#name').html($(e.relatedTarget).data('name'));
-        $(this).find('[name="id"]').val($(e.relatedTarget).data('id'));
+        $(this).find('[name="gallery_id"]').val($(e.relatedTarget).data('id'));
     });
 
     $('[data-table]').DataTable();

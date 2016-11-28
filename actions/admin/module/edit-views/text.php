@@ -3,8 +3,9 @@
 $headTitle = trans("Edytujesz moduł tekstowy");
 
 if (wasSentPost()) {
-    FrameModuleModel::update($module_id, [
+    FrameModule::updateByPrimaryId($module_id, [
         'content' => $_POST['content'],
+        'theme' => 'default',
         'settings' => json_encode($settings),
     ]);
     redirect("/admin/module/list/$page_id");

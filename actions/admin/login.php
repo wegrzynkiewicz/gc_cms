@@ -8,11 +8,11 @@ if (isset($_SESSION['staff'])) {
 
 if (wasSentPost()) {
     $passwordHash = sha1($_POST['password']);
-    $user = StaffModel::selectSingleBy('email', $_POST['email']);
+    $user = Staff::selectSingleBy('email', $_POST['email']);
 
     # jeżeli hasło w bazie nie jest zahaszowane, a zgadza się
     if (!isSha1($user['password']) and $_POST['password'] === $user['password']) {
-        StaffModel::update($user['staff_id'], [
+        Staff::updateByPrimaryId($user['staff_id'], [
             'password' => $passwordHash,
         ]);
         $user['password'] = $passwordHash;

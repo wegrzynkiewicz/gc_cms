@@ -4,7 +4,7 @@ $headTitle = trans("Pracownicy");
 
 $staff->redirectIfUnauthorized();
 
-$staffList = StaffModel::selectAll();
+$staffList = Staff::selectAllCorrectWithPrimaryKey();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
@@ -59,7 +59,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                 </a>
                             </td>
                             <td>
-                                <?php $groups = StaffGroupModel::selectAllAsOptionsByStaffId($staff_id) ?>
+                                <?php $groups = StaffGroup::selectAllAsOptionsByStaffId($staff_id) ?>
                                 <?php foreach ($groups as $group_id => $group): ?>
                                     <a href="<?=url("/admin/staff/group/edit/$group_id")?>"
                                         title="<?=trans('Przejdź do grupy')?>">
@@ -67,7 +67,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                 <?php endforeach ?>
                             </td>
                             <td>
-                                <?php $permissions = StaffPermissionModel::selectPermissionsAsOptionsByStaffId($staff_id) ?>
+                                <?php $permissions = StaffPermission::selectPermissionsAsOptionsByStaffId($staff_id) ?>
                                 <?php foreach ($permissions as $permission): ?>
                                     <?=trans($config['permissions'][$permission])?> <br>
                                 <?php endforeach ?>

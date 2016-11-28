@@ -58,38 +58,12 @@ abstract class Model extends Entity
         }, $pseudoQuery);
     }
 
-    public static function selectSingleBy($fieldLabel, $value)
-    {
-        $sql = self::sql("SELECT * FROM ::table WHERE {$fieldLabel} = ? LIMIT 1");
-
-        return Database::fetchSingle($sql, [$value]);
-    }
-
     public static function selectMaxPositionParent($parent_id, $parent)
     {
         $sql = self::sql("SELECT MAX(position) AS maximum FROM ::table WHERE {$parent} = ? LIMIT 1 ");
         $maxOrder =  Database::fetchSingle($sql, [$parent_id]);
 
         return intval($maxOrder['maximum']) + 1;
-    }
-
-    public static function selectAllAsOptions()
-    {
-        $rows = self::selectAll();
-
-        $options = [];
-        foreach($rows as $row) {
-            $options[$row[static::$primary]] = $row['name'];
-        }
-
-        return $options;
-    }
-
-    protected static function deleteBy($field, $value)
-    {
-        $sql = self::sql("DELETE FROM ::table WHERE {$field} = ?");
-
-        return Database::execute($sql, [$value]);
     }
 
     protected static function buildUpdateSyntax(array $data)

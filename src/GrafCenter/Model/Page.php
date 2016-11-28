@@ -1,9 +1,10 @@
 <?php
 
-class PageModel extends AbstractModel
+class Page extends Model
 {
     public static $table   = '::pages';
     public static $primary = 'page_id';
 
-    use HasFrameModelTrait;
+    use PrimaryTrait;
+    use ContainFrameTrait;
 }

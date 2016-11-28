@@ -4,7 +4,7 @@ $headTitle = trans("Wszystkie strony");
 
 $staff->redirectIfUnauthorized();
 
-$pages = PageModel::selectAllWithFrames();
+$pages = Page::selectAllWithFrames();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 

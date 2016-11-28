@@ -5,17 +5,17 @@ $headTitle = trans("Moduły na stronie");
 $staff->redirectIfUnauthorized();
 
 $page_id = intval(array_shift($_SEGMENTS));
-$page = PageModel::selectWithFrameByPrimaryId($page_id);
+$page = Page::selectWithFrameByPrimaryId($page_id);
 $frame_id = $page['frame_id'];
 
 if (wasSentPost()) {
     $grid = json_decode($_POST['grid'], true);
-    FrameModuleModel::updateGridByGroupId($frame_id, $grid);
+    FramePosition::updateGridByFrameId($frame_id, $grid);
 
     redirect("/admin/page/list");
 }
 
-$modules = FrameModuleModel::selectAllByGroupId($frame_id);
+$modules = FrameModule::selectAllByFrameId($frame_id);
 $headTitle .= makeLink("/admin/page/list", $page['name']);
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
@@ -47,7 +47,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             <?php else: ?>
                 <div class="grid-stack">
                     <?php foreach ($modules as $module_id => $module): ?>
-                        <?php list($x, $y, $w, $h) = explode(":", $module['position']); ?>
+                        <?php list($x, $y, $w, $h) = explode(":", $module['grid']); ?>
                         <div class="grid-stack-item"
                             data-id="<?=$module_id?>"
                             data-gs-x="<?=$x?>"

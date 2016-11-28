@@ -136,6 +136,10 @@ function url($path)
  */
 function uploadUrl($path)
 {
+    if (strlen(ROOT_URL) <= 0) {
+        return $path;
+    }
+    
     if ($path and strpos($path, ROOT_URL) === 0) {
         $path = substr($path, strlen(ROOT_URL));
     }

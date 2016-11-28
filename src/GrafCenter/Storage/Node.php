@@ -3,7 +3,7 @@
 /**
  * Reprezentuje węzeł w strukturze drzewiastej
  */
-class Node extends Entity
+class Node extends Model
 {
     private $parent = null;
     private $children = [];

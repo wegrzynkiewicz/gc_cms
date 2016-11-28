@@ -3,7 +3,7 @@
 $staff->redirectIfUnauthorized();
 
 $menu_id = intval(array_shift($_SEGMENTS));
-$node = NavMenuModel::selectByPrimaryId($menu_id);
+$node = Menu::selectByPrimaryId($menu_id);
 
 $_POST = $node;
 ?>

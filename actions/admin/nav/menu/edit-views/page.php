@@ -3,11 +3,11 @@
 $staff->redirectIfUnauthorized();
 
 $menu_id = intval(array_shift($_SEGMENTS));
-$node = NavMenuModel::selectByPrimaryId($menu_id);
+$node = Menu::selectByPrimaryId($menu_id);
 
 $_POST = $node;
 
-$pages = PageModel::selectAllWithFrames();
+$pages = Page::selectAllWithFrames();
 $pageOptions = [];
 foreach($pages as $page_id => $page) {
     $pageOptions[$page_id] = $page['name'];

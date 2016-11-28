@@ -8,15 +8,15 @@ $image_id = intval(array_shift($_SEGMENTS));
 $gallery_id = intval(array_shift($_SEGMENTS));
 
 if (wasSentPost()) {
-    GgalleryImageModel::update($image_id, [
+    GalleryImage::updateByPrimaryId($image_id, [
         'name' => $_POST['name'],
         'file' => $_POST['file'],
     ]);
     redirect("/admin/gallery/images/list/$gallery_id");
 }
 
-$gallery = GalleryModel::selectByPrimaryId($gallery_id);
-$image = GalleryImageModel::selectByPrimaryId($image_id);
+$gallery = Gallery::selectByPrimaryId($gallery_id);
+$image = GalleryImage::selectByPrimaryId($image_id);
 $headTitle .= makeLink("/admin/gallery/images/list/$gallery_id", $gallery['name']);
 
 $_POST = $image;

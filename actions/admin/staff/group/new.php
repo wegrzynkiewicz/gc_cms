@@ -7,7 +7,7 @@ $staff->redirectIfUnauthorized();
 if (wasSentPost()) {
 
     $permissions = isset($_POST['permissions']) ? $_POST['permissions'] : [];
-    $group_id = StaffGroupModel::insert([
+    $group_id = StaffGroup::insert([
         'name' => $_POST['name'],
     ], $permissions);
 

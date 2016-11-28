@@ -8,7 +8,7 @@ $menu_id = intval(array_shift($_SEGMENTS));
 $nav_id = intval(array_shift($_SEGMENTS));
 
 if(wasSentPost($_POST)) {
-    NavMenuModel::update($menu_id, [
+    Menu::updateByPrimaryId($menu_id, [
         'name' => $_POST['name'],
         'type' => $_POST['type'],
         'destination' => $_POST['destination'],
@@ -17,8 +17,8 @@ if(wasSentPost($_POST)) {
 	redirect("/admin/nav/menu/list/$nav_id");
 }
 
-$node = NavMenuModel::selectByPrimaryId($menu_id);
-$nav = NavModel::selectByPrimaryId($nav_id);
+$node = Menu::selectByPrimaryId($menu_id);
+$nav = Nav::selectByPrimaryId($nav_id);
 $headTitle .= makeLink("/admin/nav/menu/list/$nav_id", $nav['name']);
 $nodeType = $node['type'];
 

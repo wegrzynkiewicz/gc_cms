@@ -5,9 +5,9 @@ $headTitle = trans('Podgląd galerii');
 $staff->redirectIfUnauthorized();
 
 $gallery_id = intval(array_shift($_SEGMENTS));
-$gallery = GalleryModel::selectByPrimaryId($gallery_id);
+$gallery = Gallery::selectByPrimaryId($gallery_id);
 $headTitle .= makeLink("/admin/gallery/edit/$gallery_id", $gallery['name']);
-$images = GalleryImageModel::selectAllByGroupId($gallery_id);
+$images = GalleryImage::selectAllByGalleryId($gallery_id);
 
 ?>
 
@@ -20,18 +20,20 @@ $images = GalleryImageModel::selectAllByGroupId($gallery_id);
         <div class="clearfix"></div>
     </div>
     <div class="panel-body">
-        <div class="row">
-            <?php if(empty($images)): ?>
-                <div class="col-md-12">
-                    <?=trans('Brak zdjęć w galerii')?>
-                </div>
-            <?php else: ?>
+        <?php if(empty($images)): ?>
+            <?=trans('Brak zdjęć w galerii')?>
+        <?php else: ?>
+            <div class="module-gallery-preview-row">
                 <?php foreach ($images as $image): ?>
-                    <div class="col-md-2">
-                        <img src="<?=rootUrl($image['file'])?>" style="width:100%; height auto;" />
+                    <div class="module-gallery-preview-wrapper">
+                        <img src="<?=thumb($image['file'], 120, 70)?>"
+                            width="120"
+                            width="70"
+                            class="module-gallery-preview-image"/>
                     </div>
                 <?php endforeach ?>
-            <?php endif ?>
-        </div>
+                <div class="clearfix"></div>
+            </div>
+        <?php endif ?>
     </div>
 </div>

@@ -2,9 +2,14 @@
 
 class Menu extends Node
 {
+    public static $table   = '::nav_menus';
+    public static $primary = 'menu_id';
+
     public static $cache = [];
     public static $primaryIdLabel = "menu_id";
     public static $parentIdLabel  = "parent_id";
+
+    use PrimaryTrait;
 
     /**
      * Na podstawie węzła nawigacji drukuje link do strony na którą kieruje
@@ -43,10 +48,11 @@ class Menu extends Node
     /**
      * Pobiera właściwą nawigację po zadanym id i buduje z niej drzewo
      */
-    public static function buildTreeByGroupId($group_id)
+    public static function buildTreeByNavId($nav_id)
     {
-        $flatList = NavMenuModel::selectNodesByGroupId($group_id);
-        $tree = static::createTree($flatList);
+        $sql = self::sql("SELECT * FROM ::table AS n LEFT JOIN ::nav_positions AS p USING (::primary) WHERE p.nav_id = ? ORDER BY position ASC");
+        $nodes =  Database::fetchAllWithPrimaryId($sql, [$nav_id], static::$primary);
+        $tree = static::createTree($nodes);
 
         return $tree;
     }
@@ -57,7 +63,7 @@ class Menu extends Node
     public static function buildTree($workname, $language)
     {
         if (empty(self::$cache)) {
-            $navs = NavModel::selectAll();
+            $navs = Nav::selectAllWithPrimaryKey();
             foreach ($navs as $group_id => $nav) {
                 $name = $nav['workname'].'_'.$nav['lang'];
                 self::$cache[$name] = $group_id;
@@ -71,9 +77,33 @@ class Menu extends Node
         }
         $group_id = self::$cache[$name];
 
-        $flatList = NavMenuModel::selectNodesByGroupId($group_id);
-        $tree = static::createTree($flatList);
+        $tree = static::buildTreeByNavId($group_id);
 
         return $tree;
+    }
+
+    /**
+     * Usuwa węzły, które nie należą do żadnej grupy i nie posiadają rodzica
+     */
+    protected static function deleteWithoutParentId()
+    {
+        $sql = self::sql("DELETE n FROM ::table AS n LEFT JOIN ::nav_positions AS p USING(::primary) WHERE p.nav_id IS NULL");
+        $affectedRows = Database::execute($sql);
+
+        return $affectedRows;
+    }
+
+    protected static function insert(array $data, $nav_id)
+    {
+        $menu_id = parent::insert($data);
+
+        MenuPosition::insert([
+            'nav_id' => $nav_id,
+            'menu_id' => $menu_id,
+            'parent_id' => null,
+            'position' => MenuPosition::selectMaxPositionByNavIdAndParentId($nav_id, null),
+        ]);
+
+        return $primary_id;
     }
 }

@@ -4,7 +4,7 @@ $headTitle = trans("Grupy");
 
 $staff->redirectIfUnauthorized();
 
-$groups = StaffGroupModel::selectAll();
+$groups = StaffGroup::selectAllWithPrimaryKey();
 
 $headTitle .= makeLink("/admin/staff/list", trans("pracowników"));
 
@@ -55,7 +55,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                 </a>
                             </td>
                             <td>
-                                <?php $permissions = StaffPermissionModel::selectPermissionsAsOptionsByGroupId($group_id) ?>
+                                <?php $permissions = StaffPermission::selectPermissionsAsOptionsByGroupId($group_id) ?>
                                 <?php foreach ($permissions as $permission): ?>
                                     <?=trans($config['permissions'][$permission])?> <br>
                                 <?php endforeach ?>

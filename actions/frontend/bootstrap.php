@@ -9,10 +9,13 @@ $topMenu = Menu::buildTree('top', $lang);
 $sideMenu = Menu::buildTree('side', $lang);
 
 # jezeli moduly zostaly pobrane, wtedy ułoz z nich grida i pobierz wartości
-if (isset($modules)) {
+if (isset($frame_id)) {
+
+    $modules = FrameModule::selectAllByFrameId($frame_id);
+
     $gridModules = [];
     foreach ($modules as $module_id => &$module) {
-        list($x, $y, $w, $h) = explode(':', $module['position']);
+        list($x, $y, $w, $h) = explode(':', $module['grid']);
         $module['grid'] = [
             'x' => $x,
             'y' => $y,
@@ -20,15 +23,18 @@ if (isset($modules)) {
             'h' => $h,
         ];
 
+        $content = $module['content'];
+
         require sprintf(ACTIONS_PATH."/frontend/modules/%s.php", $module['type']);
 
         $gridModules[$y][$x] = $module;
     }
     unset($module);
 
+    ksort($gridModules);
     foreach ($gridModules as $y => &$row) {
-        $previousWidth = 0;
         ksort($row);
+        $previousWidth = 0;
         foreach ($row as $x => &$module) {
             $offset = $x - $previousWidth;
             $module['grid']['o'] = $offset;

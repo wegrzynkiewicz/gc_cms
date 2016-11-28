@@ -5,9 +5,9 @@ $headTitle = trans("Dodawanie nowej galerii");
 $staff->redirectIfUnauthorized();
 
 if (wasSentPost()) {
-    GalleryModel::insert([
+    Gallery::insert([
         'name' => $_POST['name'],
-        'lang' => $_SESSION['staff']['editorLang'],
+        'lang' => $_SESSION['staff']['langEditor'],
     ]);
 
     redirect('/admin/gallery/list');

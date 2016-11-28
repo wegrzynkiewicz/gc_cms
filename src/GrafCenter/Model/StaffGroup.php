@@ -1,19 +1,17 @@
 <?php
 
-class StaffGroupModel extends AbstractModel
+class StaffGroup extends Model
 {
-    public static $table      = '::staff_groups';
-    public static $primary    = 'group_id';
+    public static $table   = '::staff_groups';
+    public static $primary = 'group_id';
+
+    use ColumnTrait;
+    use PrimaryTrait;
 
     public static function selectAllAsOptionsByStaffId($staff_id)
     {
         $sql = self::sql("SELECT * FROM ::staff_membership LEFT JOIN ::table USING(::primary) WHERE staff_id = ?");
-        $groups = Database::fetchAllWithPrimaryId($sql, [$staff_id], static::$primary);
-
-        foreach ($groups as &$group) {
-            $group = $group['name'];
-        }
-        unset($group);
+        $groups = Database::fetchAsOptionsWithPrimaryId($sql, [intval($staff_id)], static::$primary, 'name');
 
         return $groups;
     }
@@ -21,7 +19,7 @@ class StaffGroupModel extends AbstractModel
     protected static function update($group_id, $data, array $permissions)
     {
         # zaktualizuj grupę
-        parent::update($group_id, [
+        parent::updateByPrimaryId($group_id, [
             'name' => $data['name'],
         ]);
 
@@ -41,11 +39,11 @@ class StaffGroupModel extends AbstractModel
     private static function updatePermissions($group_id, array $permissions)
     {
         # usuń wszystkie uprawnienia tej grupy
-        StaffPermissionModel::deleteBy('group_id', $group_id);
+        StaffPermission::deleteAllBy('group_id', $group_id);
 
         # wstaw na nowo uprawnienia grupy
         foreach ($permissions as $permission) {
-            StaffPermissionModel::insert([
+            StaffPermission::insert([
                 'group_id' => $group_id,
                 'name' => $permission,
             ]);

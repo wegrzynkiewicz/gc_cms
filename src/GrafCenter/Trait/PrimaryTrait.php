@@ -25,8 +25,9 @@ trait PrimaryTrait
     public static function selectAllWithPrimaryKey()
     {
         $sql = self::sql("SELECT * FROM ::table");
+        $rows = Database::fetchAllWithPrimaryId($sql, [], static::$primary);
 
-        return Database::fetchAllWithPrimaryId($sql, [], static::$primary);
+        return $rows;
     }
 
     /**
@@ -36,8 +37,20 @@ trait PrimaryTrait
     public static function selectAllWithPrimaryKeyBy($column, $value)
     {
         $sql = self::sql("SELECT * FROM ::table WHERE {$column} = ?");
+        $rows = Database::fetchAllWithPrimaryId($sql, [$value], static::$primary);
 
-        return Database::fetchAllWithPrimaryId($sql, [$value], static::$primary);
+        return $rows;
+    }
+
+    /**
+     * Pobiera rekordy jako tablice ::primary => $column
+     */
+    public static function selectAllAsOptionsWithPrimaryKey($column)
+    {
+        $sql = self::sql("SELECT * FROM ::table");
+        $permissions = Database::fetchAsOptionsWithPrimaryId($sql, [], static::$primary, $column);
+
+        return $permissions;
     }
 
     /**
@@ -60,7 +73,8 @@ trait PrimaryTrait
     protected static function deleteByPrimaryId($primary_id)
     {
         $sql = self::sql("DELETE FROM ::table WHERE ::primary = ? LIMIT 1");
+        $affectedRows = Database::execute($sql, [intval($primary_id)]);
 
-        return Database::execute($sql, [intval($primary_id)]);
+        return $affectedRows;
     }
 }

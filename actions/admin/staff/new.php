@@ -7,7 +7,7 @@ $staff->redirectIfUnauthorized();
 if (wasSentPost()) {
 
     $groups = isset($_POST['groups']) ? $_POST['groups'] : [];
-    $staff_id = StaffModel::insert([
+    $staff_id = Staff::insert([
         'name' => $_POST['name'],
         'email' => $_POST['email'],
         'avatar' => $_POST['avatar'],

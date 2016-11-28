@@ -5,6 +5,8 @@
  */
 abstract class Entity implements ArrayAccess
 {
+    private $data = [];
+
     public function __construct(array $data)
     {
         $this->data = $data;

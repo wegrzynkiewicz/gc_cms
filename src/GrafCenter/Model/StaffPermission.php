@@ -4,15 +4,12 @@ class StaffPermission extends Model
 {
     public static $table = '::staff_permissions';
 
+    use ColumnTrait;
+
     public static function selectPermissionsAsOptionsByGroupId($group_id)
     {
         $sql = self::sql("SELECT name FROM ::table WHERE group_id = ?");
-        $permissions = Database::fetchAll($sql, [$group_id]);
-
-        foreach ($permissions as &$permission) {
-            $permission = $permission['name'];
-        }
-        unset($permission);
+        $permissions = Database::fetchAsOptionsWithPrimaryId($sql, [$group_id], 'name', 'name');
 
         return $permissions;
     }
@@ -20,12 +17,7 @@ class StaffPermission extends Model
     public static function selectPermissionsAsOptionsByStaffId($staff_id)
     {
         $sql = self::sql("SELECT name FROM ::staff_membership JOIN ::table USING(group_id) WHERE staff_id = ?");
-        $permissions = Database::fetchAll($sql, [$staff_id]);
-
-        foreach ($permissions as &$permission) {
-            $permission = $permission['name'];
-        }
-        unset($permission);
+        $permissions = Database::fetchAsOptionsWithPrimaryId($sql, [$staff_id], 'name', 'name');
 
         return $permissions;
     }

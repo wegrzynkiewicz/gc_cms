@@ -10,7 +10,7 @@ class Database
     public static $prefix;
 
     /**
-     * Wykonuje zapytanie SQL i zwraca jeden wiersz z tego zapytania, przydatne dla pojedyńczych
+     * Wykonuje zapytanie SQL i zwraca jeden wiersz z tego zapytania, przydatne dla pojedyńczych wywołań
      */
     public static function fetchSingle($sql, array $parameters = [])
     {
@@ -45,6 +45,21 @@ class Database
     }
 
     /**
+     * Wykonuje zapytanie SQL i zwraca tablice wierszy z tego zapytania gdzie
+     * kluczem w tej tablicy jest columna przekazana jako $label a wartością jest $column
+     * przydatne dla wielu rekordow z dostępem swobodnym po kluczu w tablicy
+     */
+    public static function fetchAsOptionsWithPrimaryId($sql, array $parameters, $label, $column)
+    {
+        $data = [];
+        foreach (self::fetchAll($sql, $parameters) as $row) {
+            $data[$row[$label]] = $row[$column];
+        }
+
+        return $data;
+    }
+
+    /**
      * Wykonuje zapytanie SQL i zwraca ilość zmodyfikowanych rekordow
      */
     public static function execute($sql, array $parameters = [])
@@ -67,7 +82,7 @@ class Database
     /**
      * Przekazaną funkcje $callback otacza wewnątrz transakcji
      */
-    public static function wrapInTransaction($callback)
+    public static function transaction($callback)
     {
         try {
             if (self::$pdo->inTransaction()) {
@@ -90,7 +105,7 @@ class Database
         return preg_replace_callback('/::(\w+)/', function($matches) {
             $property = $matches[1];
             if ($property === 'lang') {
-                return sprintf("lang = '%s'", self::$lang);
+                return sprintf("lang = '%s'", $_SESSION['staff']['langEditor']);
             }
             return trim(self::$prefix.$property, '_');
         }, $pseudoQuery);

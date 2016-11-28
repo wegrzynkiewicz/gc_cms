@@ -1,13 +1,5 @@
-<?php
-
-$settings = json_decode($module['settings'], true);
-
-if (isset($settings['gallery_id'])) {
-    $images = GalleryImageModel::selectAllByGroupId($settings['gallery_id']);
-}
-
-?>
-<?php if (isset($settings['gallery_id'])): ?>
+<?php $images = GalleryImage::selectAllByGalleryId($module['content']) ?>
+<?php if ($module['content']): ?>
     <div class="module-gallery-preview-row">
         <?php foreach ($images as $image): ?>
             <div class="module-gallery-preview-wrapper">
@@ -21,6 +13,6 @@ if (isset($settings['gallery_id'])) {
     </div>
 <?php else: ?>
     <div class="text-center">
-        <?=trans(isset($settings['gallery_id']) ? 'Nie znaleziono zdjęć w galerii' : 'Nie wybrano galerii zdjęć dla tego modułu') ?>
+        <?=trans($module['content'] ? 'Nie znaleziono zdjęć w galerii' : 'Nie wybrano galerii zdjęć dla tego modułu') ?>
     </div>
 <?php endif ?>

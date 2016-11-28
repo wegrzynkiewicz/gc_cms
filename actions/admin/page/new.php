@@ -6,15 +6,15 @@ $staff->redirectIfUnauthorized();
 
 if (wasSentPost()) {
 
-    $frame_id = FrameModel::insert([
+    $frame_id = Frame::insert([
         'name' => $_POST['name'],
-        'lang' => $_SESSION['staff']['editorLang'],
+        'lang' => $_SESSION['staff']['langEditor'],
         'keywords' => $_POST['keywords'],
         'description' => $_POST['description'],
         'image' => uploadUrl($_POST['image']),
     ]);
 
-    PageModel::insert([
+    Page::insert([
         'frame_id' => $frame_id,
     ]);
 

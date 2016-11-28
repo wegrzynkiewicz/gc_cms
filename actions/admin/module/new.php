@@ -5,13 +5,13 @@ $headTitle = trans("Nowy moduł na stronie");
 $staff->redirectIfUnauthorized();
 
 $page_id = intval(array_shift($_SEGMENTS));
-$page = PageModel::selectWithFrameByPrimaryId($page_id);
+$page = Page::selectWithFrameByPrimaryId($page_id);
 $frame_id = $page['frame_id'];
 
 if(wasSentPost()) {
-	FrameModuleModel::insertToGroupId($frame_id, [
+	FrameModule::insert([
         'type' => $_POST['type'],
-    ]);
+    ], $frame_id);
 
 	redirect("/admin/module/list/$page_id");
 }

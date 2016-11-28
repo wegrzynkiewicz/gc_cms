@@ -32,7 +32,6 @@
             <?php endif ?>
 
             <div class="pull-right" style="margin-right: 30px">
-                <?=trans($config['nodeTypes'][$node['type']])?>
                 <?=view('/admin/nav/menu/list-preview/'.$node['type'].'.html.php', [
                     'node' => $node,
                     'pages' => $pages,

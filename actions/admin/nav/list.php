@@ -4,7 +4,7 @@ $headTitle = trans("Nawigacje");
 
 $staff->redirectIfUnauthorized();
 
-$navs = NavModel::selectAll();
+$navs = Nav::selectAllWithPrimaryKey();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
