@@ -1,3 +1,4 @@
 <?php
-$content = json_decode($module['content'], true);
-$module['images'] = ImageModel::pobierz_zdjecia_dla_galerii($content['gallery_id']);
+
+$content = json_decode($module['settings'], true);
+$module['images'] = GalleryImageModel::selectAllByGroupId($content['gallery_id']);
