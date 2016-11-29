@@ -34,7 +34,7 @@ class Database
      * kluczem w tej tablicy jest columna przekazana jako $label,
      * przydatne dla wielu rekordow z dostępem swobodnym po kluczu w tablicy
      */
-    public static function fetchAllWithPrimaryId($sql, array $parameters, $label)
+    public static function fetchAllWithKey($sql, array $parameters, $label)
     {
         $data = [];
         foreach (self::fetchAll($sql, $parameters) as $row) {

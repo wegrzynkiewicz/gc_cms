@@ -10,4 +10,4 @@ $moduleType = $module['type'];
 $content = $module['content'];
 $settings = json_decode($module['settings'], true);
 
-require_once sprintf(ACTIONS_PATH.'/admin/module/edit-views/%s.php', $moduleType);
+require_once sprintf(ACTIONS_PATH.'/admin/module/edit-views/%s.html.php', $moduleType);

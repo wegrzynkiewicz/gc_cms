@@ -25,7 +25,7 @@ trait PrimaryTrait
     public static function selectAllWithPrimaryKey()
     {
         $sql = self::sql("SELECT * FROM ::table");
-        $rows = Database::fetchAllWithPrimaryId($sql, [], static::$primary);
+        $rows = Database::fetchAllWithKey($sql, [], static::$primary);
 
         return $rows;
     }
@@ -37,7 +37,7 @@ trait PrimaryTrait
     public static function selectAllWithPrimaryKeyBy($column, $value)
     {
         $sql = self::sql("SELECT * FROM ::table WHERE {$column} = ?");
-        $rows = Database::fetchAllWithPrimaryId($sql, [$value], static::$primary);
+        $rows = Database::fetchAllWithKey($sql, [$value], static::$primary);
 
         return $rows;
     }

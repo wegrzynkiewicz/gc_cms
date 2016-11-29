@@ -1,4 +1,4 @@
--- Adminer 4.2.3 MySQL dump
+-- Adminer 4.2.5 MySQL dump
 
 SET NAMES utf8;
 SET time_zone = '+00:00';
@@ -26,6 +26,7 @@ DROP TABLE IF EXISTS `gc_frame_modules`;
 CREATE TABLE `gc_frame_modules` (
   `module_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `type` varchar(32) NOT NULL,
+  `theme` varchar(32) NOT NULL,
   `content` longtext NOT NULL,
   `settings` mediumtext NOT NULL,
   PRIMARY KEY (`module_id`)
@@ -36,7 +37,7 @@ DROP TABLE IF EXISTS `gc_frame_positions`;
 CREATE TABLE `gc_frame_positions` (
   `frame_id` int(10) unsigned NOT NULL,
   `module_id` int(10) unsigned NOT NULL,
-  `position` tinytext NOT NULL,
+  `grid` tinytext NOT NULL,
   KEY `frame_id` (`frame_id`),
   KEY `module_id` (`module_id`),
   CONSTRAINT `gc_frame_positions_ibfk_1` FOREIGN KEY (`frame_id`) REFERENCES `gc_frames` (`frame_id`) ON DELETE CASCADE,
@@ -121,15 +122,57 @@ CREATE TABLE `gc_pages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_users`;
-CREATE TABLE `gc_users` (
-  `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `gc_staff`;
+CREATE TABLE `gc_staff` (
+  `staff_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` tinytext NOT NULL,
-  `password` tinytext NOT NULL,
   `email` tinytext NOT NULL,
+  `password` tinytext NOT NULL,
+  `lang` varchar(2) NOT NULL,
+  `root` tinyint(3) unsigned NOT NULL,
+  `force_change_password` tinyint(3) unsigned NOT NULL,
+  `avatar` tinytext NOT NULL,
   `settings` text NOT NULL,
-  PRIMARY KEY (`user_id`)
+  PRIMARY KEY (`staff_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
--- 2016-11-24 18:44:40
+DROP TABLE IF EXISTS `gc_staff_groups`;
+CREATE TABLE `gc_staff_groups` (
+  `group_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` tinytext NOT NULL,
+  PRIMARY KEY (`group_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+DROP TABLE IF EXISTS `gc_staff_membership`;
+CREATE TABLE `gc_staff_membership` (
+  `staff_id` int(10) unsigned NOT NULL,
+  `group_id` int(10) unsigned NOT NULL,
+  KEY `staff_id` (`staff_id`),
+  KEY `group_id` (`group_id`),
+  CONSTRAINT `gc_staff_membership_ibfk_3` FOREIGN KEY (`staff_id`) REFERENCES `gc_staff` (`staff_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `gc_staff_membership_ibfk_4` FOREIGN KEY (`group_id`) REFERENCES `gc_staff_groups` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+DROP TABLE IF EXISTS `gc_staff_permissions`;
+CREATE TABLE `gc_staff_permissions` (
+  `group_id` int(10) unsigned NOT NULL,
+  `name` tinytext NOT NULL,
+  KEY `group_id` (`group_id`),
+  CONSTRAINT `gc_staff_permissions_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `gc_staff_groups` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+DROP TABLE IF EXISTS `gc_widgets`;
+CREATE TABLE `gc_widgets` (
+  `workname` varchar(32) NOT NULL,
+  `lang` varchar(2) NOT NULL,
+  `name` tinytext NOT NULL,
+  `type` varchar(32) NOT NULL,
+  `content` mediumtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- 2016-11-29 17:29:20

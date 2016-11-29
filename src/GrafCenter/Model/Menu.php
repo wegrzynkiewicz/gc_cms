@@ -51,7 +51,7 @@ class Menu extends Node
     public static function buildTreeByNavId($nav_id)
     {
         $sql = self::sql("SELECT * FROM ::table AS n LEFT JOIN ::nav_positions AS p USING (::primary) WHERE p.nav_id = ? ORDER BY position ASC");
-        $nodes =  Database::fetchAllWithPrimaryId($sql, [$nav_id], static::$primary);
+        $nodes =  Database::fetchAllWithKey($sql, [$nav_id], static::$primary);
         $tree = static::createTree($nodes);
 
         return $tree;
@@ -60,24 +60,20 @@ class Menu extends Node
     /**
      * Na podstawie workname i języka odpowiednio pobiera właściwą nawigację i buduje z niej drzewo
      */
-    public static function buildTree($workname, $language)
+    public static function buildTreeByWorkName($workname, $lang)
     {
         if (empty(self::$cache)) {
             $navs = Nav::selectAllWithPrimaryKey();
-            foreach ($navs as $group_id => $nav) {
-                $name = $nav['workname'].'_'.$nav['lang'];
-                self::$cache[$name] = $group_id;
+            foreach ($navs as $nav_id => $nav) {
+                $workname .= '_'.$nav['lang'];
+                self::$cache[$workname] = $nav_id;
             }
         }
 
-        $name = $workname.'_'.$language;
-        if (!isset(self::$cache[$name])) {
-            trigger_error("Nav not found $name");
-            return;
-        }
-        $group_id = self::$cache[$name];
+        $workname .= "_$lang";
+        $nav_id = self::$cache[$workname];
 
-        $tree = static::buildTreeByNavId($group_id);
+        $tree = static::buildTreeByNavId($nav_id);
 
         return $tree;
     }

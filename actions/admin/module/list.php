@@ -72,7 +72,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                         </button>
                                     </div>
                                     <div class="panel-body">
-                                        <?php require sprintf(ACTIONS_PATH.'/admin/module/previews/%s.php', $module['type']); ?>
+                                        <?php require sprintf(ACTIONS_PATH.'/admin/module/previews/%s.html.php', $module['type']); ?>
                                     </div>
                                 </div>
                             </div>

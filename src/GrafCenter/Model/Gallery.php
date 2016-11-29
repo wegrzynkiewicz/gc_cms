@@ -14,7 +14,7 @@ class Gallery extends Model
     public static function selectAllCorrectWithPrimaryKey()
     {
         $sql = self::sql("SELECT * FROM ::table WHERE ::lang ORDER BY name ASC");
-        $rows = Database::fetchAllWithPrimaryId($sql, [], static::$primary);
+        $rows = Database::fetchAllWithKey($sql, [], static::$primary);
 
         return $rows;
     }

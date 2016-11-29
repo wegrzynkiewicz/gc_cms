@@ -2,11 +2,11 @@
 
 /* Plik pobiera i przygotowuje najważniejsze dane z bazy dla frontend */
 
-$lang = $config['lang']['client'];
+$lang = getClientLang();
 
 # wyciągnij z bazy węzły menu i zbuduj drzewo
-$topMenu = Menu::buildTree('top', $lang);
-$sideMenu = Menu::buildTree('side', $lang);
+$topMenu = Menu::buildTreeByWorkName("top_$lang", $lang);
+$sideMenu = Menu::buildTreeByWorkName("side_$lang");
 
 # jezeli moduly zostaly pobrane, wtedy ułoz z nich grida i pobierz wartości
 if (isset($frame_id)) {

@@ -55,7 +55,7 @@ $config = [
         'product' => 'Strona produktu', # strona ze szczegółami produktu i modułami
     ],
     'modules' => [ # rodzaje zainstalowanych modułow
-        'text' => 'Moduł tekstowy',
+        'html-editor' => 'Moduł tekstu formatowanego HTML',
         'gallery' => 'Galeria zdjęć'
     ],
     'nodeTypes' => [ # rodzaje węzłów nawigacji
@@ -67,6 +67,11 @@ $config = [
     'navNodeTargets' => [ # dostępne atrybuty target dla węzłów nawigacji
         '_self'	 => 'Załaduj w tym samym oknie',
         '_blank' => 'Załaduj w nowym oknie',
+    ],
+    'widgetTypes' => [ # typy widżetów
+        'plain' => 'Zwykły tekst',
+        'html-editor' => 'Formatowany tekst HTML',
+        'image' => 'Zdjęcie',
     ],
     'permissions' => [ # zawiera uprawnienia dostępne dla pracownikow
         'manage_staff' => 'Zarządzanie pracownikami',

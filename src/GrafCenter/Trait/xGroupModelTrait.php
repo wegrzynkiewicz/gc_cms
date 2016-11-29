@@ -13,7 +13,7 @@ trait GroupModelTrait
     public static function selectAllByGroupId($group_id)
     {
         $sql = self::sql("SELECT * FROM ::table LEFT JOIN ::groupTable AS p USING (::primary) WHERE p.::groupName = ? ORDER BY position ASC");
-        $rows = Database::fetchAllWithPrimaryId($sql, [$group_id], static::$primary);
+        $rows = Database::fetchAllWithKey($sql, [$group_id], static::$primary);
 
         return $rows;
     }

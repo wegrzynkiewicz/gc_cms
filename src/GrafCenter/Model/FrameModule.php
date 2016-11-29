@@ -10,7 +10,7 @@ class FrameModule extends Model
     public static function selectAllByFrameId($frame_id)
     {
         $sql = self::sql("SELECT * FROM ::table LEFT JOIN ::frame_positions AS p USING (::primary) WHERE p.frame_id = ?");
-        $rows = Database::fetchAllWithPrimaryId($sql, [$frame_id], static::$primary);
+        $rows = Database::fetchAllWithKey($sql, [$frame_id], static::$primary);
 
         return $rows;
     }

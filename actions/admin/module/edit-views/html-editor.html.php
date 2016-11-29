@@ -25,9 +25,12 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
-        <form action="" method="post">
+        <form action="" method="post" class="form-horizontal">
 
-            <textarea name="content" id="content"><?=inputValue('content')?></textarea>
+            <?=view('/admin/parts/input/textarea.html.php', [
+                'name' => 'content',
+                'label' => 'Treść modułu',
+            ])?>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
                 'cancelHref' => "/admin/module/list/$page_id",

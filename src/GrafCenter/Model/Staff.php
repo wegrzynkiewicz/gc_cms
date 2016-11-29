@@ -132,7 +132,7 @@ class Staff extends Model
     {
         $sql = self::sql("SELECT * FROM ::table WHERE root = 0");
 
-        return Database::fetchAllWithPrimaryId($sql, [], static::$primary);
+        return Database::fetchAllWithKey($sql, [], static::$primary);
     }
 
     protected static function update($staff_id, array $data, array $groups)

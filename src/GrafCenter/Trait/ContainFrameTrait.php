@@ -15,7 +15,7 @@ trait ContainFrameTrait
     {
         # pobierz wszystkie rusztowania dla (stron)
         $sql = self::sql("SELECT * FROM ::table AS b JOIN ::frames AS f USING(frame_id) WHERE ::lang ORDER BY f.name ASC");
-        $rows = Database::fetchAllWithPrimaryId($sql, [], static::$primary);
+        $rows = Database::fetchAllWithKey($sql, [], static::$primary);
 
         return $rows;
     }

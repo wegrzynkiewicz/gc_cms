@@ -38,6 +38,7 @@ require_once ROOT_PATH.'/src/GrafCenter/Model/Staff.php';
 require_once ROOT_PATH.'/src/GrafCenter/Model/StaffGroup.php';
 require_once ROOT_PATH.'/src/GrafCenter/Model/StaffMembership.php';
 require_once ROOT_PATH.'/src/GrafCenter/Model/StaffPermission.php';
+require_once ROOT_PATH.'/src/GrafCenter/Model/Widget.php';
 
 header_remove("X-Powered-By");
 setHeaderMimeType('text/html');
