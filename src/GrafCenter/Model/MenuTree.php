@@ -1,8 +1,8 @@
 <?php
 
-class MenuPosition extends Model
+class MenuTree extends Model
 {
-    public static $table  = '::nav_positions';
+    public static $table  = '::menu_tree';
 
     use ColumnTrait;
 

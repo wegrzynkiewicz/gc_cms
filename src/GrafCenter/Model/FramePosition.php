@@ -2,7 +2,7 @@
 
 class FramePosition extends Model
 {
-    public static $table = '::frame_positions';
+    public static $table = '::frame_pos';
 
     use ColumnTrait;
 

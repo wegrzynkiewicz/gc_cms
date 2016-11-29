@@ -18,7 +18,7 @@ if(wasSentPost($_POST)) {
 }
 
 $node = Menu::selectByPrimaryId($menu_id);
-$nav = Nav::selectByPrimaryId($nav_id);
+$nav = MenuTaxonomy::selectByPrimaryId($nav_id);
 $headTitle .= makeLink("/admin/nav/menu/list/$nav_id", $nav['name']);
 $nodeType = $node['type'];
 

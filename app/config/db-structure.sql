@@ -33,15 +33,15 @@ CREATE TABLE `gc_frame_modules` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_frame_positions`;
-CREATE TABLE `gc_frame_positions` (
+DROP TABLE IF EXISTS `gc_frame_pos`;
+CREATE TABLE `gc_frame_pos` (
   `frame_id` int(10) unsigned NOT NULL,
   `module_id` int(10) unsigned NOT NULL,
   `grid` tinytext NOT NULL,
   KEY `frame_id` (`frame_id`),
   KEY `module_id` (`module_id`),
-  CONSTRAINT `gc_frame_positions_ibfk_1` FOREIGN KEY (`frame_id`) REFERENCES `gc_frames` (`frame_id`) ON DELETE CASCADE,
-  CONSTRAINT `gc_frame_positions_ibfk_2` FOREIGN KEY (`module_id`) REFERENCES `gc_frame_modules` (`module_id`) ON DELETE CASCADE
+  CONSTRAINT `gc_frame_pos_ibfk_1` FOREIGN KEY (`frame_id`) REFERENCES `gc_frames` (`frame_id`) ON DELETE CASCADE,
+  CONSTRAINT `gc_frame_pos_ibfk_2` FOREIGN KEY (`module_id`) REFERENCES `gc_frame_modules` (`module_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -63,15 +63,15 @@ CREATE TABLE `gc_gallery_images` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_gallery_positions`;
-CREATE TABLE `gc_gallery_positions` (
+DROP TABLE IF EXISTS `gc_gallery_pos`;
+CREATE TABLE `gc_gallery_pos` (
   `gallery_id` int(10) unsigned NOT NULL,
   `image_id` int(10) unsigned NOT NULL,
   `position` int(10) unsigned NOT NULL,
   KEY `image_id` (`image_id`),
   KEY `gallery_id` (`gallery_id`),
-  CONSTRAINT `gc_gallery_positions_ibfk_3` FOREIGN KEY (`image_id`) REFERENCES `gc_gallery_images` (`image_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `gc_gallery_positions_ibfk_4` FOREIGN KEY (`gallery_id`) REFERENCES `gc_galleries` (`gallery_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `gc_gallery_pos_ibfk_3` FOREIGN KEY (`image_id`) REFERENCES `gc_gallery_images` (`image_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `gc_gallery_pos_ibfk_4` FOREIGN KEY (`gallery_id`) REFERENCES `gc_galleries` (`gallery_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -96,8 +96,8 @@ CREATE TABLE `gc_nav_menus` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_nav_positions`;
-CREATE TABLE `gc_nav_positions` (
+DROP TABLE IF EXISTS `gc_menu_tree`;
+CREATE TABLE `gc_menu_tree` (
   `nav_id` int(10) unsigned NOT NULL,
   `menu_id` int(10) unsigned NOT NULL,
   `parent_id` int(10) unsigned DEFAULT NULL,
@@ -106,9 +106,9 @@ CREATE TABLE `gc_nav_positions` (
   KEY `node_id` (`menu_id`),
   KEY `parent_id` (`parent_id`),
   KEY `position` (`position`),
-  CONSTRAINT `gc_nav_positions_ibfk_1` FOREIGN KEY (`nav_id`) REFERENCES `gc_navs` (`nav_id`),
-  CONSTRAINT `gc_nav_positions_ibfk_4` FOREIGN KEY (`parent_id`) REFERENCES `gc_nav_positions` (`menu_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `gc_nav_positions_ibfk_5` FOREIGN KEY (`menu_id`) REFERENCES `gc_nav_menus` (`menu_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `gc_menu_tree_ibfk_1` FOREIGN KEY (`nav_id`) REFERENCES `gc_navs` (`nav_id`),
+  CONSTRAINT `gc_menu_tree_ibfk_4` FOREIGN KEY (`parent_id`) REFERENCES `gc_menu_tree` (`menu_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `gc_menu_tree_ibfk_5` FOREIGN KEY (`menu_id`) REFERENCES `gc_nav_menus` (`menu_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 

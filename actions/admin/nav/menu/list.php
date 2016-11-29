@@ -11,11 +11,11 @@ if (wasSentPost()) {
     $positions = array_filter($positions, function ($node) {
         return isset($node['id']);
     });
-    MenuPosition::update($nav_id, $positions);
+    MenuTree::update($nav_id, $positions);
     redirect("/admin/nav/list");
 }
 
-$nav = Nav::selectByPrimaryId($nav_id);
+$nav = MenuTaxonomy::selectByPrimaryId($nav_id);
 $pages = Page::selectAllWithFrames();
 $menuTree = Menu::buildTreeByNavId($nav_id);
 

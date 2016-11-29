@@ -13,7 +13,7 @@
         <span class="icon-bar"></span>
     </button>
 
-    <!-- Top Navigation: Left Menu -->
+    <!-- Top MenuTaxonomyigation: Left Menu -->
     <!-- <ul class="nav navbar-nav navbar-left navbar-top-links">
         <li>
             <a href="#">
@@ -22,7 +22,7 @@
         </li>
     </ul> -->
 
-    <!-- Top Navigation: Right Menu -->
+    <!-- Top MenuTaxonomyigation: Right Menu -->
     <ul class="nav navbar-right navbar-top-links">
 
 

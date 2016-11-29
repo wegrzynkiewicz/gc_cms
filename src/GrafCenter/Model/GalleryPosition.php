@@ -2,7 +2,7 @@
 
 class GalleryPosition extends Model
 {
-    public static $table = '::gallery_positions';
+    public static $table = '::gallery_pos';
 
     use ColumnTrait;
     use PositionTrait;

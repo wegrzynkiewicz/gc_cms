@@ -9,7 +9,7 @@ class FrameModule extends Model
 
     public static function selectAllByFrameId($frame_id)
     {
-        $sql = self::sql("SELECT * FROM ::table LEFT JOIN ::frame_positions AS p USING (::primary) WHERE p.frame_id = ?");
+        $sql = self::sql("SELECT * FROM ::table LEFT JOIN ::frame_pos AS p USING (::primary) WHERE p.frame_id = ?");
         $rows = Database::fetchAllWithKey($sql, [$frame_id], static::$primary);
 
         return $rows;
@@ -20,7 +20,7 @@ class FrameModule extends Model
      */
     protected static function deleteAllByFrameId($frame_id)
     {
-        $sql = self::sql("DELETE m FROM ::table AS m LEFT JOIN ::frame_positions AS p USING (::primary) WHERE frame_id = ?");
+        $sql = self::sql("DELETE m FROM ::table AS m LEFT JOIN ::frame_pos AS p USING (::primary) WHERE frame_id = ?");
         $affectedRows = Database::execute($sql, [intval($frame_id)]);
 
         return $affectedRows;

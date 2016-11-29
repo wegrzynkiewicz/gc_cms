@@ -2,7 +2,7 @@
 
 class Menu extends Node
 {
-    public static $table   = '::nav_menus';
+    public static $table   = '::menus';
     public static $primary = 'menu_id';
 
     public static $cache = [];
@@ -50,7 +50,7 @@ class Menu extends Node
      */
     public static function buildTreeByNavId($nav_id)
     {
-        $sql = self::sql("SELECT * FROM ::table AS n LEFT JOIN ::nav_positions AS p USING (::primary) WHERE p.nav_id = ? ORDER BY position ASC");
+        $sql = self::sql("SELECT * FROM ::table AS n LEFT JOIN ::menu_tree AS p USING (::primary) WHERE p.nav_id = ? ORDER BY position ASC");
         $nodes =  Database::fetchAllWithKey($sql, [$nav_id], static::$primary);
         $tree = static::createTree($nodes);
 
@@ -63,7 +63,7 @@ class Menu extends Node
     public static function buildTreeByWorkName($workname, $lang)
     {
         if (empty(self::$cache)) {
-            $navs = Nav::selectAllWithPrimaryKey();
+            $navs = MenuTaxonomy::selectAllWithPrimaryKey();
             foreach ($navs as $nav_id => $nav) {
                 $workname .= '_'.$nav['lang'];
                 self::$cache[$workname] = $nav_id;
@@ -83,7 +83,7 @@ class Menu extends Node
      */
     protected static function deleteWithoutParentId()
     {
-        $sql = self::sql("DELETE n FROM ::table AS n LEFT JOIN ::nav_positions AS p USING(::primary) WHERE p.nav_id IS NULL");
+        $sql = self::sql("DELETE n FROM ::table AS n LEFT JOIN ::menu_tree AS p USING(::primary) WHERE p.nav_id IS NULL");
         $affectedRows = Database::execute($sql);
 
         return $affectedRows;
@@ -93,11 +93,11 @@ class Menu extends Node
     {
         $menu_id = parent::insert($data);
 
-        MenuPosition::insert([
+        MenuTree::insert([
             'nav_id' => $nav_id,
             'menu_id' => $menu_id,
             'parent_id' => null,
-            'position' => MenuPosition::selectMaxPositionByNavIdAndParentId($nav_id, null),
+            'position' => MenuTree::selectMaxPositionByNavIdAndParentId($nav_id, null),
         ]);
 
         return $primary_id;

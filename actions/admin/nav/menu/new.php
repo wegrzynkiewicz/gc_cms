@@ -17,7 +17,7 @@ if(wasSentPost($_POST)) {
 	redirect("/admin/nav/menu/list/$nav_id");
 }
 
-$nav = Nav::selectByPrimaryId($nav_id);
+$nav = MenuTaxonomy::selectByPrimaryId($nav_id);
 $headTitle .= makeLink("/admin/nav/menu/list/$nav_id", $nav['name']);
 
 require_once ACTIONS_PATH.'/admin/nav/menu/form.html.php';

@@ -50,6 +50,11 @@ $menu = [
             ],
         ],
     ],
+    'Widżety' => [
+        'path' => '/admin/widget/list',
+        'icon' => 'fa fa-cube fa-fw',
+        'perms' => [],
+    ],
     'Pliki' => [
         'id' => 'navViewFiles',
         'path' => '',

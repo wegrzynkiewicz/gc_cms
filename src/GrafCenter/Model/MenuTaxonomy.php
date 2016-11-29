@@ -1,8 +1,8 @@
 <?php
 
-class Nav extends Model
+class MenuTaxonomy extends Model
 {
-    public static $table   = '::navs';
+    public static $table   = '::menu_taxonomies';
     public static $primary = 'nav_id';
 
     use PrimaryTrait;
