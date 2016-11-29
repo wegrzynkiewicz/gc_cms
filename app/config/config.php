@@ -26,6 +26,10 @@ $config = [
         'clientDefault' => 'pl', # wykorzystywany gdy wszystkie inne sposoby określenia języka klienta zawiodą
         'editorDefault' => 'pl', # domyślny język edytowania w panelu admina
     ],
+    'translator' => [ # ustawienia translatora
+        'enabled' => true, # czy włączyć tłumaczenie komunikatów
+        'folder' => ROOT_PATH.'/data/locales', # katalog do ktorego są zapisywane tłumaczenia
+    ],
     'logger' => [ # ustawienia dla rejestrowania logów
         'enabled' => true, # uruchamia rejestrowanie logów
         'folder' => TMP_PATH.'/logs', # katalog do ktorego są zapisywane logi

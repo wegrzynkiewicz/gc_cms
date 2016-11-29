@@ -224,11 +224,9 @@ function redirectToRefererOrDefault($defaultLocation, $code = 303)
 /**
  * Tłumaczy wprowadzony ciąg na inny znaleziony w plikach tłumaczeń
  */
-function trans($string, array $params = [])
+function trans($text, array $params = [])
 {
-    global
-
-    return $string;
+    return Translator::getInstance()->translate($text, $params);
 }
 
 /**
@@ -266,7 +264,7 @@ function templateView($templateName, array $arguments = [])
  */
 function createFile($filename, $mode = 0775)
 {
-    rmkdir($filename);
+    rmkdir(dirname($filename));
     if (!file_exists($filename)) {
         touch($filename);
     }

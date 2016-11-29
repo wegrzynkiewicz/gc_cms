@@ -15,17 +15,15 @@ require_once __DIR__.'/functions.php';
 //require_once __DIR__.'/error-handler.php';
 
 require_once ROOT_PATH.'/src/GrafCenter/Normalizer.php';
-
+require_once ROOT_PATH.'/src/GrafCenter/Translator.php';
 require_once ROOT_PATH.'/src/GrafCenter/Storage/Database.php';
 require_once ROOT_PATH.'/src/GrafCenter/Storage/Entity.php';
 require_once ROOT_PATH.'/src/GrafCenter/Storage/Model.php';
 require_once ROOT_PATH.'/src/GrafCenter/Storage/Node.php';
-
 require_once ROOT_PATH.'/src/GrafCenter/Trait/ColumnTrait.php';
 require_once ROOT_PATH.'/src/GrafCenter/Trait/PrimaryTrait.php';
 require_once ROOT_PATH.'/src/GrafCenter/Trait/PositionTrait.php';
 require_once ROOT_PATH.'/src/GrafCenter/Trait/ContainFrameTrait.php';
-
 require_once ROOT_PATH.'/src/GrafCenter/Model/Frame.php';
 require_once ROOT_PATH.'/src/GrafCenter/Model/FrameModule.php';
 require_once ROOT_PATH.'/src/GrafCenter/Model/FramePosition.php';

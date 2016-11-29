@@ -99,7 +99,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=trans("Czy na pewno usunąć??")?>
+                    <?=trans("Czy na pewno usunąć?")?>
                 </h2>
             </div>
             <div class="modal-body">
