@@ -1,15 +1,15 @@
 <?php
 
-class MenuTaxonomy extends Model
+class PostTaxonomy extends Model
 {
-    public static $table     = '::menu_taxonomies';
-    public static $primary   = 'nav_id';
+    public static $table   = '::post_taxonomies';
+    public static $primary = 'tax_id';
 
+    use ColumnTrait;
     use PrimaryTrait;
-    use TaxonomyTrait;
 
     /**
-     * Pobiera wszystkie nawigacje z danego języka
+     * Pobiera wszystkie podziały wpisów z danego języka
      */
     public static function selectAllCorrectWithPrimaryKey()
     {

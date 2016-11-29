@@ -6,14 +6,13 @@ if (wasSentPost()) {
     FrameModule::updateByPrimaryId($module_id, [
         'theme' => 'default',
         'content' => intval($_POST['gallery_id']),
-        'settings' => json_encode($settings),
     ]);
-    redirect("/admin/module/list/$page_id");
+    redirect("/admin/$parentSegment/module/list/$parent_id");
 }
 
 $galleriesOptions = Gallery::selectAllAsOptionsWithPrimaryKey('name');
 
-$_POST = $settings;
+$_POST['gallery_id'] = $content;
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
@@ -49,7 +48,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             <div id='galleryPreview'></div>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'cancelHref' => "/admin/module/list/$page_id",
+                'cancelHref' => "/admin/$parentSegment/module/list/$parent_id",
                 'saveLabel' => 'Zapisz moduł galerii',
             ])?>
 

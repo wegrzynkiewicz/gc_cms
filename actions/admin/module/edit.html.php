@@ -2,8 +2,8 @@
 
 $staff->redirectIfUnauthorized();
 
+$parent_id = intval(array_shift($_SEGMENTS));
 $module_id = intval(array_shift($_SEGMENTS));
-$page_id = intval(array_shift($_SEGMENTS));
 
 $module = FrameModule::selectByPrimaryId($module_id);
 $moduleType = $module['type'];

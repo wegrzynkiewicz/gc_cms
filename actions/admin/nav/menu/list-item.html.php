@@ -3,7 +3,9 @@
     <li id="node_<?=$menu_id?>" data-id="<?=$menu_id?>">
         <div class="sortable-content">
             <div class="col-lg-4">
-                <?=escape($node['name'])?>
+                <a href="<?=url("/admin/nav/menu/edit/$menu_id/$nav_id")?>">
+                    <?=escape($node['name'])?>
+                </a>
             </div>
 
             <div class="pull-right">
@@ -15,13 +17,6 @@
                     class="btn btn-danger btn-xs">
                     <i class="fa fa-times fa-fw"></i>
                     <?=trans('Usuń')?>
-                </a>
-            </div>
-
-            <div class="pull-right" style="margin-right: 10px">
-                <a href="<?=url("/admin/nav/menu/edit/$menu_id/$nav_id")?>" class="btn btn-primary btn-xs">
-                    <i class="fa fa-cog fa-fw"></i>
-                    <?=trans('Edytuj')?>
                 </a>
             </div>
 

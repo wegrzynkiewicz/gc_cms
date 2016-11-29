@@ -36,6 +36,6 @@ class FrameModule extends Model
             'grid' => '0:10:2:1',
         ]);
 
-        return $image_id;
+        return $module_id;
     }
 }

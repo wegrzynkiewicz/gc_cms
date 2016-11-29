@@ -1,10 +1,10 @@
 <?php
 
-$headTitle = trans("Wszystkie strony");
+$headTitle = trans("Wszystkie wpisy");
 
 $staff->redirectIfUnauthorized();
 
-$pages = Page::selectAllWithFrames();
+$posts = Post::selectAllWithFrames();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
@@ -16,9 +16,9 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     </div>
     <div class="col-lg-4 text-right">
         <h1 class="page-header">
-            <a href="<?=url("/admin/page/new")?>" type="button" class="btn btn-success">
+            <a href="<?=url("/admin/post/new")?>" type="button" class="btn btn-success">
                 <i class="fa fa-plus fa-fw"></i>
-                <?=trans('Dodaj nową stronę')?>
+                <?=trans('Dodaj nowy wpis')?>
             </a>
         </h1>
     </div>
@@ -26,9 +26,9 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">
-        <?php if (empty($pages)): ?>
+        <?php if (empty($posts)): ?>
             <p>
-                <?=trans('Nie znaleziono żadnej strony w języku: ')?>
+                <?=trans('Nie znaleziono żadnych wpisów w języku: ')?>
                 <?=view('/admin/parts/language.html.php')?>
             </p>
         <?php else: ?>
@@ -36,34 +36,34 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 <thead>
                     <tr>
                         <th class="col-md-5 col-lg-4">
-                            <?=trans('Nazwa strony:')?>
+                            <?=trans('Nazwa wpisu')?>
                         </th>
                         <th class="col-md-7 col-lg-8 text-right"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($pages as $page_id => $page): ?>
+                    <?php foreach ($posts as $post_id => $post): ?>
                         <tr>
                             <td>
-                                <a href="<?=url("/admin/page/edit/$page_id")?>"
-                                    title="<?=trans('Edytuj stronę')?>">
-                                    <?=$page['name']?>
+                                <a href="<?=url("/admin/post/edit/$post_id")?>"
+                                    title="<?=trans('Edytuj wpis')?>">
+                                    <?=$post['name']?>
                                 </a>
                             </td>
                             <td class="text-right">
 
-                                <a href="<?=url("/admin/page/module/list/$page_id")?>"
-                                    title="<?=trans('Wyświetl moduły strony')?>"
+                                <a href="<?=url("/admin/module/list/$post_id")?>"
+                                    title="<?=trans('Wyświetl moduły wpisu')?>"
                                     class="btn btn-success btn-xs">
                                     <i class="fa fa-file-text-o fa-fw"></i>
                                     <?=trans("Moduły")?>
                                 </a>
 
                                 <a data-toggle="modal"
-                                    data-id="<?=$page_id?>"
-                                    data-name="<?=$page['name']?>"
+                                    data-id="<?=$post_id?>"
+                                    data-name="<?=$post['name']?>"
                                     data-target="#deleteModal"
-                                    title="<?=trans('Usuń stronę')?>"
+                                    title="<?=trans('Usuń wpis')?>"
                                     class="btn btn-danger btn-xs">
                                     <i class="fa fa-times fa-fw"></i>
                                     <?=trans("Usuń")?>
@@ -82,8 +82,8 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=url("/admin/page/delete")?>" class="modal-content">
-            <input name="page_id" type="hidden" value="">
+        <form id="deleteModalForm" method="post" action="<?=url("/admin/post/delete")?>" class="modal-content">
+            <input name="post_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span>&times;</span>
@@ -93,7 +93,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=trans("Czy jesteś pewien, że chcesz usunąć stronę")?>
+                <?=trans("Czy jesteś pewien, że chcesz usunąć wpis")?>
                 <span id="name" style="font-weight:bold; color:red;"></span>?
             </div>
             <div class="modal-footer">
@@ -112,7 +112,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     $(function(){
         $('#deleteModal').on('show.bs.modal', function(e) {
             $(this).find('#name').html($(e.relatedTarget).data('name'));
-            $(this).find('[name="page_id"]').val($(e.relatedTarget).data('id'));
+            $(this).find('[name="post_id"]').val($(e.relatedTarget).data('id'));
         });
         $('[data-table]').DataTable();
     });

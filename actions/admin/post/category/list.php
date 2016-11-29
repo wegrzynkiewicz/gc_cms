@@ -1,25 +1,24 @@
 <?php
 
-$headTitle = trans("Węzły nawigacji");
+$headTitle = trans("Węzły w");
 
 $staff->redirectIfUnauthorized();
 
-$nav_id = intval(array_shift($_SEGMENTS));
+$tax_id = intval(array_shift($_SEGMENTS));
 
 if (wasSentPost()) {
     $positions = json_decode($_POST['positions'], true);
     $positions = array_filter($positions, function ($node) {
         return isset($node['id']);
     });
-    MenuTree::update($nav_id, $positions);
-    redirect("/admin/nav/list");
+    PostTree::update($tax_id, $positions);
+    redirect("/admin/post/taxonomy/list");
 }
 
-$nav = MenuTaxonomy::selectByPrimaryId($nav_id);
-$pages = Page::selectAllWithFrames();
-$menuTree = Menu::buildTreeByTaxonomyId($nav_id);
+$taxonomy = PostTaxonomy::selectByPrimaryId($tax_id);
+$category = PostCategory::buildTreeByTaxonomyId($tax_id);
 
-$headTitle .= makeLink("/admin/nav/list", $nav['name']);
+$headTitle .= makeLink("/admin/post/taxonomy/list", $taxonomy['name']);
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
@@ -31,7 +30,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     </div>
     <div class="col-lg-4 text-right">
         <h1 class="page-header">
-            <a href="<?=url("/admin/nav/menu/new/$nav_id")?>" type="button" class="btn btn-success">
+            <a href="<?=url("/admin/post/category/new/$tax_id")?>" type="button" class="btn btn-success">
                 <i class="fa fa-plus fa-fw"></i>
                 <?=trans('Dodaj nowy węzeł')?>
             </a>
@@ -41,17 +40,16 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">
-        <?php if ($menuTree->hasChildren()):?>
+        <?php if ($category->hasChildren()):?>
             <ol id="sortable" class="sortable">
-                <?=view('/admin/nav/menu/list-item.html.php', [
-                    'menu' => $menuTree,
-                    'nav_id' => $nav_id,
-                    'pages' => $pages,
+                <?=view('/admin/post/category/list-item.html.php', [
+                    'category' => $category,
+                    'tax_id' => $tax_id,
                 ])?>
             </ol>
         <?php else:?>
             <p>
-                <?=trans('Brak węzłów nawigacji')?>
+                <?=trans('Brak węzłów w %s', [$taxonomy['name']])?>
             </p>
         <?php endif?>
     </div>
@@ -76,8 +74,8 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=url("/admin/nav/menu/delete/$nav_id")?>" class="modal-content">
-            <input name="menu_id" type="hidden" value="">
+        <form id="deleteModalForm" method="post" action="<?=url("/admin/nav/menu/delete/$tax_id")?>" class="modal-content">
+            <input name="cat_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span>&times;</span>
@@ -106,7 +104,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 <script>
     $('#deleteModal').on('show.bs.modal', function(e) {
         $(this).find('#name').html($(e.relatedTarget).data('name'));
-        $(this).find('[name="menu_id"]').val($(e.relatedTarget).data('id'));
+        $(this).find('[name="cat_id"]').val($(e.relatedTarget).data('id'));
     });
 </script>
 

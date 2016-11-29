@@ -1,13 +1,5 @@
 <?php
 
-$headTitle = trans("Moduły na stronie");
-
-$staff->redirectIfUnauthorized();
-
-$page_id = intval(array_shift($_SEGMENTS));
-$page = Page::selectWithFrameByPrimaryId($page_id);
-$frame_id = $page['frame_id'];
-
 if (wasSentPost()) {
     $grid = json_decode($_POST['grid'], true);
     FramePosition::updateGridByFrameId($frame_id, $grid);
@@ -16,7 +8,6 @@ if (wasSentPost()) {
 }
 
 $modules = FrameModule::selectAllByFrameId($frame_id);
-$headTitle .= makeLink("/admin/page/list", $page['name']);
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
@@ -28,7 +19,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     </div>
     <div class="col-lg-4 text-right">
         <h1 class="page-header">
-            <a href="<?=url("/admin/module/new/$page_id")?>" type="button" class="btn btn-success">
+            <a href="<?=url("/admin/$parentSegment/module/new/$parent_id")?>" type="button" class="btn btn-success">
                 <i class="fa fa-plus fa-fw"></i>
                 <?=trans('Dodaj nowy moduł')?>
             </a>
@@ -59,7 +50,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                             <div class="grid-stack-item-content">
                                 <div class="panel panel-default panel-module">
                                     <div class="panel-heading">
-                                        <a href="<?=url("/admin/module/edit/$module_id/$page_id")?>">
+                                        <a href="<?=url("/admin/$parentSegment/module/edit/$parent_id/$module_id")?>">
                                             <?=trans($config['modules'][$module['type']])?>
                                         </a>
                                         <button data-toggle="modal"
@@ -82,7 +73,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             <?php endif ?>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'cancelHref' => "/admin/page/list",
+                'cancelHref' => "/admin/$parentSegment/list",
                 'saveLabel' => 'Zapisz ustawienie kafelków',
             ])?>
 
@@ -92,7 +83,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=url("/admin/module/delete/$page_id")?>" class="modal-content">
+        <form id="deleteModalForm" method="post" action="<?=url("/admin/$parentSegment/module/delete/$parent_id")?>" class="modal-content">
             <input name="module_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

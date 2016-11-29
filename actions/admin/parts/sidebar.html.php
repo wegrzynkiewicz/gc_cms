@@ -5,6 +5,28 @@ $menu = [
         'icon' => 'fa fa-dashboard fa-fw',
         'perms' => [],
     ],
+    'Wpisy' => [
+        'path' => '',
+        'icon' => 'fa fa-files-o fa-fw',
+        'perms' => [],
+        'children' => [
+            'Wyświetl wszystkie wpisy' => [
+                'path' => '/admin/post/list',
+                'icon' => '',
+                'perms' => [],
+            ],
+            'Dodaj nowy wpis' => [
+                'path' => '/admin/post/new',
+                'icon' => '',
+                'perms' => [],
+            ],
+            'Wyświetl podziały wpisów' => [
+                'path' => '/admin/post/taxonomy/list',
+                'icon' => '',
+                'perms' => [],
+            ],
+        ],
+    ],
     'Strony' => [
         'path' => '',
         'icon' => 'fa fa-files-o fa-fw',

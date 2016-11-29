@@ -42,7 +42,7 @@ class Translator
     public function translate($text, array $params = [])
     {
         if (!getConfig()['translator']['enabled']) {
-            return sprintf($text, $params);
+            return vsprintf($text, $params);
         }
 
         if (!isset($this->translations[$text])) {
@@ -50,6 +50,6 @@ class Translator
             $this->refresh = true;
         }
 
-        return sprintf($this->translations[$text], $params);
+        return vsprintf($this->translations[$text], $params);
     }
 }

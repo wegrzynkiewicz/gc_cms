@@ -1,22 +1,12 @@
 <?php
 
-$headTitle = trans("Nowy moduł na stronie");
-
-$staff->redirectIfUnauthorized();
-
-$page_id = intval(array_shift($_SEGMENTS));
-$page = Page::selectWithFrameByPrimaryId($page_id);
-$frame_id = $page['frame_id'];
-
 if(wasSentPost()) {
 	FrameModule::insert([
         'type' => $_POST['type'],
     ], $frame_id);
 
-	redirect("/admin/module/list/$page_id");
+	redirect("/admin/$parentSegment/module/list/$parent_id");
 }
-
-$headTitle .= makeLink("/admin/page/edit/$page_id", $page['name']);
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
@@ -39,7 +29,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             ])?>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'cancelHref' => "/admin/module/list/$page_id",
+                'cancelHref' => "/admin/$parentSegment/list",
                 'saveLabel' => 'Dodaj nowy moduł',
             ])?>
 
