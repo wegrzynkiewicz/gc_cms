@@ -105,7 +105,7 @@ class Database
         return preg_replace_callback('/::(\w+)/', function($matches) {
             $property = $matches[1];
             if ($property === 'lang') {
-                return sprintf("lang = '%s'", $_SESSION['staff']['langEditor']);
+                return sprintf("lang = '%s'", $_SESSION['lang']['editor']);
             }
             return trim(self::$prefix.$property, '_');
         }, $pseudoQuery);

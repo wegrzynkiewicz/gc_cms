@@ -11,6 +11,7 @@ if (wasSentPost()) {
         'name' => $_POST['name'],
         'email' => $_POST['email'],
         'avatar' => $_POST['avatar'],
+        'lang' => $config['lang']['clientDefault'],
     ], $groups);
 
     redirect('/admin/staff/list');

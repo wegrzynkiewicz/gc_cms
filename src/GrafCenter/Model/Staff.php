@@ -16,9 +16,12 @@ class Staff extends Model
         $this->permissions = $permissions;
 
         # jeżeli w sesji nie ma języka edytora wtedy ustaw go z configa
-        if (!isset($_SESSION['staff']['langEditor'])) {
-            $_SESSION['staff']['langEditor'] = getConfig()['lang']['editorDefault'];
+        if (!isset($_SESSION['lang']['editor'])) {
+            $_SESSION['lang']['editor'] = getConfig()['lang']['editorDefault'];
         }
+
+        # ustawienie jezyka panelu admina
+        $_SESSION['lang']['staff'] = $data['lang'];
     }
 
     /**
@@ -112,6 +115,11 @@ class Staff extends Model
             redirect('/admin/login');
         }
 
+        # jezeli istnieje flaga, ze trzeba zmienić hasło wtedy przekieruj
+        if ($staff['force_change_password']) {
+            redirect('/admin/account/force-change-password');
+        }
+
         logger(sprintf("[SESSION] %s <%s>",
             $staff['name'],
             $staff['email']
@@ -127,27 +135,17 @@ class Staff extends Model
         return Database::fetchAllWithPrimaryId($sql, [], static::$primary);
     }
 
-    protected static function update($staff_id, $data, array $groups)
+    protected static function update($staff_id, array $data, array $groups)
     {
         # zaktualizuj pracownika
-        parent::updateByPrimaryId($staff_id, [
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'avatar' => $data['avatar'],
-        ]);
-
+        parent::updateByPrimaryId($staff_id, $data);
         static::updateGroups($staff_id, $groups);
     }
 
-    protected static function insert($data, array $groups)
+    protected static function insert(array $data, array $groups)
     {
         # wstaw pracownika
-        $staff_id = parent::insert([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'avatar' => $data['avatar'],
-        ]);
-
+        $staff_id = parent::insert($data);
         static::updateGroups($staff_id, $groups);
     }
 

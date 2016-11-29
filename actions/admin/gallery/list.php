@@ -3,7 +3,7 @@
 $headTitle = trans("Galerie zdjęć");
 
 $staff->redirectIfUnauthorized();
-$rows = Gallery::selectAllWithPrimaryKey();
+$rows = Gallery::selectAllCorrectWithPrimaryKey();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
@@ -27,7 +27,8 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="col-md-12">
         <?php if (empty($rows)): ?>
             <p>
-                <?=trans('Nie znaleziono żadnej galerii.')?>
+                <?=trans('Nie znaleziono galerii w języku: ')?>
+                <?=view('/admin/parts/language.html.php')?>
             </p>
         <?php else: ?>
             <table class="table table-striped table-bordered table-hover" data-table="">

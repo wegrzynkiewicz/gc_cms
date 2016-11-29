@@ -25,8 +25,8 @@
     <!-- Top Navigation: Right Menu -->
     <ul class="nav navbar-right navbar-top-links">
 
-        <!--
-        <li class="dropdown navbar-inverse">
+
+        <!-- <li class="dropdown navbar-inverse">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="fa fa-bell fa-fw"></i> <b class="caret"></b>
             </a>
@@ -47,8 +47,26 @@
                     </a>
                 </li>
             </ul>
-        </li>
-        -->
+        </li> -->
+
+        <?php if (count($config['langs']) > 1): ?>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <?=trans('Wyświetl: ')?>
+                    <?=view('/admin/parts/language.html.php', ['lang' => $_SESSION['lang']['editor']])?>
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <?php foreach ($config['langs'] as $lang => $label): ?>
+                        <li>
+                            <a href="<?=url("/admin/account/change-lang/$lang")?>">
+                                <?=view('/admin/parts/language.html.php', ['lang' => $lang])?>
+                            </a>
+                        </li>
+                    <?php endforeach ?>
+                </ul>
+            </li>
+        <?php endif ?>
 
         <li class="dropdown">
 
@@ -59,17 +77,18 @@
             </a>
 
             <ul class="dropdown-menu dropdown-user">
+
                 <li>
-                    <a href="#">
+                    <a href="<?=url('/admin/account/profil')?>">
                         <i class="fa fa-user fa-fw"></i>
                         <?=trans('Profil użytkownika')?>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
-                        <i class="fa fa-gear fa-fw"></i>
-                        <?=trans('Ustawienia')?>
+                    <a href="<?=url('/admin/account/password')?>">
+                        <i class="fa fa-unlock-alt fa-fw"></i>
+                        <?=trans('Zmień hasło')?>
                     </a>
                 </li>
 

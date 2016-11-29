@@ -11,19 +11,20 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/gridstack.js/0.2.6/gridstack-extra.min.css">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/css/dataTables.bootstrap.min.css">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.7.0/css/flag-icon.css">
 
 <link rel="stylesheet" href="<?=assetsUrl("/admin/styles/main.css")?>">
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/i18n/<?=$config['lang']['client']?>.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/i18n/<?=getClientLang()?>.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/metisMenu/1.1.3/metisMenu.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/1.0.9/js/sb-admin-2.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.2/lodash.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/elfinder/2.1.15/js/elfinder.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/elfinder/2.1.15/js/i18n/elfinder.pl.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/elfinder/2.1.15/js/i18n/elfinder.<?=getClientLang()?>.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.1/jquery.validate.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/nestedSortable/2.0.0/jquery.mjs.nestedSortable.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/gridstack.js/0.2.6/gridstack.min.js"></script>
@@ -82,5 +83,5 @@ $.extend(true, $.fn.dataTable.defaults, {
 
 <script>
 elFinder.prototype._options.url = '<?=rootUrl('/admin/elfinder/connector')?>';
-elFinder.prototype._options.lang = '<?=$config['lang']['client']?>';
+elFinder.prototype._options.lang = '<?=getClientLang()?>';
 </script>

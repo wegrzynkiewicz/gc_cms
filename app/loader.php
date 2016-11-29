@@ -6,6 +6,10 @@ define('START_TIME',    microtime(true));
 
 session_start();
 
+if (!isset($_SESSION['lang'])) {
+    $_SESSION['lang'] = [];
+}
+
 require_once __DIR__.'/config/config.php';
 require_once __DIR__.'/functions.php';
 //require_once __DIR__.'/error-handler.php';

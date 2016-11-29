@@ -9,7 +9,7 @@ $gallery_id = intval(array_shift($_SEGMENTS));
 if (wasSentPost()) {
     Gallery::updateByPrimaryId($gallery_id, [
         'name' => $_POST['name'],
-        'lang' => $_SESSION['staff']['langEditor'],
+        'lang' => $_SESSION['lang']['editor'],
     ]);
     redirect('/admin/gallery/list');
 }

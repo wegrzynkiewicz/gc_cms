@@ -7,7 +7,7 @@ $staff->redirectIfUnauthorized();
 if (wasSentPost()) {
     Gallery::insert([
         'name' => $_POST['name'],
-        'lang' => $_SESSION['staff']['langEditor'],
+        'lang' => $_SESSION['lang']['editor'],
     ]);
 
     redirect('/admin/gallery/list');

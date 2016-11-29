@@ -28,7 +28,8 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="col-md-12">
         <?php if (empty($pages)): ?>
             <p>
-                <?=trans('Nie znaleziono żadnej strony.')?>
+                <?=trans('Nie znaleziono żadnej strony w języku: ')?>
+                <?=view('/admin/parts/language.html.php')?>
             </p>
         <?php else: ?>
             <table class="table table-striped table-bordered table-hover" data-table="">

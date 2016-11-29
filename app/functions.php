@@ -108,6 +108,26 @@ function getConfig()
 }
 
 /**
+ * Zwraca kod jezyka, aktualnie uzywanego przez klienta
+ */
+function getClientLang()
+{
+    if (isset($_SESSION['lang']['routing'])) {
+        return $_SESSION['lang']['routing'];
+    }
+
+    if (isset($_SESSION['lang']['user'])) {
+        return $_SESSION['lang']['user'];
+    }
+
+    if (isset($_SESSION['lang']['staff'])) {
+        return $_SESSION['lang']['staff'];
+    }
+
+    return getConfig()['lang']['clientDefault'];
+}
+
+/**
  * Zapisuje wiadomości do pliku logów
  */
 function logger($message, array $params = [], $file = null, $line = null)
@@ -188,10 +208,26 @@ function redirect($location, $code = 303)
 }
 
 /**
+ * Przekierowuje na adres z ktorego nastąpiło wejście lub na podany w parametrze
+ */
+function redirectToRefererOrDefault($defaultLocation, $code = 303)
+{
+    if (isset($_SERVER['HTTP_REFERER'])) {
+        $referer = $_SERVER['HTTP_REFERER'];
+        $referer = parse_url($referer, PHP_URL_PATH);
+        redirect($referer, $code);
+    }
+
+    redirect($defaultLocation, $code);
+}
+
+/**
  * Tłumaczy wprowadzony ciąg na inny znaleziony w plikach tłumaczeń
  */
 function trans($string, array $params = [])
 {
+    global
+
     return $string;
 }
 

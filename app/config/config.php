@@ -23,9 +23,7 @@ $config = [
         'noAvatarUrl' => '/admin/images/no-avatar.jpg', # ściezka do domyślnego obrazka avatara
     ],
     'lang' => [
-        'client' => 'pl', # język klienta używany w systemie
         'clientDefault' => 'pl', # wykorzystywany gdy wszystkie inne sposoby określenia języka klienta zawiodą
-        'editor' => 'pl', # język używany podczas edycji w panelu admina
         'editorDefault' => 'pl', # domyślny język edytowania w panelu admina
     ],
     'logger' => [ # ustawienia dla rejestrowania logów
@@ -42,6 +40,11 @@ $config = [
         'pl' => 'Polski',
         'en' => 'English',
         'de' => 'Deutsch',
+    ],
+    'flags' => [ # mapowanie językow na krajowe flagi
+        'pl' => 'pl',
+        'en' => 'gb',
+        'de' => 'de',
     ],
     'frames' => [ # zainstalowane typy stron
         'page' => 'Zwykła strona', # zwykła strona z modułami
@@ -124,10 +127,6 @@ function url($path)
 
     $url = rootUrl(FRONT_CONTROLLER_URL); # generowane przez routing
 
-    if ($config['lang']['client'] !== $config['lang']['clientDefault']) {
-        $url .= '/'.$config['lang']['client'];
-    }
-
     return $url.$path;
 }
 
@@ -139,7 +138,7 @@ function uploadUrl($path)
     if (strlen(ROOT_URL) <= 0) {
         return $path;
     }
-    
+
     if ($path and strpos($path, ROOT_URL) === 0) {
         $path = substr($path, strlen(ROOT_URL));
     }

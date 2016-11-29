@@ -8,7 +8,7 @@ if (wasSentPost()) {
 
     $frame_id = Frame::insert([
         'name' => $_POST['name'],
-        'lang' => $_SESSION['staff']['langEditor'],
+        'lang' => $_SESSION['lang']['editor'],
         'keywords' => $_POST['keywords'],
         'description' => $_POST['description'],
         'image' => uploadUrl($_POST['image']),

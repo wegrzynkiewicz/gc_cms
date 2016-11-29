@@ -35,10 +35,11 @@ if (empty(trim($request, '/'))) {
 $_SEGMENTS = explode('/', trim($request, '/'));
 
 # sprawdza pierwszy segment w adresie czy nie jest jednym z dostępnych języków
+unset($_SESSION['lang']['routing']);
 if (strlen($_SEGMENTS[0]) == 2) {
     foreach(array_keys($config['langs']) as $lang) {
         if ($_SEGMENTS[0] == $lang) {
-            $config['lang']['client'] = $lang;
+            $_SESSION['lang']['routing'] = $lang;
             array_shift($_SEGMENTS);
             break;
         }

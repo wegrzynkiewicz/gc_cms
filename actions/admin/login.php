@@ -26,20 +26,8 @@ if (wasSentPost()) {
     }
 }
 
-?>
-<!DOCTYPE html>
-<html lang="<?=$config['lang']['client']?>">
-<head>
-    <meta charset="utf-8" >
-	<title><?=$headTitle.' - '.$config['adminHeadTitleBase']?></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+require_once ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
 
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="<?=assetsUrl("/admin/styles/login.css")?>">
-
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-</head>
-<body>
     <div class="vertical-center">
         <div class="container">
             <div class="row">
@@ -74,7 +62,7 @@ if (wasSentPost()) {
                                         class="form-control">
                                 </div>
 
-                                <button href="index.html" type="submit" class="btn btn-lg btn-success btn-block">
+                                <button type="submit" class="btn btn-lg btn-success btn-block">
                                     <?=trans('Zaloguj się')?>
                                 </button>
                             </form>
