@@ -13,7 +13,7 @@ trait TaxonomyTrait
         if (empty(self::$cache)) {
             $taxonomies = static::selectAllWithPrimaryKey();
             foreach ($taxonomies as $tax_id => $taxonomy) {
-                $name .= '_'.$taxonomy['lang'];
+                $name = $taxonomy['workname'].'_'.$taxonomy['lang'];
                 self::$cache[$name] = $taxonomy;
             }
         }

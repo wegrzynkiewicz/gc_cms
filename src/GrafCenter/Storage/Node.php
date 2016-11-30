@@ -8,6 +8,11 @@ class Node extends Model
     private $parent = null;
     private $children = [];
 
+    public function getPrimaryId()
+    {
+        return $this->getProperty(static::$primary);
+    }
+
     public function addChildAtPosition(Node $child, $position)
     {
         if (isset($this->children[$position])) {

@@ -58,6 +58,10 @@ trait PrimaryTrait
      */
     protected static function updateByPrimaryId($primary_id, array $data)
     {
+        if (empty($data)) {
+            return 0;
+        }
+        
         $columns = static::buildUpdateSyntax($data);
         $data[] = intval($primary_id);
 

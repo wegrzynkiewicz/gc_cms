@@ -130,7 +130,7 @@ if (file_exists($customFile)) {
 }
 
 # jeżeli istnieje strona w systemie o zadanym id
-$page = $pageModel->selectWithFrameByPrimaryId($id);
+$page = Page::selectWithFrameByPrimaryId($id);
 if ($page) {
     logger("[ROUTING] Page :: $id", $page);
     return require_once ACTIONS_PATH."/frontend/frames/page.php";

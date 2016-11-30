@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = trans("Nowy moduł w poście");
+$headTitle = trans("Moduły w poście");
 
 $staff->redirectIfUnauthorized();
 
@@ -10,4 +10,4 @@ $frame_id = $post['frame_id'];
 
 $headTitle .= makeLink("/admin/page/list", $post['name']);
 
-require_once ACTIONS_PATH.'/admin/module/new.html.php'; ?>
+require_once ACTIONS_PATH.'/admin/module/list.html.php'; ?>

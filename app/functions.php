@@ -345,6 +345,14 @@ function array_partition(array $list, $p)
 }
 
 /**
+ * Łączy macierz w jedną tablicę
+ */
+function array_unchunk($array)
+{
+    return call_user_func_array('array_merge', $array);
+}
+
+/**
  * Tworzy i zapisuje miniaturkę dla pliku; zwraca ścieżkę miniaturki
  */
 function thumb($imageUrl, $width, $height)

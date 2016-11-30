@@ -51,12 +51,13 @@ $config = [
         'de' => 'de',
     ],
     'frames' => [ # zainstalowane typy stron
-        'page' => 'Zwykła strona', # zwykła strona z modułami
-        'product' => 'Strona produktu', # strona ze szczegółami produktu i modułami
+        'page' => 'Zwykła strona',
+        'post' => 'Strona wpisu bloga',
+        'product' => 'Strona produktu',
     ],
     'modules' => [ # rodzaje zainstalowanych modułow
-        'html-editor' => 'Moduł tekstu formatowanego HTML',
-        'gallery' => 'Galeria zdjęć'
+        'html-editor' => 'Moduł tekstowy',
+        'gallery' => 'Moduł galerii zdjęć'
     ],
     'nodeTypes' => [ # rodzaje węzłów nawigacji
         'empty' => 'Nieklikalny węzeł',

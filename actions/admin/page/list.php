@@ -32,7 +32,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 <?=view('/admin/parts/language.html.php')?>
             </p>
         <?php else: ?>
-            <table class="table table-striped table-bordered table-hover" data-table="">
+            <table class="table table-striped table-bordered table-hover vertical-middle" data-table="">
                 <thead>
                     <tr>
                         <th class="col-md-5 col-lg-4">
@@ -45,6 +45,10 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     <?php foreach ($pages as $page_id => $page): ?>
                         <tr>
                             <td>
+                                <?php if ($page['image']): ?>
+                                    <img src="<?=thumb($page['image'], 64, 64)?>"
+                                    height="64" style="margin-right:5px"/>
+                                <?php endif ?>
                                 <a href="<?=url("/admin/page/edit/$page_id")?>"
                                     title="<?=trans('Edytuj stronę')?>">
                                     <?=$page['name']?>

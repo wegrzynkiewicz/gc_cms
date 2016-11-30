@@ -5,8 +5,8 @@
 $lang = getClientLang();
 
 # wyciągnij z bazy węzły menu i zbuduj drzewo
-$topMenu = Menu::buildTreeByWorkName("top_$lang", $lang);
-$sideMenu = Menu::buildTreeByWorkName("side_$lang");
+$topMenu = Menu::buildTreeByWorkName("top", $lang);
+$sideMenu = Menu::buildTreeByWorkName("side", $lang);
 
 # jezeli moduly zostaly pobrane, wtedy ułoz z nich grida i pobierz wartości
 if (isset($frame_id)) {

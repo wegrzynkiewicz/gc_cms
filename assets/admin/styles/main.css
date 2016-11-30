@@ -77,6 +77,11 @@
     vertical-align: middle;
 }
 
+/** Tree checkbox */
+
+.tree-checkbox-wrapper{
+    padding-left: 20px;
+}
 
 /** Sortable */
 

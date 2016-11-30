@@ -1,4 +1,8 @@
-<?php require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
+<?php
+
+$taxonomies = PostTaxonomy::selectAllCorrectWithPrimaryKey();
+
+require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -14,7 +18,7 @@
 
             <?=view('/admin/parts/input/editbox.html.php', [
                 'name' => 'name',
-                'label' => 'Nazwa strony',
+                'label' => 'Nazwa wpisu',
             ])?>
 
             <?=view('/admin/parts/input/editbox.html.php', [
@@ -32,6 +36,20 @@
                 'label' => 'Zdjęcie wyróżniające',
                 'placeholder' => 'Ścieżka do pliku zdjęcia',
             ])?>
+
+            <?php foreach ($taxonomies as $tax_id => $taxonomy): ?>
+                <?php $tree = PostCategory::buildTreeByTaxonomyId($tax_id) ?>
+                <?php if ($tree->hasChildren()): ?>
+                    <?=view('/admin/parts/input/checkbox-tree.html.php', [
+                        'tree' => $tree,
+                        'tax_id' => $tax_id,
+                        'name' => sprintf('taxonomy[%s]', $tax_id),
+                        'label' => $taxonomy['name'],
+                        'help' => "Do jakich węzłów ma należeć ten post?",
+                        'checkedValues' => $checkedValues,
+                    ])?>
+                <?php endif ?>
+            <?php endforeach ?>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
                 'cancelHref' => "/admin/page/list",

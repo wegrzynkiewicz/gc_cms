@@ -5,6 +5,23 @@ $headTitle = trans("Wszystkie wpisy");
 $staff->redirectIfUnauthorized();
 
 $posts = Post::selectAllWithFrames();
+$package = PostCategory::selectAllWithTaxonomyId();
+$taxonomies = PostTaxonomy::selectAllCorrectWithPrimaryKey();
+
+foreach ($package as $stack) {
+    $posts[$stack['post_id']]['taxonomies'][$stack['tax_id']][] = $stack;
+}
+foreach ($posts as &$post) {
+    if (!isset($post['taxonomies'])) {
+        $post['tree_taxonomies'] = [];
+        continue;
+    }
+    foreach ($post['taxonomies'] as $tax_id => $taxonomy) {
+        $tree = PostCategory::createTree($taxonomy);
+        $post['tree_taxonomies'][$tax_id] = $tree;
+    }
+}
+unset($post);
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
@@ -32,29 +49,54 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 <?=view('/admin/parts/language.html.php')?>
             </p>
         <?php else: ?>
-            <table class="table table-striped table-bordered table-hover" data-table="">
+            <table class="table table-striped table-bordered table-hover vertical-middle" data-table="">
                 <thead>
                     <tr>
-                        <th class="col-md-5 col-lg-4">
+                        <th class="col-md-4 col-lg-4">
                             <?=trans('Nazwa wpisu')?>
                         </th>
-                        <th class="col-md-7 col-lg-8 text-right"></th>
+                        <th class="col-md-6 col-lg-6">
+                            <?=trans('Podziały według')?>
+                        </th>
+                        <th class="col-md-2 col-lg-2 text-right"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($posts as $post_id => $post): ?>
                         <tr>
                             <td>
+                                <?php if ($post['image']): ?>
+                                    <img src="<?=thumb($post['image'], 64, 64)?>"
+                                    height="64" style="margin-right:5px"/>
+                                <?php endif ?>
                                 <a href="<?=url("/admin/post/edit/$post_id")?>"
                                     title="<?=trans('Edytuj wpis')?>">
                                     <?=$post['name']?>
                                 </a>
                             </td>
+                            <td>
+                                <?php if (empty($post['tree_taxonomies'])): ?>
+                                    <?=trans('Ten wpis nie został nigdzie przypisany')?>
+                                <?php else: ?>
+                                    <?php foreach($post['tree_taxonomies'] as $tax_id => $tree): ?>
+                                        <a href="<?=url("/admin/post/category/list/$tax_id")?>"
+                                            title="<?=trans('Przejdź do podziału')?>">
+                                            <strong>
+                                                <?=$taxonomies[$tax_id]['name']?>:
+                                            </strong>
+                                        </a>
+                                        <?=view('/admin/post/list-tax-preview.html.php', [
+                                            'category' => $tree,
+                                            'tax_id' => $tax_id,
+                                        ])?>
+                                    <?php endforeach ?>
+                                <?php endif ?>
+                            </td>
                             <td class="text-right">
 
-                                <a href="<?=url("/admin/module/list/$post_id")?>"
+                                <a href="<?=url("/admin/post/module/list/$post_id")?>"
                                     title="<?=trans('Wyświetl moduły wpisu')?>"
-                                    class="btn btn-success btn-xs">
+                                    class="btn btn-success btn-sm">
                                     <i class="fa fa-file-text-o fa-fw"></i>
                                     <?=trans("Moduły")?>
                                 </a>
@@ -64,7 +106,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                     data-name="<?=$post['name']?>"
                                     data-target="#deleteModal"
                                     title="<?=trans('Usuń wpis')?>"
-                                    class="btn btn-danger btn-xs">
+                                    class="btn btn-danger btn-sm">
                                     <i class="fa fa-times fa-fw"></i>
                                     <?=trans("Usuń")?>
                                 </a>

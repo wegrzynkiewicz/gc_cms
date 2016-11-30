@@ -12,7 +12,6 @@ if (wasSentPost()) {
 
     Frame::updateByFrameId($frame_id, [
         'name' => $_POST['name'],
-        'lang' => $_SESSION['lang']['editor'],
         'keywords' => $_POST['keywords'],
         'description' => $_POST['description'],
         'image' => $_POST['image'],

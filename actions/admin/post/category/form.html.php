@@ -21,7 +21,7 @@
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
                 'cancelHref' => "/admin/post/category/list/$tax_id",
-                'saveLabel' => 'Zapisz stronę',
+                'saveLabel' => 'Zapisz węzeł',
             ])?>
 
         </form>

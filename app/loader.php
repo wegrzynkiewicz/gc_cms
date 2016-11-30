@@ -39,6 +39,7 @@ require_once ROOT_PATH.'/src/GrafCenter/Model/MenuTree.php';
 require_once ROOT_PATH.'/src/GrafCenter/Model/Page.php';
 require_once ROOT_PATH.'/src/GrafCenter/Model/Post.php';
 require_once ROOT_PATH.'/src/GrafCenter/Model/PostCategory.php';
+require_once ROOT_PATH.'/src/GrafCenter/Model/PostMembership.php';
 require_once ROOT_PATH.'/src/GrafCenter/Model/PostTaxonomy.php';
 require_once ROOT_PATH.'/src/GrafCenter/Model/PostTree.php';
 require_once ROOT_PATH.'/src/GrafCenter/Model/Staff.php';

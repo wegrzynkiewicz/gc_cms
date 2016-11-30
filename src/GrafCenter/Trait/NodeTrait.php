@@ -8,7 +8,7 @@ trait NodeTrait
     public static function buildTreeByTaxonomyId($tax_id)
     {
         $sql = self::sql("SELECT * FROM ::table AS n LEFT JOIN ::treeTable AS t USING (::primary) WHERE t.::taxonomy = ? ORDER BY t.position ASC");
-        $nodes =  Database::fetchAllWithKey($sql, [$tax_id], static::$primary);
+        $nodes =  Database::fetchAll($sql, [$tax_id]);
         $tree = static::createTree($nodes);
 
         return $tree;
