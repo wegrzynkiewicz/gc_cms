@@ -118,9 +118,9 @@ class Database
     {
         $sql = self::bindTableName($sql);
 
-        logger(sprintf("[QUERY]%s $sql",
-            self::$pdo->inTransaction() ? ' T ::' : ''
-        ), $parameters);
+        Logger::query(trim(sprintf("%s $sql",
+            self::$pdo->inTransaction() ? '(TRANSACTION) ::' : ''
+        )), $parameters);
 
         try {
             $statement = self::$pdo->prepare($sql);

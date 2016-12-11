@@ -8,8 +8,8 @@ define('ROOT_PATH', realpath(__DIR__.'/../../')); # ścieżka do katalogu głów
 define('ACTIONS_PATH', ROOT_PATH.'/actions'); # ścieżka do katalogu z plikami kontrolerów i szablonów
 define('APP_PATH', ROOT_PATH.'/app'); # ścieżka do katalogu z najważniejszy plikami aplikacji
 define('TMP_PATH', ROOT_PATH.'/tmp'); # ścieżka do folderu z plikami tymczasowymi
-define('TEMPLATE_PATH', ACTIONS_PATH.'/templates/'.TEMPLATE); # ścieżka do plików szablonu
-define('TEMPLATE_ASSETS_URL', ASSETS_URL.'/templates/'.TEMPLATE); # adres do zasobów w katalogu z szablonem
+define('TEMPLATE_PATH', ROOT_PATH.'/templates/'.TEMPLATE); # ścieżka do plików szablonu
+define('TEMPLATE_ASSETS_URL', '/templates/'.TEMPLATE); # adres do zasobów w katalogu z szablonem
 
 $config = [
     'debug' => true, # tryb developerski i wyświetlanie błędów

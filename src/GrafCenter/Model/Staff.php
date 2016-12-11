@@ -30,7 +30,7 @@ class Staff extends Model
     public function redirectIfUnauthorized(array $permissions = [])
     {
         if (!$this->hasPermissions($permissions)) {
-            logger("[DENY] Not authorized", $permissions);
+            Logger::deny("Not authorized", $permissions);
             $perm = count($permissions) > 0 ? array_shift($permissions) : 'default';
             redirect("/admin/deny/$perm");
         }
@@ -59,10 +59,8 @@ class Staff extends Model
      */
     public static function getAvatarUrl($staff, $size)
     {
-        global $config;
-
         if (empty($staff['avatar'])) {
-            return assetsUrl($config['avatar']['noAvatarUrl']);
+            return assetsUrl(getConfig()['avatar']['noAvatarUrl']);
         }
 
         return thumb($staff['avatar'], $size, $size);
@@ -96,12 +94,10 @@ class Staff extends Model
      */
     public static function createFromSession()
     {
-        $config = getConfig();
-
         # jeżeli sesja nie istnieje wtedy przekieruj na logowanie
         if (!isset($_SESSION['staff'])) {
             unset($_SESSION['staff']);
-            logger("[LOGOUT] Session does not exists");
+            Logger::logout("Session does not exists");
             redirect('/admin/login');
         }
 
@@ -111,7 +107,7 @@ class Staff extends Model
             $staff = static::createByStaffId($_SESSION['staff']['staff_id']);
         } catch (RuntimeException $exception) {
             unset($_SESSION['staff']);
-            logger("[LOGOUT] Not found user");
+            Logger::logout("Not found user");
             redirect('/admin/login');
         }
 
@@ -120,10 +116,7 @@ class Staff extends Model
             redirect('/admin/account/force-change-password');
         }
 
-        logger(sprintf("[SESSION] %s <%s>",
-            $staff['name'],
-            $staff['email']
-        ));
+        Logger::session(sprintf("%s <%s>", $staff['name'], $staff['email']));
 
         return $staff;
     }

@@ -1,8 +1,10 @@
-<?php if ($topMenu->hasChildren()): ?>
+<?php $menu = Menu::buildTreeByWorkName("top", getClientLang()) ?>
+
+<?php if ($menu->hasChildren()): ?>
     <div class="blog-masthead">
         <div class="container">
             <nav class="blog-nav">
-                <?php foreach ($topMenu->getChildren() as $node): ?>
+                <?php foreach ($menu->getChildren() as $node): ?>
                     <?=$node->getOpenTag('class="blog-nav-item"')?>
                         <?=$node['name']?>
                     <?=$node->getCloseTag()?>

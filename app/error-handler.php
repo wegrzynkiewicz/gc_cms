@@ -55,7 +55,7 @@ set_exception_handler(function (Exception $exception) {
             $logException($previous);
         }
 
-        logger(sprintf("[EXCEPTION] %s: %s [%s]\n%s",
+        Logger::exception(sprintf("%s: %s [%s]\n%s",
                 get_class($exception),
                 $exception->getMessage(),
                 $exception->getCode(),

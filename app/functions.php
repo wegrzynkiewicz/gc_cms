@@ -180,17 +180,6 @@ function relativePath($absolutePath)
 }
 
 /**
- * Zwraca obiekt DataTime z mikrosekundami
- */
-function microDateTime()
-{
-    $time = microtime(true);
-    $micro = sprintf("%06d", ($time - floor($time)) * 1000000);
-
-    return new DateTime(date('Y-m-d H:i:s.'.$micro, $time));
-}
-
-/**
  * Przekierowuje na zadany adres
  */
 function redirect($location, $code = 303)
@@ -198,7 +187,7 @@ function redirect($location, $code = 303)
     http_response_code($code);
     header("Location: ".url($location));
 
-    logger(sprintf("[REDIRECT] %s %s :: ExecutionTime: %s",
+    Logger::redirect(sprintf("%s %s :: ExecutionTime: %s",
         $code,
         $location,
         (microtime(true) - START_TIME)

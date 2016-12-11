@@ -52,7 +52,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             <?php endforeach ?>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'cancelHref' => "/admin/page/list",
+                'cancelHref' => "/admin/post/list",
                 'saveLabel' => 'Zapisz wpis',
             ])?>
 

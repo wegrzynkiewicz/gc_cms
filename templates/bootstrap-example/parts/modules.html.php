@@ -1,19 +1,10 @@
 <?php
 
-/* Plik pobiera i przygotowuje najważniejsze dane z bazy dla frontend */
+$gridModules = [];
 
-$lang = getClientLang();
-
-# wyciągnij z bazy węzły menu i zbuduj drzewo
-$topMenu = Menu::buildTreeByWorkName("top", $lang);
-$sideMenu = Menu::buildTreeByWorkName("side", $lang);
-
-# jezeli moduly zostaly pobrane, wtedy ułoz z nich grida i pobierz wartości
 if (isset($frame_id)) {
 
     $modules = FrameModule::selectAllByFrameId($frame_id);
-
-    $gridModules = [];
     foreach ($modules as $module_id => &$module) {
         list($x, $y, $w, $h) = explode(':', $module['grid']);
         $module['grid'] = [
@@ -24,8 +15,6 @@ if (isset($frame_id)) {
         ];
 
         $content = $module['content'];
-
-        require sprintf(ACTIONS_PATH."/frontend/modules/%s.php", $module['type']);
 
         $gridModules[$y][$x] = $module;
     }
@@ -44,3 +33,22 @@ if (isset($frame_id)) {
     }
     unset($row);
 }
+
+?>
+
+<?php if (empty($gridModules)): ?>
+
+<?php else: ?>
+    <?php foreach ($gridModules as $row): ?>
+        <div class="row">
+            <?php foreach ($row as $module): $grid = $module['grid'];  ?>
+                <div class="col-md-<?=$grid['w']?>
+                    <?=$grid['o']>0 ? 'col-md-offset-'.$grid['o'] : ''?>">
+                    <div id="module_<?=$module['module_id']?>">
+                        <?php require sprintf(TEMPLATE_PATH."/modules/%s-%s.html.php", $module['type'], $module['theme']); ?>
+                    </div>
+                </div>
+            <?php endforeach ?>
+        </div>
+    <?php endforeach ?>
+<?php endif ?>
