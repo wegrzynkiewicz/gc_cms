@@ -99,6 +99,10 @@ if (file_exists($file)) {
     return require_once $file;
 }
 
+# następuje analiza sluga adresu, aby uruchomić odpowiednią akcję
+$slug = array_shift($_SEGMENTS);
+$absoluteSlug = '/'.implode('/', $_SEGMENTS);
+
 # jeżeli istnieje niestandardowy plik w folderze z szablonem
 $customFile = TEMPLATE_PATH."/custom/$slug.html.php";
 if (file_exists($customFile)) {

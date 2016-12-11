@@ -2,20 +2,17 @@
 
 class Logger
 {
-    public $content = "";
-
+    private $filename = "";
     private static $instance;
 
-    public function __destruct()
+    public function __construct()
     {
         $folder = getConfig()['logger']['folder'];
-        $filename = sprintf("%s/%s.log", $folder, date('Y-m-d'));
+        $this->filename = sprintf("%s/%s.log", $folder, date('Y-m-d'));
 
-        if (!is_readable($filename)) {
-            rmkdir(dirname($filename));
+        if (!is_readable($this->filename)) {
+            rmkdir(dirname($this->filename));
         }
-
-        file_put_contents($filename, $this->content, FILE_APPEND);
     }
 
     public static function __callStatic($methodName, array $arguments)
@@ -41,14 +38,15 @@ class Logger
             $execution['line']
         );
 
-        $this->content .= $log;
+        file_put_contents($this->filename, $log, FILE_APPEND);
     }
 
     private static function getInstance()
     {
         if (self::$instance === null) {
             self::$instance = new static();
-            self::$instance->content = "=================\n";
+            $content = "=================\n";
+            file_put_contents(self::$instance->filename, $content, FILE_APPEND);
         }
 
         return self::$instance;

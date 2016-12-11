@@ -23,6 +23,8 @@ require_once ROOT_PATH.'/src/GrafCenter/Model/GalleryPosition.php';
 require_once ROOT_PATH.'/src/GrafCenter/Model/Menu.php';
 require_once ROOT_PATH.'/src/GrafCenter/Model/MenuTaxonomy.php';
 require_once ROOT_PATH.'/src/GrafCenter/Model/MenuTree.php';
+require_once ROOT_PATH.'/src/GrafCenter/Model/ModuleFile.php';
+require_once ROOT_PATH.'/src/GrafCenter/Model/ModuleFilePosition.php';
 require_once ROOT_PATH.'/src/GrafCenter/Model/Page.php';
 require_once ROOT_PATH.'/src/GrafCenter/Model/Post.php';
 require_once ROOT_PATH.'/src/GrafCenter/Model/PostNode.php';

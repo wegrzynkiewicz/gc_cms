@@ -4,7 +4,7 @@ if (wasSentPost()) {
     $grid = json_decode($_POST['grid'], true);
     FramePosition::updateGridByFrameId($frame_id, $grid);
 
-    redirect("/admin/page/list");
+    redirect("/admin/$parentSegment/list");
 }
 
 $modules = FrameModule::selectAllByFrameId($frame_id);
@@ -63,7 +63,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                         </button>
                                     </div>
                                     <div class="panel-body">
-                                        <?php require sprintf(ACTIONS_PATH.'/admin/module/previews/%s.html.php', $module['type']); ?>
+                                        <?php require sprintf(ACTIONS_PATH.'/admin/module/types/%s/grid-item-preview.html.php', $module['type']); ?>
                                     </div>
                                 </div>
                             </div>
