@@ -27,6 +27,6 @@ if (wasSentPost()) {
 $headTitle .= makeLink("/admin/post/list", $post['name']);
 
 $_POST = $post;
-$checkedValues = PostCategory::selectAllAsOptionsPostId($post_id);
+$checkedValues = PostNode::selectAllAsOptionsPostId($post_id);
 
 require_once ACTIONS_PATH.'/admin/post/form.html.php';

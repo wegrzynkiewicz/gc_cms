@@ -31,10 +31,10 @@ class Post extends Model
         PostMembership::deleteAllBy('post_id', $post_id);
 
         # wstaw na nowo grupy pracownika
-        foreach ($relations as $cat_id) {
+        foreach ($relations as $node_id) {
             PostMembership::insert([
                 'post_id' => $post_id,
-                'cat_id' => $cat_id,
+                'node_id' => $node_id,
             ]);
         }
     }

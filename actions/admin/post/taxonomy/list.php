@@ -40,7 +40,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                 <?=$taxonomy['name']?>
                             </td>
                             <td>
-                                <a href="<?=url("/admin/post/category/list/$tax_id")?>"
+                                <a href="<?=url("/admin/post/node/list/$tax_id")?>"
                                     title="<?=trans('Wyświetl węzły podziału')?>"
                                     class="btn btn-success btn-xs">
                                     <i class="fa fa-file-text-o fa-fw"></i>

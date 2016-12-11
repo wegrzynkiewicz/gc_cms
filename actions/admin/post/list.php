@@ -5,7 +5,7 @@ $headTitle = trans("Wszystkie wpisy");
 $staff->redirectIfUnauthorized();
 
 $posts = Post::selectAllWithFrames();
-$package = PostCategory::selectAllWithTaxonomyId();
+$package = PostNode::selectAllWithTaxonomyId();
 $taxonomies = PostTaxonomy::selectAllCorrectWithPrimaryKey();
 
 foreach ($package as $stack) {
@@ -17,7 +17,7 @@ foreach ($posts as &$post) {
         continue;
     }
     foreach ($post['taxonomies'] as $tax_id => $taxonomy) {
-        $tree = PostCategory::createTree($taxonomy);
+        $tree = PostNode::createTree($taxonomy);
         $post['tree_taxonomies'][$tax_id] = $tree;
     }
 }
@@ -79,7 +79,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                     <?=trans('Ten wpis nie został nigdzie przypisany')?>
                                 <?php else: ?>
                                     <?php foreach($post['tree_taxonomies'] as $tax_id => $tree): ?>
-                                        <a href="<?=url("/admin/post/category/list/$tax_id")?>"
+                                        <a href="<?=url("/admin/post/node/list/$tax_id")?>"
                                             title="<?=trans('Przejdź do podziału')?>">
                                             <strong>
                                                 <?=$taxonomies[$tax_id]['name']?>:

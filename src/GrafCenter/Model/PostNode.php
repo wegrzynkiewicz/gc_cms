@@ -1,14 +1,13 @@
 <?php
 
-class PostCategory extends Node
+class PostNode extends Node
 {
-    public static $table   = '::post_categories';
+    public static $table   = '::post_nodes';
     public static $treeTable = '::post_tree';
-    public static $primary = 'cat_id';
+    public static $primary = 'node_id';
     public static $taxonomy = 'tax_id';
 
-    public static $cache = [];
-    public static $primaryIdLabel = "cat_id";
+    public static $primaryIdLabel = "node_id";
     public static $parentIdLabel  = "parent_id";
 
     use NodeTrait;
@@ -36,15 +35,15 @@ class PostCategory extends Node
 
     protected static function insert(array $data, $tax_id)
     {
-        $cat_id = parent::insert($data);
+        $node_id = parent::insert($data);
 
         PostTree::insert([
             'tax_id' => $tax_id,
-            'cat_id' => $cat_id,
+            'node_id' => $node_id,
             'parent_id' => null,
             'position' => PostTree::selectMaxPositionByTaxonomyIdAndParentId($tax_id, null),
         ]);
 
-        return $cat_id;
+        return $node_id;
     }
 }

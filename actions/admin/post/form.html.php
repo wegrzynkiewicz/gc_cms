@@ -38,7 +38,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             ])?>
 
             <?php foreach ($taxonomies as $tax_id => $taxonomy): ?>
-                <?php $tree = PostCategory::buildTreeByTaxonomyId($tax_id) ?>
+                <?php $tree = PostNode::buildTreeByTaxonomyId($tax_id) ?>
                 <?php if ($tree->hasChildren()): ?>
                     <?=view('/admin/parts/input/checkbox-tree.html.php', [
                         'tree' => $tree,

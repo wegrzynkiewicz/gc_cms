@@ -1,7 +1,7 @@
 <ol class="list-unstyled" style="padding-left: 20px">
-    <?php foreach ($category->getChildren() as $node): $cat_id = $node->getPrimaryId() ?>
+    <?php foreach ($category->getChildren() as $node): $node_id = $node->getPrimaryId() ?>
         <li>
-            <a href="<?=url("/admin/post/category/edit/$cat_id/$tax_id")?>">
+            <a href="<?=url("/admin/post/node/edit/$node_id/$tax_id")?>">
                 <?=escape($node['name'])?>
             </a>
             <?php if ($node->hasChildren()): ?>

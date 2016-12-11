@@ -1,16 +1,16 @@
-<?php foreach ($category->getChildren() as $node): $cat_id = $node['cat_id']; ?>
+<?php foreach ($category->getChildren() as $node): $node_id = $node['node_id']; ?>
 
-    <li id="node_<?=$cat_id?>" data-id="<?=$cat_id?>">
+    <li id="node_<?=$node_id?>" data-id="<?=$node_id?>">
         <div class="sortable-content">
             <div class="col-lg-4">
-                <a href="<?=url("/admin/post/category/edit/$cat_id/$tax_id")?>">
+                <a href="<?=url("/admin/post/node/edit/$node_id/$tax_id")?>">
                     <?=escape($node['name'])?>
                 </a>
             </div>
 
             <div class="pull-right">
                 <a data-toggle="modal"
-                    data-id="<?=$cat_id?>"
+                    data-id="<?=$node_id?>"
                     data-name="<?=$node['name']?>"
                     data-target="#deleteModal"
                     title="<?=trans('Usuń węzeł')?>"
@@ -25,7 +25,7 @@
 
         <?php if ($node->hasChildren()): ?>
             <ol>
-                <?=view('/admin/post/category/list-item.html.php', [
+                <?=view('/admin/post/node/list-item.html.php', [
                     'category' => $node,
                     'tax_id' => $tax_id,
                 ])?>

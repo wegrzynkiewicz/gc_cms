@@ -16,7 +16,7 @@ if (wasSentPost()) {
 }
 
 $taxonomy = PostTaxonomy::selectByPrimaryId($tax_id);
-$category = PostCategory::buildTreeByTaxonomyId($tax_id);
+$category = PostNode::buildTreeByTaxonomyId($tax_id);
 
 $headTitle .= makeLink("/admin/post/taxonomy/list", $taxonomy['name']);
 
@@ -30,7 +30,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     </div>
     <div class="col-lg-4 text-right">
         <h1 class="page-header">
-            <a href="<?=url("/admin/post/category/new/$tax_id")?>" type="button" class="btn btn-success">
+            <a href="<?=url("/admin/post/node/new/$tax_id")?>" type="button" class="btn btn-success">
                 <i class="fa fa-plus fa-fw"></i>
                 <?=trans('Dodaj nowy węzeł')?>
             </a>
@@ -42,7 +42,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="col-md-12">
         <?php if ($category->hasChildren()):?>
             <ol id="sortable" class="sortable">
-                <?=view('/admin/post/category/list-item.html.php', [
+                <?=view('/admin/post/node/list-item.html.php', [
                     'category' => $category,
                     'tax_id' => $tax_id,
                 ])?>
@@ -75,7 +75,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <form id="deleteModalForm" method="post" action="<?=url("/admin/nav/menu/delete/$tax_id")?>" class="modal-content">
-            <input name="cat_id" type="hidden" value="">
+            <input name="node_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span>&times;</span>
@@ -104,7 +104,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 <script>
     $('#deleteModal').on('show.bs.modal', function(e) {
         $(this).find('#name').html($(e.relatedTarget).data('name'));
-        $(this).find('[name="cat_id"]').val($(e.relatedTarget).data('id'));
+        $(this).find('[name="node_id"]').val($(e.relatedTarget).data('id'));
     });
 </script>
 
