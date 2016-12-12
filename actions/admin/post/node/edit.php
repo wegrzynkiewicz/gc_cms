@@ -2,6 +2,7 @@
 
 $headTitle = trans("Edycja węzła w ");
 
+$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $post_id = intval(array_shift($_SEGMENTS));

@@ -136,43 +136,11 @@ function getClientLang()
 }
 
 /**
- * Zapisuje wiadomości do pliku logów
+ * Usuwa sieroty z tekstu bez html!
  */
-function logger($message, array $params = [], $file = null, $line = null)
+function removeOrphan($text)
 {
-    global $config;
-    $enabled = $config['logger']['enabled'];
-    $folder = $config['logger']['folder'];
-    $wasExecuted = isset($config['logger']['wasExecuted']);
-
-    if (!$enabled) {
-        return;
-    }
-
-    $filename = sprintf("%s/%s.log", $folder, date('Y-m-d'));
-
-    if (!is_readable($filename)) {
-        rmkdir(dirname($filename));
-    }
-
-    if (!$wasExecuted) {
-        $config['logger']['wasExecuted'] = true;
-        $content = "=================\n";
-        file_put_contents($filename, $content, FILE_APPEND);
-    }
-
-    $backtrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT);
-    $execution = array_shift($backtrace);
-
-    $content = sprintf("[%s] %s :: %s :: %s:%s\n",
-        microDateTime()->format('H:i:s.u'),
-        $message,
-        json_encode($params),
-        relativePath($file === null ? $execution['file'] : $file),
-        $line === null ? $execution['line'] : $line
-    );
-
-    file_put_contents($filename, $content, FILE_APPEND);
+    return preg_replace('~ ([aiowzu]) ~', ' $1&nbsp;', $text);
 }
 
 /**
@@ -477,6 +445,24 @@ function getGravatar($email, $s = 80, $d = 'mm', $r = 'g')
 function randomColor()
 {
     return sprintf('#%06X', mt_rand(0, 0xFFFFFF));
+}
+
+/**
+ * Generate a random string, using a cryptographically secure
+ *
+ * @param int $length      How many characters do we want?
+ * @param string $keyspace A string of all possible characters to select from
+ * @return string
+ */
+function randomPassword($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') 
+{
+    $password = '';
+    $max = strlen($keyspace) - 1;
+    for ($i = 0; $i < $length; ++$i) {
+        $password .= $keyspace[mt_rand(0, $max)];
+    }
+
+    return $password;
 }
 
 function getXMLTag($tag, $content = null, $attributes = array())

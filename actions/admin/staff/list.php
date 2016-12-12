@@ -2,6 +2,7 @@
 
 $headTitle = trans("Pracownicy");
 
+$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $staffList = Staff::selectAllCorrectWithPrimaryKey();

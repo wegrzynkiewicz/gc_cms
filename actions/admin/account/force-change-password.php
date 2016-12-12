@@ -10,13 +10,13 @@ if (wasSentPost()) {
 
     $user = Staff::selectByPrimaryId($_SESSION['staff']['staff_id']);
     if (!$user) {
-        redirect('/admin/logout');
+        redirect('/admin/account/logout');
     }
 
     if ($newPasswordHash === $user['password']) {
         $error = trans('Nowe hasło nie może być takie samo jak poprzednie');
-    } elseif (strlen($newPassword) < 8) {
-        $error = trans('Hasło nie może być krótsze niż 8 znaków');
+    } elseif (strlen($newPassword) < $config['minPasswordLength']) {
+        $error = trans('Hasło nie może być krótsze niż %s znaków', $config['minPasswordLength']);
     } elseif ($newPassword !== $confirmPassword) {
         $error = trans('Podane nowe hasła nie są identyczne');
     } else {
@@ -60,7 +60,7 @@ require_once ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                                 'name' => 'new_password',
                                 'type' => 'password',
                                 'label' => 'Nowe hasło',
-                                'help' => 'Twoje hasło musi składać się z przynajmniej 8 znaków',
+                                'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', $config['minPasswordLength']),
                             ])?>
 
                             <?=view('/admin/parts/input/editbox.html.php', [
@@ -90,7 +90,7 @@ $(function () {
         rules: {
             new_password: {
                 required: true,
-                minlength : 8
+                minlength : <?=$config['minPasswordLength']?>
             },
             confirm_password: {
                 required: true,
@@ -100,7 +100,7 @@ $(function () {
         messages: {
             new_password: {
                 required: "<?=trans('Wprowadź nowe hasło')?>",
-                minlength: "<?=trans('Nowe hasło powinno mieć przynajmniej 8 znaków')?>"
+                minlength: "<?=trans('Nowe hasło powinno mieć przynajmniej %s znaków', $config['minPasswordLength'])?>"
             },
             confirm_password: {
                 required: "<?=trans('Musisz powtórzyć swoje nowe hasło dla bezpieczeństwa')?>",

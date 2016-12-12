@@ -2,6 +2,7 @@
 
 $headTitle = trans("Podziały wpisów");
 
+$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $taxonomies = PostTaxonomy::selectAllCorrectWithPrimaryKey();

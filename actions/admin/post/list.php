@@ -2,6 +2,7 @@
 
 $headTitle = trans("Wszystkie wpisy");
 
+$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $posts = Post::selectAllWithFrames();

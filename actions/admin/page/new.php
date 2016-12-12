@@ -2,6 +2,7 @@
 
 $headTitle = trans("Dodawanie nowej strony");
 
+$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 if (wasSentPost()) {

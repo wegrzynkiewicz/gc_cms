@@ -2,6 +2,7 @@
 
 $headTitle = trans("Edytowanie grupy pracowników");
 
+$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $group_id = intval(array_shift($_SEGMENTS));

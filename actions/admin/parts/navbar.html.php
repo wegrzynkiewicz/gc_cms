@@ -95,7 +95,7 @@
                 <li class="divider"></li>
 
                 <li>
-                    <a href="<?=url("/admin/logout")?>">
+                    <a href="<?=url("/admin/account/logout")?>">
                         <i class="fa fa-sign-out fa-fw"></i>
                         <?=trans('Wyloguj się')?>
                     </a>

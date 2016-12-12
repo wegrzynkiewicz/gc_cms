@@ -2,6 +2,7 @@
 
 $headTitle = trans("Zmiana hasła");
 
+$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 if (wasSentPost()) {
@@ -14,7 +15,7 @@ if (wasSentPost()) {
 
     $user = Staff::selectByPrimaryId($_SESSION['staff']['staff_id']);
     if (!$user) {
-        redirect('/admin/logout');
+        redirect('/admin/account/logout');
     }
 
     # jeżeli hasło w bazie nie jest zahaszowane, a zgadza się
@@ -25,8 +26,8 @@ if (wasSentPost()) {
         $user['password'] = $oldPasswordHash;
     }
 
-    if (strlen($newPassword) < 8) {
-        $error = trans('Hasło nie może być krótsze niż 8 znaków');
+    if (strlen($newPassword) < $config['minPasswordLength']) {
+        $error = trans('Hasło nie może być krótsze niż %s znaków', $config['minPasswordLength']);
     } elseif ($oldPasswordHash !== $user['password']) {
         $error = trans('Stare hasło nie zgadza się z obecnym hasłem');
     } elseif ($newPassword !== $confirmPassword) {
@@ -74,7 +75,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 'name' => 'new_password',
                 'type' => 'password',
                 'label' => 'Nowe hasło',
-                'help' => 'Twoje hasło musi składać się z przynajmniej 8 znaków',
+                'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', $config['minPasswordLength']),
             ])?>
 
             <?=view('/admin/parts/input/editbox.html.php', [
@@ -104,7 +105,7 @@ $(function () {
             },
             new_password: {
                 required: true,
-                minlength : 8
+                minlength : <?=$config['minPasswordLength']?>
             },
             confirm_password: {
                 required: true,
@@ -117,7 +118,7 @@ $(function () {
             },
             new_password: {
                 required: "<?=trans('Wprowadź nowe hasło')?>",
-                minlength: "<?=trans('Nowe hasło powinno mieć przynajmniej 8 znaków')?>"
+                minlength: "<?=trans('Nowe hasło powinno mieć przynajmniej %s znaków', $config['minPasswordLength'])?>"
             },
             confirm_password: {
                 required: "<?=trans('Musisz powtórzyć swoje nowe hasło dla bezpieczeństwa')?>",

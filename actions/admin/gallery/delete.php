@@ -1,5 +1,6 @@
 <?php
 
+$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 if (wasSentPost()) {

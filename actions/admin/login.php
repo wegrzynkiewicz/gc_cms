@@ -11,14 +11,14 @@ if (wasSentPost()) {
     $user = Staff::selectSingleBy('email', $_POST['email']);
 
     # jeżeli hasło w bazie nie jest zahaszowane, a zgadza się
-    if (!isSha1($user['password']) and $_POST['password'] === $user['password']) {
+    if ($user and !isSha1($user['password']) and $_POST['password'] === $user['password']) {
         Staff::updateByPrimaryId($user['staff_id'], [
             'password' => $passwordHash,
         ]);
         $user['password'] = $passwordHash;
     }
 
-    if ($passwordHash === $user['password']) {
+    if ($user and $passwordHash === $user['password']) {
         $_SESSION['staff'] = $user;
         redirect('/admin');
     } else {
@@ -31,7 +31,7 @@ require_once ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
     <div class="vertical-center">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 col-md-offset-4">
+                <div class="col-md-6 col-md-offset-3">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">
@@ -65,6 +65,13 @@ require_once ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                                 <button type="submit" class="btn btn-lg btn-success btn-block">
                                     <?=trans('Zaloguj się')?>
                                 </button>
+
+                                <div class="btn-group btn-group-justified" style="margin-top:5px">
+                                    <a href="<?=url("/")?>" class="btn btn-link">
+                                        <?=trans('Przejdź na stronę główną')?></a>
+                                    <a href="<?=url("/admin/account/forgot/password")?>" class="btn btn-link">
+                                        <?=trans('Zapomniałem hasła')?></a>
+                                </div>
                             </form>
                         </div>
                     </div>

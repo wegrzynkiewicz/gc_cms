@@ -1,5 +1,6 @@
 <?php
 
+$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $positions = json_decode($_POST['ids'], true);

@@ -2,6 +2,7 @@
 
 $headTitle = trans("Zdjęcia w galerii");
 
+$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $gallery_id = intval(array_shift($_SEGMENTS));

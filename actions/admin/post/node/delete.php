@@ -1,5 +1,6 @@
 <?php
 
+$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $tax_id = intval(array_shift($_SEGMENTS));

@@ -2,6 +2,7 @@
 
 $headTitle = trans("Edytowanie strony");
 
+$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $page_id = intval(array_shift($_SEGMENTS));

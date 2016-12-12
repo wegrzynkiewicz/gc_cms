@@ -2,6 +2,7 @@
 
 $headTitle = trans("Węzły w");
 
+$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $tax_id = intval(array_shift($_SEGMENTS));

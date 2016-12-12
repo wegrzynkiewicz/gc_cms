@@ -2,6 +2,7 @@
 
 $headTitle = trans("Węzły nawigacji");
 
+$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $nav_id = intval(array_shift($_SEGMENTS));

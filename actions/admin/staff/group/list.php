@@ -2,6 +2,7 @@
 
 $headTitle = trans("Grupy");
 
+$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $groups = StaffGroup::selectAllWithPrimaryKey();

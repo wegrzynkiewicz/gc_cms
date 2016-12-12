@@ -2,6 +2,7 @@
 
 $headTitle = trans("Dodawanie nowego wpisu");
 
+$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 if (wasSentPost()) {

@@ -2,6 +2,7 @@
 
 $headTitle = trans("Edytowanie zdjęcia w module galerii");
 
+$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $file_id = intval(array_shift($_SEGMENTS));

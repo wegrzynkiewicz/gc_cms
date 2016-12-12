@@ -2,6 +2,7 @@
 
 $headTitle = trans("Dodawanie nowej grupy pracowników");
 
+$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 if (wasSentPost()) {

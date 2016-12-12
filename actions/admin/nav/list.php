@@ -2,6 +2,7 @@
 
 $headTitle = trans("Nawigacje");
 
+$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $navs = MenuTaxonomy::selectAllCorrectWithPrimaryKey();

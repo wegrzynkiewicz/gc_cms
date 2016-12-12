@@ -34,16 +34,21 @@ class Mail extends PHPMailer
         }
     }
 
-    public function compileTemplate($templateEmailFolder, array $viewArgs = [])
+    public function buildTemplate($templateEmailPath, $stylePath, array $viewArgs = [])
     {
         $cssToInlineStyles = new TijsVerkoyen\CssToInlineStyles\CssToInlineStyles();
         $viewArgs['mail'] = $this;
-        $html = view($templateEmailFolder."/body.html.php", $viewArgs);
-        $css = view($templateEmailFolder."/styles.css", $viewArgs);
+        $viewArgs['config'] = getConfig();
+        $html = view($templateEmailPath, $viewArgs);
+        $css = view($stylePath);
         $content = $cssToInlineStyles->convert($html, $css);
         $this->Body = $content;
+        $this->buildAltBody($content);
+    }
 
-        $altBody = strip_tags($content);
+    public function buildAltBody($htmlContent)
+    {
+        $altBody = strip_tags($htmlContent);
         $altBody = explode("\n", $altBody);
         $altBody = array_map(function($line){
             return trim($line);

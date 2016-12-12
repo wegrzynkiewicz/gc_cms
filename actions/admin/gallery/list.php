@@ -2,6 +2,7 @@
 
 $headTitle = trans("Galerie zdjęć");
 
+$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 $rows = Gallery::selectAllCorrectWithPrimaryKey();
 

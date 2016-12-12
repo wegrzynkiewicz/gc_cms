@@ -2,6 +2,7 @@
 
 $headTitle = trans("Widżety");
 
+$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $widgets = Widget::selectAllCorrectWitPrimaryId();

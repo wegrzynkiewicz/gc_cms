@@ -2,6 +2,7 @@
 
 $headTitle = trans("Dodawanie nowej galerii");
 
+$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 if (wasSentPost()) {

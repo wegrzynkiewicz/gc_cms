@@ -1,5 +1,6 @@
 <?php
 
+$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 error_reporting(0); // Set E_ALL for debuging

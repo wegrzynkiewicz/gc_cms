@@ -1,4 +1,5 @@
 <?php
+$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 ?>
 <!DOCTYPE html>

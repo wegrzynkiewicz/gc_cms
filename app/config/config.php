@@ -17,6 +17,7 @@ $config = [
     'adminHeadTitleBase' => 'Acme Panel Administracyjny', # nazwa doklejana do <title> strony w panelu admina
     'noImageUrl' => '/admin/images/no-image.jpg', # ścieżka do obrazka w przypadku braku obrazka
     'timezone' => 'Europe/Warsaw', # domyślna strefa czasowa
+    'minPasswordLength' => 8, # minimalna długość hasła
     'avatar' => [
         #'useGravatarForStaff' => true, # czy wyświetlać avatary dla pracowników z gravatara?
         #'useGravatarForClient' => true, # czy wyświetlać avatary dla klientów gravatara?
@@ -52,6 +53,7 @@ $config = [
         'replyEmail' => 'noreply@localhost', # nazwa użytkownika w nagłówku reply
         'replyName' => null, # nazwa użytkownika w nagłówku reply
         'limitPerOnce' => 10, # ile może się wysłać wiadomości na raz za jednym żądaniem
+        'headerTitle' => "Panel administracyjny GrafCenter CMS", # wykorzystywane do wyświetlania w panelowych mailaich
     ],
     'langs' => [ # zainstalowane wersje językowe
         'pl' => 'Polski',

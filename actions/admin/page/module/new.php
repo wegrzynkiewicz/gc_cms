@@ -2,6 +2,7 @@
 
 $headTitle = trans("Nowy moduł na stronie");
 
+$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $parent_id = intval(array_shift($_SEGMENTS));

@@ -1,5 +1,6 @@
 <?php
 
+$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $widget_id = intval(array_shift($_SEGMENTS));

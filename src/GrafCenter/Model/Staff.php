@@ -32,7 +32,7 @@ class Staff extends Model
         if (!$this->hasPermissions($permissions)) {
             Logger::deny("Not authorized", $permissions);
             $perm = count($permissions) > 0 ? array_shift($permissions) : 'default';
-            redirect("/admin/deny/$perm");
+            redirect("/admin/account/deny/$perm");
         }
     }
 
