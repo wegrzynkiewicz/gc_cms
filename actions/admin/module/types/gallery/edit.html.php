@@ -4,12 +4,13 @@ $headTitle = trans("Edytujesz moduł galerii");
 
 if (wasSentPost()) {
     FrameModule::updateByPrimaryId($module_id, [
-        'theme' => 'default',
+        'theme' => $_POST['theme'],
     ]);
     redirect("/admin/$parentSegment/module/list/$parent_id");
 }
 
 $_SESSION['preview_url'] = $request;
+$_POST = $module;
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
@@ -32,6 +33,13 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 <div class="row">
     <div class="col-lg-12">
         <form id="sortableForm" action="" method="post" class="form-horizontal">
+
+            <?=view('/admin/parts/input/selectbox.html.php', [
+                'name' => 'theme',
+                'label' => 'Szablon',
+                'help' => 'Wybierz jeden z dostępnych szablonów galerii',
+                'options' => $config['moduleThemes']['gallery'],
+            ])?>
 
             <div id="images" class="row"></div>
 

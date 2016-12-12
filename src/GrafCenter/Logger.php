@@ -23,6 +23,18 @@ class Logger
         }
     }
 
+    public static function logException(Exception $exception)
+    {
+        self::exception(sprintf("%s: %s [%s]\n%s",
+                get_class($exception),
+                $exception->getMessage(),
+                $exception->getCode(),
+                $exception->getTraceAsString()
+            ),
+            []
+        );
+    }
+
     private function log($message, array $params = [])
     {
         $backtrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT);
@@ -33,7 +45,7 @@ class Logger
         $log = sprintf("[%s] %s :: %s :: %s:%s\n",
             self::getMicroDateTime()->format('H:i:s.u'),
             $message,
-            json_encode($params),
+            json_encode($params, JSON_UNESCAPED_UNICODE),
             relativePath($execution['file']),
             $execution['line']
         );

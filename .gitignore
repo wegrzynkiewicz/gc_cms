@@ -2,3 +2,5 @@
 /assets/admin/images
 /external
 /tmp
+/vendor/
+/composer.lock

@@ -36,9 +36,22 @@ $config = [
     ],
     'db' => [ # zawiera parametry połączeniowe do bazy danych
         'dns' => 'mysql:host=localhost;dbname=_gc_cms;charset=utf8',
-        'user' => 'root',
+        'username' => 'root',
         'password' => '',
         'prefix' => 'gc_'
+    ],
+    'email' => [ # ustawienia serwera pocztowego do rozsyłania emaili
+        'smtp' => true, # czy użwać mailera smtp?
+        'host' => 'smtp.emaillabs.net.pl', # host serwera pocztowego
+        'port' => 587, # post hosta
+        'username' => '1.wegrzynkiewicz.smtp', # nazwa konta pocztowego
+        'password' => '9pf1SdUuZxZzagJN6235ShyTXGLCWCiHbI4Lh6pd', # hasło konta pocztowego
+        'SMTPsecure' => 'tls', # szyfrowanie wiadomości email
+        'fromEmail' => 'from@localhost', # adres email w nagłówku from, zostaw puste, aby wygenerować z nazwą domeny
+        'fromName' => null, # nazwa użytkownika w nagłówku from
+        'replyEmail' => 'noreply@localhost', # nazwa użytkownika w nagłówku reply
+        'replyName' => null, # nazwa użytkownika w nagłówku reply
+        'limitPerOnce' => 10, # ile może się wysłać wiadomości na raz za jednym żądaniem
     ],
     'langs' => [ # zainstalowane wersje językowe
         'pl' => 'Polski',
@@ -58,6 +71,12 @@ $config = [
     'modules' => [ # rodzaje zainstalowanych modułow
         'html-editor' => 'Moduł tekstowy',
         'gallery' => 'Moduł galerii zdjęć'
+    ],
+    'moduleThemes' => [ # rodzaje zainstalowanych szablonów dla modułów
+        'gallery' => [
+            'default' => 'Standardowa galeria',
+            'fancybox' => 'Fancybox'
+        ],
     ],
     'nodeTypes' => [ # rodzaje węzłów nawigacji
         'empty' => 'Nieklikalny węzeł',

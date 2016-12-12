@@ -1,5 +1,6 @@
 <?php
 
+require_once ROOT_PATH.'/src/GrafCenter/Mail.php';
 require_once ROOT_PATH.'/src/GrafCenter/Logger.php';
 require_once ROOT_PATH.'/src/GrafCenter/Normalizer.php';
 require_once ROOT_PATH.'/src/GrafCenter/Translator.php';
@@ -14,6 +15,8 @@ require_once ROOT_PATH.'/src/GrafCenter/Trait/PositionTrait.php';
 require_once ROOT_PATH.'/src/GrafCenter/Trait/PrimaryTrait.php';
 require_once ROOT_PATH.'/src/GrafCenter/Trait/TaxonomyTrait.php';
 require_once ROOT_PATH.'/src/GrafCenter/Trait/TreeTrait.php';
+require_once ROOT_PATH.'/src/GrafCenter/Model/MailSent.php';
+require_once ROOT_PATH.'/src/GrafCenter/Model/MailToSend.php';
 require_once ROOT_PATH.'/src/GrafCenter/Model/Frame.php';
 require_once ROOT_PATH.'/src/GrafCenter/Model/FrameModule.php';
 require_once ROOT_PATH.'/src/GrafCenter/Model/FramePosition.php';

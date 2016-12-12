@@ -39,6 +39,14 @@ function sqldate($time = null)
 }
 
 /**
+ * Zwraca losowy sha1
+ */
+function randomSha1()
+{
+    return sha1(time().mt_rand());
+}
+
+/**
  * Wyszukuje wszystkie pliki rekursywnie w katalogu
  */
 function rglob($pattern, $flags = 0)

@@ -10,6 +10,7 @@ if (!isset($_SESSION['lang'])) {
     $_SESSION['lang'] = [];
 }
 
+require_once __DIR__.'/../vendor/autoload.php';
 require_once __DIR__.'/config/config.php';
 require_once __DIR__.'/functions.php';
 require_once __DIR__.'/error-handler.php';
@@ -24,7 +25,7 @@ if ($config["debug"]) {
     ini_set('display_errors', 'on');
 }
 
-Database::$pdo = new PDO($config["db"]["dns"], $config["db"]["user"], $config["db"]["password"]);
+Database::$pdo = new PDO($config["db"]["dns"], $config["db"]["username"], $config["db"]["password"]);
 Database::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 Database::$prefix = $config["db"]["prefix"];
 
