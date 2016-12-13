@@ -18,9 +18,8 @@ $config = [
     'noImageUrl' => '/admin/images/no-image.jpg', # ścieżka do obrazka w przypadku braku obrazka
     'timezone' => 'Europe/Warsaw', # domyślna strefa czasowa
     'minPasswordLength' => 8, # minimalna długość hasła
+    'sessionTimeout' => 1800, # czas jaki musi upłynąć po zalogowaniu, aby wylogowało kogoś z automatu, w sekundach
     'avatar' => [
-        #'useGravatarForStaff' => true, # czy wyświetlać avatary dla pracowników z gravatara?
-        #'useGravatarForClient' => true, # czy wyświetlać avatary dla klientów gravatara?
         'noAvatarUrl' => '/admin/images/no-avatar.jpg', # ściezka do domyślnego obrazka avatara
     ],
     'lang' => [
@@ -60,7 +59,7 @@ $config = [
         'en' => 'English',
         'de' => 'Deutsch',
     ],
-    'flags' => [ # mapowanie językow na krajowe flagi
+    'flags' => [ # mapowanie języków na krajowe flagi
         'pl' => 'pl',
         'en' => 'gb',
         'de' => 'de',
@@ -155,6 +154,10 @@ function templateAssetsUrl($path)
 function url($path)
 {
     global $config;
+
+    if ($path === "#") {
+        return $path;
+    }
 
     $url = rootUrl(FRONT_CONTROLLER_URL); # generowane przez routing
 

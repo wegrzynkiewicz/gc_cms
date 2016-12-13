@@ -1,9 +1,12 @@
 <?php foreach($menu as $name => $node): ?>
     <?php if (empty($node['perms']) or $staff->hasPermissions($node['perms'])): ?>
         <li>
-            <a href="<?=empty($node['path']) ? '#' : url($node['path'])?>"
-                <?=isset($node['id']) ? sprintf('id="%s"', $node['id']) : '' ?> >
-                <i class="<?=$node['icon']?>"></i>
+            <a href="<?=url($node['path'])?>" id="<?=$node['id']?>">
+
+                <?php if (isset($node['icon'])): ?>
+                    <i class="<?=$node['icon']?>"></i>
+                <?php endif ?>
+
                 <?=trans($name)?>
 
                 <?php if (isset($node['children'])): ?>

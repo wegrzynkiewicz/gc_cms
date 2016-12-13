@@ -25,7 +25,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 <?=view('/admin/parts/language.html.php')?>
             </p>
         <?php else: ?>
-            <table class="table table-striped table-bordered table-hover vertical-middle" data-table="">
+            <table class="table vertical-middle" data-table="">
                 <thead>
                     <tr>
                         <th class="col-md-4 col-lg-4">

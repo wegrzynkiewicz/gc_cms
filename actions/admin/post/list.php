@@ -50,16 +50,16 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 <?=view('/admin/parts/language.html.php')?>
             </p>
         <?php else: ?>
-            <table class="table table-striped table-bordered table-hover vertical-middle" data-table="">
+            <table class="table vertical-middle" data-table="">
                 <thead>
                     <tr>
-                        <th class="col-md-4 col-lg-4">
+                        <th>
                             <?=trans('Nazwa wpisu')?>
                         </th>
-                        <th class="col-md-6 col-lg-6">
+                        <th>
                             <?=trans('Podziały według')?>
                         </th>
-                        <th class="col-md-2 col-lg-2 text-right"></th>
+                        <th class="text-right"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,8 +67,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                         <tr>
                             <td>
                                 <?php if ($post['image']): ?>
-                                    <img src="<?=thumb($post['image'], 64, 64)?>"
-                                    height="64" style="margin-right:5px"/>
+                                    <img src="<?=thumb($post['image'], 64, 64)?>" height="64" style="margin-right:5px"/>
                                 <?php endif ?>
                                 <a href="<?=url("/admin/post/edit/$post_id")?>"
                                     title="<?=trans('Edytuj wpis')?>">
@@ -94,7 +93,6 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                 <?php endif ?>
                             </td>
                             <td class="text-right">
-
                                 <a href="<?=url("/admin/post/module/list/$post_id")?>"
                                     title="<?=trans('Wyświetl moduły wpisu')?>"
                                     class="btn btn-success btn-sm">
@@ -111,7 +109,6 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                     <i class="fa fa-times fa-fw"></i>
                                     <?=trans("Usuń")?>
                                 </a>
-
                             </td>
                         </tr>
                     <?php endforeach ?>

@@ -1,5 +1,7 @@
 #page-wrapper {
     padding-top: 50px;
+    padding-bottom: 200px;
+    min-height: 100vh;
 }
 
 .vertical-center {
@@ -77,11 +79,13 @@
     vertical-align: middle;
 }
 
+
 /** Tree checkbox */
 
-.tree-checkbox-wrapper{
+.tree-checkbox-wrapper {
     padding-left: 20px;
 }
+
 
 /** Sortable */
 
@@ -248,4 +252,26 @@ li.mjs-nestedSortable-collapsed.mjs-nestedSortable-hovering div {
 .navbar-top-links .dropdown-user {
     right: 0;
     left: auto;
+}
+
+
+/** Dashboard actions */
+
+.dashboard-actions {}
+.dashboard-action {
+    min-height: 200px;
+    width: 100%;
+    display: block;
+    text-align: center;
+    padding: 22px 5px 0;
+    font-size: 20px;
+    border: 1px solid #e7e7e7;
+
+}
+.dashboard-action:hover{
+    background-color: #eee;
+    text-decoration: none;
+}
+.dashboard-action-title{
+    display: block;
 }

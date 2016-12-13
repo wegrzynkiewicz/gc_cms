@@ -68,6 +68,34 @@
             </li>
         <?php endif ?>
 
+        <li>
+            <a id="session-refresh" href="#" title="<?=trans('Kliknij, aby odświeżyć czas')?>">
+                <?=trans('Do końca: ')?>
+                <i class="fa fa-clock-o fa-fw"></i>
+                <span id="session-countdown"><?=date("i:s", $config['sessionTimeout'])?></span>
+            </a>
+            <script>
+                $(function() {
+                    var finalTime = new Date();
+                    finalTime.setSeconds(finalTime.getSeconds() + <?=$config['sessionTimeout']?>);
+                    $('#session-countdown')
+                        .countdown(finalTime)
+                        .on('update.countdown', function(event) {
+                            $(this).html(event.strftime('%M:%S'));
+                        })
+                        .on('finish.countdown', function(event) {
+                            window.location.href = "/admin/account/session/timeout";
+                        });
+                    $('#session-refresh').click(function(event){
+                        event.preventDefault();
+                        var nextTime = new Date();
+                        nextTime.setSeconds(nextTime.getSeconds() + <?=$config['sessionTimeout']?>);
+                        $('#session-countdown').countdown(nextTime);
+                    });
+                });
+            </script>
+        </li>
+
         <li class="dropdown">
 
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
