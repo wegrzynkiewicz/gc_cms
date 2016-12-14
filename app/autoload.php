@@ -1,5 +1,6 @@
 <?php
 
+require_once ROOT_PATH.'/src/GrafCenter/Thumb.php';
 require_once ROOT_PATH.'/src/GrafCenter/Mail.php';
 require_once ROOT_PATH.'/src/GrafCenter/Logger.php';
 require_once ROOT_PATH.'/src/GrafCenter/Normalizer.php';

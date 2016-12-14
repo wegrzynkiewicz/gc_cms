@@ -20,7 +20,7 @@ $images = GalleryImage::selectAllByGalleryId($gallery_id);
             <div class="thumbnail">
 
                 <div class="thumb-wrapper">
-                    <img src="<?=thumb($image['file'], 300, 200)?>" class="img-responsive"/>
+                    <img src="<?=Thumb::make($image['file'], 300, 200)?>" class="img-responsive"/>
                 </div>
 
                 <div class="pull-right">

@@ -1,7 +1,7 @@
 <?php foreach($menu as $name => $node): ?>
     <?php if (empty($node['perms']) or $staff->hasPermissions($node['perms'])): ?>
         <li>
-            <a href="<?=url($node['path'])?>" id="<?=$node['id']?>">
+            <a href="<?=url($node['path'])?>" id="nav_<?=$node['id']?>">
 
                 <?php if (isset($node['icon'])): ?>
                     <i class="<?=$node['icon']?>"></i>

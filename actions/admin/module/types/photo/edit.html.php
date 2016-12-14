@@ -3,13 +3,27 @@
 $headTitle = trans("Edytujesz moduł tekstowy");
 
 if (wasSentPost()) {
+
+    $url = $_POST['url'];
+    $name = $_POST['name'];
+
+    $filePath = "./$url";
+    list($width, $height) = getimagesize($filePath);
+    $settings = [
+        'url' => $url,
+        'width' => $width,
+        'height' => $height,
+    ];
+
     FrameModule::updateByPrimaryId($module_id, [
-        'content' => $_POST['content'],
         'theme' => 'default',
+        'content' => $name,
+        'settings' => json_encode($settings),
     ]);
     redirect("/admin/$parentSegment/module/list/$parent_id");
 }
 
+$_POST = $settings;
 $_POST['content'] = $content;
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
@@ -26,14 +40,20 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="col-lg-12">
         <form action="" method="post" class="form-horizontal">
 
-            <?=view('/admin/parts/input/textarea.html.php', [
-                'name' => 'content',
-                'label' => 'Treść modułu',
+            <?=view('/admin/parts/input/editbox.html.php', [
+                'name' => 'name',
+                'label' => 'Nazwa zdjęcia',
+            ])?>
+
+            <?=view('/admin/parts/input/image.html.php', [
+                'name' => 'url',
+                'label' => 'Zdjęcie',
+                'placeholder' => 'Ścieżka do pliku zdjęcia',
             ])?>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
                 'cancelHref' => "/admin/$parentSegment/module/list/$parent_id",
-                'saveLabel' => 'Zapisz moduł tekstowy',
+                'saveLabel' => 'Zapisz moduł zdjęcia',
             ])?>
 
         </form>
@@ -41,13 +61,4 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 </div>
 
 <?php require_once ACTIONS_PATH.'/admin/parts/assets.html.php'; ?>
-
-<script type="text/javascript">
-    $(function(){
-        CKEDITOR.replace('content', {
-             customConfig: '/assets/admin/ckeditor/full_ckeditor.js'
-        });
-    });
-</script>
-
 <?php require_once ACTIONS_PATH.'/admin/parts/footer.html.php'; ?>

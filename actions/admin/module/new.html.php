@@ -3,6 +3,7 @@
 if(wasSentPost()) {
 	FrameModule::insert([
         'type' => $_POST['type'],
+        'theme' => 'default',
     ], $frame_id);
 
 	redirect("/admin/$parentSegment/module/list/$parent_id");

@@ -5,6 +5,7 @@
     "minimum-stability": "stable",
     "require": {
         "phpmailer/phpmailer": "^5.2",
-        "tijsverkoyen/css-to-inline-styles": "^2.2"
+        "tijsverkoyen/css-to-inline-styles": "^2.2",
+        "studio-42/elfinder": "^2.1"
     }
 }

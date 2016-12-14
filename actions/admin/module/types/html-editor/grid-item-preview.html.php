@@ -1,1 +1,1 @@
-<?=$module['content']?>
+<?=$content?>

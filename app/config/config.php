@@ -71,7 +71,8 @@ $config = [
     ],
     'modules' => [ # rodzaje zainstalowanych modułow
         'html-editor' => 'Moduł tekstowy',
-        'gallery' => 'Moduł galerii zdjęć'
+        'gallery' => 'Moduł galerii zdjęć',
+        'photo' => 'Moduł pojedyńczego zdjęcia',
     ],
     'moduleThemes' => [ # rodzaje zainstalowanych szablonów dla modułów
         'gallery' => [
@@ -101,7 +102,6 @@ $config = [
     'thumb' => [ # ustawienia generatora miniaturek
         'enabled' => true, # czy generować miniaturki?
         'thumbsUrl' => '/tmp/thumbs', # adres do katalogu z miniaturkami
-        'thumbsPath' => TMP_PATH.'/thumbs', # adres do katalogu z miniaturkami
         'options' => [ # ustawienia dla generatora miniaturek
             'jpg' => [
                 'loader' => 'imagecreatefromjpeg',

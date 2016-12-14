@@ -9,10 +9,10 @@ $files = ModuleFile::selectAllByModuleId($module_id);
 ?>
 <?php if (empty($files)): ?>
     <div class="col-lg-12">
+        <hr>
         <p>
             <?=trans('Brak zdjęć w module galerii')?>
         </p>
-        <hr>
     </div>
 <?php else: ?>
     <?php foreach ($files as $file_id => $image): ?>
@@ -20,7 +20,7 @@ $files = ModuleFile::selectAllByModuleId($module_id);
             <div class="thumbnail">
 
                 <div class="thumb-wrapper">
-                    <img src="<?=thumb($image['filepath'], 300, 200)?>" class="img-responsive"/>
+                    <img src="<?=Thumb::make($image['url'], 300, 200)?>" class="img-responsive"/>
                 </div>
 
                 <div class="pull-right">

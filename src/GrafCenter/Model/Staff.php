@@ -63,7 +63,7 @@ class Staff extends Model
             return assetsUrl(getConfig()['avatar']['noAvatarUrl']);
         }
 
-        return thumb($staff['avatar'], $size, $size);
+        return Thumb::make($staff['avatar'], $size, $size);
     }
 
     /**

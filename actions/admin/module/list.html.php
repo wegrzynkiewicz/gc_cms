@@ -63,7 +63,12 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                         </button>
                                     </div>
                                     <div class="panel-body">
-                                        <?php require sprintf(ACTIONS_PATH.'/admin/module/types/%s/grid-item-preview.html.php', $module['type']); ?>
+                                        <?=view(sprintf('/admin/module/types/%s/grid-item-preview.html.php', $module['type']), [
+                                            'module_id' => $module['module_id'],
+                                            'module' => $module,
+                                            'content' => $module['content'],
+                                            'settings' => json_decode($module['settings'], true),
+                                        ])?>
                                     </div>
                                 </div>
                             </div>

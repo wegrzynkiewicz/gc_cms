@@ -9,9 +9,18 @@ $file_id = intval(array_shift($_SEGMENTS));
 $module_id = intval(array_shift($_SEGMENTS));
 
 if (wasSentPost()) {
+
+    $filePath = "./".$_POST['url'];
+    list($width, $height) = getimagesize($filePath);
+    $settings = [
+        'width' => $width,
+        'height' => $height,
+    ];
+
     ModuleFile::updateByPrimaryId($file_id, [
         'name' => $_POST['name'],
-        'filepath' => $_POST['filepath'],
+        'url' => $_POST['url'],
+        'settings' => json_encode($settings),
     ]);
     redirect($_SESSION['preview_url']);
 }
@@ -40,7 +49,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             ])?>
 
             <?=view('/admin/parts/input/image.html.php', [
-                'name' => 'filepath',
+                'name' => 'url',
                 'label' => 'Zdjęcie',
                 'placeholder' => 'Ścieżka do pliku zdjęcia',
             ])?>

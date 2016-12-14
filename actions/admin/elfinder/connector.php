@@ -3,14 +3,7 @@
 $staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
-error_reporting(0); // Set E_ALL for debuging
-
-// load composer autoload before load elFinder autoload If you need composer
-//require './vendor/autoload.php';
-
-// elFinder autoload
-require ROOT_PATH.'/external/elFinder-2.1.15/php/autoload.php';
-// ===============================================
+error_reporting(0);
 
 // Enable FTP connector netmount
 elFinder::$netDrivers['ftp'] = 'FTP';
@@ -57,9 +50,16 @@ elFinder::$netDrivers['ftp'] = 'FTP';
  **/
 function access($attr, $path, $data, $volume)
 {
-    return strpos(basename($path), '.') === 0       // if file/folder begins with '.' (dot)
-        ? !($attr == 'read' || $attr == 'write')    // set read+write to false, other (locked+hidden) set to true
-        :  null;                                    // else elFinder decide it itself
+    if (strpos(basename($path), '.') === 0) {
+        if ($attr == 'read') {
+            return false;
+        } elseif ($attr == 'write') {
+            return false;
+        }
+        return true;
+    }
+
+    return null;
 }
 
 // Documentation for connector options:

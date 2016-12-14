@@ -27,6 +27,14 @@ function checked($condition)
 }
 
 /**
+ * Zwraca odpowiedni $key z tablicy $array, jeżeli istnieje i jest niepusty, w przeciwnym wypadku $default
+ */
+function def(array $array, $key, $default = null)
+{
+    return isset($array[$key]) ? $array[$key] : $default;
+}
+
+/**
  * Zwraca spreparowaną date dla MySQL
  */
 function sqldate($time = null)
@@ -318,76 +326,15 @@ function array_unchunk($array)
 }
 
 /**
- * Tworzy i zapisuje miniaturkę dla pliku; zwraca ścieżkę miniaturki
+ * Zapisuje w sesji adres miniaturki do wygenerowania
  */
-function thumb($imageUrl, $width, $height)
+function generateThumb($imageUrl)
 {
-    global $config;
+    $token = randomSha1();
+    $imageUrl64 = base64_encode($imageUrl);
+    $_SESSION['generateThumb'][$imageUrl] = $token;
 
-    if (!$config['thumb']['enabled']) {
-        return rootUrl($imageUrl);
-    }
-
-    $thumbsUrl      = $config['thumb']['thumbsUrl'];
-    $thumbsPath     = $config['thumb']['thumbsPath'];
-    $options        = $config['thumb']['options'];
-    $imageUrl       = urldecode($imageUrl);
-    $extension      = strtolower(pathinfo($imageUrl, PATHINFO_EXTENSION));
-    if (!isset($options[$extension])) {
-        return rootUrl($imageUrl);
-    }
-    $params         = $options[$extension];
-    $prefix         = '_'.$width.'x'.$height;
-    $imagePath      = Normalizer::normalize($imageUrl);
-    $filename       = pathinfo($imagePath, PATHINFO_FILENAME);
-    $folder         = dirname($imagePath);
-    $thumbUrl       = "{$thumbsUrl}{$folder}/{$filename}{$prefix}.{$extension}";
-    $destFilePath   = "{$thumbsPath}{$folder}/{$filename}{$prefix}.{$extension}";
-    $sourceFilePath = "./{$imagePath}";
-
-    if (!is_readable($destFilePath)) {
-
-        if (!is_readable($sourceFilePath)) {
-            return $sourceFilePath;
-        }
-
-        $pathDir = pathinfo($destFilePath, PATHINFO_DIRNAME);
-        rmkdir($pathDir);
-
-        $loader = $params['loader'];
-        $sourceImage = $loader($sourceFilePath);
-        $sourceWidth = imagesx($sourceImage);
-        $sourceHeight = imagesy($sourceImage);
-
-        $distWidth = $width;
-        $distHeight = $height;
-
-        $ratio = $sourceWidth / $sourceHeight;
-
-        if ($distWidth / $distHeight > $ratio) {
-            $distWidth = $distHeight * $ratio;
-        } else {
-            $distHeight = $distWidth / $ratio;
-        }
-
-        $thumbImage = imagecreatetruecolor($distWidth, $distHeight);
-
-        if ($params['transparent'] === true) {
-            $backgroundColor = imagecolorallocate($thumbImage, 0, 0, 0);
-            imagecolortransparent($thumbImage, $backgroundColor);
-            imagealphablending($thumbImage, false);
-            imagesavealpha($thumbImage, true);
-        }
-
-        imagecopyresampled($thumbImage, $sourceImage, 0, 0, 0, 0, $distWidth,
-                           $distHeight, $sourceWidth, $sourceHeight);
-
-        $saver = $params['saver'];
-        $saver($thumbImage, $destFilePath, $params['quality']);
-        chmod($destFilePath, 0775);
-    }
-
-    return rootUrl($thumbUrl);
+    return rootUrl("/thumb/$imageUrl64/$token");
 }
 
 /**
@@ -454,7 +401,7 @@ function randomColor()
  * @param string $keyspace A string of all possible characters to select from
  * @return string
  */
-function randomPassword($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') 
+function randomPassword($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
 {
     $password = '';
     $max = strlen($keyspace) - 1;
@@ -500,7 +447,7 @@ function makeThumbsCallback($matches)
         return $content;
     }
 
-    $thumb = thumb($src, $width, $height);
+    $thumb = Thumb::make($src, $width, $height);
     list($x, $y) = getimagesize($thumb);
 
     $css['width'] = $x.'px';

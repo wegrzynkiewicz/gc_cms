@@ -113,9 +113,9 @@ $(function() {
 
     $('#select_images').elfinderInputMultiple({
         title: '<?=trans('Wybierz wiele zdjęć')?>'
-    }, function(filePaths) {
+    }, function(urls) {
         $.post("<?=url("/admin/module/types/gallery/images/new/$module_id")?>", {
-            filePaths: filePaths
+            urls: urls
         }, function() {
             refreshImages();
         });

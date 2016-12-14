@@ -47,7 +47,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                         <tr>
                             <td>
                                 <?php if ($page['image']): ?>
-                                    <img src="<?=thumb($page['image'], 64, 64)?>"
+                                    <img src="<?=Thumb::make($page['image'], 64, 64)?>"
                                     height="64" style="margin-right:5px"/>
                                 <?php endif ?>
                                 <a href="<?=url("/admin/page/edit/$page_id")?>"

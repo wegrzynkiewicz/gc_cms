@@ -8,7 +8,7 @@ $menu = [
     ],
     'Wpisy' => [
         'id' => 'posts',
-        'path' => '',
+        'path' => '#',
         'icon' => 'fa fa-pencil-square-o fa-fw',
         'perms' => [],
         'children' => [
@@ -34,7 +34,7 @@ $menu = [
     ],
     'Strony' => [
         'id' => 'pages',
-        'path' => '',
+        'path' => '#',
         'icon' => 'fa fa-files-o fa-fw',
         'perms' => [],
         'children' => [
@@ -54,7 +54,7 @@ $menu = [
     ],
     'Nawigacja' => [
         'id' => 'nav',
-        'path' => '',
+        'path' => '#',
         'icon' => 'fa fa fa-sitemap fa-fw',
         'perms' => [],
         'children' => [
@@ -67,7 +67,7 @@ $menu = [
     ],
     'Galerie zdjęć' => [
         'id' => 'galleries',
-        'path' => '',
+        'path' => '#',
         'icon' => 'fa fa-picture-o fa-fw',
         'perms' => [],
         'children' => [
@@ -93,13 +93,13 @@ $menu = [
     ],
     'Pliki' => [
         'id' => 'files',
-        'path' => '',
+        'path' => '#',
         'icon' => 'fa fa-folder-open-o fa-fw',
         'perms' => [],
     ],
     'Pracownicy' => [
         'id' => 'staff',
-        'path' => '',
+        'path' => '#',
         'icon' => 'fa fa-users fa-fw',
         'perms' => ['manage_staff'],
         'children' => [

@@ -12,6 +12,7 @@ if (isset($frame_id)) {
             'y' => $y,
             'w' => $w,
             'h' => $h,
+            'o' => 0,
         ];
 
         $content = $module['content'];
@@ -41,11 +42,15 @@ if (isset($frame_id)) {
 <?php else: ?>
     <?php foreach ($gridModules as $row): ?>
         <div class="row">
-            <?php foreach ($row as $module): $grid = $module['grid'];  ?>
-                <div class="col-md-<?=$grid['w']?>
-                    <?=$grid['o']>0 ? 'col-md-offset-'.$grid['o'] : ''?>">
+            <?php foreach ($row as $module): list($x, $y, $w, $h, $o) = array_values($module['grid']); ?>
+                <div class="col-md-<?=$w?> <?=$o > 0 ? "col-md-offset-$o" : ''?>">
                     <div id="module_<?=$module['module_id']?>">
-                        <?php require sprintf(TEMPLATE_PATH."/modules/%s-%s.html.php", $module['type'], $module['theme']); ?>
+                        <?=templateView(sprintf("/modules/%s-%s.html.php", $module['type'], $module['theme']), [
+                            'module_id' => $module['module_id'],
+                            'module' => $module,
+                            'content' => $module['content'],
+                            'settings' => json_decode($module['settings'], true),
+                        ])?>
                     </div>
                 </div>
             <?php endforeach ?>
