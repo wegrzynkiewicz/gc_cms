@@ -6,7 +6,7 @@ if(wasSentPost()) {
         'theme' => 'default',
     ], $frame_id);
 
-	redirect("/admin/$parentSegment/module/list/$parent_id");
+	redirect("/admin/$frame/module/list/$parent_id");
 }
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
@@ -30,7 +30,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             ])?>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'cancelHref' => "/admin/$parentSegment/list",
+                'cancelHref' => "/admin/$frame/list",
                 'saveLabel' => 'Dodaj nowy moduł',
             ])?>
 

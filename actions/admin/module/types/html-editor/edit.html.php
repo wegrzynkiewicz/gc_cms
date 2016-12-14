@@ -7,7 +7,7 @@ if (wasSentPost()) {
         'content' => $_POST['content'],
         'theme' => 'default',
     ]);
-    redirect("/admin/$parentSegment/module/list/$parent_id");
+    redirect("/admin/$frame/module/list/$parent_id");
 }
 
 $_POST['content'] = $content;
@@ -32,7 +32,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             ])?>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'cancelHref' => "/admin/$parentSegment/module/list/$parent_id",
+                'cancelHref' => "/admin/$frame/module/list/$parent_id",
                 'saveLabel' => 'Zapisz moduł tekstowy',
             ])?>
 

@@ -10,4 +10,4 @@ require_once ACTIONS_PATH."/admin/module/types/$moduleType/delete.html.php";
 
 FrameModule::deleteByPrimaryId($module_id);
 
-redirect("/admin/$parentSegment/module/list/$parent_id");
+redirect("/admin/$frame/module/list/$parent_id");

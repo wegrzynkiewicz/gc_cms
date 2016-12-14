@@ -33,7 +33,7 @@ class FrameModule extends Model
         FramePosition::insert([
             'frame_id' => $frame_id,
             'module_id' => $module_id,
-            'grid' => '0:10:2:1',
+            'grid' => '0:10:12:1',
         ]);
 
         return $module_id;

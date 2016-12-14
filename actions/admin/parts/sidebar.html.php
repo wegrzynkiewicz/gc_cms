@@ -165,7 +165,5 @@ $menu = [
         }, function() {
 
         });
-
-        $('#side-menu').metisMenu();
     });
 </script>

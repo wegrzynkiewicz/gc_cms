@@ -1,3 +1,3 @@
 <?php
 
-$parentSegment = "post";
+$frame = "post";

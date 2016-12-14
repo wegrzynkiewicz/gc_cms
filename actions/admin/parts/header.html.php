@@ -10,7 +10,8 @@
 </head>
 <body>
     <div id="wrapper">
-        <div id="page-wrapper">
-            <div class="container-fluid">
 
-                <?php require_once ACTIONS_PATH.'/admin/parts/navbar.html.php'; ?>
+        <?php require_once ACTIONS_PATH.'/admin/parts/navbar.html.php'; ?>
+
+            <div id="page-wrapper">
+                <div class="container-fluid">

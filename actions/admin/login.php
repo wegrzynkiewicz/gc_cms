@@ -20,6 +20,7 @@ if (wasSentPost()) {
 
     if ($user and $passwordHash === $user['password']) {
         $_SESSION['staff'] = $user;
+        $_SESSION['staff']['sessionTimeout'] = time() + $config['sessionTimeout'];
         redirect('/admin');
     } else {
         $error = trans('Nieprawidłowy login lub hasło');

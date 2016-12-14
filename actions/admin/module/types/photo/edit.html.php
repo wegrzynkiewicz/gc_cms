@@ -20,7 +20,7 @@ if (wasSentPost()) {
         'content' => $name,
         'settings' => json_encode($settings),
     ]);
-    redirect("/admin/$parentSegment/module/list/$parent_id");
+    redirect("/admin/$frame/module/list/$parent_id");
 }
 
 $_POST = $settings;
@@ -52,7 +52,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             ])?>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'cancelHref' => "/admin/$parentSegment/module/list/$parent_id",
+                'cancelHref' => "/admin/$frame/module/list/$parent_id",
                 'saveLabel' => 'Zapisz moduł zdjęcia',
             ])?>
 

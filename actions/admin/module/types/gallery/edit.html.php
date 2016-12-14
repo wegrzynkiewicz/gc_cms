@@ -6,7 +6,7 @@ if (wasSentPost()) {
     FrameModule::updateByPrimaryId($module_id, [
         'theme' => $_POST['theme'],
     ]);
-    redirect("/admin/$parentSegment/module/list/$parent_id");
+    redirect("/admin/$frame/module/list/$parent_id");
 }
 
 $_SESSION['preview_url'] = $request;
@@ -84,7 +84,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 $(function() {
 
     function refreshImages() {
-        $.get("<?=url("/admin/module/types/gallery/images/list/$module_id/$parentSegment")?>", function(data) {
+        $.get("<?=url("/admin/module/types/gallery/images/list/$module_id/$frame")?>", function(data) {
             $('#images').html(data);
         });
     }

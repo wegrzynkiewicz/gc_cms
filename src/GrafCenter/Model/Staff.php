@@ -111,6 +111,13 @@ class Staff extends Model
             redirect('/admin/login');
         }
 
+        # jeżeli czas trwania sesji minął
+        if (time() > $_SESSION['staff']['sessionTimeout']) {
+            unset($_SESSION['staff']);
+            Logger::logout("Session timeout");
+            redirect('/admin/account/session/timeout');
+        }
+
         # jezeli istnieje flaga, ze trzeba zmienić hasło wtedy przekieruj
         if ($staff['force_change_password']) {
             redirect('/admin/account/force-change-password');

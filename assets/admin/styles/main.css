@@ -1,7 +1,5 @@
 #page-wrapper {
-    padding-top: 50px;
     padding-bottom: 200px;
-    min-height: 100vh;
 }
 
 .vertical-center {
@@ -177,24 +175,8 @@ li.mjs-nestedSortable-collapsed.mjs-nestedSortable-hovering div {
 
 /** MenuTaxonomybar */
 
-.navbar-header {
-    float: left;
-}
-
 .navbar-left {
     float: left;
-}
-
-.navbar-right {
-    text-align: right;
-}
-
-.navbar-top-links {
-    margin: 0;
-}
-
-.navbar-top-links li {
-    display: inline-block;
 }
 
 .navbar-top-links li:last-child {

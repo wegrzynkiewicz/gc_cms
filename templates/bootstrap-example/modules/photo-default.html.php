@@ -3,7 +3,7 @@ $url = def($settings, 'url', null);
 $preview = $url ? rootUrl($url) : assetsUrl($config['noImageUrl']);
 ?>
 
-<div id="photo_<?=$module_id?>" class="text-center" data-gallery="photoswipe">    
+<div id="photo_<?=$module_id?>" class="text-center" data-gallery="photoswipe">
     <a href="<?=$preview?>"
         title="<?=escape($content)?>"
         data-width="<?=def($settings, 'width', 800)?>"
