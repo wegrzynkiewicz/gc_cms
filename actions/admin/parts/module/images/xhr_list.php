@@ -11,12 +11,14 @@ $files = ModuleFile::selectAllByModuleId($module_id);
     <div class="col-lg-12">
         <hr>
         <p>
-            <?=trans('Brak zdjęć w module galerii')?>
+            <?=trans('Nie znaleziono zdjęć')?>
         </p>
     </div>
 <?php else: ?>
     <?php foreach ($files as $file_id => $image): ?>
-        <div id="thumb_<?=$file_id?>" data-id="<?=$file_id?>" class="col-lg-2 col-md-4 col-xs-6 thumb">
+        <div id="thumb_<?=$file_id?>"
+            data-id="<?=$file_id?>"
+            class="col-lg-2 col-md-4 col-xs-6 thumb">
             <div class="thumbnail">
 
                 <div class="thumb-wrapper">
@@ -25,14 +27,18 @@ $files = ModuleFile::selectAllByModuleId($module_id);
 
                 <div class="pull-right">
 
-                    <a href="<?=url("/admin/module/types/gallery/images/edit/$file_id/$module_id")?>"
+                    <a id="thumb_edit_<?=$file_id?>"
                         data-toggle="modal"
-                        title="<?=trans('Edytuj stronę')?>"
+                        data-id="<?=$file_id?>"
+                        data-name="<?=$image['name']?>"
+                        data-target="#editModal"
+                        title="<?=trans('Edytuj zdjęcie')?>"
                         class="btn btn-primary btn-xs">
                         <i class="fa fa-cog fa-fw"></i>
                     </a>
 
-                    <a data-toggle="modal"
+                    <a id="thumb_delete_<?=$file_id?>"
+                        data-toggle="modal"
                         data-id="<?=$file_id?>"
                         data-name="<?=$image['name']?>"
                         data-target="#deleteModal"

@@ -56,7 +56,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
                 'cancelHref' => $_SESSION['preview_url'],
-                'saveLabel' => 'Zapisz galerię',
+                'saveLabel' => 'Zapisz zdjęcie',
             ])?>
 
         </form>

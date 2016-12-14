@@ -11,4 +11,4 @@ $frame_id = $post['frame_id'];
 
 $headTitle .= makeLink("/admin/page/list", $post['name']);
 
-require_once ACTIONS_PATH.'/admin/module/new.html.php'; ?>
+require_once ACTIONS_PATH.'/admin/parts/module/new.html.php'; ?>

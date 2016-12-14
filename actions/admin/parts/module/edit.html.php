@@ -11,4 +11,4 @@ $moduleType = $module['type'];
 $content = $module['content'];
 $settings = json_decode($module['settings'], true);
 
-require_once ACTIONS_PATH."/admin/module/types/$moduleType/edit.html.php";
+require_once ACTIONS_PATH."/admin/parts/module/types/$moduleType/edit.html.php";

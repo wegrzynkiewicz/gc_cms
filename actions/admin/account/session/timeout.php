@@ -2,9 +2,6 @@
 
 $headTitle = trans("Czas trwania sesji minął");
 
-$staff = Staff::createFromSession();
-$staff->redirectIfUnauthorized();
-
 unset($_SESSION['staff']);
 
 require_once ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>

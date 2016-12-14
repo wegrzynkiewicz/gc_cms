@@ -36,17 +36,21 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     <?=trans('Nie znaleziono modułów')?>
                 </p>
             <?php else: ?>
+                <div style="padding-left:20px">
                 <div class="grid-stack">
                     <?php foreach ($modules as $module_id => $module): ?>
                         <?php list($x, $y, $w, $h) = explode(":", $module['grid']); ?>
-                        <div class="grid-stack-item"
+                        <div id="grid_<?=$module_id?>"
                             data-id="<?=$module_id?>"
                             data-gs-x="<?=$x?>"
                             data-gs-y="<?=$y?>"
                             data-gs-width="<?=$w?>"
                             data-gs-height="<?=$h?>"
                             data-gs-min-width="2"
-                            data-gs-max-height="1">
+                            data-gs-min-height="1"
+                            data-gs-max-width="12"
+                            data-gs-max-height="1"
+                            class="grid-stack-item">
                             <div class="grid-stack-item-content">
                                 <div class="panel panel-default panel-module">
                                     <div class="panel-heading">
@@ -63,7 +67,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                         </button>
                                     </div>
                                     <div class="panel-body">
-                                        <?=view(sprintf('/admin/module/types/%s/grid-item-preview.html.php', $module['type']), [
+                                        <?=view(sprintf('/admin/parts/module/types/%s/grid-item-preview.html.php', $module['type']), [
                                             'module_id' => $module['module_id'],
                                             'module' => $module,
                                             'content' => $module['content'],
@@ -76,7 +80,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     <?php endforeach ?>
                 </div>
             <?php endif ?>
-
+</div>
             <?=view('/admin/parts/input/submitButtons.html.php', [
                 'cancelHref' => "/admin/$frame/list",
                 'saveLabel' => 'Zapisz ustawienie kafelków',

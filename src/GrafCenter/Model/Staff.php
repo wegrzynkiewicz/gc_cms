@@ -15,13 +15,18 @@ class Staff extends Model
         parent::__construct($data);
         $this->permissions = $permissions;
 
+        $config = getConfig();
+
         # jeżeli w sesji nie ma języka edytora wtedy ustaw go z configa
         if (!isset($_SESSION['lang']['editor'])) {
-            $_SESSION['lang']['editor'] = getConfig()['lang']['editorDefault'];
+            $_SESSION['lang']['editor'] = $config['lang']['editorDefault'];
         }
 
         # ustawienie jezyka panelu admina
         $_SESSION['lang']['staff'] = $data['lang'];
+
+        # aktualizujemy czas do automatycznego wylogowania
+        $_SESSION['staff']['sessionTimeout'] = time() + $config['sessionTimeout'];
     }
 
     /**

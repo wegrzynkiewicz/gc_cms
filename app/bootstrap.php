@@ -31,6 +31,9 @@ Database::$prefix = $config["db"]["prefix"];
 
 require_once __DIR__.'/routing.php';
 
+# przydatna wartość jeżeli potrzeba wrócić z gęstwiny przekierować
+$_SESSION['preview_url'] = $request;
+
 Logger::response(sprintf("%s :: ExecutionTime: %s",
     http_response_code(),
     (microtime(true) - START_TIME)

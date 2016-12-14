@@ -73,6 +73,7 @@ $config = [
         'html-editor' => 'Moduł tekstowy',
         'gallery' => 'Moduł galerii zdjęć',
         'photo' => 'Moduł pojedyńczego zdjęcia',
+        'slider' => 'Moduł slajdera',
     ],
     'moduleThemes' => [ # rodzaje zainstalowanych szablonów dla modułów
         'gallery' => [

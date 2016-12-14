@@ -9,7 +9,6 @@ if (wasSentPost()) {
     redirect("/admin/$frame/module/list/$parent_id");
 }
 
-$_SESSION['preview_url'] = $request;
 $_POST = $module;
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
@@ -47,12 +46,41 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 'cancelHref' => "/admin/gallery/list",
                 'saveLabel' => 'Zapisz',
             ])?>
+
+        </form>
+    </div>
+</div>
+
+<?php require_once ACTIONS_PATH.'/admin/parts/assets.html.php'; ?>
+
+<div id="editModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <form id="editModalForm" method="post" action="" class="modal-content form-horizontal">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span>&times;</span>
+                </button>
+                <h2 class="modal-title">
+                    <?=trans("Edytujesz zdjęcie ")?>
+                    <span id="editModalName"></span>
+                </h2>
+            </div>
+            <div id="editModalContent" class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <?=trans('Anuluj')?>
+                </button>
+                <button type="submit" value="" class="btn btn-success btn-ok" href="">
+                    <?=trans('Zapisz')?>
+                </button>
+            </div>
         </form>
     </div>
 </div>
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog">
         <form id="deleteModalForm" method="post" action="" class="modal-content">
             <input name="file_id" type="hidden" value="">
             <div class="modal-header">
@@ -78,22 +106,34 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     </div>
 </div>
 
-<?php require_once ACTIONS_PATH.'/admin/parts/assets.html.php'; ?>
-
 <script>
 $(function() {
 
     function refreshImages() {
-        $.get("<?=url("/admin/module/types/gallery/images/list/$module_id/$frame")?>", function(data) {
+        $.get("<?=url("/admin/parts/module/images/xhr_list/$module_id")?>", function(data) {
             $('#images').html(data);
         });
     }
 
+    $('#editModalForm').on('submit', function(e) {
+        e.preventDefault();
+        $.post($(this).attr('action'), $(this).serialize(), function() {
+            refreshImages();
+            $('#editModal').modal('hide');
+        });
+    });
+
+    $('#editModal').on('show.bs.modal', function(e) {
+        var url = "<?=url("/admin/parts/module/types/gallery/xhr_image-edit")?>/"+$(e.relatedTarget).data('id');
+        $.get(url, function(data) {
+            $('#editModalContent').html(data);
+            $('#editModalForm').attr('action', url);
+        });
+    });
+
     $('#deleteModalForm').on('submit', function(e) {
         e.preventDefault();
-        $.post("<?=url("/admin/module/types/gallery/images/delete")?>", {
-            file_id: $(this).find('[name="file_id"]').val()
-        }, function() {
+        $.post("<?=url("/admin/parts/module/images/xhr_delete")?>", $(this).serialize(), function() {
             refreshImages();
             $('#deleteModal').modal('hide');
         });
@@ -104,7 +144,7 @@ $(function() {
     });
 
     $("#sortableForm").submit(function(event) {
-        $.post("<?=url("/admin/module/types/gallery/images/sort/$module_id")?>", {
+        $.post("<?=url("/admin/parts/module/images/xhr_sort/$module_id")?>", {
             ids: $("#images").sortable("toArray", {
                 attribute: "data-id"
             })
@@ -114,7 +154,7 @@ $(function() {
     $('#select_images').elfinderInputMultiple({
         title: '<?=trans('Wybierz wiele zdjęć')?>'
     }, function(urls) {
-        $.post("<?=url("/admin/module/types/gallery/images/new/$module_id")?>", {
+        $.post("<?=url("/admin/parts/module/images/xhr_new/$module_id")?>", {
             urls: urls
         }, function() {
             refreshImages();
