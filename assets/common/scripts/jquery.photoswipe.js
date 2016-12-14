@@ -11,7 +11,7 @@
                     items: []
                 });
 
-                $(gallery).find('a').each(function(k, link) {
+                $(gallery).find('a[data-photoswipe-item]').each(function(k, link) {
                     var $link = $(link);
                     $link.data('gallery-id', i + 1);
                     $link.data('photo-id', k);

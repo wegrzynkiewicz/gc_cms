@@ -12,6 +12,8 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/css/dataTables.bootstrap.min.css">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.7.0/css/flag-icon.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" />
 
 <link rel="stylesheet" href="<?=assetsUrl("/admin/styles/main.css")?>">
 
@@ -30,11 +32,14 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/gridstack.js/0.2.6/gridstack.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/dataTables.bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js"></script>
 
 <script src="<?=rootUrl("/external/ckeditor-4.5.11/ckeditor.js")?>"></script>
 <script src="<?=rootUrl("/external/ckeditor-4.5.11/adapters/jquery.js")?>"></script>
 <script src="<?=assetsUrl("/admin/scripts/elfinder-input.js")?>"></script>
 <script src="<?=assetsUrl("/admin/scripts/ckeditor_integration.js")?>"></script>
+<script src="<?=assetsUrl("/common/scripts/jquery.photoswipe.js")?>"></script>
 
 <script>
 $.validator.setDefaults({
@@ -79,6 +84,15 @@ $.extend(true, $.fn.dataTable.defaults, {
         url: "//cdn.datatables.net/plug-ins/1.10.12/i18n/Polish.json"
     },
 });
+</script>
+
+<?php require ACTIONS_PATH."/admin/parts/photoswipe.html.php"; ?>
+
+<script>
+    $('[data-gallery="photoswipe"]').photoswipe({
+        loop: false,
+        closeOnScroll: false,
+    });
 </script>
 
 <script>

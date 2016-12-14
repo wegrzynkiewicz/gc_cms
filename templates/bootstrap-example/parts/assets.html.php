@@ -5,7 +5,7 @@
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js"></script>
-<script src="<?=templateAssetsUrl("/scripts/jquery.photoswipe.js")?>"></script>
+<script src="<?=assetsUrl("/common/scripts/jquery.photoswipe.js")?>"></script>
 
 <script>
     $('[data-thumb]').each(function(i, e){

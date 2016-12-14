@@ -6,7 +6,9 @@ $images = ModuleFile::selectAllByModuleId($module_id);
     <?php foreach ($images as $image_id => $image): $is = json_decode($image['settings'], true); ?>
         <div>
             <a href="<?=$image['url']?>"
+                target="_blank"
                 title="<?=escape($image['name'])?>"
+                data-photoswipe-item=""
                 data-width="<?=$is['width']?>"
                 data-height="<?=$is['height']?>">
                 <img src="<?=Thumb::make($image['url'], 200, 200)?>"
