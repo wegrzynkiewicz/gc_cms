@@ -1,18 +1,21 @@
-<?php if (isset($breadcrumbs) and count($breadcrumbs->getLinks()) > 1): ?>
-    <ol class="breadcrumb" style="background-color: #eeeeee">
-        <?php foreach ($breadcrumbs->getLinks() as $e): ?>
-            <li class="<?=empty($e['url']) ? '' : 'active'?>">
-                <?php if (!empty($e['url'])): ?>
-                    <a href="<?=$e['url']?>">
-                <?php endif ?>
-                    <?php if ($e['icon']): ?>
-                        <i class="fa <?=$e['icon']?> fa-fw"></i>
+<?php if (isset($breadcrumbs)): $links = $breadcrumbs->getLinks() ?>
+    <?php if (count($links) > 1): ?>
+        <ol class="breadcrumb" style="background-color: #eeeeee">
+            <?php foreach ($links as $i => $link): ?>
+                <?php $isLink = !(empty($link['url']) or $link['url'] == $request); ?>
+                <li class="<?=$isLink ? '' : 'active'?>">
+                    <?php if ($isLink): ?>
+                        <a href="<?=$link['url']?>">
                     <?php endif ?>
-                    <?=$e['title']?>
-                <?php if (!empty($e['url'])): ?>
-                    </a>
-                <?php endif ?>
-            </li>
-        <?php endforeach ?>
-    </ol>
+                        <?php if ($link['icon']): ?>
+                            <i class="fa <?=$link['icon']?> fa-fw"></i>
+                        <?php endif ?>
+                        <?=$link['title']?>
+                    <?php if ($isLink): ?>
+                        </a>
+                    <?php endif ?>
+                </li>
+            <?php endforeach ?>
+        </ol>
+    <?php endif ?>
 <?php endif ?>

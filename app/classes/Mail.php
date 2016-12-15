@@ -2,7 +2,11 @@
 
 namespace GC;
 
+use GC\Model\MailSent;
+use GC\Model\MailToSend;
+use GC\Logger;
 use PHPMailer;
+use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 
 class Mail extends PHPMailer
 {
@@ -40,7 +44,7 @@ class Mail extends PHPMailer
 
     public function buildTemplate($templateEmailPath, $stylePath, array $viewArgs = [])
     {
-        $cssToInlineStyles = new TijsVerkoyen\CssToInlineStyles\CssToInlineStyles();
+        $cssToInlineStyles = new CssToInlineStyles();
         $viewArgs['mail'] = $this;
         $viewArgs['config'] = getConfig();
         $html = view($templateEmailPath, $viewArgs);

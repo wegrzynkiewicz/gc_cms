@@ -1,28 +1,32 @@
 <?php
 
-$headTitle = trans("Profil użytkownika");
-
 if (wasSentPost()) {
     GC\Model\Staff::updateByPrimaryId($_SESSION['staff']['staff_id'], [
         'lang' => $_POST['lang'],
     ]);
 
-    redirect('/admin');
+	redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 $_POST = $staff->getData();
-
-$headTitle .= makeLink("/admin/account/profil", $_SESSION['staff']['name']);
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">
-            <?=$headTitle?>
-        </h1>
+        <div class="page-header">
+            <div class="btn-toolbar pull-right">
+                <a href="<?=url("/admin/account/change-password")?>" type="button" class="btn btn-success btn-md">
+                    <i class="fa fa-unlock-alt fa-fw"></i>
+                    <?=trans('Zmień hasło')?>
+                </a>
+            </div>
+            <h1><?=$headTitle?></h1>
+        </div>
     </div>
 </div>
+
+<?php require_once ACTIONS_PATH.'/admin/parts/breadcrumbs.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -35,7 +39,6 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             ])?>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'cancelHref' => "/admin",
                 'saveLabel' => 'Zapisz profil',
             ])?>
 

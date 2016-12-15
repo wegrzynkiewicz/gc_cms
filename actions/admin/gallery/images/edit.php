@@ -48,7 +48,6 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             ])?>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'cancelHref' => "/admin/gallery/list",
                 'saveLabel' => 'Zapisz galerię',
             ])?>
 

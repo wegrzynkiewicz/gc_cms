@@ -1,23 +1,19 @@
 <?php
 
+$headTitle = trans('Dodawanie nowego modułu');
+$breadcrumbs->push($request, $headTitle);
+
 if(wasSentPost()) {
-	FrameModule::insert([
+	$module_id = GC\Model\FrameModule::insert([
         'type' => $_POST['type'],
         'theme' => 'default',
     ], $frame_id);
 
-	redirect("/admin/$frame/module/list/$parent_id");
+    redirect($breadcrumbs->getBeforeLastUrl());
 }
 
-require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
-
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">
-            <?=$headTitle?>
-        </h1>
-    </div>
-</div>
+require_once ACTIONS_PATH.'/admin/parts/header.html.php';
+require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -30,7 +26,6 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             ])?>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'cancelHref' => "/admin/$frame/list",
                 'saveLabel' => 'Dodaj nowy moduł',
             ])?>
 

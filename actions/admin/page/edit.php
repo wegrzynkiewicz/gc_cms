@@ -1,8 +1,6 @@
 <?php
 
-$headTitle = trans("Edycja strony");
-
-$staff->redirectIfUnauthorized();
+$title = "Edycja strony %s";
 
 $page_id = intval(array_shift($_SEGMENTS));
 $page = GC\Model\Page::selectWithFrameByPrimaryId($page_id);
@@ -16,14 +14,11 @@ if (wasSentPost()) {
         'image' => $_POST['image'],
     ]);
 
-    redirect('/admin/page/list');
+    redirect($breadcrumbs->getBeforeLastUrl());
 }
 
-if (!$page) {
-    redirect('/admin/page/list');
-}
-
-$headTitle .= makeLink("/admin/page/list", $page['name']);
+$headTitle = trans($title, [$page['name']]);
+$breadcrumbs->push($request, $headTitle);
 
 $_POST = $page;
 

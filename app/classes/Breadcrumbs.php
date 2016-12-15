@@ -11,20 +11,43 @@ class Breadcrumbs
         return $this->links;
     }
 
-    public function push($url, $title, array $args = [], $icon = null)
+    public function push($url, $title, $icon = null)
     {
-        array_push($this->links, $this->wrap($url, $title, $args, $icon));
+        array_push($this->links, $this->wrap($url, $title, $icon));
     }
 
-    public function unshift($url, $title, array $args = [], $icon = null)
+    public function unshift($url, $title, $icon = null)
     {
-        array_unshift($this->links, $this->wrap($url, $title, $args, $icon));
+        array_unshift($this->links, $this->wrap($url, $title, $icon));
     }
 
-    protected function wrap($url, $title, array $args, $icon)
+    public function getBeforeLastUrl()
+    {
+        $beforeLast = count($this->links)-2;
+        if (isset($this->links[$beforeLast])) {
+
+            return $this->links[$beforeLast]['url'];
+        }
+
+        return '';
+    }
+
+    public function getLastUrl()
+    {
+        $last = count($this->links)-1;
+        if (isset($this->links[$last])) {
+            return $this->links[$last]['url'];
+        }
+
+        return '';
+    }
+
+
+
+    protected function wrap($url, $title, $icon)
     {
         return array(
-            'title' => trans($title, $args),
+            'title' => $title,
             'url' => url($url),
             'icon' => $icon,
         );

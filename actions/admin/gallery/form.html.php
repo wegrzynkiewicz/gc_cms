@@ -18,7 +18,6 @@
             ])?>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'cancelHref' => "/admin/gallery/list",
                 'saveLabel' => 'Zapisz galerię',
             ])?>
 

@@ -1,12 +1,5 @@
 <?php require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
-
-<div class="row">
-    <div class="col-lg-8 text-left">
-        <h1 class="page-header">
-            <?=$headTitle?>
-        </h1>
-    </div>
-</div>
+<?php require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -28,7 +21,6 @@
             <div id="nodeType"></div>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'cancelHref' => "/admin/nav/menu/list/$nav_id",
                 'saveLabel' => 'Zapisz stronę',
             ])?>
 

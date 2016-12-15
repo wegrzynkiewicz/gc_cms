@@ -1,12 +1,5 @@
 <?php require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
-
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">
-            <?=$headTitle?>
-        </h1>
-    </div>
-</div>
+<?php require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -42,7 +35,6 @@
             </fieldset>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'cancelHref' => "/admin/staff/group/list",
                 'saveLabel' => 'Zapisz grupę',
             ])?>
 

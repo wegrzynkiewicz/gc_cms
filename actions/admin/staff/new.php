@@ -1,9 +1,7 @@
 <?php
 
 $headTitle = trans("Dodawanie nowego pracownika");
-
-$staff = GC\Model\Staff::createFromSession();
-$staff->redirectIfUnauthorized();
+$breadcrumbs->push($request, $headTitle);
 
 if (wasSentPost()) {
 
@@ -21,7 +19,7 @@ if (wasSentPost()) {
         'force_change_password' => 1,
     ], $groups);
 
-    $mail = new Mail();
+    $mail = new GC\Mail();
     $mail->buildTemplate(
         '/admin/staff/staff-created.email.html.php',
         '/admin/parts/email/styles.css', [
@@ -33,9 +31,12 @@ if (wasSentPost()) {
     $mail->addAddress($_POST['email']);
     $mail->send();
 
-    redirect('/admin/staff/list');
+    redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 $groups = [];
 
-require_once ACTIONS_PATH.'/admin/staff/form.html.php';
+
+require_once ACTIONS_PATH.'/admin/parts/header.html.php';
+require_once ACTIONS_PATH.'/admin/parts/page-header.html.php';
+require_once ACTIONS_PATH.'/admin/staff/form.html.php'; ?>

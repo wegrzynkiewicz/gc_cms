@@ -1,16 +1,10 @@
 <?php
 
-$headTitle = trans("Edytowanie pracownika");
-
-$staff = GC\Model\Staff::createFromSession();
-$staff->redirectIfUnauthorized();
-
 $staff_id = intval(array_shift($_SEGMENTS));
-$staffData = GC\Model\Staff::selectByPrimaryId($staff_id);
+$user = GC\Model\Staff::selectByPrimaryId($staff_id);
 
-if (!$staffData) {
-    redirect('/admin/staff/list');
-}
+$headTitle = trans('Edytowanie pracownika "%s"', [$user['name']]);
+$breadcrumbs->push($request, $headTitle);
 
 if (wasSentPost()) {
 
@@ -28,14 +22,30 @@ if (wasSentPost()) {
         $groups = isset($_POST['groups']) ? $_POST['groups'] : [];
         GC\Model\Staff::update($staff_id, $_POST, $groups);
 
-        redirect('/admin/staff/list');
+        redirect($breadcrumbs->getBeforeLastUrl());
     }
 
 } else {
-    $_POST = $staffData;
+    $_POST = $user;
 }
 
-$headTitle .= makeLink("/admin/staff/list", $staffData['name']);
-$groups = array_keys(StaffGroup::selectAllAsOptionsByStaffId($staff_id));
+$groups = array_keys(GC\Model\StaffGroup::selectAllAsOptionsByStaffId($staff_id));
 
-require_once ACTIONS_PATH.'/admin/staff/form.html.php';
+require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <div class="btn-toolbar pull-right">
+                <a href="<?=url("/admin/staff/force-change-password/$staff_id")?>" type="button" class="btn btn-success">
+                    <i class="fa fa-unlock-alt fa-fw"></i>
+                    <?=trans('Wymuś zmianę hasła')?>
+                </a>
+            </div>
+            <h1><?=$headTitle?></h1>
+        </div>
+    </div>
+</div>
+
+<?php require_once ACTIONS_PATH.'/admin/parts/breadcrumbs.html.php'; ?>
+<?php require_once ACTIONS_PATH.'/admin/staff/form.html.php'; ?>

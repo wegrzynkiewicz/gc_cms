@@ -1,6 +1,7 @@
 <?php
 
-$headTitle = trans("Edytujesz moduł slajdera");
+$headTitle = trans("Edycja modułu slajdera");
+$breadcrumbs->push($request, $headTitle);
 
 if (wasSentPost()) {
     GC\Model\FrameModule::updateByPrimaryId($module_id, [
@@ -14,20 +15,20 @@ $_POST = $module;
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
-    <div class="col-lg-8 text-left">
-        <h1 class="page-header">
-            <?=$headTitle?>
-        </h1>
-    </div>
-    <div class="col-lg-4 text-right">
-        <h1 class="page-header">
-            <button id="select_images" class="btn btn-success">
-                <i class="fa fa-plus fa-fw"></i>
-                <?=trans('Dodaj zdjęcia')?>
-            </button>
-        </h1>
+    <div class="col-lg-12">
+        <div class="page-header">
+            <div class="btn-toolbar pull-right">
+                <button id="select_images" class="btn btn-success">
+                    <i class="fa fa-plus fa-fw"></i>
+                    <?=trans('Dodaj slajdy')?>
+                </button>
+            </div>
+            <h1><?=$headTitle?></h1>
+        </div>
     </div>
 </div>
+
+<?php require_once ACTIONS_PATH.'/admin/parts/breadcrumbs.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -40,10 +41,12 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 'options' => $config['moduleThemes']['slider'],
             ])?>
 
-            <div id="images" class="row"></div>
+            <fieldset>
+                <legend><?=trans('Slajdy')?></legend>
+                <div id="images" class="row"></div>
+            </fieldset>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'cancelHref' => "/admin/gallery/list",
                 'saveLabel' => 'Zapisz',
             ])?>
 

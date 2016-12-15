@@ -1,2 +1,4 @@
 <?=trans($config['nodeTypes']['external'])?>
-<?=makeLink($node['destination'], $node['destination'])?>
+<a href="<?=$node['destination']?>">
+    <?=escape($node['destination'])?>
+</a>

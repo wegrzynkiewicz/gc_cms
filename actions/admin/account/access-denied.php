@@ -4,15 +4,8 @@ $headTitle = trans("Brak dostępu");
 
 $permission = array_shift($_SEGMENTS);
 
-require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
-
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">
-            <?=$headTitle?>
-        </h1>
-    </div>
-</div>
+require_once ACTIONS_PATH.'/admin/parts/header.html.php';
+require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">

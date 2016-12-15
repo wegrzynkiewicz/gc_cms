@@ -2,15 +2,7 @@
 
 $groupOptions = GC\Model\StaffGroup::selectAllAsOptionsWithPrimaryKey('name');
 
-require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
-
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">
-            <?=$headTitle?>
-        </h1>
-    </div>
-</div>
+?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -46,7 +38,6 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             ])?>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'cancelHref' => "/admin/staff/list",
                 'saveLabel' => 'Zapisz ustawienia',
             ])?>
 

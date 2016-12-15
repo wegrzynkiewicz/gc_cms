@@ -1,16 +1,10 @@
 <?php
 
-$headTitle = trans("Edytowanie grupy pracowników");
-
-$staff = GC\Model\Staff::createFromSession();
-$staff->redirectIfUnauthorized();
-
 $group_id = intval(array_shift($_SEGMENTS));
 $group = GC\Model\StaffGroup::selectByPrimaryId($group_id);
 
-if (!$group) {
-    redirect('/admin/staff/group/list');
-}
+$headTitle = trans('Edytowanie grupy pracowników "%s"', [$group['name']]);
+$breadcrumbs->push($request, $headTitle);
 
 if (wasSentPost()) {
 
@@ -19,10 +13,8 @@ if (wasSentPost()) {
         'name' => $_POST['name'],
     ], $permissions);
 
-    redirect('/admin/staff/group/list');
+    redirect($breadcrumbs->getBeforeLastUrl());
 }
-
-$headTitle .= makeLink("/admin/staff/group/list", $group['name']);
 
 $_POST = $group;
 $permissions = GC\Model\StaffPermission::selectPermissionsAsOptionsByGroupId($group_id);

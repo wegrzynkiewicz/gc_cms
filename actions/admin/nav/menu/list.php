@@ -1,50 +1,40 @@
 <?php
 
-$headTitle = trans("Węzły nawigacji");
-
-$staff = GC\Model\Staff::createFromSession();
-$staff->redirectIfUnauthorized();
-
-$nav_id = intval(array_shift($_SEGMENTS));
-
 if (wasSentPost()) {
     $positions = json_decode($_POST['positions'], true);
     $positions = array_filter($positions, function ($node) {
         return isset($node['id']);
     });
     GC\Model\MenuTree::update($nav_id, $positions);
-    redirect("/admin/nav/list");
+    redirect($breadcrumbs->getBeforeLastUrl());
 }
 
-$nav = GC\Model\MenuTaxonomy::selectByPrimaryId($nav_id);
 $pages = GC\Model\Page::selectAllWithFrames();
 $menuTree = GC\Model\Menu::buildTreeByTaxonomyId($nav_id);
-
-$headTitle .= makeLink("/admin/nav/list", $nav['name']);
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
-    <div class="col-lg-8 text-left">
-        <h1 class="page-header">
-            <?=$headTitle?>
-        </h1>
-    </div>
-    <div class="col-lg-4 text-right">
-        <h1 class="page-header">
-            <a href="<?=url("/admin/nav/menu/new/$nav_id")?>" type="button" class="btn btn-success">
-                <i class="fa fa-plus fa-fw"></i>
-                <?=trans('Dodaj nowy węzeł')?>
-            </a>
-        </h1>
+    <div class="col-lg-12">
+        <div class="page-header">
+            <div class="btn-toolbar pull-right">
+                <a href="<?=url("/admin/nav/menu/new/$nav_id")?>" type="button" class="btn btn-success">
+                    <i class="fa fa-plus fa-fw"></i>
+                    <?=trans('Dodaj nowy węzeł')?>
+                </a>
+            </div>
+            <h1><?=$headTitle?></h1>
+        </div>
     </div>
 </div>
+
+<?php require_once ACTIONS_PATH.'/admin/parts/breadcrumbs.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">
         <?php if ($menuTree->hasChildren()):?>
             <ol id="sortable" class="sortable">
-                <?=view('/admin/nav/menu/list-item.html.php', [
+                <?=view('/admin/nav/menu/list-items.html.php', [
                     'menu' => $menuTree,
                     'nav_id' => $nav_id,
                     'pages' => $pages,
@@ -65,7 +55,6 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             <input name="positions" type="hidden"/>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'cancelHref' => "/admin/nav/list",
                 'saveLabel' => 'Zapisz pozycję',
             ])?>
 

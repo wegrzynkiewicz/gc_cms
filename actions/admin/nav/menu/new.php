@@ -1,11 +1,8 @@
 <?php
 
-$headTitle = trans("Tworzenie węzeła w nawigacji");
+$headTitle = trans('Dodawanie nowego węzła');
+$breadcrumbs->push($request, $headTitle);
 
-$staff = GC\Model\Staff::createFromSession();
-$staff->redirectIfUnauthorized();
-
-$nav_id = intval(array_shift($_SEGMENTS));
 $menu_id = 0;
 
 if(wasSentPost($_POST)) {
@@ -15,10 +12,8 @@ if(wasSentPost($_POST)) {
         'destination' => $_POST['destination'],
         'target' => isset($_POST['target']) ? $_POST['target'] : '_self',
     ], $nav_id);
-	redirect("/admin/nav/menu/list/$nav_id");
-}
 
-$nav = GC\Model\MenuTaxonomy::selectByPrimaryId($nav_id);
-$headTitle .= makeLink("/admin/nav/menu/list/$nav_id", $nav['name']);
+	redirect($breadcrumbs->getBeforeLastUrl());
+}
 
 require_once ACTIONS_PATH.'/admin/nav/menu/form.html.php';

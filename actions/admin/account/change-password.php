@@ -1,6 +1,7 @@
 <?php
 
 $headTitle = trans("Zmiana hasła");
+$breadcrumbs->push($request, $headTitle, 'fa-unlock-alt');
 
 if (wasSentPost()) {
 
@@ -41,15 +42,8 @@ if (wasSentPost()) {
 
 $_POST = [];
 
-require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
-
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">
-            <?=$headTitle?>
-        </h1>
-    </div>
-</div>
+require_once ACTIONS_PATH.'/admin/parts/header.html.php';
+require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -83,7 +77,6 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             ])?>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'cancelHref' => "/admin",
                 'saveLabel' => 'Zmień hasło',
             ])?>
 

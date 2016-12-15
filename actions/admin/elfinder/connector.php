@@ -64,7 +64,7 @@ function access($attr, $path, $data, $volume)
 
 // Documentation for connector options:
 // https://github.com/Studio-42/elFinder/wiki/Connector-configuration-options
-$normalizer = new Normalizer();
+$normalizer = new GC\Normalizer();
 
 $opts = array(
     'debug' => true,

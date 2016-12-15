@@ -1,29 +1,24 @@
 <?php
 
-$headTitle = trans("Pracownicy");
-
-$staff = GC\Model\Staff::createFromSession();
-$staff->redirectIfUnauthorized();
-
 $staffList = GC\Model\Staff::selectAllCorrectWithPrimaryKey();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
-    <div class="col-lg-8 text-left">
-        <h1 class="page-header">
-            <?=$headTitle?>
-        </h1>
-    </div>
-    <div class="col-lg-4 text-right">
-        <h1 class="page-header">
-            <a href="<?=url("/admin/staff/new")?>" type="button" class="btn btn-success">
-                <i class="fa fa-plus fa-fw"></i>
-                <?=trans('Dodaj nowego pracownika')?>
-            </a>
-        </h1>
+    <div class="col-lg-12">
+        <div class="page-header">
+            <div class="btn-toolbar pull-right">
+                <a href="<?=url("/admin/staff/new")?>" type="button" class="btn btn-success">
+                    <i class="fa fa-plus fa-fw"></i>
+                    <?=trans('Dodaj nowego pracownika')?>
+                </a>
+            </div>
+            <h1><?=$headTitle?></h1>
+        </div>
     </div>
 </div>
+
+<?php require_once ACTIONS_PATH.'/admin/parts/breadcrumbs.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">
@@ -51,7 +46,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     <?php foreach ($staffList as $staff_id => $row): ?>
                         <tr>
                             <td>
-                                <img src="<?=Staff::getAvatarUrl($row, 30)?>"
+                                <img src="<?=GC\Model\Staff::getAvatarUrl($row, 30)?>"
                                     height="30" style="margin-right:5px"/>
 
                                 <a href="<?=url("/admin/staff/edit/$staff_id")?>"

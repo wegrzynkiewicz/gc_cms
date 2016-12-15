@@ -35,7 +35,6 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
         <form id="sortableForm" action="<?=url("/admin/gallery/images/sort/$gallery_id")?>" method="post" class="form-horizontal">
             <input name="ids" type="hidden"/>
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'cancelHref' => "/admin/gallery/list",
                 'saveLabel' => 'Zapisz położenie zdjęć',
             ])?>
         </form>

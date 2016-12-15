@@ -1,27 +1,20 @@
 <?php
 
-$headTitle = trans("Edytujesz widżet tekstowy");
+$headTitle = trans('Edycja widżetu zdjęcia "%s"', [$widget['name']]);
+$breadcrumbs->push($request, $headTitle);
 
 if (wasSentPost()) {
     GC\Model\Widget::updateByPrimaryId($widget_id, [
         'content' => $_POST['content'],
     ]);
-    redirect("/admin/widget/list");
-}
 
-$headTitle .= makeLink("/admin/widget/list", $widget['name']);
+    redirect($breadcrumbs->getBeforeLastUrl());
+}
 
 $_POST['content'] = $content;
 
-require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
-
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">
-            <?=$headTitle?>
-        </h1>
-    </div>
-</div>
+require_once ACTIONS_PATH.'/admin/parts/header.html.php';
+require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -34,7 +27,6 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             ])?>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'cancelHref' => "/admin/widget/list",
                 'saveLabel' => 'Zapisz widżet',
             ])?>
 

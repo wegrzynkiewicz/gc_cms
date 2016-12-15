@@ -1,9 +1,7 @@
 <?php
 
 $headTitle = trans("Dodawanie nowej grupy pracowników");
-
-$staff = GC\Model\Staff::createFromSession();
-$staff->redirectIfUnauthorized();
+$breadcrumbs->push($request, $headTitle);
 
 if (wasSentPost()) {
 
@@ -12,7 +10,7 @@ if (wasSentPost()) {
         'name' => $_POST['name'],
     ], $permissions);
 
-    redirect('/admin/staff/group/list');
+    redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 $permissions = [];

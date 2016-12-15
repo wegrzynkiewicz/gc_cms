@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = trans("Zmiana języka edytora");
+/** Zmiana języka edytora */
 
 $lang = array_shift($_SEGMENTS);
 $availableLangs = array_keys($config['langs']);

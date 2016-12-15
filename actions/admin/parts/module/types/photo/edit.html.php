@@ -1,6 +1,7 @@
 <?php
 
-$headTitle = trans("Edytujesz moduł tekstowy");
+$headTitle = trans("Edycja modułu pojedyńczego zdjęcia");
+$breadcrumbs->push($request, $headTitle);
 
 if (wasSentPost()) {
 
@@ -20,21 +21,15 @@ if (wasSentPost()) {
         'content' => $name,
         'settings' => json_encode($settings),
     ]);
-    redirect("/admin/$frame/module/list/$parent_id");
+
+    redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 $_POST = $settings;
 $_POST['content'] = $content;
 
-require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
-
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">
-            <?=$headTitle?>
-        </h1>
-    </div>
-</div>
+require_once ACTIONS_PATH.'/admin/parts/header.html.php';
+require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -52,7 +47,6 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             ])?>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'cancelHref' => "/admin/$frame/module/list/$parent_id",
                 'saveLabel' => 'Zapisz moduł zdjęcia',
             ])?>
 

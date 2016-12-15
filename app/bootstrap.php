@@ -4,9 +4,6 @@
 
 define('START_TIME', microtime(true));
 
-use GC\Storage\Database;
-use GC\Logger;
-
 session_start();
 
 if (!isset($_SESSION['lang'])) {
@@ -28,18 +25,18 @@ if ($config["debug"]) {
 }
 
 
-Database::$pdo = new PDO($config["db"]["dns"], $config["db"]["username"], $config["db"]["password"]);
-Database::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-Database::$prefix = $config["db"]["prefix"];
+GC\Storage\Database::$pdo = new PDO($config["db"]["dns"], $config["db"]["username"], $config["db"]["password"]);
+GC\Storage\Database::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+GC\Storage\Database::$prefix = $config["db"]["prefix"];
 
 require_once __DIR__.'/routing.php';
 
 # przydatna wartość jeżeli potrzeba wrócić z gęstwiny przekierować
 $_SESSION['preview_url'] = $request;
 
-Logger::response(sprintf("%s :: ExecutionTime: %s",
+GC\Logger::response(sprintf("%s :: ExecutionTime: %s",
     http_response_code(),
     (microtime(true) - START_TIME)
 ));
 
-Logger::response(print_r(get_included_files(), true));
+GC\Logger::response(print_r(get_included_files(), true));

@@ -38,7 +38,7 @@
 
         <?php if ($node->hasChildren()): ?>
             <ol>
-                <?=view('/admin/nav/menu/list-item.html.php', [
+                <?=view('/admin/nav/menu/list-items.html.php', [
                     'menu' => $node,
                     'nav_id' => $nav_id,
                     'pages' => $pages,

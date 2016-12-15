@@ -20,7 +20,6 @@
             <div id="nodeType"></div>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'cancelHref' => "/admin/post/node/list/$tax_id",
                 'saveLabel' => 'Zapisz węzeł',
             ])?>
 

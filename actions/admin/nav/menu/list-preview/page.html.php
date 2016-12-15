@@ -1,6 +1,8 @@
 <?php $dest = $node['destination']; if (isset($pages[$dest])): ?>
     <?=trans($config['nodeTypes']['page'])?>
-    <?=makeLink('/admin/page/edit/'.$dest, $pages[$dest]['name'])?>
+    <a href="<?=url("/admin/page/edit/$dest")?>">
+        <?=escape($pages[$dest]['name'])?>
+    </a>
 <?php else: ?>
     <span class="text-danger">
         <?=trans('Kieruje do nieistniejącej strony!')?>

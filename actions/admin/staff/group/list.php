@@ -1,31 +1,24 @@
 <?php
 
-$headTitle = trans("Grupy");
-
-$staff = GC\Model\Staff::createFromSession();
-$staff->redirectIfUnauthorized();
-
 $groups = GC\Model\StaffGroup::selectAllWithPrimaryKey();
-
-$headTitle .= makeLink("/admin/staff/list", trans("pracowników"));
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
-    <div class="col-lg-8 text-left">
-        <h1 class="page-header">
-            <?=$headTitle?>
-        </h1>
-    </div>
-    <div class="col-lg-4 text-right">
-        <h1 class="page-header">
-            <a href="<?=url("/admin/staff/group/new")?>" type="button" class="btn btn-success">
-                <i class="fa fa-plus fa-fw"></i>
-                <?=trans('Dodaj nową grupę pracowników')?>
-            </a>
-        </h1>
+    <div class="col-lg-12">
+        <div class="page-header">
+            <div class="btn-toolbar pull-right">
+                <a href="<?=url("/admin/staff/group/new")?>" type="button" class="btn btn-success">
+                    <i class="fa fa-plus fa-fw"></i>
+                    <?=trans('Dodaj nową grupę pracowników')?>
+                </a>
+            </div>
+            <h1><?=$headTitle?></h1>
+        </div>
     </div>
 </div>
+
+<?php require_once ACTIONS_PATH.'/admin/parts/breadcrumbs.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">

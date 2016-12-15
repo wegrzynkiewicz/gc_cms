@@ -92,9 +92,12 @@
 /** Sortable */
 
 .sortable, .sortable ol {
-    margin: 0 0 0 25px;
     padding: 0;
     list-style-type: none;
+}
+
+.sortable ol {
+    margin: 0 0 0 25px;
 }
 
 .sortable li {
@@ -244,6 +247,7 @@ li.mjs-nestedSortable-collapsed.mjs-nestedSortable-hovering div {
 /** Dashboard actions */
 
 .dashboard-actions {}
+
 .dashboard-action {
     min-height: 200px;
     width: 100%;
@@ -252,12 +256,13 @@ li.mjs-nestedSortable-collapsed.mjs-nestedSortable-hovering div {
     padding: 22px 5px 0;
     font-size: 20px;
     border: 1px solid #e7e7e7;
-
 }
-.dashboard-action:hover{
+
+.dashboard-action:hover {
     background-color: #eee;
     text-decoration: none;
 }
-.dashboard-action-title{
+
+.dashboard-action-title {
     display: block;
 }

@@ -1,9 +1,7 @@
 <?php
 
-$headTitle = trans("Dodawanie nowej strony");
-
-$staff = GC\Model\Staff::createFromSession();
-$staff->redirectIfUnauthorized();
+$headTitle = trans('Dodawanie nowej strony');
+$breadcrumbs->push($request, $headTitle);
 
 if (wasSentPost()) {
 
@@ -19,7 +17,7 @@ if (wasSentPost()) {
         'frame_id' => $frame_id,
     ]);
 
-    redirect('/admin/page/list');
+    redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 require_once ACTIONS_PATH.'/admin/page/form.html.php';

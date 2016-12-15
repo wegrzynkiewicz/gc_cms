@@ -1,30 +1,22 @@
 <?php
 
 $headTitle = trans("Edycja modułu tekstowego");
+$breadcrumbs->push($request, $headTitle);
 
 if (wasSentPost()) {
     GC\Model\FrameModule::updateByPrimaryId($module_id, [
         'content' => $_POST['content'],
         'theme' => 'default',
     ]);
-    redirect("/admin/$frame/module/list/$parent_id");
+
+    redirect($breadcrumbs->getBeforeLastUrl());
 }
 
-$breadcrumbs->push($request, "Edycja modułu tekstowego");
 
 $_POST['content'] = $content;
 
-require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
-
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">
-            <?=$headTitle?>
-        </h1>
-    </div>
-</div>
-
-<?php require_once ACTIONS_PATH.'/admin/parts/breadcrumbs.html.php'; ?>
+require_once ACTIONS_PATH.'/admin/parts/header.html.php';
+require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -36,7 +28,6 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             ])?>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'cancelHref' => "/admin/$frame/module/list/$parent_id",
                 'saveLabel' => 'Zapisz moduł tekstowy',
             ])?>
 

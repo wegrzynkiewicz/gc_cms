@@ -1,8 +1,5 @@
 <?php
 
-$staff = GC\Model\Staff::createFromSession();
-$staff->redirectIfUnauthorized();
-
 $widget_id = intval(array_shift($_SEGMENTS));
 $widget = GC\Model\Widget::selectByPrimaryId($widget_id);
 $type = $widget['type'];

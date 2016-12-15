@@ -2,14 +2,12 @@
 
 /* Ładowanie odpowiednią akcję */
 
-use GC\Logger;
-
 $request = '/'.trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 $requestQuery = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 $rootUrl = dirname($_SERVER['SCRIPT_NAME']);
 $method = strtoupper($_SERVER['REQUEST_METHOD']);
 
-Logger::request(sprintf("%s %s", $method, trim("$request?$requestQuery", '?')), $_REQUEST);
+GC\Logger::request(sprintf("%s %s", $method, trim("$request?$requestQuery", '?')), $_REQUEST);
 
 # jeżeli aplikacja jest zainstalowana w katalogu, wtedy pomiń adres katalogu
 if ($rootUrl and strpos($request, $rootUrl) === 0) {
@@ -30,7 +28,7 @@ if (strpos($request, $frontController) === 0) {
 
 # jeżeli adres bez ścieżki wtedy załaduj akcję główną
 if (empty(trim($request, '/'))) {
-    Logger::routing("Homepage");
+    GC\Logger::routing("Homepage");
 
     return require_once ACTIONS_PATH.'/homepage.php';
 }
@@ -51,7 +49,7 @@ if (strlen($_SEGMENTS[0]) == 2) {
 
 # jeżeli jedyny segment okazał się być językowym prefiksem wtedy do głowej
 if (count($_SEGMENTS) === 0) {
-    Logger::routing("Homepage with lang");
+    GC\Logger::routing("Homepage with lang");
 
     return require_once ACTIONS_PATH.'/homepage.php';
 }
@@ -61,7 +59,7 @@ $fullRequest = rtrim("$request?$requestQuery", '?');
 foreach ($config['rewrites'] as $pattern => $destination) {
     if (preg_match($pattern, $fullRequest)) {
         $result = preg_replace($pattern, $destination, $fullRequest);
-        Logger::routing("Custom rewrite :: $result", [$fullRequest, $pattern, $destination]);
+        GC\Logger::routing("Custom rewrite :: $result", [$fullRequest, $pattern, $destination]);
         redirect($result, 301); # 301 Moved Permanently
     }
 }
@@ -76,7 +74,7 @@ while (count($segments) > 0) {
 
     if (file_exists($file)) {
         $_SEGMENTS = $segments;
-        Logger::routing("Nested :: ".relativePath($file));
+        GC\Logger::routing("Nested :: ".relativePath($file));
 
         return require_once $file;
     }
@@ -85,7 +83,7 @@ while (count($segments) > 0) {
     $file = $path.'/_import.php';
     if (file_exists($file)) {
         $_SEGMENTS = $segments;
-        Logger::import(relativePath($file));
+        GC\Logger::import(relativePath($file));
         require_once $file;
     }
 
@@ -97,7 +95,7 @@ while (count($segments) > 0) {
 # jeżeli nie istnieje akcja to spróbuj załadować plik start w katalogu końcowym
 $file = $path.'/start.php';
 if (file_exists($file)) {
-    Logger::routing("Start :: ".relativePath($file));
+    GC\Logger::routing("Start :: ".relativePath($file));
 
     return require_once $file;
 }
@@ -109,7 +107,7 @@ $absoluteSlug = '/'.implode('/', $_SEGMENTS);
 # jeżeli istnieje niestandardowy plik w folderze z szablonem
 $customFile = TEMPLATE_PATH."/custom/$slug.html.php";
 if (file_exists($customFile)) {
-    Logger::routing("Custom slug :: ".relativePath($customFile));
+    GC\Logger::routing("Custom slug :: ".relativePath($customFile));
 
     return require_once $customFile;
 }
@@ -119,7 +117,7 @@ $id = intval(count($_SEGMENTS) === 0 ? $slug : array_shift($_SEGMENTS));
 
 # jeżeli ostatni parametr nie jest prawidłową liczbą
 if ($id <= 0) {
-    Logger::routing("Error invalid ID :: 404");
+    GC\Logger::routing("Error invalid ID :: 404");
 
     return require_once TEMPLATE_PATH."/errors/404.html.php";
 }
@@ -127,7 +125,7 @@ if ($id <= 0) {
 # jeżeli istnieje niestandardowy plik w folderze z szablonem
 $customFile = TEMPLATE_PATH."/custom/$id.html.php";
 if (file_exists($customFile)) {
-    Logger::routing("Custom id :: ".relativePath($customFile));
+    GC\Logger::routing("Custom id :: ".relativePath($customFile));
 
     return require_once $customFile;
 }
@@ -135,7 +133,7 @@ if (file_exists($customFile)) {
 # jeżeli istnieje strona w systemie o zadanym id
 $page = Page::selectWithFrameByPrimaryId($id);
 if ($page) {
-    Logger::routing("Page :: $id", $page);
+    GC\Logger::routing("Page :: $id", $page);
 
     return require_once ACTIONS_PATH."/page.php";
 }
@@ -147,6 +145,6 @@ if ($page) {
 }*/
 
 # jeżeli żaden plik nie pasuje, wtedy wyświetl błąd 404
-Logger::routing("Endpoint error 404");
+GC\Logger::routing("Endpoint error 404");
 
 return require_once TEMPLATE_PATH."/errors/404.html.php";

@@ -2,6 +2,8 @@
 
 namespace GC\Storage\Utility;
 
+use GC\Model\Frame;
+use GC\Model\FrameModule;
 use GC\Storage\Database;
 
 /**

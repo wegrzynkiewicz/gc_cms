@@ -63,7 +63,6 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             <input name="positions" type="hidden"/>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'cancelHref' => "/admin/post/taxonomy/list",
                 'saveLabel' => 'Zapisz pozycję',
             ])?>
 

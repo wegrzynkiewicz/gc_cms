@@ -27,7 +27,6 @@
             ])?>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'cancelHref' => "/admin/page/list",
                 'saveLabel' => 'Zapisz stronę',
             ])?>
 

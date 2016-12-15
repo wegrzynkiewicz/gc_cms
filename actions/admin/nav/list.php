@@ -1,21 +1,9 @@
 <?php
 
-$headTitle = trans("Nawigacje");
-
-$staff = GC\Model\Staff::createFromSession();
-$staff->redirectIfUnauthorized();
-
 $navs = GC\Model\MenuTaxonomy::selectAllCorrectWithPrimaryKey();
 
-require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
-
-<div class="row">
-    <div class="col-lg-12 text-left">
-        <h1 class="page-header">
-            <?=$headTitle?>
-        </h1>
-    </div>
-</div>
+require_once ACTIONS_PATH.'/admin/parts/header.html.php';
+require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">
@@ -53,11 +41,4 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 </div>
 
 <?php require_once ACTIONS_PATH.'/admin/parts/assets.html.php'; ?>
-
-<script>
-    $(function(){
-        $('[data-table]').DataTable();
-    });
-</script>
-
 <?php require_once ACTIONS_PATH.'/admin/parts/footer.html.php'; ?>

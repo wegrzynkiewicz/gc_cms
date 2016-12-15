@@ -1,8 +1,5 @@
 <?php
 
-$staff = GC\Model\Staff::createFromSession();
-$staff->redirectIfUnauthorized();
-
 $menu_id = intval(array_shift($_SEGMENTS));
 $node = GC\Model\Menu::selectByPrimaryId($menu_id);
 
