@@ -2,12 +2,12 @@
 
 if (wasSentPost()) {
     $grid = json_decode($_POST['grid'], true);
-    GrafCenter\CMS\Model\FramePosition::updateGridByFrameId($frame_id, $grid);
+    GCC\Model\FramePosition::updateGridByFrameId($frame_id, $grid);
 
     redirect("/admin/$frame/list");
 }
 
-$modules = GrafCenter\CMS\Model\FrameModule::selectAllByFrameId($frame_id);
+$modules = GCC\Model\FrameModule::selectAllByFrameId($frame_id);
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 

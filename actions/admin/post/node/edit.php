@@ -2,21 +2,21 @@
 
 $headTitle = trans("Edycja węzła w ");
 
-$staff = GrafCenter\CMS\Model\Staff::createFromSession();
+$staff = GCC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $post_id = intval(array_shift($_SEGMENTS));
 $tax_id = intval(array_shift($_SEGMENTS));
 
 if(wasSentPost($_POST)) {
-    GrafCenter\CMS\Model\PostNode::updateByPrimaryId($post_id, [
+    GCC\Model\PostNode::updateByPrimaryId($post_id, [
         'name' => $_POST['name'],
     ]);
 	redirect("/admin/post/node/list/$tax_id");
 }
 
-$node = GrafCenter\CMS\Model\PostNode::selectByPrimaryId($post_id);
-$taxonomy = GrafCenter\CMS\Model\PostTaxonomy::selectByPrimaryId($tax_id);
+$node = GCC\Model\PostNode::selectByPrimaryId($post_id);
+$taxonomy = GCC\Model\PostTaxonomy::selectByPrimaryId($tax_id);
 $headTitle .= makeLink("/admin/post/node/list/$tax_id", $taxonomy['name']);
 
 $_POST = $node;

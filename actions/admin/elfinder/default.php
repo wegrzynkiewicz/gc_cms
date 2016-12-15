@@ -1,5 +1,5 @@
 <?php
-$staff = GrafCenter\CMS\Model\Staff::createFromSession();
+$staff = GCC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 ?>
 <!DOCTYPE html>

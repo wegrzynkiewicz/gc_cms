@@ -1,10 +1,10 @@
 <?php
 
-$staff = GrafCenter\CMS\Model\Staff::createFromSession();
+$staff = GCC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $menu_id = intval(array_shift($_SEGMENTS));
-$node = GrafCenter\CMS\Model\Menu::selectByPrimaryId($menu_id);
+$node = GCC\Model\Menu::selectByPrimaryId($menu_id);
 
 $_POST = $node;
 ?>

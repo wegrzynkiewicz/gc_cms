@@ -3,7 +3,7 @@
 $headTitle = trans("Profil użytkownika");
 
 if (wasSentPost()) {
-    GrafCenter\CMS\Model\Staff::updateByPrimaryId($_SESSION['staff']['staff_id'], [
+    GCC\Model\Staff::updateByPrimaryId($_SESSION['staff']['staff_id'], [
         'lang' => $_POST['lang'],
     ]);
 

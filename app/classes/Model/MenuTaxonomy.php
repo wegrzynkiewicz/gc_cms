@@ -1,11 +1,11 @@
 <?php
 
-namespace GrafCenter\CMS\Model;
+namespace GCC\Model;
 
-use GrafCenter\CMS\Storage\AbstractModel;
-use GrafCenter\CMS\Storage\Utility\PrimaryTrait;
-use GrafCenter\CMS\Storage\Utility\TaxonomyTrait;
-use GrafCenter\CMS\Storage\Database;
+use GCC\Storage\AbstractModel;
+use GCC\Storage\Utility\PrimaryTrait;
+use GCC\Storage\Utility\TaxonomyTrait;
+use GCC\Storage\Database;
 
 class MenuTaxonomy extends AbstractModel
 {

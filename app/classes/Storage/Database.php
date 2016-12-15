@@ -1,8 +1,8 @@
 <?php
 
-namespace GrafCenter\CMS\Storage;
+namespace GCC\Storage;
 
-use GrafCenter\CMS\Logger;
+use GCC\Logger;
 use PDO;
 
 /**

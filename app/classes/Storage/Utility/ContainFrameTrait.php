@@ -1,8 +1,8 @@
 <?php
 
-namespace GrafCenter\CMS\Storage\Utility;
+namespace GCC\Storage\Utility;
 
-use GrafCenter\CMS\Storage\Database;
+use GCC\Storage\Database;
 
 /**
  * Zbiór pomocniczych metod dla wszystkich (stron) posiadających rusztowanie

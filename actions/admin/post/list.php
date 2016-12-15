@@ -2,12 +2,12 @@
 
 $headTitle = trans("Wszystkie wpisy");
 
-$staff = GrafCenter\CMS\Model\Staff::createFromSession();
+$staff = GCC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
-$posts = GrafCenter\CMS\Model\Post::selectAllWithFrames();
-$package = GrafCenter\CMS\Model\PostNode::selectAllWithTaxonomyId();
-$taxonomies = GrafCenter\CMS\Model\PostTaxonomy::selectAllCorrectWithPrimaryKey();
+$posts = GCC\Model\Post::selectAllWithFrames();
+$package = GCC\Model\PostNode::selectAllWithTaxonomyId();
+$taxonomies = GCC\Model\PostTaxonomy::selectAllCorrectWithPrimaryKey();
 
 foreach ($package as $stack) {
     $posts[$stack['post_id']]['taxonomies'][$stack['tax_id']][] = $stack;
@@ -18,7 +18,7 @@ foreach ($posts as &$post) {
         continue;
     }
     foreach ($post['taxonomies'] as $tax_id => $taxonomy) {
-        $tree = GrafCenter\CMS\Model\PostNode::createTree($taxonomy);
+        $tree = GCC\Model\PostNode::createTree($taxonomy);
         $post['tree_taxonomies'][$tax_id] = $tree;
     }
 }
@@ -67,7 +67,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                         <tr>
                             <td>
                                 <?php if ($post['image']): ?>
-                                    <img src="<?=GrafCenter\CMS\Thumb::make($post['image'], 64, 64)?>" height="64" style="margin-right:5px"/>
+                                    <img src="<?=GCC\Thumb::make($post['image'], 64, 64)?>" height="64" style="margin-right:5px"/>
                                 <?php endif ?>
                                 <a href="<?=url("/admin/post/edit/$post_id")?>"
                                     title="<?=trans('Edytuj wpis')?>">

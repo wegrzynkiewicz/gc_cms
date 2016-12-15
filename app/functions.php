@@ -199,12 +199,12 @@ function redirectToRefererOrDefault($defaultLocation, $code = 303)
  */
 function trans($text, array $params = [])
 {
-    return GrafCenter\CMS\Translator::getInstance()->translate($text, $params);
+    return GCC\Translator::getInstance()->translate($text, $params);
 }
 
 function thumb($text, array $params = [])
 {
-   return GrafCenter\CMS\Thumb::make();
+   return GCC\Thumb::make();
 }
 
 /**

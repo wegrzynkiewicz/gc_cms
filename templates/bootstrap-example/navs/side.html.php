@@ -1,4 +1,4 @@
-<?php $menu = Menu::buildTreeByWorkName("side", getClientLang()) ?>
+<?php $menu = GCC\Model\Menu::buildTreeByWorkName("side", getClientLang()) ?>
 
 <?php if ($menu->hasChildren()): ?>
     <ol class="list-unstyled">

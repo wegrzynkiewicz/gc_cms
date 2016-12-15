@@ -2,7 +2,7 @@
 
 $headTitle = trans("Węzły w");
 
-$staff = GrafCenter\CMS\Model\Staff::createFromSession();
+$staff = GCC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $tax_id = intval(array_shift($_SEGMENTS));
@@ -12,12 +12,12 @@ if (wasSentPost()) {
     $positions = array_filter($positions, function ($node) {
         return isset($node['id']);
     });
-    GrafCenter\CMS\Model\PostTree::update($tax_id, $positions);
+    GCC\Model\PostTree::update($tax_id, $positions);
     redirect("/admin/post/taxonomy/list");
 }
 
-$taxonomy = GrafCenter\CMS\Model\PostTaxonomy::selectByPrimaryId($tax_id);
-$category = GrafCenter\CMS\Model\PostNode::buildTreeByTaxonomyId($tax_id);
+$taxonomy = GCC\Model\PostTaxonomy::selectByPrimaryId($tax_id);
+$category = GCC\Model\PostNode::buildTreeByTaxonomyId($tax_id);
 
 $headTitle .= makeLink("/admin/post/taxonomy/list", $taxonomy['name']);
 

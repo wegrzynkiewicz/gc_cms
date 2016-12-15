@@ -2,10 +2,10 @@
 
 $headTitle = trans("Wszystkie strony");
 
-$staff = GrafCenter\CMS\Model\Staff::createFromSession();
+$staff = GCC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
-$pages = GrafCenter\CMS\Model\Page::selectAllWithFrames();
+$pages = GCC\Model\Page::selectAllWithFrames();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
@@ -54,7 +54,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                         <tr>
                             <td>
                                 <?php if ($page['image']): ?>
-                                    <img src="<?=GrafCenter\CMS\Thumb::make($page['image'], 64, 64)?>"
+                                    <img src="<?=GCC\Thumb::make($page['image'], 64, 64)?>"
                                     height="64" style="margin-right:5px"/>
                                 <?php endif ?>
                                 <a href="<?=url("/admin/page/edit/$page_id")?>"

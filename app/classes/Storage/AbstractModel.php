@@ -1,6 +1,6 @@
 <?php
 
-namespace GrafCenter\CMS\Storage;
+namespace GCC\Storage;
 
 /**
  * Reprezentuje zarowno tablice jak i pojedynczy rekord z bazy danych

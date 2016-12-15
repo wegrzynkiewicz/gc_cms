@@ -1,12 +1,12 @@
 <?php
-    $images = ModuleFile::selectAllByModuleId($module_id);
+    $images = GCC\Model\ModuleFile::selectAllByModuleId($module_id);
 ?>
 
 <div id="slider_<?=$module_id?>" class="swiper-container" style="height: 400px">
     <div class="swiper-wrapper">
         <?php foreach ($images as $image_id => $image): ?>
             <div class="swiper-slide"
-                style="background-image: url('<?=Thumb::make($image['url'], 1920, 9999)?>')">
+                style="background-image: url('<?=GCC\Thumb::make($image['url'], 1920, 9999)?>')">
             </div>
         <?php endforeach ?>
     </div>

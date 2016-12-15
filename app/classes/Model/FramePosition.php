@@ -1,10 +1,10 @@
 <?php
 
-namespace GrafCenter\CMS\Model;
+namespace GCC\Model;
 
-use GrafCenter\CMS\Storage\AbstractModel;
-use GrafCenter\CMS\Storage\Utility\ColumnTrait;
-use GrafCenter\CMS\Storage\Database;
+use GCC\Storage\AbstractModel;
+use GCC\Storage\Utility\ColumnTrait;
+use GCC\Storage\Database;
 
 class FramePosition extends AbstractModel
 {

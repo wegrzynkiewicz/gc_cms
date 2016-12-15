@@ -4,8 +4,8 @@
 
 define('START_TIME', microtime(true));
 
-use GrafCenter\CMS\Storage\Database;
-use GrafCenter\CMS\Logger;
+use GCC\Storage\Database;
+use GCC\Logger;
 
 session_start();
 
@@ -17,7 +17,6 @@ require_once __DIR__.'/../vendor/autoload.php';
 require_once __DIR__.'/config/config.php';
 require_once __DIR__.'/functions.php';
 require_once __DIR__.'/error-handler.php';
-require_once __DIR__.'/autoload.php';
 
 header_remove("X-Powered-By");
 setHeaderMimeType('text/html');
@@ -42,3 +41,5 @@ Logger::response(sprintf("%s :: ExecutionTime: %s",
     http_response_code(),
     (microtime(true) - START_TIME)
 ));
+
+Logger::response(print_r(get_included_files(), true));

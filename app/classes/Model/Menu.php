@@ -1,12 +1,12 @@
 <?php
 
-namespace GrafCenter\CMS\Model;
+namespace GCC\Model;
 
-use GrafCenter\CMS\Storage\AbstractModel;
-use GrafCenter\CMS\Storage\Utility\NodeTrait;
-use GrafCenter\CMS\Storage\Utility\PrimaryTrait;
-use GrafCenter\CMS\Storage\Node;
-use GrafCenter\CMS\Storage\Database;
+use GCC\Storage\AbstractModel;
+use GCC\Storage\Utility\NodeTrait;
+use GCC\Storage\Utility\PrimaryTrait;
+use GCC\Storage\Node;
+use GCC\Storage\Database;
 
 class Menu extends Node
 {

@@ -2,16 +2,16 @@
 
 $headTitle = trans("Edytowanie wpisu");
 
-$staff = GrafCenter\CMS\Model\Staff::createFromSession();
+$staff = GCC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $post_id = intval(array_shift($_SEGMENTS));
-$post = GrafCenter\CMS\Model\Post::selectWithFrameByPrimaryId($post_id);
+$post = GCC\Model\Post::selectWithFrameByPrimaryId($post_id);
 $frame_id = $post['frame_id'];
 
 if (wasSentPost()) {
 
-    GrafCenter\CMS\Model\Frame::updateByFrameId($frame_id, [
+    GCC\Model\Frame::updateByFrameId($frame_id, [
         'name' => $_POST['name'],
         'keywords' => $_POST['keywords'],
         'description' => $_POST['description'],
@@ -20,7 +20,7 @@ if (wasSentPost()) {
 
     $relations = isset($_POST['taxonomy']) ? array_unchunk($_POST['taxonomy']) : [];
 
-    GrafCenter\CMS\Model\Post::update($post_id, [], $relations);
+    GCC\Model\Post::update($post_id, [], $relations);
 
     redirect('/admin/post/list');
 }
@@ -28,6 +28,6 @@ if (wasSentPost()) {
 $headTitle .= makeLink("/admin/post/list", $post['name']);
 
 $_POST = $post;
-$checkedValues = GrafCenter\CMS\Model\PostNode::selectAllAsOptionsPostId($post_id);
+$checkedValues = GCC\Model\PostNode::selectAllAsOptionsPostId($post_id);
 
 require_once ACTIONS_PATH.'/admin/post/form.html.php';

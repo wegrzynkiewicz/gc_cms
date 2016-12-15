@@ -8,11 +8,11 @@ if (isset($_SESSION['staff'])) {
 
 if (wasSentPost()) {
     $passwordHash = sha1($_POST['password']);
-    $user = GrafCenter\CMS\Model\Staff::selectSingleBy('email', $_POST['email']);
+    $user = GCC\Model\Staff::selectSingleBy('email', $_POST['email']);
 
     # jeżeli hasło w bazie nie jest zahaszowane, a zgadza się
     if ($user and !isSha1($user['password']) and $_POST['password'] === $user['password']) {
-        GrafCenter\CMS\Model\Staff::updateByPrimaryId($user['staff_id'], [
+        GCC\Model\Staff::updateByPrimaryId($user['staff_id'], [
             'password' => $passwordHash,
         ]);
         $user['password'] = $passwordHash;

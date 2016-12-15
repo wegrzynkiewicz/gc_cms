@@ -1,8 +1,8 @@
 <?php
 
-namespace GrafCenter\CMS\Storage\Utility;
+namespace GCC\Storage\Utility;
 
-use GrafCenter\CMS\Storage\Database;
+use GCC\Storage\Database;
 
 /**
  * Zbior funkcji pomagających operować na jakimkolwiek polu

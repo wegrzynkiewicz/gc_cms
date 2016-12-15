@@ -1,6 +1,6 @@
 <?php
 
-namespace GrafCenter\CMS\Storage;
+namespace GCC\Storage;
 
 use ArrayAccess;
 

@@ -1,6 +1,6 @@
 <?php
 
-$staff = GrafCenter\CMS\Model\Staff::createFromSession();
+$staff = GCC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $image_id = intval($_POST['file_id']);

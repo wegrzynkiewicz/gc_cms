@@ -2,20 +2,20 @@
 
 $headTitle = trans("Edytowanie galerii");
 
-$staff = GrafCenter\CMS\Model\Staff::createFromSession();
+$staff = GCC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $gallery_id = intval(array_shift($_SEGMENTS));
 
 if (wasSentPost()) {
-    GrafCenter\CMS\Model\Gallery::updateByPrimaryId($gallery_id, [
+    GCC\Model\Gallery::updateByPrimaryId($gallery_id, [
         'name' => $_POST['name'],
         'lang' => $_SESSION['lang']['editor'],
     ]);
     redirect('/admin/gallery/list');
 }
 
-$gallery = GrafCenter\CMS\Model\Gallery::selectByPrimaryId($gallery_id);
+$gallery = GCC\Model\Gallery::selectByPrimaryId($gallery_id);
 if (!$gallery) {
     redirect('/admin/gallery/list');
 }

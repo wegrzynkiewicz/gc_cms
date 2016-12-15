@@ -14,7 +14,7 @@
                 data-width="<?=$is['width']?>"
                 data-height="<?=$is['height']?>"
                 class="thumb-wrapper">
-                <img src="<?=GrafCenter\CMS\Thumb::make($image['url'], 300, 200)?>"
+                <img src="<?=GCC\Thumb::make($image['url'], 300, 200)?>"
                     alt="<?=escape($image['name'])?>"
                     class="img-responsive">
             </a>

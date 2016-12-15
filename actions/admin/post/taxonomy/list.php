@@ -2,10 +2,10 @@
 
 $headTitle = trans("Podziały wpisów");
 
-$staff = GrafCenter\CMS\Model\Staff::createFromSession();
+$staff = GCC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
-$taxonomies = GrafCenter\CMS\Model\PostTaxonomy::selectAllCorrectWithPrimaryKey();
+$taxonomies = GCC\Model\PostTaxonomy::selectAllCorrectWithPrimaryKey();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 

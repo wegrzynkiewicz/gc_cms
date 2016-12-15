@@ -1,8 +1,8 @@
 <?php
 
-namespace GrafCenter\CMS\Storage;
+namespace GCC\Storage;
 
-use GrafCenter\CMS\Storage\AbstractModel;
+use GCC\Storage\AbstractModel;
 
 /**
  * Reprezentuje węzeł w strukturze drzewiastej

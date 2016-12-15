@@ -3,7 +3,7 @@
 $headTitle = trans("Edycja modułu tekstowego");
 
 if (wasSentPost()) {
-    GrafCenter\CMS\Model\FrameModule::updateByPrimaryId($module_id, [
+    GCC\Model\FrameModule::updateByPrimaryId($module_id, [
         'content' => $_POST['content'],
         'theme' => 'default',
     ]);

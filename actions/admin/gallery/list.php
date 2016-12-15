@@ -2,9 +2,9 @@
 
 $headTitle = trans("Galerie zdjęć");
 
-$staff = GrafCenter\CMS\Model\Staff::createFromSession();
+$staff = GCC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
-$rows = GrafCenter\CMS\Model\Gallery::selectAllCorrectWithPrimaryKey();
+$rows = GCC\Model\Gallery::selectAllCorrectWithPrimaryKey();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 

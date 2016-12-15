@@ -1,6 +1,6 @@
 <?php
 
-namespace GrafCenter\CMS;
+namespace GCC;
 
 use DateTime;
 

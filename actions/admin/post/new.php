@@ -2,12 +2,12 @@
 
 $headTitle = trans("Dodawanie nowego wpisu");
 
-$staff = GrafCenter\CMS\Model\Staff::createFromSession();
+$staff = GCC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 if (wasSentPost()) {
 
-    $frame_id = GrafCenter\CMS\Model\Frame::insert([
+    $frame_id = GCC\Model\Frame::insert([
         'name' => $_POST['name'],
         'lang' => $_SESSION['lang']['editor'],
         'keywords' => $_POST['keywords'],
@@ -17,7 +17,7 @@ if (wasSentPost()) {
 
     $relations = isset($_POST['taxonomy']) ? array_unchunk($_POST['taxonomy']) : [];
 
-    GrafCenter\CMS\Model\Post::insert([
+    GCC\Model\Post::insert([
         'frame_id' => $frame_id,
     ], $relations);
 
