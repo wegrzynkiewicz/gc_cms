@@ -29,7 +29,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 <div class="row">
     <div class="col-lg-8 text-left">
         <h1 class="page-header">
-            <?=$headTitle?>
+            <?=($headTitle)?>
         </h1>
     </div>
     <div class="col-lg-4 text-right">
@@ -71,7 +71,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                 <?php endif ?>
                                 <a href="<?=url("/admin/post/edit/$post_id")?>"
                                     title="<?=trans('Edytuj wpis')?>">
-                                    <?=$post['name']?>
+                                    <?=e($post['name'])?>
                                 </a>
                             </td>
                             <td>
@@ -82,7 +82,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                         <a href="<?=url("/admin/post/node/list/$tax_id")?>"
                                             title="<?=trans('Przejdź do podziału')?>">
                                             <strong>
-                                                <?=$taxonomies[$tax_id]['name']?>:
+                                                <?=e($taxonomies[$tax_id]['name'])?>:
                                             </strong>
                                         </a>
                                         <?=view('/admin/post/list-tax-preview.html.php', [
@@ -101,8 +101,8 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                 </a>
 
                                 <a data-toggle="modal"
-                                    data-id="<?=$post_id?>"
-                                    data-name="<?=$post['name']?>"
+                                    data-id="<?=e($post_id)?>"
+                                    data-name="<?=e($post['name'])?>"
                                     data-target="#deleteModal"
                                     title="<?=trans('Usuń wpis')?>"
                                     class="btn btn-danger btn-sm">

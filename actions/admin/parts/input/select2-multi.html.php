@@ -1,16 +1,16 @@
 <div class="form-group">
-    <label class="col-md-12 col-sm-12 col-xs-12" for="<?=$name?>">
+    <label class="col-md-12 col-sm-12 col-xs-12" for="<?=e($name)?>">
         <?=trans($label)?>
     </label>
     <div class="col-md-12 col-sm-12 col-xs-12">
         <select
-            id="<?=$name?>"
-            name="<?=$name?>[]"
+            id="<?=e($name)?>"
+            name="<?=e($name)?>[]"
             multiple="multiple"
             class="form-control input">
 
             <?php foreach ($options as $value => $caption): ?>
-                <option value="<?=$value?>" <?=selected(in_array($value, $selectedValues))?>>
+                <option value="<?=e($value)?>" <?=selected(in_array($value, $selectedValues))?>>
                     <?=trans($caption)?>
                 </option>
             <?php endforeach; ?>
@@ -26,7 +26,7 @@
 
 <script>
     $(function() {
-        $("#<?=$name?>").select2({
+        $("#<?=e($name)?>").select2({
             <?php if (isset($placeholder)): ?>
                 placeholder: "<?=trans($placeholder)?>",
             <?php endif ?>

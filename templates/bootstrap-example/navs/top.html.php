@@ -5,9 +5,9 @@
         <div class="container">
             <nav class="blog-nav">
                 <?php foreach ($menu->getChildren() as $node): ?>
-                    <?=$node->getOpenTag('class="blog-nav-item"')?>
-                        <?=$node['name']?>
-                    <?=$node->getCloseTag()?>
+                    <?=($node->getOpenTag('class="blog-nav-item"'))?>
+                        <?=e($node['name'])?>
+                    <?=($node->getCloseTag())?>
                 <?php endforeach ?>
             </nav>
         </div>

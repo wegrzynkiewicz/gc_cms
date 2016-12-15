@@ -9,7 +9,7 @@ $groupOptions = GC\Model\StaffGroup::selectAllAsOptionsWithPrimaryKey('name');
         <form action="" method="post" id="form" class="form-horizontal">
 
             <?php if (isset($error)): ?>
-                <p class="text-center"><?=$error?></p>
+                <p class="text-center"><?=e($error)?></p>
             <?php endif ?>
 
             <?=view('/admin/parts/input/image.html.php', [

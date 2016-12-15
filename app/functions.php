@@ -5,9 +5,18 @@
 /**
  * Zabezpiecza wyjście przed XSS zamieniając znaki specjalne na encje
  */
-function escape($string)
+function e($string)
 {
     return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
+}
+
+function purifyHtml($dirtyHtml)
+{
+    $config = HTMLPurifier_Config::createDefault();
+    $purifier = new HTMLPurifier($config);
+    $cleanHtml = $purifier->purify($dirtyHtml);
+
+    return $cleanHtml;
 }
 
 /**
@@ -102,7 +111,7 @@ function inputValue($postName, $default = '')
  */
 function makeLink($href, $name)
 {
-    return sprintf(' <a href="%s">%s</a> ', url($href), escape($name));
+    return sprintf(' <a href="%s">%s</a> ', url($href), e($name));
 }
 
 /**
@@ -199,12 +208,12 @@ function redirectToRefererOrDefault($defaultLocation, $code = 303)
  */
 function trans($text, array $params = [])
 {
-    return GC\Translator::getInstance()->translate($text, $params);
+    return e(GC\Translator::getInstance()->translate($text, $params));
 }
 
 function thumb($text, array $params = [])
 {
-   return GC\Thumb::make();
+    return GC\Thumb::make();
 }
 
 /**
@@ -375,20 +384,19 @@ function outputCSS($parsed)
 /**
  * Get either a Gravatar URL or complete image tag for a specified email address.
  *
- * @param string $email The email address
- * @param string $s Size in pixels, defaults to 80px [ 1 - 2048 ]
- * @param string $d Default imageset to use [ 404 | mm | identicon | monsterid | wavatar ]
- * @param string $r Maximum rating (inclusive) [ g | pg | r | x ]
+ * @param  string $email The email address
+ * @param  string $s     Size in pixels, defaults to 80px [ 1 - 2048 ]
+ * @param  string $d     Default imageset to use [ 404 | mm | identicon | monsterid | wavatar ]
+ * @param  string $r     Maximum rating (inclusive) [ g | pg | r | x ]
  * @return String containing either just a URL or a complete image tag
  * @source https://gravatar.com/site/implement/images/php/
  */
 function getGravatar($email, $s = 80, $d = 'mm', $r = 'g')
 {
-	$url = 'https://www.gravatar.com/avatar/';
-	$url .= md5( strtolower( trim( $email ) ) );
-	$url .= "?s=$s&d=$d&r=$r";
-
-	return $url;
+    return sprintf(
+        'https://www.gravatar.com/avatar/%s?s=%s&d=%s&r=%s',
+        md5(strtolower(trim($email))), $s, $d, $r
+    );
 }
 
 /**
@@ -402,8 +410,8 @@ function randomColor()
 /**
  * Generate a random string, using a cryptographically secure
  *
- * @param int $length      How many characters do we want?
- * @param string $keyspace A string of all possible characters to select from
+ * @param  int    $length   How many characters do we want?
+ * @param  string $keyspace A string of all possible characters to select from
  * @return string
  */
 function randomPassword($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')

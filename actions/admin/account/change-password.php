@@ -11,7 +11,7 @@ if (wasSentPost()) {
     $oldPasswordHash = sha1($oldPassword);
     $newPasswordHash = sha1($newPassword);
 
-    $user = GC\Model\Staff::selectByPrimaryId($_SESSION['staff']['staff_id']);
+    $user = GC\Model\Staff::selectByPrimaryId($_SESSION['staff']['entity']['staff_id']);
     if (!$user) {
         redirect('/admin/account/logout');
     }
@@ -51,7 +51,7 @@ require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
             <?php if (isset($error)): ?>
                 <p class="text-danger text-center">
-                    <?=$error?>
+                    <?=e($error)?>
                 </p>
             <?php endif ?>
 
@@ -95,7 +95,7 @@ $(function () {
             },
             new_password: {
                 required: true,
-                minlength : <?=$config['minPasswordLength']?>
+                minlength : <?=e($config['minPasswordLength'])?>
             },
             confirm_password: {
                 required: true,

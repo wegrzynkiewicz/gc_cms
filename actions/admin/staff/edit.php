@@ -42,7 +42,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     <?=trans('Wymuś zmianę hasła')?>
                 </a>
             </div>
-            <h1><?=$headTitle?></h1>
+            <h1><?=($headTitle)?></h1>
         </div>
     </div>
 </div>

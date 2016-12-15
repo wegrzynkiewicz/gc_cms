@@ -137,7 +137,7 @@ $actions = [ [
 <div class="row">
     <div class="col-lg-12 text-left">
         <h1 class="page-header">
-            <?=$headTitle?>
+            <?=($headTitle)?>
         </h1>
     </div>
 </div>
@@ -146,8 +146,8 @@ $actions = [ [
     <?php foreach($actions as $action): ?>
         <div class="col-lg-2">
             <a class="dashboard-action">
-                <i class="fa <?=$action['icon']?> fa-fw fa-3x"></i><br>
-                <span class="dashboard-action-title"><?=$action['name']?></span>
+                <i class="fa <?=e($action['icon'])?> fa-fw fa-3x"></i><br>
+                <span class="dashboard-action-title"><?=e($action['name'])?></span>
             </a>
         </div>
     <?php endforeach ?>

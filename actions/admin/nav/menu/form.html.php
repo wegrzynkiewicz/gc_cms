@@ -33,7 +33,7 @@
 <script>
 $(function() {
     function refreshType(nodeType) {
-        $.get("<?=url("/admin/nav/menu/edit-views")?>/"+nodeType+"/<?=$menu_id?>", function(data) {
+        $.get("<?=url("/admin/nav/menu/edit-views")?>/"+nodeType+"/<?=e($menu_id)?>", function(data) {
             $('#nodeType').html(data);
         });
     }
@@ -42,7 +42,7 @@ $(function() {
     });
 
     <?php if (isset($nodeType)): ?>
-        refreshType("<?=$nodeType?>");
+        refreshType("<?=e($nodeType)?>");
     <?php endif ?>
 });
 </script>

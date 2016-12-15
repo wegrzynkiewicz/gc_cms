@@ -16,7 +16,7 @@ $images = GC\Model\GalleryImage::selectAllByGalleryId($gallery_id);
     </div>
 <?php else: ?>
     <?php foreach ($images as $id => $image): ?>
-        <div id="thumb_<?=$id?>" data-id="<?=$id?>" class="col-lg-2 col-md-4 col-xs-6 thumb">
+        <div id="thumb_<?=e($id)?>" data-id="<?=e($id)?>" class="col-lg-2 col-md-4 col-xs-6 thumb">
             <div class="thumbnail">
 
                 <div class="thumb-wrapper">
@@ -33,8 +33,8 @@ $images = GC\Model\GalleryImage::selectAllByGalleryId($gallery_id);
                     </a>
 
                     <a data-toggle="modal"
-                        data-id="<?=$id?>"
-                        data-name="<?=$image['name']?>"
+                        data-id="<?=e($id)?>"
+                        data-name="<?=e($image['name'])?>"
                         data-target="#deleteModal"
                         title="<?=trans('Usuń zdjęcie')?>"
                         class="btn btn-danger btn-xs">
@@ -42,8 +42,8 @@ $images = GC\Model\GalleryImage::selectAllByGalleryId($gallery_id);
                     </a>
                 </div>
 
-                <div class="thumb-description" title="<?=escape($image['name'])?>">
-                    <?=escape($image['name'])?>
+                <div class="thumb-description" title="<?=e($image['name'])?>">
+                    <?=e($image['name'])?>
                 </div>
 
                 <div class="clearfix"></div>

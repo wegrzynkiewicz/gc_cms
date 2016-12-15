@@ -20,7 +20,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     <?=trans('Dodaj nowy moduł')?>
                 </a>
             </div>
-            <h1><?=$headTitle?></h1>
+            <h1><?=($headTitle)?></h1>
         </div>
     </div>
 </div>
@@ -40,12 +40,12 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 <div class="grid-stack">
                     <?php foreach ($modules as $module_id => $module): ?>
                         <?php list($x, $y, $w, $h) = explode(":", $module['grid']); ?>
-                        <div id="grid_<?=$module_id?>"
-                            data-id="<?=$module_id?>"
-                            data-gs-x="<?=$x?>"
-                            data-gs-y="<?=$y?>"
-                            data-gs-width="<?=$w?>"
-                            data-gs-height="<?=$h?>"
+                        <div id="grid_<?=e($module_id)?>"
+                            data-id="<?=e($module_id)?>"
+                            data-gs-x="<?=e($x)?>"
+                            data-gs-y="<?=e($y)?>"
+                            data-gs-width="<?=e($w)?>"
+                            data-gs-height="<?=e($h)?>"
                             data-gs-min-width="2"
                             data-gs-min-height="1"
                             data-gs-max-width="12"
@@ -58,7 +58,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                             <?=trans($config['modules'][$module['type']])?>
                                         </a>
                                         <button data-toggle="modal"
-                                            data-id="<?=$module_id?>"
+                                            data-id="<?=e($module_id)?>"
                                             data-target="#deleteModal"
                                             title="<?=trans('Usuń moduł')?>"
                                             type="button"

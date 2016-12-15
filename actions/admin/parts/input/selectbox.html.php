@@ -1,12 +1,12 @@
 <?php $selectValue = inputValue($name) ?>
 <div class="form-group">
-    <label class="col-md-12 col-sm-12 col-xs-12" for="<?=$name?>">
+    <label class="col-md-12 col-sm-12 col-xs-12" for="<?=e($name)?>">
         <?=trans($label)?>
     </label>
     <div class="col-md-12 col-sm-12 col-xs-12">
         <select
-            id="<?=$name?>"
-            name="<?=$name?>"
+            id="<?=e($name)?>"
+            name="<?=e($name)?>"
             class="form-control input"
             type="text">
 
@@ -17,7 +17,7 @@
             <?php endif ?>
 
             <?php foreach ($options as $value => $caption): ?>
-                <option value="<?=$value?>" <?=selected($value == $selectValue)?>>
+                <option value="<?=e($value)?>" <?=selected($value == $selectValue)?>>
                     <?=trans($caption)?>
                 </option>
             <?php endforeach; ?>

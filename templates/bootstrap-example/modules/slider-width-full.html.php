@@ -2,7 +2,7 @@
     $images = GC\Model\ModuleFile::selectAllByModuleId($module_id);
 ?>
 
-<div id="slider_<?=$module_id?>" class="swiper-container" style="height: 400px">
+<div id="slider_<?=e($module_id)?>" class="swiper-container" style="height: 400px">
     <div class="swiper-wrapper">
         <?php foreach ($images as $image_id => $image): ?>
             <div class="swiper-slide"
@@ -19,7 +19,7 @@
 
 <script>
 $(function () {
-    new Swiper('#slider_<?=$module_id?>', {
+    new Swiper('#slider_<?=e($module_id)?>', {
         loop: true,
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev',

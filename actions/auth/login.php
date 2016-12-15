@@ -19,8 +19,10 @@ if (wasSentPost()) {
     }
 
     if ($user and $passwordHash === $user['password']) {
-        $_SESSION['staff'] = $user;
-        $_SESSION['staff']['sessionTimeout'] = time() + $config['sessionTimeout'];
+        $_SESSION['staff'] = [
+            'entity' => $user,
+            'sessionTimeout' => time() + $config['sessionTimeout']
+        ];
         redirect('/admin');
     } else {
         $error = trans('Nieprawidłowy login lub hasło');
@@ -36,7 +38,7 @@ require_once ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">
-                                <?=$headTitle?>
+                                <?=($headTitle)?>
                             </h3>
                         </div>
                         <div class="panel-body">
@@ -44,7 +46,7 @@ require_once ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
 
                                 <?php if(isset($error)): ?>
                                     <p class="text-center">
-                                        <?=$error?>
+                                        <?=e($error)?>
                                     </p>
                                 <?php endif ?>
 

@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-lg-8 text-left">
         <h1 class="page-header">
-            <?=$headTitle?>
+            <?=($headTitle)?>
         </h1>
     </div>
 </div>

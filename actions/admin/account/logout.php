@@ -13,7 +13,7 @@ require_once ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">
-                            <?=$headTitle?>
+                            <?=($headTitle)?>
                         </h3>
                     </div>
                     <div class="panel-body">

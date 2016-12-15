@@ -3,14 +3,14 @@
         <ol class="breadcrumb" style="background-color: #eeeeee">
             <?php foreach ($links as $i => $link): ?>
                 <?php $isLink = !(empty($link['url']) or $link['url'] == $request); ?>
-                <li class="<?=$isLink ? '' : 'active'?>">
+                <li class="<?=e($isLink ? '' : 'active')?>">
                     <?php if ($isLink): ?>
-                        <a href="<?=$link['url']?>">
+                        <a href="<?=e($link['url'])?>">
                     <?php endif ?>
                         <?php if ($link['icon']): ?>
-                            <i class="fa <?=$link['icon']?> fa-fw"></i>
+                            <i class="fa <?=e($link['icon'])?> fa-fw"></i>
                         <?php endif ?>
-                        <?=$link['title']?>
+                        <?=($link['title'])?>
                     <?php if ($isLink): ?>
                         </a>
                     <?php endif ?>

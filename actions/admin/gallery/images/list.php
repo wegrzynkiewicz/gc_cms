@@ -15,7 +15,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 <div class="row">
     <div class="col-lg-8 text-left">
         <h1 class="page-header">
-            <?=$headTitle?>
+            <?=($headTitle)?>
         </h1>
     </div>
     <div class="col-lg-4 text-right">

@@ -1,5 +1,5 @@
-<div class="col-md-<?=$w?> col-md-offset-<?=$o?>" style="background-color: <?=randomColor()?>">
-    <div id="module_<?=$module['module_id']?>">
+<div class="col-md-<?=e($w)?> col-md-offset-<?=e($o)?>" style="background-color: <?=randomColor()?>">
+    <div id="module_<?=e($module['module_id'])?>">
         <?=templateView(
             sprintf(
                 "/modules/%s-%s.html.php",

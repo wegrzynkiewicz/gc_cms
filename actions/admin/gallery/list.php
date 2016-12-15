@@ -11,7 +11,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 <div class="row">
     <div class="col-lg-8 text-left">
         <h1 class="page-header">
-            <?=$headTitle?>
+            <?=($headTitle)?>
         </h1>
     </div>
     <div class="col-lg-4 text-right">
@@ -47,7 +47,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                             <td>
                                 <a href="<?=url("/admin/gallery/edit/$id")?>"
                                     title="<?=trans('Edytuj galerię')?>">
-                                    <?=$row['name']?>
+                                    <?=e($row['name'])?>
                                 </a>
                             </td>
                             <td class="text-right">
@@ -60,8 +60,8 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                 </a>
 
                                 <a data-toggle="modal"
-                                    data-id="<?=$id?>"
-                                    data-name="<?=$row['name']?>"
+                                    data-id="<?=e($id)?>"
+                                    data-name="<?=e($row['name'])?>"
                                     data-target="#deleteModal"
                                     title="<?=trans('Usuń galerię')?>"
                                     class="btn btn-danger btn-xs">

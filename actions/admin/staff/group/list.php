@@ -13,7 +13,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     <?=trans('Dodaj nową grupę pracowników')?>
                 </a>
             </div>
-            <h1><?=$headTitle?></h1>
+            <h1><?=($headTitle)?></h1>
         </div>
     </div>
 </div>
@@ -45,7 +45,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                             <td>
                                 <a href="<?=url("/admin/staff/group/edit/$group_id")?>"
                                     title="<?=trans('Edytuj grupę')?>">
-                                    <?=$group['name']?>
+                                    <?=e($group['name'])?>
                                 </a>
                             </td>
                             <td>
@@ -56,8 +56,8 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                             </td>
                             <td class="text-right">
                                 <a data-toggle="modal"
-                                    data-id="<?=$group_id?>"
-                                    data-name="<?=$group['name']?>"
+                                    data-id="<?=e($group_id)?>"
+                                    data-name="<?=e($group['name'])?>"
                                     data-target="#deleteModal"
                                     title="<?=trans('Usuń grupę')?>"
                                     class="btn btn-danger btn-md">

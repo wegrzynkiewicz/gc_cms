@@ -5,7 +5,7 @@ $mail->Subject = trans("Czy zapomniałeś hasła?");
 require_once ACTIONS_PATH.'/admin/parts/email/header.html.php'; ?>
 
 <div class="title">
-    <?=trans('Witaj')?> <?=$name?>!
+    <?=trans('Witaj')?> <?=e($name)?>!
 </div>
 <br>
 <div class="body-text">
@@ -14,7 +14,7 @@ require_once ACTIONS_PATH.'/admin/parts/email/header.html.php'; ?>
     <br>
     <br>
     <?=trans('Jeżeli chcesz wygenerować nowe hasło kliknij poniższy link')?><br>
-    <a href="<?=$regenerateUrl?>"><?=$regenerateUrl?></a><br>
+    <a href="<?=e($regenerateUrl)?>"><?=e($regenerateUrl)?></a><br>
     <br>
     <?=trans('Ten link jest aktywny tylko przez jedną godzinę')?><br>
     <br>

@@ -12,7 +12,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 <div class="row">
     <div class="col-lg-12 text-left">
         <h1 class="page-header">
-            <?=$headTitle?>
+            <?=($headTitle)?>
         </h1>
     </div>
 </div>
@@ -38,7 +38,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     <?php foreach ($taxonomies as $tax_id => $taxonomy): ?>
                         <tr>
                             <td>
-                                <?=$taxonomy['name']?>
+                                <?=e($taxonomy['name'])?>
                             </td>
                             <td>
                                 <a href="<?=url("/admin/post/node/list/$tax_id")?>"

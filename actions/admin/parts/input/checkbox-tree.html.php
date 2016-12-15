@@ -9,7 +9,7 @@
             </span>
         <?php endif ?>
         <?php if ($tree->hasChildren()): ?>
-            <div id="taxonomy_<?=$tax_id?>">
+            <div id="taxonomy_<?=e($tax_id)?>">
                 <?=view('/admin/parts/input/checkbox-tree-item.html.php', [
                     'tree' => $tree,
                     'name' => $name,
@@ -26,7 +26,7 @@
 
 <script>
 $(function(){
-    $('#taxonomy_<?=$tax_id?> .tree-checkbox').change(function() {
+    $('#taxonomy_<?=e($tax_id)?> .tree-checkbox').change(function() {
         if (!$(this).prop('checked')) {
             $(this)
                 .closest('.tree-checkbox-container')

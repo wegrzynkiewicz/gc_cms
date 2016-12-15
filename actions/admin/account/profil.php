@@ -1,7 +1,7 @@
 <?php
 
 if (wasSentPost()) {
-    GC\Model\Staff::updateByPrimaryId($_SESSION['staff']['staff_id'], [
+    GC\Model\Staff::updateByPrimaryId($_SESSION['staff']['entity']['staff_id'], [
         'lang' => $_POST['lang'],
     ]);
 
@@ -21,7 +21,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     <?=trans('Zmień hasło')?>
                 </a>
             </div>
-            <h1><?=$headTitle?></h1>
+            <h1><?=($headTitle)?></h1>
         </div>
     </div>
 </div>

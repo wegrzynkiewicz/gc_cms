@@ -1,17 +1,17 @@
 <?php foreach ($category->getChildren() as $node): $node_id = $node['node_id']; ?>
 
-    <li id="node_<?=$node_id?>" data-id="<?=$node_id?>">
+    <li id="node_<?=e($node_id)?>" data-id="<?=e($node_id)?>">
         <div class="sortable-content">
             <div class="col-lg-4">
                 <a href="<?=url("/admin/post/node/edit/$node_id/$tax_id")?>">
-                    <?=escape($node['name'])?>
+                    <?=e($node['name'])?>
                 </a>
             </div>
 
             <div class="pull-right">
                 <a data-toggle="modal"
-                    data-id="<?=$node_id?>"
-                    data-name="<?=$node['name']?>"
+                    data-id="<?=e($node_id)?>"
+                    data-name="<?=e($node['name'])?>"
                     data-target="#deleteModal"
                     title="<?=trans('Usuń węzeł')?>"
                     class="btn btn-danger btn-xs">

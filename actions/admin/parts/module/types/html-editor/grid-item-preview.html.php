@@ -1,1 +1,1 @@
-<?=$content?>
+<?=purifyHtml($content)?>

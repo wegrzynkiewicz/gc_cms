@@ -108,7 +108,7 @@ class Staff extends AbstractModel
     public static function createFromSession()
     {
         # jeżeli sesja nie istnieje wtedy przekieruj na logowanie
-        if (!isset($_SESSION['staff'])) {
+        if (!isset($_SESSION['staff']) or !isset($_SESSION['staff']['entity'])) {
             unset($_SESSION['staff']);
             Logger::logout("Session does not exists");
             redirect('/auth/login');
@@ -124,7 +124,8 @@ class Staff extends AbstractModel
         # spróbuj pobrać pracownika z bazy, jezeli go nie znajdzie wtedy przekieruj na logowanie
         try{
             # pobierz pracownika z bazy danych
-            $staff = static::createByStaffId($_SESSION['staff']['staff_id']);
+            $staff = static::createByStaffId($_SESSION['staff']['entity']['staff_id']);
+            $_SESSION['staff']['entity'] = $staff->getData();
         } catch (RuntimeException $exception) {
             unset($_SESSION['staff']);
             Logger::logout("Not found user");

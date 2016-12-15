@@ -5,7 +5,7 @@
 	<meta content="width=device-width, initial-scale=1" name="viewport">
 	<meta content="IE=edge" http-equiv="X-UA-Compatible">
 	<meta content="telephone=no" name="format-detection">
-	<title><?=escape($mail->Subject)?></title>
+	<title><?=e($mail->Subject)?></title>
 </head>
 <body bgcolor="#F0F0F0">
 	<table bgcolor="#F0F0F0" border="0" cellpadding="0" cellspacing="0" width="100%">

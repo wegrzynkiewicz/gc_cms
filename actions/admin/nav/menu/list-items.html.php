@@ -1,17 +1,17 @@
 <?php foreach ($menu->getChildren() as $node): $menu_id = $node['menu_id']; ?>
 
-    <li id="node_<?=$menu_id?>" data-id="<?=$menu_id?>">
+    <li id="node_<?=e($menu_id)?>" data-id="<?=e($menu_id)?>">
         <div class="sortable-content">
             <div class="col-lg-4">
                 <a href="<?=url("/admin/nav/menu/edit/$menu_id/$nav_id")?>">
-                    <?=escape($node['name'])?>
+                    <?=e($node['name'])?>
                 </a>
             </div>
 
             <div class="pull-right">
                 <a data-toggle="modal"
-                    data-id="<?=$menu_id?>"
-                    data-name="<?=$node['name']?>"
+                    data-id="<?=e($menu_id)?>"
+                    data-name="<?=e($node['name'])?>"
                     data-target="#deleteModal"
                     title="<?=trans('Usuń węzeł')?>"
                     class="btn btn-danger btn-xs">

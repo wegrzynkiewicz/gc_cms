@@ -5,18 +5,18 @@ $mail->Subject = trans("Utworzyliśmy dla Ciebie konto pracownika w serwisie")."
 require_once ACTIONS_PATH.'/admin/parts/email/header.html.php'; ?>
 
 <div class="title">
-    <?=trans('Witaj')?> <?=$name?>!
+    <?=trans('Witaj')?> <?=e($name)?>!
 </div>
 <br>
 <div class="body-text">
     <?=trans('Utworzyliśmy dla Ciebie konto pracownika w serwisie')?>
-    <a href="http://<?=$_SERVER['HTTP_HOST']?>"><?=$_SERVER['HTTP_HOST']?></a><br>
+    <a href="http://<?=e($_SERVER['HTTP_HOST'])?>"><?=e($_SERVER['HTTP_HOST'])?></a><br>
     <br>
-    <?=trans('Login')?>: <?=escape($login)?><br>
-    <?=trans('Hasło')?>: <strong><?=escape($password)?></strong><br>
+    <?=trans('Login')?>: <?=e($login)?><br>
+    <?=trans('Hasło')?>: <strong><?=e($password)?></strong><br>
     <br>
     <?=trans('Możesz przejść teraz do panelu admina')?>
-    <a href="http://<?=$_SERVER['HTTP_HOST']?>/admin"><?=$_SERVER['HTTP_HOST']?>/admin</a><br>
+    <a href="http://<?=e($_SERVER['HTTP_HOST'])?>/admin"><?=e($_SERVER['HTTP_HOST'])?>/admin</a><br>
     <br>
     <strong><?=trans('Wiadomość została wygenerowana automatycznie. Prosimy nie odpowiadać')?></strong><br>
     <br>

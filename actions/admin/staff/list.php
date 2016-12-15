@@ -13,7 +13,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     <?=trans('Dodaj nowego pracownika')?>
                 </a>
             </div>
-            <h1><?=$headTitle?></h1>
+            <h1><?=($headTitle)?></h1>
         </div>
     </div>
 </div>
@@ -51,7 +51,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
                                 <a href="<?=url("/admin/staff/edit/$staff_id")?>"
                                     title="<?=trans('Edytuj pracownika')?>">
-                                    <?=$row['name']?>
+                                    <?=e($row['name'])?>
                                 </a>
                             </td>
                             <td>
@@ -70,8 +70,8 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                             </td>
                             <td class="text-right">
                                 <a data-toggle="modal"
-                                    data-id="<?=$staff_id?>"
-                                    data-name="<?=$row['name']?>"
+                                    data-id="<?=e($staff_id)?>"
+                                    data-name="<?=e($row['name'])?>"
                                     data-target="#deleteModal"
                                     title="<?=trans('Usuń pracownika')?>"
                                     class="btn btn-danger btn-md">

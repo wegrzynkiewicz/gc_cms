@@ -1,10 +1,10 @@
 <?php foreach($menu as $name => $node): ?>
     <?php if (empty($node['perms']) or $staff->hasPermissions($node['perms'])): ?>
         <li>
-            <a href="<?=url($node['path'])?>" id="nav_<?=$node['id']?>">
+            <a href="<?=url($node['path'])?>" id="nav_<?=e($node['id'])?>">
 
                 <?php if (isset($node['icon'])): ?>
-                    <i class="<?=$node['icon']?>"></i>
+                    <i class="<?=e($node['icon'])?>"></i>
                 <?php endif ?>
 
                 <?=trans($name)?>
@@ -15,7 +15,7 @@
             </a>
 
             <?php if (isset($node['children'])): ?>
-                <ul class="<?=$level?> collapse">
+                <ul class="<?=e($level)?> collapse">
                     <?=view('/admin/parts/sidebar-item.html.php', [
                         'menu' => $node['children'],
                         'staff' => $staff,

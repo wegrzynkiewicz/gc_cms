@@ -10,7 +10,7 @@
 
     <script>
         $(function() {
-            var sessionTimeout = <?=$config['sessionTimeout']?>;
+            var sessionTimeout = <?=e($config['sessionTimeout'])?>;
             var finalTime = new Date();
             finalTime.setSeconds(finalTime.getSeconds() + sessionTimeout);
             $('#session-countdown')

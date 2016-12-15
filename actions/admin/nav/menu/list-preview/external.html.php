@@ -1,4 +1,4 @@
 <?=trans($config['nodeTypes']['external'])?>
-<a href="<?=$node['destination']?>">
-    <?=escape($node['destination'])?>
+<a href="<?=e($node['destination'])?>">
+    <?=e($node['destination'])?>
 </a>

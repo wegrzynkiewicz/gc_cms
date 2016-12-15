@@ -1,16 +1,16 @@
 <?php $selectedValue = inputValue($name) ?>
 <div class="form-group">
-    <label class="col-md-12 col-sm-12 col-xs-12" for="<?=$name?>">
+    <label class="col-md-12 col-sm-12 col-xs-12" for="<?=e($name)?>">
         <?=trans($label)?>
     </label>
     <div class="col-md-12 col-sm-12 col-xs-12">
         <select
-            id="<?=$name?>"
-            name="<?=$name?>"
+            id="<?=e($name)?>"
+            name="<?=e($name)?>"
             class="form-control input">
 
             <?php foreach ($config['langs'] as $value => $caption): ?>
-                <option value="<?=$value?>" data-flag="<?=$config['flags'][$value]?>"
+                <option value="<?=e($value)?>" data-flag="<?=e($config['flags'][$value])?>"
                     <?=selected($selectedValue == $value)?>>
                     <?=trans($caption)?>
                 </option>
@@ -31,7 +31,7 @@
             return '<span><span class="flag-icon flag-icon-'+$(state.element).attr('data-flag')+'"></span> '+state.text+'</span>'
         }
 
-        $("#<?=$name?>").select2({
+        $("#<?=e($name)?>").select2({
             templateResult: format,
             templateSelection: format,
             escapeMarkup: function(m) {

@@ -30,7 +30,7 @@ require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                             <td>
                                 <a href="<?=url("/admin/widget/edit/$widget_id")?>"
                                     title="<?=trans('Edytuj widżet')?>">
-                                    <?=$widget['name']?>
+                                    <?=e($widget['name'])?>
                                 </a>
                             </td>
                             <td>

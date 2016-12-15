@@ -2,7 +2,7 @@
     <?php foreach ($category->getChildren() as $node): $node_id = $node->getPrimaryId() ?>
         <li>
             <a href="<?=url("/admin/post/node/edit/$node_id/$tax_id")?>">
-                <?=escape($node['name'])?>
+                <?=e($node['name'])?>
             </a>
             <?php if ($node->hasChildren()): ?>
                 <?=view('/admin/post/list-tax-preview.html.php', [

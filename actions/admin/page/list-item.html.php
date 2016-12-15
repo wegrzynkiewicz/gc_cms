@@ -6,7 +6,7 @@
         <?php endif ?>
         <a href="<?=url("/admin/page/edit/$page_id")?>"
             title="<?=trans('Edytuj stronę')?>">
-            <?=$page['name']?>
+            <?=e($page['name'])?>
         </a>
     </td>
     <td class="text-right">
@@ -19,8 +19,8 @@
         </a>
 
         <a data-toggle="modal"
-            data-id="<?=$page_id?>"
-            data-name="<?=$page['name']?>"
+            data-id="<?=e($page_id)?>"
+            data-name="<?=e($page['name'])?>"
             data-target="#deleteModal"
             title="<?=trans('Usuń stronę')?>"
             class="btn btn-danger btn-xs">

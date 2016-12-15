@@ -27,7 +27,7 @@
                             <input name="permissions[]"
                                 type="checkbox"
                                 <?=checked(in_array($perm, $permissions))?>
-                                value="<?=$perm?>">
+                                value="<?=e($perm)?>">
                             <?=trans($label)?>
                         </label>
                     </div>
