@@ -23,7 +23,7 @@ require_once ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                         </p>
 
                         <div class="btn-group btn-group-justified" style="margin-top:5px">
-                            <a href="<?=url("/admin/login")?>" class="btn btn-link">
+                            <a href="<?=url("/auth/login")?>" class="btn btn-link">
                             <?=trans('Zaloguj się ponownie')?></a>
                         </div>
 

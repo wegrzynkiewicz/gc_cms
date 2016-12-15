@@ -2,9 +2,6 @@
 
 $headTitle = trans("Zmiana języka edytora");
 
-$staff = Staff::createFromSession();
-$staff->redirectIfUnauthorized();
-
 $lang = array_shift($_SEGMENTS);
 $availableLangs = array_keys($config['langs']);
 

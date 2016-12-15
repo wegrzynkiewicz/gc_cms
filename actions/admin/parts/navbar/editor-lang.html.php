@@ -12,7 +12,7 @@
         <ul class="dropdown-menu dropdown-user">
             <?php foreach ($config['langs'] as $lang => $label): ?>
                 <li>
-                    <a href="<?=url("/admin/account/change-lang/$lang")?>">
+                    <a href="<?=url("/admin/account/change-editor-lang/$lang")?>">
                         <?=view('/admin/parts/language.html.php', [
                             'lang' => $lang
                         ])?>

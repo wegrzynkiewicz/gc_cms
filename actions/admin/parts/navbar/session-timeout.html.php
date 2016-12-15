@@ -19,13 +19,13 @@
                     $(this).html(event.strftime('%M:%S'));
                 })
                 .on('finish.countdown', function(event) {
-                    window.location.href = "/admin/account/session/timeout";
+                    window.location.href = "/auth/session-timeout";
                 });
             $('#session-refresh').click(function(event){
                 event.preventDefault();
                 var nextTime = new Date();
                 nextTime.setSeconds(nextTime.getSeconds() + sessionTimeout);
-                $.post("/admin/account/session/refresh", function() {
+                $.post("/admin/account/session-refresh", function() {
                     $('#session-countdown').countdown(nextTime);
                 });
             });

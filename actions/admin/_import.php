@@ -7,3 +7,6 @@ $headTitle = trans("Panel");
 
 $breadcrumbs = new Breadcrumbs();
 $breadcrumbs->push('/admin', 'Dashboard', [], 'fa-dashboard');
+
+# utworzenie obiektu reprezentującego pracownika, sprawdza czy jest zalogowany
+$staff = Staff::createFromSession();

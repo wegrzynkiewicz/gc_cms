@@ -14,7 +14,7 @@
             </a>
         </li>
         <li>
-            <a href="<?=url('/admin/account/password')?>">
+            <a href="<?=url('/admin/account/change-password')?>">
                 <i class="fa fa-unlock-alt fa-fw"></i>
                 <?=trans('Zmień hasło')?>
             </a>

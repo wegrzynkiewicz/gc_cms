@@ -36,7 +36,7 @@ if ($user) {
 
         $mail = new Mail();
         $mail->buildTemplate(
-            '/admin/account/forgot/password-reseted.email.html.php',
+            '/auth/forgot/password-reseted.email.html.php',
             '/admin/parts/email/styles.css', [
                 'name' => $user['name'],
                 'login' => $user['email'],
@@ -73,7 +73,7 @@ require_once ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                         <?php endif ?>
 
                         <div class="btn-group btn-group-justified" style="margin-top:5px">
-                            <a href="<?=url("/admin/login")?>" class="btn btn-link">
+                            <a href="<?=url("/auth/login")?>" class="btn btn-link">
                                 <?=trans('Wróć do logowania')?></a>
                         </div>
 

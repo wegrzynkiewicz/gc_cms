@@ -2,9 +2,6 @@
 
 $headTitle = trans("Zmiana hasła");
 
-$staff = Staff::createFromSession();
-$staff->redirectIfUnauthorized();
-
 if (wasSentPost()) {
 
     $oldPassword = $_POST['old_password'];

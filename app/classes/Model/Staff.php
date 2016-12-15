@@ -103,14 +103,14 @@ class Staff extends Model
         if (!isset($_SESSION['staff'])) {
             unset($_SESSION['staff']);
             Logger::logout("Session does not exists");
-            redirect('/admin/login');
+            redirect('/auth/login');
         }
 
         # jeżeli czas trwania sesji minął
         if (time() > $_SESSION['staff']['sessionTimeout']) {
             unset($_SESSION['staff']);
             Logger::logout("Session timeout");
-            redirect('/admin/account/session/timeout');
+            redirect('/auth/session-timeout');
         }
 
         # spróbuj pobrać pracownika z bazy, jezeli go nie znajdzie wtedy przekieruj na logowanie
@@ -120,12 +120,12 @@ class Staff extends Model
         } catch (RuntimeException $exception) {
             unset($_SESSION['staff']);
             Logger::logout("Not found user");
-            redirect('/admin/login');
+            redirect('/auth/login');
         }
 
         # jezeli istnieje flaga, ze trzeba zmienić hasło wtedy przekieruj
         if ($staff['force_change_password']) {
-            redirect('/admin/account/force-change-password');
+            redirect('/auth/force-change-password');
         }
 
         Logger::session(sprintf("%s <%s>", $staff['name'], $staff['email']));

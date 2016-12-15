@@ -21,7 +21,7 @@ if (wasSentPost()) {
         ];
 
         $regenerateUrl = sprintf(
-            "http://%s/admin/account/forgot/verify/%s/%s",
+            "http://%s/auth/forgot/verify/%s/%s",
             $_SERVER['HTTP_HOST'], $email64, $regeneration['verifyHash']
         );
 
@@ -31,7 +31,7 @@ if (wasSentPost()) {
 
         $mail = new Mail();
         $mail->buildTemplate(
-            '/admin/account/forgot/verify-generation.email.html.php',
+            '/auth/forgot/verify-generation.email.html.php',
             '/admin/parts/email/styles.css', [
                 'name' => $user['name'],
                 'regenerateUrl' => $regenerateUrl,
@@ -80,7 +80,7 @@ require_once ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                             <div class="btn-group btn-group-justified" style="margin-top:5px">
                                 <a href="<?=url("/")?>" class="btn btn-link">
                                     <?=trans('Przejdź na stronę główną')?></a>
-                                <a href="<?=url("/admin/login")?>" class="btn btn-link">
+                                <a href="<?=url("/auth/login")?>" class="btn btn-link">
                                     <?=trans('Wróć do logowania')?></a>
                             </div>
 

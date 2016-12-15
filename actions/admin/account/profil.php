@@ -2,9 +2,6 @@
 
 $headTitle = trans("Profil użytkownika");
 
-$staff = Staff::createFromSession();
-$staff->redirectIfUnauthorized();
-
 if (wasSentPost()) {
     Staff::updateByPrimaryId($_SESSION['staff']['staff_id'], [
         'lang' => $_POST['lang'],

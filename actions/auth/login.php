@@ -70,7 +70,7 @@ require_once ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                                 <div class="btn-group btn-group-justified" style="margin-top:5px">
                                     <a href="<?=url("/")?>" class="btn btn-link">
                                         <?=trans('Przejdź na stronę główną')?></a>
-                                    <a href="<?=url("/admin/account/forgot/password")?>" class="btn btn-link">
+                                    <a href="<?=url("/auth/forgot/password")?>" class="btn btn-link">
                                         <?=trans('Zapomniałem hasła')?></a>
                                 </div>
                             </form>

@@ -2,9 +2,6 @@
 
 $headTitle = trans("Zostałeś wylogowany");
 
-$staff = Staff::createFromSession();
-$staff->redirectIfUnauthorized();
-
 unset($_SESSION['staff']);
 
 require_once ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
@@ -29,7 +26,7 @@ require_once ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                         <div class="btn-group btn-group-justified" style="margin-top:5px">
                             <a href="<?=url("/")?>" class="btn btn-link">
                                 <?=trans('Przejdź na stronę główną')?></a>
-                            <a href="<?=url("/admin/login")?>" class="btn btn-link">
+                            <a href="<?=url("/auth/login")?>" class="btn btn-link">
                             <?=trans('Wróć do logowania')?></a>
                         </div>
 
