@@ -9,21 +9,22 @@ class Breadcrumbs
         return $this->links;
     }
 
-    public function push($url, $title, array $args = [])
+    public function push($url, $title, array $args = [], $icon = null)
     {
-        array_push($this->links, $this->wrap($url, $title, $args));
+        array_push($this->links, $this->wrap($url, $title, $args, $icon));
     }
 
-    public function unshift($url, $title, array $args = [])
+    public function unshift($url, $title, array $args = [], $icon = null)
     {
-        array_unshift($this->links, $this->wrap($url, $title, $args));
+        array_unshift($this->links, $this->wrap($url, $title, $args, $icon));
     }
 
-    protected function wrap($url, $title, array $args)
+    protected function wrap($url, $title, array $args, $icon)
     {
         return array(
-            'title' => vsprintf(trans($title), $args),
+            'title' => trans($title, $args),
             'url' => url($url),
+            'icon' => $icon,
         );
     }
 }

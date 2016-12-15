@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = trans("Edytujesz moduł tekstowy");
+$headTitle = trans("Edycja modułu tekstowego");
 
 if (wasSentPost()) {
     FrameModule::updateByPrimaryId($module_id, [
@@ -9,6 +9,8 @@ if (wasSentPost()) {
     ]);
     redirect("/admin/$frame/module/list/$parent_id");
 }
+
+$breadcrumbs->push($request, "Edycja modułu tekstowego");
 
 $_POST['content'] = $content;
 
@@ -21,6 +23,8 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
         </h1>
     </div>
 </div>
+
+<?php require_once ACTIONS_PATH.'/admin/parts/breadcrumbs.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">

@@ -27,6 +27,8 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     </div>
 </div>
 
+<?php require_once ACTIONS_PATH.'/admin/parts/breadcrumbs.html.php'; ?>
+
 <div class="row">
     <div class="col-lg-12">
         <form id="gridForm" action="" method="post" class="form-horizontal">

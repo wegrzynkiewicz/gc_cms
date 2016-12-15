@@ -6,4 +6,4 @@
 $headTitle = trans("Panel");
 
 $breadcrumbs = new Breadcrumbs();
-$breadcrumbs->push('/admin', 'Dashboard');
+$breadcrumbs->push('/admin', 'Dashboard', [], 'fa-dashboard');

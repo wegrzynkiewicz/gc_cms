@@ -80,8 +80,9 @@ while (count($segments) > 0) {
     }
 
     # jeżeli istnieje plik "import" to załaduj, ale nie kończ pętli
-    $file = $path.'/import.php';
+    $file = $path.'/_import.php';
     if (file_exists($file)) {
+        $_SEGMENTS = $segments;
         Logger::import(relativePath($file));
         require_once $file;
     }

@@ -10,20 +10,27 @@ $pages = Page::selectAllWithFrames();
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
-    <div class="col-lg-8 text-left">
-        <h1 class="page-header">
-            <?=$headTitle?>
-        </h1>
-    </div>
-    <div class="col-lg-4 text-right">
-        <h1 class="page-header">
-            <a href="<?=url("/admin/page/new")?>" type="button" class="btn btn-success">
-                <i class="fa fa-plus fa-fw"></i>
-                <?=trans('Dodaj nową stronę')?>
-            </a>
-        </h1>
+    <div class="col-lg-12">
+        <div class="page-header">
+            <div class="btn-toolbar pull-right">
+                <a href="<?=url("/admin/page/new")?>" type="button" class="btn btn-success btn-md">
+                    <i class="fa fa-plus fa-fw"></i>
+                    <?=trans('Dodaj nową stronę')?>
+                </a>
+            </div>
+            <h1><?=$headTitle?></h1>
+        </div>
     </div>
 </div>
+
+<?php require_once ACTIONS_PATH.'/admin/parts/breadcrumbs.html.php'; ?>
+
+<!-- <div class="alert alert-info alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert">
+        <span>&times;</span>
+    </button>
+    <strong>Pomoc:</strong> <?=trans('')?>
+</div> -->
 
 <div class="row">
     <div class="col-md-12">
