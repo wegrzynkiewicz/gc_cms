@@ -1,5 +1,9 @@
 <?php
 
+namespace GrafCenter\CMS\Storage\Utility;
+
+use GrafCenter\CMS\Storage\Database;
+
 trait GroupModelTrait
 {
     public static function selectJoinByPrimaryId($primary_id)

@@ -1,6 +1,12 @@
 <?php
 
-class FrameModule extends Model
+namespace GrafCenter\CMS\Model;
+
+use GrafCenter\CMS\Storage\AbstractModel;
+use GrafCenter\CMS\Storage\Utility\PrimaryTrait;
+use GrafCenter\CMS\Storage\Database;
+
+class FrameModule extends AbstractModel
 {
     public static $table   = '::frame_modules';
     public static $primary = 'module_id';

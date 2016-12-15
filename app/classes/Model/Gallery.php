@@ -1,6 +1,13 @@
 <?php
 
-class Gallery extends Model
+namespace GrafCenter\CMS\Model;
+
+use GrafCenter\CMS\Storage\AbstractModel;
+use GrafCenter\CMS\Storage\Utility\ColumnTrait;
+use GrafCenter\CMS\Storage\Utility\PrimaryTrait;
+use GrafCenter\CMS\Storage\Database;
+
+class Gallery extends AbstractModel
 {
     public static $table   = '::galleries';
     public static $primary = 'gallery_id';

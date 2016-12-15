@@ -1,5 +1,9 @@
 <?php
 
+namespace GrafCenter\CMS\Storage\Utility;
+
+use GrafCenter\CMS\Storage\Database;
+
 /**
  * Zbiór pomocniczych metod dla wszystkich drzewiastych struktur
  */

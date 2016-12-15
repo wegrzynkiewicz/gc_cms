@@ -1,6 +1,13 @@
 <?php
 
-class Post extends Model
+namespace GrafCenter\CMS\Model;
+
+use GrafCenter\CMS\Storage\AbstractModel;
+use GrafCenter\CMS\Storage\Utility\PrimaryTrait;
+use GrafCenter\CMS\Storage\Utility\ContainFrameTrait;
+use GrafCenter\CMS\Storage\Database;
+
+class Post extends AbstractModel
 {
     public static $table   = '::posts';
     public static $primary = 'post_id';

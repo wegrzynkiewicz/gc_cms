@@ -1,6 +1,13 @@
 <?php
 
-class ModuleFile extends Model
+namespace GrafCenter\CMS\Model;
+
+use GrafCenter\CMS\Storage\AbstractModel;
+use GrafCenter\CMS\Storage\Utility\ColumnTrait;
+use GrafCenter\CMS\Storage\Utility\PrimaryTrait;
+use GrafCenter\CMS\Storage\Database;
+
+class ModuleFile extends AbstractModel
 {
     public static $table   = '::module_files';
     public static $primary = 'file_id';

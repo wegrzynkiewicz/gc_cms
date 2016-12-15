@@ -3,6 +3,11 @@
     "type": "project",
     "license": "copyright",
     "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "GrafCenter\\CMS\\": "app/classes/"
+        }
+    },
     "require": {
         "phpmailer/phpmailer": "^5.2",
         "tijsverkoyen/css-to-inline-styles": "^2.2",

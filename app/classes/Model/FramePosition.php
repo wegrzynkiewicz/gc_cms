@@ -1,6 +1,12 @@
 <?php
 
-class FramePosition extends Model
+namespace GrafCenter\CMS\Model;
+
+use GrafCenter\CMS\Storage\AbstractModel;
+use GrafCenter\CMS\Storage\Utility\ColumnTrait;
+use GrafCenter\CMS\Storage\Database;
+
+class FramePosition extends AbstractModel
 {
     public static $table = '::frame_pos';
 

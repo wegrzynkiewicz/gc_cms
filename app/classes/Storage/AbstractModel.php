@@ -1,11 +1,13 @@
 <?php
 
+namespace GrafCenter\CMS\Storage;
+
 /**
  * Reprezentuje zarowno tablice jak i pojedynczy rekord z bazy danych
  * Wszystkie statyczne metody odnoszą sie do operacji na tablicy, natomiast
  * niestatyczne metody są własnością konkretnego obiektu, czyli wiersza z bazy
  */
-abstract class Model extends Entity
+abstract class AbstractModel extends Entity
 {
     /**
      * Jest uruchamiana w momencie wywołania metody chronionej lub nieistniejącej.

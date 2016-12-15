@@ -1,6 +1,13 @@
 <?php
 
-class ModuleFilePosition extends Model
+namespace GrafCenter\CMS\Model;
+
+use GrafCenter\CMS\Storage\AbstractModel;
+use GrafCenter\CMS\Storage\Utility\ColumnTrait;
+use GrafCenter\CMS\Storage\Utility\PositionTrait;
+use GrafCenter\CMS\Storage\Database;
+
+class ModuleFilePosition extends AbstractModel
 {
     public static $table = '::module_file_pos';
 

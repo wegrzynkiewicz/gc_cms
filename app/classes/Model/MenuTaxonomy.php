@@ -1,6 +1,13 @@
 <?php
 
-class MenuTaxonomy extends Model
+namespace GrafCenter\CMS\Model;
+
+use GrafCenter\CMS\Storage\AbstractModel;
+use GrafCenter\CMS\Storage\Utility\PrimaryTrait;
+use GrafCenter\CMS\Storage\Utility\TaxonomyTrait;
+use GrafCenter\CMS\Storage\Database;
+
+class MenuTaxonomy extends AbstractModel
 {
     public static $table     = '::menu_taxonomies';
     public static $primary   = 'nav_id';

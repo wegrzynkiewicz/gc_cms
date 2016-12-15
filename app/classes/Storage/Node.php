@@ -1,9 +1,13 @@
 <?php
 
+namespace GrafCenter\CMS\Storage;
+
+use GrafCenter\CMS\Storage\AbstractModel;
+
 /**
  * Reprezentuje węzeł w strukturze drzewiastej
  */
-class Node extends Model
+class Node extends AbstractModel
 {
     private $parent = null;
     private $children = [];

@@ -1,6 +1,13 @@
 <?php
 
-class MailToSend extends Model
+namespace GrafCenter\CMS\Model;
+
+use GrafCenter\CMS\Storage\AbstractModel;
+use GrafCenter\CMS\Storage\Utility\ColumnTrait;
+use GrafCenter\CMS\Storage\Utility\PrimaryTrait;
+use GrafCenter\CMS\Storage\Database;
+
+class MailToSend extends AbstractModel
 {
     public static $table   = '::mail_to_send';
     public static $primary = 'mail_id';

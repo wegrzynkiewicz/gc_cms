@@ -1,5 +1,9 @@
 <?php
 
+namespace GrafCenter\CMS;
+
+use PHPMailer;
+
 class Mail extends PHPMailer
 {
     private $hash = null;

@@ -1,5 +1,7 @@
 <?php
 
+use GrafCenter\CMS\Model\Staff;
+
 $headTitle = trans("Logowanie do panelu admina");
 
 if (isset($_SESSION['staff'])) {

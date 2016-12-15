@@ -1,5 +1,9 @@
 <?php
 
+namespace GrafCenter\CMS\Storage\Utility;
+
+use GrafCenter\CMS\Storage\Database;
+
 /**
  * Zbior funkcji pomagających operować na jakimkolwiek polu
  * Dla prawidłowego działania wymaga w klasie pochodnej:

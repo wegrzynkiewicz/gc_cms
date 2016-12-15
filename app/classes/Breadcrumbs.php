@@ -1,5 +1,7 @@
 <?php
 
+namespace GrafCenter\CMS;
+
 class Breadcrumbs
 {
     protected $links = array();

@@ -1,5 +1,7 @@
 <?php
 
+use GrafCenter\CMS\Model\Staff;
+
 $headTitle = trans('Dashboard');
 
 $staff = Staff::createFromSession();

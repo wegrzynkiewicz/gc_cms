@@ -1,5 +1,7 @@
 <?php
 
+namespace GrafCenter\CMS;
+
 class Translator
 {
     private static $instance;

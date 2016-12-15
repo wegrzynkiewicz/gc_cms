@@ -1,5 +1,9 @@
 <?php
 
+namespace GrafCenter\CMS\Storage;
+
+use ArrayAccess;
+
 /**
  * Reprezentuje pojedyńczy rekord z bazy danych
  */

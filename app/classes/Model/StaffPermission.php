@@ -1,6 +1,12 @@
 <?php
 
-class StaffPermission extends Model
+namespace GrafCenter\CMS\Model;
+
+use GrafCenter\CMS\Storage\AbstractModel;
+use GrafCenter\CMS\Storage\Utility\ColumnTrait;
+use GrafCenter\CMS\Storage\Database;
+
+class StaffPermission extends AbstractModel
 {
     public static $table = '::staff_permissions';
 

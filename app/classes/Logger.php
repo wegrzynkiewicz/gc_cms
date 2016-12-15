@@ -1,5 +1,9 @@
 <?php
 
+namespace GrafCenter\CMS;
+
+use DateTime;
+
 class Logger
 {
     private $filename = "";

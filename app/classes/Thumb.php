@@ -1,5 +1,7 @@
 <?php
 
+namespace GrafCenter\CMS;
+
 class Thumb
 {
     private $imageUrl = '';

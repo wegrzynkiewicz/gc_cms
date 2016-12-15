@@ -1,5 +1,10 @@
 <?php
 
+namespace GrafCenter\CMS\Storage;
+
+use GrafCenter\CMS\Logger;
+use PDO;
+
 /**
  * Słuzy do wykonywania zapytań do bazy danych
  */

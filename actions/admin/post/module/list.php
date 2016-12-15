@@ -1,8 +1,9 @@
 <?php
 
+use GrafCenter\CMS\Model\Post;
+
 $headTitle = trans("Moduły w poście");
 
-$staff = Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $parent_id = intval(array_shift($_SEGMENTS));

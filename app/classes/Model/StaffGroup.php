@@ -1,6 +1,13 @@
 <?php
 
-class StaffGroup extends Model
+namespace GrafCenter\CMS\Model;
+
+use GrafCenter\CMS\Storage\AbstractModel;
+use GrafCenter\CMS\Storage\Utility\ColumnTrait;
+use GrafCenter\CMS\Storage\Utility\PrimaryTrait;
+use GrafCenter\CMS\Storage\Database;
+
+class StaffGroup extends AbstractModel
 {
     public static $table   = '::staff_groups';
     public static $primary = 'group_id';

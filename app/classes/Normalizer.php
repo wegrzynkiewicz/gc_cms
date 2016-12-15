@@ -1,5 +1,7 @@
 <?php
 
+namespace GrafCenter\CMS;
+
 /**
  * elFinder Plugin Normalizer
  *

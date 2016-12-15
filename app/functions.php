@@ -199,7 +199,7 @@ function redirectToRefererOrDefault($defaultLocation, $code = 303)
  */
 function trans($text, array $params = [])
 {
-    return Translator::getInstance()->translate($text, $params);
+    return GrafCenter\CMS\Translator::getInstance()->translate($text, $params);
 }
 
 /**

@@ -4,6 +4,9 @@
 
 define('START_TIME', microtime(true));
 
+use GrafCenter\CMS\Storage\Database;
+use GrafCenter\CMS\Logger;
+
 session_start();
 
 if (!isset($_SESSION['lang'])) {
@@ -21,9 +24,10 @@ setHeaderMimeType('text/html');
 date_default_timezone_set($config['timezone']);
 
 if ($config["debug"]) {
-    error_reporting(E_ALL);
+    error_reporting(E_ALL ^ E_STRICT);
     ini_set('display_errors', 'on');
 }
+
 
 Database::$pdo = new PDO($config["db"]["dns"], $config["db"]["username"], $config["db"]["password"]);
 Database::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
