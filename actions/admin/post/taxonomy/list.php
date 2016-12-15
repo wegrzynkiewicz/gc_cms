@@ -2,10 +2,10 @@
 
 $headTitle = trans("Podziały wpisów");
 
-$staff = GCC\Model\Staff::createFromSession();
+$staff = GC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
-$taxonomies = GCC\Model\PostTaxonomy::selectAllCorrectWithPrimaryKey();
+$taxonomies = GC\Model\PostTaxonomy::selectAllCorrectWithPrimaryKey();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 

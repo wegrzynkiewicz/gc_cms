@@ -1,6 +1,6 @@
 <?php
 
-$staff = GCC\Model\Staff::createFromSession();
+$staff = GC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $positions = json_decode($_POST['ids'], true);

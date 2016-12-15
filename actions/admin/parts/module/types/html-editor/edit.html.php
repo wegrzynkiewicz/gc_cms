@@ -3,7 +3,7 @@
 $headTitle = trans("Edycja modułu tekstowego");
 
 if (wasSentPost()) {
-    GCC\Model\FrameModule::updateByPrimaryId($module_id, [
+    GC\Model\FrameModule::updateByPrimaryId($module_id, [
         'content' => $_POST['content'],
         'theme' => 'default',
     ]);

@@ -2,12 +2,12 @@
 
 $headTitle = trans("Dodawanie nowego wpisu");
 
-$staff = GCC\Model\Staff::createFromSession();
+$staff = GC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 if (wasSentPost()) {
 
-    $frame_id = GCC\Model\Frame::insert([
+    $frame_id = GC\Model\Frame::insert([
         'name' => $_POST['name'],
         'lang' => $_SESSION['lang']['editor'],
         'keywords' => $_POST['keywords'],
@@ -17,7 +17,7 @@ if (wasSentPost()) {
 
     $relations = isset($_POST['taxonomy']) ? array_unchunk($_POST['taxonomy']) : [];
 
-    GCC\Model\Post::insert([
+    GC\Model\Post::insert([
         'frame_id' => $frame_id,
     ], $relations);
 

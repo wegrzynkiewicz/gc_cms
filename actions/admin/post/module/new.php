@@ -2,11 +2,11 @@
 
 $headTitle = trans("Nowy moduł w poście");
 
-$staff = GCC\Model\Staff::createFromSession();
+$staff = GC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $parent_id = intval(array_shift($_SEGMENTS));
-$post = GCC\Model\Post::selectWithFrameByPrimaryId($parent_id);
+$post = GC\Model\Post::selectWithFrameByPrimaryId($parent_id);
 $frame_id = $post['frame_id'];
 
 $headTitle .= makeLink("/admin/page/list", $post['name']);

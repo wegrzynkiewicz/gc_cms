@@ -199,12 +199,12 @@ function redirectToRefererOrDefault($defaultLocation, $code = 303)
  */
 function trans($text, array $params = [])
 {
-    return GCC\Translator::getInstance()->translate($text, $params);
+    return GC\Translator::getInstance()->translate($text, $params);
 }
 
 function thumb($text, array $params = [])
 {
-   return GCC\Thumb::make();
+   return GC\Thumb::make();
 }
 
 /**
@@ -463,4 +463,37 @@ function makeThumbsCallback($matches)
     $attributes['style'] = $style;
 
     return getXMLTag('img', '', $attributes);
+}
+
+/**
+ * Wysyła request w celu zweryfikowania recatchy
+ */
+function curlReCaptcha()
+{
+    if (isset($_POST['g-recaptcha-response'])) {
+        $url = 'https://www.google.com/recaptcha/api/siteverify';
+        $curlConfig = array(
+            CURLOPT_URL => $url,
+            CURLOPT_POST => true,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_POSTFIELDS => [
+                'secret' => getConfig()['reCaptcha']['secret'],
+                'response' => $_POST['g-recaptcha-response'],
+                'remoteip' => $_SERVER['REMOTE_ADDR']
+            ]
+        );
+
+        $curl = curl_init();
+        curl_setopt_array($curl, $curlConfig);
+        $response = curl_exec($curl);
+        if ($response) {
+            return json_decode($response, true);
+        }
+        GC\Logger::curl($url.' '.curl_error($curl));
+    }
+
+    return [
+        'success' => false,
+    ];
 }

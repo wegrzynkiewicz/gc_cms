@@ -1,10 +1,10 @@
 <?php
 
-$staff = GCC\Model\Staff::createFromSession();
+$staff = GC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $gallery_id = intval(array_shift($_SEGMENTS));
-$images = GCC\Model\GalleryImage::selectAllByGalleryId($gallery_id);
+$images = GC\Model\GalleryImage::selectAllByGalleryId($gallery_id);
 
 ?>
 <?php if (empty($images)): ?>
@@ -20,7 +20,7 @@ $images = GCC\Model\GalleryImage::selectAllByGalleryId($gallery_id);
             <div class="thumbnail">
 
                 <div class="thumb-wrapper">
-                    <img src="<?=GCC\Thumb::make($image['file'], 300, 200)?>" class="img-responsive"/>
+                    <img src="<?=GC\Thumb::make($image['file'], 300, 200)?>" class="img-responsive"/>
                 </div>
 
                 <div class="pull-right">

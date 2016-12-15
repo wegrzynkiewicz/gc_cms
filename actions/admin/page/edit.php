@@ -1,17 +1,15 @@
 <?php
 
-$headTitle = trans("Edytowanie strony");
+$headTitle = trans("Edycja strony");
 
-$staff = GCC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $page_id = intval(array_shift($_SEGMENTS));
-$page = GCC\Model\Page::selectWithFrameByPrimaryId($page_id);
-$frame_id = $page['frame_id'];
+$page = GC\Model\Page::selectWithFrameByPrimaryId($page_id);
 
 if (wasSentPost()) {
 
-    GCC\Model\Frame::updateByFrameId($frame_id, [
+    GC\Model\Frame::updateByFrameId($page['frame_id'], [
         'name' => $_POST['name'],
         'keywords' => $_POST['keywords'],
         'description' => $_POST['description'],

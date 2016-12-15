@@ -1,6 +1,6 @@
 <?php
 
-namespace GCC\Storage;
+namespace GC\Storage;
 
 use ArrayAccess;
 

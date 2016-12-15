@@ -1,6 +1,6 @@
 <?php
 
-namespace GCC;
+namespace GC;
 
 class Translator
 {

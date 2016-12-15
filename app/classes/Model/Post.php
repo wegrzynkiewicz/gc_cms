@@ -1,11 +1,11 @@
 <?php
 
-namespace GCC\Model;
+namespace GC\Model;
 
-use GCC\Storage\AbstractModel;
-use GCC\Storage\Utility\PrimaryTrait;
-use GCC\Storage\Utility\ContainFrameTrait;
-use GCC\Storage\Database;
+use GC\Storage\AbstractModel;
+use GC\Storage\Utility\PrimaryTrait;
+use GC\Storage\Utility\ContainFrameTrait;
+use GC\Storage\Database;
 
 class Post extends AbstractModel
 {

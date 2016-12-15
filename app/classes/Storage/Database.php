@@ -1,8 +1,8 @@
 <?php
 
-namespace GCC\Storage;
+namespace GC\Storage;
 
-use GCC\Logger;
+use GC\Logger;
 use PDO;
 
 /**

@@ -1,14 +1,14 @@
 <?php
 
-$staff = GCC\Model\Staff::createFromSession();
+$staff = GC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $menu_id = intval(array_shift($_SEGMENTS));
-$node = GCC\Model\Menu::selectByPrimaryId($menu_id);
+$node = GC\Model\Menu::selectByPrimaryId($menu_id);
 
 $_POST = $node;
 
-$pages = GCC\Model\Page::selectAllWithFrames();
+$pages = GC\Model\Page::selectAllWithFrames();
 $pageOptions = [];
 foreach($pages as $page_id => $page) {
     $pageOptions[$page_id] = $page['name'];

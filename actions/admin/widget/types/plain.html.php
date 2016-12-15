@@ -3,7 +3,7 @@
 $headTitle = trans("Edytujesz widżet tekstowy");
 
 if (wasSentPost()) {
-    GCC\Model\Widget::updateByPrimaryId($widget_id, [
+    GC\Model\Widget::updateByPrimaryId($widget_id, [
         'content' => $_POST['content'],
     ]);
     redirect("/admin/widget/list");

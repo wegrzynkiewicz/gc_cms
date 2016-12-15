@@ -2,10 +2,10 @@
 
 $headTitle = trans("Pracownicy");
 
-$staff = GCC\Model\Staff::createFromSession();
+$staff = GC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
-$staffList = GCC\Model\Staff::selectAllCorrectWithPrimaryKey();
+$staffList = GC\Model\Staff::selectAllCorrectWithPrimaryKey();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
@@ -60,7 +60,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                 </a>
                             </td>
                             <td>
-                                <?php $groups = GCC\Model\StaffGroup::selectAllAsOptionsByStaffId($staff_id) ?>
+                                <?php $groups = GC\Model\StaffGroup::selectAllAsOptionsByStaffId($staff_id) ?>
                                 <?php foreach ($groups as $group_id => $group): ?>
                                     <a href="<?=url("/admin/staff/group/edit/$group_id")?>"
                                         title="<?=trans('Przejdź do grupy')?>">
@@ -68,7 +68,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                 <?php endforeach ?>
                             </td>
                             <td>
-                                <?php $permissions = GCC\Model\StaffPermission::selectPermissionsAsOptionsByStaffId($staff_id) ?>
+                                <?php $permissions = GC\Model\StaffPermission::selectPermissionsAsOptionsByStaffId($staff_id) ?>
                                 <?php foreach ($permissions as $permission): ?>
                                     <?=trans($config['permissions'][$permission])?> <br>
                                 <?php endforeach ?>

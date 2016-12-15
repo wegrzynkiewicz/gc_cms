@@ -4,8 +4,8 @@
 
 define('START_TIME', microtime(true));
 
-use GCC\Storage\Database;
-use GCC\Logger;
+use GC\Storage\Database;
+use GC\Logger;
 
 session_start();
 

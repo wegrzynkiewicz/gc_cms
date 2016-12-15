@@ -1,12 +1,12 @@
 <?php
 
-namespace GCC\Model;
+namespace GC\Model;
 
-use GCC\Storage\AbstractModel;
-use GCC\Storage\Utility\NodeTrait;
-use GCC\Storage\Utility\PrimaryTrait;
-use GCC\Storage\Node;
-use GCC\Storage\Database;
+use GC\Storage\AbstractModel;
+use GC\Storage\Utility\NodeTrait;
+use GC\Storage\Utility\PrimaryTrait;
+use GC\Storage\Node;
+use GC\Storage\Database;
 
 class Menu extends Node
 {

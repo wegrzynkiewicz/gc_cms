@@ -2,10 +2,10 @@
 
 $headTitle = trans("Widżety");
 
-$staff = GCC\Model\Staff::createFromSession();
+$staff = GC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
-$widgets = GCC\Model\Widget::selectAllCorrectWitPrimaryId();
+$widgets = GC\Model\Widget::selectAllCorrectWitPrimaryId();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 

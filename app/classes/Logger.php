@@ -1,8 +1,9 @@
 <?php
 
-namespace GCC;
+namespace GC;
 
 use DateTime;
+use Exception;
 
 class Logger
 {

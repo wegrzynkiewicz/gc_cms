@@ -2,7 +2,7 @@
 
 $headTitle = trans("Węzły w");
 
-$staff = GCC\Model\Staff::createFromSession();
+$staff = GC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $tax_id = intval(array_shift($_SEGMENTS));
@@ -12,12 +12,12 @@ if (wasSentPost()) {
     $positions = array_filter($positions, function ($node) {
         return isset($node['id']);
     });
-    GCC\Model\PostTree::update($tax_id, $positions);
+    GC\Model\PostTree::update($tax_id, $positions);
     redirect("/admin/post/taxonomy/list");
 }
 
-$taxonomy = GCC\Model\PostTaxonomy::selectByPrimaryId($tax_id);
-$category = GCC\Model\PostNode::buildTreeByTaxonomyId($tax_id);
+$taxonomy = GC\Model\PostTaxonomy::selectByPrimaryId($tax_id);
+$category = GC\Model\PostNode::buildTreeByTaxonomyId($tax_id);
 
 $headTitle .= makeLink("/admin/post/taxonomy/list", $taxonomy['name']);
 

@@ -2,20 +2,20 @@
 
 $headTitle = trans("Edytowanie galerii");
 
-$staff = GCC\Model\Staff::createFromSession();
+$staff = GC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $gallery_id = intval(array_shift($_SEGMENTS));
 
 if (wasSentPost()) {
-    GCC\Model\Gallery::updateByPrimaryId($gallery_id, [
+    GC\Model\Gallery::updateByPrimaryId($gallery_id, [
         'name' => $_POST['name'],
         'lang' => $_SESSION['lang']['editor'],
     ]);
     redirect('/admin/gallery/list');
 }
 
-$gallery = GCC\Model\Gallery::selectByPrimaryId($gallery_id);
+$gallery = GC\Model\Gallery::selectByPrimaryId($gallery_id);
 if (!$gallery) {
     redirect('/admin/gallery/list');
 }

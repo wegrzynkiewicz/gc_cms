@@ -1,10 +1,10 @@
 <?php
 
-$staff = GCC\Model\Staff::createFromSession();
+$staff = GC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $menu_id = intval(array_shift($_SEGMENTS));
-$node = GCC\Model\Menu::selectByPrimaryId($menu_id);
+$node = GC\Model\Menu::selectByPrimaryId($menu_id);
 
 $_POST = $node;
 ?>

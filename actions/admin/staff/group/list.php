@@ -2,10 +2,10 @@
 
 $headTitle = trans("Grupy");
 
-$staff = GCC\Model\Staff::createFromSession();
+$staff = GC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
-$groups = GCC\Model\StaffGroup::selectAllWithPrimaryKey();
+$groups = GC\Model\StaffGroup::selectAllWithPrimaryKey();
 
 $headTitle .= makeLink("/admin/staff/list", trans("pracowników"));
 
@@ -56,7 +56,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                 </a>
                             </td>
                             <td>
-                                <?php $permissions = GCC\Model\StaffPermission::selectPermissionsAsOptionsByGroupId($group_id) ?>
+                                <?php $permissions = GC\Model\StaffPermission::selectPermissionsAsOptionsByGroupId($group_id) ?>
                                 <?php foreach ($permissions as $permission): ?>
                                     <?=trans($config['permissions'][$permission])?> <br>
                                 <?php endforeach ?>

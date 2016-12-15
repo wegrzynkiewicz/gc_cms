@@ -2,7 +2,7 @@
 
 $headTitle = trans("Dodawanie nowego pracownika");
 
-$staff = GCC\Model\Staff::createFromSession();
+$staff = GC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 if (wasSentPost()) {
@@ -12,7 +12,7 @@ if (wasSentPost()) {
     $password = randomPassword($config['minPasswordLength']);
     $passwordHash = sha1($password);
 
-    $staff_id = GCC\Model\Staff::insert([
+    $staff_id = GC\Model\Staff::insert([
         'name' => $_POST['name'],
         'password' => $passwordHash,
         'email' => $_POST['email'],

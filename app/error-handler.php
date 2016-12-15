@@ -55,7 +55,7 @@ set_exception_handler(function (Exception $exception) {
             $logException($previous);
         }
 
-        Logger::logException($exception);
+        GC\Logger::logException($exception);
     };
 
     $logException($exception);

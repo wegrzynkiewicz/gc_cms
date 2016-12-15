@@ -2,11 +2,11 @@
 
 $headTitle = trans("Dodawanie nowej galerii");
 
-$staff = GCC\Model\Staff::createFromSession();
+$staff = GC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 if (wasSentPost()) {
-    GCC\Model\Gallery::insert([
+    GC\Model\Gallery::insert([
         'name' => $_POST['name'],
         'lang' => $_SESSION['lang']['editor'],
     ]);

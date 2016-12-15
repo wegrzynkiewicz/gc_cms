@@ -29,6 +29,7 @@ $config = [
     'translator' => [ # ustawienia translatora
         'enabled' => true, # czy włączyć tłumaczenie komunikatów
         'folder' => ROOT_PATH.'/data/locales', # katalog do ktorego są zapisywane tłumaczenia
+        'key' => 'trnsl.1.1.20161215T151949Z.587eb49efd9a9be2.a1eb760e6bf78076ea004f12eeb22b37902aadc2', # klucz do api translatora w serwisie Yandex
     ],
     'logger' => [ # ustawienia dla rejestrowania logów
         'enabled' => true, # uruchamia rejestrowanie logów
@@ -53,6 +54,10 @@ $config = [
         'replyName' => null, # nazwa użytkownika w nagłówku reply
         'limitPerOnce' => 10, # ile może się wysłać wiadomości na raz za jednym żądaniem
         'headerTitle' => "Panel administracyjny GrafCenter CMS", # wykorzystywane do wyświetlania w panelowych mailaich
+    ],
+    'reCaptcha' => [ # zawiera konfiguracje dla recaptchy od googla
+        'public' => '6Le88g4UAAAAAJ_VW4XML20c2tWSWFSv29lkGeVp', # publiczny klucz
+        'secret' => '6Le88g4UAAAAAIOFZyOilvhdWRP3IIOWdkdQ7gAf', # prywatny klucz
     ],
     'langs' => [ # zainstalowane wersje językowe
         'pl' => 'Polski',

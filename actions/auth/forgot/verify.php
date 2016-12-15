@@ -14,7 +14,7 @@ $email64 = array_shift($_SEGMENTS);
 $email = base64_decode($email64);
 $verifyHash = array_shift($_SEGMENTS);
 
-$user = GCC\Model\Staff::selectSingleBy('email', $email);
+$user = GC\Model\Staff::selectSingleBy('email', $email);
 if ($user) {
     $regeneration = json_decode($user['regeneration'], true);
     if (empty($regeneration)) {
@@ -28,7 +28,7 @@ if ($user) {
         $password = randomPassword($config['minPasswordLength']);
         $passwordHash = sha1($password);
 
-        GCC\Model\Staff::updateByPrimaryId($user['staff_id'], [
+        GC\Model\Staff::updateByPrimaryId($user['staff_id'], [
             'password' => $passwordHash,
             'force_change_password' => 1,
             'regeneration' => json_encode([]),

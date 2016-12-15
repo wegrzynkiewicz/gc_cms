@@ -1,6 +1,6 @@
 <?php
 
-namespace GCC\Storage;
+namespace GC\Storage;
 
 /**
  * Reprezentuje zarowno tablice jak i pojedynczy rekord z bazy danych

@@ -1,15 +1,15 @@
 <?php
 
-$staff = GCC\Model\Staff::createFromSession();
+$staff = GC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $tax_id = intval(array_shift($_SEGMENTS));
 
 if (wasSentPost()) {
-    GCC\Storage\Database::transaction(function () {
+    GC\Storage\Database::transaction(function () {
         $node_id = intval($_POST['node_id']);
-        GCC\Model\PostNode::deleteByPrimaryId($node_id);
-        GCC\Model\PostNode::deleteWithoutParentId();
+        GC\Model\PostNode::deleteByPrimaryId($node_id);
+        GC\Model\PostNode::deleteWithoutParentId();
     });
 }
 

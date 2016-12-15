@@ -1,4 +1,4 @@
-<?php $menu = GCC\Model\Menu::buildTreeByWorkName("top", getClientLang()) ?>
+<?php $menu = GC\Model\Menu::buildTreeByWorkName("top", getClientLang()) ?>
 
 <?php if ($menu->hasChildren()): ?>
     <div class="blog-masthead">

@@ -1,10 +1,10 @@
 <?php
 
-namespace GCC\Model;
+namespace GC\Model;
 
-use GCC\Storage\AbstractModel;
-use GCC\Storage\Utility\ColumnTrait;
-use GCC\Storage\Database;
+use GC\Storage\AbstractModel;
+use GC\Storage\Utility\ColumnTrait;
+use GC\Storage\Database;
 
 class PostMembership extends AbstractModel
 {

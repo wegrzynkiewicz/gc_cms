@@ -8,6 +8,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/js/swiper.jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js"></script>
+<script src='//www.google.com/recaptcha/api.js'></script>
 <script src="<?=assetsUrl("/common/scripts/jquery.photoswipe.js")?>"></script>
 
 <script>

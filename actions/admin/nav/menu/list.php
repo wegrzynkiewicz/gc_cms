@@ -2,7 +2,7 @@
 
 $headTitle = trans("Węzły nawigacji");
 
-$staff = GCC\Model\Staff::createFromSession();
+$staff = GC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $nav_id = intval(array_shift($_SEGMENTS));
@@ -12,13 +12,13 @@ if (wasSentPost()) {
     $positions = array_filter($positions, function ($node) {
         return isset($node['id']);
     });
-    GCC\Model\MenuTree::update($nav_id, $positions);
+    GC\Model\MenuTree::update($nav_id, $positions);
     redirect("/admin/nav/list");
 }
 
-$nav = GCC\Model\MenuTaxonomy::selectByPrimaryId($nav_id);
-$pages = GCC\Model\Page::selectAllWithFrames();
-$menuTree = GCC\Model\Menu::buildTreeByTaxonomyId($nav_id);
+$nav = GC\Model\MenuTaxonomy::selectByPrimaryId($nav_id);
+$pages = GC\Model\Page::selectAllWithFrames();
+$menuTree = GC\Model\Menu::buildTreeByTaxonomyId($nav_id);
 
 $headTitle .= makeLink("/admin/nav/list", $nav['name']);
 

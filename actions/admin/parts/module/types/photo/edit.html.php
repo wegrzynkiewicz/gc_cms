@@ -15,7 +15,7 @@ if (wasSentPost()) {
         'height' => $height,
     ];
 
-    GCC\Model\FrameModule::updateByPrimaryId($module_id, [
+    GC\Model\FrameModule::updateByPrimaryId($module_id, [
         'theme' => 'default',
         'content' => $name,
         'settings' => json_encode($settings),

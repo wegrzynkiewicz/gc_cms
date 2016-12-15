@@ -1,6 +1,6 @@
 <?php
 
-$staff = GCC\Model\Staff::createFromSession();
+$staff = GC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 error_reporting(0);
@@ -19,7 +19,7 @@ elFinder::$netDrivers['ftp'] = 'FTP';
  */
 // // Required for Dropbox.com connector support
 // // On composer
-// GCC\Model\elFinder::$netDrivers['dropbox'] = 'Dropbox';
+// GC\Model\elFinder::$netDrivers['dropbox'] = 'Dropbox';
 // // OR on pear
 // include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'elFinderVolumeDropbox.class.php';
 
@@ -33,7 +33,7 @@ elFinder::$netDrivers['ftp'] = 'FTP';
 // // Installation by composer
 // // `composer require nao-pon/flysystem-google-drive:~1.1 nao-pon/elfinder-flysystem-driver-ext`
 // // Enable network mount
-// GCC\Model\elFinder::$netDrivers['googledrive'] = 'FlysystemGoogleDriveNetmount';
+// GC\Model\elFinder::$netDrivers['googledrive'] = 'FlysystemGoogleDriveNetmount';
 // // GoogleDrive Netmount driver need next two settings. You can get at https://console.developers.google.com
 // // AND reuire regist redirect url to "YOUR_CONNECTOR_URL?cmd=netmount&protocol=googledrive&host=1"
 // define('ELFINDER_GOOGLEDRIVE_CLIENTID',     '');

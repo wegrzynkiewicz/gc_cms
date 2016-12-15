@@ -1,5 +1,5 @@
 <?php
-$staff = GCC\Model\Staff::createFromSession();
+$staff = GC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 ?>
 <!DOCTYPE html>

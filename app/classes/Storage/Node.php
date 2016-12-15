@@ -1,8 +1,8 @@
 <?php
 
-namespace GCC\Storage;
+namespace GC\Storage;
 
-use GCC\Storage\AbstractModel;
+use GC\Storage\AbstractModel;
 
 /**
  * Reprezentuje węzeł w strukturze drzewiastej

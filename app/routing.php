@@ -2,7 +2,7 @@
 
 /* Ładowanie odpowiednią akcję */
 
-use GCC\Logger;
+use GC\Logger;
 
 $request = '/'.trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 $requestQuery = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);

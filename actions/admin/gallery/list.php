@@ -2,9 +2,9 @@
 
 $headTitle = trans("Galerie zdjęć");
 
-$staff = GCC\Model\Staff::createFromSession();
+$staff = GC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
-$rows = GCC\Model\Gallery::selectAllCorrectWithPrimaryKey();
+$rows = GC\Model\Gallery::selectAllCorrectWithPrimaryKey();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 

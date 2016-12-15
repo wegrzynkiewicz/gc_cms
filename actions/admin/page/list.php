@@ -2,10 +2,10 @@
 
 $headTitle = trans("Wszystkie strony");
 
-$staff = GCC\Model\Staff::createFromSession();
+$staff = GC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
-$pages = GCC\Model\Page::selectAllWithFrames();
+$pages = GC\Model\Page::selectAllWithFrames();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
@@ -54,7 +54,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                         <tr>
                             <td>
                                 <?php if ($page['image']): ?>
-                                    <img src="<?=GCC\Thumb::make($page['image'], 64, 64)?>"
+                                    <img src="<?=GC\Thumb::make($page['image'], 64, 64)?>"
                                     height="64" style="margin-right:5px"/>
                                 <?php endif ?>
                                 <a href="<?=url("/admin/page/edit/$page_id")?>"

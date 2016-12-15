@@ -1,11 +1,11 @@
 <?php
 
-namespace GCC\Model;
+namespace GC\Model;
 
-use GCC\Storage\AbstractModel;
-use GCC\Storage\Utility\ColumnTrait;
-use GCC\Storage\Utility\TreeTrait;
-use GCC\Storage\Database;
+use GC\Storage\AbstractModel;
+use GC\Storage\Utility\ColumnTrait;
+use GC\Storage\Utility\TreeTrait;
+use GC\Storage\Database;
 
 class MenuTree extends AbstractModel
 {

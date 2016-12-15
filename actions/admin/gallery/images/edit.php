@@ -2,22 +2,22 @@
 
 $headTitle = trans("Edytowanie zdjęcia w galerii");
 
-$staff = GCC\Model\Staff::createFromSession();
+$staff = GC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $image_id = intval(array_shift($_SEGMENTS));
 $gallery_id = intval(array_shift($_SEGMENTS));
 
 if (wasSentPost()) {
-    GCC\Model\GalleryImage::updateByPrimaryId($image_id, [
+    GC\Model\GalleryImage::updateByPrimaryId($image_id, [
         'name' => $_POST['name'],
         'file' => $_POST['file'],
     ]);
     redirect("/admin/gallery/images/list/$gallery_id");
 }
 
-$gallery = GCC\Model\Gallery::selectByPrimaryId($gallery_id);
-$image = GCC\Model\GalleryImage::selectByPrimaryId($image_id);
+$gallery = GC\Model\Gallery::selectByPrimaryId($gallery_id);
+$image = GC\Model\GalleryImage::selectByPrimaryId($image_id);
 $headTitle .= makeLink("/admin/gallery/images/list/$gallery_id", $gallery['name']);
 
 $_POST = $image;

@@ -3,7 +3,7 @@
 $headTitle = trans("Edytujesz moduł slajdera");
 
 if (wasSentPost()) {
-    GCC\Model\FrameModule::updateByPrimaryId($module_id, [
+    GC\Model\FrameModule::updateByPrimaryId($module_id, [
         'theme' => $_POST['theme'],
     ]);
     redirect("/admin/$frame/module/list/$parent_id");

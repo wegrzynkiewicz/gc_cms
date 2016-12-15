@@ -2,10 +2,10 @@
 
 $headTitle = trans("Nawigacje");
 
-$staff = GCC\Model\Staff::createFromSession();
+$staff = GC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
-$navs = GCC\Model\MenuTaxonomy::selectAllCorrectWithPrimaryKey();
+$navs = GC\Model\MenuTaxonomy::selectAllCorrectWithPrimaryKey();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 

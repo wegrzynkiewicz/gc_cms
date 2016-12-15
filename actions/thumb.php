@@ -23,7 +23,7 @@ if ($thumbWidth > $imageWidth) {
     $thumbWidth = $imageWidth;
 }
 
-$thumb = new Thumb($imageUrl, $thumbWidth, 99999);
+$thumb = new GC\Thumb($imageUrl, $thumbWidth, 99999);
 if (!$thumb->exists()) {
 
     if (!isset($_SESSION['generateThumb'])) {

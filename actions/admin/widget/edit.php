@@ -1,10 +1,10 @@
 <?php
 
-$staff = GCC\Model\Staff::createFromSession();
+$staff = GC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $widget_id = intval(array_shift($_SEGMENTS));
-$widget = GCC\Model\Widget::selectByPrimaryId($widget_id);
+$widget = GC\Model\Widget::selectByPrimaryId($widget_id);
 $type = $widget['type'];
 $content = $widget['content'];
 

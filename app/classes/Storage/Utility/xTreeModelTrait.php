@@ -1,8 +1,8 @@
 <?php
 
-namespace GCC\Storage\Utility;
+namespace GC\Storage\Utility;
 
-use GCC\Storage\Database;
+use GC\Storage\Database;
 
 /**
  * Zbiór pomocniczych metod dla wszystkich drzewiastych struktur

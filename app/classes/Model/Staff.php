@@ -1,12 +1,12 @@
 <?php
 
-namespace GCC\Model;
+namespace GC\Model;
 
-use GCC\Storage\AbstractModel;
-use GCC\Storage\Utility\ColumnTrait;
-use GCC\Storage\Utility\PrimaryTrait;
-use GCC\Storage\Database;
-use GCC\Logger;
+use GC\Storage\AbstractModel;
+use GC\Storage\Utility\ColumnTrait;
+use GC\Storage\Utility\PrimaryTrait;
+use GC\Storage\Database;
+use GC\Logger;
 
 class Staff extends AbstractModel
 {
