@@ -80,6 +80,10 @@ $config = [
             'default' => 'Standardowa galeria',
             'fancybox' => 'Fancybox'
         ],
+        'slider' => [
+            'default' => 'Standardowy slajder',
+            'width' => 'Slajder rozciągnięty na szerokość strony',
+        ],
     ],
     'nodeTypes' => [ # rodzaje węzłów nawigacji
         'empty' => 'Nieklikalny węzeł',

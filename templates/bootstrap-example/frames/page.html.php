@@ -10,13 +10,9 @@ require TEMPLATE_PATH."/parts/header.html.php"; ?>
             <?=$headTitle?>
         </h1>
     </div>
-    <div class="row">
-        <div class="col-sm-9">
-            <?php require TEMPLATE_PATH."/parts/modules.html.php"; ?>
-        </div>
-        <?php require TEMPLATE_PATH."/parts/sidebar.html.php"; ?>
-    </div>
 </div>
+
+<?php require TEMPLATE_PATH."/parts/modules.html.php"; ?>
 
 <?php require TEMPLATE_PATH."/parts/assets.html.php"; ?>
 <?php require TEMPLATE_PATH."/parts/footer.html.php"; ?>

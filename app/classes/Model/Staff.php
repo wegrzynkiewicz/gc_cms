@@ -106,6 +106,13 @@ class Staff extends Model
             redirect('/admin/login');
         }
 
+        # jeżeli czas trwania sesji minął
+        if (time() > $_SESSION['staff']['sessionTimeout']) {
+            unset($_SESSION['staff']);
+            Logger::logout("Session timeout");
+            redirect('/admin/account/session/timeout');
+        }
+
         # spróbuj pobrać pracownika z bazy, jezeli go nie znajdzie wtedy przekieruj na logowanie
         try{
             # pobierz pracownika z bazy danych
@@ -114,13 +121,6 @@ class Staff extends Model
             unset($_SESSION['staff']);
             Logger::logout("Not found user");
             redirect('/admin/login');
-        }
-
-        # jeżeli czas trwania sesji minął
-        if (time() > $_SESSION['staff']['sessionTimeout']) {
-            unset($_SESSION['staff']);
-            Logger::logout("Session timeout");
-            redirect('/admin/account/session/timeout');
         }
 
         # jezeli istnieje flaga, ze trzeba zmienić hasło wtedy przekieruj

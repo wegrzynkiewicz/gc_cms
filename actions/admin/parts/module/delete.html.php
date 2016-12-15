@@ -6,7 +6,7 @@ $module_id = intval($_POST['module_id']);
 $module = FrameModule::selectByPrimaryId($module_id);
 $moduleType = $module['type'];
 
-ModuleFile::deleteByModuleId($module_id);
+ModuleFile::deleteAllByModuleId($module_id);
 
 require_once ACTIONS_PATH."/admin/parts/module/types/$moduleType/delete.html.php";
 

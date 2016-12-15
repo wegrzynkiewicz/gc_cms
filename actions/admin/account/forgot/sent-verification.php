@@ -27,7 +27,7 @@ require_once ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                         <?php endif ?>
 
                         <p class="text-center">
-                            <?=trans('Na zadany adres email zostały dalsze instrukcje.')?>
+                            <?=trans('Na zadany adres email zostały wysłane dalsze instrukcje.')?>
                         </p>
 
                         <div class="btn-group btn-group-justified" style="margin-top:5px">

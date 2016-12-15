@@ -4,3 +4,6 @@
 
 # domyślny headTitle, jeżeli zapomni się go nadać
 $headTitle = trans("Panel");
+
+$breadcrumbs = new Breadcrumbs();
+$breadcrumbs->push('/admin', 'Dashboard');

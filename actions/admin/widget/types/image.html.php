@@ -4,7 +4,7 @@ $headTitle = trans("Edytujesz widżet tekstowy");
 
 if (wasSentPost()) {
     Widget::updateByPrimaryId($widget_id, [
-        'content' => $_POST['image'],
+        'content' => $_POST['content'],
     ]);
     redirect("/admin/widget/list");
 }
@@ -28,7 +28,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
         <form action="" method="post" class="form-horizontal">
 
             <?=view('/admin/parts/input/image.html.php', [
-                'name' => 'image',
+                'name' => 'content',
                 'label' => 'Zdjęcie',
                 'placeholder' => 'Ścieżka do pliku zdjęcia',
             ])?>
