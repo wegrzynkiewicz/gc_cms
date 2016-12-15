@@ -1,15 +1,15 @@
 <?php
 
-$staff = Staff::createFromSession();
+$staff = GrafCenter\CMS\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $tax_id = intval(array_shift($_SEGMENTS));
 
 if (wasSentPost()) {
-    Database::transaction(function () {
+    GrafCenter\CMS\Storage\Database::transaction(function () {
         $node_id = intval($_POST['node_id']);
-        PostNode::deleteByPrimaryId($node_id);
-        PostNode::deleteWithoutParentId();
+        GrafCenter\CMS\Model\PostNode::deleteByPrimaryId($node_id);
+        GrafCenter\CMS\Model\PostNode::deleteWithoutParentId();
     });
 }
 

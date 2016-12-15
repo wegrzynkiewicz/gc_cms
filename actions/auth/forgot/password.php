@@ -8,7 +8,7 @@ if (isset($_SESSION['staff'])) {
 
 if (wasSentPost()) {
 
-    $user = Staff::selectSingleBy('email', $_POST['login']);
+    $user = GrafCenter\CMS\Model\Staff::selectSingleBy('email', $_POST['login']);
     if ($user) {
 
         $newPassword = randomPassword($config['minPasswordLength']);
@@ -25,7 +25,7 @@ if (wasSentPost()) {
             $_SERVER['HTTP_HOST'], $email64, $regeneration['verifyHash']
         );
 
-        Staff::updateByPrimaryId($user['staff_id'], [
+        GrafCenter\CMS\Model\Staff::updateByPrimaryId($user['staff_id'], [
             'regeneration' => json_encode($regeneration),
         ]);
 

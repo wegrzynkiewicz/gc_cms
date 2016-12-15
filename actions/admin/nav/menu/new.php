@@ -2,14 +2,14 @@
 
 $headTitle = trans("Tworzenie węzeła w nawigacji");
 
-$staff = Staff::createFromSession();
+$staff = GrafCenter\CMS\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $nav_id = intval(array_shift($_SEGMENTS));
 $menu_id = 0;
 
 if(wasSentPost($_POST)) {
-    Menu::insert([
+    GrafCenter\CMS\Model\Menu::insert([
         'name' => $_POST['name'],
         'type' => $_POST['type'],
         'destination' => $_POST['destination'],
@@ -18,7 +18,7 @@ if(wasSentPost($_POST)) {
 	redirect("/admin/nav/menu/list/$nav_id");
 }
 
-$nav = MenuTaxonomy::selectByPrimaryId($nav_id);
+$nav = GrafCenter\CMS\Model\MenuTaxonomy::selectByPrimaryId($nav_id);
 $headTitle .= makeLink("/admin/nav/menu/list/$nav_id", $nav['name']);
 
 require_once ACTIONS_PATH.'/admin/nav/menu/form.html.php';

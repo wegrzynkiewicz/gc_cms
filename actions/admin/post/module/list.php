@@ -1,13 +1,11 @@
 <?php
 
-use GrafCenter\CMS\Model\Post;
-
 $headTitle = trans("Moduły w poście");
 
 $staff->redirectIfUnauthorized();
 
 $parent_id = intval(array_shift($_SEGMENTS));
-$post = Post::selectWithFrameByPrimaryId($parent_id);
+$post = GrafCenter\CMS\Model\Post::selectWithFrameByPrimaryId($parent_id);
 $frame_id = $post['frame_id'];
 
 $headTitle .= makeLink("/admin/page/list", $post['name']);

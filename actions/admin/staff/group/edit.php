@@ -2,11 +2,11 @@
 
 $headTitle = trans("Edytowanie grupy pracowników");
 
-$staff = Staff::createFromSession();
+$staff = GrafCenter\CMS\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $group_id = intval(array_shift($_SEGMENTS));
-$group = StaffGroup::selectByPrimaryId($group_id);
+$group = GrafCenter\CMS\Model\StaffGroup::selectByPrimaryId($group_id);
 
 if (!$group) {
     redirect('/admin/staff/group/list');
@@ -15,7 +15,7 @@ if (!$group) {
 if (wasSentPost()) {
 
     $permissions = isset($_POST['permissions']) ? $_POST['permissions'] : [];
-    StaffGroup::update($group_id, [
+    GrafCenter\CMS\Model\StaffGroup::update($group_id, [
         'name' => $_POST['name'],
     ], $permissions);
 
@@ -25,6 +25,6 @@ if (wasSentPost()) {
 $headTitle .= makeLink("/admin/staff/group/list", $group['name']);
 
 $_POST = $group;
-$permissions = StaffPermission::selectPermissionsAsOptionsByGroupId($group_id);
+$permissions = GrafCenter\CMS\Model\StaffPermission::selectPermissionsAsOptionsByGroupId($group_id);
 
 require_once ACTIONS_PATH.'/admin/staff/group/form.html.php';

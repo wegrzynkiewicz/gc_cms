@@ -2,12 +2,12 @@
 
 $headTitle = trans("Dodawanie nowej strony");
 
-$staff = Staff::createFromSession();
+$staff = GrafCenter\CMS\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 if (wasSentPost()) {
 
-    $frame_id = Frame::insert([
+    $frame_id = GrafCenter\CMS\Model\Frame::insert([
         'name' => $_POST['name'],
         'lang' => $_SESSION['lang']['editor'],
         'keywords' => $_POST['keywords'],
@@ -15,7 +15,7 @@ if (wasSentPost()) {
         'image' => uploadUrl($_POST['image']),
     ]);
 
-    Page::insert([
+    GrafCenter\CMS\Model\Page::insert([
         'frame_id' => $frame_id,
     ]);
 

@@ -3,7 +3,7 @@
 $headTitle = trans("Edytujesz widżet tekstowy");
 
 if (wasSentPost()) {
-    Widget::updateByPrimaryId($widget_id, [
+    GrafCenter\CMS\Model\Widget::updateByPrimaryId($widget_id, [
         'content' => $_POST['content'],
     ]);
     redirect("/admin/widget/list");

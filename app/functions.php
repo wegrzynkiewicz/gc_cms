@@ -202,6 +202,11 @@ function trans($text, array $params = [])
     return GrafCenter\CMS\Translator::getInstance()->translate($text, $params);
 }
 
+function thumb($text, array $params = [])
+{
+   return GrafCenter\CMS\Thumb::make();
+}
+
 /**
  * Pomocnicza, tworzy wrapper dla renderowania pliku w akcjach
  */

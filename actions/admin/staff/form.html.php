@@ -1,6 +1,6 @@
 <?php
 
-$groupOptions = StaffGroup::selectAllAsOptionsWithPrimaryKey('name');
+$groupOptions = GrafCenter\CMS\Model\StaffGroup::selectAllAsOptionsWithPrimaryKey('name');
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 

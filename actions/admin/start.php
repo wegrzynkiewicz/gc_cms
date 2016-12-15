@@ -1,10 +1,8 @@
 <?php
 
-use GrafCenter\CMS\Model\Staff;
-
 $headTitle = trans('Dashboard');
 
-$staff = Staff::createFromSession();
+$staff = GrafCenter\CMS\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php';

@@ -2,10 +2,10 @@
 
 $headTitle = trans("Pracownicy");
 
-$staff = Staff::createFromSession();
+$staff = GrafCenter\CMS\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
-$staffList = Staff::selectAllCorrectWithPrimaryKey();
+$staffList = GrafCenter\CMS\Model\Staff::selectAllCorrectWithPrimaryKey();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
@@ -60,7 +60,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                 </a>
                             </td>
                             <td>
-                                <?php $groups = StaffGroup::selectAllAsOptionsByStaffId($staff_id) ?>
+                                <?php $groups = GrafCenter\CMS\Model\StaffGroup::selectAllAsOptionsByStaffId($staff_id) ?>
                                 <?php foreach ($groups as $group_id => $group): ?>
                                     <a href="<?=url("/admin/staff/group/edit/$group_id")?>"
                                         title="<?=trans('Przejdź do grupy')?>">
@@ -68,7 +68,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                 <?php endforeach ?>
                             </td>
                             <td>
-                                <?php $permissions = StaffPermission::selectPermissionsAsOptionsByStaffId($staff_id) ?>
+                                <?php $permissions = GrafCenter\CMS\Model\StaffPermission::selectPermissionsAsOptionsByStaffId($staff_id) ?>
                                 <?php foreach ($permissions as $permission): ?>
                                     <?=trans($config['permissions'][$permission])?> <br>
                                 <?php endforeach ?>

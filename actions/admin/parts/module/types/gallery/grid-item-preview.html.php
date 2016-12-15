@@ -1,4 +1,4 @@
-<?php $images = ModuleFile::selectAllByModuleId($module_id) ?>
+<?php $images = GrafCenter\CMS\Model\ModuleFile::selectAllByModuleId($module_id) ?>
 
 <?php if (empty($images)): ?>
     <div class="text-center">
@@ -15,7 +15,7 @@
                     data-width="<?=$is['width']?>"
                     data-height="<?=$is['height']?>"
                     class="thumb-wrapper">
-                    <img src="<?=Thumb::make($image['url'], 120, 70)?>"
+                    <img src="<?=GrafCenter\CMS\Thumb::make($image['url'], 120, 70)?>"
                         width="120"
                         width="70"
                         alt="<?=escape($image['name'])?>"

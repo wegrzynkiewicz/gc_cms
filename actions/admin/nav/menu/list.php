@@ -2,7 +2,7 @@
 
 $headTitle = trans("Węzły nawigacji");
 
-$staff = Staff::createFromSession();
+$staff = GrafCenter\CMS\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $nav_id = intval(array_shift($_SEGMENTS));
@@ -12,13 +12,13 @@ if (wasSentPost()) {
     $positions = array_filter($positions, function ($node) {
         return isset($node['id']);
     });
-    MenuTree::update($nav_id, $positions);
+    GrafCenter\CMS\Model\MenuTree::update($nav_id, $positions);
     redirect("/admin/nav/list");
 }
 
-$nav = MenuTaxonomy::selectByPrimaryId($nav_id);
-$pages = Page::selectAllWithFrames();
-$menuTree = Menu::buildTreeByTaxonomyId($nav_id);
+$nav = GrafCenter\CMS\Model\MenuTaxonomy::selectByPrimaryId($nav_id);
+$pages = GrafCenter\CMS\Model\Page::selectAllWithFrames();
+$menuTree = GrafCenter\CMS\Model\Menu::buildTreeByTaxonomyId($nav_id);
 
 $headTitle .= makeLink("/admin/nav/list", $nav['name']);
 

@@ -2,7 +2,7 @@
 
 $headTitle = trans("Dodawanie nowego pracownika");
 
-$staff = Staff::createFromSession();
+$staff = GrafCenter\CMS\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 if (wasSentPost()) {
@@ -12,7 +12,7 @@ if (wasSentPost()) {
     $password = randomPassword($config['minPasswordLength']);
     $passwordHash = sha1($password);
 
-    $staff_id = Staff::insert([
+    $staff_id = GrafCenter\CMS\Model\Staff::insert([
         'name' => $_POST['name'],
         'password' => $passwordHash,
         'email' => $_POST['email'],

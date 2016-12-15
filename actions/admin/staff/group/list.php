@@ -2,10 +2,10 @@
 
 $headTitle = trans("Grupy");
 
-$staff = Staff::createFromSession();
+$staff = GrafCenter\CMS\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
-$groups = StaffGroup::selectAllWithPrimaryKey();
+$groups = GrafCenter\CMS\Model\StaffGroup::selectAllWithPrimaryKey();
 
 $headTitle .= makeLink("/admin/staff/list", trans("pracowników"));
 
@@ -56,7 +56,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                 </a>
                             </td>
                             <td>
-                                <?php $permissions = StaffPermission::selectPermissionsAsOptionsByGroupId($group_id) ?>
+                                <?php $permissions = GrafCenter\CMS\Model\StaffPermission::selectPermissionsAsOptionsByGroupId($group_id) ?>
                                 <?php foreach ($permissions as $permission): ?>
                                     <?=trans($config['permissions'][$permission])?> <br>
                                 <?php endforeach ?>

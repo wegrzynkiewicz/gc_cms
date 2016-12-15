@@ -1,10 +1,10 @@
 <?php
 
-$staff = Staff::createFromSession();
+$staff = GrafCenter\CMS\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $gallery_id = intval(array_shift($_SEGMENTS));
-$images = GalleryImage::selectAllByGalleryId($gallery_id);
+$images = GrafCenter\CMS\Model\GalleryImage::selectAllByGalleryId($gallery_id);
 
 ?>
 <?php if (empty($images)): ?>
@@ -20,7 +20,7 @@ $images = GalleryImage::selectAllByGalleryId($gallery_id);
             <div class="thumbnail">
 
                 <div class="thumb-wrapper">
-                    <img src="<?=Thumb::make($image['file'], 300, 200)?>" class="img-responsive"/>
+                    <img src="<?=GrafCenter\CMS\Thumb::make($image['file'], 300, 200)?>" class="img-responsive"/>
                 </div>
 
                 <div class="pull-right">

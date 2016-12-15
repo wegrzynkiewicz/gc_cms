@@ -1,6 +1,6 @@
 <?php
 
-$staff = Staff::createFromSession();
+$staff = GrafCenter\CMS\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $file_id = intval(array_shift($_SEGMENTS));
@@ -14,7 +14,7 @@ if (wasSentPost()) {
         'height' => $height,
     ];
 
-    ModuleFile::updateByPrimaryId($file_id, [
+    GrafCenter\CMS\Model\ModuleFile::updateByPrimaryId($file_id, [
         'name' => $_POST['name'],
         'url' => $_POST['url'],
         'settings' => json_encode($settings),
@@ -23,7 +23,7 @@ if (wasSentPost()) {
     return http_response_code(204);
 }
 
-$image = ModuleFile::selectByPrimaryId($file_id);
+$image = GrafCenter\CMS\Model\ModuleFile::selectByPrimaryId($file_id);
 
 $_POST = $image;
 

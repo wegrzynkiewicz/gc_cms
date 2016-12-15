@@ -5,6 +5,7 @@ namespace GrafCenter\CMS\Model;
 use GrafCenter\CMS\Storage\AbstractModel;
 use GrafCenter\CMS\Storage\Utility\NodeTrait;
 use GrafCenter\CMS\Storage\Utility\PrimaryTrait;
+use GrafCenter\CMS\Storage\Node;
 use GrafCenter\CMS\Storage\Database;
 
 class Menu extends Node

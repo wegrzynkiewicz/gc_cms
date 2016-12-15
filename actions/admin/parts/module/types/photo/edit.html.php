@@ -15,7 +15,7 @@ if (wasSentPost()) {
         'height' => $height,
     ];
 
-    FrameModule::updateByPrimaryId($module_id, [
+    GrafCenter\CMS\Model\FrameModule::updateByPrimaryId($module_id, [
         'theme' => 'default',
         'content' => $name,
         'settings' => json_encode($settings),

@@ -1,6 +1,6 @@
 <?php
 
-$staff = Staff::createFromSession();
+$staff = GrafCenter\CMS\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $module_id = intval(array_shift($_SEGMENTS));

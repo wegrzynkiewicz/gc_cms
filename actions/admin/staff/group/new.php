@@ -2,13 +2,13 @@
 
 $headTitle = trans("Dodawanie nowej grupy pracowników");
 
-$staff = Staff::createFromSession();
+$staff = GrafCenter\CMS\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 if (wasSentPost()) {
 
     $permissions = isset($_POST['permissions']) ? $_POST['permissions'] : [];
-    $group_id = StaffGroup::insert([
+    $group_id = GrafCenter\CMS\Model\StaffGroup::insert([
         'name' => $_POST['name'],
     ], $permissions);
 

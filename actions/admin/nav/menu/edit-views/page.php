@@ -1,14 +1,14 @@
 <?php
 
-$staff = Staff::createFromSession();
+$staff = GrafCenter\CMS\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $menu_id = intval(array_shift($_SEGMENTS));
-$node = Menu::selectByPrimaryId($menu_id);
+$node = GrafCenter\CMS\Model\Menu::selectByPrimaryId($menu_id);
 
 $_POST = $node;
 
-$pages = Page::selectAllWithFrames();
+$pages = GrafCenter\CMS\Model\Page::selectAllWithFrames();
 $pageOptions = [];
 foreach($pages as $page_id => $page) {
     $pageOptions[$page_id] = $page['name'];

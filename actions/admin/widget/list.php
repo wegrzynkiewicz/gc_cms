@@ -2,10 +2,10 @@
 
 $headTitle = trans("Widżety");
 
-$staff = Staff::createFromSession();
+$staff = GrafCenter\CMS\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
-$widgets = Widget::selectAllCorrectWitPrimaryId();
+$widgets = GrafCenter\CMS\Model\Widget::selectAllCorrectWitPrimaryId();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 

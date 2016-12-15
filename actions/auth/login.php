@@ -1,7 +1,5 @@
 <?php
 
-use GrafCenter\CMS\Model\Staff;
-
 $headTitle = trans("Logowanie do panelu admina");
 
 if (isset($_SESSION['staff'])) {
@@ -10,11 +8,11 @@ if (isset($_SESSION['staff'])) {
 
 if (wasSentPost()) {
     $passwordHash = sha1($_POST['password']);
-    $user = Staff::selectSingleBy('email', $_POST['email']);
+    $user = GrafCenter\CMS\Model\Staff::selectSingleBy('email', $_POST['email']);
 
     # jeżeli hasło w bazie nie jest zahaszowane, a zgadza się
     if ($user and !isSha1($user['password']) and $_POST['password'] === $user['password']) {
-        Staff::updateByPrimaryId($user['staff_id'], [
+        GrafCenter\CMS\Model\Staff::updateByPrimaryId($user['staff_id'], [
             'password' => $passwordHash,
         ]);
         $user['password'] = $passwordHash;

@@ -1,10 +1,10 @@
 <?php
 
-$staff = Staff::createFromSession();
+$staff = GrafCenter\CMS\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $module_id = intval(array_shift($_SEGMENTS));
-$files = ModuleFile::selectAllByModuleId($module_id);
+$files = GrafCenter\CMS\Model\ModuleFile::selectAllByModuleId($module_id);
 
 ?>
 <?php if (empty($files)): ?>

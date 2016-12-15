@@ -8,7 +8,7 @@ if (wasSentPost()) {
     $confirmPassword = $_POST['confirm_password'];
     $newPasswordHash = sha1($newPassword);
 
-    $user = Staff::selectByPrimaryId($_SESSION['staff']['staff_id']);
+    $user = GrafCenter\CMS\Model\Staff::selectByPrimaryId($_SESSION['staff']['staff_id']);
     if (!$user) {
         redirect('/admin/account/logout');
     }
@@ -20,7 +20,7 @@ if (wasSentPost()) {
     } elseif ($newPassword !== $confirmPassword) {
         $error = trans('Podane nowe hasła nie są identyczne');
     } else {
-        Staff::updateByPrimaryId($user['staff_id'], [
+        GrafCenter\CMS\Model\Staff::updateByPrimaryId($user['staff_id'], [
             'password' => $newPasswordHash,
             'force_change_password' => 0,
         ]);

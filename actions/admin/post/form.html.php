@@ -1,6 +1,6 @@
 <?php
 
-$taxonomies = PostTaxonomy::selectAllCorrectWithPrimaryKey();
+$taxonomies = GrafCenter\CMS\Model\PostTaxonomy::selectAllCorrectWithPrimaryKey();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
@@ -38,7 +38,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             ])?>
 
             <?php foreach ($taxonomies as $tax_id => $taxonomy): ?>
-                <?php $tree = PostNode::buildTreeByTaxonomyId($tax_id) ?>
+                <?php $tree = GrafCenter\CMS\Model\PostNode::buildTreeByTaxonomyId($tax_id) ?>
                 <?php if ($tree->hasChildren()): ?>
                     <?=view('/admin/parts/input/checkbox-tree.html.php', [
                         'tree' => $tree,

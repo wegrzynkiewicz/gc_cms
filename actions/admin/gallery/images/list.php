@@ -2,11 +2,11 @@
 
 $headTitle = trans("Zdjęcia w galerii");
 
-$staff = Staff::createFromSession();
+$staff = GrafCenter\CMS\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $gallery_id = intval(array_shift($_SEGMENTS));
-$gallery = Gallery::selectByPrimaryId($gallery_id);
+$gallery = GrafCenter\CMS\Model\Gallery::selectByPrimaryId($gallery_id);
 
 $headTitle .= makeLink("/admin/gallery/list", $gallery['name']);
 
