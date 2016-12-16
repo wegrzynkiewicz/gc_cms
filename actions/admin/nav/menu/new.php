@@ -5,7 +5,7 @@ $breadcrumbs->push($request, $headTitle);
 
 $menu_id = 0;
 
-if(wasSentPost($_POST)) {
+if(isPost()) {
     GC\Model\Menu::insert([
         'name' => $_POST['name'],
         'type' => $_POST['type'],

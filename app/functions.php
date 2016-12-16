@@ -56,11 +56,16 @@ function sqldate($time = null)
 }
 
 /**
- * Zwraca losowy sha1
+ * Zwraca pseudo losowy ciąg znaków o zadanej długości
  */
-function randomSha1()
+function pseudoRandom($length)
 {
-    return sha1(time().mt_rand());
+    $string = openssl_random_pseudo_bytes(ceil($length));
+    $string = base64_encode($string);
+    $string = str_replace(['/', '+', '='], '', $string);
+    $string = substr($string, 0, $length);
+
+    return $string;
 }
 
 /**
@@ -117,9 +122,17 @@ function makeLink($href, $name)
 /**
  * Sprawdza czy wysłane żądanie jest POSTem
  */
-function wasSentPost()
+function isPost()
 {
     return $_SERVER['REQUEST_METHOD'] === 'POST';
+}
+
+/**
+ * Sprawdza czy wysłane żądanie jest AJAXem
+ */
+function isXHR()
+{
+    return (isset($_SERVER['HTTP_X_REQUESTED_WITH']) and strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
 }
 
 /**
@@ -150,6 +163,15 @@ function getClientLang()
     }
 
     return getConfig()['lang']['clientDefault'];
+}
+
+/**
+ * Ustawia krótkie wiadomości, które są wyświetlane po wykonaniu jakiejś akcji, np coś zostało usunięte
+ */
+function setNotice($message, $theme = 'success')
+{
+    $_SESSION['notice']['message'] = $message;
+    $_SESSION['notice']['theme'] = $theme;
 }
 
 /**
@@ -344,7 +366,7 @@ function array_unchunk($array)
  */
 function generateThumb($imageUrl)
 {
-    $token = randomSha1();
+    $token = pseudoRandom(40);
     $imageUrl64 = base64_encode($imageUrl);
     $_SESSION['generateThumb'][$imageUrl] = $token;
 

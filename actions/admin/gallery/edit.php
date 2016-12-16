@@ -7,7 +7,7 @@ $staff->redirectIfUnauthorized();
 
 $gallery_id = intval(array_shift($_SEGMENTS));
 
-if (wasSentPost()) {
+if (isPost()) {
     GC\Model\Gallery::updateByPrimaryId($gallery_id, [
         'name' => $_POST['name'],
         'lang' => $_SESSION['lang']['editor'],

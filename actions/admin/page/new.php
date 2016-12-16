@@ -3,7 +3,7 @@
 $headTitle = trans('Dodawanie nowej strony');
 $breadcrumbs->push($request, $headTitle);
 
-if (wasSentPost()) {
+if (isPost()) {
 
     $frame_id = GC\Model\Frame::insert([
         'name' => $_POST['name'],
@@ -16,6 +16,8 @@ if (wasSentPost()) {
     GC\Model\Page::insert([
         'frame_id' => $frame_id,
     ]);
+
+    setNotice(trans('Nowa strona "%s" została utworzona.', [$_POST['name']]));
 
     redirect($breadcrumbs->getBeforeLastUrl());
 }

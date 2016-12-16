@@ -5,7 +5,7 @@ $headTitle = trans("Dodawanie nowego wpisu");
 $staff = GC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
-if (wasSentPost()) {
+if (isPost()) {
 
     $frame_id = GC\Model\Frame::insert([
         'name' => $_POST['name'],

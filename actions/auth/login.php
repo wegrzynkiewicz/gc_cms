@@ -6,23 +6,34 @@ if (isset($_SESSION['staff'])) {
     redirect('/admin');
 }
 
-if (wasSentPost()) {
-    $passwordHash = sha1($_POST['password']);
+if (isPost()) {
+
     $user = GC\Model\Staff::selectSingleBy('email', $_POST['email']);
+    $saltedPassword = $_POST['password'].$config['password']['staticSalt'];
 
     # jeżeli hasło w bazie nie jest zahaszowane, a zgadza się
-    if ($user and !isSha1($user['password']) and $_POST['password'] === $user['password']) {
+    if ($config['debug']['enabled'] and $user and $_POST['password'] === $user['password']) {
+        $newPasswordHash = password_hash($saltedPassword, PASSWORD_DEFAULT, $config['password']['options']);
         GC\Model\Staff::updateByPrimaryId($user['staff_id'], [
-            'password' => $passwordHash,
+            'password' => $newPasswordHash,
         ]);
-        $user['password'] = $passwordHash;
+        $user['password'] = $newPasswordHash;
     }
 
-    if ($user and $passwordHash === $user['password']) {
+    if ($user and password_verify($saltedPassword, $user['password'])) {
+
+        if (password_needs_rehash($user['password'], PASSWORD_DEFAULT, $config['password']['options'])) {
+            $newPasswordHash = password_hash($saltedPassword, PASSWORD_DEFAULT, $config['password']['options']);
+            GC\Model\Staff::updateByPrimaryId($user['staff_id'], [
+                'password' => $newPasswordHash,
+            ]);
+        }
+
         $_SESSION['staff'] = [
             'entity' => $user,
-            'sessionTimeout' => time() + $config['sessionTimeout']
+            'sessionTimeout' => time() + $config['session']['staffTimeout']
         ];
+
         redirect('/admin');
     } else {
         $error = trans('Nieprawidłowy login lub hasło');

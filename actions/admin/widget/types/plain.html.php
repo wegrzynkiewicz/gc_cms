@@ -3,7 +3,7 @@
 $headTitle = trans('Edycja widżetu tekstowego "%s"', [$widget['name']]);
 $breadcrumbs->push($request, $headTitle);
 
-if (wasSentPost()) {
+if (isPost()) {
     GC\Model\Widget::updateByPrimaryId($widget_id, [
         'content' => $_POST['content'],
     ]);

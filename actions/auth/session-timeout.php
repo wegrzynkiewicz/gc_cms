@@ -2,7 +2,7 @@
 
 $headTitle = trans("Czas trwania sesji minął");
 
-unset($_SESSION['staff']);
+session_destroy();
 
 require_once ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
 

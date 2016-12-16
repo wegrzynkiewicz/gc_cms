@@ -2,7 +2,7 @@
 
 $headTitle = trans("Zostałeś wylogowany");
 
-unset($_SESSION['staff']);
+session_destroy();
 
 require_once ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
 

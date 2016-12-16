@@ -5,7 +5,7 @@ $staff->redirectIfUnauthorized();
 
 $file_id = intval(array_shift($_SEGMENTS));
 
-if (wasSentPost()) {
+if (isPost()) {
 
     $filePath = "./".$_POST['url'];
     list($width, $height) = getimagesize($filePath);

@@ -12,13 +12,24 @@ define('TEMPLATE_PATH', ROOT_PATH.'/templates/'.TEMPLATE); # ścieżka do plikó
 define('TEMPLATE_ASSETS_URL', '/templates/'.TEMPLATE); # adres do zasobów w katalogu z szablonem
 
 $config = [
-    'debug' => true, # tryb developerski i wyświetlanie błędów
+    'debug' => [ # opcje związane z wyświetlaniem błędów
+        'enabled' => true,
+    ],
     'adminNavbarTitle' => 'Panel Administracyjny', # wyświetlana w prawym gornym rogu panelu admina
     'adminHeadTitleBase' => 'Acme Panel Administracyjny', # nazwa doklejana do <title> strony w panelu admina
     'noImageUrl' => '/admin/images/no-image.jpg', # ścieżka do obrazka w przypadku braku obrazka
     'timezone' => 'Europe/Warsaw', # domyślna strefa czasowa
-    'minPasswordLength' => 8, # minimalna długość hasła
-    'sessionTimeout' => 1800, # czas jaki musi upłynąć po zalogowaniu, aby wylogowało kogoś z automatu, w sekundach
+    'password' => [
+        'minLength' => 8, # minimalna długość hasła
+        'staticSalt' => '81qU6GlSusOZNxrWQF0x5xNaWT0odCfM4x4im4p3', # unikalna, sól dla wszystkich użytkowników, nie zmieniać nigdy
+        'options' => [ # opcje dla generatora haseł
+            'cost' => 11,
+        ]
+    ],
+    'session' => [
+        'cookieName' => sha1('TOLmEeE4ouK9lWuFigwvPqVhxLgtfj7k5kVqhIWL'.date('Y-m-d')), # nazwa ciastka sesyjnego, dla utrudnienia zmienna każdego dnia
+        'staffTimeout' => 1800, # czas jaki musi upłynąć po zalogowaniu, aby wylogowało kogoś z automatu, w sekundach
+    ],
     'avatar' => [
         'noAvatarUrl' => '/admin/images/no-avatar.jpg', # ściezka do domyślnego obrazka avatara
     ],

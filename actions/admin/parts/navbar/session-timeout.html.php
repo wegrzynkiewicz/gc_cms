@@ -5,12 +5,12 @@
             <?=trans('Do końca: ')?>
         </span>
         <i class="fa fa-clock-o fa-fw"></i>
-        <span id="session-countdown"><?=date("i:s", $config['sessionTimeout'])?></span>
+        <span id="session-countdown"><?=date("i:s", $config['session']['staffTimeout'])?></span>
     </a>
 
     <script>
         $(function() {
-            var sessionTimeout = <?=e($config['sessionTimeout'])?>;
+            var sessionTimeout = <?=e($config['session']['staffTimeout'])?>;
             var finalTime = new Date();
             finalTime.setSeconds(finalTime.getSeconds() + sessionTimeout);
             $('#session-countdown')

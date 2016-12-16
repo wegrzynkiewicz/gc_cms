@@ -6,7 +6,7 @@ $user = GC\Model\Staff::selectByPrimaryId($staff_id);
 $headTitle = trans('Edytowanie pracownika "%s"', [$user['name']]);
 $breadcrumbs->push($request, $headTitle);
 
-if (wasSentPost()) {
+if (isPost()) {
 
     $email = inputValue('email');
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {

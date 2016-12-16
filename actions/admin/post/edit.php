@@ -9,7 +9,7 @@ $post_id = intval(array_shift($_SEGMENTS));
 $post = GC\Model\Post::selectWithFrameByPrimaryId($post_id);
 $frame_id = $post['frame_id'];
 
-if (wasSentPost()) {
+if (isPost()) {
 
     GC\Model\Frame::updateByFrameId($frame_id, [
         'name' => $_POST['name'],

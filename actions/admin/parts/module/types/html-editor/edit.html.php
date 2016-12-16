@@ -3,7 +3,7 @@
 $headTitle = trans("Edycja modułu tekstowego");
 $breadcrumbs->push($request, $headTitle);
 
-if (wasSentPost()) {
+if (isPost()) {
     GC\Model\FrameModule::updateByPrimaryId($module_id, [
         'content' => $_POST['content'],
         'theme' => 'default',

@@ -8,7 +8,7 @@ $staff->redirectIfUnauthorized();
 $tax_id = intval(array_shift($_SEGMENTS));
 $menu_id = 0;
 
-if(wasSentPost($_POST)) {
+if(isPost()) {
     GC\Model\PostNode::insert([
         'name' => $_POST['name'],
     ], $tax_id);

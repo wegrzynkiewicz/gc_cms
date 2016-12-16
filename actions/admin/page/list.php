@@ -59,8 +59,6 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     </div>
 </div>
 
-<?php require_once ACTIONS_PATH.'/admin/parts/assets.html.php'; ?>
-
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <form id="deleteModalForm" method="post" action="<?=url("/admin/page/delete")?>" class="modal-content">
@@ -88,6 +86,8 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
         </form>
     </div>
 </div>
+
+<?php require_once ACTIONS_PATH.'/admin/parts/assets.html.php'; ?>
 
 <script>
     $(function(){

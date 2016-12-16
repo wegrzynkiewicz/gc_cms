@@ -1,6 +1,6 @@
 <?php
 
-if (!$config['debug']) {
+if (!$config['debug']['enabled']) {
     redirect('/');
 }
 

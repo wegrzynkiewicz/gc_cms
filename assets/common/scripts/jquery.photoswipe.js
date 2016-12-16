@@ -29,7 +29,7 @@
 
                 });
 
-                $(gallery).on('click', 'a', function(e) {
+                $(gallery).on('click', 'a[data-photoswipe-item]', function(e) {
                     e.preventDefault();
                     var gid = $(this).data('gallery-id'),
                         pid = $(this).data('photo-id');

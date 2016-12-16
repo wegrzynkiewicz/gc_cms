@@ -1,3 +1,14 @@
+
+<?php if (isset($_SESSION['notice'])): ?>
+    <div class="alert alert-<?=$_SESSION['notice']['theme']?> alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+        <?=$_SESSION['notice']['message']?>
+    </div>
+    <?php unset($_SESSION['notice']); ?>
+<?php endif ?>
+
 <?php if (isset($breadcrumbs)): $links = $breadcrumbs->getLinks() ?>
     <?php if (count($links) > 1): ?>
         <ol class="breadcrumb" style="background-color: #eeeeee">

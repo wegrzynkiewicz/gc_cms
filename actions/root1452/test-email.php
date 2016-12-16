@@ -6,7 +6,6 @@ $mail->buildTemplate(
     '/admin/parts/email/styles.css', [
     'name' => 'Łukasz Węgrzynkiewicz',
     'login' => 'wegrzynkiewicz.lukasz@gmail.com',
-    'password' => randomSha1(),
 ]);
 $mail->addAddress('wegrzynkiewicz.lukasz@gmail.com');
 

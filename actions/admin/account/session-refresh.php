@@ -1,3 +1,3 @@
 <?php
 
-$_SESSION['staff']['sessionTimeout'] = time() + $config['sessionTimeout'];
+$_SESSION['staff']['sessionTimeout'] = time() + $config['session']['staffTimeout'];

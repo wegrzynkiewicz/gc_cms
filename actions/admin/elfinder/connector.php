@@ -1,8 +1,5 @@
 <?php
 
-$staff = GC\Model\Staff::createFromSession();
-$staff->redirectIfUnauthorized();
-
 error_reporting(0);
 
 // Enable FTP connector netmount

@@ -25,7 +25,7 @@ if ($user) {
         $message = trans("Link do zmiany hasła wygasł lub hasło zostało już zresetowane");
     } else {
 
-        $password = randomPassword($config['minPasswordLength']);
+        $password = randomPassword($config['password']['minLength']);
         $passwordHash = sha1($password);
 
         GC\Model\Staff::updateByPrimaryId($user['staff_id'], [

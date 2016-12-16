@@ -2,24 +2,23 @@
 
 $headTitle = trans("Wymagana zmiana hasła");
 
-if (wasSentPost()) {
+if (isPost()) {
 
     $newPassword = $_POST['new_password'];
     $confirmPassword = $_POST['confirm_password'];
     $newPasswordHash = sha1($newPassword);
 
     $user = GC\Model\Staff::selectByPrimaryId($_SESSION['staff']['entity']['staff_id']);
-    if (!$user) {
-        redirect('/admin/account/logout');
-    }
 
-    if ($newPasswordHash === $user['password']) {
-        $error = trans('Nowe hasło nie może być takie samo jak poprzednie');
-    } elseif (strlen($newPassword) < $config['minPasswordLength']) {
-        $error = trans('Hasło nie może być krótsze niż %s znaków', $config['minPasswordLength']);
-    } elseif ($newPassword !== $confirmPassword) {
+    if ($newPassword !== $confirmPassword) {
         $error = trans('Podane nowe hasła nie są identyczne');
+    } elseif (strlen($newPassword) < $config['password']['minLength']) {
+        $error = trans('Hasło nie może być krótsze niż %s znaków', $config['password']['minLength']);
+    } elseif (password_verify($newPassword, $user['password'])) {
+        $error = trans('Nowe hasło nie może być takie samo jak poprzednie');
     } else {
+        $newPassword .= $config['password']['staticSalt'];
+        $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT, $config['password']['options']);
         GC\Model\Staff::updateByPrimaryId($user['staff_id'], [
             'password' => $newPasswordHash,
             'force_change_password' => 0,
@@ -60,7 +59,7 @@ require_once ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                                 'name' => 'new_password',
                                 'type' => 'password',
                                 'label' => 'Nowe hasło',
-                                'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', $config['minPasswordLength']),
+                                'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', $config['password']['minLength']),
                             ])?>
 
                             <?=view('/admin/parts/input/editbox.html.php', [
@@ -90,7 +89,7 @@ $(function () {
         rules: {
             new_password: {
                 required: true,
-                minlength : <?=e($config['minPasswordLength'])?>
+                minlength : <?=e($config['password']['minLength'])?>
             },
             confirm_password: {
                 required: true,
@@ -100,7 +99,7 @@ $(function () {
         messages: {
             new_password: {
                 required: "<?=trans('Wprowadź nowe hasło')?>",
-                minlength: "<?=trans('Nowe hasło powinno mieć przynajmniej %s znaków', $config['minPasswordLength'])?>"
+                minlength: "<?=trans('Nowe hasło powinno mieć przynajmniej %s znaków', $config['password']['minLength'])?>"
             },
             confirm_password: {
                 required: "<?=trans('Musisz powtórzyć swoje nowe hasło dla bezpieczeństwa')?>",

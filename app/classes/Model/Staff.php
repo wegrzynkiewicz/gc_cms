@@ -34,7 +34,7 @@ class Staff extends AbstractModel
         $_SESSION['lang']['staff'] = $data['lang'];
 
         # aktualizujemy czas do automatycznego wylogowania
-        $_SESSION['staff']['sessionTimeout'] = time() + $config['sessionTimeout'];
+        $_SESSION['staff']['sessionTimeout'] = time() + $config['session']['staffTimeout'];
     }
 
     /**
@@ -109,14 +109,14 @@ class Staff extends AbstractModel
     {
         # jeżeli sesja nie istnieje wtedy przekieruj na logowanie
         if (!isset($_SESSION['staff']) or !isset($_SESSION['staff']['entity'])) {
-            unset($_SESSION['staff']);
+            session_destroy();
             Logger::logout("Session does not exists");
             redirect('/auth/login');
         }
 
         # jeżeli czas trwania sesji minął
         if (time() > $_SESSION['staff']['sessionTimeout']) {
-            unset($_SESSION['staff']);
+            session_destroy();
             Logger::logout("Session timeout");
             redirect('/auth/session-timeout');
         }
@@ -127,7 +127,7 @@ class Staff extends AbstractModel
             $staff = static::createByStaffId($_SESSION['staff']['entity']['staff_id']);
             $_SESSION['staff']['entity'] = $staff->getData();
         } catch (RuntimeException $exception) {
-            unset($_SESSION['staff']);
+            session_destroy();
             Logger::logout("Not found user");
             redirect('/auth/login');
         }

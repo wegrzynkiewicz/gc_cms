@@ -3,7 +3,7 @@
 $headTitle = trans("Edycja modułu pojedyńczego zdjęcia");
 $breadcrumbs->push($request, $headTitle);
 
-if (wasSentPost()) {
+if (isPost()) {
 
     $url = $_POST['url'];
     $name = $_POST['name'];

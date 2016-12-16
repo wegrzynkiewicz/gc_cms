@@ -8,7 +8,7 @@ $staff->redirectIfUnauthorized();
 $post_id = intval(array_shift($_SEGMENTS));
 $tax_id = intval(array_shift($_SEGMENTS));
 
-if(wasSentPost($_POST)) {
+if(isPost($_POST)) {
     GC\Model\PostNode::updateByPrimaryId($post_id, [
         'name' => $_POST['name'],
     ]);

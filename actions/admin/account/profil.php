@@ -1,6 +1,6 @@
 <?php
 
-if (wasSentPost()) {
+if (isPost()) {
     GC\Model\Staff::updateByPrimaryId($_SESSION['staff']['entity']['staff_id'], [
         'lang' => $_POST['lang'],
     ]);

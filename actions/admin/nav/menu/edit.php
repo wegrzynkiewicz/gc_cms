@@ -2,7 +2,7 @@
 
 $menu_id = intval(array_shift($_SEGMENTS));
 
-if(wasSentPost($_POST)) {
+if(isPost()) {
     GC\Model\Menu::updateByPrimaryId($menu_id, [
         'name' => $_POST['name'],
         'type' => $_POST['type'],

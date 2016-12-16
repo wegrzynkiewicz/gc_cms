@@ -2,7 +2,7 @@
 
 $staff->redirectIfUnauthorized();
 
-if (wasSentPost()) {
+if (isPost()) {
     $gallery_id = intval($_POST['gallery_id']);
 
     GC\Storage\Database::transaction(function() use ($gallery_id) {

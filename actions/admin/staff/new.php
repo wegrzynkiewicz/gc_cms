@@ -3,11 +3,11 @@
 $headTitle = trans("Dodawanie nowego pracownika");
 $breadcrumbs->push($request, $headTitle);
 
-if (wasSentPost()) {
+if (isPost()) {
 
     $groups = isset($_POST['groups']) ? $_POST['groups'] : [];
 
-    $password = randomPassword($config['minPasswordLength']);
+    $password = randomPassword($config['password']['minLength']);
     $passwordHash = sha1($password);
 
     $staff_id = GC\Model\Staff::insert([

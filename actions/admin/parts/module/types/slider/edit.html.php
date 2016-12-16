@@ -3,7 +3,7 @@
 $headTitle = trans("Edycja modułu slajdera");
 $breadcrumbs->push($request, $headTitle);
 
-if (wasSentPost()) {
+if (isPost()) {
     GC\Model\FrameModule::updateByPrimaryId($module_id, [
         'theme' => $_POST['theme'],
     ]);

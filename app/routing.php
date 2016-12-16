@@ -26,6 +26,23 @@ if (strpos($request, $frontController) === 0) {
     define('FRONT_CONTROLLER_URL', '');
 }
 
+# sprawdzana jest weryfikacja csrf tokenu, chroni przed spreparowanymi żądaniami
+if (isPost() and isset($_SESSION['csrf_token'])) {
+    if (isset($_SERVER['HTTP_X_CSRFTOKEN']) && $_SERVER['HTTP_X_CSRFTOKEN'] === $_SESSION['csrf_token']) {
+        GC\Logger::csrf("Token verified via header");
+    } elseif (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
+        GC\Logger::csrf("Token verified via request");
+    } else {
+        GC\Logger::csrf("Invalid token");
+        return http_response_code(403);
+    }
+}
+
+# jeżeli token nie istnieje wtedy go utwórz
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = pseudoRandom(80);
+}
+
 # jeżeli adres bez ścieżki wtedy załaduj akcję główną
 if (empty(trim($request, '/'))) {
     GC\Logger::routing("Homepage");

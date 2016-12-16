@@ -6,17 +6,17 @@ if (isset($_SESSION['staff'])) {
     redirect('/admin');
 }
 
-if (wasSentPost()) {
+if (isPost()) {
 
     $user = GC\Model\Staff::selectSingleBy('email', $_POST['login']);
     if ($user) {
 
-        $newPassword = randomPassword($config['minPasswordLength']);
+        $newPassword = randomPassword($config['password']['minLength']);
         $newPasswordHash = sha1($newPassword);
 
         $email64 = base64_encode($user['email']);
         $regeneration = [
-            'verifyHash' => randomSha1(),
+            'verifyHash' => pseudoRandom(80),
             'time' => time(),
         ];
 

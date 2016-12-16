@@ -5,7 +5,10 @@ $title = "Edycja strony %s";
 $page_id = intval(array_shift($_SEGMENTS));
 $page = GC\Model\Page::selectWithFrameByPrimaryId($page_id);
 
-if (wasSentPost()) {
+$headTitle = trans($title, [$page['name']]);
+$breadcrumbs->push($request, $headTitle);
+
+if (isPost()) {
 
     GC\Model\Frame::updateByFrameId($page['frame_id'], [
         'name' => $_POST['name'],
@@ -14,11 +17,10 @@ if (wasSentPost()) {
         'image' => $_POST['image'],
     ]);
 
+    setNotice(trans('Strona "%s" została zaktualizowana.', [$page['name']]));
+
     redirect($breadcrumbs->getBeforeLastUrl());
 }
-
-$headTitle = trans($title, [$page['name']]);
-$breadcrumbs->push($request, $headTitle);
 
 $_POST = $page;
 

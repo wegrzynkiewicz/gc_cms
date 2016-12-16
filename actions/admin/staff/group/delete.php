@@ -1,6 +1,6 @@
 <?php
 
-if (wasSentPost()) {
+if (isPost()) {
     $group_id = $_POST['group_id'];
     GC\Model\StaffGroup::deleteByPrimaryId($group_id);
 }

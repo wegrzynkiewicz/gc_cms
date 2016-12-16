@@ -3,40 +3,31 @@
 $headTitle = trans("Zmiana hasła");
 $breadcrumbs->push($request, $headTitle, 'fa-unlock-alt');
 
-if (wasSentPost()) {
+if (isPost()) {
 
     $oldPassword = $_POST['old_password'];
     $newPassword = $_POST['new_password'];
     $confirmPassword = $_POST['confirm_password'];
-    $oldPasswordHash = sha1($oldPassword);
-    $newPasswordHash = sha1($newPassword);
+    $saltedOldPassword = $oldPassword.$config['password']['staticSalt'];
 
     $user = GC\Model\Staff::selectByPrimaryId($_SESSION['staff']['entity']['staff_id']);
-    if (!$user) {
-        redirect('/admin/account/logout');
-    }
 
-    # jeżeli hasło w bazie nie jest zahaszowane, a zgadza się
-    if (!isSha1($user['password']) and $oldPassword === $user['password']) {
-        GC\Model\Staff::updateByPrimaryId($user['staff_id'], [
-            'password' => $oldPasswordHash,
-        ]);
-        $user['password'] = $oldPasswordHash;
-    }
-
-    if (strlen($newPassword) < $config['minPasswordLength']) {
-        $error = trans('Hasło nie może być krótsze niż %s znaków', $config['minPasswordLength']);
-    } elseif ($oldPasswordHash !== $user['password']) {
+    if (strlen($newPassword) < $config['password']['minLength']) {
+        $error = trans('Hasło nie może być krótsze niż %s znaków', $config['password']['minLength']);
+    } elseif (!password_verify($saltedOldPassword, $user['password'])) {
         $error = trans('Stare hasło nie zgadza się z obecnym hasłem');
     } elseif ($newPassword !== $confirmPassword) {
         $error = trans('Podane nowe hasła nie są identyczne');
     } else {
+        $newPassword .= $config['password']['staticSalt'];
+        $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT, $config['password']['options']);
         GC\Model\Staff::updateByPrimaryId($user['staff_id'], [
             'password' => $newPasswordHash,
         ]);
-        $user['password'] = $newPasswordHash;
 
-        redirect('/admin');
+        $_SESSION['flash-notice'] = trans("Twoje hasło zostało zmienione");
+
+        redirect($breadcrumbs->getBeforeLastUrl());
     }
 }
 
@@ -66,7 +57,7 @@ require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                 'name' => 'new_password',
                 'type' => 'password',
                 'label' => 'Nowe hasło',
-                'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', $config['minPasswordLength']),
+                'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', $config['password']['minLength']),
             ])?>
 
             <?=view('/admin/parts/input/editbox.html.php', [
@@ -95,7 +86,7 @@ $(function () {
             },
             new_password: {
                 required: true,
-                minlength : <?=e($config['minPasswordLength'])?>
+                minlength : <?=e($config['password']['minLength'])?>
             },
             confirm_password: {
                 required: true,
@@ -108,7 +99,7 @@ $(function () {
             },
             new_password: {
                 required: "<?=trans('Wprowadź nowe hasło')?>",
-                minlength: "<?=trans('Nowe hasło powinno mieć przynajmniej %s znaków', $config['minPasswordLength'])?>"
+                minlength: "<?=trans('Nowe hasło powinno mieć przynajmniej %s znaków', $config['password']['minLength'])?>"
             },
             confirm_password: {
                 required: "<?=trans('Musisz powtórzyć swoje nowe hasło dla bezpieczeństwa')?>",

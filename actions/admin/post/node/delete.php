@@ -5,7 +5,7 @@ $staff->redirectIfUnauthorized();
 
 $tax_id = intval(array_shift($_SEGMENTS));
 
-if (wasSentPost()) {
+if (isPost()) {
     GC\Storage\Database::transaction(function () {
         $node_id = intval($_POST['node_id']);
         GC\Model\PostNode::deleteByPrimaryId($node_id);

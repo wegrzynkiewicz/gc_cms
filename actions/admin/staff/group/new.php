@@ -3,7 +3,7 @@
 $headTitle = trans("Dodawanie nowej grupy pracowników");
 $breadcrumbs->push($request, $headTitle);
 
-if (wasSentPost()) {
+if (isPost()) {
 
     $permissions = isset($_POST['permissions']) ? $_POST['permissions'] : [];
     $group_id = GC\Model\StaffGroup::insert([

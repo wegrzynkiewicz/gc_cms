@@ -3,7 +3,7 @@
 $headTitle = trans('Dodawanie nowego modułu');
 $breadcrumbs->push($request, $headTitle);
 
-if(wasSentPost()) {
+if(isPost()) {
 	$module_id = GC\Model\FrameModule::insert([
         'type' => $_POST['type'],
         'theme' => 'default',

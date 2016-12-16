@@ -1,7 +1,3 @@
-<?php
-$staff = GC\Model\Staff::createFromSession();
-$staff->redirectIfUnauthorized();
-?>
 <!DOCTYPE html>
 <html>
 <head>

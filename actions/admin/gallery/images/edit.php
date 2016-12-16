@@ -8,7 +8,7 @@ $staff->redirectIfUnauthorized();
 $image_id = intval(array_shift($_SEGMENTS));
 $gallery_id = intval(array_shift($_SEGMENTS));
 
-if (wasSentPost()) {
+if (isPost()) {
     GC\Model\GalleryImage::updateByPrimaryId($image_id, [
         'name' => $_POST['name'],
         'file' => $_POST['file'],
