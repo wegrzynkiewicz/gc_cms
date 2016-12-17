@@ -37,33 +37,34 @@ require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 <div class="row">
     <div class="col-lg-12">
         <form action="" method="post" id="form" class="form-horizontal">
+            <div class="simple-box">
+                <?php if (isset($error)): ?>
+                    <div class="text-danger text-center">
+                        <?=e($error)?>
+                    </div>
+                <?php endif ?>
 
-            <?php if (isset($error)): ?>
-                <p class="text-danger text-center">
-                    <?=e($error)?>
-                </p>
-            <?php endif ?>
+                <?=view('/admin/parts/input/editbox.html.php', [
+                    'name' => 'old_password',
+                    'type' => 'password',
+                    'label' => 'Stare hasło',
+                    'help' => 'Wprowadź swoje stare hasło dla bezpieczeństwa',
+                ])?>
 
-            <?=view('/admin/parts/input/editbox.html.php', [
-                'name' => 'old_password',
-                'type' => 'password',
-                'label' => 'Stare hasło',
-                'help' => 'Wprowadź swoje stare hasło dla bezpieczeństwa',
-            ])?>
+                <?=view('/admin/parts/input/editbox.html.php', [
+                    'name' => 'new_password',
+                    'type' => 'password',
+                    'label' => 'Nowe hasło',
+                    'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', $config['password']['minLength']),
+                ])?>
 
-            <?=view('/admin/parts/input/editbox.html.php', [
-                'name' => 'new_password',
-                'type' => 'password',
-                'label' => 'Nowe hasło',
-                'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', $config['password']['minLength']),
-            ])?>
-
-            <?=view('/admin/parts/input/editbox.html.php', [
-                'name' => 'confirm_password',
-                'type' => 'password',
-                'label' => 'Powtórz nowe hasło',
-                'help' => 'Powtórz swoje nowe hasło dla bezpieczeństwa',
-            ])?>
+                <?=view('/admin/parts/input/editbox.html.php', [
+                    'name' => 'confirm_password',
+                    'type' => 'password',
+                    'label' => 'Powtórz nowe hasło',
+                    'help' => 'Powtórz swoje nowe hasło dla bezpieczeństwa',
+                ])?>
+            </div>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zmień hasło',

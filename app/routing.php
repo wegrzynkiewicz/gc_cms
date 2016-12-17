@@ -26,6 +26,20 @@ if (strpos($request, $frontController) === 0) {
     define('FRONT_CONTROLLER_URL', '');
 }
 
+# jeżeli strona jest w budowie wtedy zwróć komunikat o budowie, chyba, że masz uprawnienie :)
+if ($config['inConstruction']) {
+    if (isset($_GET['you-shall-not-pass'])) {
+        $_SESSION['allowInConstruction'] = true;
+    }
+    if (!isset($_SESSION['allowInConstruction'])) {
+        $constructionPath = TEMPLATE_PATH.'/errors/construction.html.php';
+        if (is_readable(TEMPLATE_PATH.'/errors/construction.html.php')) {
+            return require $constructionPath;
+        }
+        http_response_code(503);
+    }
+}
+
 # sprawdzana jest weryfikacja csrf tokenu, chroni przed spreparowanymi żądaniami
 if (isPost() and isset($_SESSION['csrf_token'])) {
     if (isset($_SERVER['HTTP_X_CSRFTOKEN']) && $_SERVER['HTTP_X_CSRFTOKEN'] === $_SESSION['csrf_token']) {

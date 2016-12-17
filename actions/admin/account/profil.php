@@ -31,12 +31,13 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 <div class="row">
     <div class="col-lg-12">
         <form action="" method="post" id="form" class="form-horizontal">
-
-            <?=view('/admin/parts/input/select2-language.html.php', [
-                'name' => 'lang',
-                'label' => 'Język',
-                'help' => 'Wyświetla panel i komunikaty w tym języku',
-            ])?>
+            <div class="simple-box">
+                <?=view('/admin/parts/input/select2-language.html.php', [
+                    'name' => 'lang',
+                    'label' => 'Język',
+                    'help' => 'Wyświetla panel i komunikaty w tym języku',
+                ])?>
+            </div>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz profil',

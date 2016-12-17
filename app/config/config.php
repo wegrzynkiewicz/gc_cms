@@ -15,6 +15,7 @@ $config = [
     'debug' => [ # opcje związane z wyświetlaniem błędów
         'enabled' => true,
     ],
+    'inConstruction' => false, # wyświetla komunikat "strona w budowie" za każdym żądaniem
     'adminNavbarTitle' => 'Panel Administracyjny', # wyświetlana w prawym gornym rogu panelu admina
     'adminHeadTitleBase' => 'Acme Panel Administracyjny', # nazwa doklejana do <title> strony w panelu admina
     'noImageUrl' => '/admin/images/no-image.jpg', # ścieżka do obrazka w przypadku braku obrazka
@@ -28,7 +29,7 @@ $config = [
     ],
     'session' => [
         'cookieName' => sha1('TOLmEeE4ouK9lWuFigwvPqVhxLgtfj7k5kVqhIWL'.date('Y-m-d')), # nazwa ciastka sesyjnego, dla utrudnienia zmienna każdego dnia
-        'staffTimeout' => 1800, # czas jaki musi upłynąć po zalogowaniu, aby wylogowało kogoś z automatu, w sekundach
+        'staffTimeout' => 1800, # czas jaki musi upłynąć po zalogowaniu, aby wylogowało pracownika z automatu, w sekundach
     ],
     'avatar' => [
         'noAvatarUrl' => '/admin/images/no-avatar.jpg', # ściezka do domyślnego obrazka avatara
@@ -80,11 +81,6 @@ $config = [
         'en' => 'gb',
         'de' => 'de',
     ],
-    'frames' => [ # zainstalowane typy stron
-        'page' => 'Zwykła strona',
-        'post' => 'Strona wpisu bloga',
-        'product' => 'Strona produktu',
-    ],
     'modules' => [ # rodzaje zainstalowanych modułów
         'html-editor' => [
             'name' => 'Moduł tekstowy',
@@ -119,10 +115,6 @@ $config = [
         'homepage' => 'Kieruj na stronę główną',
         'page' => 'Kieruj na istniejącą stronę',
     ],
-    'navNodeTargets' => [ # dostępne atrybuty target dla węzłów nawigacji
-        '_self'	 => 'Załaduj w tym samym oknie',
-        '_blank' => 'Załaduj w nowym oknie',
-    ],
     'widgetTypes' => [ # typy widżetów
         'plain' => 'Zwykły tekst',
         'html-editor' => 'Formatowany tekst HTML',
@@ -151,6 +143,10 @@ $config = [
                 'quality' => 9,
             ],
         ],
+    ],
+    'navNodeTargets' => [ # dostępne atrybuty target dla węzłów nawigacji
+        '_self'	 => 'Załaduj w tym samym oknie',
+        '_blank' => 'Załaduj w nowym oknie',
     ],
     'rewrites' => [ # zawiera niestandardowe przekierowania $regex => $destination
         '~^/old-service/index\.php\?id=(\d+)\&theme=([a-z]+?)$~' => '/old-service/$1/$2',

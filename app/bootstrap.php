@@ -42,5 +42,3 @@ GC\Logger::response(sprintf('%s :: ExecutionTime: %s',
     http_response_code(),
     (microtime(true) - START_TIME)
 ));
-
-GC\Logger::response(print_r(get_included_files(), true));
