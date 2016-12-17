@@ -8,6 +8,8 @@ if (isPost()) {
         'content' => $_POST['content'],
     ]);
 
+    setNotice(trans('Widżet formatowanego tekstu "%s" został zaktualizowany.', [$widget['name']]));
+
     redirect($breadcrumbs->getBeforeLastUrl());
 }
 
@@ -26,7 +28,7 @@ require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
             ])?>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => 'Zapisz widżet',
+                'saveLabel' => 'Zapisz zmiany',
             ])?>
 
         </form>

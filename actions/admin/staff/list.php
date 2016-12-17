@@ -22,68 +22,69 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">
-        <?php if (empty($staffList)): ?>
-            <p>
+        <div class="simple-box">
+            <?php if (empty($staffList)): ?>
                 <?=trans('Nie znaleziono żadnych pracowników.')?>
-            </p>
-        <?php else: ?>
-            <table class="table vertical-middle" data-table="">
-                <thead>
-                    <tr>
-                        <th class="col-md-3 col-lg-3">
-                            <?=trans('Pracownik')?>
-                        </th>
-                        <th class="col-md-4 col-lg-4">
-                            <?=trans('Grupy')?>
-                        </th>
-                        <th class="col-md-4 col-lg-4">
-                            <?=trans('Uprawnienia')?>
-                        </th>
-                        <th class="col-md-1 col-lg-1 text-right"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($staffList as $staff_id => $row): ?>
+            <?php else: ?>
+                <table class="table vertical-middle" data-table="">
+                    <thead>
                         <tr>
-                            <td>
-                                <img src="<?=GC\Model\Staff::getAvatarUrl($row, 30)?>"
-                                    height="30" style="margin-right:5px"/>
-
-                                <a href="<?=url("/admin/staff/edit/$staff_id")?>"
-                                    title="<?=trans('Edytuj pracownika')?>">
-                                    <?=e($row['name'])?>
-                                </a>
-                            </td>
-                            <td>
-                                <?php $groups = GC\Model\StaffGroup::selectAllAsOptionsByStaffId($staff_id) ?>
-                                <?php foreach ($groups as $group_id => $group): ?>
-                                    <a href="<?=url("/admin/staff/group/edit/$group_id")?>"
-                                        title="<?=trans('Przejdź do grupy')?>">
-                                        <?=trans($group)?></a><br>
-                                <?php endforeach ?>
-                            </td>
-                            <td>
-                                <?php $permissions = GC\Model\StaffPermission::selectPermissionsAsOptionsByStaffId($staff_id) ?>
-                                <?php foreach ($permissions as $permission): ?>
-                                    <?=trans($config['permissions'][$permission])?> <br>
-                                <?php endforeach ?>
-                            </td>
-                            <td class="text-right">
-                                <a data-toggle="modal"
-                                    data-id="<?=e($staff_id)?>"
-                                    data-name="<?=e($row['name'])?>"
-                                    data-target="#deleteModal"
-                                    title="<?=trans('Usuń pracownika')?>"
-                                    class="btn btn-danger btn-md">
-                                    <i class="fa fa-times fa-fw"></i>
-                                    <?=trans("Usuń")?>
-                                </a>
-                            </td>
+                            <th class="col-md-3 col-lg-3">
+                                <?=trans('Pracownik')?>
+                            </th>
+                            <th class="col-md-4 col-lg-4">
+                                <?=trans('Grupy')?>
+                            </th>
+                            <th class="col-md-4 col-lg-4">
+                                <?=trans('Uprawnienia')?>
+                            </th>
+                            <th class="col-md-1 col-lg-1 text-right"></th>
                         </tr>
-                    <?php endforeach ?>
-                </tbody>
-            </table>
-        <?php endif ?>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($staffList as $staff_id => $row): ?>
+                            <tr>
+                                <td>
+                                    <img src="<?=GC\Model\Staff::getAvatarUrl($row, 30)?>"
+                                        height="30" style="margin-right:5px"/>
+
+                                    <a href="<?=url("/admin/staff/edit/$staff_id")?>"
+                                        title="<?=trans('Edytuj pracownika')?>">
+                                        <?=e($row['name'])?>
+                                    </a>
+                                </td>
+                                <td>
+                                    <?php $groups = GC\Model\StaffGroup::selectAllAsOptionsByStaffId($staff_id) ?>
+                                    <?php foreach ($groups as $group_id => $group): ?>
+                                        <a href="<?=url("/admin/staff/group/edit/$group_id")?>"
+                                            title="<?=trans('Przejdź do grupy')?>">
+                                            <?=trans($group)?></a><br>
+                                    <?php endforeach ?>
+                                </td>
+                                <td>
+                                    <?php $permissions = GC\Model\StaffPermission::selectPermissionsAsOptionsByStaffId($staff_id) ?>
+                                    <?php foreach ($permissions as $permission): ?>
+                                        <?=trans($config['permissions'][$permission])?> <br>
+                                    <?php endforeach ?>
+                                </td>
+                                <td class="text-right">
+                                    <a data-toggle="modal"
+                                        data-id="<?=e($staff_id)?>"
+                                        data-name="<?=e($row['name'])?>"
+                                        data-target="#deleteModal"
+                                        title="<?=trans('Usuń pracownika')?>"
+                                        class="btn btn-danger btn-md">
+                                        <i class="fa fa-times fa-fw"></i>
+                                        <?=trans("Usuń")?>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endforeach ?>
+                    </tbody>
+                </table>
+            <?php endif ?>
+        </div>
+        <?=view('/admin/parts/input/submitButtons.html.php')?>
     </div>
 </div>
 

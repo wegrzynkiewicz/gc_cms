@@ -8,19 +8,19 @@ if (!isset($cancelHref)) {
 
 ?>
 
-<hr>
-<div class="row">
+<div class="row" style="margin-top:20px">
     <div class="col-md-6 col-sm-6 col-xs-6 text-left">
-        <a href="<?=url($cancelHref)?>" class="btn btn-warning btn-lg ">
+        <a href="<?=url($cancelHref)?>" class="btn btn-warning btn-md">
             <i class="fa fa-arrow-left fa-fw"></i>
             <?=trans('Wstecz')?>
         </a>
     </div>
-
-    <div class="col-md-6 col-sm-6 col-xs-6 text-right">
-        <button type="submit" class="btn btn-success btn-lg ">
-            <i class="fa fa-floppy-o fa-fw"></i>
-            <?=trans($saveLabel)?>
-        </button>
-    </div>
+    <?php if (isset($saveLabel)): ?>
+        <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+            <button type="submit" class="btn btn-success btn-md">
+                <i class="fa fa-floppy-o fa-fw"></i>
+                <?=trans($saveLabel)?>
+            </button>
+        </div>
+    <?php endif ?>
 </div>

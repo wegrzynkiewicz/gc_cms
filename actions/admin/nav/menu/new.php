@@ -6,7 +6,7 @@ $breadcrumbs->push($request, $headTitle);
 $menu_id = 0;
 
 if(isPost()) {
-    GC\Model\Menu::insert([
+    GC\Model\Menu::insertWithNavId([
         'name' => $_POST['name'],
         'type' => $_POST['type'],
         'destination' => $_POST['destination'],

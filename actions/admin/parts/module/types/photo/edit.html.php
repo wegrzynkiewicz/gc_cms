@@ -35,16 +35,18 @@ require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
     <div class="col-lg-12">
         <form action="" method="post" class="form-horizontal">
 
-            <?=view('/admin/parts/input/editbox.html.php', [
-                'name' => 'name',
-                'label' => 'Nazwa zdjęcia',
-            ])?>
+            <div class="simple-box">
+                <?=view('/admin/parts/input/editbox.html.php', [
+                    'name' => 'name',
+                    'label' => 'Nazwa zdjęcia',
+                ])?>
 
-            <?=view('/admin/parts/input/image.html.php', [
-                'name' => 'url',
-                'label' => 'Zdjęcie',
-                'placeholder' => 'Ścieżka do pliku zdjęcia',
-            ])?>
+                <?=view('/admin/parts/input/image.html.php', [
+                    'name' => 'url',
+                    'label' => 'Zdjęcie',
+                    'placeholder' => 'Ścieżka do pliku zdjęcia',
+                ])?>
+            </div>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz moduł zdjęcia',

@@ -7,36 +7,36 @@ require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">
-        <?php if (empty($navs)): ?>
-            <p>
+        <div class="simple-box">
+            <?php if (empty($navs)): ?>
                 <?=trans('Nie znaleziono żadnej nawigacji w języku: ')?>
                 <?=view('/admin/parts/language.html.php')?>
-            </p>
-        <?php else: ?>
-            <table class="table vertical-middle" data-table="">
-                <thead>
-                    <tr>
-                        <th class="col-md-5">
-                            <?=trans('Nazwa nawigacji:')?>
-                        </th>
-                        <th lass="col-md-7 text-right"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($navs as $nav_id => $nav): ?>
+            <?php else: ?>
+                <table class="table vertical-middle" data-table="">
+                    <thead>
                         <tr>
-                            <td><?=e($nav['name'])?></td>
-                            <td class="text-right">
-                                <a href="<?=url("/admin/nav/menu/list/$nav_id")?>" class="btn btn-success btn-xs">
-                                    <i class="fa fa-file-text-o fa-fw"></i>
-                                    <?=trans('Węzły nawigacji')?>
-                                </a>
-                            </td>
+                            <th><?=trans('Nazwa nawigacji')?></th>
+                            <th class="text-right"></th>
                         </tr>
-                    <?php endforeach ?>
-                </tbody>
-            </table>
-        <?php endif ?>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($navs as $nav_id => $nav): ?>
+                            <tr>
+                                <td><?=e($nav['name'])?></td>
+                                <td class="text-right">
+                                    <a href="<?=url("/admin/nav/menu/list/$nav_id")?>"
+                                        class="btn btn-success btn-sm">
+                                        <i class="fa fa-file-text-o fa-fw"></i>
+                                        <?=trans('Węzły nawigacji')?>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endforeach ?>
+                    </tbody>
+                </table>
+            <?php endif ?>
+        </div>
+        <?=view('/admin/parts/input/submitButtons.html.php')?>
     </div>
 </div>
 

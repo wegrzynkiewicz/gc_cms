@@ -11,4 +11,6 @@ require_once ACTIONS_PATH."/admin/parts/module/types/$moduleType/delete.html.php
 
 GC\Model\FrameModule::deleteByPrimaryId($module_id);
 
-redirect($breadcrumbs->getBeforeLastUrl());
+setNotice(trans("%s został usunięty", [$config['modules'][$moduleType]['name']]));
+
+redirect($breadcrumbs->getLastUrl());

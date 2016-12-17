@@ -17,7 +17,7 @@ if (isPost()) {
 
     $relations = isset($_POST['taxonomy']) ? array_unchunk($_POST['taxonomy']) : [];
 
-    GC\Model\Post::insert([
+    GC\Model\Post::insertWithRelations([
         'frame_id' => $frame_id,
     ], $relations);
 

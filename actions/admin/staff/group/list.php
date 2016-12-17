@@ -22,54 +22,55 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">
-        <?php if (empty($groups)): ?>
-            <p>
+        <div class="simple-box">
+            <?php if (empty($groups)): ?>
                 <?=trans('Nie znaleziono żadnych grup pracowników.')?>
-            </p>
-        <?php else: ?>
-            <table class="table vertical-middle" data-table="">
-                <thead>
-                    <tr>
-                        <th class="col-md-4 col-lg-4">
-                            <?=trans('Grupa pracowników')?>
-                        </th>
-                        <th class="col-md-7 col-lg-7">
-                            <?=trans('Posiadane uprawnienia')?>
-                        </th>
-                        <th class="col-md-1 col-lg-1 text-right"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($groups as $group_id => $group): ?>
+            <?php else: ?>
+                <table class="table vertical-middle" data-table="">
+                    <thead>
                         <tr>
-                            <td>
-                                <a href="<?=url("/admin/staff/group/edit/$group_id")?>"
-                                    title="<?=trans('Edytuj grupę')?>">
-                                    <?=e($group['name'])?>
-                                </a>
-                            </td>
-                            <td>
-                                <?php $permissions = GC\Model\StaffPermission::selectPermissionsAsOptionsByGroupId($group_id) ?>
-                                <?php foreach ($permissions as $permission): ?>
-                                    <?=trans($config['permissions'][$permission])?> <br>
-                                <?php endforeach ?>
-                            </td>
-                            <td class="text-right">
-                                <a data-toggle="modal"
-                                    data-id="<?=e($group_id)?>"
-                                    data-name="<?=e($group['name'])?>"
-                                    data-target="#deleteModal"
-                                    title="<?=trans('Usuń grupę')?>"
-                                    class="btn btn-danger btn-md">
-                                    <i class="fa fa-times fa-fw"></i>
-                                    <?=trans("Usuń")?>
-                                </a>
-                            </td>
+                            <th class="col-md-4 col-lg-4">
+                                <?=trans('Grupa pracowników')?>
+                            </th>
+                            <th class="col-md-7 col-lg-7">
+                                <?=trans('Posiadane uprawnienia')?>
+                            </th>
+                            <th class="col-md-1 col-lg-1 text-right"></th>
                         </tr>
-                    <?php endforeach ?>
-                </tbody>
-            </table>
-        <?php endif ?>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($groups as $group_id => $group): ?>
+                            <tr>
+                                <td>
+                                    <a href="<?=url("/admin/staff/group/edit/$group_id")?>"
+                                        title="<?=trans('Edytuj grupę')?>">
+                                        <?=e($group['name'])?>
+                                    </a>
+                                </td>
+                                <td>
+                                    <?php $permissions = GC\Model\StaffPermission::selectPermissionsAsOptionsByGroupId($group_id) ?>
+                                    <?php foreach ($permissions as $permission): ?>
+                                        <?=trans($config['permissions'][$permission])?> <br>
+                                    <?php endforeach ?>
+                                </td>
+                                <td class="text-right">
+                                    <a data-toggle="modal"
+                                        data-id="<?=e($group_id)?>"
+                                        data-name="<?=e($group['name'])?>"
+                                        data-target="#deleteModal"
+                                        title="<?=trans('Usuń grupę')?>"
+                                        class="btn btn-danger btn-md">
+                                        <i class="fa fa-times fa-fw"></i>
+                                        <?=trans("Usuń")?>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endforeach ?>
+                    </tbody>
+                </table>
+            <?php endif ?>
+        </div>
+        <?=view('/admin/parts/input/submitButtons.html.php')?>
     </div>
 </div>
 

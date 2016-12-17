@@ -9,7 +9,7 @@ $tax_id = intval(array_shift($_SEGMENTS));
 $menu_id = 0;
 
 if(isPost()) {
-    GC\Model\PostNode::insert([
+    GC\Model\PostNode::insertWithTaxId([
         'name' => $_POST['name'],
     ], $tax_id);
 	redirect("/admin/post/node/list/$tax_id");

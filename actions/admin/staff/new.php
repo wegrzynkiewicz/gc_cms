@@ -9,7 +9,7 @@ if (isPost()) {
 
     $password = pseudoRandom($config['password']['minLength']);
 
-    $staff_id = GC\Model\Staff::insert([
+    $staff_id = GC\Model\Staff::insertWithGroups([
         'name' => $_POST['name'],
         'password' => hashPassword($password),
         'email' => $_POST['email'],

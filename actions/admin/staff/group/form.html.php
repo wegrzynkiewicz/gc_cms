@@ -5,34 +5,36 @@
     <div class="col-lg-12">
         <form action="" method="post" id="form" class="form-horizontal">
 
-            <?=view('/admin/parts/input/editbox.html.php', [
-                'name' => 'name',
-                'label' => 'Nazwa grupy',
-                'help' => 'Nazwa grupy pomaga określić odpowiedzialność członków grupy (np. Sprzedawcy, Administratorzy)'
-            ])?>
+            <div class="simple-box">
+                <?=view('/admin/parts/input/editbox.html.php', [
+                    'name' => 'name',
+                    'label' => 'Nazwa grupy',
+                    'help' => 'Nazwa grupy pomaga określić odpowiedzialność członków grupy (np. Sprzedawcy, Administratorzy)'
+                ])?>
 
-            <fieldset>
-                <legend>
-                    <?=trans('Uprawnienia grupy')?>
-                </legend>
+                <fieldset>
+                    <legend>
+                        <?=trans('Uprawnienia grupy')?>
+                    </legend>
 
-                <p>
-                    <?=trans('Każda grupa posiada indywidualne uprawnienia, które są identyczne dla każdego pracownika w tej grupie.')?>
-                    <?=trans('W przypadku gdy pracownik należy do wielu grup, uprawnienia te są łączone.')?>
-                </p>
+                    <p>
+                        <?=trans('Każda grupa posiada indywidualne uprawnienia, które są identyczne dla każdego pracownika w tej grupie.')?>
+                        <?=trans('W przypadku gdy pracownik należy do wielu grup, uprawnienia te są łączone.')?>
+                    </p>
 
-                <?php foreach ($config['permissions'] as $perm => $label): ?>
-                    <div class="checkbox">
-                        <label>
-                            <input name="permissions[]"
-                                type="checkbox"
-                                <?=checked(in_array($perm, $permissions))?>
-                                value="<?=e($perm)?>">
-                            <?=trans($label)?>
-                        </label>
-                    </div>
-                <?php endforeach ?>
-            </fieldset>
+                    <?php foreach ($config['permissions'] as $perm => $label): ?>
+                        <div class="checkbox">
+                            <label>
+                                <input name="permissions[]"
+                                    type="checkbox"
+                                    <?=checked(in_array($perm, $permissions))?>
+                                    value="<?=e($perm)?>">
+                                <?=trans($label)?>
+                            </label>
+                        </div>
+                    <?php endforeach ?>
+                </fieldset>
+            </div>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz grupę',

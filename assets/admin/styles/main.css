@@ -158,10 +158,6 @@ li.mjs-nestedSortable-collapsed.mjs-nestedSortable-hovering div {
 
 /** Thumb */
 
-.thumb {
-    margin-bottom: 10px;
-}
-
 .thumb-wrapper {
     height: 153px;
     overflow: hidden;
@@ -265,4 +261,33 @@ li.mjs-nestedSortable-collapsed.mjs-nestedSortable-hovering div {
 
 .dashboard-action-title {
     display: block;
+}
+
+
+/** buttons */
+
+.btn-squared {
+    height: 150px;
+    margin-top: 20px;
+    white-space: initial;
+    background-repeat: no-repeat;
+}
+
+#page-wrapper {
+    background-color: #f0f0f0;
+}
+
+.breadcrumb {
+    border-radius: 0px;
+    border: 1px solid #e7e7e7;
+    box-shadow: 0 1px 2px rgba(0,0,0,.075);
+}
+
+.simple-box {
+    border-radius: 0px;
+    background-color: #fff;
+    border: 1px solid #e7e7e7;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.075);
 }

@@ -31,31 +31,32 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">
-        <?php if (empty($pages)): ?>
-            <p>
-                <?=trans('Nie znaleziono żadnej strony w języku: ')?>
-                <?=view('/admin/parts/language.html.php')?>
-            </p>
-        <?php else: ?>
-            <table class="table vertical-middle" data-table="">
-                <thead>
-                    <tr>
-                        <th class="col-md-5 col-lg-4">
-                            <?=trans('Nazwa strony:')?>
-                        </th>
-                        <th class="col-md-7 col-lg-8 text-right"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($pages as $page_id => $page): ?>
-                        <?=view('/admin/page/list-item.html.php', [
-                            'page_id' => $page_id,
-                            'page' => $page,
-                        ])?>
-                    <?php endforeach ?>
-                </tbody>
-            </table>
-        <?php endif ?>
+        <div class="simple-box">
+            <?php if (empty($pages)): ?>
+                <p>
+                    <?=trans('Nie znaleziono żadnej strony w języku: ')?>
+                    <?=view('/admin/parts/language.html.php')?>
+                </p>
+            <?php else: ?>
+                <table class="table vertical-middle" data-table="">
+                    <thead>
+                        <tr>
+                            <th style="width:1px"><?=trans('Zdjęcie')?></th>
+                            <th><?=trans('Nazwa strony')?></th>
+                            <th class="text-right no-sort"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($pages as $page_id => $page): ?>
+                            <?=view('/admin/page/list-item.html.php', [
+                                'page_id' => $page_id,
+                                'page' => $page,
+                            ])?>
+                        <?php endforeach ?>
+                    </tbody>
+                </table>
+            <?php endif ?>
+        </div>
     </div>
 </div>
 
@@ -95,7 +96,9 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             $(this).find('#name').html($(e.relatedTarget).data('name'));
             $(this).find('[name="page_id"]').val($(e.relatedTarget).data('id'));
         });
-        $('[data-table]').DataTable();
+        $('[data-table]').DataTable({
+            order: [[2, 'asc']]
+        });
     });
 </script>
 

@@ -6,7 +6,7 @@ $breadcrumbs->push($request, $headTitle);
 if (isPost()) {
 
     $permissions = isset($_POST['permissions']) ? $_POST['permissions'] : [];
-    $group_id = GC\Model\StaffGroup::insert([
+    $group_id = GC\Model\StaffGroup::insertWithPermissions([
         'name' => $_POST['name'],
     ], $permissions);
 

@@ -85,11 +85,23 @@ $config = [
         'post' => 'Strona wpisu bloga',
         'product' => 'Strona produktu',
     ],
-    'modules' => [ # rodzaje zainstalowanych modułow
-        'html-editor' => 'Moduł tekstowy',
-        'gallery' => 'Moduł galerii zdjęć',
-        'photo' => 'Moduł pojedyńczego zdjęcia',
-        'slider' => 'Moduł slajdera',
+    'modules' => [ # rodzaje zainstalowanych modułów
+        'html-editor' => [
+            'name' => 'Moduł tekstowy',
+            'description' => 'Wyświelta treść HTML poprzez edytor WYSIWYG.',
+        ],
+        'gallery' => [
+            'name' => 'Moduł galerii zdjęć',
+            'description' => 'Wyświetla wiele zdjęć z możliwością podglądu.',
+        ],
+        'photo' => [
+            'name' => 'Moduł pojedyńczego zdjęcia',
+            'description' => 'Wyświetla jedno zdjęcie z możliwością podglądu.',
+        ],
+        'image-slider' => [
+            'name' => 'Moduł slajdów ze zdjęciami',
+            'description' => 'Wyświetla animowane slajdy zawierające tylko zdjęcia.',
+        ],
     ],
     'moduleThemes' => [ # rodzaje zainstalowanych szablonów dla modułów
         'gallery' => [

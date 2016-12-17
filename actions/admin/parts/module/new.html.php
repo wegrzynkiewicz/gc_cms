@@ -4,12 +4,15 @@ $headTitle = trans('Dodawanie nowego modułu');
 $breadcrumbs->push($request, $headTitle);
 
 if(isPost()) {
-	$module_id = GC\Model\FrameModule::insert([
-        'type' => $_POST['type'],
+    $moduleType = $_POST['type'];
+	$module_id = GC\Model\FrameModule::insertWithFrameId([
+        'type' => $moduleType,
         'theme' => 'default',
     ], $frame_id);
+    
+    setNotice(trans("%s został utworzony. Edytujesz go teraz.", [$config['modules'][$moduleType]['name']]));
 
-    redirect($breadcrumbs->getBeforeLastUrl());
+    redirect("/admin/$frame/module/edit/$module_id/$parent_id");
 }
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php';
@@ -19,15 +22,25 @@ require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
     <div class="col-lg-12">
         <form action="" method="post" class="form-horizontal">
 
-            <?=view('/admin/parts/input/selectbox.html.php', [
-                'name' => 'type',
-                'label' => 'Typ modułu',
-                'options' => $config['modules'],
-            ])?>
+            <h3><?=trans('Dostępne moduły')?></h3>
+            <div class="row">
+                <?php foreach ($config['modules'] as $type => $module): ?>
+                    <div class="col-lg-3">
+                        <button name="type"
+                            type="submit"
+                            value="<?=$type?>"
+                            class="btn btn-default btn-squared btn-block">
+                            <strong>
+                                <?=trans($module['name'])?>
+                            </strong><br>
+                            <br>
+                            <?=removeOrphan(trans($module['description']))?>
+                        </button>
+                    </div>
+                <?php endforeach ?>
+            </div>
 
-            <?=view('/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => 'Dodaj nowy moduł',
-            ])?>
+            <?=view('/admin/parts/input/submitButtons.html.php')?>
 
         </form>
     </div>

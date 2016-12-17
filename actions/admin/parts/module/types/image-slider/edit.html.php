@@ -34,17 +34,16 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="col-lg-12">
         <form id="sortableForm" action="" method="post" class="form-horizontal">
 
-            <?=view('/admin/parts/input/selectbox.html.php', [
-                'name' => 'theme',
-                'label' => 'Szablon',
-                'help' => 'Wybierz jeden z dostępnych szablonów slajdera',
-                'options' => $config['moduleThemes']['slider'],
-            ])?>
+            <div class="simple-box">
+                <?=view('/admin/parts/input/selectbox.html.php', [
+                    'name' => 'theme',
+                    'label' => 'Szablon',
+                    'help' => 'Wybierz jeden z dostępnych szablonów slajdera',
+                    'options' => $config['moduleThemes']['slider'],
+                ])?>
+            </div>
 
-            <fieldset>
-                <legend><?=trans('Slajdy')?></legend>
-                <div id="images" class="row"></div>
-            </fieldset>
+            <div id="images" class="row"></div>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz',

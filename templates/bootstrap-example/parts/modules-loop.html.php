@@ -10,6 +10,7 @@ foreach ($modules as $module_id => $module) {
     $module['templateArgs'] = [
         'module_id' => $module_id,
         'module' => $module,
+        'type' => $module['type'],
         'content' => $module['content'],
         'settings' => json_decode($module['settings'], true),
     ];
@@ -22,9 +23,9 @@ foreach ($gridModules as $row) {
     ksort($row);
     if (count($row) === 1) {
         $module = array_shift($row);
-        $fullTemplatePath = sprintf("/modules/%s-%s-full.html.php", $module['type'], $module['theme']);
-        if ($module['size']['w'] == 12 and is_readable(TEMPLATE_PATH.$fullTemplatePath)) {
-            echo templateView($fullTemplatePath, $module['templateArgs']);
+        $template = sprintf("/modules/%s-%s-full.html.php", $module['type'], $module['theme']);
+        if ($module['size']['w'] == 12 and is_readable(TEMPLATE_PATH.$template)) {
+            require TEMPLATE_PATH."/parts/module-item.html.php";
             continue;
         }
         array_unshift($row, $module);
@@ -38,7 +39,15 @@ foreach ($gridModules as $row) {
         list($x, $y, $w, $h) = explode(':', $module['grid']);
         $o = $x - $previousWidth;
         $previousWidth = $x + $w;
+
+        $template = sprintf("/modules/%s-%s.html.php", $module['type'], $module['theme']);
+        if (!is_readable(TEMPLATE_PATH.$template)) {
+            $template = sprintf("/modules/%s-default.html.php", $module['type']);
+        }
+
+        echo sprintf('<div class="col-md-%s col-md-offset-%s">', $w, $o);
         require TEMPLATE_PATH."/parts/module-item.html.php";
+        echo '</div>';
     }
 
     echo '</div>';

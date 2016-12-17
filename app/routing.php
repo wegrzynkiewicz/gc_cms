@@ -147,20 +147,6 @@ if (file_exists($customFile)) {
     return require_once $customFile;
 }
 
-# jeżeli istnieje strona w systemie o zadanym id
-$page = Page::selectWithFrameByPrimaryId($id);
-if ($page) {
-    GC\Logger::routing("Page :: $id", $page);
-
-    return require_once ACTIONS_PATH."/page.php";
-}
-
-# jeżeli cały adres znalazł się w tablicy przekierowań
-/*$page = $slugModel->selectWithFrameByPrimaryId($absoluteSlug);
-if ($page) {
-    return require_once ACTIONS_PATH."/frontend/frames/page.php";
-}*/
-
 # jeżeli żaden plik nie pasuje, wtedy wyświetl błąd 404
 GC\Logger::routing("Endpoint error 404");
 

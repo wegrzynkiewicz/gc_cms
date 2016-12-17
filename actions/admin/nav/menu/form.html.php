@@ -5,23 +5,27 @@
     <div class="col-lg-12">
         <form action="" method="post" id="form" class="form-horizontal">
 
-            <?=view('/admin/parts/input/editbox.html.php', [
-                'name' => 'name',
-                'label' => 'Nazwa węzła',
-            ])?>
+            <div class="simple-box">
+                <?=view('/admin/parts/input/editbox.html.php', [
+                    'name' => 'name',
+                    'label' => 'Nazwa węzła',
+                ])?>
 
-            <?=view('/admin/parts/input/selectbox.html.php', [
-                'name' => 'type',
-                'label' => 'Typ węzła',
-                'help' => 'Wybierz typ węzła nawigacji w menu',
-                'options' => $config['nodeTypes'],
-                'firstOption' => 'Wybierz typ węzła',
-            ])?>
+                <?=view('/admin/parts/input/selectbox.html.php', [
+                    'name' => 'type',
+                    'label' => 'Typ węzła',
+                    'help' => 'Wybierz typ węzła nawigacji w menu',
+                    'options' => $config['nodeTypes'],
+                    'firstOption' => 'Wybierz typ węzła',
+                ])?>
+            </div>
 
-            <div id="nodeType"></div>
+            <div class="simple-box">
+                <div id="nodeType"></div>
+            </div>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => 'Zapisz stronę',
+                'saveLabel' => 'Zapisz węzeł',
             ])?>
 
         </form>

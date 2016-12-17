@@ -18,7 +18,7 @@
 
 <?php if (isset($breadcrumbs)): $links = $breadcrumbs->getLinks() ?>
     <?php if (count($links) > 1): ?>
-        <ol class="breadcrumb" style="background-color: #eeeeee">
+        <ol class="breadcrumb">
             <?php foreach ($links as $i => $link): ?>
                 <?php $isLink = !(empty($link['url']) or $link['url'] == $request); ?>
                 <li class="<?=e($isLink ? '' : 'active')?>">

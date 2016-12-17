@@ -15,7 +15,16 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=url("/admin/$frame/module/new/$parent_id")?>" type="button" class="btn btn-success">
+                <a href="<?=url("/$frame/$parent_id")?>"
+                    target="_blank"
+                    type="button"
+                    class="btn btn-primary">
+                    <i class="fa fa-search fa-fw"></i>
+                    <?=trans('Podgląd')?>
+                </a>
+                <a href="<?=url("/admin/$frame/module/new/$parent_id")?>"
+                    type="button"
+                    class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
                     <?=trans('Dodaj nowy moduł')?>
                 </a>
@@ -55,7 +64,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                     <div class="panel panel-default panel-module">
                                         <div class="panel-heading">
                                             <a href="<?=url("/admin/$frame/module/edit/$module_id/$parent_id")?>">
-                                                <?=trans($config['modules'][$module['type']])?>
+                                                <?=trans($config['modules'][$module['type']]['name'])?>
                                             </a>
                                             <button data-toggle="modal"
                                                 data-id="<?=e($module_id)?>"
