@@ -110,7 +110,7 @@ $config = [
         ],
         'slider' => [
             'default' => 'Standardowy slajder',
-            'width' => 'Slajder rozciągnięty na szerokość strony',
+            'default-full' => 'Standardowy slajder (na całą szerokość strony)',
         ],
     ],
     'nodeTypes' => [ # rodzaje węzłów nawigacji
