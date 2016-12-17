@@ -31,7 +31,7 @@ class ModuleFile extends AbstractModel
         return $affectedRows;
     }
 
-    protected static function insert(array $data, $module_id)
+    protected static function insertWithModuleId(array $data, $module_id)
     {
         $file_id = parent::insert($data);
 

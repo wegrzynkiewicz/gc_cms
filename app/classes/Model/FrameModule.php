@@ -32,7 +32,7 @@ class FrameModule extends AbstractModel
         return $affectedRows;
     }
 
-    protected static function insert(array $data, $frame_id)
+    protected static function insertWithFrameId(array $data, $frame_id)
     {
         $module_id = parent::insert($data);
 

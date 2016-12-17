@@ -54,7 +54,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     </div>
 </div>
 
-<?php require_once ACTIONS_PATH.'/admin/parts/assets.html.php'; ?>
+<?php require_once ACTIONS_PATH.'/admin/parts/footer-assets.html.php'; ?>
 
 <div id="editModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog">

@@ -31,7 +31,7 @@ class GalleryImage extends AbstractModel
         return $affectedRows;
     }
 
-    protected static function insert(array $data, $gallery_id)
+    protected static function insertWithGalleryId(array $data, $gallery_id)
     {
         $image_id = parent::insert($data);
 

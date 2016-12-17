@@ -33,7 +33,7 @@ class StaffGroup extends AbstractModel
         static::updatePermissions($group_id, $permissions);
     }
 
-    protected static function insert($data, array $permissions)
+    protected static function insertWithPermissions($data, array $permissions)
     {
         # wstaw grupę
         $group_id = parent::insert([

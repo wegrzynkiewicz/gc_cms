@@ -34,7 +34,7 @@ require_once ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
     </div>
 </div>
 
-<?php require_once ACTIONS_PATH.'/admin/parts/assets.html.php'; ?>
+<?php require_once ACTIONS_PATH.'/admin/parts/footer-assets.html.php'; ?>
 
 </body>
 </html>

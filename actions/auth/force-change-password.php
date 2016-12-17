@@ -6,7 +6,6 @@ if (isPost()) {
 
     $newPassword = $_POST['new_password'];
     $confirmPassword = $_POST['confirm_password'];
-    $newPasswordHash = sha1($newPassword);
 
     $user = GC\Model\Staff::selectByPrimaryId($_SESSION['staff']['entity']['staff_id']);
 
@@ -14,13 +13,11 @@ if (isPost()) {
         $error = trans('Podane nowe hasła nie są identyczne');
     } elseif (strlen($newPassword) < $config['password']['minLength']) {
         $error = trans('Hasło nie może być krótsze niż %s znaków', $config['password']['minLength']);
-    } elseif (password_verify($newPassword, $user['password'])) {
+    } elseif (verifyPassword($newPassword, $user['password'])) {
         $error = trans('Nowe hasło nie może być takie samo jak poprzednie');
     } else {
-        $newPassword .= $config['password']['staticSalt'];
-        $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT, $config['password']['options']);
         GC\Model\Staff::updateByPrimaryId($user['staff_id'], [
-            'password' => $newPasswordHash,
+            'password' => hashPassword($newPassword),
             'force_change_password' => 0,
         ]);
 
@@ -81,7 +78,7 @@ require_once ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
     </div>
 </div>
 
-<?php require_once ACTIONS_PATH.'/admin/parts/assets.html.php'; ?>
+<?php require_once ACTIONS_PATH.'/admin/parts/footer-assets.html.php'; ?>
 
 <script>
 $(function () {

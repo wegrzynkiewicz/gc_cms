@@ -7,6 +7,7 @@ use GC\Storage\Utility\ColumnTrait;
 use GC\Storage\Utility\PrimaryTrait;
 use GC\Storage\Database;
 use GC\Logger;
+use RuntimeException;
 
 class Staff extends AbstractModel
 {
@@ -156,7 +157,7 @@ class Staff extends AbstractModel
         static::updateGroups($staff_id, $groups);
     }
 
-    protected static function insert(array $data, array $groups)
+    protected static function insertWithGroups(array $data, array $groups)
     {
         # wstaw pracownika
         $staff_id = parent::insert($data);

@@ -11,9 +11,6 @@ if (isPost()) {
     $user = GC\Model\Staff::selectSingleBy('email', $_POST['login']);
     if ($user) {
 
-        $newPassword = randomPassword($config['password']['minLength']);
-        $newPasswordHash = sha1($newPassword);
-
         $email64 = base64_encode($user['email']);
         $regeneration = [
             'verifyHash' => pseudoRandom(80),
@@ -29,7 +26,7 @@ if (isPost()) {
             'regeneration' => json_encode($regeneration),
         ]);
 
-        $mail = new Mail();
+        $mail = new GC\Mail();
         $mail->buildTemplate(
             '/auth/forgot/verify-generation.email.html.php',
             '/admin/parts/email/styles.css', [
@@ -92,7 +89,7 @@ require_once ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
     </div>
 </div>
 
-<?php require_once ACTIONS_PATH.'/admin/parts/assets.html.php'; ?>
+<?php require_once ACTIONS_PATH.'/admin/parts/footer-assets.html.php'; ?>
 
 <script>
 $(function () {

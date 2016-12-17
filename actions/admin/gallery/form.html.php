@@ -25,7 +25,7 @@
     </div>
 </div>
 
-<?php require_once ACTIONS_PATH.'/admin/parts/assets.html.php'; ?>
+<?php require_once ACTIONS_PATH.'/admin/parts/footer-assets.html.php'; ?>
 
 <script>
 $(function () {

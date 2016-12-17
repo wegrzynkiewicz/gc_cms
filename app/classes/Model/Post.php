@@ -22,7 +22,7 @@ class Post extends AbstractModel
         static::updateRelations($post_id, $relations);
     }
 
-    protected static function insert(array $data, array $relations)
+    protected static function insertWithRelations(array $data, array $relations)
     {
         # wstaw pracownika
         $post_id = parent::insert($data);

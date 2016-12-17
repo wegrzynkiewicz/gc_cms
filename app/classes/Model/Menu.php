@@ -67,7 +67,7 @@ class Menu extends Node
         return $tree;
     }
 
-    protected static function insert(array $data, $nav_id)
+    protected static function insertWithNavId(array $data, $nav_id)
     {
         $menu_id = parent::insert($data);
 

@@ -1,4 +1,4 @@
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-css/1.4.6/select2-bootstrap.min.css" integrity="sha384-hzAvzgi6qBKRIEnkMbuJBybhO7e1+9tZLaMHpvC9AF8VjAF/JbYWMUQTyyJTZr9t" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/1.0.9/css/sb-admin-2.min.css" integrity="sha384-4hoJLq1ZHmoO5bt+W55fHZsNDMjWbjsAcXwSKq05e4UoN74sSc8Lg+YLe4GchfHD" crossorigin="anonymous">
@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="<?=assetsUrl("/admin/styles/main.css")?>">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/1.1.3/metisMenu.min.js" integrity="sha384-F21Q4YFCU/iioflzam9g/N68S5oNeUjUfHDdxjxgm7Aj1gKgOcLIDVM1o5azfVSb" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/1.0.9/js/sb-admin-2.min.js" integrity="sha384-LtycJkl5R/4gve6Uic7S1KUoJ/lcK12grgZCsAyhf/pHeDRZjurv/mlPI16RlmJe" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js" integrity="sha384-222hzbb8Z8ZKe6pzP18nTSltQM3PdcAwxWKzGOKOIF+Y3bROr5n9zdQ8yTRHgQkQ" crossorigin="anonymous"></script>
@@ -35,50 +36,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha384-bD5m2XNm9nP2xLhY13ZMvm73xzZvv/tfbPzYGjMLduzMLnDc9gzc1sVl3vufMg/U" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha384-DiTOB5DarLwdE9bzATOXhLQp6irFZIhtJreUNJiwMMDiHGu7LdRZeqZBveanC2zo" crossorigin="anonymous"></script>
 
-<?php
-$langDefinedPath = sprintf(ACTIONS_PATH."/admin/parts/assets-%s.html.php", getClientLang());
-if (is_readable($langDefinedPath)){
-    require $langDefinedPath;
-}
-?>
-
 <script src="<?=rootUrl("/external/ckeditor-4.5.11/ckeditor.js")?>"></script>
 <script src="<?=rootUrl("/external/ckeditor-4.5.11/adapters/jquery.js")?>"></script>
 <script src="<?=assetsUrl("/admin/scripts/elfinder-input.js")?>"></script>
 <script src="<?=assetsUrl("/admin/scripts/ckeditor_integration.js")?>"></script>
 <script src="<?=assetsUrl("/common/scripts/jquery.photoswipe.js")?>"></script>
-
-<script>
-$.validator.setDefaults({
-    highlight: function (element, errorClass, validClass) {
-        if (element.type === "radio") {
-            this.findByName(element.name).addClass(errorClass).removeClass(validClass);
-        } else {
-            $(element).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
-            $(element).closest('.form-group').find('span.glyphicon').remove();
-            $(element).closest('.form-group').append('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
-        }
-    },
-    unhighlight: function (element, errorClass, validClass) {
-        if (element.type === "radio") {
-            this.findByName(element.name).removeClass(errorClass).addClass(validClass);
-        } else {
-            $(element).closest('.form-group').removeClass('has-error has-feedback').addClass('has-success has-feedback');
-            $(element).closest('.form-group').find('span.glyphicon').remove();
-            $(element).closest('.form-group').append('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
-        }
-    },
-    errorElement: 'span',
-    errorClass: 'help-block',
-    errorPlacement: function(error, element) {
-        if (element.parent('.input-group').length || element.prop('type') === 'checkbox' || element.prop('type') === 'radio') {
-            error.insertAfter(element.parent());
-        } else {
-            error.insertAfter(element);
-        }
-    }
-});
-</script>
 
 <script>
 $.extend(true, $.fn.dataTable.defaults, {
@@ -91,27 +53,4 @@ $.extend(true, $.fn.dataTable.defaults, {
         url: "//cdn.datatables.net/plug-ins/1.10.12/i18n/Polish.json"
     },
 });
-</script>
-
-<?php require ACTIONS_PATH."/admin/parts/photoswipe.html.php"; ?>
-
-<script>
-    $('[data-gallery="photoswipe"]').photoswipe({
-        loop: false,
-        closeOnScroll: false,
-    });
-</script>
-
-<script>
-elFinder.prototype._options.url = '<?=rootUrl('/admin/elfinder/connector')?>';
-elFinder.prototype._options.lang = '<?=getClientLang()?>';
-</script>
-
-<script>
-    $.ajaxSetup({
-        headers: {
-            "X-CSRFToken": "<?=$_SESSION['csrf_token']?>"
-        }
-    });
-    $('form').append('<input type="hidden" name="csrf_token" value="<?=$_SESSION['csrf_token']?>"/>');
 </script>

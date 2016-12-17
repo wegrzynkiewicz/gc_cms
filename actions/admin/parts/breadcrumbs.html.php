@@ -6,6 +6,13 @@
         </button>
         <?=$_SESSION['notice']['message']?>
     </div>
+
+    <script>
+        $(".alert").delay(4000).slideUp(200, function() {
+            $(this).alert('close');
+        });
+    </script>
+
     <?php unset($_SESSION['notice']); ?>
 <?php endif ?>
 

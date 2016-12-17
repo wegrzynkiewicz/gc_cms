@@ -8,21 +8,19 @@ if (isPost()) {
     $oldPassword = $_POST['old_password'];
     $newPassword = $_POST['new_password'];
     $confirmPassword = $_POST['confirm_password'];
-    $saltedOldPassword = $oldPassword.$config['password']['staticSalt'];
 
     $user = GC\Model\Staff::selectByPrimaryId($_SESSION['staff']['entity']['staff_id']);
 
     if (strlen($newPassword) < $config['password']['minLength']) {
         $error = trans('Hasło nie może być krótsze niż %s znaków', $config['password']['minLength']);
-    } elseif (!password_verify($saltedOldPassword, $user['password'])) {
+    } elseif (!verifyPassword($oldPassword, $user['password'])) {
         $error = trans('Stare hasło nie zgadza się z obecnym hasłem');
     } elseif ($newPassword !== $confirmPassword) {
         $error = trans('Podane nowe hasła nie są identyczne');
     } else {
-        $newPassword .= $config['password']['staticSalt'];
-        $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT, $config['password']['options']);
+
         GC\Model\Staff::updateByPrimaryId($user['staff_id'], [
-            'password' => $newPasswordHash,
+            'password' => hashPassword($newPassword),
         ]);
 
         $_SESSION['flash-notice'] = trans("Twoje hasło zostało zmienione");
@@ -75,7 +73,7 @@ require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
     </div>
 </div>
 
-<?php require_once ACTIONS_PATH.'/admin/parts/assets.html.php'; ?>
+<?php require_once ACTIONS_PATH.'/admin/parts/footer-assets.html.php'; ?>
 
 <script>
 $(function () {

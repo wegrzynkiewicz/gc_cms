@@ -7,12 +7,11 @@ if (isPost()) {
 
     $groups = isset($_POST['groups']) ? $_POST['groups'] : [];
 
-    $password = randomPassword($config['password']['minLength']);
-    $passwordHash = sha1($password);
+    $password = pseudoRandom($config['password']['minLength']);
 
     $staff_id = GC\Model\Staff::insert([
         'name' => $_POST['name'],
-        'password' => $passwordHash,
+        'password' => hashPassword($password),
         'email' => $_POST['email'],
         'avatar' => $_POST['avatar'],
         'lang' => $config['lang']['clientDefault'],

@@ -42,7 +42,7 @@ class PostNode extends Node
         return $rows;
     }
 
-    protected static function insert(array $data, $tax_id)
+    protected static function insertWithTaxId(array $data, $tax_id)
     {
         $node_id = parent::insert($data);
 

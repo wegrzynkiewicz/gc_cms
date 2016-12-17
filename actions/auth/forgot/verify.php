@@ -25,16 +25,15 @@ if ($user) {
         $message = trans("Link do zmiany hasła wygasł lub hasło zostało już zresetowane");
     } else {
 
-        $password = randomPassword($config['password']['minLength']);
-        $passwordHash = sha1($password);
+        $password = pseudoRandom($config['password']['minLength']);
 
         GC\Model\Staff::updateByPrimaryId($user['staff_id'], [
-            'password' => $passwordHash,
+            'password' => hashPassword($password),
             'force_change_password' => 1,
             'regeneration' => json_encode([]),
         ]);
 
-        $mail = new Mail();
+        $mail = new GC\Mail();
         $mail->buildTemplate(
             '/auth/forgot/password-reseted.email.html.php',
             '/admin/parts/email/styles.css', [
@@ -84,7 +83,7 @@ require_once ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
     </div>
 </div>
 
-<?php require_once ACTIONS_PATH.'/admin/parts/assets.html.php'; ?>
+<?php require_once ACTIONS_PATH.'/admin/parts/footer-assets.html.php'; ?>
 
 </body>
 </html>

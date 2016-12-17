@@ -69,6 +69,29 @@ function pseudoRandom($length)
 }
 
 /**
+ * Haszuje hasło
+ */
+function hashPassword($securePassword)
+{
+    $config = getConfig();
+
+    $saltedPassword = $securePassword.$config['password']['staticSalt'];
+    $passwordHash = password_hash($saltedPassword, PASSWORD_DEFAULT, $config['password']['options']);
+
+    return $passwordHash;
+}
+
+/**
+ * Sprawdza poprawność hasła i hasza
+ */
+function verifyPassword($securePassword, $passwordHash)
+{
+    $password = $securePassword.getConfig()['password']['staticSalt'];
+
+    return password_verify($password, $passwordHash);
+}
+
+/**
  * Wyszukuje wszystkie pliki rekursywnie w katalogu
  */
 function rglob($pattern, $flags = 0)
@@ -202,7 +225,7 @@ function redirect($location, $code = 303)
     http_response_code($code);
     header("Location: ".url($location));
 
-    Logger::redirect(sprintf("%s %s :: ExecutionTime: %s",
+    GC\Logger::redirect(sprintf("%s %s :: ExecutionTime: %s",
         $code,
         $location,
         (microtime(true) - START_TIME)
@@ -427,24 +450,6 @@ function getGravatar($email, $s = 80, $d = 'mm', $r = 'g')
 function randomColor()
 {
     return sprintf('#%06X', mt_rand(0, 0xFFFFFF));
-}
-
-/**
- * Generate a random string, using a cryptographically secure
- *
- * @param  int    $length   How many characters do we want?
- * @param  string $keyspace A string of all possible characters to select from
- * @return string
- */
-function randomPassword($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
-{
-    $password = '';
-    $max = strlen($keyspace) - 1;
-    for ($i = 0; $i < $length; ++$i) {
-        $password .= $keyspace[mt_rand(0, $max)];
-    }
-
-    return $password;
 }
 
 function getXMLTag($tag, $content = null, $attributes = array())

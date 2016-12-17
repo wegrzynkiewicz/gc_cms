@@ -9,23 +9,22 @@ if (isset($_SESSION['staff'])) {
 if (isPost()) {
 
     $user = GC\Model\Staff::selectSingleBy('email', $_POST['email']);
-    $saltedPassword = $_POST['password'].$config['password']['staticSalt'];
+    $password = $_POST['password'];
 
     # jeżeli hasło w bazie nie jest zahaszowane, a zgadza się
-    if ($config['debug']['enabled'] and $user and $_POST['password'] === $user['password']) {
-        $newPasswordHash = password_hash($saltedPassword, PASSWORD_DEFAULT, $config['password']['options']);
+    if ($config['debug']['enabled'] and $user and $password === $user['password']) {
+        $newPasswordHash = hashPassword($password);
         GC\Model\Staff::updateByPrimaryId($user['staff_id'], [
             'password' => $newPasswordHash,
         ]);
         $user['password'] = $newPasswordHash;
     }
 
-    if ($user and password_verify($saltedPassword, $user['password'])) {
+    if ($user and verifyPassword($password, $user['password'])) {
 
         if (password_needs_rehash($user['password'], PASSWORD_DEFAULT, $config['password']['options'])) {
-            $newPasswordHash = password_hash($saltedPassword, PASSWORD_DEFAULT, $config['password']['options']);
             GC\Model\Staff::updateByPrimaryId($user['staff_id'], [
-                'password' => $newPasswordHash,
+                'password' => hashPassword($password),
             ]);
         }
 
@@ -94,7 +93,7 @@ require_once ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
         </div>
     </div>
 
-    <?php require_once ACTIONS_PATH.'/admin/parts/assets.html.php'; ?>
+    <?php require_once ACTIONS_PATH.'/admin/parts/footer-assets.html.php'; ?>
 
 </body>
 </html>
