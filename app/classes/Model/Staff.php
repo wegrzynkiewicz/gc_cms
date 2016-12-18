@@ -110,14 +110,14 @@ class Staff extends AbstractModel
     {
         # jeżeli sesja nie istnieje wtedy przekieruj na logowanie
         if (!isset($_SESSION['staff']) or !isset($_SESSION['staff']['entity'])) {
-            session_destroy();
+            unset($_SESSION['staff']);
             Logger::logout("Session does not exists");
             redirect('/auth/login');
         }
 
         # jeżeli czas trwania sesji minął
         if (time() > $_SESSION['staff']['sessionTimeout']) {
-            session_destroy();
+            unset($_SESSION['staff']);
             Logger::logout("Session timeout");
             redirect('/auth/session-timeout');
         }
@@ -128,7 +128,7 @@ class Staff extends AbstractModel
             $staff = static::createByStaffId($_SESSION['staff']['entity']['staff_id']);
             $_SESSION['staff']['entity'] = $staff->getData();
         } catch (RuntimeException $exception) {
-            session_destroy();
+            unset($_SESSION['staff']);
             Logger::logout("Not found user");
             redirect('/auth/login');
         }

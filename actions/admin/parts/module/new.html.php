@@ -8,8 +8,9 @@ if(isPost()) {
 	$module_id = GC\Model\FrameModule::insertWithFrameId([
         'type' => $moduleType,
         'theme' => 'default',
+        'settings' => json_encode([]),
     ], $frame_id);
-    
+
     setNotice(trans("%s został utworzony. Edytujesz go teraz.", [$config['modules'][$moduleType]['name']]));
 
     redirect("/admin/$frame/module/edit/$module_id/$parent_id");

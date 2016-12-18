@@ -23,7 +23,7 @@ if(isPost()) {
     'id' => 'options',
     'name' => 'options',
     'label' => 'Możliwe wybory',
-    'help' => 'Należy wpisać dostępne dla użytkowników wartości do wybrania. Klawisz ENTER rozdziela wartości',
+    'help' => 'Należy wpisać dostępne dla użytkowników wartości do wybrania. Należy potwierdzić klawiszem ENTER.',
     'options' => $options,
     'selectedValues' => $options,
 ])?>

@@ -28,7 +28,7 @@ $config = [
         ]
     ],
     'session' => [
-        'cookieName' => sha1('TOLmEeE4ouK9lWuFigwvPqVhxLgtfj7k5kVqhIWL'.date('Y-m-d')), # nazwa ciastka sesyjnego, dla utrudnienia zmienna każdego dnia
+        'cookieName' => 'TOLmEeE4ouK9lWuFigwvPqVhxLgtfj7k5kVqhIWL', # nazwa ciastka sesyjnego, dla utrudnienia zmienna każdego dnia
         'staffTimeout' => 1800, # czas jaki musi upłynąć po zalogowaniu, aby wylogowało pracownika z automatu, w sekundach
     ],
     'avatar' => [
@@ -126,6 +126,28 @@ $config = [
     'formFieldTypes' => [
         'editbox' => 'Zwykłe pole tekstowe',
         'selectbox' => 'Pole jednokrotnego wyboru',
+    ],
+    'formStatuses' => [ # statusy jaką wiadomość formularza może otrzymać
+        'unread' => [
+            'name' => 'Nieprzeczytana',
+            'class' => 'font-bold',
+        ],
+        'readed' => [
+            'name' => 'Przeczytana',
+            'class' => 'text-muted',
+        ],
+        'processed' => [
+            'name' => 'W trakcie realizacji',
+            'class' => 'text-warning warning',
+        ],
+        'completed' => [
+            'name' => 'Zrealizowano',
+            'class' => 'text-success success',
+        ],
+        'rejected' => [
+            'name' => 'Odrzucona',
+            'class' => 'text-danger danger',
+        ],
     ],
     'widgetTypes' => [ # typy widżetów
         'plain' => 'Zwykły tekst',

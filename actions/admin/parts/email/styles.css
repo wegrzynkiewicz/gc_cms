@@ -85,3 +85,10 @@ hr {
 .footer-text{
     text-align: justify;
 }
+.localization{
+    width: 100%;
+}
+
+.localization td{
+    font-size: 12px;
+}

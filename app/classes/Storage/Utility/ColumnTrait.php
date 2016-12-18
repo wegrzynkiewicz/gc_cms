@@ -23,6 +23,17 @@ trait ColumnTrait
     }
 
     /**
+     * Pobiera wszystkie rekordy z bazy danych po kolumnie $column i wartości $value, gdzie kluczem jest $key
+     */
+    public static function selectAllWithKeyBy($column, $value, $key)
+    {
+        $sql = self::sql("SELECT * FROM ::table WHERE {$column} = ?");
+        $row = Database::fetchAllWithKey($sql, [$value], $key);
+
+        return $row;
+    }
+
+    /**
      * Usuwa wiele rekordow z bazy danych po kolumnie $column i wartości $value
      */
     protected static function deleteAllBy($column, $value)

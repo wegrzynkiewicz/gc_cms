@@ -1,6 +1,7 @@
 <?php
 
 $forms = GC\Model\Form::selectAllCorrectWithPrimaryKey();
+$counts = GC\Model\FormSent::selectSumStatusForFormId();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php';
 require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
@@ -16,6 +17,7 @@ require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                     <thead>
                         <tr>
                             <th><?=trans('Nazwa formularza')?></th>
+                            <th><?=trans('Nieprzeczytanych')?></th>
                             <th class="text-right"></th>
                         </tr>
                     </thead>
@@ -23,7 +25,17 @@ require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                         <?php foreach ($forms as $form_id => $form): ?>
                             <tr>
                                 <td><?=e($form['name'])?></td>
+                                <td>
+                                    <span class="label label-warning">
+                                        <?=e($counts[$form_id]['unread'])?>
+                                    </span>
+                                </td>
                                 <td class="text-right">
+                                    <a href="<?=url("/admin/form/received/list/$form_id")?>"
+                                        class="btn btn-primary btn-sm">
+                                        <i class="fa fa-search fa-fw"></i>
+                                        <?=trans('Pokaż nadesłane')?>
+                                    </a>
                                     <a href="<?=url("/admin/form/field/list/$form_id")?>"
                                         class="btn btn-success btn-sm">
                                         <i class="fa fa-file-text-o fa-fw"></i>

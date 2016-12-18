@@ -7,6 +7,55 @@ SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 SET NAMES utf8mb4;
 
+DROP TABLE IF EXISTS `gc_forms`;
+CREATE TABLE `gc_forms` (
+  `form_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `lang` varchar(2) NOT NULL,
+  `name` tinytext NOT NULL,
+  PRIMARY KEY (`form_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+DROP TABLE IF EXISTS `gc_form_fields`;
+CREATE TABLE `gc_form_fields` (
+  `field_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `type` varchar(32) NOT NULL,
+  `name` tinytext NOT NULL,
+  `help` tinytext NOT NULL,
+  `settings` text NOT NULL,
+  PRIMARY KEY (`field_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+DROP TABLE IF EXISTS `gc_form_pos`;
+CREATE TABLE `gc_form_pos` (
+  `form_id` int(10) unsigned NOT NULL,
+  `field_id` int(10) unsigned NOT NULL,
+  `position` int(10) unsigned NOT NULL,
+  KEY `form_id` (`form_id`),
+  KEY `field_id` (`field_id`),
+  CONSTRAINT `gc_form_pos_ibfk_4` FOREIGN KEY (`form_id`) REFERENCES `gc_forms` (`form_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `gc_form_pos_ibfk_5` FOREIGN KEY (`field_id`) REFERENCES `gc_form_fields` (`field_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+DROP TABLE IF EXISTS `gc_form_sent`;
+CREATE TABLE `gc_form_sent` (
+  `sent_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `form_id` int(10) unsigned NOT NULL,
+  `status` varchar(32) NOT NULL,
+  `sent_date` datetime NOT NULL,
+  `name` tinytext NOT NULL,
+  `data` text NOT NULL,
+  `localization` text NOT NULL,
+  PRIMARY KEY (`sent_id`),
+  KEY `form_id` (`form_id`),
+  KEY `status` (`status`),
+  KEY `sent_date` (`sent_date`),
+  CONSTRAINT `gc_form_sent_ibfk_2` FOREIGN KEY (`form_id`) REFERENCES `gc_forms` (`form_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
 DROP TABLE IF EXISTS `gc_frames`;
 CREATE TABLE `gc_frames` (
   `frame_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -75,6 +124,28 @@ CREATE TABLE `gc_gallery_pos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
+DROP TABLE IF EXISTS `gc_mail_sent`;
+CREATE TABLE `gc_mail_sent` (
+  `mail_hash` char(40) NOT NULL,
+  `to` text NOT NULL,
+  `subject` tinytext NOT NULL,
+  `sent_date` datetime NOT NULL,
+  `content` mediumtext NOT NULL,
+  PRIMARY KEY (`mail_hash`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+
+DROP TABLE IF EXISTS `gc_mail_to_send`;
+CREATE TABLE `gc_mail_to_send` (
+  `mail_hash` char(40) NOT NULL,
+  `to` text NOT NULL,
+  `subject` tinytext NOT NULL,
+  `push_date` datetime NOT NULL,
+  `content` mediumtext NOT NULL,
+  PRIMARY KEY (`mail_hash`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+
 DROP TABLE IF EXISTS `gc_menus`;
 CREATE TABLE `gc_menus` (
   `menu_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -112,24 +183,25 @@ CREATE TABLE `gc_menu_tree` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_module_images`;
-CREATE TABLE `gc_module_images` (
-  `image_id` int(10) unsigned NOT NULL,
+DROP TABLE IF EXISTS `gc_module_files`;
+CREATE TABLE `gc_module_files` (
+  `file_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` tinytext NOT NULL,
-  `filepath` tinytext NOT NULL,
-  PRIMARY KEY (`image_id`)
+  `url` tinytext NOT NULL,
+  `settings` text NOT NULL,
+  PRIMARY KEY (`file_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_module_image_pos`;
-CREATE TABLE `gc_module_image_pos` (
+DROP TABLE IF EXISTS `gc_module_file_pos`;
+CREATE TABLE `gc_module_file_pos` (
   `module_id` int(10) unsigned NOT NULL,
-  `image_id` int(10) unsigned NOT NULL,
+  `file_id` int(10) unsigned NOT NULL,
   `position` int(10) unsigned NOT NULL,
-  KEY `image_id` (`image_id`),
   KEY `module_id` (`module_id`),
-  CONSTRAINT `gc_module_image_pos_ibfk_2` FOREIGN KEY (`image_id`) REFERENCES `gc_module_images` (`image_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `gc_module_image_pos_ibfk_3` FOREIGN KEY (`module_id`) REFERENCES `gc_frame_modules` (`module_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `file_id` (`file_id`),
+  CONSTRAINT `gc_module_file_pos_ibfk_6` FOREIGN KEY (`module_id`) REFERENCES `gc_frame_modules` (`module_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `gc_module_file_pos_ibfk_7` FOREIGN KEY (`file_id`) REFERENCES `gc_module_files` (`file_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -208,6 +280,7 @@ CREATE TABLE `gc_staff` (
   `root` tinyint(3) unsigned NOT NULL,
   `force_change_password` tinyint(3) unsigned NOT NULL,
   `avatar` tinytext NOT NULL,
+  `regeneration` text NOT NULL,
   `settings` text NOT NULL,
   PRIMARY KEY (`staff_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -253,4 +326,4 @@ CREATE TABLE `gc_widgets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
--- 2016-12-11 19:25:03
+-- 2016-12-18 23:12:52

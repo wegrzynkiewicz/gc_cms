@@ -4,9 +4,12 @@ $headTitle = trans("Edycja modułu formularza");
 $breadcrumbs->push($request, $headTitle);
 
 if (isPost()) {
+    sort($_POST['emails']);
+    $settings['emails'] = $_POST['emails'];
     GC\Model\FrameModule::updateByPrimaryId($module_id, [
         'content' => $_POST['form'],
         'theme' => $_POST['theme'],
+        'settings' => json_encode($settings, JSON_UNESCAPED_UNICODE),
     ]);
 
     setNotice(trans('Moduł formularza został zaktualizowany.'));
@@ -16,6 +19,10 @@ if (isPost()) {
 
 $options = GC\Model\Form::selectAllOptionsWithPrimaryKey('name');
 
+$emails = [];
+foreach (def($settings, 'emails', []) as $email) {
+    $emails[$email] = $email;
+}
 
 $_POST['form'] = $content;
 
@@ -40,6 +47,15 @@ require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                     'label' => 'Szablon',
                     'help' => 'Wybierz jeden z dostępnych szablonów dla formularza',
                     'options' => $config['moduleThemes']['form'],
+                ])?>
+
+                <?=view('/admin/parts/input/select2-tags.html.php', [
+                    'id' => 'emails',
+                    'name' => 'emails',
+                    'label' => 'Odbiorcy mailowi',
+                    'help' => 'Można wpisać adresy mailowe na które zostanie wysłany każdy wypełniony formularz. Należy potwierdzić klawiszem ENTER.',
+                    'options' => $emails,
+                    'selectedValues' => $emails,
                 ])?>
             </div>
 

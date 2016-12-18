@@ -96,6 +96,7 @@ $menu = [
         'path' => '/admin/form/list',
         'icon' => 'fa fa-envelope-o fa-fw',
         'perms' => [],
+        'badge' => GC\Model\FormSent::selectSumStatus()['unread'],
     ],
     'Pliki' => [
         'id' => 'files',

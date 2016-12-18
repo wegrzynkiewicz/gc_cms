@@ -280,7 +280,7 @@ li.mjs-nestedSortable-collapsed.mjs-nestedSortable-hovering div {
 .breadcrumb {
     border-radius: 0px;
     border: 1px solid #e7e7e7;
-    box-shadow: 0 1px 2px rgba(0,0,0,.075);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .075);
 }
 
 .simple-box {
@@ -289,5 +289,9 @@ li.mjs-nestedSortable-collapsed.mjs-nestedSortable-hovering div {
     border: 1px solid #e7e7e7;
     padding: 20px;
     margin-bottom: 20px;
-    box-shadow: 0 1px 2px rgba(0,0,0,.075);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .075);
+}
+
+.font-bold {
+    font-weight: bold;
 }

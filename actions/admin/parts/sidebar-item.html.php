@@ -10,7 +10,13 @@
                 <?=trans($name)?>
 
                 <?php if (isset($node['children'])): ?>
-                    <span class="fa arrow"></span>
+                    <span class="fa arrow" style="margin-top:3px"></span>
+                <?php endif ?>
+
+                <?php if (isset($node['badge']) and $node['badge'] > 0): ?>
+                    <span class="label label-warning pull-right" style="margin-top:3px">
+                        <?=$node['badge']?>
+                    </span>
                 <?php endif ?>
             </a>
 

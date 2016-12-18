@@ -2,7 +2,7 @@
 
 $mail->Subject = trans("Utworzyliśmy dla Ciebie konto pracownika w serwisie")." ".$_SERVER['HTTP_HOST'];
 
-require_once ACTIONS_PATH.'/admin/parts/email/header.html.php'; ?>
+require ACTIONS_PATH.'/admin/parts/email/header.html.php'; ?>
 
 <div class="title">
     <?=trans('Witaj')?> <?=e($name)?>!
@@ -22,4 +22,4 @@ require_once ACTIONS_PATH.'/admin/parts/email/header.html.php'; ?>
     <br>
 </div>
 
-<?php require_once ACTIONS_PATH.'/admin/parts/email/footer.html.php'; ?>
+<?php require ACTIONS_PATH.'/admin/parts/email/footer.html.php'; ?>
