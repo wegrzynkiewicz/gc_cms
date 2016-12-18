@@ -9,15 +9,13 @@ if(isPost()) {
         'destination' => $_POST['destination'],
         'target' => isset($_POST['target']) ? $_POST['target'] : '_self',
     ]);
-	redirect($breadcrumbs->getBeforeLastUrl());
+	redirect($breadcrumbs->getLastUrl());
 }
 
 $node = GC\Model\Menu::selectByPrimaryId($menu_id);
 
 $headTitle = trans('Edycja węzła "%s"', [$node['name']]);
 $breadcrumbs->push($request, $headTitle);
-
-$nodeType = $node['type'];
 
 $_POST = $node;
 

@@ -91,6 +91,12 @@ $menu = [
         'icon' => 'fa fa-cube fa-fw',
         'perms' => [],
     ],
+    'Formularze' => [
+        'id' => 'forms',
+        'path' => '/admin/form/list',
+        'icon' => 'fa fa-envelope-o fa-fw',
+        'perms' => [],
+    ],
     'Pliki' => [
         'id' => 'files',
         'path' => '#',

@@ -42,8 +42,6 @@ class Breadcrumbs
         return '';
     }
 
-
-
     protected function wrap($url, $title, $icon)
     {
         return array(

@@ -1,10 +1,8 @@
+<?php $preview = empty($page['image']) ? assetsUrl($config['noImageUrl']): $page['image']; ?>
+
 <tr>
     <td>
-        <?php if ($page['image']): ?>
-            <img src="<?=GC\Thumb::make($page['image'], 64, 64)?>"
-            height="64" 
-            style="margin-right:5px"/>
-        <?php endif ?>
+        <img src="<?=GC\Thumb::make($preview, 64, 64)?>" height="64"/>
     </td>
 
     <td>

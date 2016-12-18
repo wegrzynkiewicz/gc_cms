@@ -78,6 +78,6 @@ class Menu extends Node
             'position' => MenuTree::selectMaxPositionByTaxonomyIdAndParentId($nav_id, null),
         ]);
 
-        return $primary_id;
+        return $menu_id;
     }
 }

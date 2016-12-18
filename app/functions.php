@@ -177,10 +177,6 @@ function getClientLang()
         return $_SESSION['lang']['routing'];
     }
 
-    if (isset($_SESSION['lang']['user'])) {
-        return $_SESSION['lang']['user'];
-    }
-
     if (isset($_SESSION['lang']['staff'])) {
         return $_SESSION['lang']['staff'];
     }
@@ -254,11 +250,6 @@ function redirectToRefererOrDefault($defaultLocation, $code = 303)
 function trans($text, array $params = [])
 {
     return e(GC\Translator::getInstance()->translate($text, $params));
-}
-
-function thumb($text, array $params = [])
-{
-    return GC\Thumb::make();
 }
 
 /**

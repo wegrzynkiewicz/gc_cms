@@ -27,7 +27,7 @@ trait TreeTrait
 
     protected static function update($tax_id, array $positions)
     {
-        static::deleteAllBy('tax_id', $tax_id);
+        static::deleteAllBy(static::$taxonomy, $tax_id);
 
         foreach ($positions as $node) {
             $parent_id = $node['parent_id'];

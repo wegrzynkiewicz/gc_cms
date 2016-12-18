@@ -43,7 +43,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     'options' => $config['moduleThemes']['gallery'],
                 ])?>
             </div>
-            
+
             <div id="images" class="row"></div>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [

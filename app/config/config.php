@@ -98,6 +98,10 @@ $config = [
             'name' => 'Moduł slajdów ze zdjęciami',
             'description' => 'Wyświetla animowane slajdy zawierające tylko zdjęcia.',
         ],
+        'form' => [
+            'name' => 'Moduł formularza',
+            'description' => 'Wyświetla jeden z przygotowanych formularzy.',
+        ],
     ],
     'moduleThemes' => [ # rodzaje zainstalowanych szablonów dla modułów
         'gallery' => [
@@ -108,12 +112,20 @@ $config = [
             'default' => 'Standardowy slajder',
             'default-full' => 'Standardowy slajder (na całą szerokość strony)',
         ],
+        'form' => [
+            'default' => 'Budowany automatycznie',
+            'custom' => 'Specjalnie przygotowany (jeżeli nie istnieje, wtedy automatyczny)',
+        ],
     ],
     'nodeTypes' => [ # rodzaje węzłów nawigacji
         'empty' => 'Nieklikalny węzeł',
         'external' => 'Kieruj na adres',
         'homepage' => 'Kieruj na stronę główną',
         'page' => 'Kieruj na istniejącą stronę',
+    ],
+    'formFieldTypes' => [
+        'editbox' => 'Zwykłe pole tekstowe',
+        'selectbox' => 'Pole jednokrotnego wyboru',
     ],
     'widgetTypes' => [ # typy widżetów
         'plain' => 'Zwykły tekst',

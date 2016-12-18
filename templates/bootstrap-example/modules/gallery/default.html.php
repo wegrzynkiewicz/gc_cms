@@ -3,7 +3,8 @@ $images = GC\Model\ModuleFile::selectAllByModuleId($module_id);
 ?>
 
 <div id="gallery_<?=e($module_id)?>" data-gallery="photoswipe">
-    <?php foreach ($images as $image_id => $image): $is = json_decode($image['settings'], true); ?>
+    <?php foreach ($images as $image_id => $image): ?>
+        <?php $is = json_decode($image['settings'], true); ?>
         <div>
             <a href="<?=e($image['url'])?>"
                 target="_blank"

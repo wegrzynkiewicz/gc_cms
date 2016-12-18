@@ -65,7 +65,7 @@ trait PrimaryTrait
         if (empty($data)) {
             return 0;
         }
-        
+
         $columns = static::buildUpdateSyntax($data);
         $data[] = intval($primary_id);
 

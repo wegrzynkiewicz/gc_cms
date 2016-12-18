@@ -41,58 +41,56 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
         <form id="gridForm" action="" method="post" class="form-horizontal">
             <input name="grid" type="hidden"/>
             <?php if (empty($modules)): ?>
-                <p>
-                    <?=trans('Nie znaleziono modułów')?>
-                </p>
+                <div class="simple-box">
+                    <?=trans('Brak modułów')?>
+                </div>
             <?php else: ?>
-                <div style="padding-left:20px">
-                    <div class="grid-stack">
-                        <?php foreach ($modules as $module_id => $module): ?>
-                            <?php list($x, $y, $w, $h) = explode(":", $module['grid']); ?>
-                            <div id="grid_<?=e($module_id)?>"
-                                data-id="<?=e($module_id)?>"
-                                data-gs-x="<?=e($x)?>"
-                                data-gs-y="<?=e($y)?>"
-                                data-gs-width="<?=e($w)?>"
-                                data-gs-height="<?=e($h)?>"
-                                data-gs-min-width="2"
-                                data-gs-min-height="1"
-                                data-gs-max-width="12"
-                                data-gs-max-height="1"
-                                class="grid-stack-item">
-                                <div class="grid-stack-item-content">
-                                    <div class="panel panel-default panel-module">
-                                        <div class="panel-heading">
-                                            <a href="<?=url("/admin/$frame/module/edit/$module_id/$parent_id")?>">
-                                                <?=trans($config['modules'][$module['type']]['name'])?>
-                                            </a>
-                                            <button data-toggle="modal"
-                                                data-id="<?=e($module_id)?>"
-                                                data-target="#deleteModal"
-                                                title="<?=trans('Usuń moduł')?>"
-                                                type="button"
-                                                class="close pull-right">
-                                                <span>&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="panel-body">
-                                            <?=view(sprintf('/admin/parts/module/types/%s/grid-item-preview.html.php', $module['type']), [
-                                                'module_id' => $module['module_id'],
-                                                'module' => $module,
-                                                'content' => $module['content'],
-                                                'settings' => json_decode($module['settings'], true),
-                                            ])?>
-                                        </div>
+                <div class="grid-stack">
+                    <?php foreach ($modules as $module_id => $module): ?>
+                        <?php list($x, $y, $w, $h) = explode(":", $module['grid']); ?>
+                        <div id="grid_<?=e($module_id)?>"
+                            data-id="<?=e($module_id)?>"
+                            data-gs-x="<?=e($x)?>"
+                            data-gs-y="<?=e($y)?>"
+                            data-gs-width="<?=e($w)?>"
+                            data-gs-height="<?=e($h)?>"
+                            data-gs-min-width="2"
+                            data-gs-min-height="1"
+                            data-gs-max-width="12"
+                            data-gs-max-height="1"
+                            class="grid-stack-item">
+                            <div class="grid-stack-item-content">
+                                <div class="panel panel-default panel-module">
+                                    <div class="panel-heading">
+                                        <a href="<?=url("/admin/$frame/module/edit/$module_id/$parent_id")?>">
+                                            <?=trans($config['modules'][$module['type']]['name'])?>
+                                        </a>
+                                        <button data-toggle="modal"
+                                            data-id="<?=e($module_id)?>"
+                                            data-target="#deleteModal"
+                                            title="<?=trans('Usuń moduł')?>"
+                                            type="button"
+                                            class="close pull-right">
+                                            <span>&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="panel-body">
+                                        <?=view(sprintf('/admin/parts/module/types/%s/grid-item-preview.html.php', $module['type']), [
+                                            'module_id' => $module['module_id'],
+                                            'module' => $module,
+                                            'content' => $module['content'],
+                                            'settings' => json_decode($module['settings'], true),
+                                        ])?>
                                     </div>
                                 </div>
                             </div>
-                        <?php endforeach ?>
-                    </div>
+                        </div>
+                    <?php endforeach ?>
                 </div>
             <?php endif ?>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => 'Zapisz ustawienie kafelków',
+                'saveLabel' => 'Zapisz pozycje kafelków',
             ])?>
 
         </form>

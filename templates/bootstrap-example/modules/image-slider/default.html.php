@@ -2,7 +2,7 @@
     $images = GC\Model\ModuleFile::selectAllByModuleId($module_id);
 ?>
 
-<div id="slider_<?=e($module_id)?>" class="swiper-container" style="height: 400px">
+<div id="slider_<?=e($module_id)?>" class="swiper-container" style="height: 21vw">
     <div class="swiper-wrapper">
         <?php foreach ($images as $image_id => $image): ?>
             <div class="swiper-slide"

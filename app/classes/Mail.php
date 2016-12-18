@@ -111,5 +111,8 @@ class Mail extends PHPMailer
     {
         $limitPerOnce = getConfig()['email']['limitPerOnce'];
         $emails = MailToSend::selectLatest($limitPerOnce);
+        foreach($emails as $email) {
+            $email->send();
+        }
     }
 }

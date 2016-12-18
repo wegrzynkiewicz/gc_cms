@@ -5,12 +5,11 @@ if (isPost()) {
     $positions = array_filter($positions, function ($node) {
         return isset($node['id']);
     });
-    GC\Model\MenuTree::update($nav_id, $positions);
+    GC\Model\FormPosition::updatePositionByFormId($form_id, $positions);
     redirect($breadcrumbs->getBeforeLastUrl());
 }
 
-$pages = GC\Model\Page::selectAllWithFrames();
-$menuTree = GC\Model\Menu::buildTreeByTaxonomyId($nav_id);
+$fields = GC\Model\FormField::selectAllByFormId($form_id);
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
@@ -18,9 +17,9 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=url("/admin/nav/menu/new/$nav_id")?>" type="button" class="btn btn-success">
+                <a href="<?=url("/admin/form/field/new/$form_id")?>" type="button" class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
-                    <?=trans('Dodaj nowy węzeł')?>
+                    <?=trans('Dodaj nowe pole')?>
                 </a>
             </div>
             <h1><?=($headTitle)?></h1>
@@ -32,18 +31,17 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">
-        <?php if ($menuTree->hasChildren()):?>
+        <?php if (empty($fields)):?>
+            <div class="simple-box">
+                <?=trans('Brak pól w formularzu "%s"', [$form['name']])?>
+            </div>
+        <?php else:?>
             <ol id="sortable" class="sortable">
-                <?=view('/admin/nav/menu/list-items.html.php', [
-                    'menu' => $menuTree,
-                    'nav_id' => $nav_id,
-                    'pages' => $pages,
+                <?=view('/admin/form/field/list-items.html.php', [
+                    'fields' => $fields,
+                    'form_id' => $form_id,
                 ])?>
             </ol>
-        <?php else:?>
-            <p>
-                <?=trans('Brak węzłów nawigacji')?>
-            </p>
         <?php endif?>
     </div>
 </div>
@@ -64,8 +62,8 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=url("/admin/nav/menu/delete/$nav_id")?>" class="modal-content">
-            <input name="menu_id" type="hidden" value="">
+        <form id="deleteModalForm" method="post" action="<?=url("/admin/form/field/delete/$form_id")?>" class="modal-content">
+            <input name="field_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span>&times;</span>
@@ -75,9 +73,8 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=trans("Czy jesteś pewien, że chcesz usunąć węzeł")?>
-                <span id="name" style="font-weight:bold; color:red;"></span>
-                <?=trans("i wszystkie jego podwęzły?")?>?
+                <?=trans("Czy jesteś pewien, że chcesz usunąć pole")?>
+                <span id="name" style="font-weight:bold; color:red;"></span>?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -96,7 +93,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 <script>
     $('#deleteModal').on('show.bs.modal', function(e) {
         $(this).find('#name').html($(e.relatedTarget).data('name'));
-        $(this).find('[name="menu_id"]').val($(e.relatedTarget).data('id'));
+        $(this).find('[name="field_id"]').val($(e.relatedTarget).data('id'));
     });
 </script>
 
@@ -105,7 +102,8 @@ $(function(){
     $('#sortable').nestedSortable({
         handle: 'div',
         items: 'li',
-        toleranceElement: '> div'
+        toleranceElement: '> div',
+        maxLevels: 1
     });
 
     $("#savePosition").submit(function(event) {

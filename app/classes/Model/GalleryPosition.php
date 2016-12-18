@@ -4,7 +4,7 @@ namespace GC\Model;
 
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\ColumnTrait;
-use GC\Storage\Utility\PrimaryTrait;
+use GC\Storage\Utility\PositionTrait;
 use GC\Storage\Database;
 
 class GalleryPosition extends AbstractModel

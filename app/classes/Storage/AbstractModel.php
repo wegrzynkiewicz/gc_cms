@@ -2,6 +2,8 @@
 
 namespace GC\Storage;
 
+use BadMethodCallException;
+
 /**
  * Reprezentuje zarowno tablice jak i pojedynczy rekord z bazy danych
  * Wszystkie statyczne metody odnoszą sie do operacji na tablicy, natomiast
@@ -18,9 +20,10 @@ abstract class AbstractModel extends Entity
     public static function __callStatic($methodName, array $arguments)
     {
         # jezeli metoda statyczne o nazwie $methodName nieistnieje
-        if (!method_exists(get_called_class(), $methodName)) {
+        $calledClass = get_called_class();
+        if (!method_exists($calledClass, $methodName)) {
             throw new BadMethodCallException(sprintf(
-                "Method named %s does not exists", $methodName
+                "Method named %s does not exists in %s", $methodName, $calledClass
             ));
         }
 

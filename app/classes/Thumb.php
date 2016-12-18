@@ -108,6 +108,7 @@ class Thumb
         $saver = $this->params['saver'];
         $saver($thumbImage, $destFilePath, $this->params['quality']);
         chmod($destFilePath, 0775);
+        unset($thumbImage);
 
         return true;
     }

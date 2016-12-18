@@ -37,7 +37,7 @@ if (isPost()) {
         $mail->addAddress($user['email']);
         $mail->send();
 
-        redirect('/admin/account/forgot/sent-verification');
+        redirect('/auth/forgot/sent-verification');
     } else {
         $error = trans('Nieprawidłowy adres e-mail');
     }

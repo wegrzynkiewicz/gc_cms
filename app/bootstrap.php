@@ -7,7 +7,7 @@ define('START_TIME', microtime(true));
 require_once __DIR__.'/../vendor/autoload.php';
 require_once __DIR__.'/config/config.php';
 require_once __DIR__.'/functions.php';
-require_once __DIR__.'/error-handler.php';
+//require_once __DIR__.'/error-handler.php';
 
 ini_set('session.cookie_httponly', 1); # ustawia ciastko tylko do odczytu, nie jest możliwe odczyt document.cookie w js
 ini_set('session.use_cookies', 1); # do przechowywania sesji ma użyć ciastka
@@ -28,7 +28,7 @@ setHeaderMimeType('text/html');
 date_default_timezone_set($config['timezone']);
 
 if ($config['debug']['enabled']) {
-    error_reporting(E_ALL ^ E_STRICT);
+    error_reporting(E_ALL);
     ini_set('display_errors', 'on');
 }
 

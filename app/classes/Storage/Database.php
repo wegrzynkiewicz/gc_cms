@@ -11,7 +11,6 @@ use PDO;
 class Database
 {
     public static $pdo;
-    public static $langEditor;
     public static $prefix;
 
     /**
