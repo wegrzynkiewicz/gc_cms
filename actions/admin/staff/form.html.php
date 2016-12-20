@@ -54,7 +54,6 @@ $(function () {
     $('#form').validate({
         rules: {
             name: {
-                minlength: 4,
                 required: true
             },
             email: {
@@ -64,7 +63,6 @@ $(function () {
         },
         messages: {
             name: {
-                minlength: "<?=trans('Imię i nazwisko pracownika musi być dłuższe niż 4 znaki')?>",
                 required: "<?=trans('Imię i nazwisko jest wymagane')?>"
             },
             email: {

@@ -430,7 +430,9 @@ class Node extends AbstractModel
                 $nodes[$id] = $node;
                 $parents[$pid][$id] = $node;
             }
-            $rootNode->pushChildren(static::createBranch($parents, $parents[0]));
+            if (isset($parents[0])) {
+                $rootNode->pushChildren(static::createBranch($parents, $parents[0]));
+            }
         }
 
         return $rootNode;

@@ -3,6 +3,8 @@
 namespace GC\Storage;
 
 use ArrayAccess;
+use BadMethodCallException;
+use UnexpectedValueException;
 
 /**
  * Reprezentuje pojedyńczy rekord z bazy danych

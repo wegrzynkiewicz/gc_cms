@@ -1,7 +1,5 @@
 <?php
 
-$headTitle = trans("Wszystkie strony w serwisie");
-
 $pages = GC\Model\Page::selectAllWithFrames();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
@@ -57,6 +55,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 </table>
             <?php endif ?>
         </div>
+        <?=view('/admin/parts/input/submitButtons.html.php')?>
     </div>
 </div>
 

@@ -56,7 +56,6 @@ $(function () {
     $('#form').validate({
         rules: {
             name: {
-                minlength: 4,
                 required: true
             },
             type: {
@@ -68,7 +67,6 @@ $(function () {
         },
         messages: {
             name: {
-                minlength: "<?=trans('Nazwa węzła musi być dłuższa niż 4 znaki')?>",
                 required: "<?=trans('Nazwa węzła jest wymagana')?>"
             },
             type: {

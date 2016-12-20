@@ -1,30 +1,28 @@
 <?php
 
-$headTitle = trans('Dodawanie nowego wpisu');
+$headTitle = trans('Dodawanie nowego węzła');
 $breadcrumbs->push($request, $headTitle);
 
-if (isPost()) {
+$menu_id = 0;
+
+if(isPost()) {
 
     $frame_id = GC\Model\Frame::insert([
         'name' => $_POST['name'],
-        'type' => 'post',
+        'type' => 'post-node',
         'lang' => $_SESSION['lang']['editor'],
         'keywords' => $_POST['keywords'],
         'description' => $_POST['description'],
         'image' => uploadUrl($_POST['image']),
     ]);
 
-    $relations = isset($_POST['taxonomy']) ? array_unchunk($_POST['taxonomy']) : [];
-
-    GC\Model\Post::insertWithRelations([
+    GC\Model\PostNode::insertWithTaxonomyId([
         'frame_id' => $frame_id,
-    ], $relations);
+    ], $tax_id);
 
-    setNotice(trans('Nowy wpis "%s" została utworzony.', [$_POST['name']]));
+    setNotice(trans('Nowy węzeł "%s" dostał dodany do "%s".', [$_POST['name'], $taxonomy['name']]));
 
     redirect($breadcrumbs->getBeforeLastUrl());
 }
 
-$checkedValues = [];
-
-require_once ACTIONS_PATH.'/admin/post/form.html.php';
+require_once ACTIONS_PATH.'/admin/post/taxonomy/node/form.html.php';

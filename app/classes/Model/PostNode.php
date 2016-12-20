@@ -6,6 +6,7 @@ use GC\Storage\AbstractModel;
 use GC\Storage\Utility\NodeTrait;
 use GC\Storage\Utility\PrimaryTrait;
 use GC\Storage\Utility\TaxonomyTrait;
+use GC\Storage\Utility\ContainFrameTrait;
 use GC\Storage\Node;
 use GC\Storage\Database;
 
@@ -22,27 +23,28 @@ class PostNode extends Node
     use NodeTrait;
     use PrimaryTrait;
     use TaxonomyTrait;
+    use ContainFrameTrait;
 
     /**
      * Pobiera wszystkie kategorie dla wszystkich postow włącznie z taksonomią
      */
-    public static function selectAllWithTaxonomyId()
+    public static function selectAllForTaxonomyTree()
     {
-        $sql = self::sql("SELECT * FROM ::post_membership JOIN ::table USING(::primary) JOIN ::treeTable USING(::primary)");
+        $sql = self::sql("SELECT tax_id, node_id, parent_id, position, post_id, name FROM gc_post_nodes JOIN gc_frames USING (frame_id) JOIN gc_post_membership USING(node_id) JOIN gc_post_tree USING(node_id)");
         $rows = Database::fetchAll($sql);
 
         return $rows;
     }
 
-    public static function selectAllAsOptionsPostId($post_id)
+    public static function mapNameByPostId($post_id)
     {
-        $sql = self::sql("SELECT * FROM ::table LEFT JOIN ::post_membership AS p USING (::primary) WHERE p.post_id = ?");
-        $rows = Database::fetchAsOptionsWithPrimaryId($sql, [intval($post_id)], static::$primary, static::$primary);
+        $sql = self::sql("SELECT ::primary, name FROM ::table LEFT JOIN ::post_membership AS p USING (::primary) LEFT JOIN ::frames USING (frame_id) WHERE p.post_id = ?");
+        $rows = Database::fetchMapBy($sql, [intval($post_id)], static::$primary, 'name');
 
         return $rows;
     }
 
-    protected static function insertWithTaxId(array $data, $tax_id)
+    protected static function insertWithTaxonomyId(array $data, $tax_id)
     {
         $node_id = parent::insert($data);
 

@@ -19,7 +19,7 @@ trait CriteriaTrait
     {
         array_map(function ($column) {
             Database::assertColumn($column);
-        }, $fields);
+        }, $columns);
 
         $select = implode(', ', $columns);
         $sql = self::sql("SELECT {$select} FROM ::table {$criteria}");

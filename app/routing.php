@@ -97,28 +97,34 @@ foreach ($config['rewrites'] as $pattern => $destination) {
 
 # wyszukaj plik w katalogu /actions, który pasuje do adresu url
 $path = ACTIONS_PATH;
-$segments = $_SEGMENTS;
-while (count($segments) > 0) {
-    $segment = array_shift($segments);
+$copySegments = $_SEGMENTS;
+while (count($_SEGMENTS) > 0) {
+    $segment = array_shift($_SEGMENTS);
     $path .= '/'.$segment;
-    $file = $path.'.php';
 
+    # jeżeli istnieje plik "import" to załaduj, ale nie kończ pętli
+    $file = $path.'/_import.php';
     if (file_exists($file)) {
-        $_SEGMENTS = $segments;
+        GC\Logger::import(relativePath($file));
+        require_once $file;
+    }
+
+    $file = $path.'.php';
+    if (file_exists($file)) {
         GC\Logger::routing("Nested :: ".relativePath($file));
 
         return require_once $file;
     }
 
-    # jeżeli istnieje plik "import" to załaduj, ale nie kończ pętli
-    $file = $path.'/_import.php';
-    if (file_exists($file)) {
-        $_SEGMENTS = $segments;
-        GC\Logger::import(relativePath($file));
-        require_once $file;
-    }
-
     if (!is_dir($path)) {
+
+        # jeżeli nie istnieje akcja to spróbuj załadować plik start w katalogu końcowym
+        $file = dirname($path).'/start.php';
+        if (file_exists($file)) {
+            GC\Logger::routing("Start with segments :: ".relativePath($file));
+
+            return require_once $file;
+        }
         break;
     }
 }
@@ -126,10 +132,12 @@ while (count($segments) > 0) {
 # jeżeli nie istnieje akcja to spróbuj załadować plik start w katalogu końcowym
 $file = $path.'/start.php';
 if (file_exists($file)) {
-    GC\Logger::routing("Start :: ".relativePath($file));
+    GC\Logger::routing("Start without segments :: ".relativePath($file));
 
     return require_once $file;
 }
+
+$_SEGMENTS = $copySegments;
 
 # następuje analiza sluga adresu, aby uruchomić odpowiednią akcję
 $slug = array_shift($_SEGMENTS);

@@ -37,10 +37,8 @@ class Criteria
     }
 
     public function sort($column, $order)
-    {
-        if (!self::validateColumn($column)) {
-            return $this;
-        }
+    {        
+        Database::assertColumn($column);
 
         $order = strtoupper($order);
         if (!in_array($order, ['ASC', 'DESC'])) {

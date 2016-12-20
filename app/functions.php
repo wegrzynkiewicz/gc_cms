@@ -184,6 +184,11 @@ function getClientLang()
     return getConfig()['lang']['clientDefault'];
 }
 
+function transDateTime($dateTime)
+{
+    return $dateTime;
+}
+
 /**
  * Ustawia krótkie wiadomości, które są wyświetlane po wykonaniu jakiejś akcji, np coś zostało usunięte
  */

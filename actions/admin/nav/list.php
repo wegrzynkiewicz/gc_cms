@@ -16,21 +16,16 @@ require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                     <thead>
                         <tr>
                             <th><?=trans('Nazwa nawigacji')?></th>
+                            <th><?=trans('Podgląd węzłów')?></th>
                             <th class="text-right"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($navs as $nav_id => $nav): ?>
-                            <tr>
-                                <td><?=e($nav['name'])?></td>
-                                <td class="text-right">
-                                    <a href="<?=url("/admin/nav/menu/list/$nav_id")?>"
-                                        class="btn btn-success btn-sm">
-                                        <i class="fa fa-file-text-o fa-fw"></i>
-                                        <?=trans('Węzły nawigacji')?>
-                                    </a>
-                                </td>
-                            </tr>
+                            <?=view('/admin/nav/list-item.html.php', [
+                                'nav_id' => $nav_id,
+                                'nav' => $nav,
+                            ])?>
                         <?php endforeach ?>
                     </tbody>
                 </table>

@@ -1,8 +1,5 @@
 <?php
 
-$staff = GC\Model\Staff::createFromSession();
-$staff->redirectIfUnauthorized();
-
 $file_id = intval(array_shift($_SEGMENTS));
 
 if (isPost()) {

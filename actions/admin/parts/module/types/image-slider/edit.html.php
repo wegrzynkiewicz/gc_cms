@@ -7,7 +7,8 @@ if (isPost()) {
     GC\Model\FrameModule::updateByPrimaryId($module_id, [
         'theme' => $_POST['theme'],
     ]);
-    redirect("/admin/$frame/module/list/$parent_id");
+
+    redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 $_POST = $module;

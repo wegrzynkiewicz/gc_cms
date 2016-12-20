@@ -9,10 +9,9 @@ $files = GC\Model\ModuleFile::selectAllByModuleId($module_id);
 ?>
 <?php if (empty($files)): ?>
     <div class="col-lg-12">
-        <hr>
-        <p>
+        <div class="simple-box">
             <?=trans('Nie znaleziono zdjęć')?>
-        </p>
+        </div>
     </div>
 <?php else: ?>
     <div id="sortable">

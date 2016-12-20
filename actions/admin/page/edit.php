@@ -1,11 +1,9 @@
 <?php
 
-$title = "Edycja strony %s";
-
 $page_id = intval(array_shift($_SEGMENTS));
 $page = GC\Model\Page::selectWithFrameByPrimaryId($page_id);
 
-$headTitle = trans($title, [$page['name']]);
+$headTitle = trans("Edycja strony %s", [$page['name']]);
 $breadcrumbs->push($request, $headTitle);
 
 if (isPost()) {

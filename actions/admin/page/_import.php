@@ -1,3 +1,4 @@
 <?php
 
-$breadcrumbs->push('/admin/page/list', trans("Strony"), 'fa-files-o');
+$headTitle = trans("Strony");
+$breadcrumbs->push('/admin/page/list', $headTitle, 'fa-files-o');

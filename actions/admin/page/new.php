@@ -7,6 +7,7 @@ if (isPost()) {
 
     $frame_id = GC\Model\Frame::insert([
         'name' => $_POST['name'],
+        'type' => 'page',
         'lang' => $_SESSION['lang']['editor'],
         'keywords' => $_POST['keywords'],
         'description' => $_POST['description'],

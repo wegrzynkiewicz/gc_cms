@@ -1,80 +1,63 @@
 <?php
 
-$headTitle = trans("Węzły w");
-
-$staff = GC\Model\Staff::createFromSession();
-$staff->redirectIfUnauthorized();
-
-$tax_id = intval(array_shift($_SEGMENTS));
-
 if (isPost()) {
     $positions = json_decode($_POST['positions'], true);
     $positions = array_filter($positions, function ($node) {
         return isset($node['id']);
     });
     GC\Model\PostTree::update($tax_id, $positions);
+
     redirect("/admin/post/taxonomy/list");
 }
 
-$taxonomy = GC\Model\PostTaxonomy::selectByPrimaryId($tax_id);
-$category = GC\Model\PostNode::buildTreeByTaxonomyId($tax_id);
-
-$headTitle .= makeLink("/admin/post/taxonomy/list", $taxonomy['name']);
+$tree = GC\Model\PostNode::buildTreeWithFrameByTaxonomyId($tax_id);
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
-    <div class="col-lg-8 text-left">
-        <h1 class="page-header">
-            <?=($headTitle)?>
-        </h1>
-    </div>
-    <div class="col-lg-4 text-right">
-        <h1 class="page-header">
-            <a href="<?=url("/admin/post/node/new/$tax_id")?>" type="button" class="btn btn-success">
-                <i class="fa fa-plus fa-fw"></i>
-                <?=trans('Dodaj nowy węzeł')?>
-            </a>
-        </h1>
+    <div class="col-lg-12">
+        <div class="page-header">
+            <div class="btn-toolbar pull-right">
+                <a href="<?=taxonomyNodeUrl("/new")?>" type="button" class="btn btn-success">
+                    <i class="fa fa-plus fa-fw"></i>
+                    <?=trans('Dodaj nowy węzeł')?>
+                </a>
+            </div>
+            <h1><?=($headTitle)?></h1>
+        </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-12">
-        <?php if ($category->hasChildren()):?>
-            <ol id="sortable" class="sortable">
-                <?=view('/admin/post/node/list-item.html.php', [
-                    'category' => $category,
-                    'tax_id' => $tax_id,
-                ])?>
-            </ol>
-        <?php else:?>
-            <p>
-                <?=trans('Brak węzłów w %s', [$taxonomy['name']])?>
-            </p>
-        <?php endif?>
-    </div>
-</div>
+<?php require_once ACTIONS_PATH.'/admin/parts/breadcrumbs.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">
         <form id="savePosition" action="" method="post">
-
             <input name="positions" type="hidden"/>
-
+            <?php if ($tree->hasChildren()):?>
+                <ol id="sortable" class="sortable">
+                    <?=view('/admin/post/taxonomy/node/list-item.html.php', [
+                        'tree' => $tree,
+                    ])?>
+                </ol>
+            <?php else:?>
+                <div class="simple-box">
+                    <?=trans('Brak węzłów w %s', [$taxonomy['name']])?>
+                </div>
+            <?php endif?>
             <?=view('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz pozycję',
             ])?>
-
         </form>
     </div>
 </div>
 
-<?php require_once ACTIONS_PATH.'/admin/parts/footer-assets.html.php'; ?>
-
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=url("/admin/nav/menu/delete/$tax_id")?>" class="modal-content">
+        <form id="deleteModalForm"
+            method="post"
+            action="<?=taxonomyNodeUrl("/delete")?>"
+            class="modal-content">
             <input name="node_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -100,6 +83,8 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
         </form>
     </div>
 </div>
+
+<?php require_once ACTIONS_PATH.'/admin/parts/footer-assets.html.php'; ?>
 
 <script>
     $('#deleteModal').on('show.bs.modal', function(e) {
