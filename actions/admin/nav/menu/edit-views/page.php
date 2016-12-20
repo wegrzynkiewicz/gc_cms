@@ -5,11 +5,8 @@ $node = GC\Model\Menu::selectByPrimaryId($menu_id);
 
 $_POST = $node;
 
-$pages = GC\Model\Page::selectAllWithFrames();
-$pageOptions = [];
-foreach($pages as $page_id => $page) {
-    $pageOptions[$page_id] = $page['name'];
-}
+$pageOptions = GC\Model\Page::mapFramesWithPrimaryKeyBy('name');
+
 ?>
 
 <?=view('/admin/parts/input/selectbox.html.php', [

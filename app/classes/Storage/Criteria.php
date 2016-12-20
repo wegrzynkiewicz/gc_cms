@@ -2,10 +2,10 @@
 
 namespace GC\Storage;
 
+use GC\Storage\Database;
+
 class Criteria
 {
-    const COLUMN_REGEX = "~^[a-z_]+$~";
-
     private $limit = null;
     private $sort = [];
     private $conditions = [];
@@ -102,9 +102,7 @@ class Criteria
         $searchableColumns = [];
         foreach ($data['columns'] as $number => $column) {
             $name = $column['name'];
-            if (!self::validateColumn($name)) {
-                return null;
-            }
+            Database::assertColumn($name);
             $columnNames[$number] = $name;
 
             if ($column['searchable']) {
@@ -133,10 +131,5 @@ class Criteria
         }
 
         return $criteria;
-    }
-
-    public static function validateColumn($column)
-    {
-        return preg_match(self::COLUMN_REGEX, $column);
     }
 }

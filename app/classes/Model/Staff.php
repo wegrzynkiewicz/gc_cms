@@ -95,7 +95,7 @@ class Staff extends AbstractModel
             ));
         }
 
-        $permissions = StaffPermission::selectPermissionsAsOptionsByStaffId($staff_id);
+        $permissions = StaffPermission::mapPermissionNameByStaffId($staff_id);
 
         # utworz obiekt reprezentujacy pracownika
         $staff = new Staff($data, $permissions);

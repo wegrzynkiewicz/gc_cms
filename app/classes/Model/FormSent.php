@@ -5,7 +5,7 @@ namespace GC\Model;
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\ColumnTrait;
 use GC\Storage\Utility\PrimaryTrait;
-use GC\Storage\Criteria;
+use GC\Storage\Utility\CriteriaTrait;
 use GC\Storage\Database;
 
 class FormSent extends AbstractModel
@@ -15,41 +15,7 @@ class FormSent extends AbstractModel
 
     use ColumnTrait;
     use PrimaryTrait;
-
-    /**
-     * Pobiera wszystkie wiadomości dla zadanego $form_id sortowane po dacie
-     */
-    public static function selectByCriteria(Criteria $criteria)
-    {
-        $sql = self::sql("SELECT sent_id, name, status, sent_date FROM ::table {$criteria}");
-        $rows = Database::fetchAll($sql, $criteria->getValues());
-
-        return $rows;
-    }
-
-    /**
-     * Pobiera wszystkie wiadomości dla zadanego $form_id sortowane po dacie
-     */
-    public static function countByCriteria(Criteria $criteria)
-    {
-        $criteria->clearLimit();
-        $criteria->clearSort();
-        $sql = self::sql("SELECT COUNT(*) AS count FROM ::table {$criteria}");
-        $data = Database::fetchSingle($sql, $criteria->getValues());
-
-        return intval($data['count']);
-    }
-
-    /**
-     * Pobiera ilość wiadomości dla $form_id
-     */
-    public static function countByFormId($form_id)
-    {
-        $sql = self::sql("SELECT COUNT(*) AS count FROM ::table WHERE form_id = ? LIMIT 1");
-        $data = Database::fetchSingle($sql, [$form_id]);
-
-        return intval($data['count']);
-    }
+    use CriteriaTrait;
 
     /**
      * Pobiera ilość nieprzeczytanych wiadomości dla każdego form_id

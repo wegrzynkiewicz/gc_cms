@@ -40,6 +40,7 @@ trait PrimaryTrait
      */
     public static function selectAllWithPrimaryKeyBy($column, $value)
     {
+        Database::assertColumn($column);
         $sql = self::sql("SELECT * FROM ::table WHERE {$column} = ?");
         $rows = Database::fetchAllWithKey($sql, [$value], static::$primary);
 
@@ -47,14 +48,15 @@ trait PrimaryTrait
     }
 
     /**
-     * Pobiera rekordy jako tablice ::primary => $column
+     * Pobiera rekordy i zwraca jako tablice primary_id => columnValue
      */
-    public static function selectAllAsOptionsWithPrimaryKey($column)
+    public static function mapWithPrimaryKeyBy($column)
     {
-        $sql = self::sql("SELECT * FROM ::table");
-        $permissions = Database::fetchAsOptionsWithPrimaryId($sql, [], static::$primary, $column);
+        Database::assertColumn($column);
+        $sql = self::sql("SELECT ::primary, {$column} FROM ::table");
+        $options = Database::fetchMapBy($sql, [], static::$primary, $column);
 
-        return $permissions;
+        return $options;
     }
 
     /**

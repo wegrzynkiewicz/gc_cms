@@ -17,7 +17,7 @@ if (isPost()) {
     redirect($breadcrumbs->getBeforeLastUrl());
 }
 
-$options = GC\Model\Form::selectAllOptionsWithPrimaryKey('name');
+$options = GC\Model\Form::mapCorrectWithPrimaryKeyBy('name');
 
 $emails = [];
 foreach (def($settings, 'emails', []) as $email) {

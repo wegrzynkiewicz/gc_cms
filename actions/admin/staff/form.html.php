@@ -1,6 +1,6 @@
 <?php
 
-$groupOptions = GC\Model\StaffGroup::selectAllAsOptionsWithPrimaryKey('name');
+$groupOptions = GC\Model\StaffGroup::mapWithPrimaryKeyBy('name');
 
 ?>
 

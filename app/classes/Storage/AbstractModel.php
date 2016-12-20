@@ -3,13 +3,14 @@
 namespace GC\Storage;
 
 use BadMethodCallException;
+use RuntimeException;
 
 /**
  * Reprezentuje zarowno tablice jak i pojedynczy rekord z bazy danych
  * Wszystkie statyczne metody odnoszą sie do operacji na tablicy, natomiast
  * niestatyczne metody są własnością konkretnego obiektu, czyli wiersza z bazy
  */
-abstract class AbstractModel extends Entity
+abstract class AbstractModel extends AbstractEntity
 {
     /**
      * Jest uruchamiana w momencie wywołania metody chronionej lub nieistniejącej.
@@ -63,24 +64,17 @@ abstract class AbstractModel extends Entity
         }, $pseudoQuery);
     }
 
-    public static function selectMaxPositionParent($parent_id, $parent)
-    {
-        $sql = self::sql("SELECT MAX(position) AS maximum FROM ::table WHERE {$parent} = ? LIMIT 1 ");
-        $maxOrder =  Database::fetchSingle($sql, [$parent_id]);
-
-        return intval($maxOrder['maximum']) + 1;
-    }
-
     protected static function buildUpdateSyntax(array $data)
     {
-        $list = [];
-        foreach ($data as $field => $value) {
-            $list[] = "`{$field}` = ?";
+        $columns = [];
+        foreach ($data as $column => $value) {
+            Database::assertColumn($column);
+            $columns[] = "`{$column}` = ?";
         }
 
-        $columns = implode(', ', $list);
+        $mergedColumns = implode(', ', $columns);
 
-        return $columns;
+        return $mergedColumns;
     }
 
     /**
@@ -92,9 +86,9 @@ abstract class AbstractModel extends Entity
         $values = implode(', ', $filled);
 
         $columns = array_keys($data);
-        foreach ($columns as &$column) {
-            $column = "`{$column}`";
-        }
+        array_map(function($column){
+            Database::assertColumn($column);
+        }, $columns);
         $columns = implode(', ', $columns);
 
         $sql = self::sql("INSERT INTO ::table ({$columns}) VALUES ({$values})");

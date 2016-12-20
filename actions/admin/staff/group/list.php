@@ -48,7 +48,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                     </a>
                                 </td>
                                 <td>
-                                    <?php $permissions = GC\Model\StaffPermission::selectPermissionsAsOptionsByGroupId($group_id) ?>
+                                    <?php $permissions = GC\Model\StaffPermission::mapPermissionNameByGroupId($group_id) ?>
                                     <?php foreach ($permissions as $permission): ?>
                                         <?=trans($config['permissions'][$permission])?> <br>
                                     <?php endforeach ?>

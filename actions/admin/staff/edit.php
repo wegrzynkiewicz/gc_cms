@@ -26,10 +26,9 @@ if (isPost()) {
     }
 
 } else {
+    $groups = array_keys(GC\Model\StaffGroup::mapNameByStaffId($staff_id));
     $_POST = $user;
 }
-
-$groups = array_keys(GC\Model\StaffGroup::selectAllAsOptionsByStaffId($staff_id));
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 

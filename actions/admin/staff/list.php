@@ -54,7 +54,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                     </a>
                                 </td>
                                 <td>
-                                    <?php $groups = GC\Model\StaffGroup::selectAllAsOptionsByStaffId($staff_id) ?>
+                                    <?php $groups = GC\Model\StaffGroup::mapNameByStaffId($staff_id) ?>
                                     <?php foreach ($groups as $group_id => $group): ?>
                                         <a href="<?=url("/admin/staff/group/edit/$group_id")?>"
                                             title="<?=trans('Przejdź do grupy')?>">
@@ -62,7 +62,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                     <?php endforeach ?>
                                 </td>
                                 <td>
-                                    <?php $permissions = GC\Model\StaffPermission::selectPermissionsAsOptionsByStaffId($staff_id) ?>
+                                    <?php $permissions = GC\Model\StaffPermission::mapPermissionNameByStaffId($staff_id) ?>
                                     <?php foreach ($permissions as $permission): ?>
                                         <?=trans($config['permissions'][$permission])?> <br>
                                     <?php endforeach ?>

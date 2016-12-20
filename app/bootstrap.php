@@ -32,9 +32,7 @@ if ($config['debug']['enabled']) {
     ini_set('display_errors', 'on');
 }
 
-GC\Storage\Database::$pdo = new PDO($config['db']['dns'], $config['db']['username'], $config['db']['password']);
-GC\Storage\Database::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-GC\Storage\Database::$prefix = $config['db']['prefix'];
+GC\Storage\Database::initialize($config['db']);
 
 require_once __DIR__.'/routing.php';
 

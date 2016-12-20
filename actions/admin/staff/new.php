@@ -6,7 +6,6 @@ $breadcrumbs->push($request, $headTitle);
 if (isPost()) {
 
     $groups = isset($_POST['groups']) ? $_POST['groups'] : [];
-
     $password = pseudoRandom($config['password']['minLength']);
 
     $staff_id = GC\Model\Staff::insertWithGroups([
@@ -34,7 +33,6 @@ if (isPost()) {
 }
 
 $groups = [];
-
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php';
 require_once ACTIONS_PATH.'/admin/parts/page-header.html.php';

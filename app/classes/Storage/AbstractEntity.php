@@ -7,7 +7,7 @@ use ArrayAccess;
 /**
  * Reprezentuje pojedyńczy rekord z bazy danych
  */
-abstract class Entity implements ArrayAccess
+abstract class AbstractEntity implements ArrayAccess
 {
     private $data = [];
 

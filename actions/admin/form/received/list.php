@@ -2,8 +2,7 @@
 
 $form_id = intval(array_shift($_SEGMENTS));
 
-//$messages = GC\Model\FormSent::selectAllCorrectWithPrimaryKeyByFromId($form_id);
-$count = GC\Model\FormSent::countByFormId($form_id);
+$count = GC\Model\FormSent::countBy('form_id', $form_id);
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php';
 require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>

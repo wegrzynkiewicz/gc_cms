@@ -18,7 +18,7 @@ class Form extends AbstractModel
     /**
      * Pobiera wszystkie formularze z danego języka
      */
-    public static function selectAllCorrectWithPrimaryKey()
+    public static function selectAllCurrentLangWithPrimaryKey()
     {
         $sql = self::sql("SELECT * FROM ::table WHERE ::lang ORDER BY name ASC");
         $rows = Database::fetchAllWithKey($sql, [], static::$primary);
@@ -27,12 +27,13 @@ class Form extends AbstractModel
     }
 
     /**
-     * Pobiera wszystkie formularze z danego języka i zapisuje je w prostej tablicy $primary_id => $column
+     * Pobiera wszystkie formularze z danego języka
      */
-    public static function selectAllOptionsWithPrimaryKey($column)
+    public static function mapCorrectWithPrimaryKeyBy($column)
     {
-        $sql = self::sql("SELECT * FROM ::table WHERE ::lang ORDER BY name ASC");
-        $rows = Database::fetchAsOptionsWithPrimaryId($sql, [], static::$primary, $column);
+        Database::assertColumn($column);
+        $sql = self::sql("SELECT ::primary, {$column} FROM ::table WHERE ::lang ORDER BY name ASC");
+        $rows = Database::fetchMapBy($sql, [], static::$primary, $column);
 
         return $rows;
     }

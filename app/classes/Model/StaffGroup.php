@@ -15,10 +15,10 @@ class StaffGroup extends AbstractModel
     use ColumnTrait;
     use PrimaryTrait;
 
-    public static function selectAllAsOptionsByStaffId($staff_id)
+    public static function mapNameByStaffId($staff_id)
     {
-        $sql = self::sql("SELECT * FROM ::staff_membership LEFT JOIN ::table USING(::primary) WHERE staff_id = ?");
-        $groups = Database::fetchAsOptionsWithPrimaryId($sql, [intval($staff_id)], static::$primary, 'name');
+        $sql = self::sql("SELECT ::primary, name FROM ::staff_membership LEFT JOIN ::table USING(::primary) WHERE staff_id = ?");
+        $groups = Database::fetchMapBy($sql, [intval($staff_id)], static::$primary, 'name');
 
         return $groups;
     }

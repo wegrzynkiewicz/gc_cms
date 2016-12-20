@@ -14,11 +14,21 @@ class Database
     public static $prefix;
 
     /**
+     * Pobiera z configa dane połączeniowe i initializuje połączenie z bazą
+     */
+    public static function initialize($dbConfig)
+    {
+        self::$pdo = new PDO($dbConfig['dns'], $dbConfig['username'], $dbConfig['password']);
+        self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        self::$prefix = $dbConfig['prefix'];
+    }
+
+    /**
      * Wykonuje zapytanie SQL i zwraca jeden wiersz z tego zapytania, przydatne dla pojedyńczych wywołań
      */
-    public static function fetchSingle($sql, array $parameters = [])
+    public static function fetchSingle($sql, array $values = [])
     {
-        return self::wrapQuery($sql, $parameters, function ($statement) {
+        return self::wrapQuery($sql, $values, function ($statement) {
             return $statement->fetch(PDO::FETCH_ASSOC);
         });
     }
@@ -26,9 +36,9 @@ class Database
     /**
      * Wykonuje zapytanie SQL i zwraca tablice wierszy z tego zapytania, przydatne dla wielu rekordow
      */
-    public static function fetchAll($sql, array $parameters = [])
+    public static function fetchAll($sql, array $values = [])
     {
-        return self::wrapQuery($sql, $parameters, function ($statement) {
+        return self::wrapQuery($sql, $values, function ($statement) {
             return $statement->fetchAll(PDO::FETCH_ASSOC);
         });
     }
@@ -38,10 +48,10 @@ class Database
      * kluczem w tej tablicy jest columna przekazana jako $label,
      * przydatne dla wielu rekordow z dostępem swobodnym po kluczu w tablicy
      */
-    public static function fetchAllWithKey($sql, array $parameters, $label)
+    public static function fetchAllWithKey($sql, array $values, $label)
     {
         $data = [];
-        foreach (self::fetchAll($sql, $parameters) as $row) {
+        foreach (self::fetchAll($sql, $values) as $row) {
             $data[$row[$label]] = $row;
         }
 
@@ -53,10 +63,10 @@ class Database
      * kluczem w tej tablicy jest columna przekazana jako $label a wartością jest $column
      * przydatne dla wielu rekordow z dostępem swobodnym po kluczu w tablicy
      */
-    public static function fetchAsOptionsWithPrimaryId($sql, array $parameters, $label, $column)
+    public static function fetchMapBy($sql, array $values, $label, $column)
     {
         $data = [];
-        foreach (self::fetchAll($sql, $parameters) as $row) {
+        foreach (self::fetchAll($sql, $values) as $row) {
             $data[$row[$label]] = $row[$column];
         }
 
@@ -66,9 +76,9 @@ class Database
     /**
      * Wykonuje zapytanie SQL i zwraca ilość zmodyfikowanych rekordow
      */
-    public static function execute($sql, array $parameters = [])
+    public static function execute($sql, array $values = [])
     {
-        return self::wrapQuery($sql, $parameters, function ($statement) {
+        return self::wrapQuery($sql, $values, function ($statement) {
             return $statement->rowCount();
         });
     }
@@ -76,9 +86,9 @@ class Database
     /**
      * Wykonuje zapytanie SQL i zwraca ID ostatniego wstawionego rekordu
      */
-    public static function insert($sql, array $parameters = [])
+    public static function insert($sql, array $values = [])
     {
-        self::wrapQuery($sql, $parameters, function ($statement) {});
+        self::wrapQuery($sql, $values, function ($statement) {});
 
         return intval(self::$pdo->lastInsertId());
     }
@@ -106,7 +116,7 @@ class Database
      */
     private static function bindTableName($pseudoQuery)
     {
-        return preg_replace_callback('/::(\w+)/', function($matches) {
+        return preg_replace_callback('/::([a-z_]+)/', function($matches) {
             $property = $matches[1];
             if ($property === 'lang') {
                 return sprintf("lang = '%s'", $_SESSION['lang']['editor']);
@@ -118,21 +128,21 @@ class Database
     /**
      * Wywołuje i loguje zapytania
      */
-    private static function wrapQuery($sql, array $parameters, $callback)
+    private static function wrapQuery($sql, array $values, $callback)
     {
         $sql = self::bindTableName($sql);
 
         Logger::query(trim(sprintf("%s $sql",
             self::$pdo->inTransaction() ? '(TRANSACTION) ::' : ''
-        )), $parameters);
+        )), $values);
 
         try {
             $statement = self::$pdo->prepare($sql);
-            $statement->execute($parameters);
+            $statement->execute($values);
             $result = $callback($statement);
         } catch (PDOException $exception) {
             throw new Exception(
-                sprintf("Query: %s; Params: %s", $sql, json_encode($parameters, JSON_PRETTY_PRINT)),
+                sprintf("Query: %s; Params: %s", $sql, json_encode($values, JSON_PRETTY_PRINT)),
                 0,
                 $exception
             );
@@ -140,5 +150,18 @@ class Database
         $statement->closeCursor();
 
         return $result;
+    }
+
+    /**
+     * Wywołuje i loguje zapytania
+     */
+    public static function assertColumn($column)
+    {
+        if (!preg_match("~^[a-z_]+$~", $column)) {
+            GC\Logger::sqlInject('Invalid column name', [$column]);
+            throw new RuntimeException(sprintf(
+                'Invalid column name (%s)', $column
+            ));
+        }
     }
 }

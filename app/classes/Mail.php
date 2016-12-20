@@ -71,7 +71,7 @@ class Mail extends PHPMailer
         $this->hash = pseudoRandom(40);
         MailToSend::insert([
             'mail_hash' => $this->hash,
-            'to' => implode('; ', array_keys($this->all_recipients)),
+            'receivers' => implode('; ', array_keys($this->all_recipients)),
             'subject' => $this->Subject,
             'content' => serialize($this),
         ]);
@@ -91,7 +91,7 @@ class Mail extends PHPMailer
             MailToSend::deleteAllBy('mail_hash', $this->hash);
             MailSent::insert([
                 'mail_hash' => $this->hash,
-                'to' => implode('; ', array_keys($this->all_recipients)),
+                'receivers' => implode('; ', array_keys($this->all_recipients)),
                 'subject' => $this->Subject,
                 'content' => serialize($this),
             ]);

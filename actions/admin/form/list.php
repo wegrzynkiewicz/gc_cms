@@ -1,6 +1,6 @@
 <?php
 
-$forms = GC\Model\Form::selectAllCorrectWithPrimaryKey();
+$forms = GC\Model\Form::selectAllCurrentLangWithPrimaryKey();
 $counts = GC\Model\FormSent::selectSumStatusForFormId();
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php';

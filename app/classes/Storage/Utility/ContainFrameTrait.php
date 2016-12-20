@@ -19,11 +19,22 @@ trait ContainFrameTrait
      */
     public static function selectAllWithFrames()
     {
-        # pobierz wszystkie rusztowania dla (stron)
         $sql = self::sql("SELECT * FROM ::table AS b JOIN ::frames AS f USING(frame_id) WHERE ::lang ORDER BY f.name ASC");
         $rows = Database::fetchAllWithKey($sql, [], static::$primary);
 
         return $rows;
+    }
+
+    /**
+     * Pobiera wszystkie (strony) z ich rusztowaniami i zapisuje jako tablice primary_id => $column
+     */
+    public static function mapFramesWithPrimaryKeyBy($column)
+    {
+        Database::assertColumn($column);
+        $sql = self::sql("SELECT ::primary, {$column} FROM ::table AS b JOIN ::frames AS f USING(frame_id) WHERE ::lang ORDER BY f.name ASC");
+        $map = Database::fetchMapBy($sql, [], static::$primary, $column);
+
+        return $map;
     }
 
     /**
