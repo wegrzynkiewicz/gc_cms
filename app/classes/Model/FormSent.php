@@ -5,6 +5,7 @@ namespace GC\Model;
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\ColumnTrait;
 use GC\Storage\Utility\PrimaryTrait;
+use GC\Storage\Criteria;
 use GC\Storage\Database;
 
 class FormSent extends AbstractModel
@@ -12,18 +13,42 @@ class FormSent extends AbstractModel
     public static $table   = '::form_sent';
     public static $primary = 'sent_id';
 
-    use PrimaryTrait;
     use ColumnTrait;
+    use PrimaryTrait;
 
     /**
      * Pobiera wszystkie wiadomości dla zadanego $form_id sortowane po dacie
      */
-    public static function selectAllCorrectWithPrimaryKeyByFromId($form_id)
+    public static function selectByCriteria(Criteria $criteria)
     {
-        $sql = self::sql("SELECT sent_id, form_id, name, status, sent_date FROM ::table WHERE form_id = ? ORDER BY sent_date DESC");
-        $rows = Database::fetchAllWithKey($sql, [$form_id], static::$primary);
+        $sql = self::sql("SELECT sent_id, name, status, sent_date FROM ::table {$criteria}");
+        $rows = Database::fetchAll($sql, $criteria->getValues());
 
         return $rows;
+    }
+
+    /**
+     * Pobiera wszystkie wiadomości dla zadanego $form_id sortowane po dacie
+     */
+    public static function countByCriteria(Criteria $criteria)
+    {
+        $criteria->clearLimit();
+        $criteria->clearSort();
+        $sql = self::sql("SELECT COUNT(*) AS count FROM ::table {$criteria}");
+        $data = Database::fetchSingle($sql, $criteria->getValues());
+
+        return intval($data['count']);
+    }
+
+    /**
+     * Pobiera ilość wiadomości dla $form_id
+     */
+    public static function countByFormId($form_id)
+    {
+        $sql = self::sql("SELECT COUNT(*) AS count FROM ::table WHERE form_id = ? LIMIT 1");
+        $data = Database::fetchSingle($sql, [$form_id]);
+
+        return intval($data['count']);
     }
 
     /**
@@ -48,7 +73,7 @@ class FormSent extends AbstractModel
         return $count;
     }
 
-    public static function insertToForm($form_id, $data, $localization)
+    protected static function insertToForm($form_id, $data, $localization)
     {
         $record = [
             'form_id' => $form_id,

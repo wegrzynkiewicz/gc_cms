@@ -31,31 +31,23 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">
-        <?php if (empty($fields)):?>
-            <div class="simple-box">
-                <?=trans('Brak pól w formularzu "%s"', [$form['name']])?>
-            </div>
-        <?php else:?>
-            <ol id="sortable" class="sortable">
-                <?=view('/admin/form/field/list-items.html.php', [
-                    'fields' => $fields,
-                    'form_id' => $form_id,
-                ])?>
-            </ol>
-        <?php endif?>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12">
         <form id="savePosition" action="" method="post">
-
-            <input name="positions" type="hidden"/>
-
+            <?php if (empty($fields)):?>
+                <div class="simple-box">
+                    <?=trans('Brak pól w formularzu "%s"', [$form['name']])?>
+                </div>
+            <?php else:?>
+                <input name="positions" type="hidden"/>
+                <ol id="sortable" class="sortable">
+                    <?=view('/admin/form/field/list-items.html.php', [
+                        'fields' => $fields,
+                        'form_id' => $form_id,
+                    ])?>
+                </ol>
+            <?php endif?>
             <?=view('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz pozycję',
             ])?>
-
         </form>
     </div>
 </div>

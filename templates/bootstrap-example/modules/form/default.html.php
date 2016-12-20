@@ -50,16 +50,14 @@ if ($wasSend) {
             ])?>
         <?php endforeach ?>
 
-        <div class="row" style="margin-top:20px">
-            <div class="col-md-4 col-md-offset-4 text-center">
-                <button
-                    type="submit"
-                    name="formSubmit_<?=$form_id?>"
-                    value="1"
-                    class="btn btn-success btn-block btn-md">
-                    <?=trans('Wyślij')?>
-                </button>
-            </div>
+        <div class="text-center">
+            <button
+                type="submit"
+                name="formSubmit_<?=$form_id?>"
+                value="1"
+                class="btn btn-success btn-md">
+                <?=trans('Wyślij')?>
+            </button>
         </div>
     </form>
 <?php endif ?>

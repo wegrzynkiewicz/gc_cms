@@ -27,7 +27,11 @@ require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                                 <td><?=e($form['name'])?></td>
                                 <td>
                                     <span class="label label-warning">
-                                        <?=e($counts[$form_id]['unread'])?>
+                                        <?php if (isset($counts[$form_id])): ?>
+                                            <?=e($counts[$form_id]['unread'])?>
+                                        <?php else: ?>
+                                            0
+                                        <?php endif ?>
                                     </span>
                                 </td>
                                 <td class="text-right">

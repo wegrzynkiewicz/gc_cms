@@ -349,6 +349,19 @@ function exportDataToPHPFile($data, $file)
 }
 
 /**
+ *
+ */
+function array_rebuild(array $array, $callback)
+{
+    $results = [];
+    foreach($array as $key => $value) {
+        $results[$key] = $callback($value);
+    }
+
+    return $results;
+}
+
+/**
  * Dzieli tablice na $p równych tablic
  */
 function array_partition(array $list, $p)

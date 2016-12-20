@@ -44,14 +44,14 @@ $(function () {
         rules: {
             name: {
                 minlength: 4,
-                required: true
-            }
+                required: true,
+            },
         },
         messages: {
             name: {
                 minlength: "<?=trans('Nazwa strony musi być dłuższa niż 4 znaki')?>",
-                required: "<?=trans('Nazwa strony jest wymagana')?>"
-            }
+                required: "<?=trans('Nazwa strony jest wymagana')?>",
+            },
         },
     });
 });
