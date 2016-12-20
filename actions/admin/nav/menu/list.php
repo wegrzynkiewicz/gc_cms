@@ -32,33 +32,34 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">
-        <?php if ($menuTree->hasChildren()):?>
-            <ol id="sortable" class="sortable">
-                <?=view('/admin/nav/menu/list-items.html.php', [
-                    'menu' => $menuTree,
-                    'nav_id' => $nav_id,
-                    'pages' => $pages,
-                ])?>
-            </ol>
-        <?php else:?>
-            <p>
-                <?=trans('Brak węzłów nawigacji')?>
-            </p>
-        <?php endif?>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12">
         <form id="savePosition" action="" method="post">
-
             <input name="positions" type="hidden"/>
+
+            <?php if ($menuTree->hasChildren()):?>
+                <ol id="sortable" class="sortable">
+                    <?=view('/admin/nav/menu/list-items.html.php', [
+                        'menu' => $menuTree,
+                        'nav_id' => $nav_id,
+                        'pages' => $pages,
+                    ])?>
+                </ol>
+            <?php else:?>
+                <p>
+                    <?=trans('Brak węzłów nawigacji')?>
+                </p>
+            <?php endif?>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz pozycję',
             ])?>
 
         </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
     </div>
 </div>
 

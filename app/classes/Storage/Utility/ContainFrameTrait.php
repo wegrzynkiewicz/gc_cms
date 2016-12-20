@@ -23,7 +23,7 @@ trait ContainFrameTrait
         $rows = Database::fetchAllWithKey($sql, [], static::$primary);
 
         return $rows;
-    }
+    }    
 
     /**
      * Pobiera wszystkie (strony) z ich rusztowaniami i zapisuje jako tablice primary_id => $column

@@ -26,6 +26,7 @@ class Frame extends AbstractModel
     {
         $data['creation_date'] = sqldate();
         $data['modify_date'] = sqldate();
+        $data['lang'] = $_SESSION['lang']['editor'];
         $data['settings'] = json_encode([]);
 
         return parent::insert($data);

@@ -101,8 +101,7 @@ $(function(){
     $("#savePosition").submit(function(event) {
         var sortabled = $('#sortable').nestedSortable('toArray');
         $('[name=positions]').val(JSON.stringify(sortabled));
-   });
-
+    });
 });
 </script>
 

@@ -2,7 +2,7 @@
 
 <div id="thumb_<?=e($file_id)?>"
     data-id="<?=e($file_id)?>"
-    class="col-lg-2 col-md-4 col-xs-6">
+    class="col-lg-2 col-md-4 col-xs-6 sortable-container">
 
     <div class="thumbnail">
 

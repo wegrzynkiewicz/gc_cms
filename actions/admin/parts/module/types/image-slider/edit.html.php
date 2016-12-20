@@ -148,9 +148,7 @@ $(function() {
 
     $("#sortableForm").submit(function(event) {
         $.post("<?=url("/admin/parts/module/images/xhr_sort/$module_id")?>", {
-            ids: $("#sortable").sortable("toArray", {
-                attribute: "data-id"
-            })
+            positions: $("#sortable").sortable("toArray")
         });
     });
 

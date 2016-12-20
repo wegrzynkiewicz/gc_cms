@@ -102,6 +102,10 @@ $config = [
             'name' => 'Moduł formularza',
             'description' => 'Wyświetla jeden z przygotowanych formularzy.',
         ],
+        'tabs' => [
+            'name' => 'Moduł zakładek',
+            'description' => 'Rozdziela treść pomiędzy klikalne zakładki.',
+        ],
     ],
     'moduleThemes' => [ # rodzaje zainstalowanych szablonów dla modułów
         'gallery' => [

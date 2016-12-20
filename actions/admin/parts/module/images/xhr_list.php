@@ -27,6 +27,11 @@ $files = GC\Model\ModuleFile::selectAllByModuleId($module_id);
             loop: false,
             closeOnScroll: false,
         });
-        $('#sortable').sortable();
+        $('#sortable').nestedSortable({
+            handle: 'div',
+            listType: 'div',
+            items: 'div.sortable-container',
+            toleranceElement: '> div',
+        });
     </script>
 <?php endif ?>

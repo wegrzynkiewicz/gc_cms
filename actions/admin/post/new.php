@@ -8,7 +8,6 @@ if (isPost()) {
     $frame_id = GC\Model\Frame::insert([
         'name' => $_POST['name'],
         'type' => 'post',
-        'lang' => $_SESSION['lang']['editor'],
         'keywords' => $_POST['keywords'],
         'description' => $_POST['description'],
         'image' => uploadUrl($_POST['image']),
