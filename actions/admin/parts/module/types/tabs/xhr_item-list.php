@@ -26,6 +26,12 @@ $items = GC\Model\ModuleItem::selectAllWithFrameByModuleId($module_id);
                         </a>
                     </div>
                     <div class="pull-right">
+                        <a href="<?=sprintf($_POST['moduleUrl'], $item_id   )?>"
+                            title="<?=trans('Wyświetl moduły zakładi')?>"
+                            class="btn btn-success btn-xs">
+                            <i class="fa fa-file-text-o fa-fw"></i>
+                            <?=trans("Moduły")?>
+                        </a>
                         <a data-toggle="modal"
                             data-id="<?=e($item_id)?>"
                             data-name="<?=e($item['name'])?>"

@@ -1,6 +1,5 @@
 <?php
 
-$page_id = intval(array_shift($_SEGMENTS));
 $page = GC\Model\Page::selectWithFrameByPrimaryId($page_id);
 
 $headTitle = trans("Edycja strony %s", [$page['name']]);

@@ -137,7 +137,9 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 $(function(){
 
     function refreshItems() {
-        $.get("<?=url("/admin/parts/module/types/tabs/xhr_item-list/$module_id")?>", function(data) {
+        $.post("<?=url("/admin/parts/module/types/tabs/xhr_item-list/$module_id")?>", {
+            moduleUrl: "<?=$getModuleUrl("/item/list/%s")?>"
+        }, function(data) {
             $('#items').html(data);
         });
     }
