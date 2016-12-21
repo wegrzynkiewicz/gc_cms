@@ -1,7 +1,5 @@
 <?php
 
-$form_id = intval(array_shift($_SEGMENTS));
-
 $criteria = GC\Storage\Criteria::createForDataTables($_POST);
 $criteria->pushCondition('form_id = ?', [$form_id]);
 

@@ -27,7 +27,7 @@ require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                         <?php foreach ($widgets as $widget_id => $widget): ?>
                             <tr>
                                 <td>
-                                    <a href="<?=url("/admin/widget/edit/$widget_id")?>"
+                                    <a href="<?=$surl("/$widget_id/edit")?>"
                                         title="<?=trans('Edytuj widżet')?>">
                                         <?=e($widget['name'])?>
                                     </a>

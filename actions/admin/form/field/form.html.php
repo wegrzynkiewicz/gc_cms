@@ -49,10 +49,11 @@
 <script>
 $(function() {
     function refreshType(fieldType) {
-        $.get("<?=url("/admin/form/field/types")?>/"+fieldType+"/<?=e($field_id)?>", function(data) {
+        $.get("<?=$surl(sprintf("%s/types", $field_id ? "/$field_id" : '/'))?>/"+fieldType, function(data) {
             $('#fieldType').html(data);
         });
     }
+
     $('#type').change(function() {
         refreshType($(this).val());
     });

@@ -17,7 +17,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=url("/admin/form/field/new/$form_id")?>" type="button" class="btn btn-success">
+                <a href="<?=$surl("/new")?>" type="button" class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
                     <?=trans('Dodaj nowe pole')?>
                 </a>
@@ -41,7 +41,6 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 <ol id="sortable" class="sortable">
                     <?=view('/admin/form/field/list-items.html.php', [
                         'fields' => $fields,
-                        'form_id' => $form_id,
                     ])?>
                 </ol>
             <?php endif?>
@@ -54,7 +53,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=url("/admin/form/field/delete/$form_id")?>" class="modal-content">
+        <form id="deleteModalForm" method="post" action="<?=url("/delete")?>" class="modal-content">
             <input name="field_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

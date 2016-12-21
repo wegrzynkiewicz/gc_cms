@@ -10,11 +10,11 @@ $getPreviewUrl = function() use ($node_id) {
     return url("/post/node/$node_id");
 };
 
-$getModuleUrl = function($path) use ($node_id) {
+$surl = function($path) use ($node_id) {
     return taxonomyNodeUrl("/module$path/$node_id");
 };
 
 $headTitle = trans('Moduły w węźle "%s"', [$node['name']]);
-$breadcrumbs->push($getModuleUrl('/list'), $headTitle);
+$breadcrumbs->push($surl('/list'), $headTitle);
 
 require_once ACTIONS_PATH."/admin/parts/module/$action.html.php";

@@ -1,4 +1,13 @@
 <?php
 
 $headTitle = trans("Pracownicy");
-$breadcrumbs->push('/admin/staff/list', $headTitle, 'fa-users');
+
+if (intval($_SEGMENTS[0])) {
+    $staff_id = intval(array_shift($_SEGMENTS));
+}
+
+$surl = function($path) use ($surl) {
+    return $surl("/staff{$path}");
+};
+
+$breadcrumbs->push($surl('/list'), $headTitle, 'fa-users');

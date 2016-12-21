@@ -5,6 +5,10 @@
 # domyślny headTitle, jeżeli zapomni się go nadać
 $headTitle = trans("Panel");
 
+$surl = function($path) {
+    return url("/admin{$path}");
+};
+
 $breadcrumbs = new GC\Breadcrumbs();
 $breadcrumbs->push('/admin', 'Dashboard', 'fa-dashboard');
 

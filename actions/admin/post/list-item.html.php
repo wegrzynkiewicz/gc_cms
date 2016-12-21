@@ -7,7 +7,7 @@
     </td>
 
     <td>
-        <a href="<?=url("/admin/post/edit/$post_id")?>"
+        <a href="<?=$surl("/$post_id/edit/")?>"
             title="<?=trans('Edytuj wpis')?>">
             <?=e($post['name'])?>
         </a>
@@ -45,7 +45,7 @@
             <?=trans("Podgląd")?>
         </a>
 
-        <a href="<?=url("/admin/post/module/list/$post_id")?>"
+        <a href="<?=$surl("/$post_id/module/list")?>"
             title="<?=trans('Wyświetl moduły wpisu')?>"
             class="btn btn-success btn-sm">
             <i class="fa fa-file-text-o fa-fw"></i>

@@ -22,7 +22,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     <i class="fa fa-search fa-fw"></i>
                     <?=trans('Podgląd')?>
                 </a>
-                <a href="<?=$getModuleUrl("/new")?>"
+                <a href="<?=$surl("/new")?>"
                     type="button"
                     class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
@@ -62,7 +62,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                             <div class="grid-stack-item-content">
                                 <div class="panel panel-default panel-module">
                                     <div class="panel-heading">
-                                        <a href="<?=$getModuleUrl("/edit/$module_id")?>">
+                                        <a href="<?=$surl("/$module_id/edit")?>">
                                             <?=trans($config['modules'][$module['type']]['name'])?>
                                         </a>
                                         <button data-toggle="modal"
@@ -99,7 +99,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=$getModuleUrl("/delete")?>" class="modal-content">
+        <form id="deleteModalForm" method="post" action="<?=$surl("/delete")?>" class="modal-content">
             <input name="module_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

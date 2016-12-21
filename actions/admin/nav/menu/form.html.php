@@ -21,7 +21,9 @@
             </div>
 
             <div class="simple-box">
-                <div id="nodeType"></div>
+                <div id="nodeType">
+                    <?=trans('Wybierz typ węzła')?>
+                </div>
             </div>
 
             <?=view('/admin/parts/input/submitButtons.html.php', [
@@ -37,7 +39,7 @@
 <script>
 $(function() {
     function refreshType(nodeType) {
-        $.get("<?=url("/admin/nav/menu/edit-views")?>/"+nodeType+"/<?=e($menu_id)?>", function(data) {
+        $.get("<?=$surl("/edit-views")?>/"+nodeType, function(data) {
             $('#nodeType').html(data);
         });
     }

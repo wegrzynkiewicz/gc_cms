@@ -1,7 +1,16 @@
 <?php
 
 $headTitle = trans("Wpisy");
-$breadcrumbs->push('/admin/post/list', $headTitle, 'fa-pencil-square-o');
+
+if (intval($_SEGMENTS[0])) {
+    $post_id = intval(array_shift($_SEGMENTS));
+}
+
+$surl = function($path) use ($surl) {
+    return $surl("/post{$path}");
+};
+
+$breadcrumbs->push($surl('/list'), $headTitle, 'fa-pencil-square-o');
 
 function taxonomyNodeUrl($path)
 {

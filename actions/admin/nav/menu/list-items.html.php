@@ -3,7 +3,7 @@
     <li id="node_<?=e($menu_id)?>" data-id="<?=e($menu_id)?>">
         <div class="sortable-content">
             <div class="col-lg-4">
-                <a href="<?=url("/admin/nav/menu/edit/$menu_id/$nav_id")?>">
+                <a href="<?=$surl("/$menu_id/edit")?>">
                     <?=e($node['name'])?>
                 </a>
             </div>
@@ -40,7 +40,6 @@
             <ol>
                 <?=view('/admin/nav/menu/list-items.html.php', [
                     'menu' => $node,
-                    'nav_id' => $nav_id,
                     'pages' => $pages,
                 ])?>
             </ol>

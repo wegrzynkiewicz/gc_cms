@@ -8,7 +8,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=url("/admin/staff/group/new")?>" type="button" class="btn btn-success">
+                <a href="<?=url("/new")?>" type="button" class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
                     <?=trans('Dodaj nową grupę pracowników')?>
                 </a>
@@ -42,7 +42,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                         <?php foreach ($groups as $group_id => $group): ?>
                             <tr>
                                 <td>
-                                    <a href="<?=url("/admin/staff/group/edit/$group_id")?>"
+                                    <a href="<?=$surl("/$group_id/edit")?>"
                                         title="<?=trans('Edytuj grupę')?>">
                                         <?=e($group['name'])?>
                                     </a>
@@ -76,7 +76,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=url("/admin/staff/group/delete")?>" class="modal-content">
+        <form id="deleteModalForm" method="post" action="<?=$surl("/delete")?>" class="modal-content">
             <input name="group_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

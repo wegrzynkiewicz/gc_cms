@@ -104,7 +104,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="modal-dialog" role="document">
         <form id="deleteModalForm"
             method="post"
-            action="<?=$getModuleUrl("/delete")?>"
+            action="<?=$surl("/delete")?>"
             class="modal-content">
             <input name="item_id" type="hidden" value="">
             <div class="modal-header">
@@ -138,7 +138,7 @@ $(function(){
 
     function refreshItems() {
         $.post("<?=url("/admin/parts/module/types/tabs/xhr_item-list/$module_id")?>", {
-            moduleUrl: "<?=$getModuleUrl("/item/list/%s")?>"
+            moduleUrl: "<?=$surl("/item/list/%s")?>"
         }, function(data) {
             $('#items').html(data);
         });

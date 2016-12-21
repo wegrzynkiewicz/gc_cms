@@ -1,4 +1,13 @@
 <?php
 
 $headTitle = trans("Grupy pracowników");
-$breadcrumbs->push('/admin/staff/group/list', $headTitle);
+
+if (intval($_SEGMENTS[0])) {
+    $group_id = intval(array_shift($_SEGMENTS));
+}
+
+$surl = function($path) use ($surl) {
+    return $surl("/group{$path}");
+};
+
+$breadcrumbs->push($surl('/list'), $headTitle);

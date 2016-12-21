@@ -1,8 +1,6 @@
 <?php
 
-$group_id = intval(array_shift($_SEGMENTS));
 $group = GC\Model\StaffGroup::selectByPrimaryId($group_id);
-
 $headTitle = trans('Edytowanie grupy pracowników "%s"', [$group['name']]);
 $breadcrumbs->push($request, $headTitle);
 

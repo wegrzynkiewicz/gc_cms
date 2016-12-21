@@ -1,7 +1,5 @@
 <?php
 
-$field_id = intval(array_shift($_SEGMENTS));
-
 $field = GC\Model\FormField::selectByPrimaryId($field_id);
 $type = $field['type'];
 

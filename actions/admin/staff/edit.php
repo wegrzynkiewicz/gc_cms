@@ -1,8 +1,6 @@
 <?php
 
-$staff_id = intval(array_shift($_SEGMENTS));
 $user = GC\Model\Staff::selectByPrimaryId($staff_id);
-
 $headTitle = trans('Edytowanie pracownika "%s"', [$user['name']]);
 $breadcrumbs->push($request, $headTitle);
 
@@ -20,7 +18,12 @@ if (isPost()) {
 
     if (!isset($error)) {
         $groups = isset($_POST['groups']) ? $_POST['groups'] : [];
-        GC\Model\Staff::update($staff_id, $_POST, $groups);
+
+        GC\Model\Staff::update($staff_id, [
+            'name' => $_POST['name'],
+            'email' => $_POST['email'],
+            'avatar' => $_POST['avatar'],
+        ], $groups);
 
         redirect($breadcrumbs->getBeforeLastUrl());
     }

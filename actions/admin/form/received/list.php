@@ -1,7 +1,5 @@
 <?php
 
-$form_id = intval(array_shift($_SEGMENTS));
-
 $count = GC\Model\FormSent::countBy('form_id', $form_id);
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php';
@@ -61,7 +59,7 @@ require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
 <script id="options-template" type="text/html">
     <div class="text-right">
-        <a href="<?=url("/admin/form/received/show")?>/{{sent_id}}/<?=$form_id?>"
+        <a href="<?=$surl("/")?>{{sent_id}}/show"
             class="btn btn-primary btn-sm">
             <i class="fa fa-search fa-fw"></i>
             <?=trans('Podgląd')?>
@@ -89,7 +87,7 @@ require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
             serverSide: true,
             searchDelay: 500,
             ajax: {
-                url: '<?=url("/admin/form/received/xhr_get/$form_id")?>',
+                url: '<?=$surl("/xhr_get")?>',
                 type: 'POST'
             },
             createdRow: function (row, data, index) {

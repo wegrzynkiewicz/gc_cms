@@ -5,9 +5,8 @@ if(isPost()) {
 
     return;
 } else {
-    $field_id = intval(array_shift($_SEGMENTS));
-    $options = [];
 
+    $options = [];
     if ($field_id > 0) {
         $field = GC\Model\FormField::selectByPrimaryId($field_id);
         $settings = json_decode($field['settings'], true);

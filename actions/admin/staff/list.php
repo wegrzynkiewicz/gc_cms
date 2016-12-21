@@ -8,7 +8,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=url("/admin/staff/new")?>" type="button" class="btn btn-success">
+                <a href="<?=$surl("/new")?>" type="button" class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
                     <?=trans('Dodaj nowego pracownika')?>
                 </a>
@@ -48,7 +48,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                     <img src="<?=GC\Model\Staff::getAvatarUrl($row, 30)?>"
                                         height="30" style="margin-right:5px"/>
 
-                                    <a href="<?=url("/admin/staff/edit/$staff_id")?>"
+                                    <a href="<?=$surl("/$staff_id/edit")?>"
                                         title="<?=trans('Edytuj pracownika')?>">
                                         <?=e($row['name'])?>
                                     </a>
@@ -56,7 +56,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                 <td>
                                     <?php $groups = GC\Model\StaffGroup::mapNameByStaffId($staff_id) ?>
                                     <?php foreach ($groups as $group_id => $group): ?>
-                                        <a href="<?=url("/admin/staff/group/edit/$group_id")?>"
+                                        <a href="<?=$surl("/group/$group_id/edit")?>"
                                             title="<?=trans('Przejdź do grupy')?>">
                                             <?=trans($group)?></a><br>
                                     <?php endforeach ?>
@@ -90,7 +90,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=url("/admin/staff/delete")?>" class="modal-content">
+        <form id="deleteModalForm" method="post" action="<?=$surl("/delete")?>" class="modal-content">
             <input name="staff_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

@@ -13,7 +13,7 @@ if(isPost()) {
 
     setNotice(trans("%s został utworzony. Edytujesz go teraz.", [$config['modules'][$moduleType]['name']]));
 
-    redirect($getModuleUrl("/edit/$module_id"));
+    redirect($surl("/edit/$module_id"));
 }
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php';

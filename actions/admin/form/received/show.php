@@ -1,7 +1,5 @@
 <?php
 
-$sent_id = intval(array_shift($_SEGMENTS));
-
 $message = GC\Model\FormSent::selectByPrimaryId($sent_id);
 $data = json_decode($message['data'], true);
 $name = reset($data);
@@ -29,7 +27,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=url("/admin/form/received/delete/$sent_id")?>"
+                <a href="<?=$surl("/$sent_id/delete")?>"
                     type="button"
                     class="btn btn-danger btn-md">
                     <i class="fa fa-trash fa-fw"></i>

@@ -61,7 +61,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=url("/admin/page/delete")?>" class="modal-content">
+        <form id="deleteModalForm" method="post" action="<?=$surl("/delete")?>" class="modal-content">
             <input name="page_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

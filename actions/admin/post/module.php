@@ -1,20 +1,20 @@
 <?php
 
-$action = array_shift($_SEGMENTS);
-$post_id = intval(array_pop($_SEGMENTS));
+require_once ACTIONS_PATH."/admin/parts/module/_import.php";
 
+$action = array_shift($_SEGMENTS);
 $post = GC\Model\Post::selectWithFrameByPrimaryId($post_id);
 $frame_id = $post['frame_id'];
 
 $getPreviewUrl = function() use ($post_id) {
-    return url("/post/$post_id");
+    return url("/post/{$post_id}");
 };
 
-$getModuleUrl = function($path) use ($post_id) {
-    return url("/admin/post/module$path/$post_id");
+$surl = function($path) use ($surl, $post_id) {
+    return $surl("/{$post_id}/module{$path}");
 };
 
 $headTitle = trans('Moduły w poście "%s"', [$post['name']]);
-$breadcrumbs->push($getModuleUrl("/list"), $headTitle);
+$breadcrumbs->push($surl("/list"), $headTitle);
 
 require_once ACTIONS_PATH."/admin/parts/module/$action.html.php";

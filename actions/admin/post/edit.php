@@ -1,8 +1,6 @@
 <?php
 
-$post_id = intval(array_shift($_SEGMENTS));
 $post = GC\Model\Post::selectWithFrameByPrimaryId($post_id);
-
 $headTitle = trans('Edytowanie wpisu "%s"', [$post['name']]);
 $breadcrumbs->push($request, $headTitle);
 

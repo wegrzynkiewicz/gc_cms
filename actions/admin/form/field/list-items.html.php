@@ -3,7 +3,7 @@
     <li id="node_<?=e($field_id)?>" data-id="<?=e($field_id)?>">
         <div class="sortable-content">
             <div class="col-lg-4">
-                <a href="<?=url("/admin/form/field/edit/$field_id/$form_id")?>">
+                <a href="<?=$surl("/$field_id/edit")?>">
                     <?=e($node['name'])?>
                 </a>
             </div>

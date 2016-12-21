@@ -263,6 +263,7 @@ function trans($text, array $params = [])
 function view($templateName, array $arguments = [])
 {
     global $config;
+    global $surl;
 
     extract($arguments, EXTR_OVERWRITE);
 

@@ -1,7 +1,5 @@
 <?php
 
-$module_id = intval(array_shift($_SEGMENTS));
-
 $module = GC\Model\FrameModule::selectByPrimaryId($module_id);
 $moduleType = $module['type'];
 $content = $module['content'];

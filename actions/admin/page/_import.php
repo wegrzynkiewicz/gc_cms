@@ -1,5 +1,13 @@
 <?php
 
-$page_id = intval($_SEGMENTS[0] == 'list' ? 0 : array_shift($_SEGMENTS));
 $headTitle = trans("Strony");
-$breadcrumbs->push('/admin/page/list', $headTitle, 'fa-files-o');
+
+if (intval($_SEGMENTS[0])) {
+    $page_id = intval(array_shift($_SEGMENTS));
+}
+
+$surl = function($path) use ($surl) {
+    return $surl("/page{$path}");
+};
+
+$breadcrumbs->push($surl('/list'), $headTitle, 'fa-files-o');

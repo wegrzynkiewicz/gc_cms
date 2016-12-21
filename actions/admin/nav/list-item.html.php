@@ -6,8 +6,8 @@
             <div style="margin-left:-20px">
                 <?=view('/admin/parts/taxonomy-preview.html.php', [
                     'tree' => $tree,
-                    'taxonomyUrl' => function($path) use ($nav_id) {
-                        return url("/admin/nav/menu$path/$nav_id");
+                    'taxonomyUrl' => function($path) use ($surl, $nav_id) {
+                        return $surl("/$nav_id/menu$path/");
                     },
                 ])?>
             </div>
@@ -16,7 +16,7 @@
         <?php endif ?>
     </td>
     <td class="text-right">
-        <a href="<?=url("/admin/nav/menu/list/$nav_id")?>"
+        <a href="<?=$surl("/$nav_id/menu/list")?>"
             class="btn btn-success btn-sm">
             <i class="fa fa-file-text-o fa-fw"></i>
             <?=trans('Węzły nawigacji')?>

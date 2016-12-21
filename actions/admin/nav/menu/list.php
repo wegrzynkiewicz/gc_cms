@@ -18,7 +18,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=url("/admin/nav/menu/new/$nav_id")?>" type="button" class="btn btn-success">
+                <a href="<?=$surl('/new')?>" type="button" class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
                     <?=trans('Dodaj nowy węzeł')?>
                 </a>
@@ -65,7 +65,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=url("/admin/nav/menu/delete/$nav_id")?>" class="modal-content">
+        <form id="deleteModalForm" method="post" action="<?=$surl("/delete")?>" class="modal-content">
             <input name="menu_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

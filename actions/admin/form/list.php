@@ -35,12 +35,12 @@ require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                                     </span>
                                 </td>
                                 <td class="text-right">
-                                    <a href="<?=url("/admin/form/received/list/$form_id")?>"
+                                    <a href="<?=$surl("/$form_id/received/list")?>"
                                         class="btn btn-primary btn-sm">
                                         <i class="fa fa-search fa-fw"></i>
                                         <?=trans('Pokaż nadesłane')?>
                                     </a>
-                                    <a href="<?=url("/admin/form/field/list/$form_id")?>"
+                                    <a href="<?=$surl("/$form_id/field/list")?>"
                                         class="btn btn-success btn-sm">
                                         <i class="fa fa-file-text-o fa-fw"></i>
                                         <?=trans('Pola formularza')?>

@@ -1,7 +1,5 @@
 <?php
 
-$menu_id = intval(array_shift($_SEGMENTS));
-
 if(isPost()) {
     GC\Model\Menu::updateByPrimaryId($menu_id, [
         'name' => $_POST['name'],

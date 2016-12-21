@@ -13,7 +13,7 @@ $status = $config['formStatuses'][$message['status']];
     </td>
     <td><?=e($message['sent_date'])?></td>
     <td class="text-right">
-        <a href="<?=url("/admin/form/received/show/$sent_id/$form_id")?>"
+        <a href="<?=$surl("/$sent_id/show")?>"
             class="btn btn-primary btn-sm">
             <i class="fa fa-search fa-fw"></i>
             <?=trans('Podgląd')?>
