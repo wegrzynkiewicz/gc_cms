@@ -16,7 +16,7 @@ if (isPost()) {
         'height' => $height,
     ];
 
-    GC\Model\FrameModule::updateByPrimaryId($module_id, [
+    GC\Model\Module::updateByPrimaryId($module_id, [
         'theme' => 'default',
         'content' => $name,
         'settings' => json_encode($settings),

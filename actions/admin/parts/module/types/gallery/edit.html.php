@@ -4,7 +4,7 @@ $headTitle = trans("Edycja modułu galerii zdjęć");
 $breadcrumbs->push($request, $headTitle);
 
 if (isPost()) {
-    GC\Model\FrameModule::updateByPrimaryId($module_id, [
+    GC\Model\Module::updateByPrimaryId($module_id, [
         'theme' => $_POST['theme'],
     ]);
 

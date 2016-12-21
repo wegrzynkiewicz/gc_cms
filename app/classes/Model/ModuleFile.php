@@ -5,31 +5,19 @@ namespace GC\Model;
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\ColumnTrait;
 use GC\Storage\Utility\PrimaryTrait;
+use GC\Storage\Utility\JoinTrait;
 use GC\Storage\Database;
 
 class ModuleFile extends AbstractModel
 {
-    public static $table   = '::module_files';
-    public static $primary = 'file_id';
+    public static $table       = '::module_files';
+    public static $primary     = 'file_id';
+    public static $joinTable   = '::module_file_pos';
+    public static $joinForeign = 'module_id';
 
     use ColumnTrait;
     use PrimaryTrait;
-
-    public static function selectAllByModuleId($module_id)
-    {
-        $sql = self::sql("SELECT * FROM ::table LEFT JOIN ::module_file_pos AS p USING (::primary) WHERE p.module_id = ? ORDER BY position ASC");
-        $rows = Database::fetchAllWithKey($sql, [intval($module_id)], static::$primary);
-
-        return $rows;
-    }
-
-    protected static function deleteAllByModuleId($module_id)
-    {
-        $sql = self::sql("DELETE t FROM ::table AS t LEFT JOIN ::module_file_pos AS p USING (::primary) WHERE p.module_id = ?");
-        $affectedRows = Database::execute($sql, [intval($module_id)]);
-
-        return $affectedRows;
-    }
+    use JoinTrait;
 
     protected static function insertWithModuleId(array $data, $module_id)
     {

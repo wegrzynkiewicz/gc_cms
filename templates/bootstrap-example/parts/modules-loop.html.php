@@ -2,7 +2,7 @@
 
 $gridModules = [];
 foreach ($modules as $module_id => $module) {
-    $module['size'] = explode(':', $module['grid']);
+    $module['size'] = explode(':', $module['position']);
     list($x, $y, $w, $h) = $module['size'];
     $gridModules[$y][$x] = $module;
 }
@@ -22,7 +22,9 @@ foreach ($gridModules as $row) {
         array_unshift($row, $module);
     }
 
-    echo '<div class="container">';
+    if(!$withoutContainer) {
+        echo '<div class="container">';
+    }
     echo '<div class="row">';
 
     $previousWidth = 0;
@@ -41,6 +43,9 @@ foreach ($gridModules as $row) {
         echo '</div>';
     }
 
-    echo '</div>';
+
+    if(!$withoutContainer) {
+        echo '</div>';
+    }
     echo '</div>';
 }

@@ -1,5 +1,5 @@
 <?php
-$images = GC\Model\ModuleFile::selectAllByModuleId($module_id);
+$images = GC\Model\ModuleFile::joinAllWithKeyByForeign($module_id);
 ?>
 
 <div id="gallery_<?=e($module_id)?>" data-gallery="photoswipe">

@@ -2,12 +2,12 @@
 
 if (isPost()) {
     $grid = json_decode($_POST['grid'], true);
-    GC\Model\FramePosition::updateGridByFrameId($frame_id, $grid);
+    GC\Model\ModulePosition::updateGridByFrameId($frame_id, $grid);
 
     redirect($breadcrumbs->getBeforeLastUrl());
 }
 
-$modules = GC\Model\FrameModule::selectAllByFrameId($frame_id);
+$modules = GC\Model\Module::joinAllWithKeyByForeign($frame_id);
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
@@ -47,7 +47,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             <?php else: ?>
                 <div class="grid-stack">
                     <?php foreach ($modules as $module_id => $module): ?>
-                        <?php list($x, $y, $w, $h) = explode(":", $module['grid']); ?>
+                        <?php list($x, $y, $w, $h) = explode(":", $module['position']); ?>
                         <div id="grid_<?=e($module_id)?>"
                             data-id="<?=e($module_id)?>"
                             data-gs-x="<?=e($x)?>"

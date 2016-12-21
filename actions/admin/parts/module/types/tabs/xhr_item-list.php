@@ -1,15 +1,12 @@
 <?php
 
-$module_id = intval(array_shift($_SEGMENTS));
 $items = GC\Model\ModuleItem::selectAllWithFrameByModuleId($module_id);
 
 ?>
 
 <?php if (empty($items)): ?>
-    <div class="col-lg-12">
-        <div class="simple-box">
-            <?=trans('Nie znaleziono zakładek')?>
-        </div>
+    <div class="simple-box">
+        <?=trans('Nie znaleziono zakładek')?>
     </div>
 <?php else: ?>
     <ol id="sortable" class="sortable">

@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha384-MPpt1W7za5xYx/fOLYN2ArjgJeN9x7w9spvBInv/W5GG/w0fyN6N/0tsUSM8BNLg" crossorigin="anonymous">
 <link rel="stylesheet" href="<?=templateAssetsUrl("/styles/main.css")?>" />
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/js/swiper.min.js" integrity="sha384-SHb/knpyf6vmZuY7ONN68y9Z2/Up/WpaZgmcYFllx5pLmOkaPlq6IxeZAlp5AMk6" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/js/swiper.jquery.min.js" integrity="sha384-gLvVm3G7jBTq9s3GmovecLBW1WXBb5pUw167JAXv0LPDkFeX8qVhC9gz8a8XshNO" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha384-bD5m2XNm9nP2xLhY13ZMvm73xzZvv/tfbPzYGjMLduzMLnDc9gzc1sVl3vufMg/U" crossorigin="anonymous"></script>

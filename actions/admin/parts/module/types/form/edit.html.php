@@ -6,7 +6,7 @@ $breadcrumbs->push($request, $headTitle);
 if (isPost()) {
     sort($_POST['emails']);
     $settings['emails'] = $_POST['emails'];
-    GC\Model\FrameModule::updateByPrimaryId($module_id, [
+    GC\Model\Module::updateByPrimaryId($module_id, [
         'content' => $_POST['form'],
         'theme' => $_POST['theme'],
         'settings' => json_encode($settings, JSON_UNESCAPED_UNICODE),

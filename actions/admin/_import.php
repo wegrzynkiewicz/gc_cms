@@ -5,7 +5,7 @@
 # domyślny headTitle, jeżeli zapomni się go nadać
 $headTitle = trans("Panel");
 
-$surl = function($path) {
+$surl = function($path = '') {
     return url("/admin{$path}");
 };
 

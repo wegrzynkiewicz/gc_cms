@@ -6,7 +6,7 @@ use GC\Storage\AbstractModel;
 use GC\Storage\Utility\ColumnTrait;
 use GC\Storage\Database;
 
-class FramePosition extends AbstractModel
+class ModulePosition extends AbstractModel
 {
     public static $table = '::frame_pos';
 
@@ -14,7 +14,7 @@ class FramePosition extends AbstractModel
 
     protected static function updateGridByFrameId($frame_id, array $positions)
     {
-        FramePosition::deleteAllBy('frame_id', $frame_id);
+        ModulePosition::deleteAllBy('frame_id', $frame_id);
 
         foreach ($positions as $module) {
 
@@ -25,10 +25,10 @@ class FramePosition extends AbstractModel
                 $module['height'],
             ]);
 
-            FramePosition::insert([
+            ModulePosition::insert([
                 'frame_id' => $frame_id,
                 'module_id' => $module['id'],
-                'grid' => $grid,
+                'position' => $grid,
             ]);
         }
     }

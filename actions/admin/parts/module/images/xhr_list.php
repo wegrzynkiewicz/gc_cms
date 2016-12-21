@@ -4,7 +4,7 @@ $staff = GC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
 $module_id = intval(array_shift($_SEGMENTS));
-$files = GC\Model\ModuleFile::selectAllByModuleId($module_id);
+$files = GC\Model\ModuleFile::joinAllWithKeyByForeign($module_id);
 
 ?>
 <?php if (empty($files)): ?>

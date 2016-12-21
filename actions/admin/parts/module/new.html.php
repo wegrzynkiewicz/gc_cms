@@ -5,7 +5,7 @@ $breadcrumbs->push($request, $headTitle);
 
 if(isPost()) {
     $moduleType = $_POST['type'];
-	$module_id = GC\Model\FrameModule::insertWithFrameId([
+	$module_id = GC\Model\Module::insertWithFrameId([
         'type' => $moduleType,
         'theme' => 'default',
         'settings' => json_encode([]),
@@ -13,7 +13,7 @@ if(isPost()) {
 
     setNotice(trans("%s został utworzony. Edytujesz go teraz.", [$config['modules'][$moduleType]['name']]));
 
-    redirect($surl("/edit/$module_id"));
+    redirect($surl("/{$module_id}/edit"));
 }
 
 require_once ACTIONS_PATH.'/admin/parts/header.html.php';

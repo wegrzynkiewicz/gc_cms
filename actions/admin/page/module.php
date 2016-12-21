@@ -17,4 +17,6 @@ $surl = function($path) use ($surl, $page_id) {
 $headTitle = trans('Moduły na stronie "%s"', [$page['name']]);
 $breadcrumbs->push($surl("/list"), $headTitle);
 
+//$path =  ACTIONS_PATH."/admin/parts/module";
+
 require_once ACTIONS_PATH."/admin/parts/module/$action.html.php";

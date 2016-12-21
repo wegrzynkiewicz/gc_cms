@@ -1,6 +1,6 @@
 <?php
 $form_id = $content;
-$fields = GC\Model\FormField::selectAllByFormId($form_id);
+$fields = GC\Model\FormField::joinAllWithKeyByForeign($form_id);
 
 $wasSend = isPost() and isset($_POST["formSubmit_$form_id"]);
 

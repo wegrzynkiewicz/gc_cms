@@ -1,4 +1,4 @@
-<?php $images = GC\Model\ModuleFile::selectAllByModuleId($module_id) ?>
+<?php $images = GC\Model\ModuleFile::joinAllWithKeyByForeign($module_id) ?>
 
 <?php if (empty($images)): ?>
     <div class="text-center">

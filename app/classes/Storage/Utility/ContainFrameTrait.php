@@ -3,7 +3,7 @@
 namespace GC\Storage\Utility;
 
 use GC\Model\Frame;
-use GC\Model\FrameModule;
+use GC\Model\Module;
 use GC\Storage\Database;
 
 /**
@@ -23,7 +23,7 @@ trait ContainFrameTrait
         $rows = Database::fetchAllWithKey($sql, [], static::$primary);
 
         return $rows;
-    }    
+    }
 
     /**
      * Pobiera wszystkie (strony) z ich rusztowaniami i zapisuje jako tablice primary_id => $column
@@ -58,7 +58,10 @@ trait ContainFrameTrait
         $row = static::selectWithFrameByPrimaryId($primary_id);
 
         # usuń wszystkie moduły dla rusztowania o frame_id
-        FrameModule::deleteAllByFrameId($row['frame_id']);
+        Module::deleteModuleByForeign($row['frame_id']);
+
+        # usuń wszystkie moduły, które nie są przypisane do rusztowań
+        Module::deleteUnassignedByForeign();
 
         # usuń rusztowanie o id głownym (strony)
         Frame::deleteByPrimaryId($row['frame_id']);

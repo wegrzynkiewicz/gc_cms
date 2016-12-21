@@ -1,10 +1,9 @@
 <?php
 
-$headTitle = trans("Edycja modułu zakładek");
-$breadcrumbs->push($request, $headTitle);
+require ACTIONS_PATH."/admin/parts/module/types/$moduleType/_import.php";
 
 if (isPost()) {
-    GC\Model\FrameModule::updateByPrimaryId($module_id, [
+    GC\Model\Module::updateByPrimaryId($module_id, [
         'content' => $_POST['content'],
         'theme' => 'default',
     ]);
@@ -137,8 +136,8 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 $(function(){
 
     function refreshItems() {
-        $.post("<?=url("/admin/parts/module/types/tabs/xhr_item-list/$module_id")?>", {
-            moduleUrl: "<?=$surl("/item/list/%s")?>"
+        $.post("<?=url("/admin/parts/module/{$module_id}/types/tabs/xhr_item-list")?>", {
+            moduleUrl: "<?=$surl("/$module_id/item/%s/module/list")?>"
         }, function(data) {
             $('#items').html(data);
         });

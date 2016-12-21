@@ -95,5 +95,5 @@ abstract class AbstractModel extends AbstractEntity
         $row_id = Database::insert($sql, array_values($data));
 
         return $row_id;
-    }
+    }    
 }
