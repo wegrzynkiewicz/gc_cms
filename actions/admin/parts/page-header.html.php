@@ -6,4 +6,4 @@
     </div>
 </div>
 
-<?php require_once ACTIONS_PATH.'/admin/parts/breadcrumbs.html.php'; ?>
+<?php require ACTIONS_PATH.'/admin/parts/breadcrumbs.html.php'; ?>

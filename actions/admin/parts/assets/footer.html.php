@@ -1,10 +1,5 @@
 
-<?php
-$langDefinedPath = sprintf(ACTIONS_PATH."/admin/parts/assets-%s.html.php", getClientLang());
-if (is_readable($langDefinedPath)){
-    require $langDefinedPath;
-}
-?>
+<?php require sprintf(ACTIONS_PATH.'/admin/parts/assets/footer-%s.html.php', getClientLang()) ?>
 
 <script>
 $(window).bind("load resize", function() {

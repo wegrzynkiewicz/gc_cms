@@ -2,7 +2,7 @@
 
 $pages = GC\Model\Page::selectAllWithFrames();
 
-require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
+require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -18,7 +18,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     </div>
 </div>
 
-<?php require_once ACTIONS_PATH.'/admin/parts/breadcrumbs.html.php'; ?>
+<?php require ACTIONS_PATH.'/admin/parts/breadcrumbs.html.php'; ?>
 
 <!-- <div class="alert alert-info alert-dismissible">
     <button type="button" class="close" data-dismiss="alert">
@@ -87,7 +87,7 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     </div>
 </div>
 
-<?php require_once ACTIONS_PATH.'/admin/parts/footer-assets.html.php'; ?>
+<?php require ACTIONS_PATH.'/admin/parts/assets/footer.html.php';; ?>
 
 <script>
     $(function(){
@@ -101,4 +101,4 @@ require_once ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     });
 </script>
 
-<?php require_once ACTIONS_PATH.'/admin/parts/footer.html.php'; ?>
+<?php require ACTIONS_PATH.'/admin/parts/footer.html.php'; ?>

@@ -21,4 +21,4 @@ if (isPost()) {
 
 $_POST = $page;
 
-require_once ACTIONS_PATH.'/admin/page/form.html.php';
+require ACTIONS_PATH.'/admin/page/form.html.php';

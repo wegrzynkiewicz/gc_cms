@@ -26,4 +26,4 @@ if (isPost()) {
 
 $checkedValues = [];
 
-require_once ACTIONS_PATH.'/admin/post/form.html.php';
+require ACTIONS_PATH.'/admin/post/form.html.php';

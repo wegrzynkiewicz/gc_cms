@@ -16,4 +16,4 @@ if(isPost()) {
 	redirect($breadcrumbs->getBeforeLastUrl());
 }
 
-require_once ACTIONS_PATH.'/admin/nav/menu/form.html.php';
+require ACTIONS_PATH.'/admin/nav/menu/form.html.php';

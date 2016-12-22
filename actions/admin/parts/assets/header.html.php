@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha384-EAV0qjkNeoPc8RzwxkqwBzz/Q5qyV9dF3jL7fZ/8EZO8IDcmoOHfSeoj3w/LdYj+" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha384-MPpt1W7za5xYx/fOLYN2ArjgJeN9x7w9spvBInv/W5GG/w0fyN6N/0tsUSM8BNLg" crossorigin="anonymous">
 
-<link rel="stylesheet" href="<?=assetsUrl("/admin/styles/main.css")?>">
+<link rel="stylesheet" href="<?=GC\Url::assets("/admin/styles/main.css")?>">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/1.1.3/metisMenu.min.js" integrity="sha384-F21Q4YFCU/iioflzam9g/N68S5oNeUjUfHDdxjxgm7Aj1gKgOcLIDVM1o5azfVSb" crossorigin="anonymous"></script>
@@ -35,11 +35,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha384-DiTOB5DarLwdE9bzATOXhLQp6irFZIhtJreUNJiwMMDiHGu7LdRZeqZBveanC2zo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js" integrity="sha256-iaqfO5ue0VbSGcEiQn+OeXxnxAMK2+QgHXIDA5bWtGI=" crossorigin="anonymous"></script>
 
-<script src="<?=rootUrl("/external/ckeditor-4.5.11/ckeditor.js")?>"></script>
-<script src="<?=rootUrl("/external/ckeditor-4.5.11/adapters/jquery.js")?>"></script>
-<script src="<?=assetsUrl("/admin/scripts/elfinder-input.js")?>"></script>
-<script src="<?=assetsUrl("/admin/scripts/ckeditor_integration.js")?>"></script>
-<script src="<?=assetsUrl("/common/scripts/jquery.photoswipe.js")?>"></script>
+<script src="<?=GC\Url::root("/external/ckeditor-4.5.11/ckeditor.js")?>"></script>
+<script src="<?=GC\Url::root("/external/ckeditor-4.5.11/adapters/jquery.js")?>"></script>
+<script src="<?=GC\Url::assets("/admin/scripts/elfinder-input.js")?>"></script>
+<script src="<?=GC\Url::assets("/admin/scripts/ckeditor_integration.js")?>"></script>
+<script src="<?=GC\Url::assets("/common/scripts/jquery.photoswipe.js")?>"></script>
 
 <script>
 $.extend(true, $.fn.dataTable.defaults, {

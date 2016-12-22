@@ -40,7 +40,7 @@ $config = [
     ],
     'translator' => [ # ustawienia translatora
         'enabled' => true, # czy włączyć tłumaczenie komunikatów
-        'folder' => ROOT_PATH.'/data/locales', # katalog do ktorego są zapisywane tłumaczenia
+        'folder' => ROOT_PATH.'/app/storage/locales', # katalog do ktorego są zapisywane tłumaczenia
         'key' => 'trnsl.1.1.20161215T151949Z.587eb49efd9a9be2.a1eb760e6bf78076ea004f12eeb22b37902aadc2', # klucz do api translatora w serwisie Yandex
     ],
     'logger' => [ # ustawienia dla rejestrowania logów

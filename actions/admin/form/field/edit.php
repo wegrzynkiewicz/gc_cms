@@ -10,7 +10,7 @@ if(isPost()) {
 
     $settings = json_decode($field['settings'], true);
 
-    require_once ACTIONS_PATH."/admin/form/field/types/$type.php";
+    require ACTIONS_PATH."/admin/form/field/types/$type.php";
 
     GC\Model\FormField::updateByPrimaryId($field_id, [
         'name' => $_POST['name'],
@@ -25,4 +25,4 @@ if(isPost()) {
 
 $_POST = $field;
 
-require_once ACTIONS_PATH.'/admin/form/field/form.html.php';
+require ACTIONS_PATH.'/admin/form/field/form.html.php';

@@ -4,10 +4,10 @@
 
 define('START_TIME', microtime(true));
 
-require_once __DIR__.'/../vendor/autoload.php';
-require_once __DIR__.'/config/config.php';
-require_once __DIR__.'/functions.php';
-require_once __DIR__.'/error-handler.php';
+require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/config/config.php';
+require __DIR__.'/functions.php';
+require __DIR__.'/error-handler.php';
 
 chdir('..'); # zmienia bieżący katalog o jeden poziom wyżej niż web root
 
@@ -83,7 +83,7 @@ GC\Render::$shortcuts = [
     'templateHelper' => ROOT_PATH.'/templates/'.TEMPLATE.'/_helpers',
 ];
 
-require_once __DIR__.'/routing.php';
+require __DIR__.'/routing.php';
 
 GC\Logger::response(sprintf('%s :: ExecutionTime: %s',
     http_response_code(),

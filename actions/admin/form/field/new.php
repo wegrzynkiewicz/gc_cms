@@ -10,7 +10,7 @@ if(isPost()) {
     $type = $_POST['type'];
     $settings = [];
 
-    require_once ACTIONS_PATH."/admin/form/field/types/$type.php";
+    require ACTIONS_PATH."/admin/form/field/types/$type.php";
 
     GC\Model\FormField::insertWithFormId([
         'name' => $_POST['name'],
@@ -24,4 +24,4 @@ if(isPost()) {
 	redirect($breadcrumbs->getBeforeLastUrl());
 }
 
-require_once ACTIONS_PATH.'/admin/form/field/form.html.php';
+require ACTIONS_PATH.'/admin/form/field/form.html.php';

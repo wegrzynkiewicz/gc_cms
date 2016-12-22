@@ -25,4 +25,4 @@ if (isPost()) {
 $_POST = $post;
 $checkedValues = array_keys(GC\Model\PostNode::mapNameByPostId($post_id));
 
-require_once ACTIONS_PATH.'/admin/post/form.html.php';
+require ACTIONS_PATH.'/admin/post/form.html.php';

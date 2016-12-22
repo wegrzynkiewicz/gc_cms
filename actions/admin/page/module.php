@@ -1,6 +1,6 @@
 <?php
 
-require_once ACTIONS_PATH."/admin/parts/module/_import.php";
+require ACTIONS_PATH."/admin/parts/module/_import.php";
 
 $action = array_shift($_SEGMENTS);
 $page = GC\Model\Page::selectWithFrameByPrimaryId($page_id);
@@ -19,4 +19,4 @@ $breadcrumbs->push($surl("/list"), $headTitle);
 
 //$path =  ACTIONS_PATH."/admin/parts/module";
 
-require_once ACTIONS_PATH."/admin/parts/module/$action.html.php";
+require ACTIONS_PATH."/admin/parts/module/$action.html.php";

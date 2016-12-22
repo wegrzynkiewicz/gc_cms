@@ -23,4 +23,4 @@ if (!$gallery) {
 $headTitle .= makeLink("/admin/gallery/list", $gallery['name']);
 $_POST = $gallery;
 
-require_once ACTIONS_PATH.'/admin/gallery/form.html.php';
+require ACTIONS_PATH.'/admin/gallery/form.html.php';

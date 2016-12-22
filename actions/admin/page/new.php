@@ -22,4 +22,4 @@ if (isPost()) {
     redirect($breadcrumbs->getBeforeLastUrl());
 }
 
-require_once ACTIONS_PATH.'/admin/page/form.html.php';
+require ACTIONS_PATH.'/admin/page/form.html.php';

@@ -17,4 +17,4 @@ $breadcrumbs->push($request, $headTitle);
 
 $_POST = $node;
 
-require_once ACTIONS_PATH.'/admin/nav/menu/form.html.php';
+require ACTIONS_PATH.'/admin/nav/menu/form.html.php';

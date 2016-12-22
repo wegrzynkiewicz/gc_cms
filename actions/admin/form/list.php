@@ -3,8 +3,8 @@
 $forms = GC\Model\Form::selectAllCurrentLangWithPrimaryKey();
 $counts = GC\Model\FormSent::selectSumStatusForFormId();
 
-require_once ACTIONS_PATH.'/admin/parts/header.html.php';
-require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
+require ACTIONS_PATH.'/admin/parts/header.html.php';
+require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">
@@ -56,5 +56,5 @@ require_once ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
     </div>
 </div>
 
-<?php require_once ACTIONS_PATH.'/admin/parts/footer-assets.html.php'; ?>
-<?php require_once ACTIONS_PATH.'/admin/parts/footer.html.php'; ?>
+<?php require ACTIONS_PATH.'/admin/parts/assets/footer.html.php';; ?>
+<?php require ACTIONS_PATH.'/admin/parts/footer.html.php'; ?>

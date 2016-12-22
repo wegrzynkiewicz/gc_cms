@@ -43,7 +43,7 @@ if (isPost()) {
     }
 }
 
-require_once ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
+require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
 
 <div class="vertical-center">
     <div class="container">
@@ -89,7 +89,7 @@ require_once ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
     </div>
 </div>
 
-<?php require_once ACTIONS_PATH.'/admin/parts/footer-assets.html.php'; ?>
+<?php require ACTIONS_PATH.'/admin/parts/assets/footer.html.php';; ?>
 
 <script>
 $(function () {

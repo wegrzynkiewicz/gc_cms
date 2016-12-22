@@ -5,7 +5,7 @@ $moduleType = $module['type'];
 
 GC\Model\ModuleFile::deleteAllByModuleId($module_id);
 
-require_once ACTIONS_PATH."/admin/parts/module/types/$moduleType/delete.html.php";
+require ACTIONS_PATH."/admin/parts/module/types/$moduleType/delete.html.php";
 
 GC\Model\Module::deleteRecursiveByPrimaryId($module_id);
 

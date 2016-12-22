@@ -6,24 +6,14 @@ use GC\Storage\Database;
 
 trait TaxonomyTrait
 {
-    public static $cache = [];
-
     /**
      * Na podstawie workname i języka odpowiednio pobiera właściwą taksonomię
      */
     public static function selectSingleByWorkName($workname, $lang)
     {
-        $workname .= "_$lang";
-        if (empty(self::$cache)) {
-            $taxonomies = static::selectAllWithPrimaryKey();
-            foreach ($taxonomies as $tax_id => $taxonomy) {
-                $name = $taxonomy['workname'].'_'.$taxonomy['lang'];
-                self::$cache[$name] = $taxonomy;
-            }
-        }
+        $sql = self::sql("SELECT * FROM ::table WHERE lang = ? AND workname = ? LIMIT 1");
+        $row = Database::fetchSingle($sql, [$workname, $lang]);
 
-        $taxonomy = self::$cache[$workname];
-
-        return $taxonomy;
+        return $row;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-require_once ACTIONS_PATH."/admin/parts/module/_import.php";
+require ACTIONS_PATH."/admin/parts/module/_import.php";
 
 $action = array_shift($_SEGMENTS);
 $post = GC\Model\Post::selectWithFrameByPrimaryId($post_id);
@@ -17,4 +17,4 @@ $surl = function($path) use ($surl, $post_id) {
 $headTitle = trans('Moduły w poście "%s"', [$post['name']]);
 $breadcrumbs->push($surl("/list"), $headTitle);
 
-require_once ACTIONS_PATH."/admin/parts/module/$action.html.php";
+require ACTIONS_PATH."/admin/parts/module/$action.html.php";

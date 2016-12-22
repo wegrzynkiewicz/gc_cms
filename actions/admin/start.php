@@ -5,7 +5,7 @@ $headTitle = trans('Dashboard');
 $staff = GC\Model\Staff::createFromSession();
 $staff->redirectIfUnauthorized();
 
-require_once ACTIONS_PATH.'/admin/parts/header.html.php';
+require ACTIONS_PATH.'/admin/parts/header.html.php';
 
 
 $actions = [ [
@@ -153,5 +153,5 @@ $actions = [ [
     <?php endforeach ?>
 </div>
 
-<?php require_once ACTIONS_PATH.'/admin/parts/footer-assets.html.php'; ?>
-<?php require_once ACTIONS_PATH.'/admin/parts/footer.html.php'; ?>
+<?php require ACTIONS_PATH.'/admin/parts/assets/footer.html.php';; ?>
+<?php require ACTIONS_PATH.'/admin/parts/footer.html.php'; ?>

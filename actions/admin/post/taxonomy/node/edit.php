@@ -21,4 +21,4 @@ if(isPost($_POST)) {
 
 $_POST = $node;
 
-require_once ACTIONS_PATH.'/admin/post/taxonomy/node/form.html.php';
+require ACTIONS_PATH.'/admin/post/taxonomy/node/form.html.php';

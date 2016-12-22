@@ -17,4 +17,4 @@ if (isPost()) {
 $_POST = $group;
 $permissions = GC\Model\StaffPermission::mapPermissionNameByGroupId($group_id);
 
-require_once ACTIONS_PATH.'/admin/staff/group/form.html.php';
+require ACTIONS_PATH.'/admin/staff/group/form.html.php';

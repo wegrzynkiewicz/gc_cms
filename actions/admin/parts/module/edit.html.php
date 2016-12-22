@@ -8,4 +8,4 @@ if (!is_array($settings)) {
     $settings = [];
 }
 
-require_once ACTIONS_PATH."/admin/parts/module/types/$moduleType/edit.html.php";
+require ACTIONS_PATH."/admin/parts/module/types/$moduleType/edit.html.php";
