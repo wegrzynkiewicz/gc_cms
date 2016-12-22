@@ -7,6 +7,7 @@ use GC\Storage\Utility\ColumnTrait;
 use GC\Storage\Utility\PrimaryTrait;
 use GC\Storage\Database;
 use GC\Logger;
+use GC\Response;
 use RuntimeException;
 
 class Staff extends AbstractModel
@@ -46,7 +47,7 @@ class Staff extends AbstractModel
         if (!$this->hasPermissions($permissions)) {
             Logger::deny("Not authorized", $permissions);
             $perm = count($permissions) > 0 ? array_shift($permissions) : 'default';
-            redirect("/admin/account/deny/$perm");
+            Response::redirect("/admin/account/deny/$perm");
         }
     }
 
@@ -74,7 +75,7 @@ class Staff extends AbstractModel
     public static function getAvatarUrl($staff, $size)
     {
         if (empty($staff['avatar'])) {
-            return assetsUrl(getConfig()['avatar']['noAvatarUrl']);
+            return GC\Url::assets(getConfig()['avatar']['noAvatarUrl']);
         }
 
         return Thumb::make($staff['avatar'], $size, $size);
@@ -112,14 +113,14 @@ class Staff extends AbstractModel
         if (!isset($_SESSION['staff']) or !isset($_SESSION['staff']['entity'])) {
             unset($_SESSION['staff']);
             Logger::logout("Session does not exists");
-            redirect('/auth/login');
+            Response::redirect('/auth/login');
         }
 
         # jeżeli czas trwania sesji minął
         if (time() > $_SESSION['staff']['sessionTimeout']) {
             unset($_SESSION['staff']);
             Logger::logout("Session timeout");
-            redirect('/auth/session-timeout');
+            Response::redirect('/auth/session-timeout');
         }
 
         # spróbuj pobrać pracownika z bazy, jezeli go nie znajdzie wtedy przekieruj na logowanie
@@ -130,12 +131,12 @@ class Staff extends AbstractModel
         } catch (RuntimeException $exception) {
             unset($_SESSION['staff']);
             Logger::logout("Not found user");
-            redirect('/auth/login');
+            Response::redirect('/auth/login');
         }
 
         # jezeli istnieje flaga, ze trzeba zmienić hasło wtedy przekieruj
         if ($staff['force_change_password']) {
-            redirect('/auth/force-change-password');
+            Response::redirect('/auth/force-change-password');
         }
 
         Logger::session(sprintf("%s <%s>", $staff['name'], $staff['email']));

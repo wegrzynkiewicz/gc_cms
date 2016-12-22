@@ -38,7 +38,7 @@ function checked($condition)
 /**
  * Zwraca odpowiedni $key z tablicy $array, jeżeli istnieje i jest niepusty, w przeciwnym wypadku $default
  */
-function def(array $array, $key, $default = null)
+function def(array $array, $key, $default = '')
 {
     return isset($array[$key]) ? $array[$key] : $default;
 }
@@ -56,42 +56,6 @@ function sqldate($time = null)
 }
 
 /**
- * Zwraca pseudo losowy ciąg znaków o zadanej długości
- */
-function pseudoRandom($length)
-{
-    $string = openssl_random_pseudo_bytes(ceil($length));
-    $string = base64_encode($string);
-    $string = str_replace(['/', '+', '='], '', $string);
-    $string = substr($string, 0, $length);
-
-    return $string;
-}
-
-/**
- * Haszuje hasło
- */
-function hashPassword($securePassword)
-{
-    $config = getConfig();
-
-    $saltedPassword = $securePassword.$config['password']['staticSalt'];
-    $passwordHash = password_hash($saltedPassword, PASSWORD_DEFAULT, $config['password']['options']);
-
-    return $passwordHash;
-}
-
-/**
- * Sprawdza poprawność hasła i hasza
- */
-function verifyPassword($securePassword, $passwordHash)
-{
-    $password = $securePassword.getConfig()['password']['staticSalt'];
-
-    return password_verify($password, $passwordHash);
-}
-
-/**
  * Wyszukuje wszystkie pliki rekursywnie w katalogu
  */
 function rglob($pattern, $flags = 0)
@@ -102,14 +66,6 @@ function rglob($pattern, $flags = 0)
     }
 
     return $files;
-}
-
-/**
- * Sprawdza czy zadany string jest SHA1
- */
-function isSha1($string)
-{
-    return (bool) preg_match('/^[0-9a-f]{40}$/i', $string);
 }
 
 /**
@@ -132,30 +88,6 @@ function inputValue($postName, $default = '')
     }
 
     return $default;
-}
-
-/**
- * Pomocnicza funkcja do generowania linku htmla
- */
-function makeLink($href, $name)
-{
-    return sprintf(' <a href="%s">%s</a> ', url($href), e($name));
-}
-
-/**
- * Sprawdza czy wysłane żądanie jest POSTem
- */
-function isPost()
-{
-    return $_SERVER['REQUEST_METHOD'] === 'POST';
-}
-
-/**
- * Sprawdza czy wysłane żądanie jest AJAXem
- */
-function isXHR()
-{
-    return (isset($_SERVER['HTTP_X_REQUESTED_WITH']) and strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
 }
 
 /**
@@ -219,73 +151,11 @@ function relativePath($absolutePath)
 }
 
 /**
- * Przekierowuje na zadany adres
- */
-function redirect($location, $code = 303)
-{
-    http_response_code($code);
-    header("Location: ".url($location));
-
-    GC\Logger::redirect(sprintf("%s %s :: ExecutionTime: %s",
-        $code,
-        $location,
-        (microtime(true) - START_TIME)
-    ));
-
-    die();
-}
-
-/**
- * Przekierowuje na adres z ktorego nastąpiło wejście lub na podany w parametrze
- */
-function redirectToRefererOrDefault($defaultLocation, $code = 303)
-{
-    if (isset($_SERVER['HTTP_REFERER'])) {
-        $referer = $_SERVER['HTTP_REFERER'];
-        $referer = parse_url($referer, PHP_URL_PATH);
-        redirect($referer, $code);
-    }
-
-    redirect($defaultLocation, $code);
-}
-
-/**
  * Tłumaczy wprowadzony ciąg na inny znaleziony w plikach tłumaczeń
  */
 function trans($text, array $params = [])
 {
     return e(GC\Translator::getInstance()->translate($text, $params));
-}
-
-/**
- * Pomocnicza, tworzy wrapper dla renderowania pliku w akcjach
- */
-function view($templateName, array $arguments = [])
-{
-    global $config;
-    global $surl;
-
-    extract($arguments, EXTR_OVERWRITE);
-
-    ob_start();
-    require ACTIONS_PATH.$templateName;
-
-    return ob_get_clean();
-}
-
-/**
- * Pomocnicza, tworzy wrapper dla renderowania pliku szablonu
- */
-function templateView($templateName, array $arguments = [])
-{
-    global $config;
-
-    extract($arguments, EXTR_OVERWRITE);
-
-    ob_start();
-    require TEMPLATE_PATH.$templateName;
-
-    return ob_get_clean();
 }
 
 /**
@@ -399,11 +269,11 @@ function array_unchunk($array)
  */
 function generateThumb($imageUrl)
 {
-    $token = pseudoRandom(40);
+    $token = GC\Password::random(40);
     $imageUrl64 = base64_encode($imageUrl);
     $_SESSION['generateThumb'][$imageUrl] = $token;
 
-    return rootUrl("/thumb/$imageUrl64/$token");
+    return GC\Url::root("/thumb/$imageUrl64/$token");
 }
 
 /**

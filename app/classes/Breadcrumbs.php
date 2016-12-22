@@ -46,7 +46,7 @@ class Breadcrumbs
     {
         return array(
             'title' => $title,
-            'url' => url($url),
+            'url' => $url,
             'icon' => $icon,
         );
     }

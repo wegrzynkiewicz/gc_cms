@@ -68,7 +68,7 @@ class Mail extends PHPMailer
 
     public function push()
     {
-        $this->hash = pseudoRandom(40);
+        $this->hash = GC\Password::random(40);
         MailToSend::insert([
             'mail_hash' => $this->hash,
             'receivers' => implode('; ', array_keys($this->all_recipients)),

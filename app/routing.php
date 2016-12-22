@@ -1,70 +1,17 @@
 <?php
 
-/* Ładowanie odpowiednią akcję */
+/** Plik ładuje odpowiednią akcję poprzez warunki routingu */
 
-$request = '/'.trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
-$requestQuery = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
-$rootUrl = dirname($_SERVER['SCRIPT_NAME']);
-$method = strtoupper($_SERVER['REQUEST_METHOD']);
-
-GC\Logger::request(sprintf("%s %s", $method, trim("$request?$requestQuery", '?')), $_REQUEST);
-
-# jeżeli aplikacja jest zainstalowana w katalogu, wtedy pomiń adres katalogu
-if ($rootUrl and strpos($request, $rootUrl) === 0) {
-    $request = substr($request, strlen($rootUrl));
-    define('ROOT_URL', $rootUrl);
-} else {
-    define('ROOT_URL', '');
-}
-
-# jeżeli adres zawiera front controller, wtedy go usuń
-$frontController = '/index.php';
-if (strpos($request, $frontController) === 0) {
-    $request = substr($request, strlen($frontController));
-    define('FRONT_CONTROLLER_URL', $frontController);
-} else {
-    define('FRONT_CONTROLLER_URL', '');
-}
-
-# jeżeli strona jest w budowie wtedy zwróć komunikat o budowie, chyba, że masz uprawnienie :)
-if ($config['inConstruction']) {
-    if (isset($_GET['you-shall-not-pass'])) {
-        $_SESSION['allowInConstruction'] = true;
-    }
-    if (!isset($_SESSION['allowInConstruction'])) {
-        $constructionPath = TEMPLATE_PATH.'/errors/construction.html.php';
-        if (is_readable(TEMPLATE_PATH.'/errors/construction.html.php')) {
-            return require $constructionPath;
-        }
-        http_response_code(503);
-    }
-}
-
-# sprawdzana jest weryfikacja csrf tokenu, chroni przed spreparowanymi żądaniami
-if (isPost() and isset($_SESSION['csrf_token'])) {
-    if (isset($_SERVER['HTTP_X_CSRFTOKEN']) && $_SERVER['HTTP_X_CSRFTOKEN'] === $_SESSION['csrf_token']) {
-        GC\Logger::csrf("Token verified via header");
-    } elseif (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
-        GC\Logger::csrf("Token verified via request");
-    } else {
-        GC\Logger::csrf("Invalid token");
-        return http_response_code(403);
-    }
-}
-
-# jeżeli token nie istnieje wtedy go utwórz
-if (!isset($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = pseudoRandom(80);
-}
+$path = $request->path;
 
 # jeżeli adres bez ścieżki wtedy załaduj akcję główną
-if (empty(trim($request, '/'))) {
+if (empty(trim($path, '/'))) {
     GC\Logger::routing("Homepage");
 
-    return require_once ACTIONS_PATH.'/homepage.php';
+    return require ACTIONS_PATH.'/homepage.php';
 }
 
-$_SEGMENTS = explode('/', trim($request, '/'));
+$_SEGMENTS = explode('/', trim($path, '/'));
 
 # sprawdza pierwszy segment w adresie czy nie jest jednym z dostępnych języków
 unset($_SESSION['lang']['routing']);
@@ -82,59 +29,60 @@ if (strlen($_SEGMENTS[0]) == 2) {
 if (count($_SEGMENTS) === 0) {
     GC\Logger::routing("Homepage with lang");
 
-    return require_once ACTIONS_PATH.'/homepage.php';
+    return require ACTIONS_PATH.'/homepage.php';
 }
 
 # jeżeli któryś z niestandardowych rewritów okaże się pasować, wtedy przekieruj na właściwy adres
-$fullRequest = rtrim("$request?$requestQuery", '?');
+$fullRequest = rtrim("{$path}?{$request->query}", '?');
 foreach ($config['rewrites'] as $pattern => $destination) {
     if (preg_match($pattern, $fullRequest)) {
         $result = preg_replace($pattern, $destination, $fullRequest);
         GC\Logger::routing("Custom rewrite :: $result", [$fullRequest, $pattern, $destination]);
-        redirect($result, 301); # 301 Moved Permanently
+        GC\Response::redirect($result, 301); # 301 Moved Permanently
     }
 }
 
 # wyszukaj plik w katalogu /actions, który pasuje do adresu url
-$path = ACTIONS_PATH;
+$action = ACTIONS_PATH;
 $copySegments = $_SEGMENTS;
 while (count($_SEGMENTS) > 0) {
     $segment = array_shift($_SEGMENTS);
-    $path .= '/'.$segment;
+    $action .= '/'.$segment;
 
     # jeżeli istnieje plik "import" to załaduj, ale nie kończ pętli
-    $file = $path.'/_import.php';
+    $file = $action.'/_import.php';
     if (file_exists($file)) {
         GC\Logger::import(relativePath($file));
-        require_once $file;
+
+        return require $file;
     }
 
-    $file = $path.'.php';
+    $file = $action.'.php';
     if (file_exists($file)) {
         GC\Logger::routing("Nested :: ".relativePath($file));
 
-        return require_once $file;
+        return require $file;
     }
 
-    if (!is_dir($path)) {
+    if (!is_dir($action)) {
 
         # jeżeli nie istnieje akcja to spróbuj załadować plik start w katalogu końcowym
-        $file = dirname($path).'/start.php';
+        $file = dirname($action).'/start.php';
         if (file_exists($file)) {
             GC\Logger::routing("Start with segments :: ".relativePath($file));
 
-            return require_once $file;
+            return require $file;
         }
         break;
     }
 }
 
 # jeżeli nie istnieje akcja to spróbuj załadować plik start w katalogu końcowym
-$file = $path.'/start.php';
+$file = $action.'/start.php';
 if (file_exists($file)) {
     GC\Logger::routing("Start without segments :: ".relativePath($file));
 
-    return require_once $file;
+    return require $file;
 }
 
 $_SEGMENTS = $copySegments;
@@ -148,7 +96,7 @@ $customFile = TEMPLATE_PATH."/custom/$slug.html.php";
 if (file_exists($customFile)) {
     GC\Logger::routing("Custom slug :: ".relativePath($customFile));
 
-    return require_once $customFile;
+    return require $customFile;
 }
 
 # jeżeli nie istnieje ostatni parametr wtedy zamień sluga na id strony
@@ -158,7 +106,7 @@ $id = intval(count($_SEGMENTS) === 0 ? $slug : array_shift($_SEGMENTS));
 if ($id <= 0) {
     GC\Logger::routing("Error invalid ID :: 404");
 
-    return require_once TEMPLATE_PATH."/errors/404.html.php";
+    return require TEMPLATE_PATH.'/errors/404.html.php';
 }
 
 # jeżeli istnieje niestandardowy plik w folderze z szablonem
@@ -166,10 +114,10 @@ $customFile = TEMPLATE_PATH."/custom/$id.html.php";
 if (file_exists($customFile)) {
     GC\Logger::routing("Custom id :: ".relativePath($customFile));
 
-    return require_once $customFile;
+    return require $customFile;
 }
 
 # jeżeli żaden plik nie pasuje, wtedy wyświetl błąd 404
 GC\Logger::routing("Endpoint error 404");
 
-return require_once TEMPLATE_PATH."/errors/404.html.php";
+return require TEMPLATE_PATH.'/errors/404.html.php';

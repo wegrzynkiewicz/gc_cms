@@ -34,11 +34,11 @@ class Menu extends Node
         }
 
         if ($this->type === 'homepage') {
-            $href = rootUrl("/");
+            $href = GC\Url::root("/");
         }
 
         if ($this->type === 'page') {
-            $href = rootUrl("/page/".$this->destination);
+            $href = GC\Url::root("/page/".$this->destination);
         }
 
         if ($this->type === 'external') {
