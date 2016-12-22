@@ -1,6 +1,6 @@
-/data
-/assets/admin/images
+/composer.lock
 /external
 /tmp
 /vendor/
-/composer.lock
+/web/data
+/web/assets/admin/images
