@@ -10,4 +10,4 @@ if ($image_id) {
     GC\Model\GalleryImage::deleteByPrimaryId($image_id);
 }
 
-redirect("/admin/gallery/images/list/$gallery_id");
+GC\Response::redirect("/admin/gallery/images/list/$gallery_id");

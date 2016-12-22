@@ -8,20 +8,20 @@
     </a>
     <ul class="dropdown-menu dropdown-user">
         <li>
-            <a href="<?=url('/admin/account/profil')?>">
+            <a href="<?=GC\Url::make('/admin/account/profil')?>">
                 <i class="fa fa-user fa-fw"></i>
                 <?=trans('Profil użytkownika')?>
             </a>
         </li>
         <li>
-            <a href="<?=url('/admin/account/change-password')?>">
+            <a href="<?=GC\Url::make('/admin/account/change-password')?>">
                 <i class="fa fa-unlock-alt fa-fw"></i>
                 <?=trans('Zmień hasło')?>
             </a>
         </li>
         <li class="divider"></li>
         <li>
-            <a href="<?=url("/admin/account/logout")?>">
+            <a href="<?=GC\Url::make("/admin/account/logout")?>">
                 <i class="fa fa-sign-out fa-fw"></i>
                 <?=trans('Wyloguj się')?>
             </a>

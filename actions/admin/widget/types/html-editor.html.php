@@ -10,7 +10,7 @@ if (isPost()) {
 
     setNotice(trans('Widżet formatowanego tekstu "%s" został zaktualizowany.', [$widget['name']]));
 
-    redirect($breadcrumbs->getBeforeLastUrl());
+    GC\Response::redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 $_POST['content'] = $content;
@@ -22,12 +22,12 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
     <div class="col-lg-12">
         <form action="" method="post" class="form-horizontal">
 
-            <?=view('/admin/parts/input/textarea.html.php', [
+            <?=GC\Render::action('/admin/parts/input/textarea.html.php', [
                 'name' => 'content',
                 'label' => 'Treść widżetu',
             ])?>
 
-            <?=view('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz zmiany',
             ])?>
 

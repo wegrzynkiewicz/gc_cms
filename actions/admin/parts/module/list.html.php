@@ -4,7 +4,7 @@ if (isPost()) {
     $grid = json_decode($_POST['grid'], true);
     GC\Model\ModulePosition::updateGridByFrameId($frame_id, $grid);
 
-    redirect($breadcrumbs->getBeforeLastUrl());
+    GC\Response::redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 $modules = GC\Model\Module::joinAllWithKeyByForeign($frame_id);
@@ -75,7 +75,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                         </button>
                                     </div>
                                     <div class="panel-body">
-                                        <?=view(sprintf('/admin/parts/module/types/%s/grid-item-preview.html.php', $module['type']), [
+                                        <?=GC\Render::action(sprintf('/admin/parts/module/types/%s/grid-item-preview.html.php', $module['type']), [
                                             'module_id' => $module['module_id'],
                                             'module' => $module,
                                             'content' => $module['content'],
@@ -89,7 +89,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 </div>
             <?php endif ?>
 
-            <?=view('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz pozycje kafelków',
             ])?>
 

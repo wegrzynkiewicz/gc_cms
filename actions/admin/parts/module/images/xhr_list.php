@@ -16,7 +16,7 @@ $files = GC\Model\ModuleFile::joinAllWithKeyByForeign($module_id);
 <?php else: ?>
     <div id="sortable">
         <?php foreach ($files as $file_id => $image): ?>
-            <?=view('/admin/parts/module/images/xhr_list-item.html.php', [
+            <?=GC\Render::action('/admin/parts/module/images/xhr_list-item.html.php', [
                 'file_id' => $file_id,
                 'image' => $image,
             ])?>

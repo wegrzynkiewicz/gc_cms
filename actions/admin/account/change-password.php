@@ -13,19 +13,19 @@ if (isPost()) {
 
     if (strlen($newPassword) < $config['password']['minLength']) {
         $error = trans('Hasło nie może być krótsze niż %s znaków', $config['password']['minLength']);
-    } elseif (!verifyPassword($oldPassword, $user['password'])) {
+    } elseif (!GC\Password::verify($oldPassword, $user['password'])) {
         $error = trans('Stare hasło nie zgadza się z obecnym hasłem');
     } elseif ($newPassword !== $confirmPassword) {
         $error = trans('Podane nowe hasła nie są identyczne');
     } else {
 
         GC\Model\Staff::updateByPrimaryId($user['staff_id'], [
-            'password' => hashPassword($newPassword),
+            'password' => GC\Password::hash($newPassword),
         ]);
 
         $_SESSION['flash-notice'] = trans("Twoje hasło zostało zmienione");
 
-        redirect($breadcrumbs->getBeforeLastUrl());
+        GC\Response::redirect($breadcrumbs->getBeforeLastUrl());
     }
 }
 
@@ -44,21 +44,21 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                     </div>
                 <?php endif ?>
 
-                <?=view('/admin/parts/input/editbox.html.php', [
+                <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
                     'name' => 'old_password',
                     'type' => 'password',
                     'label' => 'Stare hasło',
                     'help' => 'Wprowadź swoje stare hasło dla bezpieczeństwa',
                 ])?>
 
-                <?=view('/admin/parts/input/editbox.html.php', [
+                <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
                     'name' => 'new_password',
                     'type' => 'password',
                     'label' => 'Nowe hasło',
                     'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', $config['password']['minLength']),
                 ])?>
 
-                <?=view('/admin/parts/input/editbox.html.php', [
+                <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
                     'name' => 'confirm_password',
                     'type' => 'password',
                     'label' => 'Powtórz nowe hasło',
@@ -66,7 +66,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                 ])?>
             </div>
 
-            <?=view('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zmień hasło',
             ])?>
 

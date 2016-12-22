@@ -21,7 +21,7 @@ if(isPost()) {
 
     setNotice(trans('Pole "%s" zostało utworzone.', [$_POST['name']]));
 
-	redirect($breadcrumbs->getBeforeLastUrl());
+	GC\Response::redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 require ACTIONS_PATH.'/admin/form/field/form.html.php';

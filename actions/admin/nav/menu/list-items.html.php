@@ -27,7 +27,7 @@
             <?php endif ?>
 
             <div class="pull-right" style="margin-right: 30px">
-                <?=view('/admin/nav/menu/list-preview/'.$node['type'].'.html.php', [
+                <?=GC\Render::action('/admin/nav/menu/list-preview/'.$node['type'].'.html.php', [
                     'node' => $node,
                     'pages' => $pages,
                 ])?>
@@ -38,7 +38,7 @@
 
         <?php if ($node->hasChildren()): ?>
             <ol>
-                <?=view('/admin/nav/menu/list-items.html.php', [
+                <?=GC\Render::action('/admin/nav/menu/list-items.html.php', [
                     'menu' => $node,
                     'pages' => $pages,
                 ])?>

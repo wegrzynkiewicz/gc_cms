@@ -6,19 +6,19 @@
         <form action="" method="post" id="form" class="form-horizontal">
 
             <div class="simple-box">
-                <?=view('/admin/parts/input/editbox.html.php', [
+                <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
                     'label' => 'Nazwa pola',
                 ])?>
 
-                <?=view('/admin/parts/input/editbox.html.php', [
+                <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
                     'name' => 'help',
                     'label' => 'Krótki opis',
                     'help' => 'Warto poinstruować użytkownika co należy wpisać w to pole.',
                 ])?>
 
                 <?php if ($field_id == 0): ?>
-                    <?=view('/admin/parts/input/selectbox.html.php', [
+                    <?=GC\Render::action('/admin/parts/input/selectbox.html.php', [
                         'name' => 'type',
                         'label' => 'Typ pola',
                         'help' => 'Typ pola określa jego wygląd i zachowanie. Typu nie można później zmienić.',
@@ -36,7 +36,7 @@
                 </div>
             </div>
 
-            <?=view('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz węzeł',
             ])?>
 

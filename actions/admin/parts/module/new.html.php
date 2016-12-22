@@ -13,7 +13,7 @@ if(isPost()) {
 
     setNotice(trans("%s został utworzony. Edytujesz go teraz.", [$config['modules'][$moduleType]['name']]));
 
-    redirect($surl("/{$module_id}/edit"));
+    GC\Response::redirect($surl("/{$module_id}/edit"));
 }
 
 require ACTIONS_PATH.'/admin/parts/header.html.php';
@@ -41,7 +41,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                 <?php endforeach ?>
             </div>
 
-            <?=view('/admin/parts/input/submitButtons.html.php')?>
+            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php')?>
 
         </form>
     </div>

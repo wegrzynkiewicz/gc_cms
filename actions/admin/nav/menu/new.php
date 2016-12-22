@@ -13,7 +13,7 @@ if(isPost()) {
         'target' => isset($_POST['target']) ? $_POST['target'] : '_self',
     ], $nav_id);
 
-	redirect($breadcrumbs->getBeforeLastUrl());
+	GC\Response::redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 require ACTIONS_PATH.'/admin/nav/menu/form.html.php';

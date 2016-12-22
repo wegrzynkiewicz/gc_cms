@@ -14,7 +14,7 @@
 
     <td class="text-right">
 
-        <a href="<?=url("/page/$page_id")?>"
+        <a href="<?=GC\Url::make("/page/$page_id")?>"
             target="_blank"
             title="<?=trans('Podejrzyj tą stronę')?>"
             class="btn btn-primary btn-sm">

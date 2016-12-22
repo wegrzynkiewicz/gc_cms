@@ -77,7 +77,7 @@ $opts = array(
         array(
             'driver'        => 'LocalFileSystem',               // driver for accessing file system (REQUIRED)
             'path'          => ROOT_PATH.'/data/uploads/',      // path to files (REQUIRED)
-            'URL'           => rootUrl('/data/uploads/'),       // URL to files (REQUIRED)
+            'URL'           => GC\Url::root('/data/uploads/'),   // URL to files (REQUIRED)
             'uploadDeny'    => array('all'),                    // All Mimetypes not allowed to upload
                                                                 // Mimetype `image` and `text/plain` allowed to upload
             'uploadAllow'   => array('image', 'text/plain', 'application/zip', 'application/rar', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'),

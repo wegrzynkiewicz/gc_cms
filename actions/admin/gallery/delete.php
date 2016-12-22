@@ -11,4 +11,4 @@ if (isPost()) {
     });
 }
 
-redirect('/admin/gallery/list');
+GC\Response::redirect('/admin/gallery/list');

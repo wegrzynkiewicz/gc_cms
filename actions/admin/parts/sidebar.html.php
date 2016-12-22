@@ -155,7 +155,7 @@ $menu = [
                 </div>
             </li> -->
 
-            <?=view('/admin/parts/sidebar-item.html.php', [
+            <?=GC\Render::action('/admin/parts/sidebar-item.html.php', [
                 'menu' => $menu,
                 'staff' => $staff,
                 'level' => 'nav nav-second-level',

@@ -9,7 +9,7 @@ if (isPost()) {
         'theme' => 'default',
     ]);
 
-    redirect($breadcrumbs->getBeforeLastUrl());
+    GC\Response::redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 
@@ -22,12 +22,12 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
     <div class="col-lg-12">
         <form action="" method="post" class="form-horizontal">
 
-            <?=view('/admin/parts/input/textarea.html.php', [
+            <?=GC\Render::action('/admin/parts/input/textarea.html.php', [
                 'name' => 'content',
                 'label' => 'Treść modułu',
             ])?>
 
-            <?=view('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz moduł tekstowy',
             ])?>
 

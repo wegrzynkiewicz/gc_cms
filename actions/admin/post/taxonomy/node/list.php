@@ -7,7 +7,7 @@ if (isPost()) {
     });
     GC\Model\PostTree::update($tax_id, $positions);
 
-    redirect("/admin/post/taxonomy/list");
+    GC\Response::redirect("/admin/post/taxonomy/list");
 }
 
 $tree = GC\Model\PostNode::buildTreeWithFrameByTaxonomyId($tax_id);
@@ -36,7 +36,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             <input name="positions" type="hidden"/>
             <?php if ($tree->hasChildren()):?>
                 <ol id="sortable" class="sortable">
-                    <?=view('/admin/post/taxonomy/node/list-item.html.php', [
+                    <?=GC\Render::action('/admin/post/taxonomy/node/list-item.html.php', [
                         'tree' => $tree,
                     ])?>
                 </ol>
@@ -45,7 +45,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     <?=trans('Brak węzłów w %s', [$taxonomy['name']])?>
                 </div>
             <?php endif?>
-            <?=view('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz pozycję',
             ])?>
         </form>

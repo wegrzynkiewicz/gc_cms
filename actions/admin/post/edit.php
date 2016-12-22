@@ -19,7 +19,7 @@ if (isPost()) {
 
     setNotice(trans('Wpis "%s" został zaktualizowany.', [$post['name']]));
 
-    redirect($breadcrumbs->getBeforeLastUrl());
+    GC\Response::redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 $_POST = $post;

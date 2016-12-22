@@ -8,7 +8,7 @@ if (isPost()) {
         'theme' => 'default',
     ]);
 
-    redirect($breadcrumbs->getBeforeLastUrl());
+    GC\Response::redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 $_POST['content'] = $content;
@@ -41,7 +41,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
             <div id="items"></div>
 
-            <?=view('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz położenie zakładek',
             ])?>
         </form>
@@ -136,7 +136,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 $(function(){
 
     function refreshItems() {
-        $.post("<?=url("/admin/parts/module/{$module_id}/types/tabs/xhr_item-list")?>", {
+        $.post("<?=GC\Url::make("/admin/parts/module/{$module_id}/types/tabs/xhr_item-list")?>", {
             moduleUrl: "<?=$surl("/$module_id/item/%s/module/list")?>"
         }, function(data) {
             $('#items').html(data);
@@ -152,7 +152,7 @@ $(function(){
     });
 
     $('#addModal').on('show.bs.modal', function(e) {
-        var url = "<?=url("/admin/parts/module/types/tabs/xhr_item-add/$module_id")?>";
+        var url = "<?=GC\Url::make("/admin/parts/module/types/tabs/xhr_item-add/$module_id")?>";
         $.get(url, function(data) {
             $('#addModalContent').html(data);
             $('#addModalForm').attr('action', url);
@@ -168,7 +168,7 @@ $(function(){
     });
 
     $('#editModal').on('show.bs.modal', function(e) {
-        var url = "<?=url("/admin/parts/module/types/tabs/xhr_item-edit")?>/"+$(e.relatedTarget).data('id');
+        var url = "<?=GC\Url::make("/admin/parts/module/types/tabs/xhr_item-edit")?>/"+$(e.relatedTarget).data('id');
         $.get(url, function(data) {
             $('#editModalContent').html(data);
             $('#editModalForm').attr('action', url);
@@ -177,7 +177,7 @@ $(function(){
 
     $('#deleteModalForm').on('submit', function(e) {
         e.preventDefault();
-        $.post("<?=url("/admin/parts/module/items/xhr_delete")?>", $(this).serialize(), function() {
+        $.post("<?=GC\Url::make("/admin/parts/module/items/xhr_delete")?>", $(this).serialize(), function() {
             refreshItems();
             $('#deleteModal').modal('hide');
         });
@@ -189,7 +189,7 @@ $(function(){
     });
 
     $("#sortableForm").submit(function(e) {
-        $.post("<?=url("/admin/parts/module/items/xhr_sort/$module_id")?>", {
+        $.post("<?=GC\Url::make("/admin/parts/module/items/xhr_sort/$module_id")?>", {
             positions: $("#sortable").sortable("toArray")
         });
     });

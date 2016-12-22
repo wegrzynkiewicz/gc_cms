@@ -4,7 +4,7 @@
             <span class="hidden-xs">
                 <?=trans('Edytuj: ')?>
             </span>
-            <?=view('/admin/parts/language.html.php', [
+            <?=GC\Render::action('/admin/parts/language.html.php', [
                 'lang' => $_SESSION['lang']['editor']
             ])?>
             <b class="caret"></b>
@@ -12,8 +12,8 @@
         <ul class="dropdown-menu dropdown-user">
             <?php foreach ($config['langs'] as $lang => $label): ?>
                 <li>
-                    <a href="<?=url("/admin/account/change-editor-lang/$lang")?>">
-                        <?=view('/admin/parts/language.html.php', [
+                    <a href="<?=GC\Url::make("/admin/account/change-editor-lang/$lang")?>">
+                        <?=GC\Render::action('/admin/parts/language.html.php', [
                             'lang' => $lang
                         ])?>
                     </a>

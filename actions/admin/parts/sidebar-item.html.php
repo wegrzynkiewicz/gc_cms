@@ -1,7 +1,7 @@
 <?php foreach($menu as $name => $node): ?>
     <?php if (empty($node['perms']) or $staff->hasPermissions($node['perms'])): ?>
         <li>
-            <a href="<?=url($node['path'])?>" id="nav_<?=e($node['id'])?>">
+            <a href="<?=GC\Url::make($node['path'])?>" id="nav_<?=e($node['id'])?>">
 
                 <?php if (isset($node['icon'])): ?>
                     <i class="<?=e($node['icon'])?>"></i>
@@ -22,7 +22,7 @@
 
             <?php if (isset($node['children'])): ?>
                 <ul class="<?=e($level)?> collapse">
-                    <?=view('/admin/parts/sidebar-item.html.php', [
+                    <?=GC\Render::action('/admin/parts/sidebar-item.html.php', [
                         'menu' => $node['children'],
                         'staff' => $staff,
                         'level' => 'nav nav-third-level'

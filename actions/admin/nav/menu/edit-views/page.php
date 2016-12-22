@@ -9,7 +9,7 @@ $pageOptions = GC\Model\Page::mapFramesWithPrimaryKeyBy('name');
 
 ?>
 
-<?=view('/admin/parts/input/selectbox.html.php', [
+<?=GC\Render::action('/admin/parts/input/selectbox.html.php', [
     'name' => 'destination',
     'label' => 'Strona',
     'help' => 'Wybierz stronę do której wezeł ma kierować',
@@ -17,7 +17,7 @@ $pageOptions = GC\Model\Page::mapFramesWithPrimaryKeyBy('name');
     'firstOption' => 'Wybierz stronę',
 ])?>
 
-<?=view('/admin/parts/input/selectbox.html.php', [
+<?=GC\Render::action('/admin/parts/input/selectbox.html.php', [
     'name' => 'target',
     'label' => 'Sposób załadowania adresu',
     'options' => $config['navNodeTargets'],

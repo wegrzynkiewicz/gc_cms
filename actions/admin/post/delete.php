@@ -8,4 +8,4 @@ if (isPost()) {
     setNotice(trans('Wpis "%s" został usunięty.', [$post['name']]));
 }
 
-redirect($breadcrumbs->getLastUrl());
+GC\Response::redirect($breadcrumbs->getLastUrl());

@@ -9,4 +9,4 @@ if (isPost()) {
     setNotice(trans('Strona "%s" została usunięta.', [$page['name']]));
 }
 
-redirect($breadcrumbs->getLastUrl());
+GC\Response::redirect($breadcrumbs->getLastUrl());

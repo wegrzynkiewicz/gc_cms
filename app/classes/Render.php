@@ -31,8 +31,6 @@ class Render
      */
     public static function __callStatic($methodName, array $arguments)
     {
-        print_r($GLOBALS);
-
         if (!isset(static::$shortcuts[$methodName])) {
             throw new RuntimeException("Not found shortcut named ({$methodName})");
         }

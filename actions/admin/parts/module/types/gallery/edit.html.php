@@ -8,7 +8,7 @@ if (isPost()) {
         'theme' => $_POST['theme'],
     ]);
 
-    redirect($breadcrumbs->getBeforeLastUrl());
+    GC\Response::redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 $_POST = $module;
@@ -36,7 +36,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
         <form id="sortableForm" action="" method="post" class="form-horizontal">
 
             <div class="simple-box">
-                <?=view('/admin/parts/input/selectbox.html.php', [
+                <?=GC\Render::action('/admin/parts/input/selectbox.html.php', [
                     'name' => 'theme',
                     'label' => 'Szablon',
                     'help' => 'Wybierz jeden z dostępnych szablonów galerii',
@@ -46,7 +46,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
             <div id="images" class="row"></div>
 
-            <?=view('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz',
             ])?>
 
@@ -113,7 +113,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 $(function() {
 
     function refreshImages() {
-        $.get("<?=url("/admin/parts/module/images/xhr_list/$module_id")?>", function(data) {
+        $.get("<?=GC\Url::make("/admin/parts/module/images/xhr_list/$module_id")?>", function(data) {
             $('#images').html(data);
         });
     }
@@ -127,7 +127,7 @@ $(function() {
     });
 
     $('#editModal').on('show.bs.modal', function(e) {
-        var url = "<?=url("/admin/parts/module/types/gallery/xhr_image-edit")?>/"+$(e.relatedTarget).data('id');
+        var url = "<?=GC\Url::make("/admin/parts/module/types/gallery/xhr_image-edit")?>/"+$(e.relatedTarget).data('id');
         $.get(url, function(data) {
             $('#editModalContent').html(data);
             $('#editModalForm').attr('action', url);
@@ -136,7 +136,7 @@ $(function() {
 
     $('#deleteModalForm').on('submit', function(e) {
         e.preventDefault();
-        $.post("<?=url("/admin/parts/module/images/xhr_delete")?>", $(this).serialize(), function() {
+        $.post("<?=GC\Url::make("/admin/parts/module/images/xhr_delete")?>", $(this).serialize(), function() {
             refreshImages();
             $('#deleteModal').modal('hide');
         });
@@ -147,7 +147,7 @@ $(function() {
     });
 
     $("#sortableForm").submit(function(event) {
-        $.post("<?=url("/admin/parts/module/images/xhr_sort/$module_id")?>", {
+        $.post("<?=GC\Url::make("/admin/parts/module/images/xhr_sort/$module_id")?>", {
             positions: $("#sortable").sortable("toArray")
         });
     });
@@ -155,7 +155,7 @@ $(function() {
     $('#select_images').elfinderInputMultiple({
         title: '<?=trans('Wybierz wiele zdjęć')?>'
     }, function(urls) {
-        $.post("<?=url("/admin/parts/module/images/xhr_new/$module_id")?>", {
+        $.post("<?=GC\Url::make("/admin/parts/module/images/xhr_new/$module_id")?>", {
             urls: urls
         }, function() {
             refreshImages();

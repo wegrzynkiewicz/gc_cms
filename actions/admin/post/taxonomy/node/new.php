@@ -21,7 +21,7 @@ if(isPost()) {
 
     setNotice(trans('Nowy węzeł "%s" dostał dodany do "%s".', [$_POST['name'], $taxonomy['name']]));
 
-    redirect($breadcrumbs->getBeforeLastUrl());
+    GC\Response::redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 require ACTIONS_PATH.'/admin/post/taxonomy/node/form.html.php';

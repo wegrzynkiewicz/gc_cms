@@ -69,18 +69,14 @@ if (!isset($_SESSION['csrf_token'])) {
 }
 
 GC\Render::$extract = [
-    'config',
-    'trans' => 'trans',
-    'url' => ['GC\Url', 'make'],
-    'assets' => ['GC\Url', 'assets'],
-    'templateAssetsUrl' => ['GC\Url', 'templateAssets'],
+    'config' => $config,
 ];
 
 GC\Render::$shortcuts = [
     'action' => ROOT_PATH.'/actions',
-    'adminHelper' => ROOT_PATH.'/actions/admin/_helpers',
+    'adminPart' => ROOT_PATH.'/actions/admin/_parts',
     'template' => ROOT_PATH.'/templates/'.TEMPLATE,
-    'templateHelper' => ROOT_PATH.'/templates/'.TEMPLATE.'/_helpers',
+    'templatePart' => ROOT_PATH.'/templates/'.TEMPLATE.'/_parts',
 ];
 
 require __DIR__.'/routing.php';

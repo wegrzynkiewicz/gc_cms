@@ -6,12 +6,12 @@
         <form action="" method="post" id="form" class="form-horizontal">
 
             <div class="simple-box">
-                <?=view('/admin/parts/input/editbox.html.php', [
+                <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
                     'label' => 'Nazwa węzła',
                 ])?>
 
-                <?=view('/admin/parts/input/selectbox.html.php', [
+                <?=GC\Render::action('/admin/parts/input/selectbox.html.php', [
                     'name' => 'type',
                     'label' => 'Typ węzła',
                     'help' => 'Wybierz typ węzła nawigacji w menu',
@@ -26,7 +26,7 @@
                 </div>
             </div>
 
-            <?=view('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz węzeł',
             ])?>
 

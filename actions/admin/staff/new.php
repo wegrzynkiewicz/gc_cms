@@ -6,11 +6,11 @@ $breadcrumbs->push($request, $headTitle);
 if (isPost()) {
 
     $groups = isset($_POST['groups']) ? $_POST['groups'] : [];
-    $password = pseudoRandom($config['password']['minLength']);
+    $password = GC\Password::random($config['password']['minLength']);
 
     $staff_id = GC\Model\Staff::insertWithGroups([
         'name' => $_POST['name'],
-        'password' => hashPassword($password),
+        'password' => GC\Password::hash($password),
         'email' => $_POST['email'],
         'avatar' => $_POST['avatar'],
         'lang' => $config['lang']['clientDefault'],
@@ -29,7 +29,7 @@ if (isPost()) {
     $mail->addAddress($_POST['email']);
     $mail->send();
 
-    redirect($breadcrumbs->getBeforeLastUrl());
+    GC\Response::redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 $groups = [];

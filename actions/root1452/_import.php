@@ -1,11 +1,11 @@
 <?php
 
 if (!$config['debug']['enabled']) {
-    redirect('/');
+    GC\Response::redirect('/');
 }
 
 $staff = GC\Model\Staff::createFromSession();
 
 if (!$staff['root']) {
-    redirect('/');
+    GC\Response::redirect('/');
 }

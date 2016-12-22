@@ -6,7 +6,7 @@ if (isPost()) {
         return isset($node['id']);
     });
     GC\Model\FormPosition::updatePositionByFormId($form_id, $positions);
-    redirect($breadcrumbs->getBeforeLastUrl());
+    GC\Response::redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 $fields = GC\Model\FormField::selectAllByFormId($form_id);
@@ -39,12 +39,12 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             <?php else:?>
                 <input name="positions" type="hidden"/>
                 <ol id="sortable" class="sortable">
-                    <?=view('/admin/form/field/list-items.html.php', [
+                    <?=GC\Render::action('/admin/form/field/list-items.html.php', [
                         'fields' => $fields,
                     ])?>
                 </ol>
             <?php endif?>
-            <?=view('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz pozycję',
             ])?>
         </form>
@@ -53,7 +53,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=url("/delete")?>" class="modal-content">
+        <form id="deleteModalForm" method="post" action="<?=GC\Url::make("/delete")?>" class="modal-content">
             <input name="field_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

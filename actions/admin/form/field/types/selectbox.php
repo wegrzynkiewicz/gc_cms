@@ -18,7 +18,7 @@ if(isPost()) {
 
 <p><?=trans('Pole jednokrotnego wyboru wymaga wprowadzenia możliwych wyborów')?></p>
 
-<?=view('/admin/parts/input/select2-tags.html.php', [
+<?=GC\Render::action('/admin/parts/input/select2-tags.html.php', [
     'id' => 'options',
     'name' => 'options',
     'label' => 'Możliwe wybory',

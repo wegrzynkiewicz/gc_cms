@@ -11,7 +11,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
         <div class="simple-box">
             <?php if (empty($forms)): ?>
                 <?=trans('Nie znaleziono żadnego formularza w języku: ')?>
-                <?=view('/admin/parts/language.html.php')?>
+                <?=GC\Render::action('/admin/parts/language.html.php')?>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">
                     <thead>
@@ -52,7 +52,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                 </table>
             <?php endif ?>
         </div>
-        <?=view('/admin/parts/input/submitButtons.html.php')?>
+        <?=GC\Render::action('/admin/parts/input/submitButtons.html.php')?>
     </div>
 </div>
 

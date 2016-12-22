@@ -84,5 +84,5 @@ require TEMPLATE_PATH."/parts/header.html.php"; ?>
     </div>
 </div>
 
-<?php require TEMPLATE_PATH."/parts/assets.html.php"; ?>
+<?php require TEMPLATE_PATH."/parts/assets/footer.html.php"; ?>
 <?php require TEMPLATE_PATH."/parts/footer.html.php"; ?>

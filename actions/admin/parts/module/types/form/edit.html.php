@@ -14,7 +14,7 @@ if (isPost()) {
 
     setNotice(trans('Moduł formularza został zaktualizowany.'));
 
-    redirect($breadcrumbs->getBeforeLastUrl());
+    GC\Response::redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 $options = GC\Model\Form::mapCorrectWithPrimaryKeyBy('name');
@@ -34,7 +34,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
         <form action="" method="post" class="form-horizontal">
 
             <div class="simple-box">
-                <?=view('/admin/parts/input/selectbox.html.php', [
+                <?=GC\Render::action('/admin/parts/input/selectbox.html.php', [
                     'name' => 'form',
                     'label' => 'Formularz',
                     'help' => 'Wybierz formularz który ma zostać wyświetlony',
@@ -42,14 +42,14 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                     'firstOption' => 'Wybierz formularz',
                 ])?>
 
-                <?=view('/admin/parts/input/selectbox.html.php', [
+                <?=GC\Render::action('/admin/parts/input/selectbox.html.php', [
                     'name' => 'theme',
                     'label' => 'Szablon',
                     'help' => 'Wybierz jeden z dostępnych szablonów dla formularza',
                     'options' => $config['moduleThemes']['form'],
                 ])?>
 
-                <?=view('/admin/parts/input/select2-tags.html.php', [
+                <?=GC\Render::action('/admin/parts/input/select2-tags.html.php', [
                     'id' => 'emails',
                     'name' => 'emails',
                     'label' => 'Odbiorcy mailowi',
@@ -59,7 +59,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                 ])?>
             </div>
 
-            <?=view('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz moduł',
             ])?>
 

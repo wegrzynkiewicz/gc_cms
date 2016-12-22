@@ -10,7 +10,7 @@
 
             <div class="pull-right">
 
-                <a href="<?=url("/post/node/$node_id")?>"
+                <a href="<?=GC\Url::make("/post/node/$node_id")?>"
                     target="_blank"
                     title="<?=trans('Podejrzyj ten węzeł')?>"
                     class="btn btn-primary btn-xs">
@@ -41,7 +41,7 @@
 
         <?php if ($node->hasChildren()): ?>
             <ol>
-                <?=view('/admin/post/taxonomy/node/list-item.html.php', [
+                <?=GC\Render::action('/admin/post/taxonomy/node/list-item.html.php', [
                     'tree' => $node,
                 ])?>
             </ol>

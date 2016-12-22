@@ -16,7 +16,7 @@ if(isPost($_POST)) {
 
     setNotice(trans('Węzeł "%s" został zaktualizowany.', [$node['name']]));
 
-    redirect($breadcrumbs->getBeforeLastUrl());
+    GC\Response::redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 $_POST = $node;

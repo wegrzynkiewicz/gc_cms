@@ -9,22 +9,22 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
     <div class="col-lg-12">
         <form action="" method="post" id="form" class="form-horizontal">
             <div class="simple-box">
-                <?=view('/admin/parts/input/editbox.html.php', [
+                <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
                     'label' => 'Nazwa wpisu',
                 ])?>
 
-                <?=view('/admin/parts/input/editbox.html.php', [
+                <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
                     'name' => 'keywords',
                     'label' => 'Tagi i słowa kluczowe (meta keywords)',
                 ])?>
 
-                <?=view('/admin/parts/input/textarea.html.php', [
+                <?=GC\Render::action('/admin/parts/input/textarea.html.php', [
                     'name' => 'description',
                     'label' => 'Opis podstrony (meta description)',
                 ])?>
 
-                <?=view('/admin/parts/input/image.html.php', [
+                <?=GC\Render::action('/admin/parts/input/image.html.php', [
                     'name' => 'image',
                     'label' => 'Zdjęcie wyróżniające',
                     'placeholder' => 'Ścieżka do pliku zdjęcia',
@@ -35,7 +35,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                 <?php $tree = GC\Model\PostNode::buildTreeWithFrameByTaxonomyId($tax_id) ?>
                 <?php if ($tree->hasChildren()): ?>
                     <div class="simple-box">
-                        <?=view('/admin/parts/input/checkbox-tree.html.php', [
+                        <?=GC\Render::action('/admin/parts/input/checkbox-tree.html.php', [
                             'tree' => $tree,
                             'tax_id' => $tax_id,
                             'name' => sprintf('taxonomy[%s]', $tax_id),
@@ -47,7 +47,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                 <?php endif ?>
             <?php endforeach ?>
 
-            <?=view('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz wpis',
             ])?>
         </form>

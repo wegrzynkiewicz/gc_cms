@@ -1,6 +1,6 @@
 <?php
 $url = def($settings, 'url', null);
-$preview = $url ? rootUrl($url) : assetsUrl($config['noImageUrl']);
+$preview = $url ? GC\Url::root($url) : assetsUrl($config['noImageUrl']);
 ?>
 
 <div id="photo_<?=e($module_id)?>" class="text-center" data-gallery="photoswipe">

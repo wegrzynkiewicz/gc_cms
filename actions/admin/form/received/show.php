@@ -16,7 +16,7 @@ if(isPost()) {
 
     setNotice(trans('Status wiadomośći został zaktualizowany.'));
 
-	redirect($breadcrumbs->getBeforeLastUrl());
+	GC\Response::redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 $_POST = $message;
@@ -80,7 +80,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             </table>
 
             <div class="simple-box">
-                <?=view('/admin/parts/input/selectbox.html.php', [
+                <?=GC\Render::action('/admin/parts/input/selectbox.html.php', [
                     'name' => 'status',
                     'label' => 'Status',
                     'help' => 'Status wiadomości jest pomocny przy filtrowaniu wiadomości.',
@@ -90,7 +90,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 ])?>
             </div>
 
-            <?=view('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz status',
             ])?>
 

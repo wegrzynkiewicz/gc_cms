@@ -11,4 +11,4 @@ GC\Model\Module::deleteRecursiveByPrimaryId($module_id);
 
 setNotice(trans("%s został usunięty", [$config['modules'][$moduleType]['name']]));
 
-redirect($breadcrumbs->getLastUrl());
+GC\Response::redirect($breadcrumbs->getLastUrl());

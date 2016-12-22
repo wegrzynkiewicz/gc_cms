@@ -22,7 +22,7 @@ if (isPost()) {
         'settings' => json_encode($settings),
     ]);
 
-    redirect($breadcrumbs->getBeforeLastUrl());
+    GC\Response::redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 $_POST = $settings;
@@ -36,19 +36,19 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
         <form action="" method="post" class="form-horizontal">
 
             <div class="simple-box">
-                <?=view('/admin/parts/input/editbox.html.php', [
+                <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
                     'label' => 'Nazwa zdjęcia',
                 ])?>
 
-                <?=view('/admin/parts/input/image.html.php', [
+                <?=GC\Render::action('/admin/parts/input/image.html.php', [
                     'name' => 'url',
                     'label' => 'Zdjęcie',
                     'placeholder' => 'Ścieżka do pliku zdjęcia',
                 ])?>
             </div>
 
-            <?=view('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz moduł zdjęcia',
             ])?>
 

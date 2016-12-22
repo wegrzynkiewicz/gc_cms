@@ -22,7 +22,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=url("/admin/post/new")?>" type="button" class="btn btn-success btn-md">
+                <a href="<?=GC\Url::make("/admin/post/new")?>" type="button" class="btn btn-success btn-md">
                     <i class="fa fa-plus fa-fw"></i>
                     <?=trans('Dodaj nowy post')?>
                 </a>
@@ -39,7 +39,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
         <div class="simple-box">
             <?php if (empty($posts)): ?>
                 <?=trans('Nie znaleziono żadnych wpisów w języku: ')?>
-                <?=view('/admin/parts/language.html.php')?>
+                <?=GC\Render::action('/admin/parts/language.html.php')?>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">
                     <thead>
@@ -61,7 +61,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     </thead>
                     <tbody>
                         <?php foreach ($posts as $post_id => $post): ?>
-                            <?=view('/admin/post/list-item.html.php', [
+                            <?=GC\Render::action('/admin/post/list-item.html.php', [
                                 'post_id' => $post_id,
                                 'post' => $post,
                                 'taxonomies' => $taxonomies,
@@ -71,13 +71,13 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 </table>
             <?php endif ?>
         </div>
-        <?=view('/admin/parts/input/submitButtons.html.php')?>
+        <?=GC\Render::action('/admin/parts/input/submitButtons.html.php')?>
     </div>
 </div>
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=url("/admin/post/delete")?>" class="modal-content">
+        <form id="deleteModalForm" method="post" action="<?=GC\Url::make("/admin/post/delete")?>" class="modal-content">
             <input name="post_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

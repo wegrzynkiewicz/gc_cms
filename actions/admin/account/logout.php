@@ -24,9 +24,9 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                         </p>
 
                         <div class="btn-group btn-group-justified" style="margin-top:5px">
-                            <a href="<?=url("/")?>" class="btn btn-link">
+                            <a href="<?=GC\Url::make("/")?>" class="btn btn-link">
                                 <?=trans('Przejdź na stronę główną')?></a>
-                            <a href="<?=url("/auth/login")?>" class="btn btn-link">
+                            <a href="<?=GC\Url::make("/auth/login")?>" class="btn btn-link">
                             <?=trans('Wróć do logowania')?></a>
                         </div>
 

@@ -5,4 +5,4 @@ if (isPost()) {
     GC\Model\FormField::deleteByPrimaryId($field_id);
 }
 
-redirect($breadcrumbs->getLastUrl());
+GC\Response::redirect($breadcrumbs->getLastUrl());

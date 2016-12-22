@@ -84,7 +84,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 </table>
             <?php endif ?>
         </div>
-        <?=view('/admin/parts/input/submitButtons.html.php')?>
+        <?=GC\Render::action('/admin/parts/input/submitButtons.html.php')?>
     </div>
 </div>
 

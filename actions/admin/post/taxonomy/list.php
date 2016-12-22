@@ -10,7 +10,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
         <div class="simple-box">
             <?php if (empty($taxonomies)): ?>
                 <?=trans('Nie znaleziono podziałów wpisów w języku: ')?>
-                <?=view('/admin/parts/language.html.php')?>
+                <?=GC\Render::action('/admin/parts/language.html.php')?>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">
                     <thead>
@@ -26,7 +26,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                     </thead>
                     <tbody>
                         <?php foreach ($taxonomies as $tax_id => $taxonomy): ?>
-                            <?=view('/admin/post/taxonomy/list-item.html.php', [
+                            <?=GC\Render::action('/admin/post/taxonomy/list-item.html.php', [
                                 'tax_id' => $tax_id,
                                 'taxonomy' => $taxonomy,
                                 'tree' => GC\Model\PostNode::buildTreeWithFrameByTaxonomyId($tax_id),
@@ -36,7 +36,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                 </table>
             <?php endif ?>
         </div>
-        <?=view('/admin/parts/input/submitButtons.html.php')?>
+        <?=GC\Render::action('/admin/parts/input/submitButtons.html.php')?>
     </div>
 </div>
 

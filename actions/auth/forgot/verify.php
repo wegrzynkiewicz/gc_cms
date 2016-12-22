@@ -3,11 +3,11 @@
 $headTitle = trans("Resetowanie hasła");
 
 if (count($_SEGMENTS)<2) {
-    redirect('/admin');
+    GC\Response::redirect('/admin');
 }
 
 if (isset($_SESSION['staff'])) {
-    redirect('/admin');
+    GC\Response::redirect('/admin');
 }
 
 $email64 = array_shift($_SEGMENTS);
@@ -25,10 +25,10 @@ if ($user) {
         $message = trans("Link do zmiany hasła wygasł lub hasło zostało już zresetowane");
     } else {
 
-        $password = pseudoRandom($config['password']['minLength']);
+        $password = GC\Password::random($config['password']['minLength']);
 
         GC\Model\Staff::updateByPrimaryId($user['staff_id'], [
-            'password' => hashPassword($password),
+            'password' => GC\Password::hash($password),
             'force_change_password' => 1,
             'regeneration' => json_encode([]),
         ]);
@@ -72,7 +72,7 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                         <?php endif ?>
 
                         <div class="btn-group btn-group-justified" style="margin-top:5px">
-                            <a href="<?=url("/auth/login")?>" class="btn btn-link">
+                            <a href="<?=GC\Url::make("/auth/login")?>" class="btn btn-link">
                                 <?=trans('Wróć do logowania')?></a>
                         </div>
 

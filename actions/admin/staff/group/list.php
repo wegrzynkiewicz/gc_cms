@@ -8,7 +8,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=url("/new")?>" type="button" class="btn btn-success">
+                <a href="<?=GC\Url::make("/new")?>" type="button" class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
                     <?=trans('Dodaj nową grupę pracowników')?>
                 </a>
@@ -70,7 +70,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 </table>
             <?php endif ?>
         </div>
-        <?=view('/admin/parts/input/submitButtons.html.php')?>
+        <?=GC\Render::action('/admin/parts/input/submitButtons.html.php')?>
     </div>
 </div>
 

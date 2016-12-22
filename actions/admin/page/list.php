@@ -8,7 +8,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=url("/admin/page/new")?>" type="button" class="btn btn-success btn-md">
+                <a href="<?=GC\Url::make("/admin/page/new")?>" type="button" class="btn btn-success btn-md">
                     <i class="fa fa-plus fa-fw"></i>
                     <?=trans('Dodaj nową stronę')?>
                 </a>
@@ -33,7 +33,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             <?php if (empty($pages)): ?>
                 <p>
                     <?=trans('Nie znaleziono żadnej strony w języku: ')?>
-                    <?=view('/admin/parts/language.html.php')?>
+                    <?=GC\Render::action('/admin/parts/language.html.php')?>
                 </p>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">
@@ -46,7 +46,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     </thead>
                     <tbody>
                         <?php foreach ($pages as $page_id => $page): ?>
-                            <?=view('/admin/page/list-item.html.php', [
+                            <?=GC\Render::action('/admin/page/list-item.html.php', [
                                 'page_id' => $page_id,
                                 'page' => $page,
                             ])?>
@@ -55,7 +55,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 </table>
             <?php endif ?>
         </div>
-        <?=view('/admin/parts/input/submitButtons.html.php')?>
+        <?=GC\Render::action('/admin/parts/input/submitButtons.html.php')?>
     </div>
 </div>
 

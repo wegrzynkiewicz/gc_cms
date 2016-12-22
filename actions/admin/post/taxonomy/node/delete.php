@@ -8,4 +8,4 @@ if (isPost()) {
     });
 }
 
-redirect($breadcrumbs->getLastUrl());
+GC\Response::redirect($breadcrumbs->getLastUrl());

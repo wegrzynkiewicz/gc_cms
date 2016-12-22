@@ -12,12 +12,12 @@
     <div class="col-lg-12">
         <form action="" method="post" id="form" class="form-horizontal">
 
-            <?=view('/admin/parts/input/editbox.html.php', [
+            <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
                 'name' => 'name',
                 'label' => 'Nazwa galerii',
             ])?>
 
-            <?=view('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz galerię',
             ])?>
 

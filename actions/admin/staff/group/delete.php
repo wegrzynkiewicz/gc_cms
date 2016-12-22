@@ -5,4 +5,4 @@ if (isPost()) {
     GC\Model\StaffGroup::deleteByPrimaryId($group_id);
 }
 
-redirect($breadcrumbs->getLastUrl());
+GC\Response::redirect($breadcrumbs->getLastUrl());

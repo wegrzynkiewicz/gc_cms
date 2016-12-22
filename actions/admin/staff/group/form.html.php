@@ -6,7 +6,7 @@
         <form action="" method="post" id="form" class="form-horizontal">
 
             <div class="simple-box">
-                <?=view('/admin/parts/input/editbox.html.php', [
+                <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
                     'label' => 'Nazwa grupy',
                     'help' => 'Nazwa grupy pomaga określić odpowiedzialność członków grupy (np. Sprzedawcy, Administratorzy)'
@@ -36,7 +36,7 @@
                 </fieldset>
             </div>
 
-            <?=view('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz grupę',
             ])?>
 

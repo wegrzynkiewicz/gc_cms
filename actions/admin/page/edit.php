@@ -16,7 +16,7 @@ if (isPost()) {
 
     setNotice(trans('Strona "%s" została zaktualizowana.', [$page['name']]));
 
-    redirect($breadcrumbs->getBeforeLastUrl());
+    GC\Response::redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 $_POST = $page;

@@ -10,7 +10,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
         <div class="simple-box">
             <?php if ($count == 0): ?>
                 <?=trans('Nie znaleziono żadnego wysłanego formularza w języku: ')?>
-                <?=view('/admin/parts/language.html.php')?>
+                <?=GC\Render::action('/admin/parts/language.html.php')?>
             <?php else: ?>
                 <form action="" method="post" id="form" class="form-horizontal">
                     <table class="table vertical-middle" data-table="">
@@ -39,7 +39,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                         </thead>
                         <tbody>
                             <?php foreach ([] as $sent_id => $message): ?>
-                                <?=view('/admin/form/received/list-item.html.php', [
+                                <?=GC\Render::action('/admin/form/received/list-item.html.php', [
                                     'sent_id' => $sent_id,
                                     'form_id' => $form_id,
                                     'message' => $message,
@@ -51,7 +51,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                 </form>
             <?php endif ?>
         </div>
-        <?=view('/admin/parts/input/submitButtons.html.php')?>
+        <?=GC\Render::action('/admin/parts/input/submitButtons.html.php')?>
     </div>
 </div>
 

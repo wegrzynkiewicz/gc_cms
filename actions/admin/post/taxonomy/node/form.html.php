@@ -5,28 +5,28 @@
     <div class="col-lg-12">
         <form action="" method="post" id="form" class="form-horizontal">
             <div class="simple-box">
-                <?=view('/admin/parts/input/editbox.html.php', [
+                <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
                     'label' => 'Nazwa węzła',
                 ])?>
 
-                <?=view('/admin/parts/input/editbox.html.php', [
+                <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
                     'name' => 'keywords',
                     'label' => 'Tagi i słowa kluczowe (meta keywords)',
                 ])?>
 
-                <?=view('/admin/parts/input/textarea.html.php', [
+                <?=GC\Render::action('/admin/parts/input/textarea.html.php', [
                     'name' => 'description',
                     'label' => 'Opis podstrony (meta description)',
                 ])?>
 
-                <?=view('/admin/parts/input/image.html.php', [
+                <?=GC\Render::action('/admin/parts/input/image.html.php', [
                     'name' => 'image',
                     'label' => 'Zdjęcie wyróżniające',
                     'placeholder' => 'Ścieżka do pliku zdjęcia',
                 ])?>
             </div>
-            <?=view('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz węzeł',
             ])?>
         </form>

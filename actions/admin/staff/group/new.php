@@ -10,7 +10,7 @@ if (isPost()) {
         'name' => $_POST['name'],
     ], $permissions);
 
-    redirect($breadcrumbs->getBeforeLastUrl());
+    GC\Response::redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 $permissions = [];

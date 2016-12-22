@@ -32,9 +32,9 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
-        <form id="sortableForm" action="<?=url("/admin/gallery/images/sort/$gallery_id")?>" method="post" class="form-horizontal">
+        <form id="sortableForm" action="<?=GC\Url::make("/admin/gallery/images/sort/$gallery_id")?>" method="post" class="form-horizontal">
             <input name="ids" type="hidden"/>
-            <?=view('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz położenie zdjęć',
             ])?>
         </form>
@@ -43,7 +43,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=url("/admin/gallery/images/delete/$gallery_id")?>" class="modal-content">
+        <form id="deleteModalForm" method="post" action="<?=GC\Url::make("/admin/gallery/images/delete/$gallery_id")?>" class="modal-content">
             <input name="image_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -74,7 +74,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 $(function() {
 
     function refreshImages() {
-        $.get("<?=url("/admin/gallery/images/api/list/$gallery_id")?>", function(data) {
+        $.get("<?=GC\Url::make("/admin/gallery/images/api/list/$gallery_id")?>", function(data) {
             $('#images').html(data);
         });
     }
@@ -83,7 +83,7 @@ $(function() {
         var sortedIDs = $("#images").sortable("toArray", {
             attribute: "data-id"
         });
-        $.post("<?=url("/admin/gallery/images/api/sort/$gallery_id")?>", {
+        $.post("<?=GC\Url::make("/admin/gallery/images/api/sort/$gallery_id")?>", {
             ids: sortedIDs
         }).done(function() {
             callback();
@@ -104,7 +104,7 @@ $(function() {
     $('#select_images').elfinderInputMultiple({
         title: '<?=trans('Wybierz wiele zdjęć')?>'
     }, function(filePaths) {
-        $.post("<?=url("/admin/gallery/images/api/new/$gallery_id")?>", {
+        $.post("<?=GC\Url::make("/admin/gallery/images/api/new/$gallery_id")?>", {
             filePaths: filePaths
         }, function(data) {
             refreshImages();

@@ -28,7 +28,7 @@
                         <?=e($taxonomies[$tax_id]['name'])?>:
                     </strong>
                 </a>
-                <?=view('/admin/parts/taxonomy-preview.html.php', [
+                <?=GC\Render::action('/admin/parts/taxonomy-preview.html.php', [
                     'tree' => $tree,
                     'taxonomyUrl' => 'taxonomyNodeUrl',
                 ])?>
@@ -37,7 +37,7 @@
     </td>
 
     <td class="text-right">
-        <a href="<?=url("/post/$post_id")?>"
+        <a href="<?=GC\Url::make("/post/$post_id")?>"
             target="_blank"
             title="<?=trans('Podejrzyj ten wpis')?>"
             class="btn btn-primary btn-sm">

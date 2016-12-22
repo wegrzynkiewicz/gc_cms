@@ -13,15 +13,15 @@ if (isPost()) {
         $error = trans('Podane nowe hasła nie są identyczne');
     } elseif (strlen($newPassword) < $config['password']['minLength']) {
         $error = trans('Hasło nie może być krótsze niż %s znaków', $config['password']['minLength']);
-    } elseif (verifyPassword($newPassword, $user['password'])) {
+    } elseif (GC\Password::verify($newPassword, $user['password'])) {
         $error = trans('Nowe hasło nie może być takie samo jak poprzednie');
     } else {
         GC\Model\Staff::updateByPrimaryId($user['staff_id'], [
-            'password' => hashPassword($newPassword),
+            'password' => GC\Password::hash($newPassword),
             'force_change_password' => 0,
         ]);
 
-        redirect('/admin');
+        GC\Response::redirect('/admin');
     }
 }
 
@@ -52,14 +52,14 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                                 </p>
                             <?php endif ?>
 
-                            <?=view('/admin/parts/input/editbox.html.php', [
+                            <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
                                 'name' => 'new_password',
                                 'type' => 'password',
                                 'label' => 'Nowe hasło',
                                 'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', $config['password']['minLength']),
                             ])?>
 
-                            <?=view('/admin/parts/input/editbox.html.php', [
+                            <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
                                 'name' => 'confirm_password',
                                 'type' => 'password',
                                 'label' => 'Powtórz nowe hasło',

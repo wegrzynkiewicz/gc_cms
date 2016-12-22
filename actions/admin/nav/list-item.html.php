@@ -4,7 +4,7 @@
     <td>
         <?php if ($tree->hasChildren()): ?>
             <div style="margin-left:-20px">
-                <?=view('/admin/parts/taxonomy-preview.html.php', [
+                <?=GC\Render::action('/admin/parts/taxonomy-preview.html.php', [
                     'tree' => $tree,
                     'taxonomyUrl' => function($path) use ($surl, $nav_id) {
                         return $surl("/$nav_id/menu$path/");

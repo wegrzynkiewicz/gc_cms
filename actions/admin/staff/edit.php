@@ -25,7 +25,7 @@ if (isPost()) {
             'avatar' => $_POST['avatar'],
         ], $groups);
 
-        redirect($breadcrumbs->getBeforeLastUrl());
+        GC\Response::redirect($breadcrumbs->getBeforeLastUrl());
     }
 
 } else {
@@ -39,7 +39,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=url("/admin/staff/force-change-password/$staff_id")?>" type="button" class="btn btn-success">
+                <a href="<?=GC\Url::make("/admin/staff/force-change-password/$staff_id")?>" type="button" class="btn btn-success">
                     <i class="fa fa-unlock-alt fa-fw"></i>
                     <?=trans('Wymuś zmianę hasła')?>
                 </a>

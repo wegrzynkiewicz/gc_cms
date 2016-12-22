@@ -11,7 +11,7 @@ if (isPost()) {
         'lang' => $_SESSION['lang']['editor'],
     ]);
 
-    redirect('/admin/gallery/list');
+    GC\Response::redirect('/admin/gallery/list');
 }
 
 require ACTIONS_PATH.'/admin/gallery/form.html.php';

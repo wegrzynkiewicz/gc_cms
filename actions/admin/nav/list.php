@@ -10,7 +10,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
         <div class="simple-box">
             <?php if (empty($navs)): ?>
                 <?=trans('Nie znaleziono żadnej nawigacji w języku: ')?>
-                <?=view('/admin/parts/language.html.php')?>
+                <?=GC\Render::action('/admin/parts/language.html.php')?>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">
                     <thead>
@@ -22,7 +22,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                     </thead>
                     <tbody>
                         <?php foreach ($navs as $nav_id => $nav): ?>
-                            <?=view('/admin/nav/list-item.html.php', [
+                            <?=GC\Render::action('/admin/nav/list-item.html.php', [
                                 'nav_id' => $nav_id,
                                 'nav' => $nav,
                             ])?>
@@ -31,7 +31,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                 </table>
             <?php endif ?>
         </div>
-        <?=view('/admin/parts/input/submitButtons.html.php')?>
+        <?=GC\Render::action('/admin/parts/input/submitButtons.html.php')?>
     </div>
 </div>
 

@@ -29,12 +29,12 @@ $_POST = $image;
 
 ?>
 
-<?=view('/admin/parts/input/editbox.html.php', [
+<?=GC\Render::action('/admin/parts/input/editbox.html.php', [
     'name' => 'name',
     'label' => 'Krótki tytuł slajdu',
 ])?>
 
-<?=view('/admin/parts/input/image.html.php', [
+<?=GC\Render::action('/admin/parts/input/image.html.php', [
     'name' => 'url',
     'label' => 'Slajd',
     'placeholder' => 'Ścieżka do pliku zdjęcia',

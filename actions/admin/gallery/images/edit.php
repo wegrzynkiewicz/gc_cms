@@ -13,7 +13,7 @@ if (isPost()) {
         'name' => $_POST['name'],
         'file' => $_POST['file'],
     ]);
-    redirect("/admin/gallery/images/list/$gallery_id");
+    GC\Response::redirect("/admin/gallery/images/list/$gallery_id");
 }
 
 $gallery = GC\Model\Gallery::selectByPrimaryId($gallery_id);
@@ -36,18 +36,18 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="col-lg-12">
         <form action="" method="post" id="form" class="form-horizontal">
 
-            <?=view('/admin/parts/input/editbox.html.php', [
+            <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
                 'name' => 'name',
                 'label' => 'Krótki tytuł zdjęcia',
             ])?>
 
-            <?=view('/admin/parts/input/image.html.php', [
+            <?=GC\Render::action('/admin/parts/input/image.html.php', [
                 'name' => 'file',
                 'label' => 'Zdjęcie',
                 'placeholder' => 'Ścieżka do pliku zdjęcia',
             ])?>
 
-            <?=view('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz galerię',
             ])?>
 

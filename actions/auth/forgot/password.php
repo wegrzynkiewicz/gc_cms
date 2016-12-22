@@ -3,7 +3,7 @@
 $headTitle = trans("Zapomniałem hasła");
 
 if (isset($_SESSION['staff'])) {
-    redirect('/admin');
+    GC\Response::redirect('/admin');
 }
 
 if (isPost()) {
@@ -13,7 +13,7 @@ if (isPost()) {
 
         $email64 = base64_encode($user['email']);
         $regeneration = [
-            'verifyHash' => pseudoRandom(80),
+            'verifyHash' => GC\Password::random(80),
             'time' => time(),
         ];
 
@@ -37,7 +37,7 @@ if (isPost()) {
         $mail->addAddress($user['email']);
         $mail->send();
 
-        redirect('/auth/forgot/sent-verification');
+        GC\Response::redirect('/auth/forgot/sent-verification');
     } else {
         $error = trans('Nieprawidłowy adres e-mail');
     }
@@ -64,7 +64,7 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                                 </p>
                             <?php endif ?>
 
-                            <?=view('/admin/parts/input/editbox.html.php', [
+                            <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
                                 'name' => 'login',
                                 'label' => 'Adres email',
                                 'help' => 'Na wprowadzony powyżej adres email zostanie wysłane nowe hasło',
@@ -75,9 +75,9 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                             </button>
 
                             <div class="btn-group btn-group-justified" style="margin-top:5px">
-                                <a href="<?=url("/")?>" class="btn btn-link">
+                                <a href="<?=GC\Url::make("/")?>" class="btn btn-link">
                                     <?=trans('Przejdź na stronę główną')?></a>
-                                <a href="<?=url("/auth/login")?>" class="btn btn-link">
+                                <a href="<?=GC\Url::make("/auth/login")?>" class="btn btn-link">
                                     <?=trans('Wróć do logowania')?></a>
                             </div>
 

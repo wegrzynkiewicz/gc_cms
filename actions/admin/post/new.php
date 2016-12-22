@@ -21,7 +21,7 @@ if (isPost()) {
 
     setNotice(trans('Nowy wpis "%s" została utworzony.', [$_POST['name']]));
 
-    redirect($breadcrumbs->getBeforeLastUrl());
+    GC\Response::redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 $checkedValues = [];

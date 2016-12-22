@@ -12,12 +12,12 @@ if (isPost()) {
         'name' => $_POST['name'],
         'lang' => $_SESSION['lang']['editor'],
     ]);
-    redirect('/admin/gallery/list');
+    GC\Response::redirect('/admin/gallery/list');
 }
 
 $gallery = GC\Model\Gallery::selectByPrimaryId($gallery_id);
 if (!$gallery) {
-    redirect('/admin/gallery/list');
+    GC\Response::redirect('/admin/gallery/list');
 }
 
 $headTitle .= makeLink("/admin/gallery/list", $gallery['name']);

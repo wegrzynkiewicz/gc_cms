@@ -6,7 +6,7 @@ if (isPost()) {
         return isset($node['id']);
     });
     GC\Model\MenuTree::update($nav_id, $positions);
-    redirect($breadcrumbs->getBeforeLastUrl());
+    GC\Response::redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 $pages = GC\Model\Page::selectAllWithFrames();
@@ -37,7 +37,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
             <?php if ($menuTree->hasChildren()):?>
                 <ol id="sortable" class="sortable">
-                    <?=view('/admin/nav/menu/list-items.html.php', [
+                    <?=GC\Render::action('/admin/nav/menu/list-items.html.php', [
                         'menu' => $menuTree,
                         'nav_id' => $nav_id,
                         'pages' => $pages,
@@ -49,7 +49,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 </p>
             <?php endif?>
 
-            <?=view('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz pozycję',
             ])?>
 

@@ -91,7 +91,7 @@ $('[data-gallery="photoswipe"]').photoswipe({
 </script>
 
 <script>
-elFinder.prototype._options.url = '<?=rootUrl('/admin/elfinder/connector')?>';
+elFinder.prototype._options.url = '<?=GC\Url::root('/admin/elfinder/connector')?>';
 elFinder.prototype._options.lang = '<?=getClientLang()?>';
 </script>
 

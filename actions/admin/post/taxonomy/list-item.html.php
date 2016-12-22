@@ -5,7 +5,7 @@
     <td>
         <?php if ($tree->hasChildren()): ?>
             <div style="margin-left:-20px">
-                <?=view('/admin/post/list-tax-preview.html.php', [
+                <?=GC\Render::action('/admin/post/list-tax-preview.html.php', [
                     'tree' => $tree,
                 ])?>
             </div>

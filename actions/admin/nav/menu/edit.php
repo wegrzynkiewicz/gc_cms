@@ -7,7 +7,7 @@ if(isPost()) {
         'destination' => $_POST['destination'],
         'target' => isset($_POST['target']) ? $_POST['target'] : '_self',
     ]);
-	redirect($breadcrumbs->getLastUrl());
+	GC\Response::redirect($breadcrumbs->getLastUrl());
 }
 
 $node = GC\Model\Menu::selectByPrimaryId($menu_id);

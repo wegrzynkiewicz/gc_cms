@@ -20,7 +20,7 @@ if(isPost()) {
 
     setNotice(trans('Pole "%s" zostało zaktualizowane.', [$field['name']]));
 
-	redirect($breadcrumbs->getBeforeLastUrl());
+	GC\Response::redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 $_POST = $field;

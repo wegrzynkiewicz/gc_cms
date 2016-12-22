@@ -3,6 +3,7 @@
 /** Plik ładuje odpowiednią akcję poprzez warunki routingu */
 
 $path = $request->path;
+$method = $request->method;
 
 # jeżeli adres bez ścieżki wtedy załaduj akcję główną
 if (empty(trim($path, '/'))) {
@@ -29,7 +30,7 @@ if (strlen($_SEGMENTS[0]) == 2) {
 if (count($_SEGMENTS) === 0) {
     GC\Logger::routing("Homepage with lang");
 
-    return require ACTIONS_PATH.'/homepage.php';
+    return require ACTIONS_PATH."/{$method}-homepage.php";
 }
 
 # jeżeli któryś z niestandardowych rewritów okaże się pasować, wtedy przekieruj na właściwy adres
@@ -43,46 +44,56 @@ foreach ($config['rewrites'] as $pattern => $destination) {
 }
 
 # wyszukaj plik w katalogu /actions, który pasuje do adresu url
-$action = ACTIONS_PATH;
+$path = ACTIONS_PATH;
 $copySegments = $_SEGMENTS;
 while (count($_SEGMENTS) > 0) {
     $segment = array_shift($_SEGMENTS);
-    $action .= '/'.$segment;
 
     # jeżeli istnieje plik "import" to załaduj, ale nie kończ pętli
-    $file = $action.'/_import.php';
+    $file = "{$path}/_import.php";
     if (file_exists($file)) {
         GC\Logger::import(relativePath($file));
+        require $file;
+    }
+
+    # jeżeli istnieje plik z metodą requesta na początku, załaduj
+    $file = "{$path}/{$method}-{$segment}.php";
+    if (file_exists($file)) {
+        GC\Logger::routing("Nested with method :: ".relativePath($file));
 
         return require $file;
     }
 
-    $file = $action.'.php';
+    # jeżeli istnieje plik, wtedy załaduj
+    $file = "{$path}/{$segment}.php";
     if (file_exists($file)) {
         GC\Logger::routing("Nested :: ".relativePath($file));
 
         return require $file;
     }
 
-    if (!is_dir($action)) {
-
-        # jeżeli nie istnieje akcja to spróbuj załadować plik start w katalogu końcowym
-        $file = dirname($action).'/start.php';
-        if (file_exists($file)) {
-            GC\Logger::routing("Start with segments :: ".relativePath($file));
-
-            return require $file;
-        }
-        break;
+    # jeżeli istnieje folder, wtedy kontynuuj pętlę, ale nie wykonuj dalej
+    $folder = "{$path}/{$segment}";
+    if (is_dir($folder) and !empty($_SEGMENTS)) {
+        $path = $folder;
+        continue;
     }
-}
 
-# jeżeli nie istnieje akcja to spróbuj załadować plik start w katalogu końcowym
-$file = $action.'/start.php';
-if (file_exists($file)) {
-    GC\Logger::routing("Start without segments :: ".relativePath($file));
+    # jeżeli nie istnieje akcja to spróbuj załadować plik start z metodą
+    $file = "{$path}/{$segment}/{$method}-start.php";
+    if (file_exists($file)) {
+        GC\Logger::routing("Start with method :: ".relativePath($file));
 
-    return require $file;
+        return require $file;
+    }
+
+    # jeżeli nie istnieje akcja to spróbuj załadować plik start
+    $file = "{$path}/{$segment}/start.php";
+    if (file_exists($file)) {
+        GC\Logger::routing("Start :: ".relativePath($file));
+
+        return require $file;
+    }
 }
 
 $_SEGMENTS = $copySegments;

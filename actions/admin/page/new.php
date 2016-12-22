@@ -19,7 +19,7 @@ if (isPost()) {
 
     setNotice(trans('Nowa strona "%s" została utworzona.', [$_POST['name']]));
 
-    redirect($breadcrumbs->getBeforeLastUrl());
+    GC\Response::redirect($breadcrumbs->getBeforeLastUrl());
 }
 
 require ACTIONS_PATH.'/admin/page/form.html.php';
