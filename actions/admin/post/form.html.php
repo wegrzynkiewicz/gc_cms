@@ -7,7 +7,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
-        <form action="" method="post" id="form" class="form-horizontal">
+        <form action="" method="post" class="form-horizontal">
             <div class="simple-box">
                 <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
@@ -38,7 +38,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                         <?=GC\Render::action('/admin/parts/input/checkbox-tree.html.php', [
                             'tree' => $tree,
                             'tax_id' => $tax_id,
-                            'name' => sprintf('taxonomy[%s]', $tax_id),
+                            'name' => "taxonomy[{$tax_id}]",
                             'label' => $taxonomy['name'],
                             'help' => "Do jakich węzłów ma należeć ten post?",
                             'checkedValues' => $checkedValues,
@@ -58,7 +58,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
 <script>
 $(function () {
-    $('#form').validate({
+    $('form').validate({
         rules: {
             name: {
                 required: true

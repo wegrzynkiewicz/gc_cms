@@ -1,4 +1,6 @@
 <?php
 
-$headTitle = trans("Podziały wpisów");
-$breadcrumbs->push('/admin/post/taxonomy/list', $headTitle);
+$headTitle = trans('Podziały wpisów');
+GC\Url::extendMask('/taxonomy%s');
+$breadcrumbs->push(GC\Url::mask('/list'), $headTitle);
+$tax_id = shiftSegmentAsInteger();

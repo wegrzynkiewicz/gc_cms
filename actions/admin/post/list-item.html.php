@@ -7,7 +7,7 @@
     </td>
 
     <td>
-        <a href="<?=GC\Url::mask("/$post_id/edit/")?>"
+        <a href="<?=GC\Url::mask("/{$post_id}/edit/")?>"
             title="<?=trans('Edytuj wpis')?>">
             <?=e($post['name'])?>
         </a>
@@ -22,7 +22,7 @@
             <?=trans('Ten wpis nie został nigdzie przypisany')?>
         <?php else: ?>
             <?php foreach($post['taxonomies'] as $tax_id => $tree): ?>
-                <a href="<?=taxonomyNodeUrl("/list")?>"
+                <a href="<?=GC\Url::mask("/taxonomy/{$tax_id}/node/tree")?>"
                     title="<?=trans('Przejdź do podziału')?>">
                     <strong>
                         <?=e($taxonomies[$tax_id]['name'])?>:
@@ -37,7 +37,7 @@
     </td>
 
     <td class="text-right">
-        <a href="<?=GC\Url::mask("/post/$post_id")?>"
+        <a href="<?=GC\Url::make("/post/{$post_id}")?>"
             target="_blank"
             title="<?=trans('Podejrzyj ten wpis')?>"
             class="btn btn-primary btn-sm">
@@ -45,7 +45,7 @@
             <?=trans("Podgląd")?>
         </a>
 
-        <a href="<?=GC\Url::mask("/$post_id/module/list")?>"
+        <a href="<?=GC\Url::mask("/{$post_id}/module/list")?>"
             title="<?=trans('Wyświetl moduły wpisu')?>"
             class="btn btn-success btn-sm">
             <i class="fa fa-file-text-o fa-fw"></i>

@@ -1,15 +1,5 @@
 <?php
 
-if (isPost()) {
-    $positions = json_decode($_POST['positions'], true);
-    $positions = array_filter($positions, function ($node) {
-        return isset($node['id']);
-    });
-    GC\Model\PostTree::update($tax_id, $positions);
-
-    GC\Response::redirect("/admin/post/taxonomy/list");
-}
-
 $tree = GC\Model\PostNode::buildTreeWithFrameByTaxonomyId($tax_id);
 
 require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
@@ -18,7 +8,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=taxonomyNodeUrl("/new")?>" type="button" class="btn btn-success">
+                <a href="<?=GC\Url::mask('/new')?>" type="button" class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
                     <?=trans('Dodaj nowy węzeł')?>
                 </a>
@@ -36,7 +26,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             <input name="positions" type="hidden"/>
             <?php if ($tree->hasChildren()):?>
                 <ol id="sortable" class="sortable">
-                    <?=GC\Render::action('/admin/post/taxonomy/node/list-item.html.php', [
+                    <?=GC\Render::action('/admin/post/taxonomy/node/tree-node.html.php', [
                         'tree' => $tree,
                     ])?>
                 </ol>
@@ -56,7 +46,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="modal-dialog" role="document">
         <form id="deleteModalForm"
             method="post"
-            action="<?=taxonomyNodeUrl("/delete")?>"
+            action="<?=GC\Url::mask('/delete')?>"
             class="modal-content">
             <input name="node_id" type="hidden" value="">
             <div class="modal-header">
@@ -69,7 +59,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             </div>
             <div class="modal-body">
                 <?=trans("Czy jesteś pewien, że chcesz usunąć węzeł")?>
-                <span id="name" style="font-weight:bold; color:red;"></span>
+                <span id="node_name" style="font-weight:bold; color:red;"></span>
                 <?=trans("i wszystkie jego podwęzły?")?>?
             </div>
             <div class="modal-footer">
@@ -88,7 +78,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <script>
     $('#deleteModal').on('show.bs.modal', function(e) {
-        $(this).find('#name').html($(e.relatedTarget).data('name'));
+        $(this).find('#node_name').html($(e.relatedTarget).data('name'));
         $(this).find('[name="node_id"]').val($(e.relatedTarget).data('id'));
     });
 </script>

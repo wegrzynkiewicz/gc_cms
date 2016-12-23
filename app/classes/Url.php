@@ -57,12 +57,12 @@ class Url
      */
     public static function upload($path)
     {
-        if (strlen(ROOT_URL) <= 0) {
+        if (strlen(Request::$rootUrl) <= 0) {
             return $path;
         }
 
-        if ($path and strpos($path, ROOT_URL) === 0) {
-            $path = substr($path, strlen(ROOT_URL));
+        if ($path and strpos($path, Request::$rootUrl) === 0) {
+            $path = substr($path, strlen(Request::$rootUrl));
         }
 
         return $path;

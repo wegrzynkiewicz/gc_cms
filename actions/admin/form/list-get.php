@@ -23,30 +23,11 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                     </thead>
                     <tbody>
                         <?php foreach ($forms as $form_id => $form): ?>
-                            <tr>
-                                <td><?=e($form['name'])?></td>
-                                <td>
-                                    <span class="label label-warning">
-                                        <?php if (isset($counts[$form_id])): ?>
-                                            <?=e($counts[$form_id]['unread'])?>
-                                        <?php else: ?>
-                                            0
-                                        <?php endif ?>
-                                    </span>
-                                </td>
-                                <td class="text-right">
-                                    <a href="<?=GC\Url::mask("/$form_id/received/list")?>"
-                                        class="btn btn-primary btn-sm">
-                                        <i class="fa fa-search fa-fw"></i>
-                                        <?=trans('Pokaż nadesłane')?>
-                                    </a>
-                                    <a href="<?=GC\Url::mask("/$form_id/field/list")?>"
-                                        class="btn btn-success btn-sm">
-                                        <i class="fa fa-file-text-o fa-fw"></i>
-                                        <?=trans('Pola formularza')?>
-                                    </a>
-                                </td>
-                            </tr>
+                            <?=GC\Render::action('/admin/form/list-item.html.php', [
+                                'form_id' => $form_id,
+                                'form' => $form,
+                                'counts' => $counts,
+                            ])?>
                         <?php endforeach ?>
                     </tbody>
                 </table>

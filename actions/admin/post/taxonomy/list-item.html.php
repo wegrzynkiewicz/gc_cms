@@ -5,8 +5,11 @@
     <td>
         <?php if ($tree->hasChildren()): ?>
             <div style="margin-left:-20px">
-                <?=GC\Render::action('/admin/post/list-tax-preview.html.php', [
+                <?=GC\Render::action('/admin/parts/taxonomy-preview.html.php', [
                     'tree' => $tree,
+                    'taxonomyUrl' => function($path) use ($tax_id) {
+                        return GC\Url::mask("/{$tax_id}/node{$path}");
+                    },
                 ])?>
             </div>
         <?php else: ?>
@@ -14,7 +17,7 @@
         <?php endif ?>
     </td>
     <td class="text-right">
-        <a href="<?=taxonomyNodeUrl("/list")?>"
+        <a href="<?=GC\Url::mask("/{$tax_id}/node/tree")?>"
             title="<?=trans('Wyświetl węzły podziału')?>"
             class="btn btn-success btn-sm">
             <i class="fa fa-file-text-o fa-fw"></i>

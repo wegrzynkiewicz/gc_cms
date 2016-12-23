@@ -1,0 +1,19 @@
+<?php
+
+$frame_id = GC\Model\Frame::insert([
+    'name' => $_POST['name'],
+    'type' => 'post',
+    'keywords' => $_POST['keywords'],
+    'description' => $_POST['description'],
+    'image' => GC\Url::upload($_POST['image']),
+]);
+
+$relations = isset($_POST['taxonomy']) ? array_unchunk($_POST['taxonomy']) : [];
+
+GC\Model\Post::insertWithRelations([
+    'frame_id' => $frame_id,
+], $relations);
+
+setNotice(trans('Nowy wpis "%s" została utworzony.', [$_POST['name']]));
+
+GC\Response::redirect($breadcrumbs->getLastUrl());

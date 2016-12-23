@@ -1,20 +1,18 @@
 <?php
 
-require ACTIONS_PATH."/admin/parts/module/_import.php";
-
-$action = array_shift($_SEGMENTS);
 $post = GC\Model\Post::selectWithFrameByPrimaryId($post_id);
 $frame_id = $post['frame_id'];
 
-$getPreviewUrl = function() use ($post_id) {
-    return url("/post/{$post_id}");
-};
-
-$surl = function($path) use ($surl, $post_id) {
-    return GC\Url::make("/{$post_id}/module{$path}");
-};
-
 $headTitle = trans('Moduły w poście "%s"', [$post['name']]);
-$breadcrumbs->push(GC\Url::make("/list"), $headTitle);
+GC\Url::extendMask("/{$post_id}/module%s");
+$breadcrumbs->push(GC\Url::mask('/list'), $headTitle);
 
-require ACTIONS_PATH."/admin/parts/module/$action.html.php";
+$getPreviewUrl = function () use ($post_id) {
+    return GC\Url::make("/post/{$post_id}");
+};
+
+require ACTIONS_PATH."/admin/parts/module/_import.php";
+
+$action = array_shift($_SEGMENTS);
+
+require ACTIONS_PATH."/admin/parts/module/{$action}-{$request->method}.html.php";

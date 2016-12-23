@@ -1,7 +1,7 @@
 <?php
 
-$tax_id = intval(array_pop($_SEGMENTS));
 $taxonomy = GC\Model\PostTaxonomy::selectByPrimaryId($tax_id);
-
-$headTitle = trans('Podział "%s"', [$taxonomy['name']]);
-$breadcrumbs->push(taxonomyNodeUrl('/list'), $headTitle);
+$headTitle = trans('%s - węzły', [$taxonomy['name']]);
+GC\Url::extendMask("/{$tax_id}/node%s");
+$breadcrumbs->push(GC\Url::mask('/tree'), $headTitle);
+$node_id = shiftSegmentAsInteger();

@@ -22,9 +22,9 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=GC\Url::mask("/admin/post/new")?>" type="button" class="btn btn-success btn-md">
+                <a href="<?=GC\Url::mask('/new')?>" type="button" class="btn btn-success btn-md">
                     <i class="fa fa-plus fa-fw"></i>
-                    <?=trans('Dodaj nowy post')?>
+                    <?=trans('Dodaj nowy wpis')?>
                 </a>
             </div>
             <h1><?=($headTitle)?></h1>
@@ -77,7 +77,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=GC\Url::mask("/admin/post/delete")?>" class="modal-content">
+        <form id="deleteModalForm" method="post" action="<?=GC\Url::mask('/delete')?>" class="modal-content">
             <input name="post_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
@@ -89,7 +89,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             </div>
             <div class="modal-body">
                 <?=trans("Czy jesteś pewien, że chcesz usunąć wpis")?>
-                <span id="name" style="font-weight:bold; color:red;"></span>?
+                <span id="post_name" style="font-weight:bold; color:red;"></span>?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -108,7 +108,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 <script>
     $(function(){
         $('#deleteModal').on('show.bs.modal', function(e) {
-            $(this).find('#name').html($(e.relatedTarget).data('name'));
+            $(this).find('#post_name').html($(e.relatedTarget).data('name'));
             $(this).find('[name="post_id"]').val($(e.relatedTarget).data('id'));
         });
         $('[data-table]').DataTable({
