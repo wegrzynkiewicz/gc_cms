@@ -32,7 +32,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
-        <form id="sortableForm" action="<?=GC\Url::make("/admin/gallery/images/sort/$gallery_id")?>" method="post" class="form-horizontal">
+        <form id="sortableForm" action="<?=GC\Url::mask("/admin/gallery/images/sort/$gallery_id")?>" method="post" class="form-horizontal">
             <input name="ids" type="hidden"/>
             <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz położenie zdjęć',
@@ -43,10 +43,10 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=GC\Url::make("/admin/gallery/images/delete/$gallery_id")?>" class="modal-content">
+        <form id="deleteModalForm" method="post" action="<?=GC\Url::mask("/admin/gallery/images/delete/$gallery_id")?>" class="modal-content">
             <input name="image_id" type="hidden" value="">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
@@ -60,7 +60,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 <button type="button" class="btn btn-default" data-dismiss="modal">
                     <?=trans('Anuluj')?>
                 </button>
-                <button type="submit" value="" class="btn btn-danger btn-ok" href="">
+                <button type="submit" class="btn btn-danger btn-ok">
                     <?=trans('Usuń')?>
                 </button>
             </div>
@@ -68,13 +68,13 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     </div>
 </div>
 
-<?php require ACTIONS_PATH.'/admin/parts/assets/footer.html.php';; ?>
+<?php require ACTIONS_PATH.'/admin/parts/assets/footer.html.php'; ?>
 
 <script>
 $(function() {
 
     function refreshImages() {
-        $.get("<?=GC\Url::make("/admin/gallery/images/api/list/$gallery_id")?>", function(data) {
+        $.get("<?=GC\Url::mask("/admin/gallery/images/api/list/$gallery_id")?>", function(data) {
             $('#images').html(data);
         });
     }
@@ -83,7 +83,7 @@ $(function() {
         var sortedIDs = $("#images").sortable("toArray", {
             attribute: "data-id"
         });
-        $.post("<?=GC\Url::make("/admin/gallery/images/api/sort/$gallery_id")?>", {
+        $.post("<?=GC\Url::mask("/admin/gallery/images/api/sort/$gallery_id")?>", {
             ids: sortedIDs
         }).done(function() {
             callback();
@@ -104,7 +104,7 @@ $(function() {
     $('#select_images').elfinderInputMultiple({
         title: '<?=trans('Wybierz wiele zdjęć')?>'
     }, function(filePaths) {
-        $.post("<?=GC\Url::make("/admin/gallery/images/api/new/$gallery_id")?>", {
+        $.post("<?=GC\Url::mask("/admin/gallery/images/api/new/$gallery_id")?>", {
             filePaths: filePaths
         }, function(data) {
             refreshImages();

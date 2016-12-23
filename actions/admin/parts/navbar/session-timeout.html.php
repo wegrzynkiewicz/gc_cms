@@ -10,7 +10,10 @@
 
     <script>
         $(function() {
+            var timeoutUrl = "<?=GC\Url::make('/auth/session-timeout')?>";
+            var refreshUrl = "<?=GC\Url::make('/admin/account/session/refresh')?>";
             var sessionTimeout = <?=e($config['session']['staffTimeout'])?>;
+
             var finalTime = new Date();
             finalTime.setSeconds(finalTime.getSeconds() + sessionTimeout);
             $('#session-countdown')
@@ -19,13 +22,13 @@
                     $(this).html(event.strftime('%M:%S'));
                 })
                 .on('finish.countdown', function(event) {
-                    window.location.href = "/auth/session-timeout";
+                    window.location.href = timeoutUrl;
                 });
             $('#session-refresh').click(function(event){
                 event.preventDefault();
                 var nextTime = new Date();
                 nextTime.setSeconds(nextTime.getSeconds() + sessionTimeout);
-                $.post("/admin/account/session-refresh", function() {
+                $.post(refreshUrl, function() {
                     $('#session-countdown').countdown(nextTime);
                 });
             });

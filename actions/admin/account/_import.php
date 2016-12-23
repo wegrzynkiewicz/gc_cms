@@ -1,4 +1,5 @@
 <?php
 
 $headTitle = trans('Twój profil użytkownika');
-$breadcrumbs->push($surl('/account/profil'), trans('Profil użytkownika'), 'fa-user');
+GC\Url::extendMask('/account%s');
+$breadcrumbs->push(GC\Url::mask('/profil'), trans('Profil użytkownika'), 'fa-user');

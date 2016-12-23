@@ -7,7 +7,7 @@ define('START_TIME', microtime(true));
 require __DIR__.'/../vendor/autoload.php';
 require __DIR__.'/config/config.php';
 require __DIR__.'/functions.php';
-require __DIR__.'/error-handler.php';
+//require __DIR__.'/error-handler.php';
 
 chdir('..'); # zmienia bieżący katalog o jeden poziom wyżej niż web root
 
@@ -70,6 +70,7 @@ if (!isset($_SESSION['csrf_token'])) {
 
 GC\Render::$extract = [
     'config' => $config,
+    'request' => $request,
 ];
 
 GC\Render::$shortcuts = [

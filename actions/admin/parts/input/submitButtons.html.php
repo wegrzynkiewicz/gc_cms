@@ -1,11 +1,6 @@
 <?php
-
 global $breadcrumbs;
-
-if (!isset($cancelHref)) {
-    $cancelHref = $breadcrumbs->getBeforeLastUrl();
-}
-
+$cancelHref = isset($cancelHref) ? $cancelHref : $breadcrumbs->getBeforeLastUrl();
 ?>
 
 <div class="row" style="margin-top:20px">

@@ -25,7 +25,7 @@ $images = GC\Model\GalleryImage::selectAllByGalleryId($gallery_id);
 
                 <div class="pull-right">
 
-                    <a href="<?=GC\Url::make("/admin/gallery/images/edit/$id/$gallery_id")?>"
+                    <a href="<?=GC\Url::mask("/admin/gallery/images/edit/$id/$gallery_id")?>"
                         data-toggle="modal"
                         title="<?=trans('Edytuj stronę')?>"
                         class="btn btn-primary btn-xs">

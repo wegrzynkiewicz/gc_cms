@@ -12,7 +12,7 @@
         <ul class="dropdown-menu dropdown-user">
             <?php foreach ($config['langs'] as $lang => $label): ?>
                 <li>
-                    <a href="<?=GC\Url::make("/admin/account/change-editor-lang/$lang")?>">
+                    <a href="<?=GC\Url::make("/admin/account/change-editor-lang/{$lang}")?>">
                         <?=GC\Render::action('/admin/parts/language.html.php', [
                             'lang' => $lang
                         ])?>

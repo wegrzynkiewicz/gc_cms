@@ -1,7 +1,7 @@
 <?php
 
 $headTitle = trans('Dodawanie nowego wpisu');
-$breadcrumbs->push($request, $headTitle);
+$breadcrumbs->push($request->path, $headTitle);
 
 if (isPost()) {
 

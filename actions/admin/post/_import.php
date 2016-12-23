@@ -7,10 +7,10 @@ if (intval($_SEGMENTS[0])) {
 }
 
 $surl = function($path) use ($surl) {
-    return $surl("/post{$path}");
+    return GC\Url::make("/post{$path}");
 };
 
-$breadcrumbs->push($surl('/list'), $headTitle, 'fa-pencil-square-o');
+$breadcrumbs->push(GC\Url::make('/list'), $headTitle, 'fa-pencil-square-o');
 
 function taxonomyNodeUrl($path)
 {

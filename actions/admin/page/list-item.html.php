@@ -1,12 +1,12 @@
-<?php $preview = empty($page['image']) ? assetsUrl($config['noImageUrl']): $page['image']; ?>
+<?php $preview = empty($page['image']) ? GC\Url::assets($config['noImageUrl']): $page['image']; ?>
 
 <tr>
     <td>
-        <img src="<?=GC\Thumb::make($preview, 64, 64)?>" height="64"/>
+        <img src="<?=GC\Thumb::make($preview, 64, 999)?>" width="64"/>
     </td>
 
     <td>
-        <a href="<?=$surl("/$page_id/edit")?>"
+        <a href="<?=GC\Url::mask("/{$page_id}/edit")?>"
             title="<?=trans('Edytuj stronę')?>">
             <?=e($page['name'])?>
         </a>
@@ -14,7 +14,7 @@
 
     <td class="text-right">
 
-        <a href="<?=GC\Url::make("/page/$page_id")?>"
+        <a href="<?=GC\Url::make("/page/{$page_id}")?>"
             target="_blank"
             title="<?=trans('Podejrzyj tą stronę')?>"
             class="btn btn-primary btn-sm">
@@ -22,7 +22,7 @@
             <?=trans("Podgląd")?>
         </a>
 
-        <a href="<?=$surl("/$page_id/module/list")?>"
+        <a href="<?=GC\Url::mask("/{$page_id}/module/list")?>"
             title="<?=trans('Wyświetl moduły strony')?>"
             class="btn btn-success btn-sm">
             <i class="fa fa-file-text-o fa-fw"></i>

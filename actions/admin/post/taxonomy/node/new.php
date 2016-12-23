@@ -1,7 +1,7 @@
 <?php
 
 $headTitle = trans('Dodawanie nowego węzła');
-$breadcrumbs->push($request, $headTitle);
+$breadcrumbs->push($request->path, $headTitle);
 
 $menu_id = 0;
 

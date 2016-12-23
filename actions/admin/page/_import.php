@@ -1,13 +1,6 @@
 <?php
 
 $headTitle = trans("Strony");
-
-if (intval($_SEGMENTS[0])) {
-    $page_id = intval(array_shift($_SEGMENTS));
-}
-
-$surl = function($path) use ($surl) {
-    return $surl("/page{$path}");
-};
-
-$breadcrumbs->push($surl('/list'), $headTitle, 'fa-files-o');
+GC\Url::extendMask('/page%s');
+$breadcrumbs->push(GC\Url::mask('/list'), $headTitle, 'fa-files-o');
+$page_id = shiftSegmentAsInteger();

@@ -6,6 +6,7 @@ use GC\Storage\AbstractModel;
 use GC\Storage\Utility\ColumnTrait;
 use GC\Storage\Utility\PrimaryTrait;
 use GC\Storage\Database;
+use GC\Url;
 use GC\Logger;
 use GC\Response;
 use RuntimeException;
@@ -47,7 +48,7 @@ class Staff extends AbstractModel
         if (!$this->hasPermissions($permissions)) {
             Logger::deny("Not authorized", $permissions);
             $perm = count($permissions) > 0 ? array_shift($permissions) : 'default';
-            Response::redirect("/admin/account/deny/$perm");
+            Response::redirect("/admin/account/deny/{$perm}");
         }
     }
 
@@ -75,7 +76,7 @@ class Staff extends AbstractModel
     public static function getAvatarUrl($staff, $size)
     {
         if (empty($staff['avatar'])) {
-            return GC\Url::assets(getConfig()['avatar']['noAvatarUrl']);
+            return Url::assets(getConfig()['avatar']['noAvatarUrl']);
         }
 
         return Thumb::make($staff['avatar'], $size, $size);

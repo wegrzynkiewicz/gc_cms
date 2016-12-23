@@ -2,12 +2,6 @@
 
 $headTitle = trans('Dashboard');
 
-$staff = GC\Model\Staff::createFromSession();
-$staff->redirectIfUnauthorized();
-
-require ACTIONS_PATH.'/admin/parts/header.html.php';
-
-
 $actions = [ [
         'id' => 'pages',
         'name' => 'Strony',
@@ -131,16 +125,10 @@ $actions = [ [
         ],
     ],
     */
-]
-?>
+];
 
-<div class="row">
-    <div class="col-lg-12 text-left">
-        <h1 class="page-header">
-            <?=($headTitle)?>
-        </h1>
-    </div>
-</div>
+require ACTIONS_PATH.'/admin/parts/header.html.php';
+require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
 <div class="row">
     <?php foreach($actions as $action): ?>
@@ -153,5 +141,5 @@ $actions = [ [
     <?php endforeach ?>
 </div>
 
-<?php require ACTIONS_PATH.'/admin/parts/assets/footer.html.php';; ?>
+<?php require ACTIONS_PATH.'/admin/parts/assets/footer.html.php'; ?>
 <?php require ACTIONS_PATH.'/admin/parts/footer.html.php'; ?>

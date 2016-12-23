@@ -1,6 +1,7 @@
-<?php $dest = $node['destination']; if (isset($pages[$dest])): ?>
+<?php $dest = $node['destination']; ?>
+<?php if (isset($pages[$dest])): ?>
     <?=trans($config['nodeTypes']['page'])?>
-    <a href="<?=GC\Url::make("/admin/page/$dest/edit")?>">
+    <a href="<?=GC\Url::make("/admin/page/{$dest}/edit")?>">
         <?=e($pages[$dest]['name'])?>
     </a>
 <?php else: ?>
@@ -8,3 +9,7 @@
         <?=trans('Kieruje do nieistniejącej strony!')?>
     </span>
 <?php endif ?>
+
+<span style="margin-left: 30px">
+    <?=trans($config['navNodeTargets'][$node['target']])?>
+</span>

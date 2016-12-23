@@ -6,6 +6,8 @@ use GC\Request;
 
 class Url
 {
+    private static $mask = '%s';
+
     /**
      * Generuje przednie części adresu dla plików w katalogu głównym
      */
@@ -39,9 +41,15 @@ class Url
             return $path;
         }
 
-        $url = static::root(Request::$frontControllerUrl); # generowane przez routing
+        return static::root(Request::$frontControllerUrl.$path);
+    }
 
-        return $url.$path;
+    /**
+     * Generuje przednie części adresu
+     */
+    public static function mask($path = '')
+    {
+        return static::make(sprintf(static::$mask, $path));
     }
 
     /**
@@ -58,5 +66,12 @@ class Url
         }
 
         return $path;
+    }
+
+    /**
+     */
+    public static function extendMask($mask)
+    {
+        static::$mask = sprintf(static::$mask, $mask);
     }
 }

@@ -1,5 +1,23 @@
 <?php
 
+$getModuleTemplate = function ($type, $theme, $additional = '') use ($request) {
+
+    $templates = [
+        "/modules/{$type}/{$theme}{$additional}-{$request->method}.html.php",
+        "/modules/{$type}/{$theme}{$additional}.html.php",
+        "/modules/{$type}/default{$additional}-{$request->method}.html.php",
+        "/modules/{$type}/default{$additional}.html.php",
+    ];
+
+    foreach ($templates as $template) {
+        if (is_readable(TEMPLATE_PATH.$template)) {
+            return $template;
+        }
+    }
+
+    return false;
+};
+
 $gridModules = [];
 foreach ($modules as $module_id => $module) {
     $module['size'] = explode(':', $module['position']);
@@ -14,15 +32,16 @@ foreach ($gridModules as $row) {
     if (count($row) === 1) {
         $module = array_shift($row);
         list($x, $y, $w, $h) = $module['size'];
-        $template = sprintf("/modules/%s/%s-fluid.html.php", $module['type'], $module['theme']);
-        if ($w == 12 and is_readable(TEMPLATE_PATH.$template)) {
+
+        $template = $getModuleTemplate($module['type'], $module['theme'], '-fluid');
+        if ($w == 12 and $template and is_readable(TEMPLATE_PATH.$template)) {
             require TEMPLATE_PATH."/parts/module-item.html.php";
             continue;
         }
         array_unshift($row, $module);
     }
 
-    if(!$withoutContainer) {
+    if($container) {
         echo '<div class="container">';
     }
     echo '<div class="row">';
@@ -33,10 +52,7 @@ foreach ($gridModules as $row) {
         $o = $x - $previousWidth;
         $previousWidth = $x + $w;
 
-        $template = sprintf("/modules/%s/%s.html.php", $module['type'], $module['theme']);
-        if (!is_readable(TEMPLATE_PATH.$template)) {
-            $template = sprintf("/modules/%s/default.html.php", $module['type']);
-        }
+        $template = $getModuleTemplate($module['type'], $module['theme']);
 
         echo sprintf('<div class="col-md-%s col-md-offset-%s">', $w, $o);
         require TEMPLATE_PATH."/parts/module-item.html.php";
@@ -44,7 +60,7 @@ foreach ($gridModules as $row) {
     }
 
 
-    if(!$withoutContainer) {
+    if($container) {
         echo '</div>';
     }
     echo '</div>';

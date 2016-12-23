@@ -10,7 +10,7 @@
 
             <div class="pull-right">
 
-                <a href="<?=GC\Url::make("/post/node/$node_id")?>"
+                <a href="<?=GC\Url::mask("/post/node/$node_id")?>"
                     target="_blank"
                     title="<?=trans('Podejrzyj ten węzeł')?>"
                     class="btn btn-primary btn-xs">

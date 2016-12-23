@@ -79,6 +79,20 @@ function setHeaderMimeType($mimeType)
 }
 
 /**
+ *
+ */
+function shiftSegmentAsInteger()
+{
+    global $_SEGMENTS;
+
+    if (count($_SEGMENTS) and intval($_SEGMENTS[0])) {
+        return intval(array_shift($_SEGMENTS));
+    }
+
+    return 0;
+}
+
+/**
  * Pomocnicza dla sprawdzania czy dany element w tabeli $_POST istnieje
  */
 function inputValue($postName, $default = '')
@@ -144,10 +158,19 @@ function removeOrphan($text)
 function relativePath($absolutePath)
 {
     $realpath = realpath($absolutePath);
-    $relativePath = str_replace($_SERVER['DOCUMENT_ROOT'], '', $realpath);
-    $relativePath = str_replace('\\', '/', $relativePath);
+    $documentRoot = $_SERVER['DOCUMENT_ROOT'];
 
-    return $relativePath;
+    do {
+        if (strpos($realpath, $documentRoot) === 0) {
+            $relativePath = str_replace($documentRoot, '', $realpath);
+            $relativePath = str_replace('\\', '/', $relativePath);
+
+            return $relativePath;
+        }
+        $documentRoot = dirname($documentRoot);
+    } while ($documentRoot !== dirname($documentRoot));
+
+    return $absolutePath;
 }
 
 /**
@@ -230,7 +253,7 @@ function exportDataToPHPFile($data, $file)
 function array_rebuild(array $array, $callback)
 {
     $results = [];
-    foreach($array as $key => $value) {
+    foreach ($array as $key => $value) {
         $results[$key] = $callback($value);
     }
 

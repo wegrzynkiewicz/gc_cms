@@ -20,7 +20,7 @@
     <?php if (count($links) > 1): ?>
         <ol class="breadcrumb">
             <?php foreach ($links as $i => $link): ?>
-                <?php $isLink = !(empty($link['url']) or $link['url'] == $request); ?>
+                <?php $isLink = !(empty($link['url']) or $link['url'] == $request->path); ?>
                 <li class="<?=e($isLink ? '' : 'active')?>">
                     <?php if ($isLink): ?>
                         <a href="<?=e($link['url'])?>">

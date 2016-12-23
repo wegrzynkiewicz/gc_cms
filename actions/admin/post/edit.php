@@ -2,7 +2,7 @@
 
 $post = GC\Model\Post::selectWithFrameByPrimaryId($post_id);
 $headTitle = trans('Edytowanie wpisu "%s"', [$post['name']]);
-$breadcrumbs->push($request, $headTitle);
+$breadcrumbs->push($request->path, $headTitle);
 
 if (isPost()) {
 

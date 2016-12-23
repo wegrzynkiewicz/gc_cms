@@ -3,7 +3,7 @@
     <li id="node_<?=e($menu_id)?>" data-id="<?=e($menu_id)?>">
         <div class="sortable-content">
             <div class="col-lg-4">
-                <a href="<?=$surl("/$menu_id/edit")?>">
+                <a href="<?=GC\Url::mask("/$menu_id/edit")?>">
                     <?=e($node['name'])?>
                 </a>
             </div>
@@ -19,12 +19,6 @@
                     <?=trans('Usuń')?>
                 </a>
             </div>
-
-            <?php if ($node['type'] != 'empty'): ?>
-                <div class="pull-right" style="margin-right: 30px">
-                    <?=trans($config['navNodeTargets'][$node['target']])?>
-                </div>
-            <?php endif ?>
 
             <div class="pull-right" style="margin-right: 30px">
                 <?=GC\Render::action('/admin/nav/menu/list-preview/'.$node['type'].'.html.php', [

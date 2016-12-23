@@ -3,5 +3,7 @@
 /external
 /tmp
 /vendor/
+/web/adminer.php
 /web/data
+/web/thumbs
 /web/assets/admin/images

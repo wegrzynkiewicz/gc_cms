@@ -4,10 +4,10 @@ namespace GC;
 
 class Thumb
 {
+    private $url = '';
     private $imageUrl = '';
     private $width = 0;
     private $height = 0;
-    private $thumbUrl = '';
     private $extension = '';
     private $params = [];
 
@@ -64,8 +64,9 @@ class Thumb
     public function generate()
     {
         $imageUrl = urldecode($this->imageUrl);
-        $destFilePath   = ".{$this->url}";
-        $sourceFilePath = ".{$imageUrl}";
+        $thumbPath = getConfig()['thumb']['thumbsPath'];
+        $destFilePath   = "{$thumbPath}{$this->url}";
+        $sourceFilePath = "{$thumbPath}{$imageUrl}";
 
         if (is_readable($destFilePath)) {
             return true;

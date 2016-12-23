@@ -60,7 +60,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             class="modal-content">
             <input name="node_id" type="hidden" value="">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
@@ -76,7 +76,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 <button type="button" class="btn btn-default" data-dismiss="modal">
                     <?=trans('Anuluj')?>
                 </button>
-                <button type="submit" value="" class="btn btn-danger btn-ok" href="">
+                <button type="submit" class="btn btn-danger btn-ok">
                     <?=trans('Usuń')?>
                 </button>
             </div>
@@ -84,7 +84,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     </div>
 </div>
 
-<?php require ACTIONS_PATH.'/admin/parts/assets/footer.html.php';; ?>
+<?php require ACTIONS_PATH.'/admin/parts/assets/footer.html.php'; ?>
 
 <script>
     $('#deleteModal').on('show.bs.modal', function(e) {

@@ -19,18 +19,21 @@ class Module extends AbstractModel
     use PrimaryTrait;
     use JoinTrait;
 
-    protected static function deleteModuleByPrimaryId($primary_id)
+    protected static function deleteModuleByPrimaryId($module_id)
     {
-        static::deleteByPrimaryId($primary_id);
+        static::deleteByPrimaryId($module_id);
         ModuleFile::deleteUnassignedByForeign();
-        ModuleItem::deleteUnassignedByForeign();
+        ModuleItem::deleteItemsByForeign($module_id);
     }
 
-    protected static function deleteModuleByForeign($foreign_id)
+    protected static function deleteModulesByForeign($frame_id)
     {
-        static::deleteAllByForeign($foreign_id);
+        $modules = static::joinAllWithKeyByForeign($frame_id);
+        foreach ($modules as $module_id => $module) {
+            ModuleItem::deleteItemsByForeign($module_id);
+        }
+        static::deleteAllByForeign($frame_id);
         ModuleFile::deleteUnassignedByForeign();
-        ModuleItem::deleteUnassignedByForeign();
     }
 
     protected static function insertWithFrameId(array $data, $frame_id)

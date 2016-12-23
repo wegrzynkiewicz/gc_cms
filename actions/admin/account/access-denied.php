@@ -22,5 +22,5 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
     </div>
 </div>
 
-<?php require ACTIONS_PATH.'/admin/parts/assets/footer.html.php';; ?>
+<?php require ACTIONS_PATH.'/admin/parts/assets/footer.html.php'; ?>
 <?php require ACTIONS_PATH.'/admin/parts/footer.html.php'; ?>

@@ -1,9 +1,3 @@
-<?php
-
-$groupOptions = GC\Model\StaffGroup::mapWithPrimaryKeyBy('name');
-
-?>
-
 <div class="row">
     <div class="col-lg-12">
         <form action="" method="post" id="form" class="form-horizontal">
@@ -34,7 +28,7 @@ $groupOptions = GC\Model\StaffGroup::mapWithPrimaryKeyBy('name');
                     'name' => 'groups',
                     'label' => 'Przynależność do grup pracowników',
                     'help' => 'Możesz wybrać jaką pracownik ma pełnić funkcję i jakie uprawnienia otrzyma. Pracownik może przynależyć do wielu grup.',
-                    'options' => $groupOptions,
+                    'options' => GC\Model\StaffGroup::mapWithPrimaryKeyBy('name'),
                     'selectedValues' => $groups,
                 ])?>
             </div>
@@ -47,7 +41,7 @@ $groupOptions = GC\Model\StaffGroup::mapWithPrimaryKeyBy('name');
     </div>
 </div>
 
-<?php require ACTIONS_PATH.'/admin/parts/assets/footer.html.php';; ?>
+<?php require ACTIONS_PATH.'/admin/parts/assets/footer.html.php'; ?>
 
 <script>
 $(function () {

@@ -3,7 +3,7 @@
     <li id="node_<?=e($field_id)?>" data-id="<?=e($field_id)?>">
         <div class="sortable-content">
             <div class="col-lg-4">
-                <a href="<?=$surl("/$field_id/edit")?>">
+                <a href="<?=GC\Url::mask("/$field_id/edit")?>">
                     <?=e($node['name'])?>
                 </a>
             </div>

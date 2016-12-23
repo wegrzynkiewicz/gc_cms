@@ -1,9 +1,8 @@
 <?php
 
-$menu_id = intval(array_shift($_SEGMENTS));
-$node = GC\Model\Menu::selectByPrimaryId($menu_id);
-
-$_POST = $node;
+if ($menu_id) {
+    $_POST = GC\Model\Menu::selectByPrimaryId($menu_id);
+}
 
 $pageOptions = GC\Model\Page::mapFramesWithPrimaryKeyBy('name');
 

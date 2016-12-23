@@ -8,7 +8,7 @@ $imageUrl64 = array_shift($_SEGMENTS);
 $token = array_shift($_SEGMENTS);
 $thumbWidth = array_shift($_SEGMENTS);
 $imageUrl = base64_decode($imageUrl64);
-$imagePath = ".".rootUrl($imageUrl);
+$imagePath = WEB_PATH.GC\Url::root($imageUrl);
 
 if (!is_readable($imagePath)) {
     return http_response_code(400);
@@ -47,7 +47,7 @@ if (!$thumb->exists()) {
 
 unset($_SESSION['generateThumb']);
 
-$thumbPath = ".".$thumb->getUrl();
+$thumbPath = WEB_PATH.$thumb->getUrl();
 $filePointer = fopen($thumbPath, 'rb');
 $extension = strtolower(pathinfo($thumbPath, PATHINFO_EXTENSION));
 

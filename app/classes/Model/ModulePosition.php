@@ -8,7 +8,7 @@ use GC\Storage\Database;
 
 class ModulePosition extends AbstractModel
 {
-    public static $table = '::frame_pos';
+    public static $table = '::module_pos';
 
     use ColumnTrait;
 

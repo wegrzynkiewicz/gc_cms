@@ -3,11 +3,9 @@
 /* Plik ładowany przed każdą akcją w panelu admina */
 
 # domyślny headTitle, jeżeli zapomni się go nadać
-$headTitle = trans("Panel");
+$headTitle = trans($config['adminNavbarTitle']);
 
-$surl = function($path = '') {
-    return url("/admin{$path}");
-};
+GC\Url::extendMask('/admin%s');
 
 $breadcrumbs = new GC\Breadcrumbs();
 $breadcrumbs->push('/admin', 'Dashboard', 'fa-dashboard');

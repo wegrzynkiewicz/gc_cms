@@ -44,12 +44,12 @@
     </div>
 </div>
 
-<?php require ACTIONS_PATH.'/admin/parts/assets/footer.html.php';; ?>
+<?php require ACTIONS_PATH.'/admin/parts/assets/footer.html.php'; ?>
 
 <script>
 $(function() {
     function refreshType(fieldType) {
-        $.get("<?=$surl(sprintf("%s/types", $field_id ? "/$field_id" : '/'))?>/"+fieldType, function(data) {
+        $.get("<?=$refreshUrl?>/"+fieldType, function(data) {
             $('#fieldType').html(data);
         });
     }

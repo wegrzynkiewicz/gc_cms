@@ -5,6 +5,8 @@ namespace GC;
 use GC\Model\MailSent;
 use GC\Model\MailToSend;
 use GC\Logger;
+use GC\Render;
+use GC\Password;
 use PHPMailer;
 use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 
@@ -47,8 +49,8 @@ class Mail extends PHPMailer
         $cssToInlineStyles = new CssToInlineStyles();
         $viewArgs['mail'] = $this;
         $viewArgs['config'] = getConfig();
-        $html = view($templateEmailPath, $viewArgs);
-        $css = view($stylePath);
+        $html = Render::action($templateEmailPath, $viewArgs);
+        $css = Render::action($stylePath);
         $content = $cssToInlineStyles->convert($html, $css);
         $this->Body = $content;
         $this->buildAltBody($content);
@@ -68,7 +70,7 @@ class Mail extends PHPMailer
 
     public function push()
     {
-        $this->hash = GC\Password::random(40);
+        $this->hash = Password::random(40);
         MailToSend::insert([
             'mail_hash' => $this->hash,
             'receivers' => implode('; ', array_keys($this->all_recipients)),

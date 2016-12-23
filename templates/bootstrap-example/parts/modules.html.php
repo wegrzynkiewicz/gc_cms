@@ -1,13 +1,11 @@
-<?php
-if (isset($frame_id) and ($frame_id > 0)) {
-    $modules = GC\Model\Module::joinAllWithKeyByForeign($frame_id);
-}
-?>
+<?php $modules = GC\Model\Module::joinAllWithKeyByForeign($frame_id) ?>
 <?php if (empty($modules)): ?>
-    Nie znaleziono modułów
+    <div class="container">
+        <?=trans("Nie znaleziono modułów")?>
+    </div>
 <?php else: ?>
-    <?=templateView("/parts/modules-loop.html.php", [
+    <?=GC\Render::template("/parts/modules-loop.html.php", [
         'modules' => $modules,
-        'withoutContainer' => isset($withoutContainer),
+        'container' => $container,
     ])?>
 <?php endif ?>

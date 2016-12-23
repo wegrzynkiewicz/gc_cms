@@ -3,7 +3,7 @@
 $post_id = intval(array_shift($_SEGMENTS));
 $node = GC\Model\PostNode::selectWithFrameByPrimaryId($post_id);
 $headTitle = trans('Edycja węzła "%s"', [$node['name']]);
-$breadcrumbs->push($request, $headTitle);
+$breadcrumbs->push($request->path, $headTitle);
 
 if(isPost($_POST)) {
 

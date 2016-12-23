@@ -3,7 +3,6 @@
 /** Plik ładuje odpowiednią akcję poprzez warunki routingu */
 
 $path = $request->path;
-$method = $request->method;
 
 # jeżeli adres bez ścieżki wtedy załaduj akcję główną
 if (empty(trim($path, '/'))) {
@@ -30,7 +29,7 @@ if (strlen($_SEGMENTS[0]) == 2) {
 if (count($_SEGMENTS) === 0) {
     GC\Logger::routing("Homepage with lang");
 
-    return require ACTIONS_PATH."/{$method}-homepage.php";
+    return require ACTIONS_PATH."/{$request->method}-homepage.php";
 }
 
 # jeżeli któryś z niestandardowych rewritów okaże się pasować, wtedy przekieruj na właściwy adres
@@ -50,14 +49,14 @@ while (count($_SEGMENTS) > 0) {
     $segment = array_shift($_SEGMENTS);
 
     # jeżeli istnieje plik "import" to załaduj, ale nie kończ pętli
-    $file = "{$path}/_import.php";
+    $file = "{$path}/{$segment}/_import.php";
     if (file_exists($file)) {
         GC\Logger::import(relativePath($file));
         require $file;
     }
 
     # jeżeli istnieje plik z metodą requesta na początku, załaduj
-    $file = "{$path}/{$method}-{$segment}.php";
+    $file = "{$path}/{$segment}-{$request->method}.php";
     if (file_exists($file)) {
         GC\Logger::routing("Nested with method :: ".relativePath($file));
 
@@ -79,14 +78,6 @@ while (count($_SEGMENTS) > 0) {
         continue;
     }
 
-    # jeżeli nie istnieje akcja to spróbuj załadować plik start z metodą
-    $file = "{$path}/{$segment}/{$method}-start.php";
-    if (file_exists($file)) {
-        GC\Logger::routing("Start with method :: ".relativePath($file));
-
-        return require $file;
-    }
-
     # jeżeli nie istnieje akcja to spróbuj załadować plik start
     $file = "{$path}/{$segment}/start.php";
     if (file_exists($file)) {
@@ -94,6 +85,8 @@ while (count($_SEGMENTS) > 0) {
 
         return require $file;
     }
+
+    $path = $folder;
 }
 
 $_SEGMENTS = $copySegments;
@@ -103,7 +96,7 @@ $slug = array_shift($_SEGMENTS);
 $absoluteSlug = '/'.implode('/', $_SEGMENTS);
 
 # jeżeli istnieje niestandardowy plik w folderze z szablonem
-$customFile = TEMPLATE_PATH."/custom/$slug.html.php";
+$customFile = TEMPLATE_PATH."/custom/{$slug}.html.php";
 if (file_exists($customFile)) {
     GC\Logger::routing("Custom slug :: ".relativePath($customFile));
 
@@ -121,7 +114,7 @@ if ($id <= 0) {
 }
 
 # jeżeli istnieje niestandardowy plik w folderze z szablonem
-$customFile = TEMPLATE_PATH."/custom/$id.html.php";
+$customFile = TEMPLATE_PATH."/custom/{$id}.html.php";
 if (file_exists($customFile)) {
     GC\Logger::routing("Custom id :: ".relativePath($customFile));
 

@@ -5,6 +5,7 @@
 define('TEMPLATE', 'bootstrap-example'); # nazwa używanego szablonu
 define('ASSETS_URL', '/assets'); # adres do katalogu z zasobami
 define('ROOT_PATH', realpath(__DIR__.'/../../')); # ścieżka do katalogu głównego serwera www
+define('WEB_PATH', ROOT_PATH.'/web'); # ścieżka do katalogu z www rootem
 define('ACTIONS_PATH', ROOT_PATH.'/actions'); # ścieżka do katalogu z plikami kontrolerów i szablonów
 define('APP_PATH', ROOT_PATH.'/app'); # ścieżka do katalogu z najważniejszy plikami aplikacji
 define('TMP_PATH', ROOT_PATH.'/tmp'); # ścieżka do folderu z plikami tymczasowymi
@@ -112,7 +113,7 @@ $config = [
             'default' => 'Standardowa galeria',
             'fancybox' => 'Fancybox'
         ],
-        'slider' => [
+        'image-slider' => [
             'default' => 'Standardowy slajder',
             'default-full' => 'Standardowy slajder (na całą szerokość strony)',
         ],
@@ -164,7 +165,8 @@ $config = [
     ],
     'thumb' => [ # ustawienia generatora miniaturek
         'enabled' => true, # czy generować miniaturki?
-        'thumbsUrl' => '/tmp/thumbs', # adres do katalogu z miniaturkami
+        'thumbsPath' => ROOT_PATH.'/web', # ścieżka do katalogu z miniaturkami, należy do tego dodać thumbsUrl
+        'thumbsUrl' => '/thumbs', # adres do katalogu z miniaturkami
         'options' => [ # ustawienia dla generatora miniaturek
             'jpg' => [
                 'loader' => 'imagecreatefromjpeg',

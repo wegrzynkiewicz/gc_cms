@@ -11,10 +11,10 @@ $getPreviewUrl = function() use ($post_id) {
 };
 
 $surl = function($path) use ($surl, $post_id) {
-    return $surl("/{$post_id}/module{$path}");
+    return GC\Url::make("/{$post_id}/module{$path}");
 };
 
 $headTitle = trans('Moduły w poście "%s"', [$post['name']]);
-$breadcrumbs->push($surl("/list"), $headTitle);
+$breadcrumbs->push(GC\Url::make("/list"), $headTitle);
 
 require ACTIONS_PATH."/admin/parts/module/$action.html.php";

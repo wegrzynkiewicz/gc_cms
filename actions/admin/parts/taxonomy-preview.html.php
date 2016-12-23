@@ -1,7 +1,8 @@
 <ol class="list-unstyled" style="padding-left: 20px">
-    <?php foreach ($tree->getChildren() as $node): $node_id = $node->getPrimaryId() ?>
+    <?php foreach ($tree->getChildren() as $node): ?>
+        <?php $node_id = $node->getPrimaryId() ?>
         <li>
-            <a href="<?=$taxonomyUrl("/edit/$node_id")?>">
+            <a href="<?=$taxonomyUrl("/{$node_id}/edit")?>">
                 <?=e($node['name'])?>
             </a>
             <?php if ($node->hasChildren()): ?>

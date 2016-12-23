@@ -4,6 +4,14 @@ namespace GC\Storage\Utility;
 
 use GC\Storage\Database;
 
+/**
+ * Zbior funkcji pomagających operować na węźle
+ * Dla prawidłowego działania wymaga w klasie pochodnej:
+ * public static $table = "";
+ * public static $primary = "";
+ * public static $treeTable = "";
+ * public static $taxonomy = "";
+ */
 trait NodeTrait
 {
     /**
@@ -28,6 +36,15 @@ trait NodeTrait
         $tree = static::createTree($nodes);
 
         return $tree;
+    }
+
+    /**
+     * Usuwa węzeł i wszystkie podwęzły które nie należą do żadnej grupy i nie posiadają rodzica
+     */
+    protected static function deleteNodeByPrimaryId($primary_id)
+    {
+        static::deleteByPrimaryId($primary_id);
+        static::deleteWithoutParentId();
     }
 
     /**

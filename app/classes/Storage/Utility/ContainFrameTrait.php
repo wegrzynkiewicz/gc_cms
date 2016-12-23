@@ -58,7 +58,7 @@ trait ContainFrameTrait
         $row = static::selectWithFrameByPrimaryId($primary_id);
 
         # usuń wszystkie moduły dla rusztowania o frame_id
-        Module::deleteModuleByForeign($row['frame_id']);
+        Module::deleteModulesByForeign($row['frame_id']);
 
         # usuń wszystkie moduły, które nie są przypisane do rusztowań
         Module::deleteUnassignedByForeign();

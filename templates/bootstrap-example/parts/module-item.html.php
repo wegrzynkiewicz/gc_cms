@@ -1,5 +1,5 @@
 <div id="module_<?=e($module['module_id'])?>">
-    <?=templateView($template, [
+    <?=GC\Render::template($template, [
         'module_id' => $module['module_id'],
         'module' => $module,
         'type' => $module['type'],

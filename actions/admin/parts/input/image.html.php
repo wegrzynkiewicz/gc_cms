@@ -1,6 +1,6 @@
 <?php
     $value = inputValue($name);
-    $preview = empty($value) ? assetsUrl($config['noImageUrl']): $value;
+    $preview = empty($value) ? GC\Url::assets($config['noImageUrl']): $value;
 ?>
 
 <div class="form-group">
@@ -58,7 +58,7 @@
         });
 
         $('#<?=e($name)?>_delete').click( function(){
-            $('#<?=e($name)?>_preview').attr('src', '<?=assetsUrl($config['noImageUrl'])?>');
+            $('#<?=e($name)?>_preview').attr('src', '<?=GC\Url::assets($config['noImageUrl'])?>');
             $('#<?=e($name)?>_source').val('');
         })
     });

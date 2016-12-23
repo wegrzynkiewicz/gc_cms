@@ -1,4 +1,4 @@
-<?php $preview = empty($post['image']) ? assetsUrl($config['noImageUrl']): $post['image']; ?>
+<?php $preview = empty($post['image']) ? GC\Url::assets($config['noImageUrl']): $post['image']; ?>
 
 <tr>
 
@@ -7,7 +7,7 @@
     </td>
 
     <td>
-        <a href="<?=$surl("/$post_id/edit/")?>"
+        <a href="<?=GC\Url::mask("/$post_id/edit/")?>"
             title="<?=trans('Edytuj wpis')?>">
             <?=e($post['name'])?>
         </a>
@@ -37,7 +37,7 @@
     </td>
 
     <td class="text-right">
-        <a href="<?=GC\Url::make("/post/$post_id")?>"
+        <a href="<?=GC\Url::mask("/post/$post_id")?>"
             target="_blank"
             title="<?=trans('Podejrzyj ten wpis')?>"
             class="btn btn-primary btn-sm">
@@ -45,7 +45,7 @@
             <?=trans("Podgląd")?>
         </a>
 
-        <a href="<?=$surl("/$post_id/module/list")?>"
+        <a href="<?=GC\Url::mask("/$post_id/module/list")?>"
             title="<?=trans('Wyświetl moduły wpisu')?>"
             class="btn btn-success btn-sm">
             <i class="fa fa-file-text-o fa-fw"></i>

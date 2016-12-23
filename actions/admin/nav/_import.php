@@ -1,13 +1,6 @@
 <?php
 
 $headTitle = trans("Nawigacje");
-
-if (intval($_SEGMENTS[0])) {
-    $nav_id = intval(array_shift($_SEGMENTS));
-}
-
-$surl = function($path) use ($surl) {
-    return $surl("/nav{$path}");
-};
-
-$breadcrumbs->push($surl('/list'), $headTitle, 'fa-files-o');
+GC\Url::extendMask('/nav%s');
+$breadcrumbs->push(GC\Url::mask('/list'), $headTitle, 'fa-sitemap');
+$nav_id = shiftSegmentAsInteger();

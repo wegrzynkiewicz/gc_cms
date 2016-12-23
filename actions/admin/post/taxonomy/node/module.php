@@ -15,6 +15,6 @@ $surl = function($path) use ($node_id) {
 };
 
 $headTitle = trans('Moduły w węźle "%s"', [$node['name']]);
-$breadcrumbs->push($surl('/list'), $headTitle);
+$breadcrumbs->push(GC\Url::make('/list'), $headTitle);
 
 require ACTIONS_PATH."/admin/parts/module/$action.html.php";

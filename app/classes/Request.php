@@ -21,7 +21,7 @@ class Request
         $rawRequest = static::filterServer('REQUEST_URI');
         $this->path = '/'.trim(parse_url($rawRequest, \PHP_URL_PATH), '/');
         $this->query = parse_url($rawRequest, \PHP_URL_QUERY);
-        $this->method = strtoupper(static::filterServer('REQUEST_METHOD'));
+        $this->method = strtolower(static::filterServer('REQUEST_METHOD'));
 
         Logger::request(sprintf("%s %s",
             $this->method, rtrim("{$this->path}?{$this->query}", '?')
@@ -45,7 +45,7 @@ class Request
      */
     public function isMethod($method)
     {
-        return $this->method === strtoupper($method);
+        return $this->method === strtolower($method);
     }
 
     /**

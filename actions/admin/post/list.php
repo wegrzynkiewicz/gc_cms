@@ -22,7 +22,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=GC\Url::make("/admin/post/new")?>" type="button" class="btn btn-success btn-md">
+                <a href="<?=GC\Url::mask("/admin/post/new")?>" type="button" class="btn btn-success btn-md">
                     <i class="fa fa-plus fa-fw"></i>
                     <?=trans('Dodaj nowy post')?>
                 </a>
@@ -77,10 +77,10 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=GC\Url::make("/admin/post/delete")?>" class="modal-content">
+        <form id="deleteModalForm" method="post" action="<?=GC\Url::mask("/admin/post/delete")?>" class="modal-content">
             <input name="post_id" type="hidden" value="">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
@@ -95,7 +95,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 <button type="button" class="btn btn-default" data-dismiss="modal">
                     <?=trans('Anuluj')?>
                 </button>
-                <button type="submit" value="" class="btn btn-danger btn-ok" href="">
+                <button type="submit" class="btn btn-danger btn-ok">
                     <?=trans('Usuń')?>
                 </button>
             </div>
@@ -103,7 +103,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     </div>
 </div>
 
-<?php require ACTIONS_PATH.'/admin/parts/assets/footer.html.php';; ?>
+<?php require ACTIONS_PATH.'/admin/parts/assets/footer.html.php'; ?>
 
 <script>
     $(function(){
