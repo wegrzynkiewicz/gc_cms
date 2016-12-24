@@ -7,8 +7,6 @@ define('ASSETS_URL', '/assets'); # adres do katalogu z zasobami
 define('ROOT_PATH', realpath(__DIR__.'/../../')); # ścieżka do katalogu głównego serwera www
 define('WEB_PATH', ROOT_PATH.'/web'); # ścieżka do katalogu z www rootem
 define('ACTIONS_PATH', ROOT_PATH.'/actions'); # ścieżka do katalogu z plikami kontrolerów i szablonów
-define('APP_PATH', ROOT_PATH.'/app'); # ścieżka do katalogu z najważniejszy plikami aplikacji
-define('TMP_PATH', ROOT_PATH.'/tmp'); # ścieżka do folderu z plikami tymczasowymi
 define('TEMPLATE_PATH', ROOT_PATH.'/templates/'.TEMPLATE); # ścieżka do plików szablonu
 define('TEMPLATE_ASSETS_URL', '/templates/'.TEMPLATE); # adres do zasobów w katalogu z szablonem
 
@@ -46,7 +44,7 @@ $config = [
     ],
     'logger' => [ # ustawienia dla rejestrowania logów
         'enabled' => true, # uruchamia rejestrowanie logów
-        'folder' => TMP_PATH.'/logs', # katalog do ktorego są zapisywane logi
+        'folder' => ROOT_PATH.'/tmp/logs', # katalog do ktorego są zapisywane logi
     ],
     'db' => [ # zawiera parametry połączeniowe do bazy danych
         'dns' => 'mysql:host=localhost;dbname=_gc_cms;charset=utf8',
@@ -113,6 +111,12 @@ $config = [
             'default' => 'Standardowa galeria',
             'fancybox' => 'Fancybox'
         ],
+        'photo' => [
+            'default' => 'Zdjęcie z poglądem',
+            'default-fluid' => 'Zdjęcie z poglądem (na całą szerokość strony)',
+            'no-clickable' => 'Nieklikalne zdjęcie',
+            'no-clickable-fluid' => 'Nieklikalne zdjęcie (na całą szerokość strony)'
+        ],
         'image-slider' => [
             'default' => 'Standardowy slajder',
             'default-full' => 'Standardowy slajder (na całą szerokość strony)',
@@ -132,7 +136,7 @@ $config = [
         'editbox' => 'Zwykłe pole tekstowe',
         'selectbox' => 'Pole jednokrotnego wyboru',
     ],
-    'formStatuses' => [ # statusy jaką wiadomość formularza może otrzymać
+    'formStatuses' => [ # statusy jaką nadesłany formularz może otrzymać
         'unread' => [
             'name' => 'Nieprzeczytana',
             'class' => 'font-bold',
@@ -190,5 +194,40 @@ $config = [
     ],
     'rewrites' => [ # zawiera niestandardowe przekierowania $regex => $destination
         '~^/old-service/index\.php\?id=(\d+)\&theme=([a-z]+?)$~' => '/old-service/$1/$2',
-    ]
+    ],
+    'dump' => [ # zawiera informacje dla eksportera bazy danych
+        'path' => ROOT_PATH.'/app/storage/dumps', # ścieżka do katalogu z rzutami bazy danych
+        'tmpPath' => ROOT_PATH.'/tmp', # ścieżka tymczasowa dla eksportera
+        'settings' => [
+            'include-tables' => [],
+            'exclude-tables' => [
+                '/dumps$/',
+                '/form_sent$/',
+                '/mail_to_send$/',
+                '/mail_sent$/',
+            ],
+            'compress' => 'Gzip',
+            'no-data' => false,
+            'add-drop-table' => true,
+            'single-transaction' => true,
+            'lock-tables' => false,
+            'add-locks' => true,
+            'extended-insert' => false,
+            'complete-insert' => false,
+            'disable-keys' => true,
+            'where' => '',
+            'no-create-info' => false,
+            'skip-triggers' => false,
+            'add-drop-trigger' => true,
+            'routines' => false,
+            'hex-blob' => true,
+            'databases' => false,
+            'add-drop-database' => false,
+            'skip-tz-utc' => false,
+            'no-autocommit' => true,
+            'default-character-set' => 'utf8',
+            'skip-comments' => true,
+            'skip-dump-date' => false,
+        ],
+    ],
 ];

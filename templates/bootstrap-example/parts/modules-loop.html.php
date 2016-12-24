@@ -1,12 +1,10 @@
 <?php
 
-$getModuleTemplate = function ($type, $theme, $additional = '') use ($request) {
+$getModuleTemplate = function ($type, $theme) use ($request) {
 
     $templates = [
-        "/modules/{$type}/{$theme}{$additional}-{$request->method}.html.php",
-        "/modules/{$type}/{$theme}{$additional}.html.php",
-        "/modules/{$type}/default{$additional}-{$request->method}.html.php",
-        "/modules/{$type}/default{$additional}.html.php",
+        "/modules/{$type}/{$theme}-{$request->method}.html.php",
+        "/modules/{$type}/{$theme}.html.php",
     ];
 
     foreach ($templates as $template) {
@@ -33,8 +31,8 @@ foreach ($gridModules as $row) {
         $module = array_shift($row);
         list($x, $y, $w, $h) = $module['size'];
 
-        $template = $getModuleTemplate($module['type'], $module['theme'], '-fluid');
-        if ($w == 12 and $template and is_readable(TEMPLATE_PATH.$template)) {
+        $template = $getModuleTemplate($module['type'], $module['theme']);
+        if ($w == 12 and $template and preg_match("~-fluid~", $template)) {
             require TEMPLATE_PATH."/parts/module-item.html.php";
             continue;
         }

@@ -11,7 +11,9 @@ GC\Model\Frame::updateByFrameId($post['frame_id'], [
 
 $relations = isset($_POST['taxonomy']) ? array_unchunk($_POST['taxonomy']) : [];
 
-GC\Model\Post::update($post_id, [], $relations);
+GC\Model\Post::update($post_id, [
+    'publication_datetime' => $_POST['publication_datetime'],
+], $relations);
 
 setNotice(trans('Wpis "%s" został zaktualizowany.', [$post['name']]));
 

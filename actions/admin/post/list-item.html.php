@@ -14,7 +14,7 @@
     </td>
 
     <td>
-        <?=e(transDateTime($post['publication_date']))?>
+        <?=e(transDateTime($post['publication_datetime']))?>
     </td>
 
     <td>

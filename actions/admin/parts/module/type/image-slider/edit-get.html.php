@@ -1,8 +1,5 @@
 <?php
 
-$headTitle = trans("Edycja modułu slajdera zdjęć");
-$breadcrumbs->push($request->path, $headTitle);
-
 $_POST = $module;
 
 require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>

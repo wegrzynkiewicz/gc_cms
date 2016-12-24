@@ -12,6 +12,7 @@ $relations = isset($_POST['taxonomy']) ? array_unchunk($_POST['taxonomy']) : [];
 
 GC\Model\Post::insertWithRelations([
     'frame_id' => $frame_id,
+    'publication_datetime' => $_POST['publication_datetime'],
 ], $relations);
 
 setNotice(trans('Nowy wpis "%s" została utworzony.', [$_POST['name']]));

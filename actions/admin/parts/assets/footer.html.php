@@ -1,5 +1,9 @@
-
-<?php require sprintf(ACTIONS_PATH.'/admin/parts/assets/footer-%s.html.php', getClientLang()) ?>
+<?php
+$template = sprintf(ACTIONS_PATH.'/admin/parts/assets/footer-%s.html.php', getClientLang());
+if (is_readable($template)) {
+    require $template;
+}
+?>
 
 <script>
 $(window).bind("load resize", function() {

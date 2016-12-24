@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.7.0/css/flag-icon.css" integrity="sha384-kAyf873uHSYboMo6C86bEejLrY1II/oRYE0u4IIKECPcoO6M5IloEBLr6+UZeTwX" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha384-EAV0qjkNeoPc8RzwxkqwBzz/Q5qyV9dF3jL7fZ/8EZO8IDcmoOHfSeoj3w/LdYj+" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha384-MPpt1W7za5xYx/fOLYN2ArjgJeN9x7w9spvBInv/W5GG/w0fyN6N/0tsUSM8BNLg" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css" integrity="sha256-IihK1cRp3mOP+uJ2NIWC4NK60QT0nPwLDHyh1ekT5/w=" crossorigin="anonymous" />
 
 <link rel="stylesheet" href="<?=GC\Url::assets("/admin/styles/main.css")?>">
 
@@ -34,6 +35,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha384-bD5m2XNm9nP2xLhY13ZMvm73xzZvv/tfbPzYGjMLduzMLnDc9gzc1sVl3vufMg/U" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha384-DiTOB5DarLwdE9bzATOXhLQp6irFZIhtJreUNJiwMMDiHGu7LdRZeqZBveanC2zo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js" integrity="sha256-iaqfO5ue0VbSGcEiQn+OeXxnxAMK2+QgHXIDA5bWtGI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js" integrity="sha256-Gn7MUQono8LUxTfRA0WZzJgTua52Udm1Ifrk5421zkA=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js" integrity="sha256-I8vGZkA2jL0PptxyJBvewDVqNXcgIhcgeqi+GD/aw34=" crossorigin="anonymous"></script>
 
 <script src="<?=GC\Url::root("/external/ckeditor-4.5.11/ckeditor.js")?>"></script>
 <script src="<?=GC\Url::root("/external/ckeditor-4.5.11/adapters/jquery.js")?>"></script>

@@ -1,6 +1,5 @@
 <?php
-
-$items = GC\Model\ModuleItem::selectAllWithFrameByModuleId($module_id);
+$items = GC\Model\ModuleItem::joinAllWithFrameByForeign($module_id);
 ?>
 
 <?php if (count($items)): ?>
@@ -17,7 +16,7 @@ $items = GC\Model\ModuleItem::selectAllWithFrameByModuleId($module_id);
         <div class="tab-content">
             <?php foreach ($items as $item_id => $item): ?>
                 <div role="tabpanel" class="tab-pane" id="tab_<?=$item_id?>">
-                    <?=templateView('/parts/modules.html.php', [
+                    <?=GC\Render::template('/parts/modules.html.php', [
                         'frame_id' => $item['frame_id'],
                         'withoutContainer' => true,
                     ])?>

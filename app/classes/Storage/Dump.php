@@ -1,0 +1,113 @@
+<?php
+
+namespace GC\Storage;
+
+use GC\Model\Dump as DumpModel;
+use GC\Logger;
+use GC\Password;
+use Ifsnop\Mysqldump as IMysqldump;
+
+class Dump
+{
+    public static $delimiter = ';';
+
+    public static function makeBackup($title)
+    {
+        $dumpPath = getConfig()['dump']['path'];
+        $time = time();
+        $creation_date = date('Y-m-d-His', $time);
+        $filepath = "{$dumpPath}/dump-{$creation_date}.sql.gz";
+        static::export($filepath);
+
+        DumpModel::insert([
+            'title' => $title,
+            'creation_date' => date('Y-m-d H:i:s', $time),
+            'path' => relativePath($filepath),
+            'size' => filesize($filepath),
+        ]);
+    }
+
+    public static function export($filename)
+    {
+        createFile($filename);
+
+        $dumpConfig = getConfig()['dump'];
+        $dbConfig = getConfig()['db'];
+
+        Logger::dumpExport($filename);
+
+        $dump = new IMysqldump\Mysqldump(
+            $dbConfig['dns'],
+            $dbConfig['username'],
+            $dbConfig['password'],
+            $dumpConfig['settings']
+        );
+
+        $dump->start($filename);
+    }
+
+    public static function import($filepath)
+    {
+        $file = $filepath;
+
+        Logger::dumpImport($file);
+
+        if (pathinfo($filepath, \PATHINFO_EXTENSION) === 'gz') {
+
+            $path = getConfig()['dump']['tmpPath'];
+            $file = $path.'/'.basename($filepath, '.gz');
+            static::decompress($filepath, $file);
+            static::openAndExecute($file);
+            unlink($file);
+
+            return;
+        }
+
+        static::openAndExecute($file);
+    }
+
+    public static function openAndExecute($file)
+    {
+        $file = fopen($file, 'r');
+        if (is_resource($file) === false) {
+            return;
+        }
+
+        $query = array();
+
+        while (feof($file) === false) {
+            $query[] = fgets($file);
+
+            if (preg_match('~' . preg_quote(static::$delimiter, '~') . '\s*$~iS', end($query)) === 1) {
+                $query = trim(implode('', $query));
+
+                Database::$pdo->exec($query);
+            }
+
+            if (is_string($query) === true) {
+                $query = array();
+            }
+        }
+
+        fclose($file);
+    }
+
+    protected static function decompress($filepath, $destination)
+    {
+        if (is_file($filepath) === false) {
+            return;
+        }
+
+        createFile($destination);
+
+        $file = gzopen($filepath, 'rb');
+        $outFile = fopen($destination, 'wb');
+
+        while (!gzeof($file)) {
+            fwrite($outFile, gzread($file, 4096));
+        }
+
+        fclose($outFile);
+        gzclose($file);
+    }
+}

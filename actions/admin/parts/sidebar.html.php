@@ -65,26 +65,6 @@ $menu = [
             ],
         ],
     ],
-    'Galerie zdjęć' => [
-        'id' => 'galleries',
-        'path' => '#',
-        'icon' => 'fa fa-picture-o fa-fw',
-        'perms' => [],
-        'children' => [
-            'Wyświetl wszystkie galerie' => [
-                'id' => 'all_galleries',
-                'path' => '/admin/gallery/list',
-                'icon' => '',
-                'perms' => [],
-            ],
-            'Dodaj nową galerie' => [
-                'id' => 'add_gallery',
-                'path' => '/admin/gallery/new',
-                'icon' => '',
-                'perms' => [],
-            ],
-        ],
-    ],
     'Widżety' => [
         'id' => 'widgets',
         'path' => '/admin/widget/list',

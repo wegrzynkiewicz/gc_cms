@@ -1,10 +1,8 @@
 <?php
 
-$headTitle = trans("Edycja modułu pojedyńczego zdjęcia");
-$breadcrumbs->push($request->path, $headTitle);
-
 $_POST = $settings;
 $_POST['name'] = $content;
+$_POST['theme'] = $module['theme'];
 
 require ACTIONS_PATH.'/admin/parts/header.html.php';
 require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
@@ -17,6 +15,13 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                 <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
                     'label' => 'Nazwa zdjęcia',
+                ])?>
+
+                <?=GC\Render::action('/admin/parts/input/selectbox.html.php', [
+                    'name' => 'theme',
+                    'label' => 'Szablon',
+                    'help' => 'Wybierz jeden z dostępnych szablonów dla zdjęcia',
+                    'options' => $config['moduleThemes']['photo'],
                 ])?>
 
                 <?=GC\Render::action('/admin/parts/input/image.html.php', [

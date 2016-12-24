@@ -1,7 +1,4 @@
-<?php
-$url = def($settings, 'url', null);
-$preview = $url ? GC\Url::root($url) : GC\Url::assets($config['noImageUrl']);
-?>
+<?php $preview = GC\Url::root(def($settings, 'url', '')) ?>
 
 <div id="photo_<?=e($module_id)?>" class="text-center" data-gallery="photoswipe">
     <a href="<?=e($preview)?>"
@@ -13,6 +10,7 @@ $preview = $url ? GC\Url::root($url) : GC\Url::assets($config['noImageUrl']);
 
         <img data-thumb="<?=generateThumb($preview)?>"
             alt="<?=e($content)?>"
+            width="100%"
             class="img-responsive">
     </a>
 </div>

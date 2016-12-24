@@ -2,7 +2,7 @@
 
 <?php if ($menu->hasChildren()): ?>
     <ol class="list-unstyled">
-        <?=templateView("/navs/side-item.html.php", [
+        <?=templateView("/navs/side-items.html.php", [
             'menu' => $menu,
         ])?>
     </ol>

@@ -20,6 +20,8 @@ class Response
         Logger::redirect(
             sprintf("%s %s :: ExecutionTime: %s", $code, $url, (microtime(true) - START_TIME)
         ));
+
+        die();
     }
 
     /**

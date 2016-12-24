@@ -12,7 +12,7 @@ trait TaxonomyTrait
     public static function selectSingleByWorkName($workname, $lang)
     {
         $sql = self::sql("SELECT * FROM ::table WHERE lang = ? AND workname = ? LIMIT 1");
-        $row = Database::fetchSingle($sql, [$workname, $lang]);
+        $row = Database::fetchSingle($sql, [$lang, $workname]);
 
         return $row;
     }

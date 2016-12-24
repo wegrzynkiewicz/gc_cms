@@ -12,6 +12,7 @@
         "phpmailer/phpmailer": "^5.2",
         "tijsverkoyen/css-to-inline-styles": "^2.2",
         "studio-42/elfinder": "^2.1",
-        "ezyang/htmlpurifier": "^4.8"
+        "ezyang/htmlpurifier": "^4.8",
+        "ifsnop/mysqldump-php": "^2.2"
     }
 }

@@ -1,8 +1,5 @@
 <?php
 
-$headTitle = trans("Edycja modułu formularza");
-$breadcrumbs->push($request->path, $headTitle);
-
 $installedForms = GC\Model\Form::mapCorrectWithPrimaryKeyBy('name');
 
 $emails = [];

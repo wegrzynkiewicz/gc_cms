@@ -4,7 +4,7 @@
             <?=e($node['name'])?>
         <?=($node->getCloseTag())?>
         <ol class="list-unstyled" style="padding-left: 20px">
-            <?=templateView("/navs/side-item.html.php", [
+            <?=templateView("/navs/side-items.html.php", [
                 'menu' => $node,
             ])?>
         </ol>

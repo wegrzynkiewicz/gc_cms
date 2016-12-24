@@ -51,7 +51,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                                 <?=trans('Nazwa wpisu')?>
                             </th>
                             <th>
-                                <?=trans('Data publikacji')?>
+                                <?=trans('Data i czas publikacji')?>
                             </th>
                             <th>
                                 <?=trans('Podziały')?>

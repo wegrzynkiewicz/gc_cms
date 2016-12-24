@@ -19,7 +19,7 @@ trait PrimaryTrait
     {
         $sql = self::sql("SELECT * FROM ::table WHERE ::primary = ? LIMIT 1");
 
-        return Database::fetchSingle($sql, [intval($primary_id)]);
+        return Database::fetchSingle($sql, [$primary_id]);
     }
 
     /**
@@ -69,7 +69,7 @@ trait PrimaryTrait
         }
 
         $columns = static::buildUpdateSyntax($data);
-        $data[] = intval($primary_id);
+        $data[] = $primary_id;
 
         $sql = self::sql("UPDATE ::table SET {$columns} WHERE ::primary = ? LIMIT 1");
         $affectedRows = Database::execute($sql, array_values($data));
@@ -83,7 +83,7 @@ trait PrimaryTrait
     protected static function deleteByPrimaryId($primary_id)
     {
         $sql = self::sql("DELETE FROM ::table WHERE ::primary = ? LIMIT 1");
-        $affectedRows = Database::execute($sql, [intval($primary_id)]);
+        $affectedRows = Database::execute($sql, [$primary_id]);
 
         return $affectedRows;
     }

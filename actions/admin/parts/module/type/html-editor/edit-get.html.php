@@ -1,8 +1,5 @@
 <?php
 
-$headTitle = trans("Edycja modułu tekstowego");
-$breadcrumbs->push($request->path, $headTitle);
-
 $_POST['content'] = $content;
 
 require ACTIONS_PATH.'/admin/parts/header.html.php';

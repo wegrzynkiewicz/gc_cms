@@ -12,9 +12,9 @@ $settings = [
 ];
 
 GC\Model\Module::updateByPrimaryId($module_id, [
-    'theme' => 'default',
+    'theme' => $_POST['theme'],
     'content' => $name,
     'settings' => json_encode($settings),
 ]);
 
-GC\Response::redirect($breadcrumbs->getLastUrl());
+GC\Response::redirect($breadcrumbs->getBeforeLastUrl());

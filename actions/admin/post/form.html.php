@@ -47,6 +47,13 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                 <?php endif ?>
             <?php endforeach ?>
 
+            <div class="simple-box">
+                <?=GC\Render::action('/admin/parts/input/datatimepicker.html.php', [
+                    'name' => 'publication_datetime',
+                    'label' => 'Data publikacji',
+                ])?>
+            </div>
+
             <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz wpis',
             ])?>
@@ -61,13 +68,21 @@ $(function () {
     $('form').validate({
         rules: {
             name: {
-                required: true
-            }
+                required: true,
+            },
+            publication_datetime: {
+                required: true,
+                date: true,
+            },
         },
         messages: {
             name: {
                 required: "<?=trans('Nazwa wpisu jest wymagana')?>"
-            }
+            },
+            publication_datetime: {
+                required: "<?=trans('Data publikacji jest wymagana')?>",
+                date: "<?=trans('Data publikacji musi być prawidłową datą w formacie YYYY-MM-DD HH:MM:SS')?>",
+            },
         },
     });
 });

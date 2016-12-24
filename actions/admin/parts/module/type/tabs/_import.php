@@ -1,4 +1,4 @@
 <?php
 
-$headTitle = trans("Edycja modułu zakładek");
-$breadcrumbs->push(GC\Url::make("/{$module_id}/edit"), $headTitle);
+$headTitle = trans('Edycja modułu zakładek');
+$breadcrumbs->push(GC\Url::mask('/edit'), $headTitle);
