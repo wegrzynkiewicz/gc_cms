@@ -11,17 +11,17 @@ class Dump
 {
     public static $delimiter = ';';
 
-    public static function makeBackup($title)
+    public static function makeBackup($name)
     {
         $dumpPath = getConfig()['dump']['path'];
         $time = time();
-        $creation_date = date('Y-m-d-His', $time);
-        $filepath = "{$dumpPath}/dump-{$creation_date}.sql.gz";
+        $creation_datetime = date('Y-m-d-His', $time);
+        $filepath = "{$dumpPath}/dump-{$creation_datetime}.sql.gz";
         static::export($filepath);
 
         DumpModel::insert([
-            'title' => $title,
-            'creation_date' => date('Y-m-d H:i:s', $time),
+            'name' => $name,
+            'creation_datetime' => date('Y-m-d H:i:s', $time),
             'path' => relativePath($filepath),
             'size' => filesize($filepath),
         ]);

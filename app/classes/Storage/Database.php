@@ -153,7 +153,7 @@ class Database
     }
 
     /**
-     * Wywołuje i loguje zapytania
+     * Sprawdza poprawność nazwy kolumny
      */
     public static function assertColumn($column)
     {

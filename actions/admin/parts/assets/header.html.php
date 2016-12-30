@@ -46,11 +46,6 @@
 
 <script>
 $.extend(true, $.fn.dataTable.defaults, {
-    fnDrawCallback: function(oSettings) {
-        if (oSettings._iDisplayLength > oSettings.fnRecordsDisplay()) {
-            $(oSettings.nTableWrapper).find('.dataTables_paginate').hide();
-        }
-    },
     language: {
         url: "//cdn.datatables.net/plug-ins/1.10.12/i18n/Polish.json"
     },

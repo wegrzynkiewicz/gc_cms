@@ -51,7 +51,11 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     <?=trans("Dodaj nową zakładkę")?>
                 </h2>
             </div>
-            <div id="addModalContent" class="modal-body">
+            <div class="modal-body">
+                <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
+                    'name' => 'name',
+                    'label' => 'Nazwa pojedyńczej zakładki',
+                ])?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -142,12 +146,6 @@ $(function(){
         $.post($(this).attr('action'), $(this).serialize(), function() {
             refreshItems();
             $('#addModal').modal('hide');
-        });
-    });
-
-    $('#addModal').on('show.bs.modal', function(e) {
-        $.get($('#addModalForm').attr('action'), function(data) {
-            $('#addModalContent').html(data);
         });
     });
 

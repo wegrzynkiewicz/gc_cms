@@ -1,0 +1,11 @@
+<tr>
+    <td>
+        <?=e($dump['name'])?>
+    </td>
+    <td>
+        <?=e($dump['creation_datetime'])?>
+    </td>
+    <td>
+        <?=humanFilesize($dump['size'])?>
+    </td>
+</tr>

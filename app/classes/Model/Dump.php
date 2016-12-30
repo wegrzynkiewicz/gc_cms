@@ -4,6 +4,7 @@ namespace GC\Model;
 
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\PrimaryTrait;
+use GC\Storage\Utility\OrderTrait;
 use GC\Storage\Database;
 
 class Dump extends AbstractModel
@@ -12,4 +13,5 @@ class Dump extends AbstractModel
     public static $primary     = 'dump_id';
 
     use PrimaryTrait;
+    use OrderTrait;
 }

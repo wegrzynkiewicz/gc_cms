@@ -40,4 +40,5 @@ $_SESSION['staff'] = [
     'sessionTimeout' => time() + $config['session']['staffTimeout']
 ];
 
+GC\Storage\Dump::makeBackup(sprintf('Po zalogowaniu użytkownika %s', $user['name']));
 GC\Response::redirect('/admin');

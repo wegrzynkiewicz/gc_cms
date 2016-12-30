@@ -39,7 +39,7 @@ GC\Storage\Database::initialize($config['db']);
 $request = new GC\Request(); # tworzy obiekt reprezentujący żądanie
 
 # jeżeli strona jest w budowie wtedy zwróć komunikat o budowie, chyba, że masz uprawnienie
-if ($config['inConstruction']) {
+if ($config['debug']['inConstruction']) {
     if (isset($_REQUEST['you-shall-not-pass'])) {
         $_SESSION['allowInConstruction'] = true;
     }

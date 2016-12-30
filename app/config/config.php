@@ -13,8 +13,8 @@ define('TEMPLATE_ASSETS_URL', '/templates/'.TEMPLATE); # adres do zasobów w kat
 $config = [
     'debug' => [ # opcje związane z wyświetlaniem błędów
         'enabled' => true,
+        'inConstruction' => false, # wyświetla komunikat "strona w budowie" za każdym żądaniem
     ],
-    'inConstruction' => false, # wyświetla komunikat "strona w budowie" za każdym żądaniem
     'adminNavbarTitle' => 'Panel Administracyjny', # wyświetlana w prawym gornym rogu panelu admina
     'adminHeadTitleBase' => 'Acme Panel Administracyjny', # nazwa doklejana do <title> strony w panelu admina
     'noImageUrl' => '/admin/images/no-image.jpg', # ścieżka do obrazka w przypadku braku obrazka
@@ -205,6 +205,10 @@ $config = [
                 '/form_sent$/',
                 '/mail_to_send$/',
                 '/mail_sent$/',
+                '/staff$/',
+                '/staff_groups$/',
+                '/staff_membership$/',
+                '/staff_permissions$/',
             ],
             'compress' => 'Gzip',
             'no-data' => false,
