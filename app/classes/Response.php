@@ -8,6 +8,16 @@ use GC\Logger;
 class Response
 {
     /**
+     * Ustawia mime type, jeżeli nagłówek nie został jeszcze wysłany
+     */
+    public static function setMimeType($mimeType)
+    {
+        if (!headers_sent()) {
+            header("Content-Type: $mimeType; charset=utf-8");
+        }
+    }
+
+    /**
      * Przekierowuje na zadany adres
      */
     public static function redirect($location, $code = 303)

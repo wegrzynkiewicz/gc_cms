@@ -7,4 +7,5 @@ GC\Model\Frame::updateByPrimaryId($item['frame_id'], [
     'name' => $_POST['name'],
 ]);
 
-return http_response_code(204);
+GC\Response::setMimeType('application/json');
+http_response_code(204);

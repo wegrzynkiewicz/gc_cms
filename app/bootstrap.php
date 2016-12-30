@@ -26,7 +26,6 @@ header('X-Content-Type-Options: nosniff'); # Nie pozwala przeglądarce na zgadyw
 header('X-XSS-Protection: 1; mode=block'); # ustawienie ochrony przeciw XSS, przeglądarka sama wykrywa XSSa
 
 header_remove('X-Powered-By');
-setHeaderMimeType('text/html');
 date_default_timezone_set($config['timezone']);
 
 if ($config['debug']['enabled']) {
@@ -35,6 +34,7 @@ if ($config['debug']['enabled']) {
 }
 
 GC\Storage\Database::initialize($config['db']);
+GC\Response::setMimeType('text/html');
 
 $request = new GC\Request(); # tworzy obiekt reprezentujący żądanie
 

@@ -20,6 +20,6 @@
 
     </ul>
 
-    <?php require ACTIONS_PATH.'/admin/parts/sidebar.html.php'; ?>
+    <?php require ACTIONS_PATH.'/admin/parts/sidebar/main.html.php'; ?>
 
 </nav>

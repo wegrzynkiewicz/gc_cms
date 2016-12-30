@@ -18,7 +18,7 @@ $items = GC\Model\ModuleItem::joinAllWithFrameByForeign($module_id);
                 <div role="tabpanel" class="tab-pane" id="tab_<?=$item_id?>">
                     <?=GC\Render::template('/parts/modules.html.php', [
                         'frame_id' => $item['frame_id'],
-                        'withoutContainer' => true,
+                        'container' => false,
                     ])?>
                 </div>
             <?php endforeach ?>

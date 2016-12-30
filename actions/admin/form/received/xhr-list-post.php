@@ -14,4 +14,5 @@ $response = [
     'data' => $records,
 ];
 
+GC\Response::setMimeType('application/json');
 echo json_encode($response);

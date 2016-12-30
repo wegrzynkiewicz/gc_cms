@@ -9,3 +9,7 @@
 * Codzienna zmiana nazwy ciastka sesyjnego
 * Zastosowanie Subresource Integrity dla zewnętrznych zależności
 * Generowanie unikatowego tokena CSRF w obrębie sesji
+
+# TODO #
+* Usuwanie przestarzałych kopii zapasowych
+* Dorobić ustawienia wiersza w modułach

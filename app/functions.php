@@ -69,16 +69,6 @@ function rglob($pattern, $flags = 0)
 }
 
 /**
- * Ustawia mime type, jeżeli nagłówek nie został jeszcze wysłany
- */
-function setHeaderMimeType($mimeType)
-{
-    if (!headers_sent()) {
-        header("Content-Type: $mimeType; charset=utf-8");
-    }
-}
-
-/**
  *
  */
 function shiftSegmentAsInteger()

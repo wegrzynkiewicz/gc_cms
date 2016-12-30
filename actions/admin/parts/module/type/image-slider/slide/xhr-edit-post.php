@@ -14,4 +14,5 @@ GC\Model\ModuleFile::updateByPrimaryId($file_id, [
     'settings' => json_encode($settings),
 ]);
 
-return http_response_code(204);
+GC\Response::setMimeType('application/json');
+http_response_code(204);

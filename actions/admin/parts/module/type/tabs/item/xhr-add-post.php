@@ -9,4 +9,5 @@ GC\Model\ModuleItem::insertWithModuleId([
     'frame_id' => $frame_id,
 ], $module_id);
 
-return http_response_code(204);
+GC\Response::setMimeType('application/json');
+http_response_code(204);

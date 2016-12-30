@@ -36,7 +36,10 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 ])?>
             </div>
 
-            <div id="images"></div>
+            <div class="row">
+                <div id="images">
+                </div>
+            </div>
 
             <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz',
@@ -110,9 +113,21 @@ $(function() {
     function refreshImages() {
         var url = "<?=GC\Url::make("/admin/parts/module/{$module_id}/image/xhr-list")?>";
         $.get(url, function(data) {
-            $('#images').html(data);
+            $('#images')
+                .html(data)
+                .photoswipe({
+                    loop: false,
+                    closeOnScroll: false,
+                });
         });
     }
+
+    $('#images').nestedSortable({
+        handle: 'div',
+        listType: 'div',
+        items: 'div.sortable-container',
+        toleranceElement: '> div',
+    });
 
     $('#editModalForm').on('submit', function(e) {
         e.preventDefault();
@@ -145,7 +160,7 @@ $(function() {
     $("#sortableForm").on('submit', function(event) {
         var url = "<?=GC\Url::make("/admin/parts/module/{$module_id}/image/xhr-sort")?>";
         $.post(url, {
-            positions: $("#sortable").sortable("toArray")
+            positions: $("#images").sortable("toArray")
         });
     });
 
