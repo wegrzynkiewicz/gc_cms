@@ -11,7 +11,7 @@ $status = $config['formStatuses'][$message['status']];
             <?=trans($status['name'])?>
         </span>
     </td>
-    <td><?=e($message['sent_date'])?></td>
+    <td><?=e($message['sent_datetime'])?></td>
     <td class="text-right">
         <a href="<?=GC\Url::mask("/$sent_id/show")?>"
             class="btn btn-primary btn-sm">

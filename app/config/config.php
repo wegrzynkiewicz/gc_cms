@@ -27,7 +27,7 @@ $config = [
         ]
     ],
     'session' => [
-        'cookieName' => 'TOLmEeE4ouK9lWuFigwvPqVhxLgtfj7k5kVqhIWL', # nazwa ciastka sesyjnego, dla utrudnienia zmienna każdego dnia
+        'cookieName' => 'TOLmEeE4ouK9lWuFigwvPqVhxLgtfj7k5kVqhIWL', # nazwa ciastka sesyjnego
         'staffTimeout' => 1800, # czas jaki musi upłynąć po zalogowaniu, aby wylogowało pracownika z automatu, w sekundach
     ],
     'avatar' => [
@@ -136,7 +136,7 @@ $config = [
         'editbox' => 'Zwykłe pole tekstowe',
         'selectbox' => 'Pole jednokrotnego wyboru',
     ],
-    'formStatuses' => [ # statusy jaką nadesłany formularz może otrzymać
+    'formStatuses' => [ # statusy jakie nadesłany formularz może otrzymać
         'unread' => [
             'name' => 'Nieprzeczytana',
             'class' => 'font-bold',

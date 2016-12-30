@@ -17,15 +17,15 @@ class Frame extends AbstractModel
 
     protected static function updateByFrameId($frame_id, array $data)
     {
-        $data['modify_date'] = sqldate();
+        $data['modify_datetime'] = sqldate();
 
         return parent::updateByPrimaryId($frame_id, $data);
     }
 
     protected static function insert(array $data)
     {
-        $data['creation_date'] = sqldate();
-        $data['modify_date'] = sqldate();
+        $data['creation_datetime'] = sqldate();
+        $data['modify_datetime'] = sqldate();
         $data['lang'] = $_SESSION['lang']['editor'];
         $data['settings'] = json_encode([]);
 

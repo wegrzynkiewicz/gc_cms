@@ -44,7 +44,7 @@ class FormSent extends AbstractModel
         $record = [
             'form_id' => $form_id,
             'status' => 'unread',
-            'sent_date' => sqldate(),
+            'sent_datetime' => sqldate(),
             'name' => substr(reset($data), 0, 120),
             'data' => json_encode($data, JSON_UNESCAPED_UNICODE),
             'localization' => json_encode($localization, JSON_UNESCAPED_UNICODE),

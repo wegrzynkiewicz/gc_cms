@@ -26,7 +26,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                                     data-sortable="1">
                                     <?=trans('Status wiadomości')?>
                                 </th>
-                                <th data-name="sent_date"
+                                <th data-name="sent_datetime"
                                     data-searchable="1"
                                     data-sortable="1">
                                     <?=trans('Data nadesłania')?>
@@ -132,7 +132,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                         return statuses[row['status']]['name'];
                     }
                 },
-                {data: "sent_date"},
+                {data: "sent_datetime"},
                 {
                     data: 'options',
                     render: function (data, type, row) {

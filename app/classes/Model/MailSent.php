@@ -17,7 +17,7 @@ class MailSent extends AbstractModel
 
     protected static function insert(array $data)
     {
-        $data['sent_date'] = sqldate();
+        $data['sent_datetime'] = sqldate();
 
         return parent::insert($data);
     }

@@ -17,7 +17,7 @@ class MailToSend extends AbstractModel
 
     protected static function insert(array $data)
     {
-        $data['push_date'] = sqldate();
+        $data['push_datetime'] = sqldate();
 
         return parent::insert($data);
     }
