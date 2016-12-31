@@ -12,8 +12,9 @@ require TEMPLATE_PATH.'/parts/header.html.php'; ?>
     </div>
 </div>
 
-<?=GC\Render::template('/parts/modules.html.php', [
+<?=GC\Render::template('/parts/module/wrapper.html.php', [
     'frame_id' => $frame_id,
+    'frame' => $frame,
     'container' => true,
 ])?>
 

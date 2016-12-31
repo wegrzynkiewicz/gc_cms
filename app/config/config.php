@@ -109,17 +109,14 @@ $config = [
     'moduleThemes' => [ # rodzaje zainstalowanych szablonów dla modułów
         'gallery' => [
             'default' => 'Standardowa galeria',
-            'fancybox' => 'Fancybox'
+            'simple' => 'Zwykłe zdjęcia bez obramowań (z podglądem)'
         ],
         'photo' => [
             'default' => 'Zdjęcie z poglądem',
-            'default-fluid' => 'Zdjęcie z poglądem (na całą szerokość strony)',
             'no-clickable' => 'Nieklikalne zdjęcie',
-            'no-clickable-fluid' => 'Nieklikalne zdjęcie (na całą szerokość strony)'
         ],
         'image-slider' => [
             'default' => 'Standardowy slajder',
-            'default-full' => 'Standardowy slajder (na całą szerokość strony)',
         ],
         'form' => [
             'default' => 'Budowany automatycznie',

@@ -26,26 +26,26 @@ if ($thumbWidth > $imageWidth) {
 $thumb = new GC\Thumb($imageUrl, $thumbWidth, 99999);
 if (!$thumb->exists()) {
 
-    if (!isset($_SESSION['generateThumb'])) {
+    if (!isset($_SESSION['lazyGenerate'])) {
         return http_response_code(403);
     }
 
-    if (!isset($_SESSION['generateThumb'][$imageUrl])) {
+    if (!isset($_SESSION['lazyGenerate'][$imageUrl])) {
         return http_response_code(404);
     }
 
-    if ($_SESSION['generateThumb'][$imageUrl] != $token) {
+    if (!isset($_SESSION['lazyGenerate'][$imageUrl][$token])) {
         return http_response_code(401);
     }
 
-    unset($_SESSION['generateThumb'][$imageUrl]);
+    unset($_SESSION['lazyGenerate'][$imageUrl][$token]);
 
     if (!$thumb->generate()) {
         return http_response_code(500);
     }
 }
 
-unset($_SESSION['generateThumb']);
+unset($_SESSION['lazyGenerate'][$imageUrl][$token]);
 
 $thumbPath = WEB_PATH.$thumb->getUrl();
 $filePointer = fopen($thumbPath, 'rb');

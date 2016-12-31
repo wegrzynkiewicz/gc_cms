@@ -51,7 +51,9 @@
     $(function() {
 
         $('#<?=e($name)?>_select').elfinderInput({
-            title: '<?=trans('Wybierz plik')?>'
+            title: '<?=trans('Wybierz plik')?>',
+            url: '<?=GC\Url::make('/admin/elfinder/connector')?>',
+            lang: '<?=getClientLang()?>',
         }, function(file) {
             $('#<?=e($name)?>_preview').attr('src', file);
             $('#<?=e($name)?>_source').val(file);

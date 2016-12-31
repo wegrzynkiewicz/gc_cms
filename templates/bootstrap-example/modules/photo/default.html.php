@@ -8,7 +8,7 @@
         data-width="<?=def($settings, 'width', 800)?>"
         data-height="<?=def($settings, 'height', 800)?>">
 
-        <img data-thumb="<?=generateThumb($preview)?>"
+        <img data-thumb="<?=GC\Thumb::lazyGenerate($preview)?>"
             alt="<?=e($content)?>"
             width="100%"
             class="img-responsive">

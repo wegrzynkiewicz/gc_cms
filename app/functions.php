@@ -278,18 +278,6 @@ function array_unchunk($array)
 }
 
 /**
- * Zapisuje w sesji adres miniaturki do wygenerowania
- */
-function generateThumb($imageUrl)
-{
-    $token = GC\Password::random(40);
-    $imageUrl64 = base64_encode($imageUrl);
-    $_SESSION['generateThumb'][$imageUrl] = $token;
-
-    return GC\Url::root("/thumb/$imageUrl64/$token");
-}
-
-/**
  * Zwraca tablicę właściwośćCSS => wartośćCSS
  */
 function parseCSS($css)

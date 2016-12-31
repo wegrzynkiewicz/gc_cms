@@ -12,6 +12,7 @@ if ($page_id <= 0) {
 }
 
 $page = GC\Model\Page::selectWithFrameByPrimaryId($page_id);
+$frame = $page;
 $frame_id = $page['frame_id'];
 
 require TEMPLATE_PATH."/frames/page.html.php";

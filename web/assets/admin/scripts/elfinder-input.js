@@ -34,7 +34,7 @@
                 getFileCallback: function(file) {
                     $dialog.dialogelfinder('close');
                     callback(file.url);
-                }
+                },
             };
             $.extend(options, inputOptions);
             $dialog.dialogelfinder(options);

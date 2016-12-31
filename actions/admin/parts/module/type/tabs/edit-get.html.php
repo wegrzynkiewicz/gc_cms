@@ -179,7 +179,7 @@ $(function(){
     });
 
     $("#sortableForm").submit(function(e) {
-        var url = "<?=GC\Url::mask("/admin/parts/module/{$module_id}/item/xhr_sort")?>";
+        var url = "<?=GC\Url::mask("/admin/parts/module/{$module_id}/item/xhr-sort")?>";
         $.post(url, {
             positions: $("#sortable").sortable("toArray")
         });

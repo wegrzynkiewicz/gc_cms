@@ -53,16 +53,16 @@ if ($config['debug']['inConstruction']) {
 }
 
 # sprawdzana jest weryfikacja csrf tokenu, chroni przed spreparowanymi żądaniami
-if (!$request->isMethod('GET') and isset($_SESSION['csrf_token'])) {
-    if (isset($_SERVER['HTTP_X_CSRFTOKEN']) && $_SERVER['HTTP_X_CSRFTOKEN'] === $_SESSION['csrf_token']) {
-        GC\Logger::csrf("Token verified via header");
-    } elseif (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
-        GC\Logger::csrf("Token verified via request");
-    } else {
-        GC\Logger::csrf("Invalid token");
-        return http_response_code(403);
-    }
-}
+// if (!$request->isMethod('GET') and isset($_SESSION['csrf_token'])) {
+//     if (isset($_SERVER['HTTP_X_CSRFTOKEN']) && $_SERVER['HTTP_X_CSRFTOKEN'] === $_SESSION['csrf_token']) {
+//         GC\Logger::csrf("Token verified via header");
+//     } elseif (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
+//         GC\Logger::csrf("Token verified via request");
+//     } else {
+//         GC\Logger::csrf("Invalid token");
+//         return http_response_code(403);
+//     }
+// }
 
 if (!isset($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = GC\Password::random(80);

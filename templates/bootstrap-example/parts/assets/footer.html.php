@@ -10,7 +10,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha384-bD5m2XNm9nP2xLhY13ZMvm73xzZvv/tfbPzYGjMLduzMLnDc9gzc1sVl3vufMg/U" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha384-DiTOB5DarLwdE9bzATOXhLQp6irFZIhtJreUNJiwMMDiHGu7LdRZeqZBveanC2zo" crossorigin="anonymous"></script>
 
-<?php 
+<?php
 $template = sprintf(TEMPLATE_PATH.'/parts/assets/footer-%s.html.php', getClientLang());
 if (is_readable($template)) {
     require $template;
@@ -23,7 +23,7 @@ if (is_readable($template)) {
 <script>
     $('[data-thumb]').each(function(i, e){
         var $e = $(e);
-        $e.attr('src', $e.attr('data-thumb')+'/'+$e.width()).removeAttr('data-thumb');
+        $e.attr('src', $e.attr('data-thumb')+'/'+Math.ceil($e.width())).removeAttr('data-thumb');
     });
 </script>
 

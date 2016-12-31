@@ -82,11 +82,6 @@ $('[data-gallery="photoswipe"]').photoswipe({
 </script>
 
 <script>
-elFinder.prototype._options.url = '<?=GC\Url::root('/admin/elfinder/connector')?>';
-elFinder.prototype._options.lang = '<?=getClientLang()?>';
-</script>
-
-<script>
 $.ajaxSetup({
     beforeSend: function(xhr, settings) {
         if (!settings.crossDomain) {

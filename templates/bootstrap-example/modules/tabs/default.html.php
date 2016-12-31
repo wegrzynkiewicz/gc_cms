@@ -16,8 +16,9 @@ $items = GC\Model\ModuleItem::joinAllWithFrameByForeign($module_id);
         <div class="tab-content">
             <?php foreach ($items as $item_id => $item): ?>
                 <div role="tabpanel" class="tab-pane" id="tab_<?=$item_id?>">
-                    <?=GC\Render::template('/parts/modules.html.php', [
+                    <?=GC\Render::template('/parts/module/wrapper.html.php', [
                         'frame_id' => $item['frame_id'],
+                        'frame' => $item,
                         'container' => false,
                     ])?>
                 </div>
@@ -26,19 +27,20 @@ $items = GC\Model\ModuleItem::joinAllWithFrameByForeign($module_id);
     </div>
     <script type="text/javascript">
         $(function(){
-            $('#tabs_<?=$module_id?> a').click(function (e) {
+            $('#tabs_<?=$module_id?>>ul a').on('click', function (e) {
                 e.preventDefault()
                 $(this).tab('show')
             });
 
-            $('#tabs_<?=$module_id?> a:first').tab('show') ;
+            $('#tabs_<?=$module_id?>>ul a:first').tab('show') ;
 
             var url = document.location.toString();
             var prefix = "#tab_";
 
             if (url.match(prefix)) {
-                $('#tabs_<?=$module_id?> a[href="'+prefix+url.split(prefix)[1]+'"]').tab('show') ;
+                $('#tabs_<?=$module_id?>>ul a[href="'+prefix+url.split(prefix)[1]+'"]').tab('show') ;
             }
+            $('document').trigger('resize');
         });
     </script>
 <?php endif ?>

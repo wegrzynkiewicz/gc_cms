@@ -59,6 +59,18 @@ class Thumb
     }
 
     /**
+     * Zapisuje w sesji adres miniaturki do wygenerowania
+     */
+    public static function lazyGenerate($imageUrl)
+    {
+        $token = Password::random(40);
+        $imageUrl64 = base64_encode($imageUrl);
+        $_SESSION['lazyGenerate'][$imageUrl][$token] = true;
+
+        return Url::root("/thumb/$imageUrl64/$token");
+    }
+
+    /**
      * Tworzy i zapisuje miniaturkę dla pliku
      */
     public function generate()

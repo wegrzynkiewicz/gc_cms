@@ -33,7 +33,9 @@
                     elf.destroy();
                     window.close();
                 },
-                resizable: false
+                resizable: false,
+                url: '<?=GC\Url::make('/admin/elfinder/connector')?>',
+                lang: '<?=getClientLang()?>',
             }).elfinder('instance');
         });
     </script>

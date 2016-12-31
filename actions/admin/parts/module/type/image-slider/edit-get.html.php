@@ -138,7 +138,7 @@ $(function() {
     });
 
     $('#editModal').on('show.bs.modal', function(e) {
-        var url = "<?=GC\Url::make("/admin/parts/module/{$module_id}/type/slide/image/xhr-edit")?>/"+$(e.relatedTarget).data('id');
+        var url = "<?=GC\Url::make("/admin/parts/module/{$module_id}/type/image-slider/slide/xhr-edit")?>/"+$(e.relatedTarget).data('id');
         $.get(url, function(data) {
             $('#editModalContent').html(data);
             $('#editModalForm').attr('action', url);
@@ -165,7 +165,9 @@ $(function() {
     });
 
     $('#select_images').elfinderInputMultiple({
-        title: '<?=trans('Wybierz wiele zdjęć')?>'
+        title: '<?=trans('Wybierz wiele zdjęć')?>',
+        url: '<?=GC\Url::make('/admin/elfinder/connector')?>',
+        lang: '<?=getClientLang()?>',
     }, function(urls) {
         $.post("<?=GC\Url::make("/admin/parts/module/{$module_id}/image/xhr-add")?>", {
             urls: urls

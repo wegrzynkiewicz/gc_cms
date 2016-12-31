@@ -1,6 +1,6 @@
 <?php
 
-$_POST = $module;
+$_POST = array_merge($module, $settings);
 
 require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
@@ -34,6 +34,12 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     'help' => 'Wybierz jeden z dostępnych szablonów galerii',
                     'options' => $config['moduleThemes']['gallery'],
                 ])?>
+            </div>
+
+            <div class="simple-box">
+                <div id="moduleTheme">
+                    <?=trans('Wybierz szablon galerii')?>
+                </div>
             </div>
 
             <div class="row">
@@ -122,6 +128,21 @@ $(function() {
         });
     }
 
+    function refreshTheme(theme) {
+        var url = "<?=GC\Url::make("/admin/parts/module/{$module_id}/type/gallery/theme")?>/";
+        $.get(url+theme, function(data) {
+            $('#moduleTheme').html(data);
+        });
+    }
+
+    $('#theme').change(function() {
+        refreshTheme($(this).val());
+    });
+
+    <?php if (isset($_POST['theme'])): ?>
+        refreshTheme("<?=e($_POST['theme'])?>");
+    <?php endif ?>
+
     $('#images').nestedSortable({
         handle: 'div',
         listType: 'div',
@@ -165,7 +186,9 @@ $(function() {
     });
 
     $('#select_images').elfinderInputMultiple({
-        title: '<?=trans('Wybierz wiele zdjęć')?>'
+        title: '<?=trans('Wybierz wiele zdjęć')?>',
+        url: '<?=GC\Url::make('/admin/elfinder/connector')?>',
+        lang: '<?=getClientLang()?>',
     }, function(urls) {
         $.post("<?=GC\Url::make("/admin/parts/module/{$module_id}/image/xhr-add")?>", {
             urls: urls

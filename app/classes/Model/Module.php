@@ -43,7 +43,7 @@ class Module extends AbstractModel
         ModulePosition::insert([
             'frame_id' => $frame_id,
             'module_id' => $module_id,
-            'position' => '0:10:12:1',
+            'position' => '0:999:12:1',
         ]);
 
         return $module_id;

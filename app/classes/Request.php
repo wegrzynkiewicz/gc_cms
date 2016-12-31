@@ -24,7 +24,7 @@ class Request
         $this->method = strtolower(static::filterServer('REQUEST_METHOD'));
 
         Logger::request(sprintf("%s %s",
-            $this->method, rtrim("{$this->path}?{$this->query}", '?')
+            strtoupper($this->method), rtrim("{$this->path}?{$this->query}", '?')
         ), $_REQUEST);
 
         # jeżeli aplikacja jest zainstalowana w katalogu, wtedy pomiń ścieżkę katalogu
