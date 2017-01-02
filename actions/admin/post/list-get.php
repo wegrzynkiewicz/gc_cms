@@ -112,7 +112,8 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             $(this).find('[name="post_id"]').val($(e.relatedTarget).data('id'));
         });
         $('[data-table]').DataTable({
-            order: [[2, 'desc']]
+            order: [[2, 'desc']],
+            iDisplayLength: <?=$config['dataTable']['iDisplayLength']?>,
         });
     });
 </script>

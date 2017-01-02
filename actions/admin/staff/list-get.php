@@ -93,7 +93,9 @@ $(function(){
         $(this).find('[name="staff_id"]').val($(e.relatedTarget).data('id'));
     });
 
-    $('[data-table]').DataTable();
+    $('[data-table]').DataTable({        
+        iDisplayLength: <?=$config['dataTable']['iDisplayLength']?>,
+    });
 });
 </script>
 

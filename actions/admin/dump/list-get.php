@@ -89,7 +89,8 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 <script>
     $(function(){
         var table = $('[data-table]').DataTable({
-            order: []
+            order: [],
+            iDisplayLength: <?=$config['dataTable']['iDisplayLength']?>,
         });
     });
 </script>

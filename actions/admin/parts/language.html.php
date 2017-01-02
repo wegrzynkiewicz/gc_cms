@@ -1,3 +1,3 @@
-<?php $lang = (isset($lang) and $lang != null) ? $lang : $_SESSION['lang']['editor'] ?>
-<span class="flag-icon flag-icon-<?=e($config['flags'][$lang])?>"></span>
-<?=trans($config['langs'][$lang])?>
+<?php $lang = (isset($lang) and is_array($lang)) ? $lang : GC\Model\Lang::selectByPrimaryId($_SESSION['lang']['editor']) ?>
+<span class="flag-icon flag-icon-<?=e($lang['flag'])?>"></span>
+<?=trans($lang['name'])?>

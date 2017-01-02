@@ -1,20 +1,25 @@
-<?php if (count($config['langs']) > 1): ?>
+<?php
+$langs = GC\Model\Lang::selectAllWithPrimaryKeyOrderBy('position', 'ASC');
+$currentLang = $langs[$_SESSION['lang']['editor']];
+?>
+
+<?php if (count($langs) > 1): ?>
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <span class="hidden-xs">
                 <?=trans('Edytuj: ')?>
             </span>
             <?=GC\Render::action('/admin/parts/language.html.php', [
-                'lang' => $_SESSION['lang']['editor']
+                'lang' => $currentLang,
             ])?>
             <b class="caret"></b>
         </a>
         <ul class="dropdown-menu dropdown-user">
-            <?php foreach ($config['langs'] as $lang => $label): ?>
+            <?php foreach ($langs as $code => $lang): ?>
                 <li>
-                    <a href="<?=GC\Url::make("/admin/account/change-editor-lang/{$lang}")?>">
+                    <a href="<?=GC\Url::make("/admin/account/change-editor-lang/{$code}")?>">
                         <?=GC\Render::action('/admin/parts/language.html.php', [
-                            'lang' => $lang
+                            'lang' => $lang,
                         ])?>
                     </a>
                 </li>

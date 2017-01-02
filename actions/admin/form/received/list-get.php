@@ -114,6 +114,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
         var statuses = <?=json_encode($config['formStatuses'])?>;
         var table = $('[data-table]').DataTable({
             order: [[2, 'desc']],
+            iDisplayLength: <?=$config['dataTable']['iDisplayLength']?>,
 	        processing: true,
             serverSide: true,
             searchDelay: 500,

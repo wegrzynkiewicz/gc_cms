@@ -7,7 +7,6 @@
 * Użycie nagłówka X-XSS-Protection: 1; mode=block - _Chroni przed XSS_
 * Nadanie session.cookie_httponly = 1, flaga HttpOnly
 * Codzienna zmiana nazwy ciastka sesyjnego
-* Zastosowanie Subresource Integrity dla zewnętrznych zależności
 * Generowanie unikatowego tokena CSRF w obrębie sesji
 
 # TODO #

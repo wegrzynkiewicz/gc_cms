@@ -7,10 +7,20 @@ define('START_TIME', microtime(true));
 require __DIR__.'/../vendor/autoload.php';
 require __DIR__.'/config/config.php';
 require __DIR__.'/functions.php';
-//require __DIR__.'/error-handler.php';
+require __DIR__.'/error-handler.php';
+require __DIR__.'/redirects.php';
 
 chdir('..'); # zmienia bieżący katalog o jeden poziom wyżej niż web root
 
+header('X-Content-Type-Options: nosniff'); # Nie pozwala przeglądarce na zgadywanie typu mime nieznanego pliku
+header('X-XSS-Protection: 1; mode=block'); # ustawienie ochrony przeciw XSS, przeglądarka sama wykrywa XSSa
+header_remove('X-Powered-By'); # usuwa informacje o wykorzystywanej wersji php
+
+error_reporting($config['debug']['error_reporting']); # raportuje napotkane błędy
+ini_set('display_errors', $config['debug']['display_errors'] ? 1 : 0); # włącza wyświetlanie błędów
+ini_set('display_startup_errors', $config['debug']['display_errors'] ? 1 : 0); # włącza wyświetlanie startowych błędów
+ini_set('error_log', $config['logger']['folder'].'/'.date('Y-m-d').'.error.log'); # zmienia ścieżkę logowania błędów
+ini_set('max_execution_time', 300); # określa maksymalny czas trwania skryptu
 ini_set('session.cookie_httponly', 1); # ustawia ciastko tylko do odczytu, nie jest możliwe odczyt document.cookie w js
 ini_set('session.use_cookies', 1); # do przechowywania sesji ma użyć ciastka
 ini_set('session.use_only_cookies', 1); # do przechowywania sesji ma używać tylko ciastka!
@@ -18,19 +28,10 @@ ini_set('session.use_only_cookies', 1); # do przechowywania sesji ma używać ty
 session_name($config['session']['cookieName']); # zmień nazwę ciasteczka sesyjnego
 session_start();
 
-if (!isset($_SESSION['lang'])) {
-    $_SESSION['lang'] = [];
-}
-
-header('X-Content-Type-Options: nosniff'); # Nie pozwala przeglądarce na zgadywanie typu mime nieznanego pliku
-header('X-XSS-Protection: 1; mode=block'); # ustawienie ochrony przeciw XSS, przeglądarka sama wykrywa XSSa
-
-header_remove('X-Powered-By');
 date_default_timezone_set($config['timezone']);
 
-if ($config['debug']['enabled']) {
-    error_reporting(E_ALL);
-    ini_set('display_errors', 'on');
+if (!isset($_SESSION['lang'])) {
+    $_SESSION['lang'] = [];
 }
 
 GC\Storage\Database::initialize($config['db']);

@@ -97,7 +97,8 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             $(this).find('[name="page_id"]').val($(e.relatedTarget).data('id'));
         });
         $('[data-table]').DataTable({
-            order: [[2, 'asc']]
+            order: [[2, 'asc']],
+            iDisplayLength: <?=$config['dataTable']['iDisplayLength']?>,
         });
     });
 </script>

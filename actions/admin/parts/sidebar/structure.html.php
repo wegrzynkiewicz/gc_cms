@@ -131,4 +131,33 @@ return [
             ],
         ],
     ],
+    'root' => [
+        'name' => 'Panel programisty',
+        'path' => '',
+        'icon' => 'bug',
+        'perms' => ['root'],
+        'children' => [
+            'phpinfo' => [
+                'name' => 'PHPInfo',
+                'path' => '/root/phpinfo',
+                'icon' => '',
+                'perms' => [],
+                'children' => [],
+            ],
+            'requirements' => [
+                'name' => 'Wymagania systemowe',
+                'path' => '/root/requirements',
+                'icon' => '',
+                'perms' => [],
+                'children' => [],
+            ],
+            'checksum' => [
+                'name' => 'Sumy kontrolne plików',
+                'path' => '/root/checksum/list',
+                'icon' => '',
+                'perms' => [],
+                'children' => [],
+            ],
+        ],
+    ],
 ];

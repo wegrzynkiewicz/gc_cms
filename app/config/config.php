@@ -12,8 +12,16 @@ define('TEMPLATE_ASSETS_URL', '/templates/'.TEMPLATE); # adres do zasobów w kat
 
 $config = [
     'debug' => [ # opcje związane z wyświetlaniem błędów
-        'enabled' => true,
+        'enabled' => true, # zezwala na nietypowe akcje (np: zmiana hasła admina, wejście do /actions/root)
+        'display_errors' => true, # czy wyświetlać błędy na wyjściu?
+        'error_reporting' => E_ALL, # poziom raportowania błędów
         'inConstruction' => false, # wyświetla komunikat "strona w budowie" za każdym żądaniem
+    ],
+    'seoUrl' => [ # związane z nazwą adresu url witryny
+        'forceHTTPS' => false, # wartość logiczna, nakazuje przekierowywanie na adres z lub bez https, null jeżeli możliwość wejścia z każdego protokolu
+        'forceWWW' => false, # wartość logiczna, nakazuje przekierowywanie na adres z lub bez www, null jeżeli możliwość wejścia z każdego www.
+        'forceDomain' => null, # nakazuje przekierowywanie na zadaną domenę, null jeżeli możliwość wejścia z każdej domeny.
+        'forcePort' => null, # nakazuje przekierowywanie na zadany port, null jeżeli możliwość wejścia z każdego portu.
     ],
     'adminNavbarTitle' => 'Panel Administracyjny', # wyświetlana w prawym gornym rogu panelu admina
     'adminHeadTitleBase' => 'Acme Panel Administracyjny', # nazwa doklejana do <title> strony w panelu admina
@@ -70,15 +78,8 @@ $config = [
         'public' => '6Le88g4UAAAAAJ_VW4XML20c2tWSWFSv29lkGeVp', # publiczny klucz
         'secret' => '6Le88g4UAAAAAIOFZyOilvhdWRP3IIOWdkdQ7gAf', # prywatny klucz
     ],
-    'langs' => [ # zainstalowane wersje językowe
-        'pl' => 'Polski',
-        'en' => 'English',
-        'de' => 'Deutsch',
-    ],
-    'flags' => [ # mapowanie języków na krajowe flagi
-        'pl' => 'pl',
-        'en' => 'gb',
-        'de' => 'de',
+    'dataTable' => [ # dotyczą pluginu DataTables
+        'iDisplayLength' => 50, # ilość rekordów domyślnie wyświetlanych na jedną strone
     ],
     'modules' => [ # rodzaje zainstalowanych modułów
         'html-editor' => [
