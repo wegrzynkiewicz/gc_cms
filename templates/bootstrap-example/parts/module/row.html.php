@@ -48,3 +48,4 @@ $gutterHalf = ceil($gutter/2);
             </div>
         <?php $previousWidth = $x + $width; ?>
     <?php endforeach ?>
+</div>

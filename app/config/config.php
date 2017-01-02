@@ -151,7 +151,7 @@ $config = [
             'class' => 'text-success success',
         ],
         'rejected' => [
-            'name' => 'Odrzucona',
+            'name' => 'Odrzucono',
             'class' => 'text-danger danger',
         ],
     ],

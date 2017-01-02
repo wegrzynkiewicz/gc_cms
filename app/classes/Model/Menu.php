@@ -7,6 +7,7 @@ use GC\Storage\Utility\NodeTrait;
 use GC\Storage\Utility\PrimaryTrait;
 use GC\Storage\Node;
 use GC\Storage\Database;
+use GC\Url;
 
 class Menu extends Node
 {
@@ -34,11 +35,11 @@ class Menu extends Node
         }
 
         if ($this->type === 'homepage') {
-            $href = GC\Url::root("/");
+            $href = Url::root("/");
         }
 
         if ($this->type === 'page') {
-            $href = GC\Url::root("/page/".$this->destination);
+            $href = Url::root("/page/".$this->destination);
         }
 
         if ($this->type === 'external') {

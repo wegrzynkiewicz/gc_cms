@@ -5,4 +5,7 @@ $positions = array_filter($positions, function ($node) {
     return isset($node['id']);
 });
 GC\Model\FormPosition::updatePositionByFormId($form_id, $positions);
-GC\Response::redirect($breadcrumbs->getBeforeLastUrl());
+
+setNotice(trans('Pozycja pól została zapisana.'));
+
+GC\Response::redirect($breadcrumbs->getLastUrl());

@@ -11,9 +11,6 @@ $_POST = $settings;
 
 ?>
 
-
-<p><?=trans('Szablon wymaga wprowadzenia poniższych właściwości')?></p>
-
 <?=GC\Render::action('/admin/parts/input/selectbox.html.php', [
     'name' => 'thumbsPerRow',
     'label' => 'Ilość miniaturek na wiersz galerii',

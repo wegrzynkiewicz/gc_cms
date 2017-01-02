@@ -28,18 +28,25 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             class="form-horizontal">
 
             <div class="simple-box">
-                <?=GC\Render::action('/admin/parts/input/selectbox.html.php', [
-                    'name' => 'theme',
-                    'label' => 'Szablon',
-                    'help' => 'Wybierz jeden z dostępnych szablonów galerii',
-                    'options' => $config['moduleThemes']['gallery'],
-                ])?>
+                <fieldset>
+                    <legend><?=trans('Ustawienia galerii zdjęć')?></legend>
+                    <?=GC\Render::action('/admin/parts/input/selectbox.html.php', [
+                        'name' => 'theme',
+                        'label' => 'Szablon',
+                        'help' => 'Wybierz jeden z dostępnych szablonów galerii',
+                        'options' => $config['moduleThemes']['gallery'],
+                    ])?>
+                </fieldset>
             </div>
 
+
             <div class="simple-box">
-                <div id="moduleTheme">
-                    <?=trans('Wybierz szablon galerii')?>
-                </div>
+                <fieldset>
+                    <legend><?=trans('Ustawienia szablonu')?></legend>
+                    <div id="moduleTheme">
+                        <?=trans('Wybierz szablon galerii')?>
+                    </div>
+                </fieldset>
             </div>
 
             <div class="row">

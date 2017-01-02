@@ -24,6 +24,7 @@ class Module extends AbstractModel
         static::deleteByPrimaryId($module_id);
         ModuleFile::deleteUnassignedByForeign();
         ModuleItem::deleteItemsByForeign($module_id);
+        ModuleItem::deleteUnassignedByForeign();
     }
 
     protected static function deleteModulesByForeign($frame_id)
@@ -34,6 +35,7 @@ class Module extends AbstractModel
         }
         static::deleteAllByForeign($frame_id);
         ModuleFile::deleteUnassignedByForeign();
+        ModuleItem::deleteUnassignedByForeign();
     }
 
     protected static function insertWithFrameId(array $data, $frame_id)

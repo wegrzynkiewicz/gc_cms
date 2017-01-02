@@ -59,6 +59,12 @@ function access($attr, $path, $data, $volume)
     return null;
 }
 
+function setToken($cmd, &$result, $args, $elfinder) {
+    if (isset($result['added']) && $result['added']) {
+        $result['csrftoken'] = 'one time token';
+    }
+}
+
 // Documentation for connector options:
 // https://github.com/Studio-42/elFinder/wiki/Connector-configuration-options
 $normalizer = new GC\Normalizer();
@@ -66,6 +72,7 @@ $normalizer = new GC\Normalizer();
 $opts = array(
     'debug' => true,
     'bind' => array(
+        'upload' => 'setToken',
         'upload.pre mkdir.pre mkfile.pre rename.pre archive.pre ls.pre' => array(
         	[$normalizer, 'cmdPreprocess']
         ),
