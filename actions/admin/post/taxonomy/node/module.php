@@ -1,6 +1,6 @@
 <?php
 
-$node = GC\Model\PostNode::selectWithFrameByPrimaryId($node_id);
+$node = GC\Model\Post\Node::selectWithFrameByPrimaryId($node_id);
 $frame_id = $node['frame_id'];
 
 $headTitle = trans('Moduły w węźle "%s"', [$node['name']]);

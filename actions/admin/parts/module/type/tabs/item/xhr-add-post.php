@@ -1,11 +1,11 @@
 <?php
 
-$frame_id = GC\Model\Frame::insert([
+$frame_id = GC\Model\Module\Frame::insert([
     'name' => $_POST['name'],
     'type' => 'tabs-item',
 ]);
 
-GC\Model\ModuleItem::insertWithModuleId([
+GC\Model\Module\Item::insertWithModuleId([
     'frame_id' => $frame_id,
 ], $module_id);
 

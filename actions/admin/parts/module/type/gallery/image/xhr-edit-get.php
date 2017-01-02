@@ -1,7 +1,7 @@
 <?php
 
 $file_id = intval(array_shift($_SEGMENTS));
-$image = GC\Model\ModuleFile::selectByPrimaryId($file_id);
+$image = GC\Model\Module\File::selectByPrimaryId($file_id);
 $_POST = $image;
 
 echo GC\Render::action('/admin/parts/input/editbox.html.php', [

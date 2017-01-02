@@ -1,4 +1,4 @@
-<?php $modules = GC\Model\Module::joinAllWithKeyByForeign($frame_id); ?>
+<?php $modules = GC\Model\Module\Module::joinAllWithKeyByForeign($frame_id); ?>
 <?php if (empty($modules)): ?>
     <div class="container">
         <?=trans("Nie znaleziono modułów")?>

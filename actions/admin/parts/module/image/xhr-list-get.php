@@ -1,4 +1,4 @@
-<?php $files = GC\Model\ModuleFile::joinAllWithKeyByForeign($module_id); ?>
+<?php $files = GC\Model\Module\File::joinAllWithKeyByForeign($module_id); ?>
 
 <?php if (empty($files)): ?>
     <div class="col-md-12">    

@@ -1,10 +1,10 @@
 <?php
 
-$user = GC\Model\Staff::selectByPrimaryId($staff_id);
+$user = GC\Model\Staff\Staff::selectByPrimaryId($staff_id);
 $headTitle = trans('Edytowanie pracownika "%s"', [$user['name']]);
 $breadcrumbs->push($request->path, $headTitle);
 
-$groups = array_keys(GC\Model\StaffGroup::mapNameByStaffId($staff_id));
+$groups = array_keys(GC\Model\Staff\Group::mapNameByStaffId($staff_id));
 $_POST = $user;
 
 require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>

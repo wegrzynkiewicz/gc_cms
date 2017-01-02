@@ -1,10 +1,10 @@
 <?php
 
-$module = GC\Model\Module::selectByPrimaryId($module_id);
+$module = GC\Model\Module\Module::selectByPrimaryId($module_id);
 $moduleType = $module['type'];
 
 $item_id = intval(array_shift($_SEGMENTS));
-$item = GC\Model\ModuleItem::selectWithFrameByPrimaryId($item_id);
+$item = GC\Model\Module\Item::selectWithFrameByPrimaryId($item_id);
 $frame_id = $item['frame_id'];
 
 GC\Url::extendMask("/{$module_id}%s");

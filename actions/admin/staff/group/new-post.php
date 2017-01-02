@@ -1,7 +1,7 @@
 <?php
 
 $permissions = isset($_POST['permissions']) ? $_POST['permissions'] : [];
-$group_id = GC\Model\StaffGroup::insertWithPermissions([
+$group_id = GC\Model\Staff\Group::insertWithPermissions([
     'name' => $_POST['name'],
 ], $permissions);
 

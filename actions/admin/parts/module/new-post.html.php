@@ -1,7 +1,7 @@
 <?php
 
 $moduleType = $_POST['type'];
-$module_id = GC\Model\Module::insertWithFrameId([
+$module_id = GC\Model\Module\Module::insertWithFrameId([
     'type' => $moduleType,
     'theme' => 'default',
     'settings' => json_encode([]),

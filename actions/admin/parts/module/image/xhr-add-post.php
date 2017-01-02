@@ -9,7 +9,7 @@ foreach ($_POST['urls'] as $url) {
         'height' => $height,
     ];
 
-    GC\Model\ModuleFile::insertWithModuleId([
+    GC\Model\Module\File::insertWithModuleId([
         'url' => GC\Url::upload($url),
         'settings' => json_encode($settings),
     ], $module_id);

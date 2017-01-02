@@ -1,6 +1,6 @@
 <?php
 
-namespace GC\Model;
+namespace GC\Model\Post;
 
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\PrimaryTrait;
@@ -35,11 +35,11 @@ class Post extends AbstractModel
     private static function updateRelations($post_id, array $relations)
     {
         # usuń wszystkie grupy tego pracownika
-        PostMembership::deleteAllBy('post_id', $post_id);
+        Membership::deleteAllBy('post_id', $post_id);
 
         # wstaw na nowo grupy pracownika
         foreach ($relations as $node_id) {
-            PostMembership::insert([
+            Membership::insert([
                 'post_id' => $post_id,
                 'node_id' => $node_id,
             ]);

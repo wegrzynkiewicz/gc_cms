@@ -1,6 +1,6 @@
 <?php
 
-$taxonomies = GC\Model\PostTaxonomy::selectAllCorrectWithPrimaryKey();
+$taxonomies = GC\Model\Post\Taxonomy::selectAllCorrectWithPrimaryKey();
 
 require ACTIONS_PATH.'/admin/parts/header.html.php';
 require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
@@ -29,7 +29,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                             <?=GC\Render::action('/admin/post/taxonomy/list-item.html.php', [
                                 'tax_id' => $tax_id,
                                 'taxonomy' => $taxonomy,
-                                'tree' => GC\Model\PostNode::buildTreeWithFrameByTaxonomyId($tax_id),
+                                'tree' => GC\Model\Post\Node::buildTreeWithFrameByTaxonomyId($tax_id),
                             ])?>
                         <?php endforeach ?>
                     </tbody>

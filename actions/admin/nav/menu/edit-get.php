@@ -1,6 +1,6 @@
 <?php
 
-$node = GC\Model\Menu::selectByPrimaryId($menu_id);
+$node = GC\Model\Menu\Menu::selectByPrimaryId($menu_id);
 
 $headTitle = trans('Edycja węzła "%s"', [$node['name']]);
 $breadcrumbs->push($request->path, $headTitle);

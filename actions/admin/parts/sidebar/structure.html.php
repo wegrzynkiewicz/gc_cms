@@ -78,7 +78,7 @@ return [
         'path' => '/admin/form/list',
         'icon' => 'envelope-o',
         'perms' => [],
-        'badge' => GC\Model\FormSent::selectSumStatus()['unread'],
+        'badge' => GC\Model\Form\Sent::selectSumStatus()['unread'],
         'children' => [],
     ],
     'files' => [

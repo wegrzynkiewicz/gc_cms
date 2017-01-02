@@ -1,6 +1,6 @@
 <?php
 
-$post = GC\Model\Post::selectWithFrameByPrimaryId($post_id);
+$post = GC\Model\Post\Post::selectWithFrameByPrimaryId($post_id);
 $frame_id = $post['frame_id'];
 
 $headTitle = trans('Moduły w poście "%s"', [$post['name']]);

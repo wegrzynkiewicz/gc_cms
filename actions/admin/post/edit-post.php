@@ -1,8 +1,8 @@
 <?php
 
-$post = GC\Model\Post::selectWithFrameByPrimaryId($post_id);
+$post = GC\Model\Post\Post::selectWithFrameByPrimaryId($post_id);
 
-GC\Model\Frame::updateByFrameId($post['frame_id'], [
+GC\Model\Module\Frame::updateByFrameId($post['frame_id'], [
     'name' => $_POST['name'],
     'keywords' => $_POST['keywords'],
     'description' => $_POST['description'],
@@ -11,7 +11,7 @@ GC\Model\Frame::updateByFrameId($post['frame_id'], [
 
 $relations = isset($_POST['taxonomy']) ? array_unchunk($_POST['taxonomy']) : [];
 
-GC\Model\Post::update($post_id, [
+GC\Model\Post\Post::update($post_id, [
     'publication_datetime' => $_POST['publication_datetime'],
 ], $relations);
 

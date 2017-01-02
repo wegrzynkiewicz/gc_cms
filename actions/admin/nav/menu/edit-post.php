@@ -1,6 +1,6 @@
 <?php
 
-GC\Model\Menu::updateByPrimaryId($menu_id, [
+GC\Model\Menu\Menu::updateByPrimaryId($menu_id, [
     'name' => $_POST['name'],
     'type' => $_POST['type'],
     'destination' => $_POST['destination'],

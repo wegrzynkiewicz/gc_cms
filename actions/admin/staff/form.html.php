@@ -28,7 +28,7 @@
                     'name' => 'groups',
                     'label' => 'Przynależność do grup pracowników',
                     'help' => 'Możesz wybrać jaką pracownik ma pełnić funkcję i jakie uprawnienia otrzyma. Pracownik może przynależyć do wielu grup.',
-                    'options' => GC\Model\StaffGroup::mapWithPrimaryKeyBy('name'),
+                    'options' => GC\Model\Staff\Group::mapWithPrimaryKeyBy('name'),
                     'selectedValues' => $groups,
                 ])?>
             </div>

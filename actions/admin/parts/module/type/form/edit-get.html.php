@@ -1,6 +1,6 @@
 <?php
 
-$installedForms = GC\Model\Form::mapCorrectWithPrimaryKeyBy('name');
+$installedForms = GC\Model\Form\Form::mapCorrectWithPrimaryKeyBy('name');
 
 $emails = [];
 foreach (def($settings, 'emails', []) as $email) {

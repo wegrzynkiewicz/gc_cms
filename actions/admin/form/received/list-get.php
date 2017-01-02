@@ -1,6 +1,6 @@
 <?php
 
-$count = GC\Model\FormSent::countBy('form_id', $form_id);
+$count = GC\Model\Form\Sent::countBy('form_id', $form_id);
 
 require ACTIONS_PATH.'/admin/parts/header.html.php';
 require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>

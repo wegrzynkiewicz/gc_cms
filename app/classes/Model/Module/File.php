@@ -1,6 +1,6 @@
 <?php
 
-namespace GC\Model;
+namespace GC\Model\Module;
 
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\ColumnTrait;
@@ -8,7 +8,7 @@ use GC\Storage\Utility\PrimaryTrait;
 use GC\Storage\Utility\JoinTrait;
 use GC\Storage\Database;
 
-class ModuleFile extends AbstractModel
+class File extends AbstractModel
 {
     public static $table       = '::module_files';
     public static $primary     = 'file_id';
@@ -23,10 +23,10 @@ class ModuleFile extends AbstractModel
     {
         $file_id = parent::insert($data);
 
-        ModuleFilePosition::insert([
+        FilePosition::insert([
             'module_id' => $module_id,
             'file_id' => $file_id,
-            'position' => ModuleFilePosition::selectMaxPositionBy('module_id', $module_id),
+            'position' => FilePosition::selectMaxPositionBy('module_id', $module_id),
         ]);
 
         return $file_id;

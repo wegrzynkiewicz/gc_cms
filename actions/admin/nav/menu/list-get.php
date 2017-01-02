@@ -1,7 +1,7 @@
 <?php
 
 $pages = GC\Model\Page::selectAllWithFrames();
-$menuTree = GC\Model\Menu::buildTreeByTaxonomyId($nav_id);
+$menuTree = GC\Model\Menu\Menu::buildTreeByTaxonomyId($nav_id);
 
 require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 

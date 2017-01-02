@@ -3,7 +3,7 @@
 $groups = isset($_POST['groups']) ? $_POST['groups'] : [];
 $password = GC\Password::random($config['password']['minLength']);
 
-$staff_id = GC\Model\Staff::insertWithGroups([
+$staff_id = GC\Model\Staff\Staff::insertWithGroups([
     'name' => $_POST['name'],
     'password' => GC\Password::hash($password),
     'email' => $_POST['email'],

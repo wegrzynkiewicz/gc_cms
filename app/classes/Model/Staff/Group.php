@@ -1,13 +1,13 @@
 <?php
 
-namespace GC\Model;
+namespace GC\Model\Staff;
 
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\ColumnTrait;
 use GC\Storage\Utility\PrimaryTrait;
 use GC\Storage\Database;
 
-class StaffGroup extends AbstractModel
+class Group extends AbstractModel
 {
     public static $table   = '::staff_groups';
     public static $primary = 'group_id';
@@ -46,11 +46,11 @@ class StaffGroup extends AbstractModel
     private static function updatePermissions($group_id, array $permissions)
     {
         # usuń wszystkie uprawnienia tej grupy
-        StaffPermission::deleteAllBy('group_id', $group_id);
+        Permission::deleteAllBy('group_id', $group_id);
 
         # wstaw na nowo uprawnienia grupy
         foreach ($permissions as $permission) {
-            StaffPermission::insert([
+            Permission::insert([
                 'group_id' => $group_id,
                 'name' => $permission,
             ]);

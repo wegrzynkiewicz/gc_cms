@@ -1,5 +1,5 @@
 <?php
-    $images = GC\Model\ModuleFile::joinAllWithKeyByForeign($module_id);
+    $images = GC\Model\Module\File::joinAllWithKeyByForeign($module_id);
     $thumbsPerRow = def($settings, 'thumbsPerRow', 12);
     $gutter = ceil(def($settings, 'gutter', 20)/2)*2;
     $colWidth = ceil(12/$thumbsPerRow);

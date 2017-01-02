@@ -1,6 +1,6 @@
 <?php
 
-GC\Model\Menu::insertWithNavId([
+GC\Model\Menu\Menu::insertWithNavId([
     'name' => $_POST['name'],
     'type' => $_POST['type'],
     'destination' => $_POST['destination'],

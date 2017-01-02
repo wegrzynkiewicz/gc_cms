@@ -1,12 +1,12 @@
 <?php
 
-namespace GC\Model;
+namespace GC\Model\Module;
 
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\ColumnTrait;
 use GC\Storage\Database;
 
-class ModulePosition extends AbstractModel
+class Position extends AbstractModel
 {
     public static $table = '::module_pos';
 
@@ -14,7 +14,7 @@ class ModulePosition extends AbstractModel
 
     protected static function updateGridByFrameId($frame_id, array $positions)
     {
-        ModulePosition::deleteAllBy('frame_id', $frame_id);
+        Position::deleteAllBy('frame_id', $frame_id);
 
         foreach ($positions as $module) {
 
@@ -25,7 +25,7 @@ class ModulePosition extends AbstractModel
                 $module['height'],
             ]);
 
-            ModulePosition::insert([
+            Position::insert([
                 'frame_id' => $frame_id,
                 'module_id' => $module['id'],
                 'position' => $grid,

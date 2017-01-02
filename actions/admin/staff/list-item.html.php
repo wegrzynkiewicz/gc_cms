@@ -1,6 +1,6 @@
 <tr>
     <td>
-        <img src="<?=GC\Model\Staff::getAvatarUrl($staff, 30)?>"
+        <img src="<?=GC\Model\Staff\Staff::getAvatarUrl($staff, 30)?>"
             height="30" style="margin-right:5px"/>
 
         <a href="<?=GC\Url::mask("/{$staff_id}/edit")?>"
@@ -9,7 +9,7 @@
         </a>
     </td>
     <td>
-        <?php $groups = GC\Model\StaffGroup::mapNameByStaffId($staff_id) ?>
+        <?php $groups = GC\Model\Staff\Group::mapNameByStaffId($staff_id) ?>
         <?php foreach ($groups as $group_id => $group): ?>
             <a href="<?=GC\Url::mask("/group/{$group_id}/edit")?>"
                 title="<?=trans('Przejdź do grupy')?>">
@@ -17,7 +17,7 @@
         <?php endforeach ?>
     </td>
     <td>
-        <?php $permissions = GC\Model\StaffPermission::mapPermissionNameByStaffId($staff_id) ?>
+        <?php $permissions = GC\Model\Staff\Permission::mapPermissionNameByStaffId($staff_id) ?>
         <?php foreach ($permissions as $permission): ?>
             <?=trans($config['permissions'][$permission])?> <br>
         <?php endforeach ?>

@@ -1,6 +1,6 @@
 <?php
 
-$field = GC\Model\FormField::selectByPrimaryId($field_id);
+$field = GC\Model\Form\Field::selectByPrimaryId($field_id);
 
 $headTitle = trans('Edycja pola "%s"', [$field['name']]);
 $breadcrumbs->push($request->path, $headTitle);

@@ -1,12 +1,12 @@
 <?php
 
-namespace GC\Model;
+namespace GC\Model\Post;
 
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\ColumnTrait;
 use GC\Storage\Database;
 
-class PostMembership extends AbstractModel
+class Membership extends AbstractModel
 {
     public static $table = '::post_membership';
 

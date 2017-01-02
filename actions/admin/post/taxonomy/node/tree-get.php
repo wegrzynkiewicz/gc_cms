@@ -1,6 +1,6 @@
 <?php
 
-$tree = GC\Model\PostNode::buildTreeWithFrameByTaxonomyId($tax_id);
+$tree = GC\Model\Post\Node::buildTreeWithFrameByTaxonomyId($tax_id);
 
 require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 

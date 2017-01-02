@@ -1,15 +1,15 @@
 <?php
 
-namespace GC\Model;
+namespace GC\Model\Product;
 
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\ColumnTrait;
 use GC\Storage\Utility\TreeTrait;
 use GC\Storage\Database;
 
-class PostTree extends AbstractModel
+class Tree extends AbstractModel
 {
-    public static $table    = '::post_tree';
+    public static $table    = '::product_tree';
     public static $primary  = 'node_id';
     public static $taxonomy = 'tax_id';
 

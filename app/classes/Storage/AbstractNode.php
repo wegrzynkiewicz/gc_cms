@@ -7,7 +7,7 @@ use GC\Storage\AbstractModel;
 /**
  * Reprezentuje węzeł w strukturze drzewiastej
  */
-class Node extends AbstractModel
+abstract class AbstractNode extends AbstractModel
 {
     private $parent = null;
     private $children = [];
@@ -17,7 +17,7 @@ class Node extends AbstractModel
         return $this->getProperty(static::$primary);
     }
 
-    public function addChildAtPosition(Node $child, $position)
+    public function addChildAtPosition(AbstractNode $child, $position)
     {
         if (isset($this->children[$position])) {
             throw new UnexpectedValueException(
@@ -205,7 +205,7 @@ class Node extends AbstractModel
         return $siblings;
     }
 
-    public function hasChild(Node $node)
+    public function hasChild(AbstractNode $node)
     {
         return $this->isParentFor($node);
     }
@@ -215,7 +215,7 @@ class Node extends AbstractModel
         return count($this->children) > 0;
     }
 
-    public function isChildFor(Node $node)
+    public function isChildFor(AbstractNode $node)
     {
         foreach ($node->getChildren() as $child) {
             if ($this === $child) {
@@ -231,7 +231,7 @@ class Node extends AbstractModel
         return $this->parent !== null;
     }
 
-    public function isDescendantFor(Node $node)
+    public function isDescendantFor(AbstractNode $node)
     {
         foreach ($node->getChildren() as $child) {
             if ($this === $child) {
@@ -255,7 +255,7 @@ class Node extends AbstractModel
         return $this->isRoot() or $this->isLeaf();
     }
 
-    public function isParentFor(Node $node)
+    public function isParentFor(AbstractNode $node)
     {
         foreach ($this->children as $child) {
             if ($node === $child) {
@@ -290,7 +290,7 @@ class Node extends AbstractModel
         return $child;
     }
 
-    public function pushChild(Node $child)
+    public function pushChild(AbstractNode $child)
     {
         if ($this->hasChild($child)) {
             return $this;
@@ -318,7 +318,7 @@ class Node extends AbstractModel
         }
     }
 
-    public function removeChild(Node $node)
+    public function removeChild(AbstractNode $node)
     {
         foreach ($this->children as $key => $child) {
             if ($child === $node) {
@@ -377,7 +377,7 @@ class Node extends AbstractModel
         return $correct;
     }
 
-    public function setParent(Node $newParent)
+    public function setParent(AbstractNode $newParent)
     {
         if ($this->hasParent() and $this->getParent() === $newParent) {
             return $this;
@@ -404,7 +404,7 @@ class Node extends AbstractModel
         return $child;
     }
 
-    public function unshiftChild(Node $child)
+    public function unshiftChild(AbstractNode $child)
     {
         if ($this->hasChild($child)) {
             return $this;

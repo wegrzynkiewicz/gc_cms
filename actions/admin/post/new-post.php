@@ -1,6 +1,6 @@
 <?php
 
-$frame_id = GC\Model\Frame::insert([
+$frame_id = GC\Model\Module\Frame::insert([
     'name' => $_POST['name'],
     'type' => 'post',
     'keywords' => $_POST['keywords'],
@@ -10,7 +10,7 @@ $frame_id = GC\Model\Frame::insert([
 
 $relations = isset($_POST['taxonomy']) ? array_unchunk($_POST['taxonomy']) : [];
 
-GC\Model\Post::insertWithRelations([
+GC\Model\Post\Post::insertWithRelations([
     'frame_id' => $frame_id,
     'publication_datetime' => $_POST['publication_datetime'],
 ], $relations);

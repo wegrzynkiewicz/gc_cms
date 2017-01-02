@@ -1,16 +1,16 @@
 <?php
 
-namespace GC\Model;
+namespace GC\Model\Post;
 
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\NodeTrait;
 use GC\Storage\Utility\PrimaryTrait;
 use GC\Storage\Utility\TaxonomyTrait;
 use GC\Storage\Utility\ContainFrameTrait;
-use GC\Storage\Node;
+use GC\Storage\AbstractNode;
 use GC\Storage\Database;
 
-class PostNode extends Node
+class Node extends AbstractNode
 {
     public static $table   = '::post_nodes';
     public static $treeTable = '::post_tree';
@@ -48,11 +48,11 @@ class PostNode extends Node
     {
         $node_id = parent::insert($data);
 
-        PostTree::insert([
+        Tree::insert([
             'tax_id' => $tax_id,
             'node_id' => $node_id,
             'parent_id' => null,
-            'position' => PostTree::selectMaxPositionByTaxonomyIdAndParentId($tax_id, null),
+            'position' => Tree::selectMaxPositionByTaxonomyIdAndParentId($tax_id, null),
         ]);
 
         return $node_id;

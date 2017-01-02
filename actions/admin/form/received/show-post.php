@@ -1,6 +1,6 @@
 <?php
 
-GC\Model\FormSent::updateByPrimaryId($sent_id, [
+GC\Model\Form\Sent::updateByPrimaryId($sent_id, [
     'status' => $_POST['status'],
 ]);
 

@@ -1,8 +1,8 @@
 <?php
 
-$posts = GC\Model\Post::selectAllWithFrames();
-$nodes = GC\Model\PostNode::selectAllForTaxonomyTree();
-$taxonomies = GC\Model\PostTaxonomy::selectAllCorrectWithPrimaryKey();
+$posts = GC\Model\Post\Post::selectAllWithFrames();
+$nodes = GC\Model\Post\Node::selectAllForTaxonomyTree();
+$taxonomies = GC\Model\Post\Taxonomy::selectAllCorrectWithPrimaryKey();
 
 foreach ($nodes as $node) {
     $posts[$node['post_id']]['taxonomies'][$node['tax_id']][] = $node;
@@ -10,7 +10,7 @@ foreach ($nodes as $node) {
 foreach ($posts as &$post) {
     if (isset($post['taxonomies'])) {
         foreach ($post['taxonomies'] as $tax_id => $taxonomy) {
-            $post['taxonomies'][$tax_id] = GC\Model\PostNode::createTree($taxonomy);
+            $post['taxonomies'][$tax_id] = GC\Model\Post\Node::createTree($taxonomy);
         }
     }
 }

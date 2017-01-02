@@ -1,5 +1,5 @@
 <?php
-$items = GC\Model\ModuleItem::joinAllWithFrameByForeign($module_id);
+$items = GC\Model\Module\Item::joinAllWithFrameByForeign($module_id);
 ?>
 
 <?php if (empty($items)): ?>

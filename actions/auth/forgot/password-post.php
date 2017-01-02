@@ -2,7 +2,7 @@
 
 $headTitle = trans("Wysłano e-maila z weryfikacją przypomnienia hasła");
 
-$user = GC\Model\Staff::selectSingleBy('email', $_POST['login']);
+$user = GC\Model\Staff\Staff::selectSingleBy('email', $_POST['login']);
 
 if (!$user) {
     $error = trans('Nieprawidłowy adres e-mail');
@@ -21,7 +21,7 @@ $regenerateUrl = sprintf(
     $_SERVER['HTTP_HOST'], $email64, $regeneration['verifyHash']
 );
 
-GC\Model\Staff::updateByPrimaryId($user['staff_id'], [
+GC\Model\Staff\Staff::updateByPrimaryId($user['staff_id'], [
     'regeneration' => json_encode($regeneration),
 ]);
 

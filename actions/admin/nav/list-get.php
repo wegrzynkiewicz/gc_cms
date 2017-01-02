@@ -1,6 +1,6 @@
 <?php
 
-$navs = GC\Model\MenuTaxonomy::selectAllCorrectWithPrimaryKey();
+$navs = GC\Model\Menu\Taxonomy::selectAllCorrectWithPrimaryKey();
 
 require ACTIONS_PATH.'/admin/parts/header.html.php';
 require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>

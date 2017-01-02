@@ -1,13 +1,13 @@
 <?php
 
 $form_id = $content;
-$fields = GC\Model\FormField::joinAllWithKeyByForeign($form_id);
+$fields = GC\Model\Form\Field::joinAllWithKeyByForeign($form_id);
 
 if (!isset($_POST["formSubmit_$form_id"])) {
     require TEMPLATE_PATH.'/modules/form/default-get.html.php';
 }
 
-$form = GC\Model\Form::selectByPrimaryId($form_id);
+$form = GC\Model\Form\Form::selectByPrimaryId($form_id);
 
 $data = [];
 foreach ($fields as $field_id => $field) {
@@ -32,7 +32,7 @@ if (count($settings['emails']) > 0) {
     }
 }
 
-GC\Model\FormSent::insertToForm($form_id, $data, $localization);
+GC\Model\Form\Sent::insertToForm($form_id, $data, $localization);
 
 ?>
 <p class="text-success">

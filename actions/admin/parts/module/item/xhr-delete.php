@@ -2,7 +2,7 @@
 
 if (isPost()) {
     $item_id = intval($_POST['item_id']);
-    GC\Model\ModuleItem::deleteFrameByPrimaryId($item_id);
+    GC\Model\Module\Item::deleteFrameByPrimaryId($item_id);
 }
 
 GC\Response::setMimeType('application/json');

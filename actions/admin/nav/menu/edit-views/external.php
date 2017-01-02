@@ -1,7 +1,7 @@
 <?php
 
 if ($menu_id) {
-    $_POST = GC\Model\Menu::selectByPrimaryId($menu_id);
+    $_POST = GC\Model\Menu\Menu::selectByPrimaryId($menu_id);
 }
 
 ?>

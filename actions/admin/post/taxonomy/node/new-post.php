@@ -1,6 +1,6 @@
 <?php
 
-$frame_id = GC\Model\Frame::insert([
+$frame_id = GC\Model\Module\Frame::insert([
     'name' => $_POST['name'],
     'type' => 'post-node',
     'keywords' => $_POST['keywords'],
@@ -8,7 +8,7 @@ $frame_id = GC\Model\Frame::insert([
     'image' => GC\Url::upload($_POST['image']),
 ]);
 
-GC\Model\PostNode::insertWithTaxonomyId([
+GC\Model\Post\Node::insertWithTaxonomyId([
     'frame_id' => $frame_id,
 ], $tax_id);
 

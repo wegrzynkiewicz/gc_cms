@@ -2,7 +2,7 @@
 
 $page = GC\Model\Page::selectWithFrameByPrimaryId($page_id);
 
-GC\Model\Frame::updateByFrameId($page['frame_id'], [
+GC\Model\Module\Frame::updateByFrameId($page['frame_id'], [
     'name' => $_POST['name'],
     'keywords' => $_POST['keywords'],
     'description' => $_POST['description'],

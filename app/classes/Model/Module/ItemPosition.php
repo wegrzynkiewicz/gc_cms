@@ -1,15 +1,15 @@
 <?php
 
-namespace GC\Model;
+namespace GC\Model\Module;
 
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\ColumnTrait;
 use GC\Storage\Utility\PositionTrait;
 use GC\Storage\Database;
 
-class ModuleFilePosition extends AbstractModel
+class ItemPosition extends AbstractModel
 {
-    public static $table = '::module_file_pos';
+    public static $table = '::module_item_pos';
 
     use ColumnTrait;
     use PositionTrait;
@@ -19,10 +19,10 @@ class ModuleFilePosition extends AbstractModel
         static::deleteAllBy('module_id', $module_id);
 
         $pos = 1;
-        foreach ($positions as $file) {
+        foreach ($positions as $item) {
             static::insert([
                 'module_id' => $module_id,
-                'file_id' => $file['id'],
+                'item_id' => $item['id'],
                 'position' => $pos++,
             ]);
         }

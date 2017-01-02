@@ -1,6 +1,6 @@
 <?php
 $form_id = $content;
-$fields = GC\Model\FormField::joinAllWithKeyByForeign($form_id);
+$fields = GC\Model\Form\Field::joinAllWithKeyByForeign($form_id);
 ?>
 
 <form id="form_<?=$form_id?>" action="" method="post" class="form-horizontal">

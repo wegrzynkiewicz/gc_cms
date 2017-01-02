@@ -1,6 +1,6 @@
 <?php
 
-$taxonomies = GC\Model\PostTaxonomy::selectAllCorrectWithPrimaryKey();
+$taxonomies = GC\Model\Post\Taxonomy::selectAllCorrectWithPrimaryKey();
 
 require ACTIONS_PATH.'/admin/parts/header.html.php';
 require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
@@ -32,7 +32,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
             </div>
 
             <?php foreach ($taxonomies as $tax_id => $taxonomy): ?>
-                <?php $tree = GC\Model\PostNode::buildTreeWithFrameByTaxonomyId($tax_id) ?>
+                <?php $tree = GC\Model\Post\Node::buildTreeWithFrameByTaxonomyId($tax_id) ?>
                 <?php if ($tree->hasChildren()): ?>
                     <div class="simple-box">
                         <?=GC\Render::action('/admin/parts/input/checkbox-tree.html.php', [

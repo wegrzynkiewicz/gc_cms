@@ -1,6 +1,6 @@
 <?php
 
-$staffList = GC\Model\Staff::selectAllCorrectWithPrimaryKey();
+$staffList = GC\Model\Staff\Staff::selectAllCorrectWithPrimaryKey();
 
 require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 

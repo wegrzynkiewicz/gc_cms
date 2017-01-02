@@ -11,4 +11,4 @@ $breadcrumbs = new GC\Breadcrumbs();
 $breadcrumbs->push('/admin', 'Dashboard', 'fa-dashboard');
 
 # utworzenie obiektu reprezentującego pracownika, sprawdza czy jest zalogowany
-$staff = GC\Model\Staff::createFromSession();
+$staff = GC\Model\Staff\Staff::createFromSession();

@@ -1,5 +1,5 @@
 <?php
-    $images = GC\Model\ModuleFile::joinAllWithKeyByForeign($module_id);
+    $images = GC\Model\Module\File::joinAllWithKeyByForeign($module_id);
 ?>
 
 <div id="slider_<?=e($module_id)?>" class="swiper-container" style="height: 21vw">

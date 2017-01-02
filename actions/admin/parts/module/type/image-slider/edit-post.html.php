@@ -1,6 +1,6 @@
 <?php
 
-GC\Model\Module::updateByPrimaryId($module_id, [
+GC\Model\Module\Module::updateByPrimaryId($module_id, [
     'theme' => $_POST['theme'],
 ]);
 

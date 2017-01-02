@@ -2,7 +2,7 @@
 
 $options = [];
 if ($field_id > 0) {
-    $field = GC\Model\FormField::selectByPrimaryId($field_id);
+    $field = GC\Model\Form\Field::selectByPrimaryId($field_id);
     $settings = json_decode($field['settings'], true);
     $options = $settings['options'];
 }

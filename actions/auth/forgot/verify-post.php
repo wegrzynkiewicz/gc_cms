@@ -12,7 +12,7 @@ if ($new_password !== $_POST['confirm_password']) {
     GC\Response::redirect('/auth/login');
 }
 
-GC\Model\Staff::updateByPrimaryId($user['staff_id'], [
+GC\Model\Staff\Staff::updateByPrimaryId($user['staff_id'], [
     'password' => GC\Password::hash($new_password),
     'regeneration' => json_encode([]),
 ]);

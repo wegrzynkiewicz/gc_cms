@@ -12,7 +12,7 @@ $settings['rows'][$row_number] = [
     'gutter' => $_POST['gutter'],
 ];
 
-GC\Model\Frame::updateByFrameId($frame_id, [
+GC\Model\Module\Frame::updateByFrameId($frame_id, [
     'settings' => json_encode($settings, JSON_UNESCAPED_UNICODE),
 ]);
 

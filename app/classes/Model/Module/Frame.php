@@ -1,6 +1,6 @@
 <?php
 
-namespace GC\Model;
+namespace GC\Model\Module;
 
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\ColumnTrait;

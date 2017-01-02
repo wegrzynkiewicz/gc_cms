@@ -1,6 +1,6 @@
 <?php
 
-$node = GC\Model\PostNode::selectWithFrameByPrimaryId($node_id);
+$node = GC\Model\Post\Node::selectWithFrameByPrimaryId($node_id);
 $headTitle = trans('Edycja węzła "%s"', [$node['name']]);
 $breadcrumbs->push($request->path, $headTitle);
 

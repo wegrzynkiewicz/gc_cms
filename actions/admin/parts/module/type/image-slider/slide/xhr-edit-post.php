@@ -8,7 +8,7 @@ $settings = [
     'height' => $height,
 ];
 
-GC\Model\ModuleFile::updateByPrimaryId($file_id, [
+GC\Model\Module\File::updateByPrimaryId($file_id, [
     'name' => $_POST['name'],
     'url' => $_POST['url'],
     'settings' => json_encode($settings),

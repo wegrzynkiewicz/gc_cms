@@ -1,6 +1,6 @@
 <?php
 
-namespace GC\Model;
+namespace GC\Model\Module;
 
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\ColumnTrait;
@@ -9,7 +9,7 @@ use GC\Storage\Utility\JoinTrait;
 use GC\Storage\Utility\ContainFrameTrait;
 use GC\Storage\Database;
 
-class ModuleItem extends AbstractModel
+class Item extends AbstractModel
 {
     public static $table       = '::module_items';
     public static $primary     = 'item_id';
@@ -34,10 +34,10 @@ class ModuleItem extends AbstractModel
     {
         $item_id = parent::insert($data);
 
-        ModuleItemPosition::insert([
+        ItemPosition::insert([
             'module_id' => $module_id,
             'item_id' => $item_id,
-            'position' => ModuleItemPosition::selectMaxPositionBy('module_id', $module_id),
+            'position' => ItemPosition::selectMaxPositionBy('module_id', $module_id),
         ]);
 
         return $item_id;

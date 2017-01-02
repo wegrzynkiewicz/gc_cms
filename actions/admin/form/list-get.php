@@ -1,7 +1,7 @@
 <?php
 
-$forms = GC\Model\Form::selectAllCurrentLangWithPrimaryKey();
-$counts = GC\Model\FormSent::selectSumStatusForFormId();
+$forms = GC\Model\Form\Form::selectAllCurrentLangWithPrimaryKey();
+$counts = GC\Model\Form\Sent::selectSumStatusForFormId();
 
 require ACTIONS_PATH.'/admin/parts/header.html.php';
 require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>

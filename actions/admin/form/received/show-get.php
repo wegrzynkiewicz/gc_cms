@@ -1,6 +1,6 @@
 <?php
 
-$message = GC\Model\FormSent::selectByPrimaryId($sent_id);
+$message = GC\Model\Form\Sent::selectByPrimaryId($sent_id);
 $data = json_decode($message['data'], true);
 $name = reset($data);
 $localization = json_decode($message['localization'], true);

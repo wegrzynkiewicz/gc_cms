@@ -4,7 +4,7 @@ $theme = $_POST['theme'];
 
 require ACTIONS_PATH."/admin/parts/module/type/gallery/theme/{$theme}-{$request->method}.php";
 
-GC\Model\Module::updateByPrimaryId($module_id, [
+GC\Model\Module\Module::updateByPrimaryId($module_id, [
     'theme' => $theme,
     'settings' => json_encode($settings, JSON_UNESCAPED_UNICODE),
 ]);

@@ -3,7 +3,7 @@
 $newPassword = $_POST['new_password'];
 $confirmPassword = $_POST['confirm_password'];
 
-$user = GC\Model\Staff::selectByPrimaryId($_SESSION['staff']['entity']['staff_id']);
+$user = GC\Model\Staff\Staff::selectByPrimaryId($_SESSION['staff']['entity']['staff_id']);
 
 if ($newPassword !== $confirmPassword) {
     $error = trans('Podane nowe hasła nie są identyczne');
@@ -23,7 +23,7 @@ if (GC\Password::verify($newPassword, $user['password'])) {
     return require ACTIONS_PATH.'/admin/account/force-change-password-get.php';
 }
 
-GC\Model\Staff::updateByPrimaryId($user['staff_id'], [
+GC\Model\Staff\Staff::updateByPrimaryId($user['staff_id'], [
     'password' => GC\Password::hash($newPassword),
     'force_change_password' => 0,
 ]);

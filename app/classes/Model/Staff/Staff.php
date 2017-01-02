@@ -1,6 +1,6 @@
 <?php
 
-namespace GC\Model;
+namespace GC\Model\Staff;
 
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\ColumnTrait;
@@ -97,7 +97,7 @@ class Staff extends AbstractModel
             ));
         }
 
-        $permissions = StaffPermission::mapPermissionNameByStaffId($staff_id);
+        $permissions = Permission::mapPermissionNameByStaffId($staff_id);
 
         # utworz obiekt reprezentujacy pracownika
         $staff = new Staff($data, $permissions);
@@ -172,11 +172,11 @@ class Staff extends AbstractModel
     private static function updateGroups($staff_id, array $groups)
     {
         # usuń wszystkie grupy tego pracownika
-        StaffMembership::deleteAllBy('staff_id', $staff_id);
+        Membership::deleteAllBy('staff_id', $staff_id);
 
         # wstaw na nowo grupy pracownika
         foreach ($groups as $group_id) {
-            StaffMembership::insert([
+            Membership::insert([
                 'group_id' => $group_id,
                 'staff_id' => $staff_id,
             ]);

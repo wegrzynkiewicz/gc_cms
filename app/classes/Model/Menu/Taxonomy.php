@@ -1,13 +1,13 @@
 <?php
 
-namespace GC\Model;
+namespace GC\Model\Menu;
 
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\PrimaryTrait;
 use GC\Storage\Utility\TaxonomyTrait;
 use GC\Storage\Database;
 
-class MenuTaxonomy extends AbstractModel
+class Taxonomy extends AbstractModel
 {
     public static $table     = '::menu_taxonomies';
     public static $primary   = 'nav_id';

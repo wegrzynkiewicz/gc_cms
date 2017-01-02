@@ -5,7 +5,7 @@ $settings = [];
 
 require ACTIONS_PATH."/admin/form/field/types/{$type}-{$request->method}.php";
 
-GC\Model\FormField::insertWithFormId([
+GC\Model\Form\Field::insertWithFormId([
     'name' => $_POST['name'],
     'type' => $type,
     'help' => $_POST['help'],

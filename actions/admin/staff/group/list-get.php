@@ -1,6 +1,6 @@
 <?php
 
-$groups = GC\Model\StaffGroup::selectAllWithPrimaryKey();
+$groups = GC\Model\Staff\Group::selectAllWithPrimaryKey();
 
 require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 

@@ -4,7 +4,7 @@ $oldPassword = $_POST['old_password'];
 $newPassword = $_POST['new_password'];
 $confirmPassword = $_POST['confirm_password'];
 
-$user = GC\Model\Staff::selectByPrimaryId($_SESSION['staff']['entity']['staff_id']);
+$user = GC\Model\Staff\Staff::selectByPrimaryId($_SESSION['staff']['entity']['staff_id']);
 
 if (strlen($newPassword) < $config['password']['minLength']) {
     $error = trans('Hasło nie może być krótsze niż %s znaków', $config['password']['minLength']);
@@ -24,7 +24,7 @@ if ($newPassword !== $confirmPassword) {
     return require ACTIONS_PATH.'/admin/account/change-password-get.php';
 }
 
-GC\Model\Staff::updateByPrimaryId($user['staff_id'], [
+GC\Model\Staff\Staff::updateByPrimaryId($user['staff_id'], [
     'password' => GC\Password::hash($newPassword),
 ]);
 

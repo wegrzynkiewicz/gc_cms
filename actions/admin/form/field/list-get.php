@@ -1,6 +1,6 @@
 <?php
 
-$fields = GC\Model\FormField::joinAllWithKeyByForeign($form_id);
+$fields = GC\Model\Form\Field::joinAllWithKeyByForeign($form_id);
 
 require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 

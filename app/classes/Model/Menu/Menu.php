@@ -1,15 +1,15 @@
 <?php
 
-namespace GC\Model;
+namespace GC\Model\Menu;
 
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\NodeTrait;
 use GC\Storage\Utility\PrimaryTrait;
-use GC\Storage\Node;
+use GC\Storage\AbstractNode;
 use GC\Storage\Database;
 use GC\Url;
 
-class Menu extends Node
+class Menu extends AbstractNode
 {
     public static $table        = '::menus';
     public static $primary      = 'menu_id';
@@ -62,7 +62,7 @@ class Menu extends Node
      */
     public static function buildTreeByWorkName($workname, $lang)
     {
-        $nav = MenuTaxonomy::selectSingleByWorkName($workname, $lang);
+        $nav = Taxonomy::selectSingleByWorkName($workname, $lang);
         $tree = static::buildTreeByTaxonomyId($nav['nav_id']);
 
         return $tree;
@@ -72,11 +72,11 @@ class Menu extends Node
     {
         $menu_id = parent::insert($data);
 
-        MenuTree::insert([
+        Tree::insert([
             'nav_id' => $nav_id,
             'menu_id' => $menu_id,
             'parent_id' => null,
-            'position' => MenuTree::selectMaxPositionByTaxonomyIdAndParentId($nav_id, null),
+            'position' => Tree::selectMaxPositionByTaxonomyIdAndParentId($nav_id, null),
         ]);
 
         return $menu_id;

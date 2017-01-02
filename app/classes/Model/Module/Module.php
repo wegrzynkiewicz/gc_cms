@@ -1,9 +1,9 @@
 <?php
 
-namespace GC\Model;
+namespace GC\Model\Module;
 
-use GC\Model\ModuleFile;
-use GC\Model\ModuleItem;
+use GC\Model\Module\File;
+use GC\Model\Module\Item;
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\PrimaryTrait;
 use GC\Storage\Utility\JoinTrait;
@@ -22,27 +22,27 @@ class Module extends AbstractModel
     protected static function deleteModuleByPrimaryId($module_id)
     {
         static::deleteByPrimaryId($module_id);
-        ModuleFile::deleteUnassignedByForeign();
-        ModuleItem::deleteItemsByForeign($module_id);
-        ModuleItem::deleteUnassignedByForeign();
+        File::deleteUnassignedByForeign();
+        Item::deleteItemsByForeign($module_id);
+        Item::deleteUnassignedByForeign();
     }
 
     protected static function deleteModulesByForeign($frame_id)
     {
         $modules = static::joinAllWithKeyByForeign($frame_id);
         foreach ($modules as $module_id => $module) {
-            ModuleItem::deleteItemsByForeign($module_id);
+            Item::deleteItemsByForeign($module_id);
         }
         static::deleteAllByForeign($frame_id);
-        ModuleFile::deleteUnassignedByForeign();
-        ModuleItem::deleteUnassignedByForeign();
+        File::deleteUnassignedByForeign();
+        Item::deleteUnassignedByForeign();
     }
 
     protected static function insertWithFrameId(array $data, $frame_id)
     {
         $module_id = parent::insert($data);
 
-        ModulePosition::insert([
+        Position::insert([
             'frame_id' => $frame_id,
             'module_id' => $module_id,
             'position' => '0:999:12:1',

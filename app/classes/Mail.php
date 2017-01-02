@@ -2,8 +2,8 @@
 
 namespace GC;
 
-use GC\Model\MailSent;
-use GC\Model\MailToSend;
+use GC\Model\Mail\Sent;
+use GC\Model\Mail\ToSend;
 use GC\Logger;
 use GC\Render;
 use GC\Password;
@@ -71,7 +71,7 @@ class Mail extends PHPMailer
     public function push()
     {
         $this->hash = Password::random(40);
-        MailToSend::insert([
+        ToSend::insert([
             'mail_hash' => $this->hash,
             'receivers' => implode('; ', array_keys($this->all_recipients)),
             'subject' => $this->Subject,
@@ -90,8 +90,8 @@ class Mail extends PHPMailer
         try {
             parent::send();
 
-            MailToSend::deleteAllBy('mail_hash', $this->hash);
-            MailSent::insert([
+            ToSend::deleteAllBy('mail_hash', $this->hash);
+            Sent::insert([
                 'mail_hash' => $this->hash,
                 'receivers' => implode('; ', array_keys($this->all_recipients)),
                 'subject' => $this->Subject,
@@ -112,7 +112,7 @@ class Mail extends PHPMailer
     public static function sendScheduled()
     {
         $limitPerOnce = getConfig()['email']['limitPerOnce'];
-        $emails = MailToSend::selectLatest($limitPerOnce);
+        $emails = ToSend::selectLatest($limitPerOnce);
         foreach($emails as $email) {
             $email->send();
         }

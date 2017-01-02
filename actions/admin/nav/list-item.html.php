@@ -1,4 +1,4 @@
-<?php $tree = GC\Model\Menu::buildTreeByTaxonomyId($nav_id) ?>
+<?php $tree = GC\Model\Menu\Menu::buildTreeByTaxonomyId($nav_id) ?>
 <tr>
     <td><?=e($nav['name'])?></td>
     <td>
