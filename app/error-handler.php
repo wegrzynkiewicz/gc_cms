@@ -22,11 +22,11 @@ set_error_handler(function ($err_severity, $err_msg, $err_file, $err_line, array
 
     GC\Logger::error($err_msg, [$err_file, $err_line]);
 
-    if (error_reporting() === 0) {
+    if (error_reporting() == 0) {
         return false;
     }
 
-    switch ($err_severity) {
+    switch ($err_severity & error_reporting()) {
         case E_ERROR:               throw new ErrorException($err_msg, 0, $err_severity, $err_file, $err_line);
         case E_WARNING:             throw new WarningException($err_msg, 0, $err_severity, $err_file, $err_line);
         case E_PARSE:               throw new ParseException($err_msg, 0, $err_severity, $err_file, $err_line);

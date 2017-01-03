@@ -92,10 +92,8 @@
             gallery.init();
         }
 
-        // initialize
         init(this);
 
-        // Parse URL and open gallery if it contains #&pid=3&gid=1
         var hashData = parseHash();
         if (hashData.pid > 0 && hashData.gid > 0) {
             openGallery(hashData.gid, hashData.pid);

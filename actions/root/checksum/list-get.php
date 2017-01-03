@@ -12,6 +12,9 @@ $stored = json_decode($json, true);
 $checksums = [];
 foreach($files as $file) {
     $key = trim($file, '.');
+    if ($key == '/app/storage/checksum.json') {
+        continue;
+    }
     $hash = sha1(file_get_contents($file));
     $checksums[] = [
         'file' => $key,

@@ -18,7 +18,10 @@ CKEDITOR.editorConfig = function( config ) {
 
 
 
-    config.contentsCss = ['http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css', 'http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'];
+    config.contentsCss = [
+        '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css',
+        '//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'
+    ];
 
     config.allowedContent = true;
     config.filebrowserBrowseUrl = '#';

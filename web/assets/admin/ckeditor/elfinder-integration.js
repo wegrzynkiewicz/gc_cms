@@ -5,6 +5,11 @@ $(function() {
         var dialogDefinition = event.data.definition;
         var tabCount = dialogDefinition.contents.length;
         for (var i = 0; i < tabCount; i++) { // cycle to replace the click of button "View on the server"
+
+            if (!dialogDefinition.contents[i]) {
+                continue;
+            }
+
             var browseButton = dialogDefinition.contents[i].get('browse');
 
             if (browseButton !== null) {
@@ -18,6 +23,7 @@ $(function() {
                     });
                     elfNode.dialogelfinder({
                         title: '',
+                        url: '/admin/elfinder/connector',
                         useBrowserHistory: false,
                         resizable: false,
                         getFileCallback: function(file) {

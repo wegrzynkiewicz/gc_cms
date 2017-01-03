@@ -56,8 +56,10 @@ $config = [
     ],
     'db' => [ # zawiera parametry połączeniowe do bazy danych
         'dns' => 'mysql:host=localhost;dbname=_gc_cms;charset=utf8',
-        'username' => 'root',
-        'password' => '',
+        'host' => 'localhost',
+        'username' => 'tester',
+        'password' => 'tester',
+        'name' => '_gc_cms',
         'prefix' => 'gc_'
     ],
     'email' => [ # ustawienia serwera pocztowego do rozsyłania emaili
