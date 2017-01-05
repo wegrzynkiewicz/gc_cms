@@ -4,7 +4,7 @@ $oldPassword = $_POST['old_password'];
 $newPassword = $_POST['new_password'];
 $confirmPassword = $_POST['confirm_password'];
 
-$user = GC\Model\Staff\Staff::selectByPrimaryId($_SESSION['staff']['entity']['staff_id']);
+$user = GC\Model\Staff\Staff::selectByPrimaryId($staff['staff_id']);
 
 if (strlen($newPassword) < $config['password']['minLength']) {
     $error = trans('Hasło nie może być krótsze niż %s znaków', $config['password']['minLength']);

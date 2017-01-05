@@ -2,6 +2,7 @@
 
 namespace GC\Storage\Utility;
 
+use GC\Assert;
 use GC\Storage\Database;
 
 /**
@@ -19,7 +20,7 @@ trait PrimaryTrait
     {
         $sql = self::sql("SELECT * FROM ::table WHERE ::primary = ? LIMIT 1");
 
-        return Database::fetchSingle($sql, [$primary_id]);
+        return Database::fetch($sql, [$primary_id]);
     }
 
     /**
@@ -29,7 +30,7 @@ trait PrimaryTrait
     public static function selectAllWithPrimaryKey()
     {
         $sql = self::sql("SELECT * FROM ::table");
-        $rows = Database::fetchAllWithKey($sql, [], static::$primary);
+        $rows = Database::fetchByKey($sql, [], static::$primary);
 
         return $rows;
     }
@@ -40,9 +41,9 @@ trait PrimaryTrait
      */
     public static function selectAllWithPrimaryKeyBy($column, $value)
     {
-        Database::assertColumn($column);
+        Assert::column($column);
         $sql = self::sql("SELECT * FROM ::table WHERE {$column} = ?");
-        $rows = Database::fetchAllWithKey($sql, [$value], static::$primary);
+        $rows = Database::fetchByKey($sql, [$value], static::$primary);
 
         return $rows;
     }
@@ -52,9 +53,9 @@ trait PrimaryTrait
      */
     public static function mapWithPrimaryKeyBy($column)
     {
-        Database::assertColumn($column);
+        Assert::column($column);
         $sql = self::sql("SELECT ::primary, {$column} FROM ::table");
-        $options = Database::fetchMapBy($sql, [], static::$primary, $column);
+        $options = Database::fetchByMap($sql, [], static::$primary, $column);
 
         return $options;
     }

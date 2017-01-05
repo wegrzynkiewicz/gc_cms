@@ -2,7 +2,9 @@
 
 $posts = GC\Model\Post\Post::selectAllWithFrames();
 $nodes = GC\Model\Post\Node::selectAllForTaxonomyTree();
-$taxonomies = GC\Model\Post\Taxonomy::selectAllCorrectWithPrimaryKey();
+$taxonomies = GC\Model\Post\Taxonomy::select()
+    ->equals('lang', $_SESSION['lang']['editor'])
+    ->fetchByPrimaryKey();
 
 foreach ($nodes as $node) {
     $posts[$node['post_id']]['taxonomies'][$node['tax_id']][] = $node;

@@ -2,6 +2,7 @@
 
 namespace GC\Storage;
 
+use GC\Assert;
 use GC\Storage\Database;
 
 class Criteria
@@ -37,8 +38,8 @@ class Criteria
     }
 
     public function sort($column, $order)
-    {        
-        Database::assertColumn($column);
+    {
+        Assert::column($column);
 
         $order = strtoupper($order);
         if (!in_array($order, ['ASC', 'DESC'])) {
@@ -100,7 +101,7 @@ class Criteria
         $searchableColumns = [];
         foreach ($data['columns'] as $number => $column) {
             $name = $column['name'];
-            Database::assertColumn($name);
+            Assert::column($name);
             $columnNames[$number] = $name;
 
             if ($column['searchable']) {

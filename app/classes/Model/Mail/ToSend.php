@@ -25,7 +25,7 @@ class ToSend extends AbstractModel
     public static function selectLatest($limit)
     {
         $sql = self::sql("SELECT * FROM ::table LEFT JOIN ::frame_pos AS p USING (::primary) WHERE p.frame_id = ?");
-        $rows = Database::fetchAllWithKey($sql, [$frame_id], static::$primary);
+        $rows = Database::fetchByKey($sql, [$frame_id], static::$primary);
 
         return $rows;
     }

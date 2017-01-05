@@ -2,6 +2,8 @@
 
 namespace GC\Storage;
 
+use GC\Assert;
+use GC\Storage\Query\Select;
 use BadMethodCallException;
 use RuntimeException;
 
@@ -68,13 +70,18 @@ abstract class AbstractModel extends AbstractEntity
     {
         $columns = [];
         foreach ($data as $column => $value) {
-            Database::assertColumn($column);
+            Assert::column($column);
             $columns[] = "`{$column}` = ?";
         }
 
         $mergedColumns = implode(', ', $columns);
 
         return $mergedColumns;
+    }
+
+    public static function select()
+    {
+        return new Select(static::class);
     }
 
     /**
@@ -87,7 +94,7 @@ abstract class AbstractModel extends AbstractEntity
 
         $columns = array_keys($data);
         array_map(function($column){
-            Database::assertColumn($column);
+            Assert::column($column);
         }, $columns);
         $columns = implode(', ', $columns);
 

@@ -62,7 +62,11 @@ class Menu extends AbstractNode
      */
     public static function buildTreeByWorkName($workname, $lang)
     {
-        $nav = Taxonomy::selectSingleByWorkName($workname, $lang);
+        $nav = Taxonomy::select()
+            ->equals('workname', $workname)
+            ->equals('lang', $lang)
+            ->fetch();
+
         $tree = static::buildTreeByTaxonomyId($nav['nav_id']);
 
         return $tree;

@@ -2,6 +2,7 @@
 
 namespace GC\Storage\Utility;
 
+use GC\Assert;
 use GC\Storage\Database;
 use GC\Storage\Criteria;
 
@@ -18,7 +19,7 @@ trait CriteriaTrait
     public static function selectAllByCriteria(array $columns, Criteria $criteria)
     {
         array_map(function ($column) {
-            Database::assertColumn($column);
+            Assert::column($column);
         }, $columns);
 
         $select = implode(', ', $columns);
@@ -37,7 +38,7 @@ trait CriteriaTrait
         $copy->clearLimit();
         $copy->clearSort();
         $sql = self::sql("SELECT COUNT(*) AS count FROM ::table {$copy}");
-        $data = Database::fetchSingle($sql, $copy->getValues());
+        $data = Database::fetch($sql, $copy->getValues());
 
         return intval($data['count']);
     }

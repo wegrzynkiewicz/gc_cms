@@ -18,7 +18,7 @@ class Group extends AbstractModel
     public static function mapNameByStaffId($staff_id)
     {
         $sql = self::sql("SELECT ::primary, name FROM ::staff_membership LEFT JOIN ::table USING(::primary) WHERE staff_id = ?");
-        $groups = Database::fetchMapBy($sql, [intval($staff_id)], static::$primary, 'name');
+        $groups = Database::fetchByMap($sql, [intval($staff_id)], static::$primary, 'name');
 
         return $groups;
     }

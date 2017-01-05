@@ -15,19 +15,4 @@ class Position extends AbstractModel
     use ColumnTrait;
     use PrimaryTrait;
     use PositionTrait;
-
-    protected static function updatePositionByFormId($form_id, array $positions)
-    {
-        static::deleteAllBy('form_id', $form_id);
-
-        $pos = 1;
-        foreach ($positions as $field) {
-
-            static::insert([
-                'form_id' => $form_id,
-                'field_id' => $field['id'],
-                'position' => $pos++,
-            ]);
-        }
-    }
 }

@@ -1,5 +1,5 @@
 <?php
-$langs = GC\Model\Lang::selectAllWithPrimaryKeyOrderBy('position', 'ASC');
+$langs = GC\Model\Lang::select()->sort('position', 'ASC')->fetchByPrimaryKey();
 $currentLang = $langs[$_SESSION['lang']['editor']];
 ?>
 

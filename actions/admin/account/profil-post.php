@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-GC\Model\Staff\Staff::updateByPrimaryId($_SESSION['staff']['entity']['staff_id'], [
+GC\Model\Staff\Staff::updateByPrimaryId($staff['staff_id'], [
     'lang' => $_POST['lang'],
 ]);
 

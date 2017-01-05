@@ -20,7 +20,7 @@ trait TreeTrait
         }
 
         $sql = self::sql("SELECT MAX(position) AS maximum FROM ::table AS p WHERE p.::taxonomy = ? AND parent_id {$condition} LIMIT 1");
-        $maxOrder =  Database::fetchSingle($sql, $data);
+        $maxOrder =  Database::fetch($sql, $data);
 
         return $maxOrder['maximum'] + 1;
     }

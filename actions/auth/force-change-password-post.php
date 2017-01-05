@@ -3,7 +3,7 @@
 $newPassword = $_POST['new_password'];
 $confirmPassword = $_POST['confirm_password'];
 
-$user = GC\Model\Staff\Staff::selectByPrimaryId($_SESSION['staff']['entity']['staff_id']);
+$user = GC\Model\Staff\Staff::selectByPrimaryId($staff['staff_id']);
 
 if ($newPassword !== $confirmPassword) {
     $error = trans('Podane nowe hasła nie są identyczne');

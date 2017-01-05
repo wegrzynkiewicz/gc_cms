@@ -1,7 +1,6 @@
 <?php
 
-$dumps = GC\Model\Dump::selectAllWithPrimaryKeyOrderBy('creation_datetime', 'DESC');
-
+$dumps = GC\Model\Dump::select()->sort('creation_datetime', 'DESC')->fetchByPrimaryKey();
 require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">

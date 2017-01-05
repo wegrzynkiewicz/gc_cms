@@ -16,17 +16,4 @@ class Field extends AbstractModel
 
     use PrimaryTrait;
     use JoinTrait;
-
-    protected static function insertWithFormId(array $data, $form_id)
-    {
-        $field_id = parent::insert($data);
-
-        Position::insert([
-            'form_id' => $form_id,
-            'field_id' => $field_id,
-            'position' => Position::selectMaxPositionBy('form_id', $form_id),
-        ]);
-
-        return $field_id;
-    }
 }

@@ -2,7 +2,7 @@
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
         <i class="fa fa-user fa-fw"></i>
         <span class="hidden-xs hidden-sm">
-            <?=e($_SESSION['staff']['entity']['name'])?>
+            <?=e($staff['name'])?>
         </span>
         <b class="caret"></b>
     </a>

@@ -39,7 +39,7 @@ class Node extends AbstractNode
     public static function mapNameByPostId($post_id)
     {
         $sql = self::sql("SELECT ::primary, name FROM ::table LEFT JOIN ::post_membership AS p USING (::primary) LEFT JOIN ::frames USING (frame_id) WHERE p.post_id = ?");
-        $rows = Database::fetchMapBy($sql, [intval($post_id)], static::$primary, 'name');
+        $rows = Database::fetchByMap($sql, [intval($post_id)], static::$primary, 'name');
 
         return $rows;
     }

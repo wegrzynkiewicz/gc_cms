@@ -5,7 +5,6 @@ namespace GC\Model;
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\PrimaryTrait;
 use GC\Storage\Utility\ColumnTrait;
-use GC\Storage\Utility\OrderTrait;
 use GC\Storage\Database;
 
 class Checksum extends AbstractModel
@@ -15,5 +14,4 @@ class Checksum extends AbstractModel
 
     use PrimaryTrait;
     use ColumnTrait;
-    use OrderTrait;
 }

@@ -1,6 +1,9 @@
 <?php
 
-$taxonomies = GC\Model\Post\Taxonomy::selectAllCorrectWithPrimaryKey();
+$taxonomies = GC\Model\Post\Taxonomy::select()
+    ->equals('lang', $_SESSION['lang']['editor'])
+    ->sort('name')
+    ->fetchByPrimaryKey();
 
 require ACTIONS_PATH.'/admin/parts/header.html.php';
 require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>

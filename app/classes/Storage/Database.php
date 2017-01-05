@@ -26,7 +26,7 @@ class Database
     /**
      * Wykonuje zapytanie SQL i zwraca jeden wiersz z tego zapytania, przydatne dla pojedyńczych wywołań
      */
-    public static function fetchSingle($sql, array $values = [])
+    public static function fetch($sql, array $values = [])
     {
         return self::wrapQuery($sql, $values, function ($statement) {
             return $statement->fetch(PDO::FETCH_ASSOC);
@@ -48,7 +48,7 @@ class Database
      * kluczem w tej tablicy jest columna przekazana jako $label,
      * przydatne dla wielu rekordow z dostępem swobodnym po kluczu w tablicy
      */
-    public static function fetchAllWithKey($sql, array $values, $label)
+    public static function fetchByKey($sql, array $values, $label)
     {
         $data = [];
         foreach (self::fetchAll($sql, $values) as $row) {
@@ -63,7 +63,7 @@ class Database
      * kluczem w tej tablicy jest columna przekazana jako $label a wartością jest $column
      * przydatne dla wielu rekordow z dostępem swobodnym po kluczu w tablicy
      */
-    public static function fetchMapBy($sql, array $values, $label, $column)
+    public static function fetchByMap($sql, array $values, $label, $column)
     {
         $data = [];
         foreach (self::fetchAll($sql, $values) as $row) {

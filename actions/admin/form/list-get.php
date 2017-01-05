@@ -1,7 +1,14 @@
 <?php
 
-$forms = GC\Model\Form\Form::selectAllCurrentLangWithPrimaryKey();
-$counts = GC\Model\Form\Sent::selectSumStatusForFormId();
+$forms = GC\Model\Form\Form::select()
+    ->equals('lang', $_SESSION['lang']['editor'])
+    ->sort('name', 'ASC')
+    ->fetchByPrimaryKey();
+
+$counts = GC\Model\Form\Sent::select()
+    ->fields("form_id, SUM(status = 'unread') AS unread")
+    ->groupBy('form_id')
+    ->fetchByKey('form_id');
 
 require ACTIONS_PATH.'/admin/parts/header.html.php';
 require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>

@@ -1,6 +1,9 @@
 <?php
 
-$widgets = GC\Model\Widget::selectAllCorrectWitPrimaryId();
+$widgets = GC\Model\Widget::select()
+    ->equals('lang', $_SESSION['lang']['editor'])
+    ->sort('name', 'ASC')
+    ->fetchByPrimaryKey();
 
 require ACTIONS_PATH.'/admin/parts/header.html.php';
 require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>

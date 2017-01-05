@@ -2,6 +2,7 @@
 
 namespace GC\Storage\Utility;
 
+use GC\Assert;
 use GC\Storage\Database;
 
 /**
@@ -16,9 +17,9 @@ trait ColumnTrait
      */
     public static function selectSingleBy($column, $value)
     {
-        Database::assertColumn($column);
+        Assert::column($column);
         $sql = self::sql("SELECT * FROM ::table WHERE {$column} = ? LIMIT 1");
-        $row = Database::fetchSingle($sql, [$value]);
+        $row = Database::fetch($sql, [$value]);
 
         return $row;
     }
@@ -28,10 +29,10 @@ trait ColumnTrait
      */
     public static function selectAllWithKeyBy($column, $value, $key)
     {
-        Database::assertColumn($column);
-        Database::assertColumn($key);
+        Assert::column($column);
+        Assert::column($key);
         $sql = self::sql("SELECT * FROM ::table WHERE {$column} = ?");
-        $row = Database::fetchAllWithKey($sql, [$value], $key);
+        $row = Database::fetchByKey($sql, [$value], $key);
 
         return $row;
     }
@@ -41,9 +42,9 @@ trait ColumnTrait
      */
     public static function countBy($column, $value)
     {
-        Database::assertColumn($column);
+        Assert::column($column);
         $sql = self::sql("SELECT COUNT(*) AS count FROM ::table WHERE {$column} = ? LIMIT 1");
-        $data = Database::fetchSingle($sql, [$value]);
+        $data = Database::fetch($sql, [$value]);
 
         return intval($data['count']);
     }
@@ -53,7 +54,7 @@ trait ColumnTrait
      */
     protected static function deleteAllBy($column, $value)
     {
-        Database::assertColumn($column);
+        Assert::column($column);
         $sql = self::sql("DELETE FROM ::table WHERE {$column} = ?");
         $affectedRows = Database::execute($sql, [$value]);
 

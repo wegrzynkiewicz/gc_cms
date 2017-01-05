@@ -1,6 +1,10 @@
 <?php
 
-$installedForms = GC\Model\Form\Form::mapCorrectWithPrimaryKeyBy('name');
+$installedForms = GC\Model\Form\Form::select()
+    ->fields('::primary, name')
+    ->equals('lang', $_SESSION['lang']['editor'])
+    ->sort('name', 'ASC')
+    ->fetchByMap('form_id', 'name');
 
 $emails = [];
 foreach (def($settings, 'emails', []) as $email) {

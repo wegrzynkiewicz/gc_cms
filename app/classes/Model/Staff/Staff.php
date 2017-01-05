@@ -24,6 +24,8 @@ class Staff extends AbstractModel
     public function __construct(array $data, array $permissions)
     {
         parent::__construct($data);
+        $_SESSION['staff']['entity'] = $data;
+
         $this->permissions = $permissions;
 
         $config = getConfig();
@@ -36,8 +38,21 @@ class Staff extends AbstractModel
         # ustawienie jezyka panelu admina
         $_SESSION['lang']['staff'] = $data['lang'];
 
-        # aktualizujemy czas do automatycznego wylogowania
-        $_SESSION['staff']['sessionTimeout'] = time() + $config['session']['staffTimeout'];
+        # jeżeli czas trwania sesji minął
+        if (time() > $_SESSION['staff']['sessionTimeout']) {
+            unset($_SESSION['staff']);
+            Logger::logout("Session timeout");
+            Response::redirect('/auth/session-timeout');
+        }
+
+        static::refreshSessionTimeout();
+
+        # jezeli istnieje flaga, ze trzeba zmienić hasło wtedy przekieruj
+        if ($data['force_change_password']) {
+            Response::redirect('/auth/force-change-password');
+        }
+
+        Logger::session(sprintf("%s <%s>", $data['name'], $data['email']));
     }
 
     /**
@@ -105,6 +120,12 @@ class Staff extends AbstractModel
         return $staff;
     }
 
+    public static function refreshSessionTimeout()
+    {
+        # aktualizujemy czas do automatycznego wylogowania
+        $_SESSION['staff']['sessionTimeout'] = time() + getConfig()['session']['staffTimeout'];
+    }
+
     /**
      * Pobiera dane i tworzy obiekt pracownika na podstawie sesji
      */
@@ -117,39 +138,15 @@ class Staff extends AbstractModel
             Response::redirect('/auth/login');
         }
 
-        # jeżeli czas trwania sesji minął
-        if (time() > $_SESSION['staff']['sessionTimeout']) {
-            unset($_SESSION['staff']);
-            Logger::logout("Session timeout");
-            Response::redirect('/auth/session-timeout');
-        }
-
         # spróbuj pobrać pracownika z bazy, jezeli go nie znajdzie wtedy przekieruj na logowanie
         try{
             # pobierz pracownika z bazy danych
-            $staff = static::createByStaffId($_SESSION['staff']['entity']['staff_id']);
-            $_SESSION['staff']['entity'] = $staff->getData();
+            return static::createByStaffId($_SESSION['staff']['entity']['staff_id']);
         } catch (RuntimeException $exception) {
             unset($_SESSION['staff']);
             Logger::logout("Not found user");
             Response::redirect('/auth/login');
         }
-
-        # jezeli istnieje flaga, ze trzeba zmienić hasło wtedy przekieruj
-        if ($staff['force_change_password']) {
-            Response::redirect('/auth/force-change-password');
-        }
-
-        Logger::session(sprintf("%s <%s>", $staff['name'], $staff['email']));
-
-        return $staff;
-    }
-
-    public static function selectAllCorrectWithPrimaryKey()
-    {
-        $sql = self::sql("SELECT * FROM ::table WHERE root = 0");
-
-        return Database::fetchAllWithKey($sql, [], static::$primary);
     }
 
     protected static function update($staff_id, array $data, array $groups)

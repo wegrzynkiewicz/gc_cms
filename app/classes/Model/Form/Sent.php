@@ -17,28 +17,6 @@ class Sent extends AbstractModel
     use PrimaryTrait;
     use CriteriaTrait;
 
-    /**
-     * Pobiera ilość nieprzeczytanych wiadomości dla każdego form_id
-     */
-    public static function selectSumStatusForFormId()
-    {
-        $sql = self::sql("SELECT form_id, SUM(status = 'unread') AS unread FROM ::table GROUP BY form_id");
-        $rows = Database::fetchAllWithKey($sql, [], 'form_id');
-
-        return $rows;
-    }
-
-    /**
-     * Pobiera ilość wszystkich nieprzeczytanych wiadomości
-     */
-    public static function selectSumStatus()
-    {
-        $sql = self::sql("SELECT SUM(status = 'unread') AS unread FROM ::table LIMIT 1");
-        $count = Database::fetchSingle($sql, []);
-
-        return $count;
-    }
-
     protected static function insertToForm($form_id, $data, $localization)
     {
         $record = [

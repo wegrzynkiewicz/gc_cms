@@ -1,6 +1,9 @@
 <?php
 
-$staffList = GC\Model\Staff\Staff::selectAllCorrectWithPrimaryKey();
+$staffList = GC\Model\Staff\Staff::select()
+    ->fields(['staff_id', 'name'])
+    ->equals('root', 0)
+    ->fetchByPrimaryKey();
 
 require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
@@ -93,7 +96,7 @@ $(function(){
         $(this).find('[name="staff_id"]').val($(e.relatedTarget).data('id'));
     });
 
-    $('[data-table]').DataTable({        
+    $('[data-table]').DataTable({
         iDisplayLength: <?=$config['dataTable']['iDisplayLength']?>,
     });
 });
