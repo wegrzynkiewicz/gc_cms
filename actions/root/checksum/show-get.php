@@ -6,13 +6,10 @@ $file = base64_decode($base64);
 $headTitle = sprintf('Źródło pliku "%s"', $file);
 $breadcrumbs->push($request->path, $headTitle, 'fa-file-o');
 
-$json = file_get_contents(ROOT_PATH.'/app/storage/checksum.json');
-$stored = json_decode($json, true);
-
 $filepath = ROOT_PATH.$file;
 $content = file_get_contents($filepath);
 $checksum = sha1($content);
-$status = isset($stored[$file]) and $stored[$file] === $checksum;
+$status = (bool)GC\Model\Checksum::selectSingleBy('file', $file);
 $code = substr(highlight_string($content, true), 36, -15);
 $lines = explode('<br />', $code);
 $lineCount = count($lines);

@@ -4,7 +4,7 @@ if (isset($_SESSION['staff'])) {
     GC\Response::redirect('/admin');
 }
 
-$headTitle = trans("Logowanie do panelu admina");
+$headTitle = trans("Logowanie do panelu administracyjnego");
 
 require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
 
@@ -14,7 +14,7 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                 <div class="col-md-6 col-md-offset-3">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">
+                            <h3 class="panel-title text-center">
                                 <?=($headTitle)?>
                             </h3>
                         </div>

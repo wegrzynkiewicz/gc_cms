@@ -95,5 +95,13 @@ abstract class AbstractModel extends AbstractEntity
         $row_id = Database::insert($sql, array_values($data));
 
         return $row_id;
-    }    
+    }
+
+    protected static function deleteAll()
+    {
+        $sql = self::sql("DELETE FROM ::table ");
+        $affectedRows = Database::execute($sql);
+
+        return $affectedRows;
+    }
 }

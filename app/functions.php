@@ -216,7 +216,9 @@ function rmkdir($dir, $mode = 0775)
     while (count($dirs)) {
         $folder = array_shift($dirs);
         $path .= $folder.'/';
-        @mkdir($path, $mode);
+        if (!is_readable($path)) {
+            @mkdir($path, $mode);
+        }
         @chmod($path, $mode);
     }
 }

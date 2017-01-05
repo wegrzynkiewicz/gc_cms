@@ -17,7 +17,7 @@
 <?php endif ?>
 
 <?php if (isset($breadcrumbs)): $links = $breadcrumbs->getLinks() ?>
-    <?php if (count($links) > 1): ?>
+    <?php if (count($links)): ?>
         <ol class="breadcrumb">
             <?php foreach ($links as $i => $link): ?>
                 <?php $isLink = !(empty($link['url']) or $link['url'] == $request->path); ?>

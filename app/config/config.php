@@ -74,7 +74,7 @@ $config = [
         'replyEmail' => 'noreply@localhost', # nazwa użytkownika w nagłówku reply
         'replyName' => null, # nazwa użytkownika w nagłówku reply
         'limitPerOnce' => 10, # ile może się wysłać wiadomości na raz za jednym żądaniem
-        'headerTitle' => "Panel administracyjny GrafCenter CMS", # wykorzystywane do wyświetlania w panelowych mailaich
+        'headerTitle' => "Panel administracyjny GrafCenter CMS", # wykorzystywane do wyświetlania w panelowych mailach
     ],
     'reCaptcha' => [ # zawiera konfiguracje dla recaptchy od googla
         'public' => '6Le88g4UAAAAAJ_VW4XML20c2tWSWFSv29lkGeVp', # publiczny klucz
@@ -201,6 +201,7 @@ $config = [
         'settings' => [
             'include-tables' => [],
             'exclude-tables' => [
+                '/checksums$/',
                 '/dumps$/',
                 '/form_sent$/',
                 '/mail_to_send$/',
