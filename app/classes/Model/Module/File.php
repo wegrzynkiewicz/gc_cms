@@ -19,7 +19,7 @@ class File extends AbstractModel
     use PrimaryTrait;
     use JoinTrait;
 
-    protected static function insertWithModuleId(array $data, $module_id)
+    public static function insertWithModuleId(array $data, $module_id)
     {
         $file_id = parent::insert($data);
 

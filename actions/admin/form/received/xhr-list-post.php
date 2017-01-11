@@ -5,7 +5,13 @@ $criteria->pushCondition('form_id = ?', [$form_id]);
 
 $records = GC\Model\Form\Sent::selectAllByCriteria(['sent_id', 'name', 'status', 'sent_datetime'], $criteria);
 $filtered = GC\Model\Form\Sent::countByCriteria($criteria);
-$allRecords = GC\Model\Form\Sent::countBy('form_id', $form_id);
+
+$allRecords = intval(GC\Model\Form\Sent::select()
+    ->fields('COUNT(*) AS `count`')
+    ->equals('form_id', $form_id)
+    ->fetch()
+    ['count']
+);
 
 $response = [
     'draw' => intval($_POST['draw']),

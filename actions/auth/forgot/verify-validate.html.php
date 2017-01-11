@@ -9,7 +9,7 @@ $verifyHash = array_shift($_SEGMENTS);
 
 $email = base64_decode($email64);
 
-$user = GC\Model\Staff\Staff::selectSingleBy('email', $email);
+$user = GC\Model\Staff\Staff::select()->equals('email', $email)->fetch();
 if (!$user) {
     $error = trans("Wystąpił problem podczas resetowania hasła");
 

@@ -151,17 +151,4 @@ class Database
 
         return $result;
     }
-
-    /**
-     * Sprawdza poprawność nazwy kolumny
-     */
-    public static function assertColumn($column)
-    {
-        if (!preg_match("~^[a-z_]+$~", $column)) {
-            GC\Logger::sqlInject('Invalid column name', [$column]);
-            throw new RuntimeException(sprintf(
-                'Invalid column name (%s)', $column
-            ));
-        }
-    }
 }

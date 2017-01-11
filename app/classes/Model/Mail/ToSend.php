@@ -15,18 +15,10 @@ class ToSend extends AbstractModel
     use ColumnTrait;
     use PrimaryTrait;
 
-    protected static function insert(array $data)
+    public static function insert(array $data)
     {
         $data['push_datetime'] = sqldate();
 
         return parent::insert($data);
-    }
-
-    public static function selectLatest($limit)
-    {
-        $sql = self::sql("SELECT * FROM ::table LEFT JOIN ::frame_pos AS p USING (::primary) WHERE p.frame_id = ?");
-        $rows = Database::fetchByKey($sql, [$frame_id], static::$primary);
-
-        return $rows;
     }
 }

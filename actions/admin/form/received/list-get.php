@@ -1,6 +1,10 @@
 <?php
 
-$count = GC\Model\Form\Sent::countBy('form_id', $form_id);
+$count = GC\Model\Form\Sent::select()
+    ->fields('COUNT(*) AS `count`')
+    ->equals('form_id', $form_id)
+    ->fetch()
+    ['count'];
 
 require ACTIONS_PATH.'/admin/parts/header.html.php';
 require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>

@@ -9,7 +9,7 @@ $breadcrumbs->push($request->path, $headTitle, 'fa-file-o');
 $filepath = ROOT_PATH.$file;
 $content = file_get_contents($filepath);
 $checksum = sha1($content);
-$status = (bool)GC\Model\Checksum::selectSingleBy('file', $file);
+$status = (bool)GC\Model\Checksum::select()->equals('file', $file)->fetch();
 $code = substr(highlight_string($content, true), 36, -15);
 $lines = explode('<br />', $code);
 $lineCount = count($lines);

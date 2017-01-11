@@ -6,7 +6,6 @@
         </a>
     </td>
     <td>
-        <?php $permissions = GC\Model\Staff\Permission::mapPermissionNameByGroupId($group_id) ?>
         <?php foreach ($permissions as $permission): ?>
             <?=trans($config['permissions'][$permission])?> <br>
         <?php endforeach ?>

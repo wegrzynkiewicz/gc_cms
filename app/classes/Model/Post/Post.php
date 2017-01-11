@@ -15,14 +15,14 @@ class Post extends AbstractModel
     use PrimaryTrait;
     use ContainFrameTrait;
 
-    protected static function update($post_id, array $data, array $relations)
+    public static function update($post_id, array $data, array $relations)
     {
         # zaktualizuj pracownika
         parent::updateByPrimaryId($post_id, $data);
         static::updateRelations($post_id, $relations);
     }
 
-    protected static function insertWithRelations(array $data, array $relations)
+    public static function insertWithRelations(array $data, array $relations)
     {
         # wstaw pracownika
         $post_id = parent::insert($data);

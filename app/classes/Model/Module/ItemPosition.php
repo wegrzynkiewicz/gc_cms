@@ -14,7 +14,7 @@ class ItemPosition extends AbstractModel
     use ColumnTrait;
     use PositionTrait;
 
-    protected static function updatePositionsByModuleId($module_id, array $positions)
+    public static function updatePositionsByModuleId($module_id, array $positions)
     {
         static::deleteAllBy('module_id', $module_id);
 

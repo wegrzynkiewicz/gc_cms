@@ -52,10 +52,15 @@ abstract class AbstractModel extends AbstractEntity
         return $result;
     }
 
+    public static function delete()
+    {
+        return new Delete(static::class);
+    }
+
     /**
      * Wyszukuje w zapytaniu fraz :: i podstawia odpowiednie wartości statycznych pol klas.
      */
-    protected static function sql($pseudoQuery)
+    public static function sql($pseudoQuery)
     {
         return preg_replace_callback('/(::(\w+))/', function ($matches) {
             $property = $matches[2];
@@ -64,6 +69,47 @@ abstract class AbstractModel extends AbstractEntity
             }
             return $matches[1];
         }, $pseudoQuery);
+    }
+
+    public static function select()
+    {
+        return new Select(static::class);
+    }
+
+    /**
+     * Buduje i wykonuje zapytanie INSERT dla zadanych danych
+     */
+    public static function insert(array $data)
+    {
+        list($columns, $values) = self::buildInsertSyntax($data);
+        $sql = self::sql("INSERT INTO ::table ({$columns}) VALUES ({$values})");
+        $row_id = Database::insert($sql, array_values($data));
+
+        return $row_id;
+    }
+
+    /**
+     * Buduje i wykonuje zapytanie REPLACE dla zadanych danych
+     */
+    public static function replace(array $data)
+    {
+        list($columns, $values) = self::buildInsertSyntax($data);
+        $sql = self::sql("REPLACE INTO ::table ({$columns}) VALUES ({$values})");
+        Database::execute($sql, array_values($data));
+    }
+
+    protected static function buildInsertSyntax(array $data)
+    {
+        $filled = array_fill(0, count($data), '?');
+        $values = implode(', ', $filled);
+
+        $columns = array_keys($data);
+        array_map(function($column){
+            Assert::column($column);
+        }, $columns);
+        $columns = implode(', ', $columns);
+
+        return [$columns, $values];
     }
 
     protected static function buildUpdateSyntax(array $data)
@@ -77,31 +123,6 @@ abstract class AbstractModel extends AbstractEntity
         $mergedColumns = implode(', ', $columns);
 
         return $mergedColumns;
-    }
-
-    public static function select()
-    {
-        return new Select(static::class);
-    }
-
-    /**
-     * Buduje i wykonuje zapytanie INSERT dla zadanych danych
-     */
-    protected static function insert(array $data)
-    {
-        $filled = array_fill(0, count($data), '?');
-        $values = implode(', ', $filled);
-
-        $columns = array_keys($data);
-        array_map(function($column){
-            Assert::column($column);
-        }, $columns);
-        $columns = implode(', ', $columns);
-
-        $sql = self::sql("INSERT INTO ::table ({$columns}) VALUES ({$values})");
-        $row_id = Database::insert($sql, array_values($data));
-
-        return $row_id;
     }
 
     protected static function deleteAll()

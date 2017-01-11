@@ -51,7 +51,7 @@ class Thumb
         $thumbsUrl      = getConfig()['thumb']['thumbsUrl'];
         $imageUrl       = urldecode($this->imageUrl);
         $sufix          = '/'.$this->width.'x'.$this->height;
-        $normalized     = Normalizer::normalize($imageUrl);
+        $normalized     = normalize($imageUrl);
         $filename       = pathinfo($normalized, PATHINFO_FILENAME);
         $folder         = dirname($normalized);
 

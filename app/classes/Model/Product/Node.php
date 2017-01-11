@@ -44,7 +44,7 @@ class Node extends AbstractNode
         return $rows;
     }
 
-    protected static function insertWithTaxonomyId(array $data, $tax_id)
+    public static function insertWithTaxonomyId(array $data, $tax_id)
     {
         $node_id = parent::insert($data);
 

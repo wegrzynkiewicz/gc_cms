@@ -6,7 +6,7 @@ use GC\Model\Mail\Sent;
 use GC\Model\Mail\ToSend;
 use GC\Logger;
 use GC\Render;
-use GC\Password;
+use GC\Auth\Password;
 use PHPMailer;
 use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 
@@ -107,14 +107,5 @@ class Mail extends PHPMailer
         }
 
         return false;
-    }
-
-    public static function sendScheduled()
-    {
-        $limitPerOnce = getConfig()['email']['limitPerOnce'];
-        $emails = ToSend::selectLatest($limitPerOnce);
-        foreach($emails as $email) {
-            $email->send();
-        }
     }
 }

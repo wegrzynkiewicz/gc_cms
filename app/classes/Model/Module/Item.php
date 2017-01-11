@@ -21,7 +21,7 @@ class Item extends AbstractModel
     use JoinTrait;
     use ContainFrameTrait;
 
-    protected static function deleteItemsByForeign($module_id)
+    public static function deleteItemsByForeign($module_id)
     {
         $items = static::joinAllWithKeyByForeign($module_id);
         foreach ($items as $item_id => $item) {
@@ -30,7 +30,7 @@ class Item extends AbstractModel
         static::deleteAllByForeign($module_id);
     }
 
-    protected static function insertWithModuleId(array $data, $module_id)
+    public static function insertWithModuleId(array $data, $module_id)
     {
         $item_id = parent::insert($data);
 

@@ -17,7 +17,7 @@ class Sent extends AbstractModel
     use PrimaryTrait;
     use CriteriaTrait;
 
-    protected static function insertToForm($form_id, $data, $localization)
+    public static function insertToForm($form_id, $data, $localization)
     {
         $record = [
             'form_id' => $form_id,

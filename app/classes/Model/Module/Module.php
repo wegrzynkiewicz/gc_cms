@@ -19,7 +19,7 @@ class Module extends AbstractModel
     use PrimaryTrait;
     use JoinTrait;
 
-    protected static function deleteModuleByPrimaryId($module_id)
+    public static function deleteModuleByPrimaryId($module_id)
     {
         static::deleteByPrimaryId($module_id);
         File::deleteUnassignedByForeign();
@@ -27,7 +27,7 @@ class Module extends AbstractModel
         Item::deleteUnassignedByForeign();
     }
 
-    protected static function deleteModulesByForeign($frame_id)
+    public static function deleteModulesByForeign($frame_id)
     {
         $modules = static::joinAllWithKeyByForeign($frame_id);
         foreach ($modules as $module_id => $module) {
@@ -38,7 +38,7 @@ class Module extends AbstractModel
         Item::deleteUnassignedByForeign();
     }
 
-    protected static function insertWithFrameId(array $data, $frame_id)
+    public static function insertWithFrameId(array $data, $frame_id)
     {
         $module_id = parent::insert($data);
 

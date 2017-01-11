@@ -19,7 +19,12 @@ class Staff extends AbstractModel
     use ColumnTrait;
     use PrimaryTrait;
 
-    public $permissions = [];
+    /**
+     * Uruchamia proces przetwarzania sesji
+     */
+    public function start()
+    {
+    }
 
     public function __construct(array $data, array $permissions)
     {

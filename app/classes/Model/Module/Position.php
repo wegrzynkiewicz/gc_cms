@@ -12,7 +12,7 @@ class Position extends AbstractModel
 
     use ColumnTrait;
 
-    protected static function updateGridByFrameId($frame_id, array $positions)
+    public static function updateGridByFrameId($frame_id, array $positions)
     {
         Position::deleteAllBy('frame_id', $frame_id);
 

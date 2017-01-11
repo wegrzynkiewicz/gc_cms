@@ -4,7 +4,7 @@ namespace GC\Storage;
 
 use GC\Model\Dump as DumpModel;
 use GC\Logger;
-use GC\Password;
+use GC\Auth\Password;
 use Ifsnop\Mysqldump as IMysqldump;
 
 class Dump

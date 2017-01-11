@@ -29,7 +29,7 @@ if (strlen($_SEGMENTS[0]) == 2) {
 if (count($_SEGMENTS) === 0) {
     GC\Logger::routing("Homepage with lang");
 
-    return require ACTIONS_PATH."/{$request->method}-homepage.php";
+    return require ACTIONS_PATH."/homepage-{$request->method}.php";
 }
 
 # jeżeli któryś z niestandardowych rewritów okaże się pasować, wtedy przekieruj na właściwy adres

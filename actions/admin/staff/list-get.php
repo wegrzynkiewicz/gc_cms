@@ -5,6 +5,27 @@ $staffList = GC\Model\Staff\Staff::select()
     ->equals('root', 0)
     ->fetchByPrimaryKey();
 
+$groups = GC\Model\Staff\Group::select()
+    ->fields(['staff_id', 'name', 'group_id'])
+    ->from('::staff_membership LEFT JOIN ::staff_groups USING(group_id)')
+    ->sort('name', 'ASC')
+    ->fetchAll();
+
+$staffGroups = [];
+foreach ($groups as $group) {
+    $staffGroups[$group['staff_id']][$group['group_id']] = $group['name'];
+}
+
+$permissions = GC\Model\Staff\Permission::select()
+    ->fields(['staff_id', 'name'])
+    ->from('::staff_membership JOIN ::staff_permissions USING(group_id)')
+    ->fetchAll();
+
+$staffPermissions = [];
+foreach ($permissions as $permission) {
+    $staffPermissions[$permission['staff_id']][] = $permission['name'];
+}
+
 require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
@@ -49,6 +70,8 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                             <?=GC\Render::action('/admin/staff/list-item.html.php', [
                                 'staff_id' => $staff_id,
                                 'staff' => $row,
+                                'groups' => $staffGroups[$staff_id],
+                                'permissions' => $staffPermissions[$staff_id],
                             ])?>
                         <?php endforeach ?>
                     </tbody>

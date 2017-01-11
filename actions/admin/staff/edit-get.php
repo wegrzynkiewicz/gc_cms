@@ -4,7 +4,12 @@ $user = GC\Model\Staff\Staff::selectByPrimaryId($staff_id);
 $headTitle = trans('Edytowanie pracownika "%s"', [$user['name']]);
 $breadcrumbs->push($request->path, $headTitle);
 
-$groups = array_keys(GC\Model\Staff\Group::mapNameByStaffId($staff_id));
+$groups = array_keys(GC\Model\Staff\Group::select()
+    ->fields(['group_id', 'name'])
+    ->from('::staff_membership LEFT JOIN ::staff_groups USING(group_id)')
+    ->sort('name', 'ASC')
+    ->fetchByMap('group_id', 'name'));
+
 $_POST = $user;
 
 require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>

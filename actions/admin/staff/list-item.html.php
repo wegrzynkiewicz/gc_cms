@@ -9,7 +9,6 @@
         </a>
     </td>
     <td>
-        <?php $groups = GC\Model\Staff\Group::mapNameByStaffId($staff_id) ?>
         <?php foreach ($groups as $group_id => $group): ?>
             <a href="<?=GC\Url::mask("/group/{$group_id}/edit")?>"
                 title="<?=trans('Przejdź do grupy')?>">
@@ -17,7 +16,6 @@
         <?php endforeach ?>
     </td>
     <td>
-        <?php $permissions = GC\Model\Staff\Permission::mapPermissionNameByStaffId($staff_id) ?>
         <?php foreach ($permissions as $permission): ?>
             <?=trans($config['permissions'][$permission])?> <br>
         <?php endforeach ?>

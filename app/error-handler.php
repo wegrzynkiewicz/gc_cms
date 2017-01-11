@@ -20,13 +20,15 @@ class UserDeprecatedException       extends ErrorException {}
  */
 set_error_handler(function ($err_severity, $err_msg, $err_file, $err_line, array $err_context) {
 
+    $errorReporting = error_reporting();
+
     GC\Logger::error($err_msg, [$err_file, $err_line]);
 
-    if (error_reporting() == 0) {
+    if ($errorReporting == 0) {
         return false;
     }
 
-    switch ($err_severity & error_reporting()) {
+    switch ($err_severity & $errorReporting) {
         case E_ERROR:               throw new ErrorException($err_msg, 0, $err_severity, $err_file, $err_line);
         case E_WARNING:             throw new WarningException($err_msg, 0, $err_severity, $err_file, $err_line);
         case E_PARSE:               throw new ParseException($err_msg, 0, $err_severity, $err_file, $err_line);

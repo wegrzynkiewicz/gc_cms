@@ -15,14 +15,14 @@ class Frame extends AbstractModel
     use ColumnTrait;
     use PrimaryTrait;
 
-    protected static function updateByFrameId($frame_id, array $data)
+    public static function updateByFrameId($frame_id, array $data)
     {
         $data['modify_datetime'] = sqldate();
 
         return parent::updateByPrimaryId($frame_id, $data);
     }
 
-    protected static function insert(array $data)
+    public static function insert(array $data)
     {
         $data['creation_datetime'] = sqldate();
         $data['modify_datetime'] = sqldate();

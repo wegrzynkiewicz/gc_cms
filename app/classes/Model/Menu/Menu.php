@@ -16,7 +16,6 @@ class Menu extends AbstractNode
     public static $treeTable    = '::menu_tree';
     public static $taxonomy     = 'nav_id';
 
-    public static $cache = [];
     public static $primaryIdLabel = "menu_id";
     public static $parentIdLabel  = "parent_id";
 
@@ -72,7 +71,7 @@ class Menu extends AbstractNode
         return $tree;
     }
 
-    protected static function insertWithNavId(array $data, $nav_id)
+    public static function insertWithNavId(array $data, $nav_id)
     {
         $menu_id = parent::insert($data);
 

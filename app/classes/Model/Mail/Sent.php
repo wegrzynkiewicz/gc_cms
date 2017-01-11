@@ -15,7 +15,7 @@ class Sent extends AbstractModel
     use ColumnTrait;
     use PrimaryTrait;
 
-    protected static function insert(array $data)
+    public static function insert(array $data)
     {
         $data['sent_datetime'] = sqldate();
 

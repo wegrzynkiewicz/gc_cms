@@ -46,11 +46,21 @@ abstract class AbstractQuery
         return $this;
     }
 
+    public function execute()
+    {
+        return Database::execute($this->getSQL(), $this->params);
+    }
+
     public function fetch()
     {
         $this->limit(1);
 
         return Database::fetch($this->getSQL(), $this->params);
+    }
+
+    public function fetchAll()
+    {
+        return Database::fetchAll($this->getSQL(), $this->params);
     }
 
     public function fetchByKey($key)
@@ -67,12 +77,13 @@ abstract class AbstractQuery
         );
     }
 
-    public function fetchByMap()
+    public function fetchByMap($keyLabel, $valueLabel)
     {
         return Database::fetchByMap(
             $this->getSQL(),
             $this->params,
-            get_class_vars($this->modelClass)['primary']
+            $keyLabel,
+            $valueLabel
         );
     }
 

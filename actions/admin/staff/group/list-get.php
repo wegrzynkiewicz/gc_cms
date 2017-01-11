@@ -2,6 +2,15 @@
 
 $groups = GC\Model\Staff\Group::selectAllWithPrimaryKey();
 
+$permissions = GC\Model\Staff\Permission::select()
+    ->fields(['group_id', 'name'])
+    ->fetchAll();
+
+$groupPermissions = [];
+foreach ($permissions as $permission) {
+    $groupPermissions[$permission['group_id']][] = $permission['name'];
+}
+
 require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
@@ -43,6 +52,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                             <?=GC\Render::action('/admin/staff/group/list-item.html.php', [
                                 'group_id' => $group_id,
                                 'group' => $group,
+                                'permissions' => $groupPermissions[$group_id],
                             ])?>
                         <?php endforeach ?>
                     </tbody>
@@ -90,7 +100,7 @@ $(function(){
         $(this).find('[name="group_id"]').val($(e.relatedTarget).data('id'));
     });
 
-    $('[data-table]').DataTable({        
+    $('[data-table]').DataTable({
         iDisplayLength: <?=$config['dataTable']['iDisplayLength']?>,
     });
 });

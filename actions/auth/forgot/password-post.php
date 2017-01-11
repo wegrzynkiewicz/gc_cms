@@ -2,7 +2,7 @@
 
 $headTitle = trans("Wysłano e-maila z weryfikacją przypomnienia hasła");
 
-$user = GC\Model\Staff\Staff::selectSingleBy('email', $_POST['login']);
+$user = GC\Model\Staff\Staff::select()->equals('email', $_POST['login'])->fecht();
 
 if (!$user) {
     $error = trans('Nieprawidłowy adres e-mail');
@@ -12,7 +12,7 @@ if (!$user) {
 
 $email64 = base64_encode($user['email']);
 $regeneration = [
-    'verifyHash' => GC\Password::random(80),
+    'verifyHash' => GC\Auth\Password::random(80),
     'time' => time(),
 ];
 
