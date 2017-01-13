@@ -4,10 +4,10 @@ $groups = isset($_POST['groups']) ? $_POST['groups'] : [];
 $password = GC\Auth\Password::random(GC\Container::get('config')['password']['minLength']);
 
 $staff_id = GC\Model\Staff\Staff::insertWithGroups([
-    'name' => $_POST['name'],
+    'name' => post('name'),
     'password' => GC\Auth\Password::hash($password),
-    'email' => $_POST['email'],
-    'avatar' => $_POST['avatar'],
+    'email' => post('email'),
+    'avatar' => post('avatar'),
     'lang' => GC\Container::get('config')['lang']['clientDefault'],
     'force_change_password' => 1,
 ], $groups);
@@ -16,8 +16,8 @@ $mail = new GC\Mail();
 $mail->buildTemplate(
     '/admin/staff/staff-created.email.html.php',
     '/admin/parts/email/styles.css', [
-        'name' => $_POST['name'],
-        'login' => $_POST['email'],
+        'name' => post('name'),
+        'login' => post('email'),
         'password' => $password,
     ]
 );

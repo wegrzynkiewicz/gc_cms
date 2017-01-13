@@ -1,5 +1,5 @@
 <?php
-$template = sprintf(ACTIONS_PATH.'/admin/parts/assets/footer-%s.html.php', getClientLang());
+$template = sprintf(ACTIONS_PATH.'/admin/parts/assets/footer-%s.html.php', GC\Auth\Client::getLang());
 if (is_readable($template)) {
     require $template;
 }

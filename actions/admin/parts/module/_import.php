@@ -1,3 +1,3 @@
 <?php
 
-$module_id = shiftSegmentAsInteger();
+$module_id = intval(array_shift($_PARAMETERS));

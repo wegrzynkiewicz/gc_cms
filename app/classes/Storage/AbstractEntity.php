@@ -13,7 +13,7 @@ abstract class AbstractEntity implements ArrayAccess
 {
     private $data = [];
 
-    public function __construct(array $data)
+    public function __construct(array $data = [])
     {
         $this->data = $data;
     }

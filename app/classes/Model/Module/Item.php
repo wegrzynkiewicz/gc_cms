@@ -3,7 +3,6 @@
 namespace GC\Model\Module;
 
 use GC\Storage\AbstractModel;
-use GC\Storage\Utility\ColumnTrait;
 use GC\Storage\Utility\PrimaryTrait;
 use GC\Storage\Utility\JoinTrait;
 use GC\Storage\Utility\ContainFrameTrait;
@@ -16,7 +15,6 @@ class Item extends AbstractModel
     public static $joinTable   = '::module_item_pos';
     public static $joinForeign = 'module_id';
 
-    use ColumnTrait;
     use PrimaryTrait;
     use JoinTrait;
     use ContainFrameTrait;

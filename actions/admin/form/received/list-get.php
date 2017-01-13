@@ -1,7 +1,7 @@
 <?php
 
 $count = GC\Model\Form\Sent::select()
-    ->fields('COUNT(*) AS `count`')
+    ->fields('COUNT(*) AS count')
     ->equals('form_id', $form_id)
     ->fetch()
     ['count'];

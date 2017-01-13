@@ -1,12 +1,13 @@
 <?php
 
+$staff_id = intval(array_shift($_PARAMETERS));
 $user = GC\Model\Staff\Staff::fetchByPrimaryId($staff_id);
 $headTitle = $trans('Edytowanie pracownika "%s"', [$user['name']]);
 $breadcrumbs->push($request->path, $headTitle);
 
 $groups = array_keys(GC\Model\Staff\Group::select()
     ->fields(['group_id', 'name'])
-    ->from('::staff_membership LEFT JOIN ::staff_groups USING(group_id)')
+    ->source('::staff_membership LEFT JOIN ::staff_groups USING(group_id)')
     ->sort('name', 'ASC')
     ->fetchByMap('group_id', 'name'));
 

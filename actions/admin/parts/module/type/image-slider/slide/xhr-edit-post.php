@@ -9,8 +9,8 @@ $settings = [
 ];
 
 GC\Model\Module\File::updateByPrimaryId($file_id, [
-    'name' => $_POST['name'],
-    'url' => $_POST['url'],
+    'name' => post('name'),
+    'url' => post('url'),
     'settings' => json_encode($settings),
 ]);
 

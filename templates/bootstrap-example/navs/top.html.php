@@ -1,4 +1,4 @@
-<?php $menu = GC\Model\Menu\Menu::buildTreeByWorkName("top", getClientLang()) ?>
+<?php $menu = GC\Model\Menu\Menu::buildTreeByWorkName("top", GC\Auth\Client::getLang()) ?>
 
 <?php if ($menu->hasChildren()): ?>
     <div class="blog-masthead">

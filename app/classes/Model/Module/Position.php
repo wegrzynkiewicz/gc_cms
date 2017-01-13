@@ -3,18 +3,15 @@
 namespace GC\Model\Module;
 
 use GC\Storage\AbstractModel;
-use GC\Storage\Utility\ColumnTrait;
 use GC\Container;
 
 class Position extends AbstractModel
 {
     public static $table = '::module_pos';
 
-    use ColumnTrait;
-
     public static function updateGridByFrameId($frame_id, array $positions)
     {
-        Position::deleteAllBy('frame_id', $frame_id);
+        Position::delete()->equals('frame_id', $frame_id)->execute();
 
         foreach ($positions as $module) {
 

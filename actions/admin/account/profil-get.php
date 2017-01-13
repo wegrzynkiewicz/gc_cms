@@ -1,6 +1,6 @@
 <?php
 
-$_POST = $staff->getData();
+$_POST = GC\Container::get('staff')->getData();
 
 require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 

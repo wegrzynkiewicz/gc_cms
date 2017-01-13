@@ -4,7 +4,7 @@ $item_id = intval(array_shift($_SEGMENTS));
 $item = GC\Model\Module\Item::selectWithFrameByPrimaryId($item_id);
 
 GC\Model\Module\Frame::updateByPrimaryId($item['frame_id'], [
-    'name' => $_POST['name'],
+    'name' => post('name'),
 ]);
 
 GC\Response::setMimeType('application/json');

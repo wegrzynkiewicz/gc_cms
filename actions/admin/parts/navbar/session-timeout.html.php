@@ -11,7 +11,7 @@
     <script>
         $(function() {
             var timeoutUrl = "<?=GC\Url::make('/auth/session-timeout')?>";
-            var refreshUrl = "<?=GC\Url::make('/admin/account/session/refresh')?>";
+            var refreshUrl = "<?=GC\Url::make('/admin/account/session-refresh')?>";
             var sessionTimeout = <?=e(GC\Container::get('config')['session']['staffTimeout'])?>;
 
             var finalTime = new Date();

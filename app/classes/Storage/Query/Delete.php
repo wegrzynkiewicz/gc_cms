@@ -8,7 +8,7 @@ class Delete extends AbstractQuery
     {
         ob_start();
 
-        echo "DELETE * FROM ".$this->from;
+        echo "DELETE FROM ".$this->source;
 
         if (count($this->conditions) > 0) {
             echo " WHERE ".implode(' AND ', array_map(function($condition) {

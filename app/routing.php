@@ -56,6 +56,7 @@ foreach (GC\Container::get('config')['rewrites'] as $pattern => $destination) {
 
 # wyszukaj plik w katalogu /actions, który pasuje do adresu url
 $path = ACTIONS_PATH;
+$_PARAMETERS = [];
 $copySegments = $_SEGMENTS;
 while (count($_SEGMENTS) > 0) {
     $segment = array_shift($_SEGMENTS);
@@ -85,7 +86,7 @@ while (count($_SEGMENTS) > 0) {
 
     # jeżeli istnieje folder, wtedy kontynuuj pętlę, ale nie wykonuj dalej
     $folder = "{$path}/{$segment}";
-    if (is_dir($folder) and !empty($_SEGMENTS)) {
+    if (is_dir($folder) and count($_SEGMENTS)) {
         $path = $folder;
         continue;
     }
@@ -98,7 +99,7 @@ while (count($_SEGMENTS) > 0) {
         return require $file;
     }
 
-    $path = $folder;
+    $_PARAMETERS[] = $segment;
 }
 
 $_SEGMENTS = $copySegments;

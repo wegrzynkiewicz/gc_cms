@@ -1,7 +1,8 @@
 <?php
 
+$tax_id = intval(array_shift($_PARAMETERS));
 $taxonomies = GC\Model\Post\Taxonomy::select()
-    ->equals('lang', $_SESSION['lang']['editor'])
+    ->equals('lang', GC\Auth\Staff::getEditorLang())
     ->sort('name')
     ->fetchByPrimaryKey();
 

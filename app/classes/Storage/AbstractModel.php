@@ -3,9 +3,8 @@
 namespace GC\Storage;
 
 use GC\Assert;
-use GC\Storage\Query\Select;
-use BadMethodCallException;
-use RuntimeException;
+use GC\Container;
+use GC\Storage\Query;
 
 /**
  * Reprezentuje zarowno tablice jak i pojedynczy rekord z bazy danych
@@ -14,47 +13,29 @@ use RuntimeException;
  */
 abstract class AbstractModel extends AbstractEntity
 {
-    /**
-     * Jest uruchamiana w momencie wywołania metody chronionej lub nieistniejącej.
-     * Gdy jest wywoływana wtedy sprawdza czy taka metoda istnieje i uruchamia
-     * ją wewnętrz transakcji. Wystarczy wywołać chronioną metodę, aby zawrzeć
-     * ją całą w transakcji.
-     */
-    public static function __callStatic($name, array $arguments)
-    {
-        # jezeli metoda statyczne o nazwie $name nieistnieje
-        $calledClass = get_called_class();
-        if (!method_exists($calledClass, $name)) {
-            throw new BadMethodCallException(sprintf(
-                "Method named %s does not exists in %s", $name, $calledClass
-            ));
-        }
-
-        # jezeli juz jesteśmy w transakcji wtedy wywołaj metodę chronioną
-        if (Container::get('database')->$pdo->inTransaction()) {
-            return call_user_func_array(['static', $name], $arguments);
-        }
-
-        # rozpocznij transakcję
-        Container::get('database')->$pdo->beginTransaction();
-
-        try {
-            # wywołaj metodę chronioną i zapisz zmiany w bazie
-            $result = call_user_func_array(['static', $name], $arguments);
-            Container::get('database')->$pdo->commit();
-        } catch (Exception $exception) {
-            # w przypadku błędu przywroc zmiany
-            Container::get('database')->$pdo->rollBack();
-            throw $exception;
-        }
-
-        # zwroc wynik zapytania
-        return $result;
-    }
-
     public static function delete()
     {
-        return new Delete(static::class);
+        return new Query\Delete(static::class);
+    }
+
+    /**
+     * Zwraca obiekt bazy danych na którym wykonywane są zapytania
+     */
+    public static function getDatabase()
+    {
+        return Container::get('database');
+    }
+
+    /**
+     * Buduje i wykonuje zapytanie INSERT dla zadanych danych
+     */
+    public static function insert(array $data)
+    {
+        list($columns, $values) = static::buildInsertSyntax($data);
+        $sql = static::sql("INSERT INTO ::table ({$columns}) VALUES ({$values})");
+        $row_id = static::getDatabase()->insert($sql, array_values($data));
+
+        return $row_id;
     }
 
     /**
@@ -71,31 +52,24 @@ abstract class AbstractModel extends AbstractEntity
         }, $pseudoQuery);
     }
 
-    public static function select()
-    {
-        return new Select(static::class);
-    }
-
-    /**
-     * Buduje i wykonuje zapytanie INSERT dla zadanych danych
-     */
-    public static function insert(array $data)
-    {
-        list($columns, $values) = self::buildInsertSyntax($data);
-        $sql = self::sql("INSERT INTO ::table ({$columns}) VALUES ({$values})");
-        $row_id = Container::get('database')->insert($sql, array_values($data));
-
-        return $row_id;
-    }
-
     /**
      * Buduje i wykonuje zapytanie REPLACE dla zadanych danych
      */
     public static function replace(array $data)
     {
-        list($columns, $values) = self::buildInsertSyntax($data);
-        $sql = self::sql("REPLACE INTO ::table ({$columns}) VALUES ({$values})");
-        Container::get('database')->execute($sql, array_values($data));
+        list($columns, $values) = static::buildInsertSyntax($data);
+        $sql = static::sql("REPLACE INTO ::table ({$columns}) VALUES ({$values})");
+        static::getDatabase()->execute($sql, array_values($data));
+    }
+
+    public static function select()
+    {
+        return new Query\Select(static::class);
+    }
+
+    public static function update()
+    {
+        return new Query\Update(static::class);
     }
 
     protected static function buildInsertSyntax(array $data)
@@ -117,19 +91,11 @@ abstract class AbstractModel extends AbstractEntity
         $columns = [];
         foreach ($data as $column => $value) {
             Assert::column($column);
-            $columns[] = "`{$column}` = ?";
+            $columns[] = "{$column} = ?";
         }
 
         $mergedColumns = implode(', ', $columns);
 
         return $mergedColumns;
-    }
-
-    protected static function deleteAll()
-    {
-        $sql = self::sql("DELETE FROM ::table ");
-        $affectedRows = Container::get('database')->execute($sql);
-
-        return $affectedRows;
     }
 }

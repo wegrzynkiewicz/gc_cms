@@ -1,9 +1,9 @@
 <?php
 
 GC\Model\Menu\Menu::insertWithNavId([
-    'name' => $_POST['name'],
-    'type' => $_POST['type'],
-    'destination' => $_POST['destination'],
+    'name' => post('name'),
+    'type' => post('type'),
+    'destination' => post('destination'),
     'target' => isset($_POST['target']) ? $_POST['target'] : '_self',
 ], $nav_id);
 

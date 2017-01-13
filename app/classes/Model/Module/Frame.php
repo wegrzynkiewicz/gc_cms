@@ -3,7 +3,6 @@
 namespace GC\Model\Module;
 
 use GC\Storage\AbstractModel;
-use GC\Storage\Utility\ColumnTrait;
 use GC\Storage\Utility\PrimaryTrait;
 use GC\Container;
 
@@ -12,7 +11,6 @@ class Frame extends AbstractModel
     public static $table   = '::frames';
     public static $primary = 'frame_id';
 
-    use ColumnTrait;
     use PrimaryTrait;
 
     public static function updateByFrameId($frame_id, array $data)
@@ -26,7 +24,7 @@ class Frame extends AbstractModel
     {
         $data['creation_datetime'] = sqldate();
         $data['modify_datetime'] = sqldate();
-        $data['lang'] = $_SESSION['lang']['editor'];
+        $data['lang'] = GC\Auth\Staff::getEditorLang();
         $data['settings'] = json_encode([]);
 
         return parent::insert($data);

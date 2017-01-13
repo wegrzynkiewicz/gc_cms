@@ -5,7 +5,7 @@ $positions = array_filter($positions, function ($node) {
     return isset($node['id']);
 });
 
-GC\Model\Form\Position::deleteAllBy('form_id', $form_id);
+GC\Model\Form\Position::delete()->equals('form_id', $form_id)->execute();
 $pos = 1;
 foreach ($positions as $field) {
     GC\Model\Form\Position::insert([

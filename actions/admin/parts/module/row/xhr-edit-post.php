@@ -6,10 +6,10 @@ if (empty($_POST['gutter']) and $_POST['gutter'] != 0) {
 
 $row_number = intval(array_shift($_SEGMENTS));
 $settings['rows'][$row_number] = [
-    'widthType' => $_POST['widthType'],
-    'bgColor' => $_POST['bgColor'],
-    'bgImage' => $_POST['bgImage'],
-    'gutter' => $_POST['gutter'],
+    'widthType' => post('widthType'),
+    'bgColor' => post('bgColor'),
+    'bgImage' => post('bgImage'),
+    'gutter' => post('gutter'),
 ];
 
 GC\Model\Module\Frame::updateByFrameId($frame_id, [

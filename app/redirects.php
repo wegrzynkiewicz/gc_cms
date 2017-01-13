@@ -1,6 +1,6 @@
 <?php
 
-$seoUrl = $config['seoUrl'];
+$seoUrl = &$config['seoUrl'];
 
 $protocol = 'http'.(stripos($_SERVER['SERVER_PROTOCOL'], 'https') === true ? 's' : '').'://';
 $www = substr($_SERVER['HTTP_HOST'], 0, 4) === 'www.' ? 'www.' : '';

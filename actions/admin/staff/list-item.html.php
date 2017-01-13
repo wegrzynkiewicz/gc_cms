@@ -1,11 +1,17 @@
+<?php
+$staffName = e($staff['name']);
+$avatarUrl = empty($staff['avatar'])
+    ? GC\Url::assets($config['avatar']['noAvatarUrl'])
+    : GC\Thumb::make($staff['avatar'], 40, 40);
+?>
 <tr>
     <td>
-        <img src="<?=GC\Model\Staff\Staff::getAvatarUrl($staff, 30)?>"
-            height="30" style="margin-right:5px"/>
+        <img src="<?=$avatarUrl?>"
+            height="40" style="margin-right:5px"/>
 
         <a href="<?=GC\Url::mask("/{$staff_id}/edit")?>"
             title="<?=$trans('Edytuj pracownika')?>">
-            <?=e($staff['name'])?>
+            <?=$staffName?>
         </a>
     </td>
     <td>
@@ -22,8 +28,8 @@
     </td>
     <td class="text-right">
         <a data-toggle="modal"
-            data-id="<?=e($staff_id)?>"
-            data-name="<?=e($staff['name'])?>"
+            data-id="<?=$staff_id?>"
+            data-name="<?=$staffName?>"
             data-target="#deleteModal"
             title="<?=$trans('Usuń pracownika')?>"
             class="btn btn-danger btn-md">

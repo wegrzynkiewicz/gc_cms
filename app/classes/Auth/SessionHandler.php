@@ -49,7 +49,7 @@ class SessionHandler implements SessionHandlerInterface
     public function gc($maxlifetime)
     {
         Session::delete()
-            ->condition('`update_datetime` <= ?', sqldate(time() - $maxlifetime))
+            ->condition('update_datetime <= ?', sqldate(time() - $maxlifetime))
             ->execute();
     }
 }

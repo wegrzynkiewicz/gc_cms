@@ -1,7 +1,7 @@
 <?php
 
 GC\Model\Module\Module::updateByPrimaryId($module_id, [
-    'content' => $_POST['content'],
+    'content' => post('content'),
     'theme' => 'default',
 ]);
 

@@ -1,6 +1,6 @@
 <?php
-$langs = GC\Model\Lang::select()->sort('position', 'ASC')->fetchByPrimaryKey();
-$currentLang = $langs[$_SESSION['lang']['editor']];
+$langs = GC\Container::get('config')['langs'];
+$currentLang = $langs[GC\Auth\Staff::getEditorLang()];
 ?>
 
 <?php if (count($langs) > 1): ?>

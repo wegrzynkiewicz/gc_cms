@@ -30,18 +30,14 @@ class Select extends AbstractQuery
         if (is_array($this->extract)) {
             $fields = [];
             foreach ($this->extract as $key => $column) {
-                $field = "`{$column}`";
-                if (!is_numeric($key)) {
-                    $field .= " AS `{$key}`";
-                }
-                $fields[] = $field;
+                $fields[] = is_numeric($key) ? $column : "{$column} AS {$key}";
             }
             echo implode(', ', $fields);
         } else {
             echo $this->extract;
         }
 
-        echo " FROM ".$this->from;
+        echo " FROM ".$this->source;
 
         if (count($this->conditions) > 0) {
             echo " WHERE ".implode(' AND ', array_map(function($condition) {

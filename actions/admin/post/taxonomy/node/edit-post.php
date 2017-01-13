@@ -3,9 +3,9 @@
 $node = GC\Model\Post\Node::selectWithFrameByPrimaryId($node_id);
 
 GC\Model\Module\Frame::updateByFrameId($node['frame_id'], [
-    'name' => $_POST['name'],
-    'keywords' => $_POST['keywords'],
-    'description' => $_POST['description'],
+    'name' => post('name'),
+    'keywords' => post('keywords'),
+    'description' => post('description'),
     'image' => GC\Url::upload($_POST['image']),
 ]);
 

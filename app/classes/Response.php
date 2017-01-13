@@ -28,8 +28,13 @@ class Response
         header("Location: {$url}");
 
         Container::get('logger')->redirect(
-            sprintf("%s %s :: ExecutionTime: %s", $code, $url, (microtime(true) - START_TIME)
-        ));
+            sprintf("%s %s :: Time: %ss :: Memory: %sMiB",
+                $code,
+                $url,
+                microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'],
+                memory_get_peak_usage(true) / 1048576
+            )
+        );
 
         die();
     }

@@ -1,7 +1,7 @@
 <?php
 
 $frame_id = GC\Model\Module\Frame::insert([
-    'name' => $_POST['name'],
+    'name' => post('name'),
     'type' => 'tabs-item',
 ]);
 

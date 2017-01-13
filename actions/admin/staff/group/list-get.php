@@ -1,6 +1,8 @@
 <?php
 
-$groups = GC\Model\Staff\Group::selectAllWithPrimaryKey();
+$groups = GC\Model\Staff\Group::select()
+    ->fields(['group_id', 'name'])
+    ->fetchByPrimaryKey();
 
 $permissions = GC\Model\Staff\Permission::select()
     ->fields(['group_id', 'name'])

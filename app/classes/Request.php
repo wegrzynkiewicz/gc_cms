@@ -19,13 +19,12 @@ class Request
         # pobierz wszystkie najistotniejsze informacje o żądaniu
         $rootUrl = dirname($_SERVER['SCRIPT_NAME']);
         $rawRequest = $_SERVER['REQUEST_URI'];
-        $this->path = '/'.trim(parse_url($rawRequest, \PHP_URL_PATH), '/');
-        $this->query = parse_url($rawRequest, \PHP_URL_QUERY);
+        $this->path = rtrim(parse_url($rawRequest, \PHP_URL_PATH), '/');
         $this->method = strtolower($_SERVER['REQUEST_METHOD']);
 
-        Container::get('logger')->request(sprintf("%s %s",
-            strtoupper($this->method), rtrim("{$this->path}?{$this->query}", '?')
-        ), $_REQUEST);
+        Container::get('logger')->request(
+            $_SERVER['REQUEST_METHOD'].' '.$this->path, $_REQUEST
+        );
 
         # jeżeli aplikacja jest zainstalowana w katalogu, wtedy pomiń ścieżkę katalogu
         if ($rootUrl and strpos($this->path, $rootUrl) === 0) {

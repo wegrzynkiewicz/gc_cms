@@ -26,6 +26,11 @@ class Container
         return static::$services[$name];
     }
 
+    public static function &getAllServices()
+    {
+        return static::$services;
+    }
+
     public static function set($name, $service)
     {
         static::$services[$name] = $service;

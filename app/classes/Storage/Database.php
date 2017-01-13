@@ -12,12 +12,23 @@ class Database
     public $pdo = null;
     public $prefix;
 
-    /**
-     * Pobiera z configa dane połączeniowe i initializuje połączenie z bazą
-     */
     public function __construct(\PDO $pdo)
     {
         $this->pdo = $pdo;
+
+        if (Container::get('request')->isMethod('POST')) {
+            $this->pdo->beginTransaction();
+        }
+    }
+
+    /**
+     * Pobiera z configa dane połączeniowe i initializuje połączenie z bazą
+     */
+    public function __destruct()
+    {
+        if ($this->pdo->inTransaction()) {
+            $this->pdo->commit();
+        }
     }
 
     /**
@@ -118,7 +129,7 @@ class Database
     {
         # dodaje prefix do każdego wyrazu zaczynającego się od ::
         $sql = preg_replace_callback('/::([a-z_]+)/', function ($matches) {
-            return trim($this->prefix.$matches[1], '_');
+            return $this->prefix.$matches[1];
         }, $sql);
 
         Container::get('logger')->query(

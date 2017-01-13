@@ -3,7 +3,6 @@
 namespace GC\Model\Form;
 
 use GC\Storage\AbstractModel;
-use GC\Storage\Utility\ColumnTrait;
 use GC\Storage\Utility\PrimaryTrait;
 use GC\Storage\Utility\CriteriaTrait;
 use GC\Container;
@@ -13,7 +12,6 @@ class Sent extends AbstractModel
     public static $table   = '::form_sent';
     public static $primary = 'sent_id';
 
-    use ColumnTrait;
     use PrimaryTrait;
     use CriteriaTrait;
 

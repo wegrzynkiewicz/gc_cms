@@ -167,7 +167,7 @@ $(function() {
     $('#select_images').elfinderInputMultiple({
         title: '<?=$trans('Wybierz wiele zdjęć')?>',
         url: '<?=GC\Url::make('/admin/elfinder/connector')?>',
-        lang: '<?=getClientLang()?>',
+        lang: '<?=GC\Auth\Client::getLang()?>',
     }, function(urls) {
         $.post("<?=GC\Url::make("/admin/parts/module/{$module_id}/image/xhr-add")?>", {
             urls: urls

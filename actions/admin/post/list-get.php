@@ -3,7 +3,7 @@
 $posts = GC\Model\Post\Post::selectWithFrames()->fetchByPrimaryKey();
 $nodes = GC\Model\Post\Node::selectAllForTaxonomyTree();
 $taxonomies = GC\Model\Post\Taxonomy::select()
-    ->equals('lang', $_SESSION['lang']['editor'])
+    ->equals('lang', GC\Auth\Staff::getEditorLang())
     ->fetchByPrimaryKey();
 
 foreach ($nodes as $node) {

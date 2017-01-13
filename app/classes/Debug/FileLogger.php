@@ -15,6 +15,9 @@ class FileLogger
         if (!is_readable($this->filename)) {
             Disc::makeDirRecursive(dirname($this->filename));
         }
+        
+        $log = '================='.PHP_EOL;
+        file_put_contents($this->filename, $log, FILE_APPEND);
     }
 
     public function __call($name, array $arguments)

@@ -2,13 +2,11 @@
 
 /* Plik ładowany przed każdą akcją w panelu admina */
 
-# domyślny headTitle, jeżeli zapomni się go nadać
-$headTitle = $trans(GC\Container::get('config')['adminNavbarTitle']);
-
 GC\Url::extendMask('/admin%s');
 
 $breadcrumbs = new GC\Breadcrumbs();
 $breadcrumbs->push('/admin', 'Dashboard', 'fa-dashboard');
+GC\Container::set('breadcrumbs', $breadcrumbs);
 
 # utworzenie obiektu reprezentującego pracownika, sprawdza czy jest zalogowany
-$staff = GC\Model\Staff\Staff::createFromSession();
+GC\Container::set('staff', GC\Auth\Staff::createFromSession());

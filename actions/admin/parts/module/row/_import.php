@@ -1,6 +1,6 @@
 <?php
 
-$frame_id = shiftSegmentAsInteger();
+$frame_id = intval(array_shift($_PARAMETERS));
 $frame = GC\Model\Module\Frame::fetchByPrimaryId($frame_id);
 $settings = json_decode($frame['settings'], true);
 if (!isset($settings['rows'])) {

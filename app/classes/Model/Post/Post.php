@@ -35,7 +35,7 @@ class Post extends AbstractModel
     private static function updateRelations($post_id, array $relations)
     {
         # usuń wszystkie grupy tego pracownika
-        Membership::deleteAllBy('post_id', $post_id);
+        Membership::delete()->equals('post_id', $post_id)->execute();
 
         # wstaw na nowo grupy pracownika
         foreach ($relations as $node_id) {

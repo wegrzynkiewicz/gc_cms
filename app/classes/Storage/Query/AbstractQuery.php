@@ -9,7 +9,7 @@ abstract class AbstractQuery
 {
     protected $database;
     protected $modelClass;
-    protected $from = "::table";
+    protected $source = "::table";
     protected $conditions = [];
     protected $sort = [];
     protected $limit = null;
@@ -18,7 +18,7 @@ abstract class AbstractQuery
     public function __construct($modelClass)
     {
         $this->modelClass = $modelClass;
-        $this->database = Container::get('database');
+        $this->database = call_user_func([$this->modelClass, 'getDatabase']);
     }
 
     public function condition($sqlPart, $passedParams = [])
@@ -39,7 +39,7 @@ abstract class AbstractQuery
 
     public function equals($column, $passedParam)
     {
-        $this->condition("`{$column}` = ?", [$passedParam]);
+        $this->condition("{$column} = ?", [$passedParam]);
 
         return $this;
     }
@@ -85,9 +85,9 @@ abstract class AbstractQuery
         );
     }
 
-    public function from($sqlParts)
+    public function source($sqlParts)
     {
-        $this->from = $sqlParts;
+        $this->source = $sqlParts;
 
         return $this;
     }
@@ -100,6 +100,8 @@ abstract class AbstractQuery
     public function limit($limit)
     {
         $this->limit = $limit;
+
+        return $this;
     }
 
     public function pagination($page, $epp)
@@ -108,6 +110,8 @@ abstract class AbstractQuery
         $epp = intval($epp > 0 ? $epp : 1);
 
         $this->limit = sprintf('%s, %s', ($page-1)*$epp, $epp);
+
+        return $this;
     }
 
     public function sort($column, $order)
@@ -119,7 +123,7 @@ abstract class AbstractQuery
             return $this;
         }
 
-        $this->sort[] = "`{$column}` $order";
+        $this->sort[] = "{$column} {$order}";
 
         return $this;
     }

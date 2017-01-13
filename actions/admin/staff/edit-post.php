@@ -1,23 +1,20 @@
 <?php
 
-$email = inputValue('email');
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $error = $trans('Adres email jest nieprawidłowy');
-}
+$staff_id = intval(array_shift($_PARAMETERS));
+$email = post('email');
 
 $existedStaff = GC\Model\Staff\Staff::select()->equals('email', $email)->fetch();
 if ($existedStaff and $existedStaff['staff_id'] != $staff_id) {
     $error = $trans('Taki adres email już istnieje');
+
+    return require ACTIONS_PATH.'/admin/staff/edit-get.php';
 }
 
-if (!isset($error)) {
-    $groups = isset($_POST['groups']) ? $_POST['groups'] : [];
+GC\Model\Staff\Staff::updateByPrimaryId($staff_id, [
+    'name' => post('name'),
+    'email' => post('email'),
+    'avatar' => post('avatar'),
+]);
+GC\Model\Staff\Staff::updateGroups($staff_id, post('groups', []));
 
-    GC\Model\Staff\Staff::update($staff_id, [
-        'name' => $_POST['name'],
-        'email' => $_POST['email'],
-        'avatar' => $_POST['avatar'],
-    ], $groups);
-
-    GC\Response::redirect($breadcrumbs->getLastUrl());
-}
+GC\Response::redirect($breadcrumbs->getLastUrl());

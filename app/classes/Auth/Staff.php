@@ -1,53 +1,51 @@
 <?php
 
-namespace GC\Model\Staff;
+namespace GC\Auth;
 
-use GC\Storage\AbstractModel;
-use GC\Storage\Utility\ColumnTrait;
-use GC\Storage\Utility\PrimaryTrait;
 use GC\Container;
 use GC\Url;
 use GC\Logger;
 use GC\Response;
-use RuntimeException;
+use GC\Storage\AbstractEntity;
+use GC\Model\Staff\Staff as ModelStaff;
+use GC\Model\Staff\Permission as Permission;
 
-class Staff extends AbstractModel
+class Staff extends AbstractEntity
 {
-    public static $table   = '::staff';
-    public static $primary = 'staff_id';
+    private $permissions = [];
 
-    use ColumnTrait;
-    use PrimaryTrait;
-
-    /**
-     * Uruchamia proces przetwarzania sesji
-     */
-    public function start()
+    public function __construct($staff_id)
     {
-    }
+        # pobieranie pracownika z bazy danych
+        $data = ModelStaff::select()
+            ->fields([
+                'staff_id',
+                'name',
+                'email',
+                'root',
+                'force_change_password',
+            ])
+            ->equals('staff_id', $staff_id)
+            ->fetch();
 
-    public function __construct(array $data, array $permissions)
-    {
-        parent::__construct($data);
-        $_SESSION['staff']['entity'] = $data;
-
-        $this->permissions = $permissions;
-
-        $config = \GC\Container::get('config');
-
-        # jeżeli w sesji nie ma języka edytora wtedy ustaw go z configa
-        if (!isset($_SESSION['lang']['editor'])) {
-            $_SESSION['lang']['editor'] = GC\Container::get('config')['lang']['editorDefault'];
+        # jezeli taki pracownik nie istnieje
+        if (!$data) {
+            static::abort('Staff entity id %s does not exists');
         }
 
-        # ustawienie jezyka panelu admina
-        $_SESSION['lang']['staff'] = $data['lang'];
+        # całość jest łatwym do odczytu obiektem Entity
+        parent::__construct($data);
+
+        # pobiera uprawnienia pracownika
+        $this->permissions = Permission::select()
+            ->fields('DISTINCT name')
+            ->source('::staff_membership JOIN ::staff_permissions USING(group_id)')
+            ->equals('staff_id', $staff_id)
+            ->fetchByMap('name', 'name');
 
         # jeżeli czas trwania sesji minął
         if (time() > $_SESSION['staff']['sessionTimeout']) {
-            unset($_SESSION['staff']);
-            Container::get('logger')->logout("Session timeout");
-            Response::redirect('/auth/session-timeout');
+            static::abort('Session timeout');
         }
 
         static::refreshSessionTimeout();
@@ -57,19 +55,49 @@ class Staff extends AbstractModel
             Response::redirect('/auth/force-change-password');
         }
 
-        Container::get('logger')->auth(sprintf("%s <%s>", $data['name'], $data['email']));
+        Container::get('logger')->staff($data['name']);
     }
 
     /**
-     * Przekierowuje jezeli uzytkownik nie posiada uprawnień
+     * Niszczy dane pracownika w sesji i przekierowuje na panel logowania
      */
-    public function redirectIfUnauthorized(array $permissions = [])
+    public static function abort($message)
     {
-        if (!$this->hasPermissions($permissions)) {
-            Container::get('logger')->deny("Not authorized", $permissions);
-            $perm = count($permissions) > 0 ? array_shift($permissions) : 'default';
-            Response::redirect("/admin/account/deny/{$perm}");
+        unset($_SESSION['staff']);
+        Container::get('logger')->logout($message);
+        Response::redirect('/auth/login');
+    }
+
+    /**
+     * Pobiera dane sesyjne i tworzy obiekt pracownika na podstawie sesji
+     */
+    public static function createFromSession()
+    {
+        # jeżeli sesja nie istnieje wtedy przekieruj na logowanie
+        if (!isset($_SESSION['staff'])) {
+            static::abort('Session does not exists');
         }
+
+        # jeżeli encja nie istnieje wtedy przekieruj na logowanie
+        if (!isset($_SESSION['staff']['staff_id'])) {
+            static::abort('Staff id does not exists');
+        }
+
+        # utworz obiekt reprezentujacy pracownika
+        return new static($_SESSION['staff']['staff_id']);
+    }
+
+    /**
+     * Zwraca język edycji danych
+     */
+    public static function getEditorLang()
+    {
+        # jeżeli w sesji nie ma języka edytora wtedy ustaw go z configa
+        if (isset($_SESSION['staff']['langEditor'])) {
+            return $_SESSION['staff']['langEditor'];
+        }
+
+        return Container::get('config')['lang']['editorDefault'];
     }
 
     /**
@@ -91,101 +119,31 @@ class Staff extends AbstractModel
     }
 
     /**
-     * Zwraca url avatara zadanego pracownika
+     * Przekierowuje jezeli uzytkownik nie posiada uprawnień
      */
-    public static function getAvatarUrl($staff, $size)
+    public function redirectIfUnauthorized(array $permissions = [])
     {
-        if (empty($staff['avatar'])) {
-            return Url::assets(\GC\Container::get('config')['avatar']['noAvatarUrl']);
+        if (!$this->hasPermissions($permissions)) {
+            Container::get('logger')->deny("Not authorized", $permissions);
+            $perm = count($permissions) > 0 ? array_shift($permissions) : 'default';
+            Response::redirect("/admin/account/deny/{$perm}");
         }
-
-        return Thumb::make($staff['avatar'], $size, $size);
     }
 
     /**
-     * Pobiera dane i tworzy obiekt pracownika o zadanym id
+     * Tworzy sesję dla zadanego $staff_id
      */
-    public static function createByStaffId($staff_id)
+    public function registerSession($staff_id)
     {
-        # pobierz pracownika z bazy danych
-        $data = static::fetchByPrimaryId($staff_id);
-
-        # jezeli taki uzytkownik zostal usuniety, albo nie istnieje wtedy wyjątek
-        if (!$data) {
-            throw new RuntimeException(sprintf(
-                "Staff by id %s does not exists", $staff_id
-            ));
-        }
-
-        $permissions = Permission::select()
-            ->fields(['name'])
-            ->from('::staff_membership JOIN ::staff_permissions USING(group_id)')
-            ->equals('staff_id', $staff_id)
-            ->fetchByMap('name', 'name');
-
-        # utworz obiekt reprezentujacy pracownika
-        $staff = new Staff($data, $permissions);
-
-        return $staff;
+        $_SESSION['staff']['staff_id'] = $staff_id;
+        static::refreshSessionTimeout();
     }
 
+    /**
+     * Aktualizuje czas do automatycznego wylogowania
+     */
     public static function refreshSessionTimeout()
     {
-        # aktualizujemy czas do automatycznego wylogowania
-        $_SESSION['staff']['sessionTimeout'] = time() + \GC\Container::get('config')['session']['staffTimeout'];
-    }
-
-    /**
-     * Pobiera dane i tworzy obiekt pracownika na podstawie sesji
-     */
-    public static function createFromSession()
-    {
-        # jeżeli sesja nie istnieje wtedy przekieruj na logowanie
-        if (!isset($_SESSION['staff']) or !isset($_SESSION['staff']['entity'])) {
-            unset($_SESSION['staff']);
-            Container::get('logger')->logout("Session does not exists");
-            Response::redirect('/auth/login');
-        }
-
-        # spróbuj pobrać pracownika z bazy, jezeli go nie znajdzie wtedy przekieruj na logowanie
-        try{
-            # pobierz pracownika z bazy danych
-            return static::createByStaffId($_SESSION['staff']['entity']['staff_id']);
-        } catch (RuntimeException $exception) {
-            unset($_SESSION['staff']);
-            Container::get('logger')->logout("Not found user");
-            Response::redirect('/auth/login');
-        }
-    }
-
-    protected static function update($staff_id, array $data, array $groups)
-    {
-        # zaktualizuj pracownika
-        parent::updateByPrimaryId($staff_id, $data);
-        static::updateGroups($staff_id, $groups);
-    }
-
-    protected static function insertWithGroups(array $data, array $groups)
-    {
-        # wstaw pracownika
-        $staff_id = parent::insert($data);
-        static::updateGroups($staff_id, $groups);
-    }
-
-    /**
-     * Aktualizuje grupy pracownikow dla pracownika o $staff_id
-     */
-    private static function updateGroups($staff_id, array $groups)
-    {
-        # usuń wszystkie grupy tego pracownika
-        Membership::deleteAllBy('staff_id', $staff_id);
-
-        # wstaw na nowo grupy pracownika
-        foreach ($groups as $group_id) {
-            Membership::insert([
-                'group_id' => $group_id,
-                'staff_id' => $staff_id,
-            ]);
-        }
+        $_SESSION['staff']['sessionTimeout'] = time() + Container::get('config')['session']['staffTimeout'];
     }
 }

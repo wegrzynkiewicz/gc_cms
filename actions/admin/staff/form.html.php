@@ -1,3 +1,9 @@
+<?php
+$groupOptions = GC\Model\Staff\Group::select()
+    ->fields(['group_id', 'name'])
+    ->fetchByMap('group_id', 'name');
+?>
+
 <div class="row">
     <div class="col-lg-12">
         <form action="" method="post" id="form" class="form-horizontal">
@@ -28,7 +34,7 @@
                     'name' => 'groups',
                     'label' => 'Przynależność do grup pracowników',
                     'help' => 'Możesz wybrać jaką pracownik ma pełnić funkcję i jakie uprawnienia otrzyma. Pracownik może przynależyć do wielu grup.',
-                    'options' => GC\Model\Staff\Group::mapWithPrimaryKeyBy('name'),
+                    'options' => $groupOptions,
                     'selectedValues' => $groups,
                 ])?>
             </div>

@@ -21,8 +21,8 @@ trait ContainFrameTrait
     public static function selectWithFrames()
     {
         return static::select()
-            ->from('::table JOIN ::frames USING(frame_id)')
-            ->equals('lang', $_SESSION['lang']['editor'])
+            ->source('::table JOIN ::frames USING(frame_id)')
+            ->equals('lang', GC\Auth\Staff::getEditorLang())
             ->sort('name', 'ASC');
     }
 

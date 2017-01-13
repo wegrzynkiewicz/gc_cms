@@ -1,7 +1,7 @@
 <?php
 
 GC\Model\Form\Sent::updateByPrimaryId($sent_id, [
-    'status' => $_POST['status'],
+    'status' => post('status'),
 ]);
 
 setNotice($trans('Status wiadomośći został zaktualizowany.'));

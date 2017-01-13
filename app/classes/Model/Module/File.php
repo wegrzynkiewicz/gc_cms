@@ -3,7 +3,6 @@
 namespace GC\Model\Module;
 
 use GC\Storage\AbstractModel;
-use GC\Storage\Utility\ColumnTrait;
 use GC\Storage\Utility\PrimaryTrait;
 use GC\Storage\Utility\JoinTrait;
 use GC\Container;
@@ -15,7 +14,6 @@ class File extends AbstractModel
     public static $joinTable   = '::module_file_pos';
     public static $joinForeign = 'module_id';
 
-    use ColumnTrait;
     use PrimaryTrait;
     use JoinTrait;
 

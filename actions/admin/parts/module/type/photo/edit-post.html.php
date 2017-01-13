@@ -12,7 +12,7 @@ $settings = [
 ];
 
 GC\Model\Module\Module::updateByPrimaryId($module_id, [
-    'theme' => $_POST['theme'],
+    'theme' => post('theme'),
     'content' => $name,
     'settings' => json_encode($settings),
 ]);

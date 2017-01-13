@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<?=getClientLang()?>">
+<html lang="<?=GC\Auth\Client::getLang()?>">
 <head>
     <meta charset="utf-8" >
 	<title><?=($headTitle.' - '.GC\Container::get('config')['adminHeadTitleBase'])?></title>

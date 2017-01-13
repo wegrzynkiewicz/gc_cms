@@ -2,7 +2,7 @@
 
 $installedForms = GC\Model\Form\Form::select()
     ->fields('::primary, name')
-    ->equals('lang', $_SESSION['lang']['editor'])
+    ->equals('lang', GC\Auth\Staff::getEditorLang())
     ->sort('name', 'ASC')
     ->fetchByMap('form_id', 'name');
 

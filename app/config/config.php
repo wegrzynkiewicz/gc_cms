@@ -30,7 +30,7 @@ header('X-Content-Type-Options: nosniff'); # Nie pozwala przeglądarce na zgadyw
 header('X-XSS-Protection: 1; mode=block'); # ustawienie ochrony przeciw XSS, przeglądarka sama wykrywa XSSa
 header_remove('X-Powered-By'); # usuwa informacje o wykorzystywanej wersji php
 
-$config = [
+return [
     'debug' => [ # opcje związane z wyświetlaniem błędów
         'enabled' => true, # zezwala na nietypowe akcje (np: zmiana hasła admina, wejście do /actions/root)
         'inConstruction' => false, # wyświetla komunikat "strona w budowie" za każdym żądaniem
@@ -98,6 +98,20 @@ $config = [
     ],
     'dataTable' => [ # dotyczą pluginu DataTables
         'iDisplayLength' => 50, # ilość rekordów domyślnie wyświetlanych na jedną strone
+    ],
+    'langs' => [ # zainstalowane języki w aplikacji
+        'pl' => [
+            'name' => 'Polski',
+            'flag' => 'pl',
+        ],
+        'en' => [
+            'name' => 'English',
+            'flag' => 'gb',
+        ],
+        'de' => [
+            'name' => 'Deutsch',
+            'flag' => 'de',
+        ],
     ],
     'modules' => [ # rodzaje zainstalowanych modułów
         'html-editor' => [

@@ -17,7 +17,6 @@
 
             <?=GC\Render::action('/admin/parts/sidebar/items.html.php', [
                 'menu' => $menu,
-                'staff' => $staff,
                 'attr' => 'class="nav nav-second-level"',
             ])?>
 
@@ -30,7 +29,7 @@
         $('#nav_files').elfinderInput({
             title: '<?=$trans('Przeglądaj pliki')?>',
             url: '<?=GC\Url::make('/admin/elfinder/connector')?>',
-            lang: '<?=getClientLang()?>',
+            lang: '<?=GC\Auth\Client::getLang()?>',
         }, function() {
 
         });

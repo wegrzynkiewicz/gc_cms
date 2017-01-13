@@ -1,7 +1,7 @@
 <?php
 
 $navs = GC\Model\Menu\Taxonomy::select()
-    ->equals('lang', $_SESSION['lang']['editor'])
+    ->equals('lang', GC\Auth\Staff::getEditorLang())
     ->sort('name')
     ->fetchByPrimaryKey();
 

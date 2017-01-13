@@ -1,5 +1,4 @@
 <?php
-global $breadcrumbs;
 $cancelHref = isset($cancelHref) ? $cancelHref : $breadcrumbs->getBeforeLastUrl();
 ?>
 

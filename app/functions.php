@@ -56,20 +56,6 @@ function sqldate($time = null)
 }
 
 /**
- *
- */
-function shiftSegmentAsInteger()
-{
-    global $_SEGMENTS;
-
-    if (count($_SEGMENTS) and intval($_SEGMENTS[0])) {
-        return intval(array_shift($_SEGMENTS));
-    }
-
-    return 0;
-}
-
-/**
  * Pomocnicza dla sprawdzania czy dany element w tabeli $_POST istnieje
  */
 function inputValue($postName, $default = '')
@@ -82,19 +68,11 @@ function inputValue($postName, $default = '')
 }
 
 /**
- * Zwraca kod jezyka, aktualnie uzywanego przez klienta
+ * Pomocnicza dla sprawdzania czy dany element w tabeli $_POST istnieje
  */
-function getClientLang()
+function post($name, $default = '')
 {
-    if (isset($_SESSION['lang']['routing'])) {
-        return $_SESSION['lang']['routing'];
-    }
-
-    if (isset($_SESSION['lang']['staff'])) {
-        return $_SESSION['lang']['staff'];
-    }
-
-    return GC\Container::get('config')['lang']['clientDefault'];
+    return isset($_POST[$name]) ? $_POST[$name] : $default;
 }
 
 function transDateTime($dateTime)
@@ -258,7 +236,7 @@ function curlReCaptcha()
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_POSTFIELDS => [
                 'secret' => GC\Container::get('config')['reCaptcha']['secret'],
-                'response' => $_POST['g-recaptcha-response'],
+                'response' => post('g-recaptcha-response'),
                 'remoteip' => $_SERVER['REMOTE_ADDR']
             ]
         );

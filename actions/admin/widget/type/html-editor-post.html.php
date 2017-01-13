@@ -1,7 +1,7 @@
 <?php
 
 GC\Model\Widget::updateByPrimaryId($widget_id, [
-    'content' => $_POST['content'],
+    'content' => post('content'),
 ]);
 
 setNotice($trans('Widżet formatowanego tekstu "%s" został zaktualizowany.', [$widget['name']]));

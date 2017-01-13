@@ -7,7 +7,7 @@ $staffList = GC\Model\Staff\Staff::select()
 
 $groups = GC\Model\Staff\Group::select()
     ->fields(['staff_id', 'name', 'group_id'])
-    ->from('::staff_membership LEFT JOIN ::staff_groups USING(group_id)')
+    ->source('::staff_membership LEFT JOIN ::staff_groups USING(group_id)')
     ->sort('name', 'ASC')
     ->fetchAll();
 
@@ -17,8 +17,8 @@ foreach ($groups as $group) {
 }
 
 $permissions = GC\Model\Staff\Permission::select()
-    ->fields(['staff_id', 'name'])
-    ->from('::staff_membership JOIN ::staff_permissions USING(group_id)')
+    ->fields('DISTINCT name, staff_id')
+    ->source('::staff_membership JOIN ::staff_permissions USING(group_id)')
     ->fetchAll();
 
 $staffPermissions = [];

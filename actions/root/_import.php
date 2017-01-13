@@ -5,7 +5,9 @@ if (!GC\Container::get('config')['debug']['enabled']) {
     GC\Response::redirect('/');
 }
 
-$staff = GC\Model\Staff\Staff::createFromSession();
+# utworzenie obiektu reprezentującego pracownika, sprawdza czy jest zalogowany
+$staff = GC\Auth\Staff::createFromSession();
+GC\Container::set('staff', $staff);
 
 $breadcrumbs = new GC\Breadcrumbs();
 $breadcrumbs->push('/admin', 'Dashboard', 'fa-dashboard');

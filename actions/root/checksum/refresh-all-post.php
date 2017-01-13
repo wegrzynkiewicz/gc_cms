@@ -1,6 +1,6 @@
 <?php
 
-GC\Model\Checksum::deleteAll();
+GC\Model\Checksum::delete()->execute();
 
 foreach($getFiles() as $file) {
     GC\Model\Checksum::insert([

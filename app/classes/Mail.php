@@ -90,7 +90,7 @@ class Mail extends PHPMailer
         try {
             parent::send();
 
-            ToSend::deleteAllBy('mail_hash', $this->hash);
+            ToSend::delete()->equals('mail_hash', $this->hash)->execute();
             Sent::insert([
                 'mail_hash' => $this->hash,
                 'receivers' => implode('; ', array_keys($this->all_recipients)),

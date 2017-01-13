@@ -1,10 +1,10 @@
 <?php
 
 $frame_id = GC\Model\Module\Frame::insert([
-    'name' => $_POST['name'],
+    'name' => post('name'),
     'type' => 'page',
-    'keywords' => $_POST['keywords'],
-    'description' => $_POST['description'],
+    'keywords' => post('keywords'),
+    'description' => post('description'),
     'image' => GC\Url::upload($_POST['image']),
 ]);
 

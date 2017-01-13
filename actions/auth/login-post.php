@@ -1,6 +1,5 @@
 <?php
 
-
 if (isset($_SESSION['staff'])) {
     GC\Response::redirect('/admin');
 }
@@ -32,16 +31,12 @@ if (!GC\Auth\Password::verify($password, $user['password'])) {
     return require ACTIONS_PATH.'/auth/login-get.php';
 }
 
-if (password_needs_rehash($user['password'], PASSWORD_DEFAULT, GC\Container::get('config')['password']['options'])) {
+if (GC\Auth\Password::needsRehash($user['password'])) {
     GC\Model\Staff\Staff::updateByPrimaryId($user['staff_id'], [
         'password' => GC\Auth\Password::hash($password),
     ]);
 }
 
-$_SESSION['staff'] = [
-    'entity' => $user,
-    'sessionTimeout' => time() + GC\Container::get('config')['session']['staffTimeout']
-];
-
+GC\Auth\Staff::registerSession($user['staff_id']);
 GC\Storage\Backup::make(sprintf('Po zalogowaniu użytkownika %s', $user['name']));
 GC\Response::redirect('/admin');

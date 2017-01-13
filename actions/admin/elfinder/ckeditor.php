@@ -35,7 +35,7 @@
                 },
                 resizable: false,
                 url: '<?=GC\Url::make('/admin/elfinder/connector')?>',
-                lang: '<?=getClientLang()?>',
+                lang: '<?=GC\Auth\Client::getLang()?>',
             }).elfinder('instance');
         });
     </script>

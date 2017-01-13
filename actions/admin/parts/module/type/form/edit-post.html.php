@@ -5,8 +5,8 @@ sort($emails);
 $settings['emails'] = $emails;
 
 GC\Model\Module\Module::updateByPrimaryId($module_id, [
-    'content' => $_POST['form'],
-    'theme' => $_POST['theme'],
+    'content' => post('form'),
+    'theme' => post('theme'),
     'settings' => json_encode($settings, JSON_UNESCAPED_UNICODE),
 ]);
 

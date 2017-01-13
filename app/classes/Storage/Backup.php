@@ -36,7 +36,7 @@ class Backup
         $dumpConfig = Container::get('config')['dump'];
         $dbConfig = Container::get('config')['database'];
 
-        Container::get('logger')->dumpExport($filename);
+        Container::get('logger')->dumpExport(relativePath($filename));
 
         $dump = new IMysqldump\Mysqldump(
             $dbConfig['dns'],

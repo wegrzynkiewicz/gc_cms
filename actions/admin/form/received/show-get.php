@@ -1,5 +1,6 @@
 <?php
 
+$sent_id = intval(array_shift($_PARAMETERS));
 $message = GC\Model\Form\Sent::fetchByPrimaryId($sent_id);
 $data = json_decode($message['data'], true);
 $name = reset($data);
@@ -16,7 +17,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=GC\Url::mask("/$sent_id/delete")?>"
+                <a href="<?=GC\Url::mask("/{$sent_id}/delete")?>"
                     type="button"
                     class="btn btn-danger btn-md">
                     <i class="fa fa-trash fa-fw"></i>

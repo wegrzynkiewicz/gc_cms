@@ -1,6 +1,8 @@
 <?php
 
-$stored = GC\Model\Checksum::selectAllWithPrimaryKey();
+$stored = GC\Model\Checksum::select()
+    ->fields(['file', 'hash'])
+    ->fetchByPrimaryKey();
 
 $checksums = [];
 foreach($getFiles() as $file) {
