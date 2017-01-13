@@ -1,6 +1,6 @@
 <?php
 
-$widget = GC\Model\Widget::selectByPrimaryId($widget_id);
+$widget = GC\Model\Widget::fetchByPrimaryId($widget_id);
 $type = $widget['type'];
 $content = $widget['content'];
 

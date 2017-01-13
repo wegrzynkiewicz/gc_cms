@@ -13,7 +13,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
     <div class="col-md-12">
         <div class="simple-box">
             <?php if ($count == 0): ?>
-                <?=trans('Nie znaleziono żadnego wysłanego formularza w języku: ')?>
+                <?=$trans('Nie znaleziono żadnego wysłanego formularza w języku: ')?>
                 <?=GC\Render::action('/admin/parts/language.html.php')?>
             <?php else: ?>
                 <form action="" method="post" id="form" class="form-horizontal">
@@ -23,17 +23,17 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                                 <th data-name="name"
                                     data-searchable="1"
                                     data-sortable="1">
-                                    <?=trans('Pierwsze pole formularza')?>
+                                    <?=$trans('Pierwsze pole formularza')?>
                                 </th>
                                 <th data-name="status"
                                     data-searchable="0"
                                     data-sortable="1">
-                                    <?=trans('Status wiadomości')?>
+                                    <?=$trans('Status wiadomości')?>
                                 </th>
                                 <th data-name="sent_datetime"
                                     data-searchable="1"
                                     data-sortable="1">
-                                    <?=trans('Data nadesłania')?>
+                                    <?=$trans('Data nadesłania')?>
                                 </th>
                                 <th data-name="options"
                                     data-searchable="0"
@@ -41,16 +41,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                                     class="text-right"></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <?php foreach ([] as $sent_id => $message): ?>
-                                <?=GC\Render::action('/admin/form/received/list-item.html.php', [
-                                    'sent_id' => $sent_id,
-                                    'form_id' => $form_id,
-                                    'message' => $message,
-                                    'config' => $config,
-                                ])?>
-                            <?php endforeach ?>
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </form>
             <?php endif ?>
@@ -71,19 +62,19 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=trans("Czy na pewno usunąć?")?>
+                    <?=$trans("Czy na pewno usunąć?")?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=trans("Czy jesteś pewien, że chcesz usunąć nadesłany formularz")?>
+                <?=$trans("Czy jesteś pewien, że chcesz usunąć nadesłany formularz")?>
                 <span id="sent_name" style="font-weight:bold; color:red;"></span>?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <?=trans('Anuluj')?>
+                    <?=$trans('Anuluj')?>
                 </button>
                 <button type="submit" class="btn btn-danger btn-ok">
-                    <?=trans('Usuń')?>
+                    <?=$trans('Usuń')?>
                 </button>
             </div>
         </form>
@@ -95,17 +86,17 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
         <a href="<?=GC\Url::mask("/")?>{{sent_id}}/show"
             class="btn btn-primary btn-sm">
             <i class="fa fa-search fa-fw"></i>
-            <?=trans('Podgląd')?>
+            <?=$trans('Podgląd')?>
         </a>
 
         <a data-toggle="modal"
             data-id="{{sent_id}}"
             data-name="{{name}}"
             data-target="#deleteModal"
-            title="<?=trans('Usuń wiadomość')?>"
+            title="<?=$trans('Usuń wiadomość')?>"
             class="btn btn-danger btn-sm">
             <i class="fa fa-times fa-fw"></i>
-            <?=trans("Usuń")?>
+            <?=$trans("Usuń")?>
         </a>
     </div>
 </script>
@@ -115,10 +106,10 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 <script>
     $(function(){
         var optionsTemplate = $('#options-template').html();
-        var statuses = <?=json_encode($config['formStatuses'])?>;
+        var statuses = <?=json_encode(GC\Container::get('config')['formStatuses'])?>;
         var table = $('[data-table]').DataTable({
             order: [[2, 'desc']],
-            iDisplayLength: <?=$config['dataTable']['iDisplayLength']?>,
+            iDisplayLength: <?=GC\Container::get('config')['dataTable']['iDisplayLength']?>,
 	        processing: true,
             serverSide: true,
             searchDelay: 500,

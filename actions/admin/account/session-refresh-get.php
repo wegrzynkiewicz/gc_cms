@@ -1,3 +1,3 @@
 <?php
 
-$_SESSION['staff']['sessionTimeout'] = time() + $config['session']['staffTimeout'];
+$_SESSION['staff']['sessionTimeout'] = time() + GC\Container::get('config')['session']['staffTimeout'];

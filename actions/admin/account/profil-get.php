@@ -10,7 +10,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             <div class="btn-toolbar pull-right">
                 <a href="<?=GC\Url::mask("/change-password")?>" type="button" class="btn btn-success btn-md">
                     <i class="fa fa-unlock-alt fa-fw"></i>
-                    <?=trans('Zmień hasło')?>
+                    <?=$trans('Zmień hasło')?>
                 </a>
             </div>
             <h1><?=($headTitle)?></h1>

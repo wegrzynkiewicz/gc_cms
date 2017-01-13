@@ -1,8 +1,8 @@
 <?php
 
-$node = GC\Model\Menu\Menu::selectByPrimaryId($menu_id);
+$node = GC\Model\Menu\Menu::fetchByPrimaryId($menu_id);
 
-$headTitle = trans('Edycja węzła "%s"', [$node['name']]);
+$headTitle = $trans('Edycja węzła "%s"', [$node['name']]);
 $breadcrumbs->push($request->path, $headTitle);
 
 $_POST = $node;

@@ -9,6 +9,6 @@ GC\Model\Module\Frame::updateByFrameId($page['frame_id'], [
     'image' => GC\Url::upload($_POST['image']),
 ]);
 
-setNotice(trans('Strona "%s" została zaktualizowana.', [$_POST['name']]));
+setNotice($trans('Strona "%s" została zaktualizowana.', [$_POST['name']]));
 
 GC\Response::redirect($breadcrumbs->getLastUrl());

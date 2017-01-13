@@ -57,11 +57,11 @@ $(function () {
         },
         messages: {
             name: {
-                required: "<?=trans('Imię i nazwisko jest wymagane')?>"
+                required: "<?=$trans('Imię i nazwisko jest wymagane')?>"
             },
             email: {
-                email: "<?=trans('Adres E-mail nie jest prawidłowy')?>",
-                required: "<?=trans('Adres E-mail jest wymagany')?>"
+                email: "<?=$trans('Adres E-mail nie jest prawidłowy')?>",
+                required: "<?=$trans('Adres E-mail jest wymagany')?>"
             }
         },
     });

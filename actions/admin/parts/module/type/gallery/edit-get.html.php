@@ -10,7 +10,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             <div class="btn-toolbar pull-right">
                 <button id="select_images" class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
-                    <?=trans('Dodaj zdjęcia')?>
+                    <?=$trans('Dodaj zdjęcia')?>
                 </button>
             </div>
             <h1><?=($headTitle)?></h1>
@@ -29,12 +29,12 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
             <div class="simple-box">
                 <fieldset>
-                    <legend><?=trans('Ustawienia galerii zdjęć')?></legend>
+                    <legend><?=$trans('Ustawienia galerii zdjęć')?></legend>
                     <?=GC\Render::action('/admin/parts/input/selectbox.html.php', [
                         'name' => 'theme',
                         'label' => 'Szablon',
                         'help' => 'Wybierz jeden z dostępnych szablonów galerii',
-                        'options' => $config['moduleThemes']['gallery'],
+                        'options' => GC\Container::get('config')['moduleThemes']['gallery'],
                     ])?>
                 </fieldset>
             </div>
@@ -42,9 +42,9 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
             <div class="simple-box">
                 <fieldset>
-                    <legend><?=trans('Ustawienia szablonu')?></legend>
+                    <legend><?=$trans('Ustawienia szablonu')?></legend>
                     <div id="moduleTheme">
-                        <?=trans('Wybierz szablon galerii')?>
+                        <?=$trans('Wybierz szablon galerii')?>
                     </div>
                 </fieldset>
             </div>
@@ -70,7 +70,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=trans("Edytujesz zdjęcie ")?>
+                    <?=$trans("Edytujesz zdjęcie ")?>
                     <span id="editModalName"></span>
                 </h2>
             </div>
@@ -78,10 +78,10 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <?=trans('Anuluj')?>
+                    <?=$trans('Anuluj')?>
                 </button>
                 <button type="submit" value="" class="btn btn-success btn-ok">
-                    <?=trans('Zapisz')?>
+                    <?=$trans('Zapisz')?>
                 </button>
             </div>
         </form>
@@ -100,18 +100,18 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=trans("Czy na pewno usunąć?")?>
+                    <?=$trans("Czy na pewno usunąć?")?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=trans("Czy jesteś pewien, że chcesz usunąć to zdjęcie?")?>
+                <?=$trans("Czy jesteś pewien, że chcesz usunąć to zdjęcie?")?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <?=trans('Anuluj')?>
+                    <?=$trans('Anuluj')?>
                 </button>
                 <button type="submit" class="btn btn-danger btn-ok">
-                    <?=trans('Usuń')?>
+                    <?=$trans('Usuń')?>
                 </button>
             </div>
         </form>
@@ -193,7 +193,7 @@ $(function() {
     });
 
     $('#select_images').elfinderInputMultiple({
-        title: '<?=trans('Wybierz wiele zdjęć')?>',
+        title: '<?=$trans('Wybierz wiele zdjęć')?>',
         url: '<?=GC\Url::make('/admin/elfinder/connector')?>',
         lang: '<?=getClientLang()?>',
     }, function(urls) {

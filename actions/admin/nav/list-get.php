@@ -12,14 +12,14 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
     <div class="col-md-12">
         <div class="simple-box">
             <?php if (empty($navs)): ?>
-                <?=trans('Nie znaleziono żadnej nawigacji w języku: ')?>
+                <?=$trans('Nie znaleziono żadnej nawigacji w języku: ')?>
                 <?=GC\Render::action('/admin/parts/language.html.php')?>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">
                     <thead>
                         <tr>
-                            <th><?=trans('Nazwa nawigacji')?></th>
-                            <th><?=trans('Podgląd węzłów')?></th>
+                            <th><?=$trans('Nazwa nawigacji')?></th>
+                            <th><?=$trans('Podgląd węzłów')?></th>
                             <th class="text-right"></th>
                         </tr>
                     </thead>

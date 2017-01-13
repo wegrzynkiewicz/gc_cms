@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = trans("Czas trwania sesji minął");
+$headTitle = $trans("Czas trwania sesji minął");
 
 unset($_SESSION['staff']);
 
@@ -19,12 +19,12 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                     <div class="panel-body">
 
                         <p class="text-center">
-                            <?=trans('Zostałeś wylogowany, ponieważ minął czas trwania Twojej sesji.')?><br>
+                            <?=$trans('Zostałeś wylogowany, ponieważ minął czas trwania Twojej sesji.')?><br>
                         </p>
 
                         <div class="btn-group btn-group-justified" style="margin-top:5px">
                             <a href="<?=GC\Url::mask("/auth/login")?>" class="btn btn-link">
-                            <?=trans('Zaloguj się ponownie')?></a>
+                            <?=$trans('Zaloguj się ponownie')?></a>
                         </div>
 
                     </div>

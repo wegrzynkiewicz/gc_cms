@@ -1,7 +1,7 @@
 <?php
 
-$group = GC\Model\Staff\Group::selectByPrimaryId($group_id);
-$headTitle = trans('Edytowanie grupy pracowników "%s"', [$group['name']]);
+$group = GC\Model\Staff\Group::fetchByPrimaryId($group_id);
+$headTitle = $trans('Edytowanie grupy pracowników "%s"', [$group['name']]);
 $breadcrumbs->push($request->path, $headTitle);
 
 $_POST = $group;

@@ -1,6 +1,6 @@
 <?php
 
-namespace GC;
+namespace GC\Auth;
 
 class Password
 {
@@ -25,7 +25,7 @@ class Password
         return password_hash(
             static::salt($securePassword),
             \PASSWORD_DEFAULT,
-            getConfig()['password']['options']
+            \GC\Container::get('config')['password']['options']
         );
     }
 
@@ -42,6 +42,6 @@ class Password
      */
     public static function salt($securePassword)
     {
-        return $securePassword.getConfig()['password']['staticSalt'];
+        return $securePassword.\GC\Container::get('config')['password']['staticSalt'];
     }
 }

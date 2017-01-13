@@ -20,31 +20,31 @@ abstract class AbstractModel extends AbstractEntity
      * ją wewnętrz transakcji. Wystarczy wywołać chronioną metodę, aby zawrzeć
      * ją całą w transakcji.
      */
-    public static function __callStatic($methodName, array $arguments)
+    public static function __callStatic($name, array $arguments)
     {
-        # jezeli metoda statyczne o nazwie $methodName nieistnieje
+        # jezeli metoda statyczne o nazwie $name nieistnieje
         $calledClass = get_called_class();
-        if (!method_exists($calledClass, $methodName)) {
+        if (!method_exists($calledClass, $name)) {
             throw new BadMethodCallException(sprintf(
-                "Method named %s does not exists in %s", $methodName, $calledClass
+                "Method named %s does not exists in %s", $name, $calledClass
             ));
         }
 
         # jezeli juz jesteśmy w transakcji wtedy wywołaj metodę chronioną
-        if (Database::$pdo->inTransaction()) {
-            return call_user_func_array(['static', $methodName], $arguments);
+        if (Container::get('database')->$pdo->inTransaction()) {
+            return call_user_func_array(['static', $name], $arguments);
         }
 
         # rozpocznij transakcję
-        Database::$pdo->beginTransaction();
+        Container::get('database')->$pdo->beginTransaction();
 
         try {
             # wywołaj metodę chronioną i zapisz zmiany w bazie
-            $result = call_user_func_array(['static', $methodName], $arguments);
-            Database::$pdo->commit();
+            $result = call_user_func_array(['static', $name], $arguments);
+            Container::get('database')->$pdo->commit();
         } catch (Exception $exception) {
             # w przypadku błędu przywroc zmiany
-            Database::$pdo->rollBack();
+            Container::get('database')->$pdo->rollBack();
             throw $exception;
         }
 
@@ -83,7 +83,7 @@ abstract class AbstractModel extends AbstractEntity
     {
         list($columns, $values) = self::buildInsertSyntax($data);
         $sql = self::sql("INSERT INTO ::table ({$columns}) VALUES ({$values})");
-        $row_id = Database::insert($sql, array_values($data));
+        $row_id = Container::get('database')->insert($sql, array_values($data));
 
         return $row_id;
     }
@@ -95,7 +95,7 @@ abstract class AbstractModel extends AbstractEntity
     {
         list($columns, $values) = self::buildInsertSyntax($data);
         $sql = self::sql("REPLACE INTO ::table ({$columns}) VALUES ({$values})");
-        Database::execute($sql, array_values($data));
+        Container::get('database')->execute($sql, array_values($data));
     }
 
     protected static function buildInsertSyntax(array $data)
@@ -128,7 +128,7 @@ abstract class AbstractModel extends AbstractEntity
     protected static function deleteAll()
     {
         $sql = self::sql("DELETE FROM ::table ");
-        $affectedRows = Database::execute($sql);
+        $affectedRows = Container::get('database')->execute($sql);
 
         return $affectedRows;
     }

@@ -12,17 +12,17 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
     <div class="col-md-12">
         <div class="simple-box">
             <?php if (empty($widgets)): ?>
-                <?=trans('Nie znaleziono żadnych widżetów w języku: ')?>
+                <?=$trans('Nie znaleziono żadnych widżetów w języku: ')?>
                 <?=GC\Render::action('/admin/parts/language.html.php')?>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">
                     <thead>
                         <tr>
                             <th class="col-md-4 col-lg-4">
-                                <?=trans('Nazwa widżetu')?>
+                                <?=$trans('Nazwa widżetu')?>
                             </th>
                             <th class="col-md-8 col-lg-8">
-                                <?=trans('Rodzaj')?>
+                                <?=$trans('Rodzaj')?>
                             </th>
                         </tr>
                     </thead>
@@ -31,12 +31,12 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                             <tr>
                                 <td>
                                     <a href="<?=GC\Url::mask("/{$widget_id}/edit")?>"
-                                        title="<?=trans('Edytuj widżet')?>">
+                                        title="<?=$trans('Edytuj widżet')?>">
                                         <?=e($widget['name'])?>
                                     </a>
                                 </td>
                                 <td>
-                                    <?=trans($config['widgetTypes'][$widget['type']])?>
+                                    <?=$trans(GC\Container::get('config')['widgetTypes'][$widget['type']])?>
                                 </td>
                             </tr>
                         <?php endforeach ?>

@@ -1,6 +1,6 @@
 <?php
 
-$pages = GC\Model\Page::selectAllWithFrames();
+$pages = GC\Model\Page::selectWithFrames()->fetchByPrimaryKey();
 
 require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
@@ -10,7 +10,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             <div class="btn-toolbar pull-right">
                 <a href="<?=GC\Url::mask('/new')?>" type="button" class="btn btn-success btn-md">
                     <i class="fa fa-plus fa-fw"></i>
-                    <?=trans('Dodaj nową stronę')?>
+                    <?=$trans('Dodaj nową stronę')?>
                 </a>
             </div>
             <h1><?=($headTitle)?></h1>
@@ -24,21 +24,21 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <button type="button" class="close" data-dismiss="alert">
         <span>&times;</span>
     </button>
-    <strong>Pomoc:</strong> <?=trans('')?>
+    <strong>Pomoc:</strong> <?=$trans('')?>
 </div> -->
 
 <div class="row">
     <div class="col-md-12">
         <div class="simple-box">
             <?php if (empty($pages)): ?>
-                <?=trans('Nie znaleziono żadnej strony w języku: ')?>
+                <?=$trans('Nie znaleziono żadnej strony w języku: ')?>
                 <?=GC\Render::action('/admin/parts/language.html.php')?>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">
                     <thead>
                         <tr>
-                            <th style="width:1px"><?=trans('Zdjęcie')?></th>
-                            <th><?=trans('Nazwa strony')?></th>
+                            <th style="width:1px"><?=$trans('Zdjęcie')?></th>
+                            <th><?=$trans('Nazwa strony')?></th>
                             <th class="text-right no-sort"></th>
                         </tr>
                     </thead>
@@ -69,19 +69,19 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=trans("Czy na pewno usunąć?")?>
+                    <?=$trans("Czy na pewno usunąć?")?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=trans("Czy jesteś pewien, że chcesz usunąć stronę")?>
+                <?=$trans("Czy jesteś pewien, że chcesz usunąć stronę")?>
                 <span id="name" style="font-weight:bold; color:red;"></span>?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <?=trans('Anuluj')?>
+                    <?=$trans('Anuluj')?>
                 </button>
                 <button type="submit" class="btn btn-danger btn-ok">
-                    <?=trans('Usuń')?>
+                    <?=$trans('Usuń')?>
                 </button>
             </div>
         </form>
@@ -98,7 +98,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
         });
         $('[data-table]').DataTable({
             order: [[2, 'asc']],
-            iDisplayLength: <?=$config['dataTable']['iDisplayLength']?>,
+            iDisplayLength: <?=GC\Container::get('config')['dataTable']['iDisplayLength']?>,
         });
     });
 </script>

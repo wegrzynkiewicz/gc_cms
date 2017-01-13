@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = trans("Dodawanie nowej grupy pracowników");
+$headTitle = $trans("Dodawanie nowej grupy pracowników");
 $breadcrumbs->push($request->path, $headTitle);
 $permissions = [];
 

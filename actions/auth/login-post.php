@@ -5,9 +5,12 @@ if (isset($_SESSION['staff'])) {
     GC\Response::redirect('/admin');
 }
 
-$user = GC\Model\Staff\Staff::select()->equals('email', $_POST['email'])->fetch();
+$user = GC\Model\Staff\Staff::select()
+    ->equals('email', $_POST['email'])
+    ->fetch();
+
 if (!$user) {
-    $error = trans('Nieprawidłowy login lub hasło');
+    $error = $trans('Nieprawidłowy login lub hasło');
 
     return require ACTIONS_PATH.'/auth/login-get.php';
 }
@@ -15,7 +18,7 @@ if (!$user) {
 $password = $_POST['password'];
 
 # jeżeli hasło w bazie nie jest zahaszowane, a zgadza się
-if ($config['debug']['enabled'] and $user and $password === $user['password']) {
+if (GC\Container::get('config')['debug']['enabled'] and $user and $password === $user['password']) {
     $newPasswordHash = GC\Auth\Password::hash($password);
     GC\Model\Staff\Staff::updateByPrimaryId($user['staff_id'], [
         'password' => $newPasswordHash,
@@ -24,12 +27,12 @@ if ($config['debug']['enabled'] and $user and $password === $user['password']) {
 }
 
 if (!GC\Auth\Password::verify($password, $user['password'])) {
-    $error = trans('Nieprawidłowy login lub hasło');
+    $error = $trans('Nieprawidłowy login lub hasło');
 
     return require ACTIONS_PATH.'/auth/login-get.php';
 }
 
-if (password_needs_rehash($user['password'], PASSWORD_DEFAULT, $config['password']['options'])) {
+if (password_needs_rehash($user['password'], PASSWORD_DEFAULT, GC\Container::get('config')['password']['options'])) {
     GC\Model\Staff\Staff::updateByPrimaryId($user['staff_id'], [
         'password' => GC\Auth\Password::hash($password),
     ]);
@@ -37,8 +40,8 @@ if (password_needs_rehash($user['password'], PASSWORD_DEFAULT, $config['password
 
 $_SESSION['staff'] = [
     'entity' => $user,
-    'sessionTimeout' => time() + $config['session']['staffTimeout']
+    'sessionTimeout' => time() + GC\Container::get('config')['session']['staffTimeout']
 ];
 
-GC\Storage\Dump::makeBackup(sprintf('Po zalogowaniu użytkownika %s', $user['name']));
+GC\Storage\Backup::make(sprintf('Po zalogowaniu użytkownika %s', $user['name']));
 GC\Response::redirect('/admin');

@@ -1,1 +1,1 @@
-<?=trans('Ten szablon nie posiada unikalnych właściwości.')?>
+<?=$trans('Ten szablon nie posiada unikalnych właściwości.')?>

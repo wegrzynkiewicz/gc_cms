@@ -1,4 +1,4 @@
-<?php $preview = empty($post['image']) ? GC\Url::assets($config['noImageUrl']): $post['image']; ?>
+<?php $preview = empty($post['image']) ? GC\Url::assets(GC\Container::get('config')['noImageUrl']): $post['image']; ?>
 
 <tr>
 
@@ -8,7 +8,7 @@
 
     <td>
         <a href="<?=GC\Url::mask("/{$post_id}/edit/")?>"
-            title="<?=trans('Edytuj wpis')?>">
+            title="<?=$trans('Edytuj wpis')?>">
             <?=e($post['name'])?>
         </a>
     </td>
@@ -19,11 +19,11 @@
 
     <td>
         <?php if (empty($post['taxonomies'])): ?>
-            <?=trans('Ten wpis nie został nigdzie przypisany')?>
+            <?=$trans('Ten wpis nie został nigdzie przypisany')?>
         <?php else: ?>
             <?php foreach($post['taxonomies'] as $tax_id => $tree): ?>
                 <a href="<?=GC\Url::mask("/taxonomy/{$tax_id}/node/tree")?>"
-                    title="<?=trans('Przejdź do podziału')?>">
+                    title="<?=$trans('Przejdź do podziału')?>">
                     <strong>
                         <?=e($taxonomies[$tax_id]['name'])?>:
                     </strong>
@@ -39,27 +39,27 @@
     <td class="text-right">
         <a href="<?=GC\Url::make("/post/{$post_id}")?>"
             target="_blank"
-            title="<?=trans('Podejrzyj ten wpis')?>"
+            title="<?=$trans('Podejrzyj ten wpis')?>"
             class="btn btn-primary btn-sm">
             <i class="fa fa-search fa-fw"></i>
-            <?=trans("Podgląd")?>
+            <?=$trans("Podgląd")?>
         </a>
 
         <a href="<?=GC\Url::mask("/{$post_id}/module/list")?>"
-            title="<?=trans('Wyświetl moduły wpisu')?>"
+            title="<?=$trans('Wyświetl moduły wpisu')?>"
             class="btn btn-success btn-sm">
             <i class="fa fa-file-text-o fa-fw"></i>
-            <?=trans("Moduły")?>
+            <?=$trans("Moduły")?>
         </a>
 
         <a data-toggle="modal"
             data-id="<?=e($post_id)?>"
             data-name="<?=e($post['name'])?>"
             data-target="#deleteModal"
-            title="<?=trans('Usuń wpis')?>"
+            title="<?=$trans('Usuń wpis')?>"
             class="btn btn-danger btn-sm">
             <i class="fa fa-times fa-fw"></i>
-            <?=trans("Usuń")?>
+            <?=$trans("Usuń")?>
         </a>
     </td>
 </tr>

@@ -1,7 +1,7 @@
 <?php
 
 if ($menu_id) {
-    $_POST = GC\Model\Menu\Menu::selectByPrimaryId($menu_id);
+    $_POST = GC\Model\Menu\Menu::fetchByPrimaryId($menu_id);
 }
 
 $pageOptions = GC\Model\Page::mapFramesWithPrimaryKeyBy('name');
@@ -19,5 +19,5 @@ $pageOptions = GC\Model\Page::mapFramesWithPrimaryKeyBy('name');
 <?=GC\Render::action('/admin/parts/input/selectbox.html.php', [
     'name' => 'target',
     'label' => 'Sposób załadowania adresu',
-    'options' => $config['navNodeTargets'],
+    'options' => GC\Container::get('config')['navNodeTargets'],
 ])?>

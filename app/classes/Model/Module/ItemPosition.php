@@ -5,7 +5,7 @@ namespace GC\Model\Module;
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\ColumnTrait;
 use GC\Storage\Utility\PositionTrait;
-use GC\Storage\Database;
+use GC\Container;
 
 class ItemPosition extends AbstractModel
 {

@@ -7,7 +7,7 @@ use GC\Storage\Utility\ColumnTrait;
 use GC\Storage\Utility\PrimaryTrait;
 use GC\Storage\Utility\JoinTrait;
 use GC\Storage\Utility\ContainFrameTrait;
-use GC\Storage\Database;
+use GC\Container;
 
 class Item extends AbstractModel
 {

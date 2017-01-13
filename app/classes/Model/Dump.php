@@ -4,7 +4,7 @@ namespace GC\Model;
 
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\PrimaryTrait;
-use GC\Storage\Database;
+use GC\Container;
 
 class Dump extends AbstractModel
 {

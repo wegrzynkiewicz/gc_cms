@@ -48,7 +48,7 @@ $(function () {
         },
         messages: {
             name: {
-                required: "<?=trans('Nazwa strony jest wymagana')?>",
+                required: "<?=$trans('Nazwa strony jest wymagana')?>",
             },
         },
     });

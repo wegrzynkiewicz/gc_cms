@@ -2,44 +2,41 @@
 
 namespace GC\Storage;
 
-use GC\Logger;
-use PDO;
+use GC\Container;
 
 /**
  * Słuzy do wykonywania zapytań do bazy danych
  */
 class Database
 {
-    public static $pdo;
-    public static $prefix;
+    public $pdo = null;
+    public $prefix;
 
     /**
      * Pobiera z configa dane połączeniowe i initializuje połączenie z bazą
      */
-    public static function initialize($dbConfig)
+    public function __construct(\PDO $pdo)
     {
-        self::$pdo = new PDO($dbConfig['dns'], $dbConfig['username'], $dbConfig['password']);
-        self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        self::$prefix = $dbConfig['prefix'];
+        $this->pdo = $pdo;
     }
 
     /**
      * Wykonuje zapytanie SQL i zwraca jeden wiersz z tego zapytania, przydatne dla pojedyńczych wywołań
      */
-    public static function fetch($sql, array $values = [])
+    public function fetch($sql, array $values = [])
     {
-        return self::wrapQuery($sql, $values, function ($statement) {
-            return $statement->fetch(PDO::FETCH_ASSOC);
+        return $this->wrapQuery($sql, $values, function ($statement) {
+            return $statement->fetch(\PDO::FETCH_ASSOC);
         });
     }
 
     /**
      * Wykonuje zapytanie SQL i zwraca tablice wierszy z tego zapytania, przydatne dla wielu rekordow
      */
-    public static function fetchAll($sql, array $values = [])
+    public function fetchAll($sql, array $values = [])
     {
-        return self::wrapQuery($sql, $values, function ($statement) {
-            return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $this->wrapQuery($sql, $values, function ($statement) {
+            return $statement->fetchAll(\PDO::FETCH_ASSOC);
         });
     }
 
@@ -48,10 +45,10 @@ class Database
      * kluczem w tej tablicy jest columna przekazana jako $label,
      * przydatne dla wielu rekordow z dostępem swobodnym po kluczu w tablicy
      */
-    public static function fetchByKey($sql, array $values, $label)
+    public function fetchByKey($sql, array $values, $label)
     {
         $data = [];
-        foreach (self::fetchAll($sql, $values) as $row) {
+        foreach ($this->fetchAll($sql, $values) as $row) {
             $data[$row[$label]] = $row;
         }
 
@@ -63,10 +60,10 @@ class Database
      * kluczem w tej tablicy jest columna przekazana jako $label a wartością jest $column
      * przydatne dla wielu rekordow z dostępem swobodnym po kluczu w tablicy
      */
-    public static function fetchByMap($sql, array $values, $label, $column)
+    public function fetchByMap($sql, array $values, $label, $column)
     {
         $data = [];
-        foreach (self::fetchAll($sql, $values) as $row) {
+        foreach ($this->fetchAll($sql, $values) as $row) {
             $data[$row[$label]] = $row[$column];
         }
 
@@ -76,9 +73,9 @@ class Database
     /**
      * Wykonuje zapytanie SQL i zwraca ilość zmodyfikowanych rekordow
      */
-    public static function execute($sql, array $values = [])
+    public function execute($sql, array $values = [])
     {
-        return self::wrapQuery($sql, $values, function ($statement) {
+        return $this->wrapQuery($sql, $values, function ($statement) {
             return $statement->rowCount();
         });
     }
@@ -86,66 +83,59 @@ class Database
     /**
      * Wykonuje zapytanie SQL i zwraca ID ostatniego wstawionego rekordu
      */
-    public static function insert($sql, array $values = [])
+    public function insert($sql, array $values = [])
     {
-        self::wrapQuery($sql, $values, function ($statement) {});
+        $this->wrapQuery($sql, $values, function ($statement) {
 
-        return intval(self::$pdo->lastInsertId());
+        });
+
+        return intval($this->pdo->lastInsertId());
     }
 
     /**
      * Przekazaną funkcje $callback otacza wewnątrz transakcji
      */
-    public static function transaction($callback)
+    public function transaction($callback)
     {
+        if ($this->pdo->inTransaction()) {
+            return $callback();
+        }
+
         try {
-            if (self::$pdo->inTransaction()) {
-                $callback();
-            }
-            self::$pdo->beginTransaction();
+            $this->pdo->beginTransaction();
             $callback();
-            self::$pdo->commit();
+            $this->pdo->commit();
         } catch (PDOException $exception) {
-            self::$pdo->rollBack();
+            $this->pdo->rollBack();
             throw $exception;
         }
     }
 
     /**
-     * Zamienia kazde napotkanie znaki :: na prefiks bazy danych
-     */
-    private static function bindTableName($pseudoQuery)
-    {
-        return preg_replace_callback('/::([a-z_]+)/', function($matches) {
-            $property = $matches[1];
-            if ($property === 'lang') {
-                return sprintf("lang = '%s'", $_SESSION['lang']['editor']);
-            }
-            return trim(self::$prefix.$property, '_');
-        }, $pseudoQuery);
-    }
-
-    /**
      * Wywołuje i loguje zapytania
      */
-    private static function wrapQuery($sql, array $values, $callback)
+    private function wrapQuery($sql, array $values, $callback)
     {
-        $sql = self::bindTableName($sql);
+        # dodaje prefix do każdego wyrazu zaczynającego się od ::
+        $sql = preg_replace_callback('/::([a-z_]+)/', function ($matches) {
+            return trim($this->prefix.$matches[1], '_');
+        }, $sql);
 
-        Logger::query(trim(sprintf("%s $sql",
-            self::$pdo->inTransaction() ? '(TRANSACTION) ::' : ''
-        )), $values);
+        Container::get('logger')->query(
+            ($this->pdo->inTransaction() ? '(TRANSACTION) :: ' : '').$sql,
+            $values
+        );
 
         try {
-            $statement = self::$pdo->prepare($sql);
+            $statement = $this->pdo->prepare($sql);
             $statement->execute($values);
             $result = $callback($statement);
         } catch (PDOException $exception) {
-            throw new Exception(
-                sprintf("Query: %s; Params: %s", $sql, json_encode($values, JSON_PRETTY_PRINT)),
-                0,
-                $exception
+            $message = sprintf(
+                "Query: %s; Params: %s",
+                $sql, json_encode($values, JSON_PRETTY_PRINT)
             );
+            throw new Exception($message, 0, $exception);
         }
         $statement->closeCursor();
 

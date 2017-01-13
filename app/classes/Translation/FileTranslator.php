@@ -1,21 +1,18 @@
 <?php
 
-namespace GC;
+namespace GC\Translation;
 
-class Translator
+use GC\Disc;
+
+class FileTranslator
 {
-    private static $instance;
-
     public $refresh = false;
     public $translations = [];
-    public $translationFile = '';
+    public $translationPath = '';
 
-    private function __construct()
+    public function __construct($translationPath)
     {
-        $folder = getConfig()['translator']['folder'];
-        $lang = getClientLang();
-
-        $this->translationPath = "$folder/$lang.json";
+        $this->translationPath = $translationPath;
 
         if (is_readable($this->translationPath)) {
             $json = file_get_contents($this->translationPath);
@@ -27,26 +24,13 @@ class Translator
     {
         if ($this->refresh) {
             $json = json_encode($this->translations, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-            createFile($this->translationPath);
+            Disc::makeFile($this->translationPath);
             file_put_contents($this->translationPath, $json);
         }
     }
 
-    public static function getInstance()
-    {
-        if (self::$instance === null) {
-            self::$instance = new static();
-        }
-
-        return self::$instance;
-    }
-
     public function translate($text, array $params = [])
     {
-        if (!getConfig()['translator']['enabled']) {
-            return vsprintf($text, $params);
-        }
-
         if (!isset($this->translations[$text])) {
             $this->translations[$text] = $text;
             $this->refresh = true;

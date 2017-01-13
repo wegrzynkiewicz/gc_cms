@@ -13,7 +13,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     data-target="#addModal"
                     class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
-                    <?=trans('Dodaj zakładkę')?>
+                    <?=$trans('Dodaj zakładkę')?>
                 </button>
             </div>
             <h1><?=($headTitle)?></h1>
@@ -26,7 +26,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 <div class="row">
     <div class="col-lg-12">
         <form id="sortableForm" action="" method="post">
-            <h3><?=trans('Zakładki')?></h3>
+            <h3><?=$trans('Zakładki')?></h3>
 
             <div id="items"></div>
 
@@ -48,7 +48,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=trans("Dodaj nową zakładkę")?>
+                    <?=$trans("Dodaj nową zakładkę")?>
                 </h2>
             </div>
             <div class="modal-body">
@@ -59,10 +59,10 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <?=trans('Anuluj')?>
+                    <?=$trans('Anuluj')?>
                 </button>
                 <button type="submit" value="" class="btn btn-success btn-ok">
-                    <?=trans('Dodaj')?>
+                    <?=$trans('Dodaj')?>
                 </button>
             </div>
         </form>
@@ -80,17 +80,17 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=trans("Edytujesz zakładkę")?>
+                    <?=$trans("Edytujesz zakładkę")?>
                 </h2>
             </div>
             <div id="editModalContent" class="modal-body">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <?=trans('Anuluj')?>
+                    <?=$trans('Anuluj')?>
                 </button>
                 <button type="submit" value="" class="btn btn-success btn-ok">
-                    <?=trans('Zapisz')?>
+                    <?=$trans('Zapisz')?>
                 </button>
             </div>
         </form>
@@ -109,19 +109,19 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=trans("Czy na pewno usunąć?")?>
+                    <?=$trans("Czy na pewno usunąć?")?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=trans("Czy jesteś pewien, że chcesz usunąć zakładkę")?>
+                <?=$trans("Czy jesteś pewien, że chcesz usunąć zakładkę")?>
                 <span id="deleteName" style="font-weight:bold; color:red;"></span>?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <?=trans('Anuluj')?>
+                    <?=$trans('Anuluj')?>
                 </button>
                 <button type="submit" class="btn btn-danger btn-ok">
-                    <?=trans('Usuń')?>
+                    <?=$trans('Usuń')?>
                 </button>
             </div>
         </form>

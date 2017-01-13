@@ -12,6 +12,6 @@ GC\Model\Page::insert([
     'frame_id' => $frame_id,
 ]);
 
-setNotice(trans('Nowa strona "%s" została utworzona.', [$_POST['name']]));
+setNotice($trans('Nowa strona "%s" została utworzona.', [$_POST['name']]));
 
 GC\Response::redirect($breadcrumbs->getLastUrl());

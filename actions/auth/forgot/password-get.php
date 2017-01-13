@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = trans("Zapomniałem hasła");
+$headTitle = $trans("Zapomniałem hasła");
 
 require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
 
@@ -30,14 +30,14 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                             ])?>
 
                             <button type="submit" class="btn btn-lg btn-success btn-block">
-                                <?=trans('Wyślij nowe hasło')?>
+                                <?=$trans('Wyślij nowe hasło')?>
                             </button>
 
                             <div class="btn-group btn-group-justified" style="margin-top:5px">
                                 <a href="<?=GC\Url::make("/")?>" class="btn btn-link">
-                                    <?=trans('Przejdź na stronę główną')?></a>
+                                    <?=$trans('Przejdź na stronę główną')?></a>
                                 <a href="<?=GC\Url::make("/auth/login")?>" class="btn btn-link">
-                                    <?=trans('Wróć do logowania')?></a>
+                                    <?=$trans('Wróć do logowania')?></a>
                             </div>
 
                         </form>
@@ -61,8 +61,8 @@ $(function () {
         },
         messages: {
             login: {
-                required: "<?=trans('Wprowadź adres e-mail')?>",
-                email: "<?=trans('Adres e-mail jest nieprawidłowy')?>"
+                required: "<?=$trans('Wprowadź adres e-mail')?>",
+                email: "<?=$trans('Adres e-mail jest nieprawidłowy')?>"
             }
         },
     });

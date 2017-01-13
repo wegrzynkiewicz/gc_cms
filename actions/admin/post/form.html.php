@@ -80,11 +80,11 @@ $(function () {
         },
         messages: {
             name: {
-                required: "<?=trans('Nazwa wpisu jest wymagana')?>"
+                required: "<?=$trans('Nazwa wpisu jest wymagana')?>"
             },
             publication_datetime: {
-                required: "<?=trans('Data publikacji jest wymagana')?>",
-                date: "<?=trans('Data publikacji musi być prawidłową datą w formacie YYYY-MM-DD HH:MM:SS')?>",
+                required: "<?=$trans('Data publikacji jest wymagana')?>",
+                date: "<?=$trans('Data publikacji musi być prawidłową datą w formacie YYYY-MM-DD HH:MM:SS')?>",
             },
         },
     });

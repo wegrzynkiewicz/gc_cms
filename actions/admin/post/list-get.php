@@ -1,6 +1,6 @@
 <?php
 
-$posts = GC\Model\Post\Post::selectAllWithFrames();
+$posts = GC\Model\Post\Post::selectWithFrames()->fetchByPrimaryKey();
 $nodes = GC\Model\Post\Node::selectAllForTaxonomyTree();
 $taxonomies = GC\Model\Post\Taxonomy::select()
     ->equals('lang', $_SESSION['lang']['editor'])
@@ -26,7 +26,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             <div class="btn-toolbar pull-right">
                 <a href="<?=GC\Url::mask('/new')?>" type="button" class="btn btn-success btn-md">
                     <i class="fa fa-plus fa-fw"></i>
-                    <?=trans('Dodaj nowy wpis')?>
+                    <?=$trans('Dodaj nowy wpis')?>
                 </a>
             </div>
             <h1><?=($headTitle)?></h1>
@@ -40,23 +40,23 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="col-md-12">
         <div class="simple-box">
             <?php if (empty($posts)): ?>
-                <?=trans('Nie znaleziono żadnych wpisów w języku: ')?>
+                <?=$trans('Nie znaleziono żadnych wpisów w języku: ')?>
                 <?=GC\Render::action('/admin/parts/language.html.php')?>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">
                     <thead>
                         <tr>
                             <th style="width:1px">
-                                <?=trans('Zdjęcie')?>
+                                <?=$trans('Zdjęcie')?>
                             </th>
                             <th>
-                                <?=trans('Nazwa wpisu')?>
+                                <?=$trans('Nazwa wpisu')?>
                             </th>
                             <th>
-                                <?=trans('Data i czas publikacji')?>
+                                <?=$trans('Data i czas publikacji')?>
                             </th>
                             <th>
-                                <?=trans('Podziały')?>
+                                <?=$trans('Podziały')?>
                             </th>
                             <th class="text-right"></th>
                         </tr>
@@ -86,19 +86,19 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=trans("Czy na pewno usunąć?")?>
+                    <?=$trans("Czy na pewno usunąć?")?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=trans("Czy jesteś pewien, że chcesz usunąć wpis")?>
+                <?=$trans("Czy jesteś pewien, że chcesz usunąć wpis")?>
                 <span id="post_name" style="font-weight:bold; color:red;"></span>?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <?=trans('Anuluj')?>
+                    <?=$trans('Anuluj')?>
                 </button>
                 <button type="submit" class="btn btn-danger btn-ok">
-                    <?=trans('Usuń')?>
+                    <?=$trans('Usuń')?>
                 </button>
             </div>
         </form>
@@ -115,7 +115,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
         });
         $('[data-table]').DataTable({
             order: [[2, 'desc']],
-            iDisplayLength: <?=$config['dataTable']['iDisplayLength']?>,
+            iDisplayLength: <?=GC\Container::get('config')['dataTable']['iDisplayLength']?>,
         });
     });
 </script>

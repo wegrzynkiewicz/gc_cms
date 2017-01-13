@@ -22,7 +22,7 @@
                         'name' => 'type',
                         'label' => 'Typ pola',
                         'help' => 'Typ pola określa jego wygląd i zachowanie. Typu nie można później zmienić.',
-                        'options' => $config['formFieldTypes'],
+                        'options' => GC\Container::get('config')['formFieldTypes'],
                         'firstOption' => 'Wybierz typ pola',
                     ])?>
                 <?php endif ?>
@@ -31,7 +31,7 @@
             <div class="simple-box">
                 <div id="fieldType">
                     <span class="text-muted">
-                        <?=trans('Wybierz typ pola')?>
+                        <?=$trans('Wybierz typ pola')?>
                     </span>
                 </div>
             </div>
@@ -77,10 +77,10 @@ $(function () {
         },
         messages: {
             name: {
-                required: "<?=trans('Nazwa pola jest wymagana')?>"
+                required: "<?=$trans('Nazwa pola jest wymagana')?>"
             },
             type: {
-                required: "<?=trans('Wybierz typ pola formularza')?>"
+                required: "<?=$trans('Wybierz typ pola formularza')?>"
             }
         },
     });

@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = trans('Dodawanie nowego pola');
+$headTitle = $trans('Dodawanie nowego pola');
 $breadcrumbs->push($request->path, $headTitle);
 
 $refreshUrl = GC\Url::mask('/types');

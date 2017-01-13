@@ -1,14 +1,14 @@
 <?php
 
 $groups = isset($_POST['groups']) ? $_POST['groups'] : [];
-$password = GC\Auth\Password::random($config['password']['minLength']);
+$password = GC\Auth\Password::random(GC\Container::get('config')['password']['minLength']);
 
 $staff_id = GC\Model\Staff\Staff::insertWithGroups([
     'name' => $_POST['name'],
     'password' => GC\Auth\Password::hash($password),
     'email' => $_POST['email'],
     'avatar' => $_POST['avatar'],
-    'lang' => $config['lang']['clientDefault'],
+    'lang' => GC\Container::get('config')['lang']['clientDefault'],
     'force_change_password' => 1,
 ], $groups);
 

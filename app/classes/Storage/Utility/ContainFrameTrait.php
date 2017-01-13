@@ -5,7 +5,7 @@ namespace GC\Storage\Utility;
 use GC\Assert;
 use GC\Model\Module\Frame;
 use GC\Model\Module\Module;
-use GC\Storage\Database;
+use GC\Container;
 
 /**
  * Zbiór pomocniczych metod dla wszystkich (stron) posiadających rusztowanie
@@ -18,12 +18,12 @@ trait ContainFrameTrait
     /**
      * Pobiera wszystkie (strony) z ich rusztowaniami
      */
-    public static function selectAllWithFrames()
+    public static function selectWithFrames()
     {
-        $sql = self::sql("SELECT * FROM ::table AS b JOIN ::frames AS f USING(frame_id) WHERE ::lang ORDER BY f.name ASC");
-        $rows = Database::fetchByKey($sql, [], static::$primary);
-
-        return $rows;
+        return static::select()
+            ->from('::table JOIN ::frames USING(frame_id)')
+            ->equals('lang', $_SESSION['lang']['editor'])
+            ->sort('name', 'ASC');
     }
 
     /**
@@ -33,7 +33,7 @@ trait ContainFrameTrait
     {
         Assert::column($column);
         $sql = self::sql("SELECT ::primary, {$column} FROM ::table AS b JOIN ::frames AS f USING(frame_id) WHERE ::lang ORDER BY f.name ASC");
-        $map = Database::fetchByMap($sql, [], static::$primary, $column);
+        $map = Container::get('database')->fetchByMap($sql, [], static::$primary, $column);
 
         return $map;
     }
@@ -45,7 +45,7 @@ trait ContainFrameTrait
     {
         # pobierz dane rusztowania dla (strony) o id podstawowego
         $sql = self::sql("SELECT * FROM ::table AS b JOIN ::frames AS f USING(frame_id) WHERE ::primary = ? LIMIT 1");
-        $row = Database::fetch($sql, [intval($primary_id)]);
+        $row = Container::get('database')->fetch($sql, [intval($primary_id)]);
 
         return $row;
     }

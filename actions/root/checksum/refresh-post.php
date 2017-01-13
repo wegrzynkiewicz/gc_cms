@@ -11,5 +11,5 @@ GC\Model\Checksum::insert([
     'hash' => $hash,
 ]);
 
-setNotice(trans('Plik "%s" został odświeżony.', [$file]));
+setNotice($trans('Plik "%s" został odświeżony.', [$file]));
 GC\Response::redirect($breadcrumbs->getLastUrl());

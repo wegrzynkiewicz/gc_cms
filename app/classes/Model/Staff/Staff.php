@@ -5,10 +5,10 @@ namespace GC\Model\Staff;
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\ColumnTrait;
 use GC\Storage\Utility\PrimaryTrait;
-use GC\Storage\Database;
 use GC\Url;
 use GC\Logger;
 use GC\Response;
+use GC\Container;
 use RuntimeException;
 
 class Staff extends AbstractModel
@@ -28,11 +28,11 @@ class Staff extends AbstractModel
 
         $this->permissions = $permissions;
 
-        $config = getConfig();
+        $config = Container::get('config');
 
         # jeżeli w sesji nie ma języka edytora wtedy ustaw go z configa
         if (!isset($_SESSION['lang']['editor'])) {
-            $_SESSION['lang']['editor'] = $config['lang']['editorDefault'];
+            $_SESSION['lang']['editor'] = Container::get('config')['lang']['editorDefault'];
         }
 
         # ustawienie jezyka panelu admina
@@ -41,7 +41,7 @@ class Staff extends AbstractModel
         # jeżeli czas trwania sesji minął
         if (time() > $_SESSION['staff']['sessionTimeout']) {
             unset($_SESSION['staff']);
-            Logger::logout("Session timeout");
+            Container::get('logger')->logout("Session timeout");
             Response::redirect('/auth/session-timeout');
         }
 
@@ -52,7 +52,7 @@ class Staff extends AbstractModel
             Response::redirect('/auth/force-change-password');
         }
 
-        Logger::auth(sprintf("%s <%s>", $data['name'], $data['email']));
+        Container::get('logger')->auth(sprintf("%s <%s>", $data['name'], $data['email']));
     }
 
     /**
@@ -61,7 +61,7 @@ class Staff extends AbstractModel
     public function redirectIfUnauthorized(array $permissions = [])
     {
         if (!$this->hasPermissions($permissions)) {
-            Logger::deny("Not authorized", $permissions);
+            Container::get('logger')->deny("Not authorized", $permissions);
             $perm = count($permissions) > 0 ? array_shift($permissions) : 'default';
             Response::redirect("/admin/account/deny/{$perm}");
         }
@@ -91,7 +91,7 @@ class Staff extends AbstractModel
     public static function getAvatarUrl($staff, $size)
     {
         if (empty($staff['avatar'])) {
-            return Url::assets(getConfig()['avatar']['noAvatarUrl']);
+            return Url::assets(\GC\Container::get('config')['avatar']['noAvatarUrl']);
         }
 
         return Thumb::make($staff['avatar'], $size, $size);
@@ -103,7 +103,7 @@ class Staff extends AbstractModel
     public static function createByStaffId($staff_id)
     {
         # pobierz pracownika z bazy danych
-        $data = static::selectByPrimaryId($staff_id);
+        $data = static::fetchByPrimaryId($staff_id);
 
         # jezeli taki uzytkownik zostal usuniety, albo nie istnieje wtedy wyjątek
         if (!$data) {
@@ -127,7 +127,7 @@ class Staff extends AbstractModel
     public static function refreshSessionTimeout()
     {
         # aktualizujemy czas do automatycznego wylogowania
-        $_SESSION['staff']['sessionTimeout'] = time() + getConfig()['session']['staffTimeout'];
+        $_SESSION['staff']['sessionTimeout'] = time() + \GC\Container::get('config')['session']['staffTimeout'];
     }
 
     /**
@@ -138,7 +138,7 @@ class Staff extends AbstractModel
         # jeżeli sesja nie istnieje wtedy przekieruj na logowanie
         if (!isset($_SESSION['staff']) or !isset($_SESSION['staff']['entity'])) {
             unset($_SESSION['staff']);
-            Logger::logout("Session does not exists");
+            Container::get('logger')->logout("Session does not exists");
             Response::redirect('/auth/login');
         }
 
@@ -148,7 +148,7 @@ class Staff extends AbstractModel
             return static::createByStaffId($_SESSION['staff']['entity']['staff_id']);
         } catch (RuntimeException $exception) {
             unset($_SESSION['staff']);
-            Logger::logout("Not found user");
+            Container::get('logger')->logout("Not found user");
             Response::redirect('/auth/login');
         }
     }

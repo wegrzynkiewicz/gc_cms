@@ -20,7 +20,7 @@ class SessionHandler implements SessionHandlerInterface
 
     public function read($id)
     {
-        Logger::session($id);
+        Container::get('logger')->session($id);
 
         return Session::select()
             ->fields(['data'])

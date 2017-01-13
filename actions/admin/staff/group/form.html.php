@@ -14,22 +14,22 @@
 
                 <fieldset>
                     <legend>
-                        <?=trans('Uprawnienia grupy')?>
+                        <?=$trans('Uprawnienia grupy')?>
                     </legend>
 
                     <p>
-                        <?=trans('Każda grupa posiada indywidualne uprawnienia, które są identyczne dla każdego pracownika w tej grupie.')?>
-                        <?=trans('W przypadku gdy pracownik należy do wielu grup, uprawnienia te są łączone.')?>
+                        <?=$trans('Każda grupa posiada indywidualne uprawnienia, które są identyczne dla każdego pracownika w tej grupie.')?>
+                        <?=$trans('W przypadku gdy pracownik należy do wielu grup, uprawnienia te są łączone.')?>
                     </p>
 
-                    <?php foreach ($config['permissions'] as $perm => $label): ?>
+                    <?php foreach (GC\Container::get('config')['permissions'] as $perm => $label): ?>
                         <div class="checkbox">
                             <label>
                                 <input name="permissions[]"
                                     type="checkbox"
                                     <?=checked(in_array($perm, $permissions))?>
                                     value="<?=e($perm)?>">
-                                <?=trans($label)?>
+                                <?=$trans($label)?>
                             </label>
                         </div>
                     <?php endforeach ?>
@@ -56,7 +56,7 @@ $(function () {
         },
         messages: {
             name: {
-                required: "<?=trans('Nazwa grupy jest wymagana')?>"
+                required: "<?=$trans('Nazwa grupy jest wymagana')?>"
             }
         },
     });

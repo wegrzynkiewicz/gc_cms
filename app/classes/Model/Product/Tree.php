@@ -5,7 +5,7 @@ namespace GC\Model\Product;
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\ColumnTrait;
 use GC\Storage\Utility\TreeTrait;
-use GC\Storage\Database;
+use GC\Container;
 
 class Tree extends AbstractModel
 {

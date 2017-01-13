@@ -2,7 +2,7 @@
 
 <?php if (empty($images)): ?>
     <div class="text-center">
-        <?=trans('Nie znaleziono zdjęć slajdera') ?>
+        <?=$trans('Nie znaleziono zdjęć slajdera') ?>
     </div>
 <?php else: ?>
     <div class="module-gallery-preview-row" data-gallery="photoswipe">

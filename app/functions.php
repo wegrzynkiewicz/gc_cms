@@ -56,19 +56,6 @@ function sqldate($time = null)
 }
 
 /**
- * Wyszukuje wszystkie pliki rekursywnie w katalogu
- */
-function rglob($pattern, $flags = 0)
-{
-    $files = glob($pattern, $flags);
-    foreach (glob(dirname($pattern).'/*', GLOB_ONLYDIR|GLOB_NOSORT) as $dir) {
-        $files = array_merge($files, rglob($dir.'/'.basename($pattern), $flags));
-    }
-
-    return $files;
-}
-
-/**
  *
  */
 function shiftSegmentAsInteger()
@@ -95,16 +82,6 @@ function inputValue($postName, $default = '')
 }
 
 /**
- * Zwraca obiekt config; przydatne w miejscach niedostępnych
- */
-function getConfig()
-{
-    global $config;
-
-    return $config;
-}
-
-/**
  * Zwraca kod jezyka, aktualnie uzywanego przez klienta
  */
 function getClientLang()
@@ -117,7 +94,7 @@ function getClientLang()
         return $_SESSION['lang']['staff'];
     }
 
-    return getConfig()['lang']['clientDefault'];
+    return GC\Container::get('config')['lang']['clientDefault'];
 }
 
 function transDateTime($dateTime)
@@ -161,122 +138,6 @@ function relativePath($absolutePath)
     } while ($documentRoot !== dirname($documentRoot));
 
     return $absolutePath;
-}
-
-/**
- * Tłumaczy wprowadzony ciąg na inny znaleziony w plikach tłumaczeń
- */
-function trans($text, array $params = [])
-{
-    return e(GC\Translator::getInstance()->translate($text, $params));
-}
-
-/**
- * Tworzy plik oraz katalogi, jeżeli ich brakuje
- */
-function createFile($filename, $mode = 0775)
-{
-    rmkdir(dirname($filename));
-    if (!file_exists($filename)) {
-        touch($filename);
-    }
-    chmod($filename, $mode);
-}
-
-/**
- * Usuwa katalogu oraz pliki i katalogi wewnątrz
- */
-function rrmdir($dir)
-{
-    if (is_dir($dir)) {
-        $objects = scandir($dir);
-        foreach ($objects as $object) {
-            if ($object != "." && $object != "..") {
-                $file = $dir.DIRECTORY_SEPARATOR.$object;
-                if (filetype($file) == "dir") {
-                    rrmdir($file);
-                } else {
-                    unlink($file);
-                }
-            }
-        }
-        reset($objects);
-        rmdir($dir);
-    }
-}
-
-/**
- * Tworzy rekursywnie katalogi
- */
-function rmkdir($dir, $mode = 0775)
-{
-    $path = '';
-    $dirs = explode('/', trim($dir, '/ '));
-
-    while (count($dirs)) {
-        $folder = array_shift($dirs);
-        $path .= $folder.'/';
-        if (!is_readable($path)) {
-            @mkdir($path, $mode);
-        }
-        @chmod($path, $mode);
-    }
-}
-
-/**
- * Zapisuje zadane dane do pliku w formie łatwego do odczytu pliku PHP
- */
-function exportDataToPHPFile($data, $file)
-{
-    if (!is_writable($file)) {
-        return;
-    }
-
-    rmkdir(dirname($cacheFile));
-
-    $content = "<?php\n\nreturn ".var_export($data, true);
-
-    return file_put_contents($file, $content);
-}
-
-/**
- *
- */
-function array_rebuild(array $array, $callback)
-{
-    $results = [];
-    foreach ($array as $key => $value) {
-        $results[$key] = $callback($value);
-    }
-
-    return $results;
-}
-
-/**
- * Dzieli tablice na $p równych tablic
- */
-function array_partition(array $list, $p)
-{
-    $listlen = count($list);
-    $partlen = floor($listlen / $p);
-    $partrem = $listlen % $p;
-    $partition = array();
-    $mark = 0;
-    for ($px = 0; $px < $p; $px++) {
-        $incr = ($px < $partrem) ? $partlen + 1 : $partlen;
-        $partition[$px] = array_slice($list, $mark, $incr);
-        $mark += $incr;
-    }
-
-    return $partition;
-}
-
-/**
- * Łączy macierz w jedną tablicę
- */
-function array_unchunk($array)
-{
-    return call_user_func_array('array_merge', $array);
 }
 
 /**
@@ -396,7 +257,7 @@ function curlReCaptcha()
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_POSTFIELDS => [
-                'secret' => getConfig()['reCaptcha']['secret'],
+                'secret' => GC\Container::get('config')['reCaptcha']['secret'],
                 'response' => $_POST['g-recaptcha-response'],
                 'remoteip' => $_SERVER['REMOTE_ADDR']
             ]
@@ -408,7 +269,7 @@ function curlReCaptcha()
         if ($response) {
             return json_decode($response, true);
         }
-        GC\Logger::curl($url.' '.curl_error($curl));
+        GC\Container::get('logger')->curl($url.' '.curl_error($curl));
     }
 
     return [

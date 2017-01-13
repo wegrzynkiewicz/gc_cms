@@ -12,27 +12,27 @@
 
                 <a href="<?=GC\Url::make("/post/node/{$node_id}")?>"
                     target="_blank"
-                    title="<?=trans('Podejrzyj ten węzeł')?>"
+                    title="<?=$trans('Podejrzyj ten węzeł')?>"
                     class="btn btn-primary btn-xs">
                     <i class="fa fa-search fa-fw"></i>
-                    <?=trans("Podgląd")?>
+                    <?=$trans("Podgląd")?>
                 </a>
 
                 <a href="<?=GC\Url::mask("/{$node_id}/module/list")?>"
-                    title="<?=trans('Wyświetl moduły węzła')?>"
+                    title="<?=$trans('Wyświetl moduły węzła')?>"
                     class="btn btn-success btn-xs">
                     <i class="fa fa-file-text-o fa-fw"></i>
-                    <?=trans("Moduły")?>
+                    <?=$trans("Moduły")?>
                 </a>
 
                 <a data-toggle="modal"
                     data-id="<?=e($node_id)?>"
                     data-name="<?=e($node['name'])?>"
                     data-target="#deleteModal"
-                    title="<?=trans('Usuń węzeł')?>"
+                    title="<?=$trans('Usuń węzeł')?>"
                     class="btn btn-danger btn-xs">
                     <i class="fa fa-times fa-fw"></i>
-                    <?=trans('Usuń')?>
+                    <?=$trans('Usuń')?>
                 </a>
             </div>
 

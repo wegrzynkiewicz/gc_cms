@@ -1,6 +1,6 @@
 <?php
 
-$field = GC\Model\Form\Field::selectByPrimaryId($field_id);
+$field = GC\Model\Form\Field::fetchByPrimaryId($field_id);
 $type = $field['type'];
 
 $settings = json_decode($field['settings'], true);
@@ -13,6 +13,6 @@ GC\Model\Form\Field::updateByPrimaryId($field_id, [
     'settings' => json_encode($settings, JSON_UNESCAPED_UNICODE),
 ]);
 
-setNotice(trans('Pole "%s" zostało zaktualizowane.', [$field['name']]));
+setNotice($trans('Pole "%s" zostało zaktualizowane.', [$field['name']]));
 
 GC\Response::redirect($breadcrumbs->getLastUrl());

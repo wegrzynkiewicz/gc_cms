@@ -5,7 +5,7 @@ namespace GC\Model\Post;
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\ColumnTrait;
 use GC\Storage\Utility\PrimaryTrait;
-use GC\Storage\Database;
+use GC\Container;
 
 class Taxonomy extends AbstractModel
 {

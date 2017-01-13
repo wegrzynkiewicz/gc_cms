@@ -1,6 +1,6 @@
 <?php
 
-$module = GC\Model\Module\Module::selectByPrimaryId($module_id);
+$module = GC\Model\Module\Module::fetchByPrimaryId($module_id);
 $settings = json_decode($module['settings'], true);
 
 if (!isset($settings['gutter'])) {

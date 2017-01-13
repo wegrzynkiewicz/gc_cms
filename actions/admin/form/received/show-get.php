@@ -1,11 +1,11 @@
 <?php
 
-$message = GC\Model\Form\Sent::selectByPrimaryId($sent_id);
+$message = GC\Model\Form\Sent::fetchByPrimaryId($sent_id);
 $data = json_decode($message['data'], true);
 $name = reset($data);
 $localization = json_decode($message['localization'], true);
 
-$headTitle = trans('Wyświetl wiadomość');
+$headTitle = $trans('Wyświetl wiadomość');
 $breadcrumbs->push($request->path, $headTitle);
 
 $_POST = $message;
@@ -20,7 +20,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     type="button"
                     class="btn btn-danger btn-md">
                     <i class="fa fa-trash fa-fw"></i>
-                    <?=trans('Usuń wiadomość')?>
+                    <?=$trans('Usuń wiadomość')?>
                 </a>
             </div>
             <h1><?=($headTitle)?></h1>
@@ -34,7 +34,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
     <div class="col-lg-12">
         <form action="" method="post" id="form" class="form-horizontal">
 
-            <h3><?=trans('Treść formularza')?></h3>
+            <h3><?=$trans('Treść formularza')?></h3>
             <table class="table table-bordered vertical-middle simple-box">
                 <tbody>
                     <?php foreach ($data as $label => $value): ?>
@@ -46,11 +46,11 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 </tbody>
             </table>
 
-            <h3><?=trans('Dane lokalizacyjne')?></h3>
+            <h3><?=$trans('Dane lokalizacyjne')?></h3>
             <table class="table table-bordered vertical-middle simple-box">
                 <tbody>
                     <tr>
-                        <td><?=trans('Data wysłania')?></td>
+                        <td><?=$trans('Data wysłania')?></td>
                         <td><?=sqldate()?></td>
                     </tr>
                     <tr>
@@ -58,7 +58,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                         <td><?=def($localization, 'ip')?></td>
                     </tr>
                     <tr>
-                        <td><?=trans('Kraj / Miasto')?></td>
+                        <td><?=$trans('Kraj / Miasto')?></td>
                         <td><?=def($localization, 'country', '').' / '.def($localization, 'city', '')?></td>
                     </tr>
                     <tr>
@@ -75,7 +75,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     'help' => 'Status wiadomości jest pomocny przy filtrowaniu wiadomości.',
                     'options' => array_map(function ($status) {
                         return $status['name'];
-                    }, $config['formStatuses']),
+                    }, GC\Container::get('config')['formStatuses']),
                 ])?>
             </div>
 

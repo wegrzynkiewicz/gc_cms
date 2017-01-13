@@ -19,9 +19,9 @@ GC\Model\Staff\Staff::updateByPrimaryId($user['staff_id'], [
 
 $_SESSION['staff'] = [
     'entity' => $user,
-    'sessionTimeout' => time() + $config['session']['staffTimeout']
+    'sessionTimeout' => time() + GC\Container::get('config')['session']['staffTimeout']
 ];
 
-setNotice(trans('Zostałeś zalogowany, a Twoje hasło zostało zresetowane.'));
+setNotice($trans('Zostałeś zalogowany, a Twoje hasło zostało zresetowane.'));
 
 GC\Response::redirect('/admin');

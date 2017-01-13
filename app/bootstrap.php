@@ -2,37 +2,49 @@
 
 /* Bootstapuje aplikację */
 
-define('START_TIME', microtime(true));
-
 require __DIR__.'/../vendor/autoload.php';
 require __DIR__.'/config/config.php';
+
+# serwis logowania do pliku, jeżeli logowanie wyłączone wtedy utwórz atrapę
+GC\Container::set('logger',
+    $config['logger']['enabled']
+        ? new GC\Debug\FileLogger($config['logger']['folder'].date('Y-m-d').'.log')
+        : new GC\Debug\NullLogger()
+);
+
+# serwis translacji tekstu, jeżeli translacja wyłączona wtedy utwórz atrapę
+GC\Container::registerLazyService('translator', function () use ($config) {
+    return $config['translator']['enabled']
+        ? new GC\Translation\FileTranslator($config['translator']['folder'].getClientLang().'.json')
+        : new GC\Translation\NullTranslator();
+});
+
+# serwis bazodanowy, łączy się z bazą tylko jeżeli jest to potrzebne
+GC\Container::registerLazyService('database', function () use ($config) {
+    $config = $config['database'];
+    $pdo = new \PDO(
+        $config['dns'],
+        $config['username'],
+        $config['password']
+    );
+    $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+    $database = new GC\Storage\Database($pdo);
+    $database->prefix = $config['prefix'];
+
+    GC\Container::get('logger')->database($config['dns']);
+
+    return $database;
+});
+
+$trans = function ($text, array $params = []) {
+    return GC\Container::get('translator')->translate($text, $params);
+};
+
+//require __DIR__.'/error-handler.php';
 require __DIR__.'/functions.php';
-require __DIR__.'/error-handler.php';
 require __DIR__.'/redirects.php';
 
-error_reporting($config['debug']['error_reporting']); # raportuje napotkane błędy
-
-ini_set('display_errors', $config['debug']['display_errors'] ? 1 : 0); # włącza wyświetlanie błędów
-ini_set('display_startup_errors', $config['debug']['display_errors'] ? 1 : 0); # włącza wyświetlanie startowych błędów
-ini_set('error_log', $config['logger']['folder'].'/'.date('Y-m-d').'.error.log'); # zmienia ścieżkę logowania błędów
-ini_set('max_execution_time', 300); # określa maksymalny czas trwania skryptu
-ini_set('session.use_trans_sid', 0);
-ini_set('session.use_strict_mode', 1);
-ini_set('session.cookie_httponly', 1); # ustawia ciastko tylko do odczytu, nie jest możliwe odczyt document.cookie w js
-ini_set('session.use_cookies', 1); # do przechowywania sesji ma użyć ciastka
-ini_set('session.use_only_cookies', 1); # do przechowywania sesji ma używać tylko ciastka!
-
-session_name($config['session']['cookieName']); # zmiana nazwy ciastka sesyjnego
-session_set_save_handler(new GC\SessionHandler(), true);
 session_start();
-
-date_default_timezone_set($config['timezone']); # ustawienie domyślnej strefy czasowej
-
-chdir('..'); # zmienia bieżący katalog o jeden poziom wyżej niż web root
-
-header('X-Content-Type-Options: nosniff'); # Nie pozwala przeglądarce na zgadywanie typu mime nieznanego pliku
-header('X-XSS-Protection: 1; mode=block'); # ustawienie ochrony przeciw XSS, przeglądarka sama wykrywa XSSa
-header_remove('X-Powered-By'); # usuwa informacje o wykorzystywanej wersji php
 
 if (!isset($_SESSION['lang'])) {
     $_SESSION['lang'] = [];
@@ -40,31 +52,17 @@ if (!isset($_SESSION['lang'])) {
 
 $request = new GC\Request(); # tworzy obiekt reprezentujący żądanie
 
-GC\Storage\Database::initialize($config['db']);
-GC\Response::setMimeType('text/html');
-
-# jeżeli strona jest w budowie wtedy zwróć komunikat o budowie, chyba, że masz uprawnienie
-if ($config['debug']['inConstruction']) {
-    if (isset($_REQUEST['you-shall-not-pass'])) {
-        $_SESSION['allowInConstruction'] = true;
-    }
-    if (!isset($_SESSION['allowInConstruction'])) {
-        $constructionPath = TEMPLATE_PATH.'/errors/construction.html.php';
-        if (is_readable($constructionPath)) {
-            return require $constructionPath;
-        }
-        http_response_code(503);
-    }
-}
+GC\Container::set('config', $config);
+GC\Container::set('request', $request);
 
 # sprawdzana jest weryfikacja csrf tokenu, chroni przed spreparowanymi żądaniami
 // if (!$request->isMethod('GET') and isset($_SESSION['csrf_token'])) {
 //     if (isset($_SERVER['HTTP_X_CSRFTOKEN']) && $_SERVER['HTTP_X_CSRFTOKEN'] === $_SESSION['csrf_token']) {
-//         GC\Logger::csrf("Token verified via header");
+//         GC\Container::get('logger')->csrf("Token verified via header");
 //     } elseif (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
-//         GC\Logger::csrf("Token verified via request");
+//         GC\Container::get('logger')->csrf("Token verified via request");
 //     } else {
-//         GC\Logger::csrf("Invalid token");
+//         GC\Container::get('logger')->csrf("Invalid token");
 //         return http_response_code(403);
 //     }
 // }
@@ -74,8 +72,7 @@ if (!isset($_SESSION['csrf_token'])) {
 }
 
 GC\Render::$extract = [
-    'config' => $config,
-    'request' => $request,
+    'trans' => $trans,
 ];
 
 GC\Render::$shortcuts = [
@@ -87,7 +84,7 @@ GC\Render::$shortcuts = [
 
 require __DIR__.'/routing.php';
 
-GC\Logger::response(sprintf('%s :: ExecutionTime: %s',
+GC\Container::get('logger')->response(sprintf('%s :: ExecutionTime: %s',
     http_response_code(),
-    (microtime(true) - START_TIME)
+    (microtime(true))
 ));

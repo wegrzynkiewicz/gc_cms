@@ -35,7 +35,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     data-target="#refreshAllModal"
                     class="btn btn-primary">
                     <i class="fa fa-refresh fa-fw"></i>
-                    <?=trans('Odśwież wszystkie')?>
+                    <?=$trans('Odśwież wszystkie')?>
                 </button>
             </div>
             <h1><?=($headTitle)?></h1>
@@ -71,18 +71,18 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=trans("Czy na pewno odświeżyć?")?>
+                    <?=$trans("Czy na pewno odświeżyć?")?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=trans("Czy jesteś pewien, że chcesz odświeżyć wszystkie pliki?")?>
+                <?=$trans("Czy jesteś pewien, że chcesz odświeżyć wszystkie pliki?")?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <?=trans('Anuluj')?>
+                    <?=$trans('Anuluj')?>
                 </button>
                 <button type="submit" class="btn btn-primary btn-ok">
-                    <?=trans('Odśwież')?>
+                    <?=$trans('Odśwież')?>
                 </button>
             </div>
         </form>
@@ -101,19 +101,19 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=trans("Czy na pewno odświeżyć?")?>
+                    <?=$trans("Czy na pewno odświeżyć?")?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=trans("Czy jesteś pewien, że chcesz odświeżyć plik")?>
+                <?=$trans("Czy jesteś pewien, że chcesz odświeżyć plik")?>
                 <span id="name" style="font-weight:bold; color:blue;"></span>?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <?=trans('Anuluj')?>
+                    <?=$trans('Anuluj')?>
                 </button>
                 <button type="submit" class="btn btn-primary btn-ok">
-                    <?=trans('Odśwież')?>
+                    <?=$trans('Odśwież')?>
                 </button>
             </div>
         </form>

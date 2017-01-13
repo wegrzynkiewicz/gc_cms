@@ -4,13 +4,6 @@
 
 $path = $request->path;
 
-# jeżeli adres bez ścieżki wtedy załaduj akcję główną
-if (empty(trim($path, '/'))) {
-    GC\Logger::routing("Homepage");
-
-    return require ACTIONS_PATH.'/homepage.php';
-}
-
 $_SEGMENTS = explode('/', trim($path, '/'));
 
 # sprawdza pierwszy segment w adresie czy nie jest jednym z dostępnych języków
@@ -25,19 +18,38 @@ if (strlen($_SEGMENTS[0]) == 2) {
     }
 }
 
+# jeżeli adres bez ścieżki wtedy załaduj akcję główną
+if (empty(trim($path, '/'))) {
+    GC\Container::get('logger')->routing("Homepage");
+
+    return require ACTIONS_PATH.'/homepage.php';
+}
+
+# jeżeli strona jest w budowie wtedy zwróć komunikat o budowie, chyba, że masz uprawnienie
+if ($config['debug']['inConstruction']) {
+    if (isset($_REQUEST['you-shall-not-pass'])) {
+        $_SESSION['allowInConstruction'] = true;
+    }
+    if (!isset($_SESSION['allowInConstruction'])) {
+        http_response_code(503);
+
+        return require TEMPLATE_PATH.'/errors/construction.html.php';
+    }
+}
+
 # jeżeli jedyny segment okazał się być językowym prefiksem wtedy do głowej
 if (count($_SEGMENTS) === 0) {
-    GC\Logger::routing("Homepage with lang");
+    GC\Container::get('logger')->routing("Homepage with lang");
 
     return require ACTIONS_PATH."/homepage-{$request->method}.php";
 }
 
 # jeżeli któryś z niestandardowych rewritów okaże się pasować, wtedy przekieruj na właściwy adres
 $fullRequest = rtrim("{$path}?{$request->query}", '?');
-foreach ($config['rewrites'] as $pattern => $destination) {
+foreach (GC\Container::get('config')['rewrites'] as $pattern => $destination) {
     if (preg_match($pattern, $fullRequest)) {
         $result = preg_replace($pattern, $destination, $fullRequest);
-        GC\Logger::routing("Custom rewrite :: $result", [$fullRequest, $pattern, $destination]);
+        GC\Container::get('logger')->routing("Custom rewrite :: $result", [$fullRequest, $pattern, $destination]);
         GC\Response::redirect($result, 301); # 301 Moved Permanently
     }
 }
@@ -51,14 +63,14 @@ while (count($_SEGMENTS) > 0) {
     # jeżeli istnieje plik "import" to załaduj, ale nie kończ pętli
     $file = "{$path}/{$segment}/_import.php";
     if (file_exists($file)) {
-        GC\Logger::import(relativePath($file));
+        GC\Container::get('logger')->import(relativePath($file));
         require $file;
     }
 
     # jeżeli istnieje plik z metodą requesta na początku, załaduj
     $file = "{$path}/{$segment}-{$request->method}.php";
     if (file_exists($file)) {
-        GC\Logger::routing("Nested with method :: ".relativePath($file));
+        GC\Container::get('logger')->routing("Nested with method :: ".relativePath($file));
 
         return require $file;
     }
@@ -66,7 +78,7 @@ while (count($_SEGMENTS) > 0) {
     # jeżeli istnieje plik, wtedy załaduj
     $file = "{$path}/{$segment}.php";
     if (file_exists($file)) {
-        GC\Logger::routing("Nested :: ".relativePath($file));
+        GC\Container::get('logger')->routing("Nested :: ".relativePath($file));
 
         return require $file;
     }
@@ -81,7 +93,7 @@ while (count($_SEGMENTS) > 0) {
     # jeżeli nie istnieje akcja to spróbuj załadować plik start
     $file = "{$path}/{$segment}/start.php";
     if (file_exists($file)) {
-        GC\Logger::routing("Start :: ".relativePath($file));
+        GC\Container::get('logger')->routing("Start :: ".relativePath($file));
 
         return require $file;
     }
@@ -98,7 +110,7 @@ $absoluteSlug = '/'.implode('/', $_SEGMENTS);
 # jeżeli istnieje niestandardowy plik w folderze z szablonem
 $customFile = TEMPLATE_PATH."/custom/{$slug}.html.php";
 if (file_exists($customFile)) {
-    GC\Logger::routing("Custom slug :: ".relativePath($customFile));
+    GC\Container::get('logger')->routing("Custom slug :: ".relativePath($customFile));
 
     return require $customFile;
 }
@@ -108,7 +120,7 @@ $id = intval(count($_SEGMENTS) === 0 ? $slug : array_shift($_SEGMENTS));
 
 # jeżeli ostatni parametr nie jest prawidłową liczbą
 if ($id <= 0) {
-    GC\Logger::routing("Error invalid ID :: 404");
+    GC\Container::get('logger')->routing("Error invalid ID :: 404");
 
     return require TEMPLATE_PATH.'/errors/404.html.php';
 }
@@ -116,12 +128,12 @@ if ($id <= 0) {
 # jeżeli istnieje niestandardowy plik w folderze z szablonem
 $customFile = TEMPLATE_PATH."/custom/{$id}.html.php";
 if (file_exists($customFile)) {
-    GC\Logger::routing("Custom id :: ".relativePath($customFile));
+    GC\Container::get('logger')->routing("Custom id :: ".relativePath($customFile));
 
     return require $customFile;
 }
 
 # jeżeli żaden plik nie pasuje, wtedy wyświetl błąd 404
-GC\Logger::routing("Endpoint error 404");
+GC\Container::get('logger')->routing("Endpoint error 404");
 
 return require TEMPLATE_PATH.'/errors/404.html.php';

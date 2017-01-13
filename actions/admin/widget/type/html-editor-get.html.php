@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = trans('Edycja widżetu formatowanego tekstu HTML "%s"', [$widget['name']]);
+$headTitle = $trans('Edycja widżetu formatowanego tekstu HTML "%s"', [$widget['name']]);
 $breadcrumbs->push($request->path, $headTitle);
 
 $_POST['content'] = $content;

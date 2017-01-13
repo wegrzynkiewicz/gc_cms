@@ -1,7 +1,7 @@
 <?php
 
-$user = GC\Model\Staff\Staff::selectByPrimaryId($staff_id);
-$headTitle = trans('Edytowanie pracownika "%s"', [$user['name']]);
+$user = GC\Model\Staff\Staff::fetchByPrimaryId($staff_id);
+$headTitle = $trans('Edytowanie pracownika "%s"', [$user['name']]);
 $breadcrumbs->push($request->path, $headTitle);
 
 $groups = array_keys(GC\Model\Staff\Group::select()
@@ -20,7 +20,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             <div class="btn-toolbar pull-right">
                 <a href="<?=GC\Url::mask("/{$staff_id}/force-change-password")?>" type="button" class="btn btn-success">
                     <i class="fa fa-unlock-alt fa-fw"></i>
-                    <?=trans('Wymuś zmianę hasła')?>
+                    <?=$trans('Wymuś zmianę hasła')?>
                 </a>
             </div>
             <h1><?=($headTitle)?></h1>

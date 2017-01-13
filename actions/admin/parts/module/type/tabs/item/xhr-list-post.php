@@ -4,7 +4,7 @@ $items = GC\Model\Module\Item::joinAllWithFrameByForeign($module_id);
 
 <?php if (empty($items)): ?>
     <div class="simple-box">
-        <?=trans('Nie znaleziono zakładek')?>
+        <?=$trans('Nie znaleziono zakładek')?>
     </div>
 <?php else: ?>
     <ol id="sortable" class="sortable">
@@ -22,19 +22,19 @@ $items = GC\Model\Module\Item::joinAllWithFrameByForeign($module_id);
                     </div>
                     <div class="pull-right">
                         <a href="<?=sprintf($_POST['moduleUrl'], $item_id   )?>"
-                            title="<?=trans('Wyświetl moduły zakładi')?>"
+                            title="<?=$trans('Wyświetl moduły zakładi')?>"
                             class="btn btn-success btn-xs">
                             <i class="fa fa-file-text-o fa-fw"></i>
-                            <?=trans("Moduły")?>
+                            <?=$trans("Moduły")?>
                         </a>
                         <a data-toggle="modal"
                             data-id="<?=e($item_id)?>"
                             data-name="<?=e($item['name'])?>"
                             data-target="#deleteModal"
-                            title="<?=trans('Usuń węzeł')?>"
+                            title="<?=$trans('Usuń węzeł')?>"
                             class="btn btn-danger btn-xs">
                             <i class="fa fa-times fa-fw"></i>
-                            <?=trans('Usuń')?>
+                            <?=$trans('Usuń')?>
                         </a>
                     </div>
                     <div class="clearfix"></div>

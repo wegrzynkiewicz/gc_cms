@@ -1,18 +1,18 @@
 <li>
     <a id="session-refresh" href="#"
-        title="<?=trans('Kliknij, aby odświeżyć czas')?>">
+        title="<?=$trans('Kliknij, aby odświeżyć czas')?>">
         <span class="hidden-xs">
-            <?=trans('Do końca: ')?>
+            <?=$trans('Do końca: ')?>
         </span>
         <i class="fa fa-clock-o fa-fw"></i>
-        <span id="session-countdown"><?=date("i:s", $config['session']['staffTimeout'])?></span>
+        <span id="session-countdown"><?=date("i:s", GC\Container::get('config')['session']['staffTimeout'])?></span>
     </a>
 
     <script>
         $(function() {
             var timeoutUrl = "<?=GC\Url::make('/auth/session-timeout')?>";
             var refreshUrl = "<?=GC\Url::make('/admin/account/session/refresh')?>";
-            var sessionTimeout = <?=e($config['session']['staffTimeout'])?>;
+            var sessionTimeout = <?=e(GC\Container::get('config')['session']['staffTimeout'])?>;
 
             var finalTime = new Date();
             finalTime.setSeconds(finalTime.getSeconds() + sessionTimeout);

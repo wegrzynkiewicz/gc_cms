@@ -1,5 +1,5 @@
 <?php
-$status = $config['formStatuses'][$message['status']];
+$status = GC\Container::get('config')['formStatuses'][$message['status']];
 ?>
 
 <tr class="<?=$status['class']?>">
@@ -8,7 +8,7 @@ $status = $config['formStatuses'][$message['status']];
     </td>
     <td>
         <span class="">
-            <?=trans($status['name'])?>
+            <?=$trans($status['name'])?>
         </span>
     </td>
     <td><?=e($message['sent_datetime'])?></td>
@@ -16,17 +16,17 @@ $status = $config['formStatuses'][$message['status']];
         <a href="<?=GC\Url::mask("/$sent_id/show")?>"
             class="btn btn-primary btn-sm">
             <i class="fa fa-search fa-fw"></i>
-            <?=trans('Podgląd')?>
+            <?=$trans('Podgląd')?>
         </a>
 
         <a data-toggle="modal"
             data-id="<?=e($sent_id)?>"
             data-name="<?=e($message['name'])?>"
             data-target="#deleteModal"
-            title="<?=trans('Usuń wiadomość')?>"
+            title="<?=$trans('Usuń wiadomość')?>"
             class="btn btn-danger btn-sm">
             <i class="fa fa-times fa-fw"></i>
-            <?=trans("Usuń")?>
+            <?=$trans("Usuń")?>
         </a>
     </td>
 </tr>

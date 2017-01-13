@@ -12,6 +12,6 @@ GC\Model\Post\Node::insertWithTaxonomyId([
     'frame_id' => $frame_id,
 ], $tax_id);
 
-setNotice(trans('Nowy węzeł "%s" dostał dodany do "%s".', [$_POST['name'], $taxonomy['name']]));
+setNotice($trans('Nowy węzeł "%s" dostał dodany do "%s".', [$_POST['name'], $taxonomy['name']]));
 
 GC\Response::redirect($breadcrumbs->getLastUrl());

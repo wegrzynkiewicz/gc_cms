@@ -29,14 +29,14 @@ class Render
      * Jeżeli tak, to wtedy wywołuje metodę static::file,
      * a jako prefix przekazuje wartość z tablicy $shortcuts.
      */
-    public static function __callStatic($methodName, array $arguments)
+    public static function __callStatic($name, array $arguments)
     {
-        if (!isset(static::$shortcuts[$methodName])) {
-            throw new RuntimeException("Not found shortcut named ({$methodName})");
+        if (!isset(static::$shortcuts[$name])) {
+            throw new RuntimeException("Not found shortcut named ({$name})");
         }
 
         if (empty($arguments)) {
-            throw new RuntimeException("Method ({$methodName}) must have arguments");
+            throw new RuntimeException("Method ({$name}) must have arguments");
         }
 
         $template = array_shift($arguments);
@@ -45,6 +45,6 @@ class Render
             $args = array_shift($arguments);
         }
 
-        return static::file($template, $args, static::$shortcuts[$methodName]);
+        return static::file($template, $args, static::$shortcuts[$name]);
     }
 }

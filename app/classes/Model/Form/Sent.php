@@ -6,7 +6,7 @@ use GC\Storage\AbstractModel;
 use GC\Storage\Utility\ColumnTrait;
 use GC\Storage\Utility\PrimaryTrait;
 use GC\Storage\Utility\CriteriaTrait;
-use GC\Storage\Database;
+use GC\Container;
 
 class Sent extends AbstractModel
 {

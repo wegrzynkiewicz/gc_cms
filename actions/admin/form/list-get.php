@@ -17,14 +17,14 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
     <div class="col-md-12">
         <div class="simple-box">
             <?php if (empty($forms)): ?>
-                <?=trans('Nie znaleziono żadnego formularza w języku: ')?>
+                <?=$trans('Nie znaleziono żadnego formularza w języku: ')?>
                 <?=GC\Render::action('/admin/parts/language.html.php')?>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">
                     <thead>
                         <tr>
-                            <th><?=trans('Nazwa formularza')?></th>
-                            <th><?=trans('Nieprzeczytanych')?></th>
+                            <th><?=$trans('Nazwa formularza')?></th>
+                            <th><?=$trans('Nieprzeczytanych')?></th>
                             <th class="text-right"></th>
                         </tr>
                     </thead>

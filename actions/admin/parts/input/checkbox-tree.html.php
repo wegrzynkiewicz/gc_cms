@@ -1,11 +1,11 @@
 <div class="form-group">
     <label class="col-md-12 col-sm-12 col-xs-12">
-        <?=trans($label)?>
+        <?=$trans($label)?>
     </label>
     <div class="col-md-12 col-sm-12 col-xs-12">
         <?php if (isset($help)): ?>
             <span class="help-block">
-                <?=trans($help)?>
+                <?=$trans($help)?>
             </span>
         <?php endif ?>
         <?php if ($tree->hasChildren()): ?>
@@ -18,7 +18,7 @@
             </div>
         <?php else:?>
             <p>
-                <?=trans('Brak węzłów')?>
+                <?=$trans('Brak węzłów')?>
             </p>
         <?php endif?>
     </div>

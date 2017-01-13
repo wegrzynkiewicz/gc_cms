@@ -10,7 +10,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
             <div class="btn-toolbar pull-right">
                 <a href="<?=GC\Url::mask("/new")?>" type="button" class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
-                    <?=trans('Dodaj nowe pole')?>
+                    <?=$trans('Dodaj nowe pole')?>
                 </a>
             </div>
             <h1><?=($headTitle)?></h1>
@@ -25,7 +25,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
         <form id="savePosition" action="" method="post">
             <?php if (empty($fields)):?>
                 <div class="simple-box">
-                    <?=trans('Brak pól w formularzu "%s"', [$form['name']])?>
+                    <?=$trans('Brak pól w formularzu "%s"', [$form['name']])?>
                 </div>
             <?php else:?>
                 <input name="positions" type="hidden"/>
@@ -51,19 +51,19 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=trans("Czy na pewno usunąć?")?>
+                    <?=$trans("Czy na pewno usunąć?")?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=trans("Czy jesteś pewien, że chcesz usunąć pole")?>
+                <?=$trans("Czy jesteś pewien, że chcesz usunąć pole")?>
                 <span id="name" style="font-weight:bold; color:red;"></span>?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <?=trans('Anuluj')?>
+                    <?=$trans('Anuluj')?>
                 </button>
                 <button type="submit" class="btn btn-danger btn-ok">
-                    <?=trans('Usuń')?>
+                    <?=$trans('Usuń')?>
                 </button>
             </div>
         </form>

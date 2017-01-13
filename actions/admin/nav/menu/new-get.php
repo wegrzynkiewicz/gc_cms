@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = trans('Dodawanie nowego węzła');
+$headTitle = $trans('Dodawanie nowego węzła');
 $breadcrumbs->push($request->path, $headTitle);
 
 $refreshUrl = GC\Url::mask("/edit-views");

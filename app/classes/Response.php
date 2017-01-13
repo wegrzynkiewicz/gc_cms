@@ -13,7 +13,7 @@ class Response
     public static function setMimeType($mimeType)
     {
         if (!headers_sent()) {
-            header("Content-Type: $mimeType; charset=utf-8");
+            header("Content-Type: {$mimeType}; charset=utf-8");
         }
     }
 
@@ -27,7 +27,7 @@ class Response
         http_response_code($code);
         header("Location: {$url}");
 
-        Logger::redirect(
+        Container::get('logger')->redirect(
             sprintf("%s %s :: ExecutionTime: %s", $code, $url, (microtime(true) - START_TIME)
         ));
 

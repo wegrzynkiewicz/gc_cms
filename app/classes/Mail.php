@@ -6,7 +6,7 @@ use GC\Model\Mail\Sent;
 use GC\Model\Mail\ToSend;
 use GC\Logger;
 use GC\Render;
-use GC\Auth\Password;
+use GC\Password;
 use PHPMailer;
 use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 
@@ -17,7 +17,7 @@ class Mail extends PHPMailer
     public function __construct()
     {
         parent::__construct(true);
-        $this->bindMailerFromConfig(getConfig());
+        $this->bindMailerFromConfig(\GC\Container::get('config'));
     }
 
     protected function bindMailerFromConfig(array $config)
@@ -25,22 +25,22 @@ class Mail extends PHPMailer
         try {
             $this->SMTPDebug = false;
 
-            if ($config['email']['smtp']) {
+            if (GC\Container::get('config')['email']['smtp']) {
                 $this->isSMTP();
-                $this->Host = $config['email']['host'];
+                $this->Host = GC\Container::get('config')['email']['host'];
                 $this->SMTPAuth = true;
-                $this->Username = $config['email']['username'];
-                $this->Password = $config['email']['password'];
-                $this->SMTPSecure = $config['email']['SMTPsecure'];
-                $this->Port = $config['email']['port'];
+                $this->Username = GC\Container::get('config')['email']['username'];
+                $this->Password = GC\Container::get('config')['email']['password'];
+                $this->SMTPSecure = GC\Container::get('config')['email']['SMTPsecure'];
+                $this->Port = GC\Container::get('config')['email']['port'];
             }
 
-            $this->setFrom($config['email']['fromEmail'], $config['email']['fromName']);
+            $this->setFrom(GC\Container::get('config')['email.fromEmail'), GC\Config::get('email']['fromName']);
             $this->CharSet = 'UTF-8';
             $this->isHTML(true);
 
         } catch (phpmailerException $exception) {
-            Logger::logException($exception);
+            Container::get('logger')->logException($exception);
         }
     }
 
@@ -48,7 +48,7 @@ class Mail extends PHPMailer
     {
         $cssToInlineStyles = new CssToInlineStyles();
         $viewArgs['mail'] = $this;
-        $viewArgs['config'] = getConfig();
+        $viewArgs['config'] = \GC\Container::get('config');
         $html = Render::action($templateEmailPath, $viewArgs);
         $css = Render::action($stylePath);
         $content = $cssToInlineStyles->convert($html, $css);
@@ -70,7 +70,7 @@ class Mail extends PHPMailer
 
     public function push()
     {
-        $this->hash = Password::random(40);
+        $this->hash = Auth\Password::random(40);
         ToSend::insert([
             'mail_hash' => $this->hash,
             'receivers' => implode('; ', array_keys($this->all_recipients)),
@@ -78,7 +78,7 @@ class Mail extends PHPMailer
             'content' => serialize($this),
         ]);
 
-        Logger::emailPush("$this->hash $this->Subject", array_keys($this->all_recipients));
+        Container::get('logger')->emailPush("$this->hash $this->Subject", array_keys($this->all_recipients));
     }
 
     public function send()
@@ -98,12 +98,12 @@ class Mail extends PHPMailer
                 'content' => serialize($this),
             ]);
 
-            Logger::emailSent("$this->hash $this->Subject", array_keys($this->all_recipients));
+            Container::get('logger')->emailSent("$this->hash $this->Subject", array_keys($this->all_recipients));
 
             return true;
 
         } catch (phpmailerException $exception) {
-            Logger::logException($exception);
+            Container::get('logger')->logException($exception);
         }
 
         return false;

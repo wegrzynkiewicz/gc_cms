@@ -22,7 +22,7 @@ set_error_handler(function ($err_severity, $err_msg, $err_file, $err_line, array
 
     $errorReporting = error_reporting();
 
-    GC\Logger::error($err_msg, [$err_file, $err_line]);
+    GC\Container::get('logger')->error($err_msg, [$err_file, $err_line]);
 
     if ($errorReporting == 0) {
         return false;
@@ -59,7 +59,15 @@ set_exception_handler(function (Exception $exception) {
             $logException($previous);
         }
 
-        GC\Logger::logException($exception);
+        GC\Container::get('logger')->exception(
+            sprintf("%s: %s [%s]\n%s",
+                get_class($exception),
+                $exception->getMessage(),
+                $exception->getCode(),
+                $exception->getTraceAsString()
+            ),
+            []
+        );
     };
 
     $logException($exception);

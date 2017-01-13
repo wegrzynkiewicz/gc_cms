@@ -7,14 +7,14 @@ $cancelHref = isset($cancelHref) ? $cancelHref : $breadcrumbs->getBeforeLastUrl(
     <div class="col-md-6 col-sm-6 col-xs-6 text-left">
         <a href="<?=GC\Url::make($cancelHref)?>" class="btn btn-warning btn-md">
             <i class="fa fa-arrow-left fa-fw"></i>
-            <?=trans('Wstecz')?>
+            <?=$trans('Wstecz')?>
         </a>
     </div>
     <?php if (isset($saveLabel)): ?>
         <div class="col-md-6 col-sm-6 col-xs-6 text-right">
             <button type="submit" class="btn btn-success btn-md">
                 <i class="fa fa-floppy-o fa-fw"></i>
-                <?=trans($saveLabel)?>
+                <?=$trans($saveLabel)?>
             </button>
         </div>
     <?php endif ?>

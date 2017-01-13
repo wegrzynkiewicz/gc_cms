@@ -1,1 +1,1 @@
-<?=trans($config['nodeTypes']['homepage'])?>
+<?=$trans(GC\Container::get('config')['nodeTypes']['homepage'])?>

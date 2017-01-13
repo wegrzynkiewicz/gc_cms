@@ -7,7 +7,7 @@ if (!isset($_POST["formSubmit_$form_id"])) {
     require TEMPLATE_PATH.'/modules/form/default-get.html.php';
 }
 
-$form = GC\Model\Form\Form::selectByPrimaryId($form_id);
+$form = GC\Model\Form\Form::fetchByPrimaryId($form_id);
 
 $data = [];
 foreach ($fields as $field_id => $field) {
@@ -36,5 +36,5 @@ GC\Model\Form\Sent::insertToForm($form_id, $data, $localization);
 
 ?>
 <p class="text-success">
-    <?=trans('Dziękujemy za wysłanie wiadomości, wkrótce się z Państwem skontaktujemy.')?>
+    <?=$trans('Dziękujemy za wysłanie wiadomości, wkrótce się z Państwem skontaktujemy.')?>
 </p>

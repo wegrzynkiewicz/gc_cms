@@ -10,11 +10,29 @@ define('ACTIONS_PATH', ROOT_PATH.'/actions'); # ścieżka do katalogu z plikami 
 define('TEMPLATE_PATH', ROOT_PATH.'/templates/'.TEMPLATE); # ścieżka do plików szablonu
 define('TEMPLATE_ASSETS_URL', '/templates/'.TEMPLATE); # adres do zasobów w katalogu z szablonem
 
+chdir(ROOT_PATH); # zmienia bieżący katalog o jeden poziom wyżej niż web root
+
+ini_set('error_reporting', E_ALL); # raportuje napotkane błędy
+ini_set('display_errors', 1); # włącza wyświetlanie błędów
+ini_set('display_startup_errors', 1); # włącza wyświetlanie startowych błędów
+ini_set('error_log', ROOT_PATH.'/tmp/logs/'.date('Y-m-d').'.error.log'); # zmienia ścieżkę logowania błędów
+ini_set('max_execution_time', 300); # określa maksymalny czas trwania skryptu
+ini_set('date.timezone', 'Europe/Warsaw'); # ustawienie domyślnej strefy czasowej
+ini_set('session.name', 'TOLmEeE4ouK9lWuFigwvPqVhxLgtfj7k5kVqhIWL'); # zmiana nazwy ciastka sesyjnego
+ini_set('session.use_trans_sid', 0);
+ini_set('session.use_strict_mode', 1);
+ini_set('session.cookie_httponly', 1); # ustawia ciastko tylko do odczytu, nie jest możliwe odczyt document.cookie w js
+ini_set('session.use_cookies', 1); # do przechowywania sesji ma użyć ciastka
+ini_set('session.use_only_cookies', 1); # do przechowywania sesji ma używać tylko ciastka!
+
+header("Content-Type: text/html; charset=utf-8"); # ustawienie domyślego mimetype i kodowania
+header('X-Content-Type-Options: nosniff'); # Nie pozwala przeglądarce na zgadywanie typu mime nieznanego pliku
+header('X-XSS-Protection: 1; mode=block'); # ustawienie ochrony przeciw XSS, przeglądarka sama wykrywa XSSa
+header_remove('X-Powered-By'); # usuwa informacje o wykorzystywanej wersji php
+
 $config = [
     'debug' => [ # opcje związane z wyświetlaniem błędów
         'enabled' => true, # zezwala na nietypowe akcje (np: zmiana hasła admina, wejście do /actions/root)
-        'display_errors' => true, # czy wyświetlać błędy na wyjściu?
-        'error_reporting' => E_ALL, # poziom raportowania błędów
         'inConstruction' => false, # wyświetla komunikat "strona w budowie" za każdym żądaniem
     ],
     'seoUrl' => [ # związane z nazwą adresu url witryny
@@ -26,7 +44,6 @@ $config = [
     'adminNavbarTitle' => 'Panel Administracyjny', # wyświetlana w prawym gornym rogu panelu admina
     'adminHeadTitleBase' => 'Acme Panel Administracyjny', # nazwa doklejana do <title> strony w panelu admina
     'noImageUrl' => '/admin/images/no-image.jpg', # ścieżka do obrazka w przypadku braku obrazka
-    'timezone' => 'Europe/Warsaw', # domyślna strefa czasowa
     'password' => [
         'minLength' => 8, # minimalna długość hasła
         'staticSalt' => '81qU6GlSusOZNxrWQF0x5xNaWT0odCfM4x4im4p3', # unikalna, sól dla wszystkich użytkowników, nie zmieniać nigdy
@@ -35,7 +52,6 @@ $config = [
         ]
     ],
     'session' => [
-        'cookieName' => 'TOLmEeE4ouK9lWuFigwvPqVhxLgtfj7k5kVqhIWL', # nazwa ciastka sesyjnego
         'staffTimeout' => 1800, # czas jaki musi upłynąć po zalogowaniu, aby wylogowało pracownika z automatu, w sekundach
     ],
     'avatar' => [
@@ -45,22 +61,22 @@ $config = [
         'clientDefault' => 'pl', # wykorzystywany gdy wszystkie inne sposoby określenia języka klienta zawiodą
         'editorDefault' => 'pl', # domyślny język edytowania w panelu admina
     ],
-    'translator' => [ # ustawienia translatora
-        'enabled' => true, # czy włączyć tłumaczenie komunikatów
-        'folder' => ROOT_PATH.'/app/storage/locales', # katalog do ktorego są zapisywane tłumaczenia
-        'key' => 'trnsl.1.1.20161215T151949Z.587eb49efd9a9be2.a1eb760e6bf78076ea004f12eeb22b37902aadc2', # klucz do api translatora w serwisie Yandex
-    ],
-    'logger' => [ # ustawienia dla rejestrowania logów
-        'enabled' => true, # uruchamia rejestrowanie logów
-        'folder' => ROOT_PATH.'/tmp/logs', # katalog do ktorego są zapisywane logi
-    ],
-    'db' => [ # zawiera parametry połączeniowe do bazy danych
+    'database' => [ # zawiera parametry połączeniowe do bazy danych
         'dns' => 'mysql:host=localhost;dbname=_gc_cms;charset=utf8',
         'host' => 'localhost',
         'username' => 'tester',
         'password' => 'tester',
         'name' => '_gc_cms',
         'prefix' => 'gc_'
+    ],
+    'logger' => [ # ustawienia dla rejestrowania logów
+        'enabled' => true, # uruchamia rejestrowanie logów
+        'folder' => ROOT_PATH.'/tmp/logs', # katalog do ktorego są zapisywane logi
+    ],
+    'translator' => [ # ustawienia translatora
+        'enabled' => true, # czy włączyć tłumaczenie komunikatów
+        'folder' => ROOT_PATH.'/app/storage/locales', # katalog do ktorego są zapisywane tłumaczenia
+        'key' => 'trnsl.1.1.20161215T151949Z.587eb49efd9a9be2.a1eb760e6bf78076ea004f12eeb22b37902aadc2', # klucz do api translatora w serwisie Yandex
     ],
     'email' => [ # ustawienia serwera pocztowego do rozsyłania emaili
         'smtp' => true, # czy użwać mailera smtp?

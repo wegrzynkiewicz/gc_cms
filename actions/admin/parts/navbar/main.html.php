@@ -8,7 +8,7 @@
             <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="<?=GC\Url::make("/admin")?>">
-            <?=trans($config['adminNavbarTitle'])?>
+            <?=$trans(GC\Container::get('config')['adminNavbarTitle'])?>
         </a>
     </div>
 

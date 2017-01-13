@@ -1,8 +1,8 @@
 <?php
 
-$field = GC\Model\Form\Field::selectByPrimaryId($field_id);
+$field = GC\Model\Form\Field::fetchByPrimaryId($field_id);
 
-$headTitle = trans('Edycja pola "%s"', [$field['name']]);
+$headTitle = $trans('Edycja pola "%s"', [$field['name']]);
 $breadcrumbs->push($request->path, $headTitle);
 
 $refreshUrl = GC\Url::mask("/{$field_id}/types");

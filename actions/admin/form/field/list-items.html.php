@@ -13,15 +13,15 @@
                     data-id="<?=e($field_id)?>"
                     data-name="<?=e($node['name'])?>"
                     data-target="#deleteModal"
-                    title="<?=trans('Usuń węzeł')?>"
+                    title="<?=$trans('Usuń węzeł')?>"
                     class="btn btn-danger btn-xs">
                     <i class="fa fa-times fa-fw"></i>
-                    <?=trans('Usuń')?>
+                    <?=$trans('Usuń')?>
                 </a>
             </div>
 
             <div class="pull-right" style="margin-right: 30px">
-                <?=trans($config['formFieldTypes'][$node['type']])?>
+                <?=$trans(GC\Container::get('config')['formFieldTypes'][$node['type']])?>
             </div>
 
             <div class="clearfix"></div>

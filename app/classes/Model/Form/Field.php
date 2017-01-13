@@ -5,7 +5,7 @@ namespace GC\Model\Form;
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\PrimaryTrait;
 use GC\Storage\Utility\JoinTrait;
-use GC\Storage\Database;
+use GC\Container;
 
 class Field extends AbstractModel
 {

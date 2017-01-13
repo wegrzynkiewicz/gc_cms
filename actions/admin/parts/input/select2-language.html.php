@@ -1,7 +1,7 @@
 <?php $selectedValue = inputValue($name) ?>
 <div class="form-group">
     <label class="col-md-12 col-sm-12 col-xs-12" for="<?=e($name)?>">
-        <?=trans($label)?>
+        <?=$trans($label)?>
     </label>
     <div class="col-md-12 col-sm-12 col-xs-12">
         <select
@@ -9,17 +9,17 @@
             name="<?=e($name)?>"
             class="form-control input">
 
-            <?php foreach ($config['langs'] as $value => $caption): ?>
-                <option value="<?=e($value)?>" data-flag="<?=e($config['flags'][$value])?>"
+            <?php foreach (GC\Container::get('config')['langs'] as $value => $caption): ?>
+                <option value="<?=e($value)?>" data-flag="<?=e(GC\Container::get('config')['flags'][$value])?>"
                     <?=selected($selectedValue == $value)?>>
-                    <?=trans($caption)?>
+                    <?=$trans($caption)?>
                 </option>
             <?php endforeach; ?>
 
         </select>
         <?php if (isset($help)): ?>
             <span class="help-block">
-                <?=trans($help)?>
+                <?=$trans($help)?>
             </span>
         <?php endif ?>
     </div>

@@ -21,7 +21,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                     'name' => 'theme',
                     'label' => 'Szablon',
                     'help' => 'Wybierz jeden z dostępnych szablonów dla zdjęcia',
-                    'options' => $config['moduleThemes']['photo'],
+                    'options' => GC\Container::get('config')['moduleThemes']['photo'],
                 ])?>
 
                 <?=GC\Render::action('/admin/parts/input/image.html.php', [

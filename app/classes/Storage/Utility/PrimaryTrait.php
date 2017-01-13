@@ -3,7 +3,7 @@
 namespace GC\Storage\Utility;
 
 use GC\Assert;
-use GC\Storage\Database;
+use GC\Container;
 
 /**
  * Zbior funkcji pomagających operować na kluczu głownym tabeli
@@ -16,11 +16,11 @@ trait PrimaryTrait
     /**
      * Pobiera rekord o zadanym kluczu głownym
      */
-    public static function selectByPrimaryId($primary_id)
+    public static function fetchByPrimaryId($primary_id)
     {
-        $sql = self::sql("SELECT * FROM ::table WHERE ::primary = ? LIMIT 1");
+        $sql = static::sql("SELECT * FROM ::table WHERE ::primary = ? LIMIT 1");
 
-        return Database::fetch($sql, [$primary_id]);
+        return Container::get('database')->fetch($sql, [$primary_id]);
     }
 
     /**
@@ -30,7 +30,7 @@ trait PrimaryTrait
     public static function selectAllWithPrimaryKey()
     {
         $sql = self::sql("SELECT * FROM ::table");
-        $rows = Database::fetchByKey($sql, [], static::$primary);
+        $rows = Container::get('database')->fetchByKey($sql, [], static::$primary);
 
         return $rows;
     }
@@ -43,7 +43,7 @@ trait PrimaryTrait
     {
         Assert::column($column);
         $sql = self::sql("SELECT * FROM ::table WHERE {$column} = ?");
-        $rows = Database::fetchByKey($sql, [$value], static::$primary);
+        $rows = Container::get('database')->fetchByKey($sql, [$value], static::$primary);
 
         return $rows;
     }
@@ -55,7 +55,7 @@ trait PrimaryTrait
     {
         Assert::column($column);
         $sql = self::sql("SELECT ::primary, {$column} FROM ::table");
-        $options = Database::fetchByMap($sql, [], static::$primary, $column);
+        $options = Container::get('database')->fetchByMap($sql, [], static::$primary, $column);
 
         return $options;
     }
@@ -73,7 +73,7 @@ trait PrimaryTrait
         $data[] = $primary_id;
 
         $sql = self::sql("UPDATE ::table SET {$columns} WHERE ::primary = ? LIMIT 1");
-        $affectedRows = Database::execute($sql, array_values($data));
+        $affectedRows = Container::get('database')->execute($sql, array_values($data));
 
         return $affectedRows;
     }
@@ -84,7 +84,7 @@ trait PrimaryTrait
     protected static function deleteByPrimaryId($primary_id)
     {
         $sql = self::sql("DELETE FROM ::table WHERE ::primary = ? LIMIT 1");
-        $affectedRows = Database::execute($sql, [$primary_id]);
+        $affectedRows = Container::get('database')->execute($sql, [$primary_id]);
 
         return $affectedRows;
     }

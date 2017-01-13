@@ -15,6 +15,6 @@ GC\Model\Post\Post::insertWithRelations([
     'publication_datetime' => $_POST['publication_datetime'],
 ], $relations);
 
-setNotice(trans('Nowy wpis "%s" została utworzony.', [$_POST['name']]));
+setNotice($trans('Nowy wpis "%s" została utworzony.', [$_POST['name']]));
 
 GC\Response::redirect($breadcrumbs->getLastUrl());

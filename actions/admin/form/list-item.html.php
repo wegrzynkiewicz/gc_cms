@@ -20,12 +20,12 @@
         <a href="<?=GC\Url::mask("/{$form_id}/received/list")?>"
             class="btn btn-primary btn-sm">
             <i class="fa fa-search fa-fw"></i>
-            <?=trans('Pokaż nadesłane')?>
+            <?=$trans('Pokaż nadesłane')?>
         </a>
         <a href="<?=GC\Url::mask("/{$form_id}/field/list")?>"
             class="btn btn-success btn-sm">
             <i class="fa fa-file-text-o fa-fw"></i>
-            <?=trans('Pola formularza')?>
+            <?=$trans('Pola formularza')?>
         </a>
     </td>
 

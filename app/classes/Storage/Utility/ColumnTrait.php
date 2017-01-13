@@ -3,7 +3,7 @@
 namespace GC\Storage\Utility;
 
 use GC\Assert;
-use GC\Storage\Database;
+use GC\Container;
 
 /**
  * Zbior funkcji pomagających operować na jakimkolwiek polu
@@ -19,7 +19,7 @@ trait ColumnTrait
     {
         Assert::column($column);
         $sql = self::sql("DELETE FROM ::table WHERE {$column} = ?");
-        $affectedRows = Database::execute($sql, [$value]);
+        $affectedRows = Container::get('database')->execute($sql, [$value]);
 
         return $affectedRows;
     }

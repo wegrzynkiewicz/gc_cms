@@ -18,7 +18,7 @@ class Thumb
         $this->height = $height;
         $this->extension = strtolower(pathinfo($imageUrl, PATHINFO_EXTENSION));
 
-        $options = getConfig()['thumb']['options'];
+        $options = \GC\Container::get('config')['thumb']['options'];
         if (isset($options[$this->extension])) {
             $this->params = $options[$this->extension];
             $this->url = $this->makeUrl();
@@ -48,7 +48,7 @@ class Thumb
      */
     private function makeUrl()
     {
-        $thumbsUrl      = getConfig()['thumb']['thumbsUrl'];
+        $thumbsUrl      = \GC\Container::get('config')['thumb']['thumbsUrl'];
         $imageUrl       = urldecode($this->imageUrl);
         $sufix          = '/'.$this->width.'x'.$this->height;
         $normalized     = normalize($imageUrl);
@@ -63,7 +63,7 @@ class Thumb
      */
     public static function lazyGenerate($imageUrl)
     {
-        $token = Password::random(40);
+        $token = Auth\Password::random(40);
         $imageUrl64 = base64_encode($imageUrl);
         $_SESSION['lazyGenerate'][$imageUrl][$token] = true;
 
@@ -76,7 +76,7 @@ class Thumb
     public function generate()
     {
         $imageUrl = urldecode($this->imageUrl);
-        $thumbPath = getConfig()['thumb']['thumbsPath'];
+        $thumbPath = \GC\Container::get('config')['thumb']['thumbsPath'];
         $destFilePath   = "{$thumbPath}{$this->url}";
         $sourceFilePath = "{$thumbPath}{$imageUrl}";
 
@@ -88,7 +88,7 @@ class Thumb
             return false;
         }
 
-        rmkdir(pathinfo($destFilePath, PATHINFO_DIRNAME));
+        Disc::makeDirRecursive(pathinfo($destFilePath, PATHINFO_DIRNAME));
 
         $loader = $this->params['loader'];
         $sourceImage = $loader($sourceFilePath);

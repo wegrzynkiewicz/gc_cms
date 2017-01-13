@@ -3,7 +3,7 @@
 namespace GC\Storage\Utility;
 
 use GC\Assert;
-use GC\Storage\Database;
+use GC\Container;
 
 trait PositionTrait
 {
@@ -14,7 +14,7 @@ trait PositionTrait
     {
         Assert::column($column);
         $sql = self::sql("SELECT MAX(position) AS maximum FROM ::table WHERE {$column} = ? LIMIT 1");
-        $maxOrder =  Database::fetch($sql, [$value]);
+        $maxOrder =  Container::get('database')->fetch($sql, [$value]);
 
         return $maxOrder['maximum'] + 1;
     }

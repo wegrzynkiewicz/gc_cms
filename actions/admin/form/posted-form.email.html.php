@@ -1,6 +1,6 @@
 <?php
 
-$mail->Subject = trans('%s został wykorzystany w serwisie %s', [$form['name'], $_SERVER['HTTP_HOST']]);
+$mail->Subject = $trans('%s został wykorzystany w serwisie %s', [$form['name'], $_SERVER['HTTP_HOST']]);
 
 require ACTIONS_PATH.'/admin/parts/email/header.html.php'; ?>
 
@@ -9,9 +9,9 @@ require ACTIONS_PATH.'/admin/parts/email/header.html.php'; ?>
 </div>
 <br>
 <div class="body-text">
-    <?=trans('Została wysłana wiadomość na Twój adres email.')?><br>
+    <?=$trans('Została wysłana wiadomość na Twój adres email.')?><br>
     <br>
-    <b><?=trans('Treść wiadomości')?></b><br>
+    <b><?=$trans('Treść wiadomości')?></b><br>
     <br>
     <table border="1" cellpadding="6" style="width:100%;border-collapse:collapse;">
         <?php foreach ($data as $label => $value): ?>
@@ -24,7 +24,7 @@ require ACTIONS_PATH.'/admin/parts/email/header.html.php'; ?>
     <br>
     <?php require ACTIONS_PATH.'/admin/parts/email/localization.html.php'; ?>
     <br>
-    <strong><?=trans('Wiadomość została wygenerowana automatycznie. Prosimy nie odpowiadać')?></strong><br>
+    <strong><?=$trans('Wiadomość została wygenerowana automatycznie. Prosimy nie odpowiadać')?></strong><br>
     <br>
 </div>
 

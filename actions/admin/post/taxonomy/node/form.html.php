@@ -45,7 +45,7 @@ $(function () {
         },
         messages: {
             name: {
-                required: "<?=trans('Nazwa węzła jest wymagana')?>"
+                required: "<?=$trans('Nazwa węzła jest wymagana')?>"
             }
         },
     });

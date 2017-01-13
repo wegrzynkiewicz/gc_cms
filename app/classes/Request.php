@@ -17,13 +17,13 @@ class Request
     public function __construct()
     {
         # pobierz wszystkie najistotniejsze informacje o żądaniu
-        $rootUrl = dirname(static::filterServer('SCRIPT_NAME'));
-        $rawRequest = static::filterServer('REQUEST_URI');
+        $rootUrl = dirname($_SERVER['SCRIPT_NAME']);
+        $rawRequest = $_SERVER['REQUEST_URI'];
         $this->path = '/'.trim(parse_url($rawRequest, \PHP_URL_PATH), '/');
         $this->query = parse_url($rawRequest, \PHP_URL_QUERY);
-        $this->method = strtolower(static::filterServer('REQUEST_METHOD'));
+        $this->method = strtolower($_SERVER['REQUEST_METHOD']);
 
-        Logger::request(sprintf("%s %s",
+        Container::get('logger')->request(sprintf("%s %s",
             strtoupper($this->method), rtrim("{$this->path}?{$this->query}", '?')
         ), $_REQUEST);
 
@@ -58,13 +58,5 @@ class Request
         }
 
         return false;
-    }
-
-    /**
-     * Filtruje własciwości w tablicy $_SERVER
-     */
-    public static function filterServer($name)
-    {
-        return filter_input(\INPUT_SERVER, $name, \FILTER_SANITIZE_SPECIAL_CHARS);
     }
 }

@@ -3,10 +3,11 @@
 namespace GC\Storage\Query;
 
 use GC\Assert;
-use GC\Storage\Database;
+use GC\Container;
 
 abstract class AbstractQuery
 {
+    protected $database;
     protected $modelClass;
     protected $from = "::table";
     protected $conditions = [];
@@ -17,10 +18,7 @@ abstract class AbstractQuery
     public function __construct($modelClass)
     {
         $this->modelClass = $modelClass;
-    }
-
-    public function __toString()
-    {
+        $this->database = Container::get('database');
     }
 
     public function condition($sqlPart, $passedParams = [])
@@ -48,29 +46,29 @@ abstract class AbstractQuery
 
     public function execute()
     {
-        return Database::execute($this->getSQL(), $this->params);
+        return $this->database->execute($this->getSQL(), $this->params);
     }
 
     public function fetch()
     {
         $this->limit(1);
 
-        return Database::fetch($this->getSQL(), $this->params);
+        return $this->database->fetch($this->getSQL(), $this->params);
     }
 
     public function fetchAll()
     {
-        return Database::fetchAll($this->getSQL(), $this->params);
+        return $this->database->fetchAll($this->getSQL(), $this->params);
     }
 
     public function fetchByKey($key)
     {
-        return Database::fetchByKey($this->getSQL(), $this->params, $key);
+        return $this->database->fetchByKey($this->getSQL(), $this->params, $key);
     }
 
     public function fetchByPrimaryKey()
     {
-        return Database::fetchByKey(
+        return $this->database->fetchByKey(
             $this->getSQL(),
             $this->params,
             get_class_vars($this->modelClass)['primary']
@@ -79,7 +77,7 @@ abstract class AbstractQuery
 
     public function fetchByMap($keyLabel, $valueLabel)
     {
-        return Database::fetchByMap(
+        return $this->database->fetchByMap(
             $this->getSQL(),
             $this->params,
             $keyLabel,

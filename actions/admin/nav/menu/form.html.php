@@ -15,14 +15,14 @@
                     'name' => 'type',
                     'label' => 'Typ węzła',
                     'help' => 'Wybierz typ węzła nawigacji w menu',
-                    'options' => $config['nodeTypes'],
+                    'options' => GC\Container::get('config')['nodeTypes'],
                     'firstOption' => 'Wybierz typ węzła',
                 ])?>
             </div>
 
             <div class="simple-box">
                 <div id="nodeType">
-                    <?=trans('Wybierz typ węzła')?>
+                    <?=$trans('Wybierz typ węzła')?>
                 </div>
             </div>
 
@@ -69,13 +69,13 @@ $(function () {
         },
         messages: {
             name: {
-                required: "<?=trans('Nazwa węzła jest wymagana')?>"
+                required: "<?=$trans('Nazwa węzła jest wymagana')?>"
             },
             type: {
-                required: "<?=trans('Wybierz typ węzła')?>"
+                required: "<?=$trans('Wybierz typ węzła')?>"
             },
             destination: {
-                required: "<?=trans('Podaj gdzie ma kierować węzeł')?>"
+                required: "<?=$trans('Podaj gdzie ma kierować węzeł')?>"
             }
         },
     });

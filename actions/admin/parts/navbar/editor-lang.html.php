@@ -7,7 +7,7 @@ $currentLang = $langs[$_SESSION['lang']['editor']];
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <span class="hidden-xs">
-                <?=trans('Edytuj: ')?>
+                <?=$trans('Edytuj: ')?>
             </span>
             <?=GC\Render::action('/admin/parts/language.html.php', [
                 'lang' => $currentLang,

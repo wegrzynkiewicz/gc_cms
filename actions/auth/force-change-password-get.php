@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = trans("Wymagana zmiana hasła");
+$headTitle = $trans("Wymagana zmiana hasła");
 $_POST = [];
 
 require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
@@ -19,7 +19,7 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                         <form action="" method="post" id="form" class="form-horizontal">
 
                             <p class="text-center">
-                                <?=trans('Dla bezpieczeństwa musisz zmienić swoje hasło')?>
+                                <?=$trans('Dla bezpieczeństwa musisz zmienić swoje hasło')?>
                             </p>
 
                             <?php if (isset($error)): ?>
@@ -32,7 +32,7 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                                 'name' => 'new_password',
                                 'type' => 'password',
                                 'label' => 'Nowe hasło',
-                                'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', $config['password']['minLength']),
+                                'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', GC\Container::get('config')['password']['minLength']),
                             ])?>
 
                             <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
@@ -43,7 +43,7 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                             ])?>
 
                             <button type="submit" class="btn btn-lg btn-success btn-block">
-                                <?=trans('Zmień hasło')?>
+                                <?=$trans('Zmień hasło')?>
                             </button>
 
                         </form>
@@ -62,7 +62,7 @@ $(function () {
         rules: {
             new_password: {
                 required: true,
-                minlength : <?=e($config['password']['minLength'])?>
+                minlength : <?=e(GC\Container::get('config')['password']['minLength'])?>
             },
             confirm_password: {
                 required: true,
@@ -71,12 +71,12 @@ $(function () {
         },
         messages: {
             new_password: {
-                required: "<?=trans('Wprowadź nowe hasło')?>",
-                minlength: "<?=trans('Nowe hasło powinno mieć przynajmniej %s znaków', $config['password']['minLength'])?>"
+                required: "<?=$trans('Wprowadź nowe hasło')?>",
+                minlength: "<?=$trans('Nowe hasło powinno mieć przynajmniej %s znaków', GC\Container::get('config')['password']['minLength'])?>"
             },
             confirm_password: {
-                required: "<?=trans('Musisz powtórzyć swoje nowe hasło dla bezpieczeństwa')?>",
-                equalTo: "<?=trans('Hasła nie są jednakowe')?>"
+                required: "<?=$trans('Musisz powtórzyć swoje nowe hasło dla bezpieczeństwa')?>",
+                equalTo: "<?=$trans('Hasła nie są jednakowe')?>"
             }
         },
     });

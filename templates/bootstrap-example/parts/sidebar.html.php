@@ -5,7 +5,7 @@
     </div>
 
     <div class="sidebar-module">
-        <h4><?=trans('Śmieszne filmiki')?></h4>
+        <h4><?=$trans('Śmieszne filmiki')?></h4>
         <?php require TEMPLATE_PATH."/navs/side.html.php"; ?>
     </div>
 

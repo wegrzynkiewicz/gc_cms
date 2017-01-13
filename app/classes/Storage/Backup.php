@@ -2,24 +2,26 @@
 
 namespace GC\Storage;
 
-use GC\Model\Dump as DumpModel;
+use GC\Disc;
 use GC\Logger;
-use GC\Auth\Password;
+use GC\Password;
+use GC\Container;
+use GC\Model\Dump;
 use Ifsnop\Mysqldump as IMysqldump;
 
-class Dump
+class Backup
 {
     public static $delimiter = ';';
 
-    public static function makeBackup($name)
+    public static function make($name)
     {
-        $dumpPath = getConfig()['dump']['path'];
+        $dumpPath = Container::get('config')['dump']['path'];
         $time = time();
         $creation_datetime = date('Y-m-d-His', $time);
         $filepath = "{$dumpPath}/dump-{$creation_datetime}.sql.gz";
         static::export($filepath);
 
-        DumpModel::insert([
+        Dump::insert([
             'name' => $name,
             'creation_datetime' => date('Y-m-d H:i:s', $time),
             'path' => relativePath($filepath),
@@ -29,12 +31,12 @@ class Dump
 
     public static function export($filename)
     {
-        createFile($filename);
+        Disc::makeFile($filename);
 
-        $dumpConfig = getConfig()['dump'];
-        $dbConfig = getConfig()['db'];
+        $dumpConfig = Container::get('config')['dump'];
+        $dbConfig = Container::get('config')['database'];
 
-        Logger::dumpExport($filename);
+        Container::get('logger')->dumpExport($filename);
 
         $dump = new IMysqldump\Mysqldump(
             $dbConfig['dns'],
@@ -50,11 +52,11 @@ class Dump
     {
         $file = $filepath;
 
-        Logger::dumpImport($file);
+        Container::get('logger')->dumpImport($file);
 
         if (pathinfo($filepath, \PATHINFO_EXTENSION) === 'gz') {
 
-            $path = getConfig()['dump']['tmpPath'];
+            $path = Container::get('config')['dump']['tmpPath'];
             $file = $path.'/'.basename($filepath, '.gz');
             static::decompress($filepath, $file);
             static::openAndExecute($file);
@@ -81,7 +83,7 @@ class Dump
             if (preg_match('~' . preg_quote(static::$delimiter, '~') . '\s*$~iS', end($query)) === 1) {
                 $query = trim(implode('', $query));
 
-                Database::$pdo->exec($query);
+                Container::get('database')->pdo->exec($query);
             }
 
             if (is_string($query) === true) {
@@ -98,7 +100,7 @@ class Dump
             return;
         }
 
-        createFile($destination);
+        Disc::makeFile($destination);
 
         $file = gzopen($filepath, 'rb');
         $outFile = fopen($destination, 'wb');

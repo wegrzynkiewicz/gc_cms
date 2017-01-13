@@ -8,6 +8,6 @@
     </ol>
 <?php else: ?>
     <p>
-        <?=trans('Brak stron do wyświetlenia')?>
+        <?=$trans('Brak stron do wyświetlenia')?>
     </p>
 <?php endif ?>

@@ -9,6 +9,6 @@ GC\Model\Module\Module::updateByPrimaryId($module_id, [
     'settings' => json_encode($settings, JSON_UNESCAPED_UNICODE),
 ]);
 
-setNotice(trans('Moduł galerii zdjęć został zaktualizowany.'));
+setNotice($trans('Moduł galerii zdjęć został zaktualizowany.'));
 
 GC\Response::redirect($breadcrumbs->getBeforeLastUrl());

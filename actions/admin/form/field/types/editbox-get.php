@@ -1,1 +1,1 @@
-<?=trans('Zwykłe pole tekstowe pozwala wprowadzić prosty tekst')?>
+<?=$trans('Zwykłe pole tekstowe pozwala wprowadzić prosty tekst')?>

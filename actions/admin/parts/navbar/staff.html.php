@@ -10,20 +10,20 @@
         <li>
             <a href="<?=GC\Url::make('/admin/account/profil')?>">
                 <i class="fa fa-user fa-fw"></i>
-                <?=trans('Profil użytkownika')?>
+                <?=$trans('Profil użytkownika')?>
             </a>
         </li>
         <li>
             <a href="<?=GC\Url::make('/admin/account/change-password')?>">
                 <i class="fa fa-unlock-alt fa-fw"></i>
-                <?=trans('Zmień hasło')?>
+                <?=$trans('Zmień hasło')?>
             </a>
         </li>
         <li class="divider"></li>
         <li>
             <a href="<?=GC\Url::make("/admin/account/logout")?>">
                 <i class="fa fa-sign-out fa-fw"></i>
-                <?=trans('Wyloguj się')?>
+                <?=$trans('Wyloguj się')?>
             </a>
         </li>
     </ul>

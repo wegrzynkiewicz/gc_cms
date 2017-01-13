@@ -1,11 +1,11 @@
 <?php
 
-$headTitle = trans("Wysłano e-maila z weryfikacją przypomnienia hasła");
+$headTitle = $trans("Wysłano e-maila z weryfikacją przypomnienia hasła");
 
 $user = GC\Model\Staff\Staff::select()->equals('email', $_POST['login'])->fecht();
 
 if (!$user) {
-    $error = trans('Nieprawidłowy adres e-mail');
+    $error = $trans('Nieprawidłowy adres e-mail');
 
     return require ACTIONS_PATH.'/auth/forgot/password-get.php';
 }
@@ -57,14 +57,14 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                         <?php endif ?>
 
                         <p class="text-center">
-                            <?=trans('Na zadany adres email zostały wysłane dalsze instrukcje.')?>
+                            <?=$trans('Na zadany adres email zostały wysłane dalsze instrukcje.')?>
                         </p>
 
                         <div class="btn-group btn-group-justified" style="margin-top:5px">
                             <a href="<?=GC\Url::mask("/")?>" class="btn btn-link">
-                                <?=trans('Przejdź na stronę główną')?></a>
+                                <?=$trans('Przejdź na stronę główną')?></a>
                             <a href="<?=GC\Url::mask("/auth/login")?>" class="btn btn-link">
-                            <?=trans('Wróć do logowania')?></a>
+                            <?=$trans('Wróć do logowania')?></a>
                         </div>
 
                     </div>

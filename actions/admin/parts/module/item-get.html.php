@@ -1,6 +1,6 @@
 <?php
 
-$module = GC\Model\Module\Module::selectByPrimaryId($module_id);
+$module = GC\Model\Module\Module::fetchByPrimaryId($module_id);
 $moduleType = $module['type'];
 
 $item_id = intval(array_shift($_SEGMENTS));

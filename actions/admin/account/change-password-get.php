@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = trans("Zmiana hasła");
+$headTitle = $trans("Zmiana hasła");
 $breadcrumbs->push($request->path, $headTitle, 'fa-unlock-alt');
 
 $_POST = [];
@@ -29,7 +29,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                     'name' => 'new_password',
                     'type' => 'password',
                     'label' => 'Nowe hasło',
-                    'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', $config['password']['minLength']),
+                    'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', GC\Container::get('config')['password']['minLength']),
                 ])?>
 
                 <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
@@ -59,7 +59,7 @@ $(function () {
             },
             new_password: {
                 required: true,
-                minlength : <?=e($config['password']['minLength'])?>
+                minlength : <?=GC\Container::get('config')['password']['minLength']?>
             },
             confirm_password: {
                 required: true,
@@ -68,15 +68,15 @@ $(function () {
         },
         messages: {
             old_password: {
-                required: "<?=trans('Stare hasło jest wymagane')?>"
+                required: "<?=$trans('Stare hasło jest wymagane')?>"
             },
             new_password: {
-                required: "<?=trans('Wprowadź nowe hasło')?>",
-                minlength: "<?=trans('Nowe hasło powinno mieć przynajmniej %s znaków', [$config['password']['minLength']])?>"
+                required: "<?=$trans('Wprowadź nowe hasło')?>",
+                minlength: "<?=$trans('Nowe hasło powinno mieć przynajmniej %s znaków', [GC\Container::get('config')['password']['minLength']])?>"
             },
             confirm_password: {
-                required: "<?=trans('Musisz powtórzyć swoje nowe hasło dla bezpieczeństwa')?>",
-                equalTo: "<?=trans('Hasła nie są jednakowe')?>"
+                required: "<?=$trans('Musisz powtórzyć swoje nowe hasło dla bezpieczeństwa')?>",
+                equalTo: "<?=$trans('Hasła nie są jednakowe')?>"
             }
         },
     });

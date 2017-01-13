@@ -9,6 +9,6 @@ GC\Model\Module\Frame::updateByFrameId($node['frame_id'], [
     'image' => GC\Url::upload($_POST['image']),
 ]);
 
-setNotice(trans('Węzeł "%s" został zaktualizowany.', [$node['name']]));
+setNotice($trans('Węzeł "%s" został zaktualizowany.', [$node['name']]));
 
 GC\Response::redirect($breadcrumbs->getLastUrl());

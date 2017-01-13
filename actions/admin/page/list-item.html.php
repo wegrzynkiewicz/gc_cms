@@ -1,4 +1,4 @@
-<?php $preview = empty($page['image']) ? GC\Url::assets($config['noImageUrl']): $page['image']; ?>
+<?php $preview = empty($page['image']) ? GC\Url::assets(GC\Container::get('config')['noImageUrl']): $page['image']; ?>
 
 <tr>
     <td>
@@ -7,7 +7,7 @@
 
     <td>
         <a href="<?=GC\Url::mask("/{$page_id}/edit")?>"
-            title="<?=trans('Edytuj stronę')?>">
+            title="<?=$trans('Edytuj stronę')?>">
             <?=e($page['name'])?>
         </a>
     </td>
@@ -16,27 +16,27 @@
 
         <a href="<?=GC\Url::make("/page/{$page_id}")?>"
             target="_blank"
-            title="<?=trans('Podejrzyj tą stronę')?>"
+            title="<?=$trans('Podejrzyj tą stronę')?>"
             class="btn btn-primary btn-sm">
             <i class="fa fa-search fa-fw"></i>
-            <?=trans("Podgląd")?>
+            <?=$trans("Podgląd")?>
         </a>
 
         <a href="<?=GC\Url::mask("/{$page_id}/module/list")?>"
-            title="<?=trans('Wyświetl moduły strony')?>"
+            title="<?=$trans('Wyświetl moduły strony')?>"
             class="btn btn-success btn-sm">
             <i class="fa fa-file-text-o fa-fw"></i>
-            <?=trans("Moduły")?>
+            <?=$trans("Moduły")?>
         </a>
 
         <a data-toggle="modal"
             data-id="<?=e($page_id)?>"
             data-name="<?=e($page['name'])?>"
             data-target="#deleteModal"
-            title="<?=trans('Usuń stronę')?>"
+            title="<?=$trans('Usuń stronę')?>"
             class="btn btn-danger btn-sm">
             <i class="fa fa-times fa-fw"></i>
-            <?=trans("Usuń")?>
+            <?=$trans("Usuń")?>
         </a>
 
     </td>

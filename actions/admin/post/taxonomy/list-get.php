@@ -12,17 +12,17 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
     <div class="col-md-12">
         <div class="simple-box">
             <?php if (empty($taxonomies)): ?>
-                <?=trans('Nie znaleziono podziałów wpisów w języku: ')?>
+                <?=$trans('Nie znaleziono podziałów wpisów w języku: ')?>
                 <?=GC\Render::action('/admin/parts/language.html.php')?>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">
                     <thead>
                         <tr>
                             <th>
-                                <?=trans('Nazwa podziału')?>
+                                <?=$trans('Nazwa podziału')?>
                             </th>
                             <th>
-                                <?=trans('Podgląd węzłów')?>
+                                <?=$trans('Podgląd węzłów')?>
                             </th>
                             <th></th>
                         </tr>

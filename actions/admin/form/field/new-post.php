@@ -5,7 +5,7 @@ $settings = [];
 
 require ACTIONS_PATH."/admin/form/field/types/{$type}-{$request->method}.php";
 
-GC\Storage\Database::transaction(function() use ($form_id, $settings) {
+GC\Storage\Container::get('database')->transaction(function() use ($form_id, $settings) {
     GC\Model\Form\Position::insert([
         'form_id' => $form_id,
         'field_id' => GC\Model\Form\Field::insert([
@@ -18,5 +18,5 @@ GC\Storage\Database::transaction(function() use ($form_id, $settings) {
     ]);
 });
 
-setNotice(trans('Pole "%s" zostało utworzone.', [$_POST['name']]));
+setNotice($trans('Pole "%s" zostało utworzone.', [$_POST['name']]));
 GC\Response::redirect($breadcrumbs->getLastUrl());

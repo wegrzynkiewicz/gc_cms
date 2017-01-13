@@ -6,7 +6,7 @@ use GC\Storage\AbstractModel;
 use GC\Storage\Utility\NodeTrait;
 use GC\Storage\Utility\PrimaryTrait;
 use GC\Storage\AbstractNode;
-use GC\Storage\Database;
+use GC\Container;
 use GC\Url;
 
 class Menu extends AbstractNode
