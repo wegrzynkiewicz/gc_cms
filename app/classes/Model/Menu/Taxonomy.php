@@ -4,7 +4,7 @@ namespace GC\Model\Menu;
 
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\PrimaryTrait;
-use GC\Container;
+use GC\Data;
 
 class Taxonomy extends AbstractModel
 {

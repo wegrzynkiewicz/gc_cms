@@ -5,8 +5,9 @@ $breadcrumbs->push($request->path, $headTitle, 'fa-unlock-alt');
 
 $_POST = [];
 
-require ACTIONS_PATH.'/admin/parts/header.html.php';
-require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
+?>
+<?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
+<?php require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -29,7 +30,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                     'name' => 'new_password',
                     'type' => 'password',
                     'label' => 'Nowe hasło',
-                    'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', GC\Container::get('config')['password']['minLength']),
+                    'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', GC\Data::get('config')['password']['minLength']),
                 ])?>
 
                 <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
@@ -59,7 +60,7 @@ $(function () {
             },
             new_password: {
                 required: true,
-                minlength : <?=GC\Container::get('config')['password']['minLength']?>
+                minlength : <?=GC\Data::get('config')['password']['minLength']?>
             },
             confirm_password: {
                 required: true,
@@ -72,7 +73,7 @@ $(function () {
             },
             new_password: {
                 required: "<?=$trans('Wprowadź nowe hasło')?>",
-                minlength: "<?=$trans('Nowe hasło powinno mieć przynajmniej %s znaków', [GC\Container::get('config')['password']['minLength']])?>"
+                minlength: "<?=$trans('Nowe hasło powinno mieć przynajmniej %s znaków', [GC\Data::get('config')['password']['minLength']])?>"
             },
             confirm_password: {
                 required: "<?=$trans('Musisz powtórzyć swoje nowe hasło dla bezpieczeństwa')?>",

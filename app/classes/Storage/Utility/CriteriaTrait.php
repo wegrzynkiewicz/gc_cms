@@ -3,7 +3,7 @@
 namespace GC\Storage\Utility;
 
 use GC\Assert;
-use GC\Container;
+use GC\Data;
 use GC\Storage\Criteria;
 
 /**
@@ -24,7 +24,7 @@ trait CriteriaTrait
 
         $select = implode(', ', $columns);
         $sql = self::sql("SELECT {$select} FROM ::table {$criteria}");
-        $rows = Container::get('database')->fetchAll($sql, $criteria->getValues());
+        $rows = Data::get('database')->fetchAll($sql, $criteria->getValues());
 
         return $rows;
     }
@@ -38,7 +38,7 @@ trait CriteriaTrait
         $copy->clearLimit();
         $copy->clearSort();
         $sql = self::sql("SELECT COUNT(*) AS count FROM ::table {$copy}");
-        $data = Container::get('database')->fetch($sql, $copy->getValues());
+        $data = Data::get('database')->fetch($sql, $copy->getValues());
 
         return intval($data['count']);
     }

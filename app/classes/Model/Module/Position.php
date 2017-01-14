@@ -3,7 +3,7 @@
 namespace GC\Model\Module;
 
 use GC\Storage\AbstractModel;
-use GC\Container;
+use GC\Data;
 
 class Position extends AbstractModel
 {

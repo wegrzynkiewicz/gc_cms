@@ -1,5 +1,5 @@
 <?php
-$langs = GC\Container::get('config')['langs'];
+$langs = GC\Data::get('config')['langs'];
 $currentLang = $langs[GC\Auth\Staff::getEditorLang()];
 ?>
 

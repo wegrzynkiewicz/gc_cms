@@ -3,7 +3,7 @@
 namespace GC\Storage;
 
 use GC\Assert;
-use GC\Container;
+use GC\Data;
 
 class Criteria
 {

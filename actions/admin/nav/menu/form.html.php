@@ -15,7 +15,7 @@
                     'name' => 'type',
                     'label' => 'Typ węzła',
                     'help' => 'Wybierz typ węzła nawigacji w menu',
-                    'options' => GC\Container::get('config')['nodeTypes'],
+                    'options' => GC\Data::get('config')['nodeTypes'],
                     'firstOption' => 'Wybierz typ węzła',
                 ])?>
             </div>

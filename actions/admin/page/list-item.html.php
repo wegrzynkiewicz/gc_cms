@@ -1,4 +1,4 @@
-<?php $preview = empty($page['image']) ? GC\Url::assets(GC\Container::get('config')['noImageUrl']): $page['image']; ?>
+<?php $preview = empty($page['image']) ? GC\Url::assets(GC\Data::get('config')['noImageUrl']): $page['image']; ?>
 
 <tr>
     <td>

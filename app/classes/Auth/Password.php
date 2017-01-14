@@ -2,7 +2,7 @@
 
 namespace GC\Auth;
 
-use GC\Container;
+use GC\Data;
 
 class Password
 {
@@ -27,7 +27,7 @@ class Password
         return password_hash(
             static::salt($securePassword),
             PASSWORD_DEFAULT,
-            Container::get('config')['password']['options']
+            Data::get('config')['password']['options']
         );
     }
 
@@ -39,7 +39,7 @@ class Password
         return password_needs_rehash(
             $passwordHash,
             PASSWORD_DEFAULT,
-            Container::get('config')['password']['options']
+            Data::get('config')['password']['options']
         );
     }
 
@@ -56,6 +56,6 @@ class Password
      */
     public static function salt($securePassword)
     {
-        return $securePassword.Container::get('config')['password']['staticSalt'];
+        return $securePassword.Data::get('config')['password']['staticSalt'];
     }
 }

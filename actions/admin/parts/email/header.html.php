@@ -16,7 +16,7 @@
 				<table border="0" cellpadding="0" cellspacing="0" class="container" width="600">
 					<tr>
 						<td align="left" class="container-padding header">
-                            <?=$trans(GC\Container::get('config')['email']['headerTitle'])?>
+                            <?=$trans(GC\Data::get('config')['email']['headerTitle'])?>
                         </td>
 					</tr>
 					<tr>

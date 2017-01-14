@@ -5,7 +5,7 @@ namespace GC\Model\Form;
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\PrimaryTrait;
 use GC\Storage\Utility\PositionTrait;
-use GC\Container;
+use GC\Data;
 
 class Position extends AbstractModel
 {

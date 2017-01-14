@@ -13,8 +13,9 @@ foreach (def($settings, 'emails', []) as $email) {
 
 $_POST['form'] = $content;
 
-require ACTIONS_PATH.'/admin/parts/header.html.php';
-require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
+?>
+<?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
+<?php require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -33,7 +34,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                     'name' => 'theme',
                     'label' => 'Szablon',
                     'help' => 'Wybierz jeden z dostępnych szablonów dla formularza',
-                    'options' => GC\Container::get('config')['moduleThemes']['form'],
+                    'options' => GC\Data::get('config')['moduleThemes']['form'],
                 ])?>
 
                 <?=GC\Render::action('/admin/parts/input/select2-tags.html.php', [

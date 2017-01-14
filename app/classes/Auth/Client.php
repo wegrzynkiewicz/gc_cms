@@ -2,7 +2,7 @@
 
 namespace GC\Auth;
 
-use GC\Container;
+use GC\Data;
 use RuntimeException;
 
 class Client
@@ -20,6 +20,6 @@ class Client
              return $_SESSION['lang']['staff'];
          }
 
-         return Container::get('config')['lang']['clientDefault'];
+         return Data::get('config')['lang']['clientDefault'];
      }
 }

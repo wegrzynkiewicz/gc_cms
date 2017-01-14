@@ -4,26 +4,29 @@ namespace GC;
 
 use RuntimeException;
 
-class Container
+class Data
 {
+    public static $config;
+
     private static $services = [];
     private static $lazyServices = [];
 
     public static function get($name)
     {
+        if (isset(static::$services[$name])) {
+            return static::$services[$name];
+        }
+
         if (isset(static::$lazyServices[$name])) {
             $callback = static::$lazyServices[$name];
-            static::$services[$name] = $callback();
             unset(static::$lazyServices[$name]);
+
+            return static::$services[$name] = $callback();
         }
 
-        if (!isset(static::$services[$name])) {
-            throw new RuntimeException(sprintf(
-                'Service named (%s) does not exists', $name
-            ));
-        }
-
-        return static::$services[$name];
+        throw new RuntimeException(sprintf(
+            'Service named (%s) does not exists', $name
+        ));
     }
 
     public static function &getAllServices()

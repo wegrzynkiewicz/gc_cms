@@ -1,8 +1,9 @@
 <?php
 
-$_POST = GC\Container::get('staff')->getData();
+$_POST = GC\Data::get('staff')->getData();
 
-require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
+?>
+<?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">

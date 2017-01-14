@@ -6,15 +6,16 @@ $count = GC\Model\Form\Sent::select()
     ->fetch()
     ['count'];
 
-require ACTIONS_PATH.'/admin/parts/header.html.php';
-require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
+?>
+<?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
+<?php require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">
         <div class="simple-box">
             <?php if ($count == 0): ?>
                 <?=$trans('Nie znaleziono żadnego wysłanego formularza w języku: ')?>
-                <?=GC\Render::action('/admin/parts/language.html.php')?>
+                <?php require ACTIONS_PATH.'/admin/parts/language.html.php'; ?>
             <?php else: ?>
                 <form action="" method="post" id="form" class="form-horizontal">
                     <table class="table vertical-middle" data-table="">
@@ -46,7 +47,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                 </form>
             <?php endif ?>
         </div>
-        <?=GC\Render::action('/admin/parts/input/submitButtons.html.php')?>
+        <?php require ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php'; ?>
     </div>
 </div>
 
@@ -106,10 +107,10 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 <script>
     $(function(){
         var optionsTemplate = $('#options-template').html();
-        var statuses = <?=json_encode(GC\Container::get('config')['formStatuses'])?>;
+        var statuses = <?=json_encode(GC\Data::get('config')['formStatuses'])?>;
         var table = $('[data-table]').DataTable({
             order: [[2, 'desc']],
-            iDisplayLength: <?=GC\Container::get('config')['dataTable']['iDisplayLength']?>,
+            iDisplayLength: <?=GC\Data::get('config')['dataTable']['iDisplayLength']?>,
 	        processing: true,
             serverSide: true,
             searchDelay: 500,

@@ -1,6 +1,6 @@
 <?php
     $value = inputValue($name);
-    $preview = empty($value) ? GC\Url::assets(GC\Container::get('config')['noImageUrl']): $value;
+    $preview = empty($value) ? GC\Url::assets(GC\Data::get('config')['noImageUrl']): $value;
 ?>
 
 <div class="form-group">
@@ -60,7 +60,7 @@
         });
 
         $('#<?=$name?>_delete').click( function(){
-            $('#<?=$name?>_preview').attr('src', '<?=GC\Url::assets(GC\Container::get('config')['noImageUrl'])?>');
+            $('#<?=$name?>_preview').attr('src', '<?=GC\Url::assets(GC\Data::get('config')['noImageUrl'])?>');
             $('#<?=$name?>_source').val('');
         })
     });

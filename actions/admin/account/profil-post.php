@@ -1,6 +1,7 @@
 <?php
 
-GC\Model\Staff\Staff::updateByPrimaryId($staff['staff_id'], [
+$staff_id = GC\Data::get('staff')['staff_id'];
+GC\Model\Staff\Staff::updateByPrimaryId($staff_id, [
     'lang' => post('lang'),
 ]);
 

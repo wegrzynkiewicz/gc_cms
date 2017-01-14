@@ -22,7 +22,7 @@
                         <?=$trans('W przypadku gdy pracownik należy do wielu grup, uprawnienia te są łączone.')?>
                     </p>
 
-                    <?php foreach (GC\Container::get('config')['permissions'] as $perm => $label): ?>
+                    <?php foreach (GC\Data::get('config')['permissions'] as $perm => $label): ?>
                         <div class="checkbox">
                             <label>
                                 <input name="permissions[]"

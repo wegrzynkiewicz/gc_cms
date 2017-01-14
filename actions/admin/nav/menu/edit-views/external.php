@@ -15,5 +15,5 @@ if ($menu_id) {
 <?=GC\Render::action('/admin/parts/input/selectbox.html.php', [
     'name' => 'target',
     'label' => 'Sposób załadowania adresu',
-    'options' => GC\Container::get('config')['navNodeTargets'],
+    'options' => GC\Data::get('config')['navNodeTargets'],
 ])?>

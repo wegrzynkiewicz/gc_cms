@@ -2,7 +2,7 @@
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
         <i class="fa fa-user fa-fw"></i>
         <span class="hidden-xs hidden-sm">
-            <?=e(GC\Container::get('staff')['name'])?>
+            <?=e(GC\Data::get('staff')['name'])?>
         </span>
         <b class="caret"></b>
     </a>

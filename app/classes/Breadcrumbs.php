@@ -11,25 +11,24 @@ class Breadcrumbs
         return $this->links;
     }
 
-    public function push($url, $title, $icon = null)
+    public function push(array $data)
     {
-        array_push($this->links, $this->wrap($url, $title, $icon));
+        array_push($this->links, $data);
     }
 
-    public function unshift($url, $title, $icon = null)
+    public function unshift(array $data)
     {
-        array_unshift($this->links, $this->wrap($url, $title, $icon));
+        array_unshift($this->links, $data);
     }
 
     public function getBeforeLastUrl()
     {
         $beforeLast = count($this->links)-2;
         if (isset($this->links[$beforeLast])) {
-
             return $this->links[$beforeLast]['url'];
         }
 
-        return '';
+        return '/';
     }
 
     public function getLastUrl()
@@ -39,15 +38,6 @@ class Breadcrumbs
             return $this->links[$last]['url'];
         }
 
-        return '';
-    }
-
-    protected function wrap($url, $title, $icon)
-    {
-        return array(
-            'title' => $title,
-            'url' => $url,
-            'icon' => $icon,
-        );
+        return '/';
     }
 }

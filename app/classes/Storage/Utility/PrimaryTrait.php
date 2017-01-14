@@ -3,7 +3,7 @@
 namespace GC\Storage\Utility;
 
 use GC\Assert;
-use GC\Container;
+use GC\Data;
 
 /**
  * Zbior funkcji pomagających operować na kluczu głownym tabeli

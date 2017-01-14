@@ -7,7 +7,7 @@ use GC\Storage\Utility\PrimaryTrait;
 use GC\Url;
 use GC\Logger;
 use GC\Response;
-use GC\Container;
+use GC\Data;
 use RuntimeException;
 
 class Staff extends AbstractModel

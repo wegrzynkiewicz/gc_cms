@@ -5,7 +5,7 @@ namespace GC\Model\Product;
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\PrimaryTrait;
 use GC\Storage\Utility\ContainFrameTrait;
-use GC\Container;
+use GC\Data;
 
 class Product extends AbstractModel
 {

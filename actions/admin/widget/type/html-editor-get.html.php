@@ -5,8 +5,9 @@ $breadcrumbs->push($request->path, $headTitle);
 
 $_POST['content'] = $content;
 
-require ACTIONS_PATH.'/admin/parts/header.html.php';
-require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
+?>
+<?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
+<?php require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">

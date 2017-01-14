@@ -5,7 +5,7 @@ namespace GC\Model\Module;
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\PrimaryTrait;
 use GC\Storage\Utility\JoinTrait;
-use GC\Container;
+use GC\Data;
 
 class File extends AbstractModel
 {

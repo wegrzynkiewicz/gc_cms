@@ -2,7 +2,8 @@
 
 $_POST = array_merge($module, $settings);
 
-require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
+?>
+<?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -34,7 +35,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                         'name' => 'theme',
                         'label' => 'Szablon',
                         'help' => 'Wybierz jeden z dostępnych szablonów galerii',
-                        'options' => GC\Container::get('config')['moduleThemes']['gallery'],
+                        'options' => GC\Data::get('config')['moduleThemes']['gallery'],
                     ])?>
                 </fieldset>
             </div>

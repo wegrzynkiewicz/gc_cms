@@ -8,7 +8,7 @@ use GC\Storage\Utility\PrimaryTrait;
 use GC\Storage\Utility\TaxonomyTrait;
 use GC\Storage\Utility\ContainFrameTrait;
 use GC\Storage\AbstractNode;
-use GC\Container;
+use GC\Data;
 
 class Node extends AbstractNode
 {
@@ -31,7 +31,7 @@ class Node extends AbstractNode
     public static function selectAllForTaxonomyTree()
     {
         $sql = self::sql("SELECT tax_id, node_id, parent_id, position, post_id, name FROM gc_post_nodes JOIN gc_frames USING (frame_id) JOIN gc_post_membership USING(node_id) JOIN gc_post_tree USING(node_id)");
-        $rows = Container::get('database')->fetchAll($sql);
+        $rows = Data::get('database')->fetchAll($sql);
 
         return $rows;
     }
@@ -39,7 +39,7 @@ class Node extends AbstractNode
     public static function mapNameByPostId($post_id)
     {
         $sql = self::sql("SELECT ::primary, name FROM ::table LEFT JOIN ::post_membership AS p USING (::primary) LEFT JOIN ::frames USING (frame_id) WHERE p.post_id = ?");
-        $rows = Container::get('database')->fetchByMap($sql, [intval($post_id)], static::$primary, 'name');
+        $rows = Data::get('database')->fetchByMap($sql, [intval($post_id)], static::$primary, 'name');
 
         return $rows;
     }

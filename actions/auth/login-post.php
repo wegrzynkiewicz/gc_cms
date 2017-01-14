@@ -17,7 +17,7 @@ if (!$user) {
 $password = $_POST['password'];
 
 # jeżeli hasło w bazie nie jest zahaszowane, a zgadza się
-if (GC\Container::get('config')['debug']['enabled'] and $user and $password === $user['password']) {
+if (GC\Data::get('config')['debug']['enabled'] and $user and $password === $user['password']) {
     $newPasswordHash = GC\Auth\Password::hash($password);
     GC\Model\Staff\Staff::updateByPrimaryId($user['staff_id'], [
         'password' => $newPasswordHash,

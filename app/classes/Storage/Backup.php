@@ -5,7 +5,7 @@ namespace GC\Storage;
 use GC\Disc;
 use GC\Logger;
 use GC\Password;
-use GC\Container;
+use GC\Data;
 use GC\Model\Dump;
 use Ifsnop\Mysqldump as IMysqldump;
 
@@ -15,7 +15,7 @@ class Backup
 
     public static function make($name)
     {
-        $dumpPath = Container::get('config')['dump']['path'];
+        $dumpPath = Data::get('config')['dump']['path'];
         $time = time();
         $creation_datetime = date('Y-m-d-His', $time);
         $filepath = "{$dumpPath}/dump-{$creation_datetime}.sql.gz";
@@ -33,10 +33,10 @@ class Backup
     {
         Disc::makeFile($filename);
 
-        $dumpConfig = Container::get('config')['dump'];
-        $dbConfig = Container::get('config')['database'];
+        $dumpConfig = Data::get('config')['dump'];
+        $dbConfig = Data::get('config')['database'];
 
-        Container::get('logger')->dumpExport(relativePath($filename));
+        Data::get('logger')->dumpExport(relativePath($filename));
 
         $dump = new IMysqldump\Mysqldump(
             $dbConfig['dns'],
@@ -52,11 +52,11 @@ class Backup
     {
         $file = $filepath;
 
-        Container::get('logger')->dumpImport($file);
+        Data::get('logger')->dumpImport($file);
 
         if (pathinfo($filepath, \PATHINFO_EXTENSION) === 'gz') {
 
-            $path = Container::get('config')['dump']['tmpPath'];
+            $path = Data::get('config')['dump']['tmpPath'];
             $file = $path.'/'.basename($filepath, '.gz');
             static::decompress($filepath, $file);
             static::openAndExecute($file);
@@ -83,7 +83,7 @@ class Backup
             if (preg_match('~' . preg_quote(static::$delimiter, '~') . '\s*$~iS', end($query)) === 1) {
                 $query = trim(implode('', $query));
 
-                Container::get('database')->pdo->exec($query);
+                Data::get('database')->pdo->exec($query);
             }
 
             if (is_string($query) === true) {

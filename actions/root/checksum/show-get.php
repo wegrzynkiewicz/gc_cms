@@ -16,8 +16,9 @@ $lines = explode('<br />', $code);
 $lineCount = count($lines);
 $padLength = strlen($lineCount);
 
-require ACTIONS_PATH.'/admin/parts/header.html.php';
-require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
+?>
+<?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
+<?php require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
 <div class="<?=$status ? 'bg-success' : 'bg-danger'?>">
     <pre class="simple-box" style="background-color: initial">SHA1: <span class=""><?=$checksum?></span></pre>

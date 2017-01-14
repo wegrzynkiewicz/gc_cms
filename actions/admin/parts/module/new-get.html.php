@@ -3,15 +3,16 @@
 $headTitle = $trans('Dodawanie nowego modułu');
 $breadcrumbs->push($request->path, $headTitle);
 
-require ACTIONS_PATH.'/admin/parts/header.html.php';
-require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
+?>
+<?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
+<?php require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
         <form action="" method="post" class="form-horizontal">
             <h3><?=$trans('Dostępne moduły')?></h3>
             <div class="row">
-                <?php foreach (GC\Container::get('config')['modules'] as $type => $module): ?>
+                <?php foreach (GC\Data::get('config')['modules'] as $type => $module): ?>
                     <div class="col-lg-3">
                         <button name="type"
                             type="submit"
@@ -26,7 +27,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                     </div>
                 <?php endforeach ?>
             </div>
-            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php')?>
+            <?php require ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php'; ?>
         </form>
     </div>
 </div>

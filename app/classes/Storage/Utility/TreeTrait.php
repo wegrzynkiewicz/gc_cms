@@ -2,7 +2,7 @@
 
 namespace GC\Storage\Utility;
 
-use GC\Container;
+use GC\Data;
 
 trait TreeTrait
 {
@@ -20,7 +20,7 @@ trait TreeTrait
         }
 
         $sql = self::sql("SELECT MAX(position) AS maximum FROM ::table AS p WHERE p.::taxonomy = ? AND parent_id {$condition} LIMIT 1");
-        $maxOrder =  Container::get('database')->fetch($sql, $data);
+        $maxOrder =  Data::get('database')->fetch($sql, $data);
 
         return $maxOrder['maximum'] + 1;
     }

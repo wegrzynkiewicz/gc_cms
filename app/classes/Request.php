@@ -22,7 +22,7 @@ class Request
         $this->path = rtrim(parse_url($rawRequest, \PHP_URL_PATH), '/');
         $this->method = strtolower($_SERVER['REQUEST_METHOD']);
 
-        Container::get('logger')->request(
+        Data::get('logger')->request(
             $_SERVER['REQUEST_METHOD'].' '.$this->path, $_REQUEST
         );
 

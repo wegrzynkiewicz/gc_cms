@@ -1,13 +1,13 @@
 <?php
 
 # panel roota jest dostępny tylko jeżeli jest włączony debug
-if (!GC\Container::get('config')['debug']['enabled']) {
+if (!GC\Data::get('config')['debug']['enabled']) {
     GC\Response::redirect('/');
 }
 
 # utworzenie obiektu reprezentującego pracownika, sprawdza czy jest zalogowany
 $staff = GC\Auth\Staff::createFromSession();
-GC\Container::set('staff', $staff);
+GC\Data::set('staff', $staff);
 
 $breadcrumbs = new GC\Breadcrumbs();
 $breadcrumbs->push('/admin', 'Dashboard', 'fa-dashboard');

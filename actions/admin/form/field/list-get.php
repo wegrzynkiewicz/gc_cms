@@ -2,7 +2,8 @@
 
 $fields = GC\Model\Form\Field::joinAllWithKeyByForeign($form_id);
 
-require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
+?>
+<?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">

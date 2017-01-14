@@ -3,7 +3,8 @@
 $pages = GC\Model\Page::selectWithFrames()->fetchByPrimaryKey();
 $menuTree = GC\Model\Menu\Menu::buildTreeByTaxonomyId($nav_id);
 
-require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
+?>
+<?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">

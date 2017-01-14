@@ -5,15 +5,16 @@ $widgets = GC\Model\Widget::select()
     ->sort('name', 'ASC')
     ->fetchByPrimaryKey();
 
-require ACTIONS_PATH.'/admin/parts/header.html.php';
-require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
+?>
+<?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
+<?php require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">
         <div class="simple-box">
             <?php if (empty($widgets)): ?>
                 <?=$trans('Nie znaleziono żadnych widżetów w języku: ')?>
-                <?=GC\Render::action('/admin/parts/language.html.php')?>
+                <?php require ACTIONS_PATH.'/admin/parts/language.html.php'; ?>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">
                     <thead>
@@ -36,7 +37,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                                     </a>
                                 </td>
                                 <td>
-                                    <?=$trans(GC\Container::get('config')['widgetTypes'][$widget['type']])?>
+                                    <?=$trans(GC\Data::get('config')['widgetTypes'][$widget['type']])?>
                                 </td>
                             </tr>
                         <?php endforeach ?>
@@ -44,7 +45,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                 </table>
             <?php endif ?>
         </div>
-        <?=GC\Render::action('/admin/parts/input/submitButtons.html.php')?>
+        <?php require ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php'; ?>
     </div>
 </div>
 

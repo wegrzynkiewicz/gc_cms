@@ -10,15 +10,16 @@ $counts = GC\Model\Form\Sent::select()
     ->groupBy('form_id')
     ->fetchByKey('form_id');
 
-require ACTIONS_PATH.'/admin/parts/header.html.php';
-require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
+?>
+<?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
+<?php require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">
         <div class="simple-box">
             <?php if (empty($forms)): ?>
                 <?=$trans('Nie znaleziono żadnego formularza w języku: ')?>
-                <?=GC\Render::action('/admin/parts/language.html.php')?>
+                <?php require ACTIONS_PATH.'/admin/parts/language.html.php'; ?>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">
                     <thead>
@@ -40,7 +41,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                 </table>
             <?php endif ?>
         </div>
-        <?=GC\Render::action('/admin/parts/input/submitButtons.html.php')?>
+        <?php require ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php'; ?>
     </div>
 </div>
 

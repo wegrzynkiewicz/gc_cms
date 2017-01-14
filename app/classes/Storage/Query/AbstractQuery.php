@@ -3,7 +3,7 @@
 namespace GC\Storage\Query;
 
 use GC\Assert;
-use GC\Container;
+use GC\Data;
 
 abstract class AbstractQuery
 {

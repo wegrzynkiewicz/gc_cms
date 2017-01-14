@@ -2,7 +2,7 @@
 
 namespace GC\Auth;
 
-use GC\Container;
+use GC\Data;
 use GC\Url;
 use GC\Logger;
 use GC\Response;
@@ -23,6 +23,7 @@ class Staff extends AbstractEntity
                 'name',
                 'email',
                 'root',
+                'lang',
                 'force_change_password',
             ])
             ->equals('staff_id', $staff_id)
@@ -55,7 +56,7 @@ class Staff extends AbstractEntity
             Response::redirect('/auth/force-change-password');
         }
 
-        Container::get('logger')->staff($data['name']);
+        Data::get('logger')->staff($data['name']);
     }
 
     /**
@@ -64,7 +65,7 @@ class Staff extends AbstractEntity
     public static function abort($message)
     {
         unset($_SESSION['staff']);
-        Container::get('logger')->logout($message);
+        Data::get('logger')->logout($message);
         Response::redirect('/auth/login');
     }
 
@@ -97,7 +98,7 @@ class Staff extends AbstractEntity
             return $_SESSION['staff']['langEditor'];
         }
 
-        return Container::get('config')['lang']['editorDefault'];
+        return Data::get('config')['lang']['editorDefault'];
     }
 
     /**
@@ -124,7 +125,7 @@ class Staff extends AbstractEntity
     public function redirectIfUnauthorized(array $permissions = [])
     {
         if (!$this->hasPermissions($permissions)) {
-            Container::get('logger')->deny("Not authorized", $permissions);
+            Data::get('logger')->deny("Not authorized", $permissions);
             $perm = count($permissions) > 0 ? array_shift($permissions) : 'default';
             Response::redirect("/admin/account/deny/{$perm}");
         }
@@ -144,6 +145,6 @@ class Staff extends AbstractEntity
      */
     public static function refreshSessionTimeout()
     {
-        $_SESSION['staff']['sessionTimeout'] = time() + Container::get('config')['session']['staffTimeout'];
+        $_SESSION['staff']['sessionTimeout'] = time() + Data::get('config')['session']['staffTimeout'];
     }
 }

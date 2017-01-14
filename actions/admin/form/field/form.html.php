@@ -22,7 +22,7 @@
                         'name' => 'type',
                         'label' => 'Typ pola',
                         'help' => 'Typ pola określa jego wygląd i zachowanie. Typu nie można później zmienić.',
-                        'options' => GC\Container::get('config')['formFieldTypes'],
+                        'options' => GC\Data::get('config')['formFieldTypes'],
                         'firstOption' => 'Wybierz typ pola',
                     ])?>
                 <?php endif ?>

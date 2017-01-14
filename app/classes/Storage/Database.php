@@ -2,7 +2,7 @@
 
 namespace GC\Storage;
 
-use GC\Container;
+use GC\Data;
 
 /**
  * Słuzy do wykonywania zapytań do bazy danych
@@ -16,7 +16,7 @@ class Database
     {
         $this->pdo = $pdo;
 
-        if (Container::get('request')->isMethod('POST')) {
+        if (Data::get('request')->isMethod('POST')) {
             $this->pdo->beginTransaction();
         }
     }
@@ -132,7 +132,7 @@ class Database
             return $this->prefix.$matches[1];
         }, $sql);
 
-        Container::get('logger')->query(
+        Data::get('logger')->query(
             ($this->pdo->inTransaction() ? '(TRANSACTION) :: ' : '').$sql,
             $values
         );

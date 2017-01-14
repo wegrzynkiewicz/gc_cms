@@ -18,25 +18,32 @@ class Response
     }
 
     /**
-     * Przekierowuje na zadany adres
+     * Przekierowuje na zewnętrzny zadany adres
      */
-    public static function redirect($location, $code = 303)
+    public static function absoluteRedirect($location, $code = 303)
     {
-        $url = Url::make($location);
-
         http_response_code($code);
-        header("Location: {$url}");
+        header("Location: {$location}");
 
-        Container::get('logger')->redirect(
+        Data::get('logger')->redirect(
             sprintf("%s %s :: Time: %ss :: Memory: %sMiB",
                 $code,
-                $url,
-                microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'],
+                $location,
+                microtime(true) - START_TIME,
                 memory_get_peak_usage(true) / 1048576
             )
         );
 
         die();
+    }
+
+    /**
+     * Przekierowuje na zadany adres
+     */
+    public static function redirect($location, $code = 303)
+    {
+        $url = Url::make($location);
+        static::absoluteRedirect($url, $code);
     }
 
     /**

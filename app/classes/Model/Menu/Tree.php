@@ -4,7 +4,7 @@ namespace GC\Model\Menu;
 
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\TreeTrait;
-use GC\Container;
+use GC\Data;
 
 class Tree extends AbstractModel
 {

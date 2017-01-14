@@ -56,8 +56,9 @@ function ini_access($access)
     return implode('&nbsp;|&nbsp;', $values);
 }
 
-require ACTIONS_PATH.'/admin/parts/header.html.php';
-require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
+?>
+<?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
+<?php require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
 <table class="simple-box table table-condensed table-bordered">
     <thead>

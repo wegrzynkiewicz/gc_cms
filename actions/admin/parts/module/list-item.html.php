@@ -14,7 +14,7 @@
         <div class="panel panel-default panel-module">
             <div class="panel-heading">
                 <a href="<?=GC\Url::mask("/{$module_id}/edit")?>">
-                    <?=$trans(GC\Container::get('config')['modules'][$module['type']]['name'])?>
+                    <?=$trans(GC\Data::get('config')['modules'][$module['type']]['name'])?>
                 </a>
                 <button data-toggle="modal"
                     data-id="<?=e($module_id)?>"

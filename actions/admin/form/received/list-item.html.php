@@ -1,5 +1,5 @@
 <?php
-$status = GC\Container::get('config')['formStatuses'][$message['status']];
+$status = GC\Data::get('config')['formStatuses'][$message['status']];
 ?>
 
 <tr class="<?=$status['class']?>">

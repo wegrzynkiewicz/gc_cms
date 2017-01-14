@@ -13,7 +13,8 @@ $groups = array_keys(GC\Model\Staff\Group::select()
 
 $_POST = $user;
 
-require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
+?>
+<?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">

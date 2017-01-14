@@ -2,7 +2,7 @@
 
 namespace GC\Storage\Utility;
 
-use GC\Container;
+use GC\Data;
 
 /**
  * Zbior funkcji pomagających operować na rekordach które przynależą do jakiejś grupy
@@ -20,7 +20,7 @@ trait JoinTrait
      public static function joinAllWithKeyByForeign($foreign_id)
      {
          $sql = self::sql("SELECT * FROM ::table LEFT JOIN ::joinTable AS p USING (::primary) WHERE p.::joinForeign = ? ORDER BY position ASC");
-         $rows = Container::get('database')->fetchByKey($sql, [intval($foreign_id)], static::$primary);
+         $rows = Data::get('database')->fetchByKey($sql, [intval($foreign_id)], static::$primary);
 
          return $rows;
      }
@@ -31,7 +31,7 @@ trait JoinTrait
      public static function joinAllWithFrameByForeign($foreign_id)
      {
          $sql = self::sql("SELECT * FROM ::table LEFT JOIN ::frames USING (frame_id) LEFT JOIN ::joinTable AS p USING (::primary) WHERE p.::joinForeign = ? ORDER BY position ASC");
-         $rows = Container::get('database')->fetchByKey($sql, [intval($foreign_id)], static::$primary);
+         $rows = Data::get('database')->fetchByKey($sql, [intval($foreign_id)], static::$primary);
 
          return $rows;
      }
@@ -42,7 +42,7 @@ trait JoinTrait
      protected static function deleteAllByForeign($foreign_id)
      {
          $sql = self::sql("DELETE rows FROM ::table AS rows LEFT JOIN ::joinTable AS p USING (::primary) WHERE p.::joinForeign = ?");
-         $affectedRows = Container::get('database')->execute($sql, [intval($foreign_id)]);
+         $affectedRows = Data::get('database')->execute($sql, [intval($foreign_id)]);
 
          return $affectedRows;
      }
@@ -53,7 +53,7 @@ trait JoinTrait
      protected static function deleteUnassignedByForeign()
      {
          $sql = self::sql("DELETE rows FROM ::table AS rows LEFT JOIN ::joinTable AS p USING(::primary) WHERE p.::joinForeign IS NULL");
-         $affectedRows = Container::get('database')->execute($sql);
+         $affectedRows = Data::get('database')->execute($sql);
 
          return $affectedRows;
      }

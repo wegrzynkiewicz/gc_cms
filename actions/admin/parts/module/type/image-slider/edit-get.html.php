@@ -2,7 +2,8 @@
 
 $_POST = $module;
 
-require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
+?>
+<?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -32,7 +33,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                     'name' => 'theme',
                     'label' => 'Szablon',
                     'help' => 'Wybierz jeden z dostępnych szablonów slajdera zdjęć',
-                    'options' => GC\Container::get('config')['moduleThemes']['image-slider'],
+                    'options' => GC\Data::get('config')['moduleThemes']['image-slider'],
                 ])?>
             </div>
 

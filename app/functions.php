@@ -75,6 +75,14 @@ function post($name, $default = '')
     return isset($_POST[$name]) ? $_POST[$name] : $default;
 }
 
+/**
+ * Pomocnicza dla sprawdzania czy dany element w tabeli $_SERVER istnieje
+ */
+function server($name, $default = '')
+{
+    return isset($_SERVER[$name]) ? $_SERVER[$name] : $default;
+}
+
 function transDateTime($dateTime)
 {
     return $dateTime;
@@ -235,7 +243,7 @@ function curlReCaptcha()
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_POSTFIELDS => [
-                'secret' => GC\Container::get('config')['reCaptcha']['secret'],
+                'secret' => GC\Data::get('config')['reCaptcha']['secret'],
                 'response' => post('g-recaptcha-response'),
                 'remoteip' => $_SERVER['REMOTE_ADDR']
             ]
@@ -247,7 +255,7 @@ function curlReCaptcha()
         if ($response) {
             return json_decode($response, true);
         }
-        GC\Container::get('logger')->curl($url.' '.curl_error($curl));
+        GC\Data::get('logger')->curl($url.' '.curl_error($curl));
     }
 
     return [

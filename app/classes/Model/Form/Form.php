@@ -5,7 +5,7 @@ namespace GC\Model\Form;
 use GC\Assert;
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\PrimaryTrait;
-use GC\Container;
+use GC\Data;
 
 class Form extends AbstractModel
 {

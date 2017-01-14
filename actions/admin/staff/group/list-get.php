@@ -13,7 +13,8 @@ foreach ($permissions as $permission) {
     $groupPermissions[$permission['group_id']][] = $permission['name'];
 }
 
-require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
+?>
+<?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -61,7 +62,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 </table>
             <?php endif ?>
         </div>
-        <?=GC\Render::action('/admin/parts/input/submitButtons.html.php')?>
+        <?php require ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php'; ?>
     </div>
 </div>
 
@@ -103,7 +104,7 @@ $(function(){
     });
 
     $('[data-table]').DataTable({
-        iDisplayLength: <?=GC\Container::get('config')['dataTable']['iDisplayLength']?>,
+        iDisplayLength: <?=GC\Data::get('config')['dataTable']['iDisplayLength']?>,
     });
 });
 </script>

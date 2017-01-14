@@ -11,8 +11,8 @@ if ($newPassword !== $confirmPassword) {
     return require ACTIONS_PATH.'/admin/account/force-change-password-get.php';
 }
 
-if (strlen($newPassword) < GC\Container::get('config')['password']['minLength']) {
-    $error = $trans('Hasło nie może być krótsze niż %s znaków', GC\Container::get('config')['password']['minLength']);
+if (strlen($newPassword) < GC\Data::get('config')['password']['minLength']) {
+    $error = $trans('Hasło nie może być krótsze niż %s znaków', GC\Data::get('config')['password']['minLength']);
 
     return require ACTIONS_PATH.'/admin/account/force-change-password-get.php';
 }

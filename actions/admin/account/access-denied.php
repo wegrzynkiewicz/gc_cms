@@ -4,8 +4,9 @@ $headTitle = $trans("Brak dostępu");
 
 $permission = array_shift($_SEGMENTS);
 
-require ACTIONS_PATH.'/admin/parts/header.html.php';
-require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
+?>
+<?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
+<?php require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -15,7 +16,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
             <?php else: ?>
                 <?=$trans("Nie masz uprawnień do:")?>
                 <strong>
-                    <?=$trans(GC\Container::get('config')['permissions'][$permission])?>
+                    <?=$trans(GC\Data::get('config')['permissions'][$permission])?>
                 </strong>
             <?php endif ?>
         </div>

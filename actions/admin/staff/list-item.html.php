@@ -23,7 +23,7 @@ $avatarUrl = empty($staff['avatar'])
     </td>
     <td>
         <?php foreach ($permissions as $permission): ?>
-            <?=$trans(GC\Container::get('config')['permissions'][$permission])?> <br>
+            <?=$trans(GC\Data::get('config')['permissions'][$permission])?> <br>
         <?php endforeach ?>
     </td>
     <td class="text-right">

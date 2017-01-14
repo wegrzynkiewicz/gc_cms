@@ -3,7 +3,7 @@
 namespace GC\Storage;
 
 use GC\Assert;
-use GC\Container;
+use GC\Data;
 use GC\Storage\Query;
 
 /**
@@ -23,7 +23,7 @@ abstract class AbstractModel extends AbstractEntity
      */
     public static function getDatabase()
     {
-        return Container::get('database');
+        return Data::get('database');
     }
 
     /**

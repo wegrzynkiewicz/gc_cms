@@ -21,7 +21,7 @@
             </div>
 
             <div class="pull-right" style="margin-right: 30px">
-                <?=$trans(GC\Container::get('config')['formFieldTypes'][$node['type']])?>
+                <?=$trans(GC\Data::get('config')['formFieldTypes'][$node['type']])?>
             </div>
 
             <div class="clearfix"></div>

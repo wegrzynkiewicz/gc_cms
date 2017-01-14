@@ -2,7 +2,8 @@
 
 $pages = GC\Model\Page::selectWithFrames()->fetchByPrimaryKey();
 
-require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
+?>
+<?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -32,7 +33,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
         <div class="simple-box">
             <?php if (empty($pages)): ?>
                 <?=$trans('Nie znaleziono żadnej strony w języku: ')?>
-                <?=GC\Render::action('/admin/parts/language.html.php')?>
+                <?php require ACTIONS_PATH.'/admin/parts/language.html.php'; ?>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">
                     <thead>
@@ -53,7 +54,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
                 </table>
             <?php endif ?>
         </div>
-        <?=GC\Render::action('/admin/parts/input/submitButtons.html.php')?>
+        <?php require ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php'; ?>
     </div>
 </div>
 
@@ -98,7 +99,7 @@ require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
         });
         $('[data-table]').DataTable({
             order: [[2, 'asc']],
-            iDisplayLength: <?=GC\Container::get('config')['dataTable']['iDisplayLength']?>,
+            iDisplayLength: <?=GC\Data::get('config')['dataTable']['iDisplayLength']?>,
         });
     });
 </script>

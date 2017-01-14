@@ -17,7 +17,7 @@ class Mail extends PHPMailer
     public function __construct()
     {
         parent::__construct(true);
-        $this->bindMailerFromConfig(\GC\Container::get('config'));
+        $this->bindMailerFromConfig(\GC\Data::get('config'));
     }
 
     protected function bindMailerFromConfig(array $config)
@@ -25,22 +25,22 @@ class Mail extends PHPMailer
         try {
             $this->SMTPDebug = false;
 
-            if (GC\Container::get('config')['email']['smtp']) {
+            if (GC\Data::get('config')['email']['smtp']) {
                 $this->isSMTP();
-                $this->Host = GC\Container::get('config')['email']['host'];
+                $this->Host = GC\Data::get('config')['email']['host'];
                 $this->SMTPAuth = true;
-                $this->Username = GC\Container::get('config')['email']['username'];
-                $this->Password = GC\Container::get('config')['email']['password'];
-                $this->SMTPSecure = GC\Container::get('config')['email']['SMTPsecure'];
-                $this->Port = GC\Container::get('config')['email']['port'];
+                $this->Username = GC\Data::get('config')['email']['username'];
+                $this->Password = GC\Data::get('config')['email']['password'];
+                $this->SMTPSecure = GC\Data::get('config')['email']['SMTPsecure'];
+                $this->Port = GC\Data::get('config')['email']['port'];
             }
 
-            $this->setFrom(GC\Container::get('config')['email.fromEmail'), GC\Config::get('email']['fromName']);
+            $this->setFrom(GC\Data::get('config')['email.fromEmail'), GC\Config::get('email']['fromName']);
             $this->CharSet = 'UTF-8';
             $this->isHTML(true);
 
         } catch (phpmailerException $exception) {
-            Container::get('logger')->logException($exception);
+            Data::get('logger')->logException($exception);
         }
     }
 
@@ -48,7 +48,7 @@ class Mail extends PHPMailer
     {
         $cssToInlineStyles = new CssToInlineStyles();
         $viewArgs['mail'] = $this;
-        $viewArgs['config'] = \GC\Container::get('config');
+        $viewArgs['config'] = \GC\Data::get('config');
         $html = Render::action($templateEmailPath, $viewArgs);
         $css = Render::action($stylePath);
         $content = $cssToInlineStyles->convert($html, $css);
@@ -78,7 +78,7 @@ class Mail extends PHPMailer
             'content' => serialize($this),
         ]);
 
-        Container::get('logger')->emailPush("$this->hash $this->Subject", array_keys($this->all_recipients));
+        Data::get('logger')->emailPush("$this->hash $this->Subject", array_keys($this->all_recipients));
     }
 
     public function send()
@@ -98,12 +98,12 @@ class Mail extends PHPMailer
                 'content' => serialize($this),
             ]);
 
-            Container::get('logger')->emailSent("$this->hash $this->Subject", array_keys($this->all_recipients));
+            Data::get('logger')->emailSent("$this->hash $this->Subject", array_keys($this->all_recipients));
 
             return true;
 
         } catch (phpmailerException $exception) {
-            Container::get('logger')->logException($exception);
+            Data::get('logger')->logException($exception);
         }
 
         return false;

@@ -2,6 +2,7 @@
 
 /** Plik zawiera definicje najważniejszych stałych i właściwości dla aplikacji */
 
+define('START_TIME', server('REQUEST_TIME_FLOAT', microtime(true))); # początkowy czas odpalenia aplikacji
 define('TEMPLATE', 'bootstrap-example'); # nazwa używanego szablonu
 define('ASSETS_URL', '/assets'); # adres do katalogu z zasobami
 define('ROOT_PATH', realpath(__DIR__.'/../../')); # ścieżka do katalogu głównego serwera www
@@ -35,7 +36,7 @@ return [
         'enabled' => true, # zezwala na nietypowe akcje (np: zmiana hasła admina, wejście do /actions/root)
         'inConstruction' => false, # wyświetla komunikat "strona w budowie" za każdym żądaniem
     ],
-    'seoUrl' => [ # związane z nazwą adresu url witryny
+    'seo' => [ # związane z nazwą adresu url witryny
         'forceHTTPS' => false, # wartość logiczna, nakazuje przekierowywanie na adres z lub bez https, null jeżeli możliwość wejścia z każdego protokolu
         'forceWWW' => false, # wartość logiczna, nakazuje przekierowywanie na adres z lub bez www, null jeżeli możliwość wejścia z każdego www.
         'forceDomain' => null, # nakazuje przekierowywanie na zadaną domenę, null jeżeli możliwość wejścia z każdej domeny.

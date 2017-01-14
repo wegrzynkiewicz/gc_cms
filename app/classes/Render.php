@@ -2,7 +2,7 @@
 
 namespace GC;
 
-use GC\Container;
+use GC\Data;
 use RuntimeException;
 
 class Render
@@ -15,7 +15,7 @@ class Render
      */
     public static function file($templateName, array $arguments = [], $prefix = '')
     {
-        extract(Container::getAllServices());
+        extract(Data::getAllServices());
         extract($arguments, EXTR_OVERWRITE);
 
         ob_start();

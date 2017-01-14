@@ -4,7 +4,7 @@ namespace GC\Model\Module;
 
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\PrimaryTrait;
-use GC\Container;
+use GC\Data;
 
 class Frame extends AbstractModel
 {

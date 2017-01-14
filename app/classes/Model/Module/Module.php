@@ -7,7 +7,7 @@ use GC\Model\Module\Item;
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\PrimaryTrait;
 use GC\Storage\Utility\JoinTrait;
-use GC\Container;
+use GC\Data;
 
 class Module extends AbstractModel
 {

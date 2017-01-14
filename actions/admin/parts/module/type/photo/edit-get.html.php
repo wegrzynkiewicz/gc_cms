@@ -4,8 +4,9 @@ $_POST = $settings;
 $_POST['name'] = $content;
 $_POST['theme'] = $module['theme'];
 
-require ACTIONS_PATH.'/admin/parts/header.html.php';
-require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
+?>
+<?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
+<?php require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -21,7 +22,7 @@ require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
                     'name' => 'theme',
                     'label' => 'Szablon',
                     'help' => 'Wybierz jeden z dostępnych szablonów dla zdjęcia',
-                    'options' => GC\Container::get('config')['moduleThemes']['photo'],
+                    'options' => GC\Data::get('config')['moduleThemes']['photo'],
                 ])?>
 
                 <?=GC\Render::action('/admin/parts/input/image.html.php', [

@@ -9,7 +9,7 @@
             name="<?=$name?>"
             class="form-control input">
 
-            <?php foreach (GC\Container::get('config')['langs'] as $code => $lang): ?>
+            <?php foreach (GC\Data::get('config')['langs'] as $code => $lang): ?>
                 <option value="<?=$code?>" data-flag="<?=$lang['flag']?>"
                     <?=selected($selectedValue == $code)?>>
                     <?=$trans($lang['name'])?>

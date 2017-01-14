@@ -2,7 +2,7 @@
 
 namespace GC\Storage\Utility;
 
-use GC\Container;
+use GC\Data;
 
 /**
  * Zbior funkcji pomagających operować na węźle
@@ -20,7 +20,7 @@ trait NodeTrait
     public static function buildTreeByTaxonomyId($tax_id)
     {
         $sql = self::sql("SELECT * FROM ::table AS n LEFT JOIN ::treeTable AS t USING (::primary) WHERE t.::taxonomy = ? ORDER BY t.position ASC");
-        $nodes =  Container::get('database')->fetchAll($sql, [$tax_id]);
+        $nodes =  Data::get('database')->fetchAll($sql, [$tax_id]);
         $tree = static::createTree($nodes);
 
         return $tree;
@@ -32,7 +32,7 @@ trait NodeTrait
     public static function buildTreeWithFrameByTaxonomyId($tax_id)
     {
         $sql = self::sql("SELECT * FROM ::table AS n LEFT JOIN ::treeTable AS t USING (::primary) LEFT JOIN ::frames USING (frame_id) WHERE t.::taxonomy = ? ORDER BY t.position ASC");
-        $nodes =  Container::get('database')->fetchAll($sql, [$tax_id]);
+        $nodes =  Data::get('database')->fetchAll($sql, [$tax_id]);
         $tree = static::createTree($nodes);
 
         return $tree;
@@ -53,7 +53,7 @@ trait NodeTrait
     protected static function deleteWithoutParentId()
     {
         $sql = self::sql("DELETE n FROM ::table AS n LEFT JOIN ::treeTable AS p USING(::primary) WHERE p.::taxonomy IS NULL");
-        $affectedRows = Container::get('database')->execute($sql);
+        $affectedRows = Data::get('database')->execute($sql);
 
         return $affectedRows;
     }
