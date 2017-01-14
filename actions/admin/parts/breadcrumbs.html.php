@@ -20,15 +20,15 @@
     <?php if (count($links)): ?>
         <ol class="breadcrumb">
             <?php foreach ($links as $i => $link): ?>
-                <?php $isLink = !(empty($link['url']) or $link['url'] == $request->path); ?>
-                <li class="<?=e($isLink ? '' : 'active')?>">
+                <?php $isLink = !(empty($link['href']) or $link['href'] == $request->path); ?>
+                <li class="<?=$isLink ? '' : 'active'?>">
                     <?php if ($isLink): ?>
-                        <a href="<?=e($link['url'])?>">
+                        <a href="<?=$link['href']?>">
                     <?php endif ?>
                         <?php if ($link['icon']): ?>
-                            <i class="fa <?=e($link['icon'])?> fa-fw"></i>
+                            <i class="fa <?=$link['icon']?> fa-fw"></i>
                         <?php endif ?>
-                        <?=($link['title'])?>
+                        <?=$link['name']?>
                     <?php if ($isLink): ?>
                         </a>
                     <?php endif ?>
