@@ -7,7 +7,10 @@ $name = reset($data);
 $localization = json_decode($message['localization'], true);
 
 $headTitle = $trans('Wyświetl wiadomość');
-$breadcrumbs->push($request->path, $headTitle);
+$breadcrumbs->push([
+    'url' => $request->path,
+    'name' => $headTitle,
+]);
 
 $_POST = $message;
 

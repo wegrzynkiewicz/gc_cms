@@ -1,7 +1,10 @@
 <?php
 
 $headTitle = $trans('Dodawanie nowego węzła');
-$breadcrumbs->push($request->path, $headTitle);
+$breadcrumbs->push([
+    'url' => $request->path,
+    'name' => $headTitle,
+]);
 
 $refreshUrl = GC\Url::mask("/edit-views");
 

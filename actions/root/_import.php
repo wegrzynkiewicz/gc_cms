@@ -10,8 +10,16 @@ $staff = GC\Auth\Staff::createFromSession();
 GC\Data::set('staff', $staff);
 
 $breadcrumbs = new GC\Breadcrumbs();
-$breadcrumbs->push('/admin', 'Dashboard', 'fa-dashboard');
-$breadcrumbs->push(null, 'Panel programisty', 'fa-bug');
+$breadcrumbs->push([
+    'url' => '/admin',
+    'name' => 'Dashboard',
+    'icon' => 'fa-dashboard',
+]);
+$breadcrumbs->push([
+    'url' => null,
+    'name' => 'Panel programisty',
+    'icon' => 'fa-bug',
+]);
 
 # panel roota jest dostępny tylko dla pracowników z polem 'root'
 if (!$staff['root']) {

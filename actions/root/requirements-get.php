@@ -1,7 +1,10 @@
 <?php
 
 $headTitle = "Wymagania systemowe";
-$breadcrumbs->push('/root/requirements', $headTitle);
+$breadcrumbs->push([
+    'url' => '/root/requirements',
+    'name' => $headTitle,
+]);
 
 $minimumPHPVersion = '5.5.9';
 $requiredExtensions = [

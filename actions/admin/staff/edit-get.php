@@ -3,7 +3,10 @@
 $staff_id = intval(array_shift($_PARAMETERS));
 $user = GC\Model\Staff\Staff::fetchByPrimaryId($staff_id);
 $headTitle = $trans('Edytowanie pracownika "%s"', [$user['name']]);
-$breadcrumbs->push($request->path, $headTitle);
+$breadcrumbs->push([
+    'url' => $request->path,
+    'name' => $headTitle,
+]);
 
 $groups = array_keys(GC\Model\Staff\Group::select()
     ->fields(['group_id', 'name'])

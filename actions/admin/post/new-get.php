@@ -1,7 +1,10 @@
 <?php
 
 $headTitle = $trans('Dodawanie nowego wpisu');
-$breadcrumbs->push($request->path, $headTitle);
+$breadcrumbs->push([
+    'url' => $request->path,
+    'name' => $headTitle,
+]);
 
 $checkedValues = [];
 

@@ -5,7 +5,10 @@ $frame_id = $page['frame_id'];
 
 $headTitle = $trans('Moduły na stronie "%s"', [$page['name']]);
 GC\Url::extendMask("/{$page_id}/module%s");
-$breadcrumbs->push(GC\Url::mask('/list'), $headTitle);
+$breadcrumbs->push([
+    'url' => GC\Url::mask('/list'),
+    'name' => $headTitle,
+]);
 
 $getPreviewUrl = function () use ($page_id) {
     return GC\Url::make("/page/{$page_id}");

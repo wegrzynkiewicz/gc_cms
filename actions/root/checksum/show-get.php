@@ -4,7 +4,11 @@ $base64 = array_shift($_SEGMENTS);
 $file = base64_decode($base64);
 
 $headTitle = sprintf('Źródło pliku "%s"', $file);
-$breadcrumbs->push($request->path, $headTitle, 'fa-file-o');
+$breadcrumbs->push([
+    'url' => $request->path,
+    'name' => $headTitle,
+    'icon' => 'fa-file-o',
+]);
 
 $filepath = ROOT_PATH.$file;
 $content = file_get_contents($filepath);

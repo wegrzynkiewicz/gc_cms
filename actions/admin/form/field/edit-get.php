@@ -3,7 +3,10 @@
 $field = GC\Model\Form\Field::fetchByPrimaryId($field_id);
 
 $headTitle = $trans('Edycja pola "%s"', [$field['name']]);
-$breadcrumbs->push($request->path, $headTitle);
+$breadcrumbs->push([
+    'url' => $request->path,
+    'name' => $headTitle,
+]);
 
 $refreshUrl = GC\Url::mask("/{$field_id}/types");
 $_POST = $field;

@@ -1,7 +1,10 @@
 <?php
 
 $headTitle = $trans('Dodawanie nowego modułu');
-$breadcrumbs->push($request->path, $headTitle);
+$breadcrumbs->push([
+    'url' => $request->path,
+    'name' => $headTitle,
+]);
 
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>

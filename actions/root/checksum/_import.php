@@ -2,7 +2,10 @@
 
 $headTitle = "Sumy kontrolne plików";
 GC\Url::extendMask('/root/checksum%s');
-$breadcrumbs->push(GC\Url::mask('/list'), $headTitle);
+$breadcrumbs->push([
+    'url' => GC\Url::mask('/list'),
+    'name' => $headTitle,
+]);
 
 $getFiles = function () {
     return array_filter(GC\Disc::globRecursive('*.*'), function ($value) {

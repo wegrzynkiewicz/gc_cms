@@ -3,5 +3,8 @@
 $taxonomy = GC\Model\Post\Taxonomy::fetchByPrimaryId($tax_id);
 $headTitle = $trans('%s - węzły', [$taxonomy['name']]);
 GC\Url::extendMask("/{$tax_id}/node%s");
-$breadcrumbs->push(GC\Url::mask('/tree'), $headTitle);
+$breadcrumbs->push([
+    'url' => GC\Url::mask('/tree'),
+    'name' => $headTitle,
+]);
 $node_id = intval(array_shift($_PARAMETERS));

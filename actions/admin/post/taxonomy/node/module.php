@@ -5,7 +5,10 @@ $frame_id = $node['frame_id'];
 
 $headTitle = $trans('Moduły w węźle "%s"', [$node['name']]);
 GC\Url::extendMask("/{$node_id}/module%s");
-$breadcrumbs->push(GC\Url::mask('/list'), $headTitle);
+$breadcrumbs->push([
+    'url' => GC\Url::mask('/list'),
+    'name' => $headTitle,
+]);
 
 $getPreviewUrl = function () use ($node_id) {
     return GC\Url::make("/post/node/{$node_id}");

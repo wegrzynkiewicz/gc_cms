@@ -1,4 +1,7 @@
 <?php
 
 $headTitle = $trans('Edycja modułu tekstowego');
-$breadcrumbs->push(GC\Url::mask('/edit'), $headTitle);
+$breadcrumbs->push([
+    'url' => GC\Url::mask('/edit'),
+    'name' => $headTitle,
+]);

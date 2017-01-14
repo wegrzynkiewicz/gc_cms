@@ -2,4 +2,8 @@
 
 $headTitle = $trans("Wpisy");
 GC\Url::extendMask('/post%s');
-$breadcrumbs->push(GC\Url::mask('/list'), $headTitle, 'fa-pencil-square-o');
+$breadcrumbs->push([
+    'url' => GC\Url::mask('/list'),
+    'name' => $headTitle,
+    'icon' => 'fa-pencil-square-o',
+]);

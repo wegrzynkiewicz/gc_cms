@@ -25,7 +25,7 @@
                     <?php if ($isLink): ?>
                         <a href="<?=$link['href']?>">
                     <?php endif ?>
-                        <?php if ($link['icon']): ?>
+                        <?php if (isset($link['icon'])): ?>
                             <i class="fa <?=$link['icon']?> fa-fw"></i>
                         <?php endif ?>
                         <?=$link['name']?>

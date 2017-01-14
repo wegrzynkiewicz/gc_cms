@@ -3,7 +3,10 @@
 $node = GC\Model\Menu\Menu::fetchByPrimaryId($menu_id);
 
 $headTitle = $trans('Edycja węzła "%s"', [$node['name']]);
-$breadcrumbs->push($request->path, $headTitle);
+$breadcrumbs->push([
+    'url' => $request->path,
+    'name' => $headTitle,
+]);
 
 $_POST = $node;
 $refreshUrl = GC\Url::mask("/{$menu_id}/edit-views");
