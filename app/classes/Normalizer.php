@@ -50,8 +50,8 @@ class Normalizer
         return true;
     }
 
-    public static function normalize($unformatted)
+    public function normalize($unformatted)
     {
-        normalize($unformatted);
+        return normalize($unformatted);
     }
 }

@@ -28,8 +28,10 @@
                 event.preventDefault();
                 var nextTime = new Date();
                 nextTime.setSeconds(nextTime.getSeconds() + sessionTimeout);
-                $.post(refreshUrl, function() {
-                    $('#session-countdown').countdown(nextTime);
+                $.post(refreshUrl, function(data, statusText, xhr) {
+                    if (xhr.status == 204) {
+                        $('#session-countdown').countdown(nextTime);
+                    }
                 });
             });
         });
