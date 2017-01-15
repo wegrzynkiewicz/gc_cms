@@ -15,7 +15,9 @@ $taxonomies = GC\Model\Post\Taxonomy::select()
         <div class="simple-box">
             <?php if (empty($taxonomies)): ?>
                 <?=$trans('Nie znaleziono podziałów wpisów w języku: ')?>
-                <?php require ACTIONS_PATH.'/admin/parts/language.html.php'; ?>
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/language.html.php', [
+                    'lang' => GC\Auth\Staff::getEditorLang(),
+                ])?>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">
                     <thead>

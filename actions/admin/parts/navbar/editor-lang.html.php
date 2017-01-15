@@ -1,8 +1,6 @@
 <?php
 $langs = $config['langs'];
-$currentLang = $langs[GC\Auth\Staff::getEditorLang()];
 ?>
-
 <?php if (count($langs) > 1): ?>
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -10,7 +8,7 @@ $currentLang = $langs[GC\Auth\Staff::getEditorLang()];
                 <?=$trans('Edytuj: ')?>
             </span>
             <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/language.html.php', [
-                'lang' => $currentLang,
+                'lang' => GC\Auth\Staff::getEditorLang(),
             ])?>
             <b class="caret"></b>
         </a>
@@ -19,7 +17,7 @@ $currentLang = $langs[GC\Auth\Staff::getEditorLang()];
                 <li>
                     <a href="<?=GC\Url::make("/admin/account/change-editor-lang/{$code}")?>">
                         <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/language.html.php', [
-                            'lang' => $lang,
+                            'lang' => $code,
                         ])?>
                     </a>
                 </li>

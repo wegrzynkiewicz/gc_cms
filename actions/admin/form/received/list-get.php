@@ -3,8 +3,7 @@
 $count = GC\Model\Form\Sent::select()
     ->fields('COUNT(*) AS count')
     ->equals('form_id', $form_id)
-    ->fetch()
-    ['count'];
+    ->fetch()['count'];
 
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
@@ -15,7 +14,9 @@ $count = GC\Model\Form\Sent::select()
         <div class="simple-box">
             <?php if ($count == 0): ?>
                 <?=$trans('Nie znaleziono żadnego wysłanego formularza w języku: ')?>
-                <?php require ACTIONS_PATH.'/admin/parts/language.html.php'; ?>
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/language.html.php', [
+                    'lang' => GC\Auth\Staff::getEditorLang(),
+                ])?>
             <?php else: ?>
                 <form action="" method="post" id="form" class="form-horizontal">
                     <table class="table vertical-middle" data-table="">

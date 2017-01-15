@@ -103,6 +103,11 @@ abstract class AbstractQuery
         return $this->$params;
     }
 
+    public function getSQL()
+    {
+        return call_user_func([$this->modelClass, 'sql'], $this->buildSQL());
+    }
+
     public function limit($limit)
     {
         $this->limit = $limit;
@@ -146,9 +151,4 @@ abstract class AbstractQuery
     }
 
     protected abstract function buildSQL();
-
-    protected function getSQL()
-    {
-        return call_user_func([$this->modelClass, 'sql'], $this->buildSQL());
-    }
 }

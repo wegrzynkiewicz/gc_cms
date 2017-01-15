@@ -42,7 +42,9 @@ unset($post);
         <div class="simple-box">
             <?php if (empty($posts)): ?>
                 <?=$trans('Nie znaleziono żadnych wpisów w języku: ')?>
-                <?php require ACTIONS_PATH.'/admin/parts/language.html.php'; ?>
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/language.html.php', [
+                    'lang' => GC\Auth\Staff::getEditorLang(),
+                ])?>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">
                     <thead>
