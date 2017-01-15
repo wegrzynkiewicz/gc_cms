@@ -4,6 +4,7 @@
 
 GC\Url::extendMask('/admin%s');
 
+# utworzenie okruszków chleba dla całego panelu admina
 $breadcrumbs = new GC\Breadcrumbs();
 $breadcrumbs->push([
     'url' => GC\Url::mask(),
@@ -13,4 +14,6 @@ $breadcrumbs->push([
 GC\Data::set('breadcrumbs', $breadcrumbs);
 
 # utworzenie obiektu reprezentującego pracownika, sprawdza czy jest zalogowany
-GC\Data::set('staff', GC\Auth\Staff::createFromSession());
+GC\Auth\Staff::startSession();
+$staff = GC\Auth\Staff::createFromSession();
+GC\Data::set('staff', $staff);

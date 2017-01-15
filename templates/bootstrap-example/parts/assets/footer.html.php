@@ -11,7 +11,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha384-DiTOB5DarLwdE9bzATOXhLQp6irFZIhtJreUNJiwMMDiHGu7LdRZeqZBveanC2zo" crossorigin="anonymous"></script>
 
 <?php
-$template = sprintf(TEMPLATE_PATH.'/parts/assets/footer-%s.html.php', GC\Auth\Client::getLang());
+$template = sprintf(TEMPLATE_PATH.'/parts/assets/footer-%s.html.php', GC\Auth\Visitor::getLang());
 if (is_readable($template)) {
     require $template;
 }
@@ -34,15 +34,4 @@ if (is_readable($template)) {
         loop: false,
         closeOnScroll: false,
     });
-</script>
-
-<script>
-$.ajaxSetup({
-    beforeSend: function(xhr, settings) {
-        if (!settings.crossDomain) {
-            xhr.setRequestHeader("X-CSRFToken", "<?=$_SESSION['csrf_token']?>")
-        }
-    }
-});
-$('form').append('<input type="hidden" name="csrf_token" value="<?=$_SESSION['csrf_token']?>"/>');
 </script>

@@ -1,4 +1,4 @@
-<?php $menu = GC\Model\Menu\Menu::buildTreeByWorkName("side", GC\Auth\Client::getLang()) ?>
+<?php $menu = GC\Model\Menu\Menu::buildTreeByWorkName("side", GC\Auth\Visitor::getLang()) ?>
 
 <?php if ($menu->hasChildren()): ?>
     <ol class="list-unstyled">

@@ -29,7 +29,7 @@
         $('#nav_files').elfinderInput({
             title: '<?=$trans('Przeglądaj pliki')?>',
             url: '<?=GC\Url::make('/admin/elfinder/connector')?>',
-            lang: '<?=GC\Auth\Client::getLang()?>',
+            lang: '<?=GC\Auth\Visitor::getLang()?>',
         }, function() {
 
         });

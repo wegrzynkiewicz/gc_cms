@@ -14,15 +14,10 @@ if (empty($url)) {
 }
 
 # sprawdza pierwszy segment w adresie czy nie jest jednym z dostępnych języków
-unset($_SESSION['lang']['routing']);
-if (strlen($_SEGMENTS[0]) === 2) {
-    foreach (array_keys($config['langs']) as $lang) {
-        if ($_SEGMENTS[0] == $lang) {
-            $_SESSION['lang']['routing'] = $lang;
-            array_shift($_SEGMENTS);
-            break;
-        }
-    }
+$lang = $_SEGMENTS[0];
+if (GC\Validate::installedLang($lang)) {
+    GC\Visitor::$langRequest = $lang;
+    array_shift($_SEGMENTS);
 }
 
 # jeżeli jedyny segment okazał się być językowym prefiksem wtedy do głowej

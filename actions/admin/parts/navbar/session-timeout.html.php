@@ -5,14 +5,14 @@
             <?=$trans('Do końca: ')?>
         </span>
         <i class="fa fa-clock-o fa-fw"></i>
-        <span id="session-countdown"><?=date("i:s", $config['session']['staffTimeout'])?></span>
+        <span id="session-countdown"><?=date("i:s", $config['session']['staff']['timeout'])?></span>
     </a>
 
     <script>
         $(function() {
             var timeoutUrl = "<?=GC\Url::make('/auth/session-timeout')?>";
             var refreshUrl = "<?=GC\Url::make('/admin/account/session-refresh')?>";
-            var sessionTimeout = <?=e($config['session']['staffTimeout'])?>;
+            var sessionTimeout = <?=e($config['session']['staff']['timeout'])?>;
 
             var finalTime = new Date();
             finalTime.setSeconds(finalTime.getSeconds() + sessionTimeout);

@@ -6,6 +6,7 @@ if (!$config['debug']['enabled']) {
 }
 
 # utworzenie obiektu reprezentującego pracownika, sprawdza czy jest zalogowany
+GC\Auth\Staff::startSession();
 $staff = GC\Auth\Staff::createFromSession();
 GC\Data::set('staff', $staff);
 

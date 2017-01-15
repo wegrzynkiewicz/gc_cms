@@ -57,7 +57,7 @@ GC\Data::set('trans', $trans);
 # serwis translacji tekstu, jeżeli translacja wyłączona wtedy utwórz atrapę
 GC\Data::registerLazyService('translator', function () use (&$config) {
     return $config['translator']['enabled']
-        ? new GC\Translation\FileTranslator($config['translator']['folder'].'/'.GC\Auth\Client::getLang().'.json')
+        ? new GC\Translation\FileTranslator($config['translator']['folder'].'/'.GC\Auth\Visitor::getLang().'.json')
         : new GC\Translation\NullTranslator();
 });
 

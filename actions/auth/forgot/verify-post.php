@@ -17,11 +17,7 @@ GC\Model\Staff\Staff::updateByPrimaryId($user['staff_id'], [
     'regeneration' => json_encode([]),
 ]);
 
-$_SESSION['staff'] = [
-    'entity' => $user,
-    'sessionTimeout' => time() + $config['session']['staffTimeout']
-];
-
+GC\Auth\Staff::registerSession($user['staff_id']);
 setNotice($trans('Zostałeś zalogowany, a Twoje hasło zostało zresetowane.'));
 
 GC\Response::redirect('/admin');

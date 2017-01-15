@@ -145,6 +145,26 @@ class Staff extends AbstractEntity
      */
     public static function refreshSessionTimeout()
     {
-        $_SESSION['staff']['sessionTimeout'] = time() + Data::get('config')['session']['staffTimeout'];
+        $_SESSION['staff']['sessionTimeout'] = time() + Data::get('config')['session']['staff']['timeout'];
+    }
+
+    /**
+     * Aktualizuje czas do automatycznego wylogowania
+     */
+    public static function startSession()
+    {
+        # zmiana nazwy ciastka sesyjnego dla pracownika
+        ini_set('session.name', Data::get('config')['session']['staff']['cookieName']);
+
+        # rozpoczęcie sesji
+        session_start();
+
+        # sprawdzenie poprawności tokenu csrf, tylko gdy metoda post
+        if (Data::get('request')->isMethod('POST')) {
+            CSRFToken::assert();
+        }
+
+        # utworzenie nowego tokenu
+        CSRFToken::register();
     }
 }

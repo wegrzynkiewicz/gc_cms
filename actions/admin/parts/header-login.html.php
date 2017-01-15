@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<?=GC\Auth\Client::getLang()?>">
+<html lang="<?=GC\Auth\Visitor::getLang()?>">
 <head>
     <meta charset="utf-8" >
 	<title><?=($headTitle.' - '.$config['adminHeadTitleBase'])?></title>

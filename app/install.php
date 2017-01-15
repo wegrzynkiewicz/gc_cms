@@ -7,8 +7,11 @@ require __DIR__.'/../vendor/autoload.php';
 # wygenerowanie losowych wartości dla aplikacji
 $generated = [
     'datetime' => date('Y-m-d H:i:s'),
-    'session.name' => GC\Auth\Password::random(40),
     'password.salt' => GC\Auth\Password::random(40),
+    'csrf.secretKey' => GC\Auth\Password::random(40),
+    'csrf.cookieName' => GC\Auth\Password::random(40),
+    'session.staff.cookieName' => GC\Auth\Password::random(40),
+    'session.visitor.cookieName' => GC\Auth\Password::random(40),
 ];
 $export = var_export($generated, true);
 

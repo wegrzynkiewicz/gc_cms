@@ -13,18 +13,21 @@ define('TEMPLATE_ASSETS_URL', '/templates/'.TEMPLATE); # adres do zasobów w kat
 
 chdir(ROOT_PATH); # zmienia bieżący katalog na root
 
+ini_set('register_globals', 0); # zabrania tworzenia zmiennych z danych wysyłanych przez żądanie
 ini_set('error_reporting', E_ALL); # raportuje napotkane błędy
 ini_set('display_errors', 1); # włącza wyświetlanie błędów
 ini_set('display_startup_errors', 1); # włącza wyświetlanie startowych błędów
 ini_set('error_log', ROOT_PATH.'/tmp/logs/'.date('Y-m-d').'.error.log'); # zmienia ścieżkę logowania błędów
 ini_set('max_execution_time', 300); # określa maksymalny czas trwania skryptu
 ini_set('date.timezone', 'Europe/Warsaw'); # ustawienie domyślnej strefy czasowej
-ini_set('session.name', def($generated, 'session.name')); # zmiana nazwy ciastka sesyjnego
+ini_set('session.name', def($generated, 'session.visitor.cookieName')); # zmiana nazwy ciastka sesyjnego
 ini_set('session.use_trans_sid', 0);
 ini_set('session.use_strict_mode', 1);
 ini_set('session.cookie_httponly', 1); # ustawia ciastko tylko do odczytu, nie jest możliwe odczyt document.cookie w js
 ini_set('session.use_cookies', 1); # do przechowywania sesji ma użyć ciastka
 ini_set('session.use_only_cookies', 1); # do przechowywania sesji ma używać tylko ciastka!
+ini_set('session.hash_function', 1); # użycie bardziej złożonej funkcji do hashowania ciastka sesyjnego
+ini_set('zlib.output_compression_level', 1); # poziom kompresji wyjścia skryptu
 
 header("Content-Type: text/html; charset=utf-8"); # ustawienie domyślego mimetype i kodowania
 header('X-Content-Type-Options: nosniff'); # Nie pozwala przeglądarce na zgadywanie typu mime nieznanego pliku
@@ -47,13 +50,19 @@ return [
     'noImageUrl' => '/admin/images/no-image.jpg', # ścieżka do obrazka w przypadku braku obrazka
     'password' => [
         'minLength' => 8, # minimalna długość hasła
-        'staticSalt' => def($generated, 'password.salt'), # unikalna, sól dla wszystkich użytkowników, nie zmieniać nigdy
+        'staticSalt' => def($generated, 'password.salt'), # unikalna, sól dla wszystkich użytkowników, jeżeli ulegnie zmianie, żaden pracownik nie będzie mógł się zalogować
         'options' => [ # opcje dla generatora haseł
             'cost' => 11, # ilość iteracji
-        ]
+        ],
     ],
-    'session' => [
-        'staffTimeout' => 1800, # czas jaki musi upłynąć po zalogowaniu, aby wylogowało pracownika z automatu, w sekundach
+    'session' => [ # ustawienia sesji
+        'staff' => [ # ustawienia sesji dla pracownika
+            'cookieName' => def($generated, 'session.staff.cookieName'), # nazwa ciastka sesyjnego dla pracownika
+            'timeout' => 1800, # czas jaki musi upłynąć po zalogowaniu, aby wylogowało pracownika z automatu, w sekundach
+        ],
+        'visitor' => [ # ustawienia sesji dla odwiedzającego
+            'cookieName' => def($generated, 'session.visitor.cookieName'), # nazwa ciastka sesyjnego dla odwiedzającego
+        ],
     ],
     'avatar' => [
         'noAvatarUrl' => '/admin/images/no-avatar.jpg', # ściezka do domyślnego obrazka avatara
@@ -92,6 +101,11 @@ return [
         'replyName' => null, # nazwa użytkownika w nagłówku reply
         'limitPerOnce' => 10, # ile może się wysłać wiadomości na raz za jednym żądaniem
         'headerTitle' => "Panel administracyjny GrafCenter CMS", # wykorzystywane do wyświetlania w panelowych mailach
+    ],
+    'csrf' => [ # zawiera konfiguracje tokenu csrf
+        'expires' => 1800, # czas po którym token jest nieważny
+        'secretKey' => def($generated, 'csrf.secretKey'), # klucz, za pomocą którego walidowany jest token
+        'cookieName' => def($generated, 'csrf.cookieName'), # nazwa ciastka, które przechowuje token CSRF
     ],
     'reCaptcha' => [ # zawiera konfiguracje dla recaptchy od googla
         'public' => '6Le88g4UAAAAAJ_VW4XML20c2tWSWFSv29lkGeVp', # publiczny klucz
@@ -220,7 +234,7 @@ return [
         ],
     ],
     'navNodeTargets' => [ # dostępne atrybuty target dla węzłów nawigacji
-        '_self'	 => 'Załaduj w tym samym oknie',
+        '_self'     => 'Załaduj w tym samym oknie',
         '_blank' => 'Załaduj w nowym oknie',
     ],
     'rewrites' => [ # zawiera niestandardowe przekierowania $regex => $destination
