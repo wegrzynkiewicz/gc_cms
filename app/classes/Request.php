@@ -8,7 +8,7 @@ class Request
 {
     const FRONT_CONTROLLER_URL = '/index.php';
 
-    public $path = '';
+    public $url = '';
     public $query = '';
     public $method = '';
     public static $rootUrl = '';
@@ -19,22 +19,22 @@ class Request
         # pobierz wszystkie najistotniejsze informacje o żądaniu
         $rootUrl = dirname($_SERVER['SCRIPT_NAME']);
         $rawRequest = $_SERVER['REQUEST_URI'];
-        $this->path = rtrim(parse_url($rawRequest, \PHP_URL_PATH), '/');
+        $this->url = rtrim(parse_url($rawRequest, \PHP_URL_PATH), '/');
         $this->method = strtolower($_SERVER['REQUEST_METHOD']);
 
         Data::get('logger')->request(
-            $_SERVER['REQUEST_METHOD'].' '.$this->path, $_REQUEST
+            $_SERVER['REQUEST_METHOD'].' '.$this->url, $_REQUEST
         );
 
         # jeżeli aplikacja jest zainstalowana w katalogu, wtedy pomiń ścieżkę katalogu
-        if ($rootUrl and strpos($this->path, $rootUrl) === 0) {
-            $this->path = substr($this->path, strlen($rootUrl));
+        if ($rootUrl and strpos($this->url, $rootUrl) === 0) {
+            $this->url = substr($this->url, strlen($rootUrl));
             static::$rootUrl = $rootUrl;
         }
 
         # jeżeli ścieżka zawiera front controller, wtedy usuń go
-        if (strpos($this->path, static::FRONT_CONTROLLER_URL) === 0) {
-            $this->path = substr($this->path, strlen(static::FRONT_CONTROLLER_URL));
+        if (strpos($this->url, static::FRONT_CONTROLLER_URL) === 0) {
+            $this->url = substr($this->url, strlen(static::FRONT_CONTROLLER_URL));
             static::$frontControllerUrl = static::FRONT_CONTROLLER_URL;
         }
     }

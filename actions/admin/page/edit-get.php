@@ -3,7 +3,7 @@
 $page = GC\Model\Page::selectWithFrameByPrimaryId($page_id);
 $headTitle = $trans("Edycja strony %s", [$page['name']]);
 $breadcrumbs->push([
-    'url' => $request->path,
+    'url' => $request->url,
     'name' => $headTitle,
 ]);
 $_POST = $page;

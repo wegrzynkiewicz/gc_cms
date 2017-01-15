@@ -31,11 +31,11 @@ $_POST = array_merge($module, $settings);
             <div class="simple-box">
                 <fieldset>
                     <legend><?=$trans('Ustawienia galerii zdjęć')?></legend>
-                    <?=GC\Render::action('/admin/parts/input/selectbox.html.php', [
+                    <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
                         'name' => 'theme',
                         'label' => 'Szablon',
                         'help' => 'Wybierz jeden z dostępnych szablonów galerii',
-                        'options' => GC\Data::get('config')['moduleThemes']['gallery'],
+                        'options' => $config['moduleThemes']['gallery'],
                     ])?>
                 </fieldset>
             </div>
@@ -55,7 +55,7 @@ $_POST = array_merge($module, $settings);
                 </div>
             </div>
 
-            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz',
             ])?>
 

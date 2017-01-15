@@ -14,7 +14,7 @@
         </div>
         <div id="node_wrapper_<?=e($primary_id)?>" class="tree-checkbox-wrapper">
             <?php if ($node->hasChildren()): ?>
-                <?=GC\Render::action('/admin/parts/input/checkbox-tree-item.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/checkbox-tree-item.html.php', [
                     'tree' => $node,
                     'name' => $name,
                     'checkedValues' => $checkedValues,

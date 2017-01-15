@@ -31,7 +31,7 @@ $taxonomies = GC\Model\Post\Taxonomy::select()
                     </thead>
                     <tbody>
                         <?php foreach ($taxonomies as $tax_id => $taxonomy): ?>
-                            <?=GC\Render::action('/admin/post/taxonomy/list-item.html.php', [
+                            <?=GC\Render::file(ACTIONS_PATH.'/admin/post/taxonomy/list-item.html.php', [
                                 'tax_id' => $tax_id,
                                 'taxonomy' => $taxonomy,
                                 'tree' => GC\Model\Post\Node::buildTreeWithFrameByTaxonomyId($tax_id),

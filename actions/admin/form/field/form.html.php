@@ -6,23 +6,23 @@
         <form action="" method="post" id="form" class="form-horizontal">
 
             <div class="simple-box">
-                <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
                     'label' => 'Nazwa pola',
                 ])?>
 
-                <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'help',
                     'label' => 'Krótki opis',
                     'help' => 'Warto poinstruować użytkownika co należy wpisać w to pole.',
                 ])?>
 
                 <?php if ($field_id == 0): ?>
-                    <?=GC\Render::action('/admin/parts/input/selectbox.html.php', [
+                    <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
                         'name' => 'type',
                         'label' => 'Typ pola',
                         'help' => 'Typ pola określa jego wygląd i zachowanie. Typu nie można później zmienić.',
-                        'options' => GC\Data::get('config')['formFieldTypes'],
+                        'options' => $config['formFieldTypes'],
                         'firstOption' => 'Wybierz typ pola',
                     ])?>
                 <?php endif ?>
@@ -36,7 +36,7 @@
                 </div>
             </div>
 
-            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz węzeł',
             ])?>
 

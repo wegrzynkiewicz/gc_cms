@@ -11,7 +11,7 @@
 
 # TODO #
 * Usuwanie przestarzałych kopii zapasowych
-* Dorobić ustawienia wiersza w modułach
+* ~~Dorobić ustawienia wiersza w modułach~~
 * Nadać wszystkim funkcjonalnością odpowiednie uprawnienia
 * Dodać krótki tekst pomocniczy dla każdej funkcjonalności
 * Dodać więcej typów pól w formularzu

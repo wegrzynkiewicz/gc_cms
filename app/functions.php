@@ -1,6 +1,6 @@
 <?php
 
-/* Zawiera definicje wszystkich funkcji w aplikacji */
+/** Zawiera definicje wszystkich funkcji w aplikacji */
 
 /**
  * Zabezpiecza wyjście przed XSS zamieniając znaki specjalne na encje
@@ -243,7 +243,7 @@ function curlReCaptcha()
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_POSTFIELDS => [
-                'secret' => GC\Data::get('config')['reCaptcha']['secret'],
+                'secret' => $config['reCaptcha']['secret'],
                 'response' => post('g-recaptcha-response'),
                 'remoteip' => $_SERVER['REMOTE_ADDR']
             ]

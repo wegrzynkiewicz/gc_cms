@@ -4,7 +4,7 @@
     <td>
         <?php if ($tree->hasChildren()): ?>
             <div style="margin-left:-20px">
-                <?=GC\Render::action('/admin/parts/taxonomy-preview.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/taxonomy-preview.html.php', [
                     'tree' => $tree,
                     'taxonomyUrl' => function($path) use ($nav_id) {
                         return GC\Url::mask("/{$nav_id}/menu{$path}");

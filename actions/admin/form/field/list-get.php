@@ -31,12 +31,12 @@ $fields = GC\Model\Form\Field::joinAllWithKeyByForeign($form_id);
             <?php else:?>
                 <input name="positions" type="hidden"/>
                 <ol id="sortable" class="sortable">
-                    <?=GC\Render::action('/admin/form/field/list-items.html.php', [
+                    <?=GC\Render::file(ACTIONS_PATH.'/admin/form/field/list-items.html.php', [
                         'fields' => $fields,
                     ])?>
                 </ol>
             <?php endif?>
-            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz pozycję',
             ])?>
         </form>

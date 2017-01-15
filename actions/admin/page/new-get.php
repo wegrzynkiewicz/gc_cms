@@ -2,7 +2,7 @@
 
 $headTitle = $trans('Dodawanie nowej strony');
 $breadcrumbs->push([
-    'url' => $request->path,
+    'url' => $request->url,
     'name' => $headTitle,
 ]);
 

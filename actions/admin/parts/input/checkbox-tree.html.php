@@ -10,7 +10,7 @@
         <?php endif ?>
         <?php if ($tree->hasChildren()): ?>
             <div id="taxonomy_<?=e($tax_id)?>">
-                <?=GC\Render::action('/admin/parts/input/checkbox-tree-item.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/checkbox-tree-item.html.php', [
                     'tree' => $tree,
                     'name' => $name,
                     'checkedValues' => $checkedValues,

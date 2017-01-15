@@ -1,5 +1,5 @@
 <?php
-$langs = GC\Data::get('config')['langs'];
+$langs = $config['langs'];
 $currentLang = $langs[GC\Auth\Staff::getEditorLang()];
 ?>
 
@@ -9,7 +9,7 @@ $currentLang = $langs[GC\Auth\Staff::getEditorLang()];
             <span class="hidden-xs">
                 <?=$trans('Edytuj: ')?>
             </span>
-            <?=GC\Render::action('/admin/parts/language.html.php', [
+            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/language.html.php', [
                 'lang' => $currentLang,
             ])?>
             <b class="caret"></b>
@@ -18,7 +18,7 @@ $currentLang = $langs[GC\Auth\Staff::getEditorLang()];
             <?php foreach ($langs as $code => $lang): ?>
                 <li>
                     <a href="<?=GC\Url::make("/admin/account/change-editor-lang/{$code}")?>">
-                        <?=GC\Render::action('/admin/parts/language.html.php', [
+                        <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/language.html.php', [
                             'lang' => $lang,
                         ])?>
                     </a>

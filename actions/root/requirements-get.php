@@ -6,9 +6,20 @@ $breadcrumbs->push([
     'name' => $headTitle,
 ]);
 
-$minimumPHPVersion = '5.5.9';
+$requiredCore = [
+    [
+        'name' => 'PHP',
+        'required' => '5.5.9',
+        'current' => PHP_VERSION,
+    ],
+    [
+        'name' => 'MySQL',
+        'required' => '5.6',
+        'current' => GC\Data::get('database')->fetch('SELECT VERSION() AS version')['version'],
+    ],
+];
+
 $requiredExtensions = [
-    'Core',
     'ctype',
     'date',
     'filter',
@@ -63,42 +74,51 @@ function ini_access($access)
 <?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 <?php require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
 
-<table class="simple-box table table-condensed table-bordered">
+<h2>System</h2>
+<table class="simple-box table table-condensed table-bordered" style="table-layout: fixed;">
     <thead>
-        <th>Wymagana wersja</th>
-        <th>Czy kompatybilna?</th>
+        <th>Name</th>
+        <th>Required version</th>
+        <th>Current version</th>
     </thead>
     <tbody>
-        <?php $status = version_compare(PHP_VERSION, $minimumPHPVersion, '>=') ?>
-        <tr class="<?=$status ? 'success' : 'danger'?>">
-            <td>PHP &gt;= <?=$minimumPHPVersion?></td>
-            <td><?=$status ? 'Tak' : 'Nie' ?></td>
-        </tr>
+        <?php foreach ($requiredCore as $core): ?>
+            <?php $status = version_compare($core['current'], $core['required'], '>='); ?>
+            <tr class="<?=$status ? 'success' : 'danger'?>">
+                <td><?=$core['name']?></td>
+                <td><?=$core['required']?></td>
+                <td><?=$core['current']?></td>
+            </tr>
+        <?php endforeach ?>
     </tbody>
 </table>
 
-<table class="table table-condensed table-bordered">
+<h2>PHP Extensions</h2>
+<table class="table table-condensed table-bordered" style="table-layout: fixed;">
     <thead>
-        <th>Rozszerzenie</th>
-        <th>Czy załadowane?</th>
+        <th>Name</th>
+        <th>Required version</th>
+        <th>Current version</th>
     </thead>
     <tbody>
         <?php foreach ($requiredExtensions as $extension): ?>
             <?php $status = extension_loaded($extension) ?>
             <tr class="<?=$status ? 'success' : 'danger'?>">
                 <td><?=$extension?></td>
-                <td><?=$status ? 'Tak' : 'Nie' ?></td>
+                <td>*</td>
+                <td><?=phpversion($extension)?></td>
             </tr>
         <?php endforeach ?>
     </tbody>
 </table>
 
-<table class="table table-condensed table-bordered" style="font-size:12px">
+<h2>Settings</h2>
+<table class="table table-condensed table-bordered"  style="table-layout: fixed; font-size:12px">
     <thead>
-        <th>Właściwość</th>
-        <th>Globalna wartość</th>
-        <th>Lokalna wartość</th>
-        <th>Dostęp</th>
+        <th>Property</th>
+        <th>Global value</th>
+        <th>Local value</th>
+        <th>Access</th>
     </thead>
     <tbody>
         <?php foreach ($ini as $name => $i): ?>

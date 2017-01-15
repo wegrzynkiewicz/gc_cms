@@ -107,10 +107,10 @@ $count = GC\Model\Form\Sent::select()
 <script>
     $(function(){
         var optionsTemplate = $('#options-template').html();
-        var statuses = <?=json_encode(GC\Data::get('config')['formStatuses'])?>;
+        var statuses = <?=json_encode($config['formStatuses'])?>;
         var table = $('[data-table]').DataTable({
             order: [[2, 'desc']],
-            iDisplayLength: <?=GC\Data::get('config')['dataTable']['iDisplayLength']?>,
+            iDisplayLength: <?=$config['dataTable']['iDisplayLength']?>,
 	        processing: true,
             serverSide: true,
             searchDelay: 500,

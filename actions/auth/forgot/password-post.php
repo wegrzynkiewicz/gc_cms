@@ -27,8 +27,8 @@ GC\Model\Staff\Staff::updateByPrimaryId($user['staff_id'], [
 
 $mail = new GC\Mail();
 $mail->buildTemplate(
-    '/auth/forgot/verify-generation.email.html.php',
-    '/admin/parts/email/styles.css', [
+    ACTIONS_PATH.'/auth/forgot/verify-generation.email.html.php',
+    ACTIONS_PATH.'/admin/parts/email/styles.css', [
         'name' => $user['name'],
         'regenerateUrl' => $regenerateUrl,
     ]

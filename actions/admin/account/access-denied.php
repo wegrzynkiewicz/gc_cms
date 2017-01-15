@@ -16,7 +16,7 @@ $permission = array_shift($_SEGMENTS);
             <?php else: ?>
                 <?=$trans("Nie masz uprawnień do:")?>
                 <strong>
-                    <?=$trans(GC\Data::get('config')['permissions'][$permission])?>
+                    <?=$trans($config['permissions'][$permission])?>
                 </strong>
             <?php endif ?>
         </div>

@@ -1,6 +1,6 @@
 <?php
 
-require_once ACTIONS_PATH.'/auth/forgot/verify-validate.html.php';
+require ACTIONS_PATH.'/auth/forgot/verify-validate.html.php';
 
 if (isset($error)) {
     GC\Response::redirect('/auth/login');
@@ -19,7 +19,7 @@ GC\Model\Staff\Staff::updateByPrimaryId($user['staff_id'], [
 
 $_SESSION['staff'] = [
     'entity' => $user,
-    'sessionTimeout' => time() + GC\Data::get('config')['session']['staffTimeout']
+    'sessionTimeout' => time() + $config['session']['staffTimeout']
 ];
 
 setNotice($trans('Zostałeś zalogowany, a Twoje hasło zostało zresetowane.'));

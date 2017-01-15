@@ -7,8 +7,8 @@ $confirmPassword = $_POST['confirm_password'];
 $staff_id = GC\Data::get('staff')['staff_id'];
 $user = GC\Model\Staff\Staff::fetchByPrimaryId($staff_id);
 
-if (strlen($newPassword) < GC\Data::get('config')['password']['minLength']) {
-    $error = $trans('Hasło nie może być krótsze niż %s znaków', GC\Data::get('config')['password']['minLength']);
+if (strlen($newPassword) < $config['password']['minLength']) {
+    $error = $trans('Hasło nie może być krótsze niż %s znaków', $config['password']['minLength']);
 
     return require ACTIONS_PATH.'/admin/account/change-password-get.php';
 }
@@ -31,4 +31,4 @@ GC\Model\Staff\Staff::updateByPrimaryId($user['staff_id'], [
 
 setNotice($trans("Twoje hasło zostało zmienione"));
 
-GC\Response::redirect($breadcrumbs->getLastUrl());
+GC\Response::redirect($breadcrumbs->getLast('url'));

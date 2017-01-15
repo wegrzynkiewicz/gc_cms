@@ -17,4 +17,4 @@ GC\Model\Staff\Staff::updateByPrimaryId($staff_id, [
 ]);
 GC\Model\Staff\Staff::updateGroups($staff_id, post('groups', []));
 
-GC\Response::redirect($breadcrumbs->getLastUrl());
+GC\Response::redirect($breadcrumbs->getLast('url'));

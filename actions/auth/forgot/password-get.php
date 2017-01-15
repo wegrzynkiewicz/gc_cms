@@ -23,7 +23,7 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                                 </p>
                             <?php endif ?>
 
-                            <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
+                            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                                 'name' => 'login',
                                 'label' => 'Adres email',
                                 'help' => 'Na wprowadzony powyżej adres email zostanie wysłane nowe hasło',

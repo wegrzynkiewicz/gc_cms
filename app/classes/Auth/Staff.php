@@ -31,7 +31,7 @@ class Staff extends AbstractEntity
 
         # jezeli taki pracownik nie istnieje
         if (!$data) {
-            static::abort('Staff entity id %s does not exists');
+            static::abort("Staff entity id {$staff_id} does not exists");
         }
 
         # całość jest łatwym do odczytu obiektem Entity
@@ -134,7 +134,7 @@ class Staff extends AbstractEntity
     /**
      * Tworzy sesję dla zadanego $staff_id
      */
-    public function registerSession($staff_id)
+    public static function registerSession($staff_id)
     {
         $_SESSION['staff']['staff_id'] = $staff_id;
         static::refreshSessionTimeout();

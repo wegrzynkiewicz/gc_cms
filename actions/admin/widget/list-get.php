@@ -37,7 +37,7 @@ $widgets = GC\Model\Widget::select()
                                     </a>
                                 </td>
                                 <td>
-                                    <?=$trans(GC\Data::get('config')['widgetTypes'][$widget['type']])?>
+                                    <?=$trans($config['widgetTypes'][$widget['type']])?>
                                 </td>
                             </tr>
                         <?php endforeach ?>

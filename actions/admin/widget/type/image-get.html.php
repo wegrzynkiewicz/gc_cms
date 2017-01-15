@@ -2,7 +2,7 @@
 
 $headTitle = $trans('Edycja widżetu zdjęcia "%s"', [$widget['name']]);
 $breadcrumbs->push([
-    'url' => $request->path,
+    'url' => $request->url,
     'name' => $headTitle,
 ]);
 
@@ -17,14 +17,14 @@ $_POST['content'] = $content;
         <form action="" method="post" class="form-horizontal">
 
             <div class="simple-box">
-                <?=GC\Render::action('/admin/parts/input/image.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/image.html.php', [
                     'name' => 'content',
                     'label' => 'Zdjęcie',
                     'placeholder' => 'Ścieżka do pliku zdjęcia',
                 ])?>
             </div>
 
-            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz zmiany',
             ])?>
 

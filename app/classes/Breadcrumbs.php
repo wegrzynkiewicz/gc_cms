@@ -2,6 +2,8 @@
 
 namespace GC;
 
+use GC\ArrayHelper;
+
 class Breadcrumbs
 {
     protected $links = array();
@@ -21,23 +23,21 @@ class Breadcrumbs
         array_unshift($this->links, $data);
     }
 
-    public function getBeforeLastUrl()
+    public function getBeforeLast($index)
     {
-        $beforeLast = count($this->links)-2;
-        if (isset($this->links[$beforeLast])) {
-            return $this->links[$beforeLast]['url'];
-        }
-
-        return '/';
+        return ArrayHelper::getValueByKeys(
+            $this->links,
+            [count($this->links)-2, $index],
+            '/'
+        );
     }
 
-    public function getLastUrl()
+    public function getLast($index)
     {
-        $last = count($this->links)-1;
-        if (isset($this->links[$last])) {
-            return $this->links[$last]['url'];
-        }
-
-        return '/';
+        return ArrayHelper::getValueByKeys(
+            $this->links,
+            [count($this->links)-1, $index],
+            '/'
+        );
     }
 }

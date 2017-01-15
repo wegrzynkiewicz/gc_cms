@@ -6,7 +6,7 @@ GC\Url::extendMask('/admin%s');
 
 $breadcrumbs = new GC\Breadcrumbs();
 $breadcrumbs->push([
-    'href' => '/admin',
+    'url' => GC\Url::mask(),
     'name' => 'Dashboard',
     'icon' => 'fa-dashboard',
 ]);

@@ -29,11 +29,11 @@ $_POST = $module;
             class="form-horizontal">
 
             <div class="simple-box">
-                <?=GC\Render::action('/admin/parts/input/selectbox.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
                     'name' => 'theme',
                     'label' => 'Szablon',
                     'help' => 'Wybierz jeden z dostępnych szablonów slajdera zdjęć',
-                    'options' => GC\Data::get('config')['moduleThemes']['image-slider'],
+                    'options' => $config['moduleThemes']['image-slider'],
                 ])?>
             </div>
 
@@ -42,7 +42,7 @@ $_POST = $module;
                 </div>
             </div>
 
-            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz',
             ])?>
 

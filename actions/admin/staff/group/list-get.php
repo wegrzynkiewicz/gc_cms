@@ -52,7 +52,7 @@ foreach ($permissions as $permission) {
                     </thead>
                     <tbody>
                         <?php foreach ($groups as $group_id => $group): ?>
-                            <?=GC\Render::action('/admin/staff/group/list-item.html.php', [
+                            <?=GC\Render::file(ACTIONS_PATH.'/admin/staff/group/list-item.html.php', [
                                 'group_id' => $group_id,
                                 'group' => $group,
                                 'permissions' => $groupPermissions[$group_id],
@@ -104,7 +104,7 @@ $(function(){
     });
 
     $('[data-table]').DataTable({
-        iDisplayLength: <?=GC\Data::get('config')['dataTable']['iDisplayLength']?>,
+        iDisplayLength: <?=$config['dataTable']['iDisplayLength']?>,
     });
 });
 </script>

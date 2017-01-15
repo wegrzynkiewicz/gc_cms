@@ -2,7 +2,7 @@
 
 $headTitle = $trans('Dodawanie nowego wpisu');
 $breadcrumbs->push([
-    'url' => $request->path,
+    'url' => $request->url,
     'name' => $headTitle,
 ]);
 

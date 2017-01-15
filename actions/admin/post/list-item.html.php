@@ -1,4 +1,4 @@
-<?php $preview = empty($post['image']) ? GC\Url::assets(GC\Data::get('config')['noImageUrl']): $post['image']; ?>
+<?php $preview = empty($post['image']) ? GC\Url::assets($config['noImageUrl']): $post['image']; ?>
 
 <tr>
 
@@ -28,7 +28,7 @@
                         <?=e($taxonomies[$tax_id]['name'])?>:
                     </strong>
                 </a>
-                <?=GC\Render::action('/admin/parts/taxonomy-preview.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/taxonomy-preview.html.php', [
                     'tree' => $tree,
                     'taxonomyUrl' => 'taxonomyNodeUrl',
                 ])?>

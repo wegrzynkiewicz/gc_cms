@@ -16,9 +16,9 @@ class Disc
             return;
         }
 
-        static::makeDirRecursive(dirname($cacheFile));
+        static::makeDirRecursive(dirname($file));
 
-        $content = "<?php\n\nreturn ".var_export($data, true);
+        $content = "<?php\n\nreturn ".var_export($data, true).';';
         file_put_contents($file, $content);
     }
 
@@ -46,10 +46,10 @@ class Disc
         while (count($dirs)) {
             $folder = array_shift($dirs);
             $path .= $folder.'/';
-            if (!is_readable($path)) {
-                @mkdir($path, $mode);
+            if (!is_readable($path) and !is_dir($path)) {
+                mkdir($path, $mode);
             }
-            @chmod($path, $mode);
+            chmod($path, $mode);
         }
     }
 

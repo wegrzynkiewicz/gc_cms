@@ -15,7 +15,7 @@
                 </div>
             </li> -->
 
-            <?=GC\Render::action('/admin/parts/sidebar/items.html.php', [
+            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/sidebar/items.html.php', [
                 'menu' => $menu,
                 'attr' => 'class="nav nav-second-level"',
             ])?>

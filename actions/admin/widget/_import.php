@@ -7,4 +7,3 @@ $breadcrumbs->push([
     'name' => $headTitle,
     'icon' => 'fa-cube',
 ]);
-$widget_id = intval(array_shift($_PARAMETERS));

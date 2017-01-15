@@ -4,7 +4,7 @@ $staff_id = intval(array_shift($_PARAMETERS));
 $user = GC\Model\Staff\Staff::fetchByPrimaryId($staff_id);
 $headTitle = $trans('Edytowanie pracownika "%s"', [$user['name']]);
 $breadcrumbs->push([
-    'url' => $request->path,
+    'url' => $request->url,
     'name' => $headTitle,
 ]);
 

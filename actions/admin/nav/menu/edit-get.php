@@ -4,7 +4,7 @@ $node = GC\Model\Menu\Menu::fetchByPrimaryId($menu_id);
 
 $headTitle = $trans('Edycja węzła "%s"', [$node['name']]);
 $breadcrumbs->push([
-    'url' => $request->path,
+    'url' => $request->url,
     'name' => $headTitle,
 ]);
 

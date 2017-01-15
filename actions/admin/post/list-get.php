@@ -64,7 +64,7 @@ unset($post);
                     </thead>
                     <tbody>
                         <?php foreach ($posts as $post_id => $post): ?>
-                            <?=GC\Render::action('/admin/post/list-item.html.php', [
+                            <?=GC\Render::file(ACTIONS_PATH.'/admin/post/list-item.html.php', [
                                 'post_id' => $post_id,
                                 'post' => $post,
                                 'taxonomies' => $taxonomies,
@@ -116,7 +116,7 @@ unset($post);
         });
         $('[data-table]').DataTable({
             order: [[2, 'desc']],
-            iDisplayLength: <?=GC\Data::get('config')['dataTable']['iDisplayLength']?>,
+            iDisplayLength: <?=$config['dataTable']['iDisplayLength']?>,
         });
     });
 </script>

@@ -29,7 +29,7 @@ $menuTree = GC\Model\Menu\Menu::buildTreeByTaxonomyId($nav_id);
 
             <?php if ($menuTree->hasChildren()):?>
                 <ol id="sortable" class="sortable">
-                    <?=GC\Render::action('/admin/nav/menu/list-items.html.php', [
+                    <?=GC\Render::file(ACTIONS_PATH.'/admin/nav/menu/list-items.html.php', [
                         'menu' => $menuTree,
                         'nav_id' => $nav_id,
                         'pages' => $pages,
@@ -41,7 +41,7 @@ $menuTree = GC\Model\Menu\Menu::buildTreeByTaxonomyId($nav_id);
                 </div>
             <?php endif?>
 
-            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz pozycję',
             ])?>
 

@@ -26,7 +26,7 @@ $navs = GC\Model\Menu\Taxonomy::select()
                     </thead>
                     <tbody>
                         <?php foreach ($navs as $nav_id => $nav): ?>
-                            <?=GC\Render::action('/admin/nav/list-item.html.php', [
+                            <?=GC\Render::file(ACTIONS_PATH.'/admin/nav/list-item.html.php', [
                                 'nav_id' => $nav_id,
                                 'nav' => $nav,
                             ])?>

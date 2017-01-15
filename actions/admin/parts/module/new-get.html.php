@@ -2,7 +2,7 @@
 
 $headTitle = $trans('Dodawanie nowego modułu');
 $breadcrumbs->push([
-    'url' => $request->path,
+    'url' => $request->url,
     'name' => $headTitle,
 ]);
 
@@ -15,7 +15,7 @@ $breadcrumbs->push([
         <form action="" method="post" class="form-horizontal">
             <h3><?=$trans('Dostępne moduły')?></h3>
             <div class="row">
-                <?php foreach (GC\Data::get('config')['modules'] as $type => $module): ?>
+                <?php foreach ($config['modules'] as $type => $module): ?>
                     <div class="col-lg-3">
                         <button name="type"
                             type="submit"

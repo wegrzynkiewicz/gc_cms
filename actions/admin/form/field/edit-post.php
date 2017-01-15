@@ -15,4 +15,4 @@ GC\Model\Form\Field::updateByPrimaryId($field_id, [
 
 setNotice($trans('Pole "%s" zostało zaktualizowane.', [$field['name']]));
 
-GC\Response::redirect($breadcrumbs->getLastUrl());
+GC\Response::redirect($breadcrumbs->getLast('url'));

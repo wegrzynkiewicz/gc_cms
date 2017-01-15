@@ -1,6 +1,6 @@
 <?php
 
-$rowHtml = GC\Render::template('/parts/module/row.html.php', [
+$rowHtml = GC\Render::file(TEMPLATE_PATH.'/parts/module/row.html.php', [
     'row' => $row,
     'rowSettings' => $rowSettings,
 ]);

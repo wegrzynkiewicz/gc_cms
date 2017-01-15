@@ -31,7 +31,7 @@ $_POST['content'] = $content;
 
             <div id="items"></div>
 
-            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz położenie zakładek',
             ])?>
         </form>
@@ -53,7 +53,7 @@ $_POST['content'] = $content;
                 </h2>
             </div>
             <div class="modal-body">
-                <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
                     'label' => 'Nazwa pojedyńczej zakładki',
                 ])?>

@@ -41,7 +41,7 @@
 
         <?php if ($node->hasChildren()): ?>
             <ol>
-                <?=GC\Render::action('/admin/post/taxonomy/node/tree-node.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/post/taxonomy/node/tree-node.html.php', [
                     'tree' => $node,
                 ])?>
             </ol>

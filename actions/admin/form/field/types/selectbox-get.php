@@ -10,7 +10,7 @@ if ($field_id > 0) {
 ?>
 <p><?=$trans('Pole jednokrotnego wyboru wymaga wprowadzenia możliwych wyborów')?></p>
 
-<?=GC\Render::action('/admin/parts/input/select2-tags.html.php', [
+<?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/select2-tags.html.php', [
     'id' => 'options',
     'name' => 'options',
     'label' => 'Możliwe wybory',

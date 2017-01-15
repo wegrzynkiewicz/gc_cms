@@ -17,4 +17,4 @@ foreach ($positions as $field) {
 
 setNotice($trans('Pozycja pól została zapisana.'));
 
-GC\Response::redirect($breadcrumbs->getLastUrl());
+GC\Response::redirect($breadcrumbs->getLast('url'));

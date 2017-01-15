@@ -68,11 +68,11 @@ foreach ($permissions as $permission) {
                     </thead>
                     <tbody>
                         <?php foreach ($staffList as $staff_id => $row): ?>
-                            <?=GC\Render::action('/admin/staff/list-item.html.php', [
+                            <?=GC\Render::file(ACTIONS_PATH.'/admin/staff/list-item.html.php', [
                                 'staff_id' => $staff_id,
                                 'staff' => $row,
-                                'groups' => $staffGroups[$staff_id],
-                                'permissions' => $staffPermissions[$staff_id],
+                                'groups' => def($staffGroups, $staff_id, []),
+                                'permissions' => def($staffPermissions, $staff_id, []),
                             ])?>
                         <?php endforeach ?>
                     </tbody>
@@ -121,7 +121,7 @@ $(function(){
     });
 
     $('[data-table]').DataTable({
-        iDisplayLength: <?=GC\Data::get('config')['dataTable']['iDisplayLength']?>,
+        iDisplayLength: <?=$config['dataTable']['iDisplayLength']?>,
     });
 });
 </script>

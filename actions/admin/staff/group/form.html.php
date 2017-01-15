@@ -6,7 +6,7 @@
         <form action="" method="post" id="form" class="form-horizontal">
 
             <div class="simple-box">
-                <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
                     'label' => 'Nazwa grupy',
                     'help' => 'Nazwa grupy pomaga określić odpowiedzialność członków grupy (np. Sprzedawcy, Administratorzy)'
@@ -22,7 +22,7 @@
                         <?=$trans('W przypadku gdy pracownik należy do wielu grup, uprawnienia te są łączone.')?>
                     </p>
 
-                    <?php foreach (GC\Data::get('config')['permissions'] as $perm => $label): ?>
+                    <?php foreach ($config['permissions'] as $perm => $label): ?>
                         <div class="checkbox">
                             <label>
                                 <input name="permissions[]"
@@ -36,7 +36,7 @@
                 </fieldset>
             </div>
 
-            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz grupę',
             ])?>
 

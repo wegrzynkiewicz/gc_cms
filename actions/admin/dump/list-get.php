@@ -39,7 +39,7 @@ $dumps = GC\Model\Dump::select()->sort('creation_datetime', 'DESC')->fetchByPrim
                     </thead>
                     <tbody>
                         <?php foreach ($dumps as $dump_id => $dump): ?>
-                            <?=GC\Render::action('/admin/dump/list-item.html.php', [
+                            <?=GC\Render::file(ACTIONS_PATH.'/admin/dump/list-item.html.php', [
                                 'dump_id' => $dump_id,
                                 'dump' => $dump,
                             ])?>
@@ -67,7 +67,7 @@ $dumps = GC\Model\Dump::select()->sort('creation_datetime', 'DESC')->fetchByPrim
                 </h2>
             </div>
             <div class="modal-body">
-                <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
                     'label' => 'Nazwa kopii zapasowej',
                 ])?>
@@ -90,7 +90,7 @@ $dumps = GC\Model\Dump::select()->sort('creation_datetime', 'DESC')->fetchByPrim
     $(function(){
         var table = $('[data-table]').DataTable({
             order: [],
-            iDisplayLength: <?=GC\Data::get('config')['dataTable']['iDisplayLength']?>,
+            iDisplayLength: <?=$config['dataTable']['iDisplayLength']?>,
         });
     });
 </script>

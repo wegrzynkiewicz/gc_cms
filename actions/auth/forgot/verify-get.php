@@ -2,7 +2,7 @@
 
 $headTitle = $trans("Resetowanie hasła");
 
-require_once ACTIONS_PATH.'/auth/forgot/verify-validate.html.php';
+require ACTIONS_PATH.'/auth/forgot/verify-validate.html.php';
 require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
 
 <div class="vertical-center">
@@ -26,21 +26,21 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                                 <input type="hidden" name="email64" value="<?=$email64?>">
                                 <input type="hidden" name="verifyHash" value="<?=$verifyHash?>">
 
-                                <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
+                                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                                     'name' => 'new_password',
                                     'type' => 'password',
                                     'label' => 'Nowe hasło',
-                                    'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', GC\Data::get('config')['password']['minLength']),
+                                    'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', $config['password']['minLength']),
                                 ])?>
 
-                                <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
+                                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                                     'name' => 'confirm_password',
                                     'type' => 'password',
                                     'label' => 'Powtórz nowe hasło',
                                     'help' => 'Powtórz swoje nowe hasło dla bezpieczeństwa',
                                 ])?>
 
-                                <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
+                                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                                     'saveLabel' => 'Zmień hasło',
                                     'cancelHref' => GC\Url::make('/auth/login'),
                                 ])?>
@@ -61,7 +61,7 @@ $(function () {
         rules: {
             new_password: {
                 required: true,
-                minlength : <?=e(GC\Data::get('config')['password']['minLength'])?>
+                minlength : <?=e($config['password']['minLength'])?>
             },
             confirm_password: {
                 required: true,
@@ -71,7 +71,7 @@ $(function () {
         messages: {
             new_password: {
                 required: "<?=$trans('Wprowadź nowe hasło')?>",
-                minlength: "<?=$trans('Nowe hasło powinno mieć przynajmniej %s znaków', [GC\Data::get('config')['password']['minLength']])?>"
+                minlength: "<?=$trans('Nowe hasło powinno mieć przynajmniej %s znaków', [$config['password']['minLength']])?>"
             },
             confirm_password: {
                 required: "<?=$trans('Musisz powtórzyć swoje nowe hasło dla bezpieczeństwa')?>",

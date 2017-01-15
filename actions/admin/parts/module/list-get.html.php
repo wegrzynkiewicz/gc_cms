@@ -42,7 +42,7 @@ $modules = GC\Model\Module\Module::joinAllWithKeyByForeign($frame_id);
                     <div id="grid-rows-wrapper"></div>
                     <div class="grid-stack">
                         <?php foreach ($modules as $module_id => $module): ?>
-                            <?=GC\Render::action('/admin/parts/module/list-item.html.php', [
+                            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/module/list-item.html.php', [
                                 'module_id' => $module_id,
                                 'module' => $module,
                                 'type' => $module['type'],
@@ -52,7 +52,7 @@ $modules = GC\Model\Module\Module::joinAllWithKeyByForeign($frame_id);
                 </div>
             <?php endif ?>
 
-            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz pozycje kafelków',
             ])?>
 

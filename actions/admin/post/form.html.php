@@ -13,22 +13,22 @@ $taxonomies = GC\Model\Post\Taxonomy::select()
     <div class="col-lg-12">
         <form action="" method="post" class="form-horizontal">
             <div class="simple-box">
-                <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
                     'label' => 'Nazwa wpisu',
                 ])?>
 
-                <?=GC\Render::action('/admin/parts/input/editbox.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'keywords',
                     'label' => 'Tagi i słowa kluczowe (meta keywords)',
                 ])?>
 
-                <?=GC\Render::action('/admin/parts/input/textarea.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/textarea.html.php', [
                     'name' => 'description',
                     'label' => 'Opis podstrony (meta description)',
                 ])?>
 
-                <?=GC\Render::action('/admin/parts/input/image.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/image.html.php', [
                     'name' => 'image',
                     'label' => 'Zdjęcie wyróżniające',
                     'placeholder' => 'Ścieżka do pliku zdjęcia',
@@ -39,7 +39,7 @@ $taxonomies = GC\Model\Post\Taxonomy::select()
                 <?php $tree = GC\Model\Post\Node::buildTreeWithFrameByTaxonomyId($tax_id) ?>
                 <?php if ($tree->hasChildren()): ?>
                     <div class="simple-box">
-                        <?=GC\Render::action('/admin/parts/input/checkbox-tree.html.php', [
+                        <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/checkbox-tree.html.php', [
                             'tree' => $tree,
                             'tax_id' => $tax_id,
                             'name' => "taxonomy[{$tax_id}]",
@@ -52,13 +52,13 @@ $taxonomies = GC\Model\Post\Taxonomy::select()
             <?php endforeach ?>
 
             <div class="simple-box">
-                <?=GC\Render::action('/admin/parts/input/datatimepicker.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/datatimepicker.html.php', [
                     'name' => 'publication_datetime',
                     'label' => 'Data publikacji',
                 ])?>
             </div>
 
-            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz wpis',
             ])?>
         </form>

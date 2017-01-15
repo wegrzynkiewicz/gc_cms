@@ -6,4 +6,4 @@ GC\Model\Post\Post::deleteFrameByPrimaryId($post_id);
 
 setNotice($trans('Wpis "%s" został usunięty.', [$post['name']]));
 
-GC\Response::redirect($breadcrumbs->getLastUrl());
+GC\Response::redirect($breadcrumbs->getLast('url'));

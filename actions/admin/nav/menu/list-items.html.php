@@ -21,7 +21,7 @@
             </div>
 
             <div class="pull-right" style="margin-right: 30px">
-                <?=GC\Render::action('/admin/nav/menu/list-preview/'.$node['type'].'.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/nav/menu/list-preview/'.$node['type'].'.html.php', [
                     'node' => $node,
                     'pages' => $pages,
                 ])?>
@@ -32,7 +32,7 @@
 
         <?php if ($node->hasChildren()): ?>
             <ol>
-                <?=GC\Render::action('/admin/nav/menu/list-items.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/nav/menu/list-items.html.php', [
                     'menu' => $node,
                     'pages' => $pages,
                 ])?>

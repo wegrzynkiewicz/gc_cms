@@ -1,9 +1,9 @@
 <?php
 
-GC\Data::set('title', $trans('Twój profil użytkownika'));
+$headTitle = $trans('Profil użytkownika');
 GC\Url::extendMask('/account%s');
 $breadcrumbs->push([
     'url' => GC\Url::mask('/profil'),
-    'name' => $trans('Profil użytkownika'),
+    'name' => $headTitle,
     'icon' => 'fa-user',
 ]);

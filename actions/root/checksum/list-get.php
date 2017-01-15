@@ -56,7 +56,7 @@ usort($checksums, function ($a, $b) {
     </thead>
     <tbody style="font-family: monospace;">
         <?php foreach ($checksums as $checksum): ?>
-            <?=GC\Render::action('/root/checksum/list-item.html.php', [
+            <?=GC\Render::file(ACTIONS_PATH.'/root/checksum/list-item.html.php', [
                 'checksum' => $checksum,
             ])?>
         <?php endforeach ?>

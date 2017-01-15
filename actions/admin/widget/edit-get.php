@@ -1,5 +1,6 @@
 <?php
 
+$widget_id = intval(array_shift($_PARAMETERS));
 $widget = GC\Model\Widget::fetchByPrimaryId($widget_id);
 $type = $widget['type'];
 $content = $widget['content'];

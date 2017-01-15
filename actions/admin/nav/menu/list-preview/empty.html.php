@@ -1,1 +1,1 @@
-<?=$trans(GC\Data::get('config')['nodeTypes']['empty'])?>
+<?=$trans($config['nodeTypes']['empty'])?>

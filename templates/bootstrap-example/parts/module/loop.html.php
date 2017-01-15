@@ -17,7 +17,7 @@ foreach ($gridModules as $y => $row) {
 
     $rowSettings = isset($frameSettings['rows'][$y]) ? $frameSettings['rows'][$y] : [];
 
-    $rowHtml = GC\Render::template('/parts/module/row-container.html.php', [
+    $rowHtml = GC\Render::file(TEMPLATE_PATH.'/parts/module/row-container.html.php', [
         'row' => $row,
         'container' => $container,
         'rowSettings' => $rowSettings,

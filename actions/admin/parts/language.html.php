@@ -1,7 +1,7 @@
 <?php
 $lang = (isset($lang) and is_array($lang))
     ? $lang
-    : GC\Data::get('config')['langs'][GC\Auth\Staff::getEditorLang()]
+    : $config['langs'][GC\Auth\Staff::getEditorLang()]
 ?>
 <span class="flag-icon flag-icon-<?=e($lang['flag'])?>"></span>
 <?=$trans($lang['name'])?>

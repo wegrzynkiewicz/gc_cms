@@ -25,14 +25,14 @@ $_POST = GC\Data::get('staff')->getData();
     <div class="col-lg-12">
         <form action="" method="post" id="form" class="form-horizontal">
             <div class="simple-box">
-                <?=GC\Render::action('/admin/parts/input/select2-language.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/select2-language.html.php', [
                     'name' => 'lang',
                     'label' => 'Język',
                     'help' => 'Wyświetla panel i komunikaty w tym języku',
                 ])?>
             </div>
 
-            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz profil',
             ])?>
 

@@ -7,14 +7,12 @@ SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 SET NAMES utf8mb4;
 
-DROP TABLE IF EXISTS `gc_checksums`;
 CREATE TABLE `gc_checksums` (
   `file` tinytext NOT NULL,
   `hash` char(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_dumps`;
 CREATE TABLE `gc_dumps` (
   `dump_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` tinytext NOT NULL,
@@ -25,7 +23,6 @@ CREATE TABLE `gc_dumps` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_forms`;
 CREATE TABLE `gc_forms` (
   `form_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `lang` varchar(2) NOT NULL,
@@ -34,7 +31,6 @@ CREATE TABLE `gc_forms` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_form_fields`;
 CREATE TABLE `gc_form_fields` (
   `field_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `type` varchar(32) NOT NULL,
@@ -45,7 +41,6 @@ CREATE TABLE `gc_form_fields` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_form_pos`;
 CREATE TABLE `gc_form_pos` (
   `form_id` int(10) unsigned NOT NULL,
   `field_id` int(10) unsigned NOT NULL,
@@ -57,7 +52,6 @@ CREATE TABLE `gc_form_pos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_form_sent`;
 CREATE TABLE `gc_form_sent` (
   `sent_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `form_id` int(10) unsigned NOT NULL,
@@ -73,7 +67,6 @@ CREATE TABLE `gc_form_sent` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_frames`;
 CREATE TABLE `gc_frames` (
   `frame_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
@@ -89,20 +82,6 @@ CREATE TABLE `gc_frames` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_langs`;
-CREATE TABLE `gc_langs` (
-  `code` char(2) NOT NULL,
-  `position` tinyint(3) unsigned NOT NULL,
-  `flag` char(2) NOT NULL,
-  `name` tinytext NOT NULL,
-  `datetime_format` varchar(32) NOT NULL,
-  `date_format` varchar(32) NOT NULL,
-  `time_format` varchar(32) NOT NULL,
-  PRIMARY KEY (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-DROP TABLE IF EXISTS `gc_mail_sent`;
 CREATE TABLE `gc_mail_sent` (
   `mail_hash` char(40) NOT NULL,
   `receivers` text NOT NULL,
@@ -113,7 +92,6 @@ CREATE TABLE `gc_mail_sent` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_mail_to_send`;
 CREATE TABLE `gc_mail_to_send` (
   `mail_hash` char(40) NOT NULL,
   `receivers` text NOT NULL,
@@ -124,7 +102,6 @@ CREATE TABLE `gc_mail_to_send` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_menus`;
 CREATE TABLE `gc_menus` (
   `menu_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` tinytext NOT NULL,
@@ -135,7 +112,6 @@ CREATE TABLE `gc_menus` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_menu_taxonomies`;
 CREATE TABLE `gc_menu_taxonomies` (
   `nav_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `workname` varchar(32) NOT NULL,
@@ -146,7 +122,6 @@ CREATE TABLE `gc_menu_taxonomies` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_menu_tree`;
 CREATE TABLE `gc_menu_tree` (
   `nav_id` int(10) unsigned NOT NULL,
   `menu_id` int(10) unsigned NOT NULL,
@@ -162,7 +137,6 @@ CREATE TABLE `gc_menu_tree` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_modules`;
 CREATE TABLE `gc_modules` (
   `module_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `type` varchar(32) NOT NULL,
@@ -173,7 +147,6 @@ CREATE TABLE `gc_modules` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_module_files`;
 CREATE TABLE `gc_module_files` (
   `file_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` tinytext NOT NULL,
@@ -183,7 +156,6 @@ CREATE TABLE `gc_module_files` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_module_file_pos`;
 CREATE TABLE `gc_module_file_pos` (
   `module_id` int(10) unsigned NOT NULL,
   `file_id` int(10) unsigned NOT NULL,
@@ -195,7 +167,6 @@ CREATE TABLE `gc_module_file_pos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_module_items`;
 CREATE TABLE `gc_module_items` (
   `item_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `frame_id` int(10) unsigned NOT NULL,
@@ -205,7 +176,6 @@ CREATE TABLE `gc_module_items` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_module_item_pos`;
 CREATE TABLE `gc_module_item_pos` (
   `module_id` int(10) unsigned NOT NULL,
   `item_id` int(10) unsigned NOT NULL,
@@ -217,7 +187,6 @@ CREATE TABLE `gc_module_item_pos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_module_pos`;
 CREATE TABLE `gc_module_pos` (
   `frame_id` int(10) unsigned NOT NULL,
   `module_id` int(10) unsigned NOT NULL,
@@ -229,7 +198,6 @@ CREATE TABLE `gc_module_pos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_pages`;
 CREATE TABLE `gc_pages` (
   `page_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `frame_id` int(10) unsigned NOT NULL,
@@ -239,7 +207,6 @@ CREATE TABLE `gc_pages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_posts`;
 CREATE TABLE `gc_posts` (
   `post_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `frame_id` int(10) unsigned NOT NULL,
@@ -250,7 +217,6 @@ CREATE TABLE `gc_posts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_post_membership`;
 CREATE TABLE `gc_post_membership` (
   `post_id` int(10) unsigned NOT NULL,
   `node_id` int(10) unsigned NOT NULL,
@@ -261,7 +227,6 @@ CREATE TABLE `gc_post_membership` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_post_nodes`;
 CREATE TABLE `gc_post_nodes` (
   `node_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `frame_id` int(10) unsigned NOT NULL,
@@ -271,7 +236,6 @@ CREATE TABLE `gc_post_nodes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_post_taxonomies`;
 CREATE TABLE `gc_post_taxonomies` (
   `tax_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `workname` varchar(32) NOT NULL,
@@ -281,7 +245,6 @@ CREATE TABLE `gc_post_taxonomies` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_post_tree`;
 CREATE TABLE `gc_post_tree` (
   `tax_id` int(10) unsigned NOT NULL,
   `node_id` int(10) unsigned NOT NULL,
@@ -296,7 +259,6 @@ CREATE TABLE `gc_post_tree` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_products`;
 CREATE TABLE `gc_products` (
   `product_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `frame_id` int(10) unsigned NOT NULL,
@@ -307,7 +269,6 @@ CREATE TABLE `gc_products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Zawiera produkty';
 
 
-DROP TABLE IF EXISTS `gc_product_membership`;
 CREATE TABLE `gc_product_membership` (
   `product_id` int(10) unsigned NOT NULL,
   `node_id` int(10) unsigned NOT NULL,
@@ -318,7 +279,6 @@ CREATE TABLE `gc_product_membership` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_product_nodes`;
 CREATE TABLE `gc_product_nodes` (
   `node_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `frame_id` int(10) unsigned NOT NULL,
@@ -328,7 +288,6 @@ CREATE TABLE `gc_product_nodes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_product_taxonomies`;
 CREATE TABLE `gc_product_taxonomies` (
   `tax_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `workname` varchar(32) NOT NULL,
@@ -338,7 +297,6 @@ CREATE TABLE `gc_product_taxonomies` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_product_tree`;
 CREATE TABLE `gc_product_tree` (
   `tax_id` int(10) unsigned NOT NULL,
   `node_id` int(10) unsigned NOT NULL,
@@ -353,7 +311,14 @@ CREATE TABLE `gc_product_tree` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_staff`;
+CREATE TABLE `gc_sessions` (
+  `session_id` varchar(40) NOT NULL,
+  `update_datetime` datetime NOT NULL,
+  `data` mediumtext NOT NULL,
+  PRIMARY KEY (`session_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
 CREATE TABLE `gc_staff` (
   `staff_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` tinytext NOT NULL,
@@ -369,7 +334,6 @@ CREATE TABLE `gc_staff` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_staff_groups`;
 CREATE TABLE `gc_staff_groups` (
   `group_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` tinytext NOT NULL,
@@ -377,7 +341,6 @@ CREATE TABLE `gc_staff_groups` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_staff_membership`;
 CREATE TABLE `gc_staff_membership` (
   `staff_id` int(10) unsigned NOT NULL,
   `group_id` int(10) unsigned NOT NULL,
@@ -388,7 +351,6 @@ CREATE TABLE `gc_staff_membership` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_staff_permissions`;
 CREATE TABLE `gc_staff_permissions` (
   `group_id` int(10) unsigned NOT NULL,
   `name` tinytext NOT NULL,
@@ -397,7 +359,6 @@ CREATE TABLE `gc_staff_permissions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_widgets`;
 CREATE TABLE `gc_widgets` (
   `widget_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `workname` varchar(32) NOT NULL,
@@ -409,4 +370,4 @@ CREATE TABLE `gc_widgets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
--- 2017-01-05 17:23:48
+-- 2017-01-14 23:45:09

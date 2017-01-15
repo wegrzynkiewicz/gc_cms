@@ -22,7 +22,7 @@ $_POST['form'] = $content;
         <form action="" method="post" class="form-horizontal">
 
             <div class="simple-box">
-                <?=GC\Render::action('/admin/parts/input/selectbox.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
                     'name' => 'form',
                     'label' => 'Formularz',
                     'help' => 'Wybierz formularz który ma zostać wyświetlony',
@@ -30,14 +30,14 @@ $_POST['form'] = $content;
                     'firstOption' => 'Wybierz formularz',
                 ])?>
 
-                <?=GC\Render::action('/admin/parts/input/selectbox.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
                     'name' => 'theme',
                     'label' => 'Szablon',
                     'help' => 'Wybierz jeden z dostępnych szablonów dla formularza',
-                    'options' => GC\Data::get('config')['moduleThemes']['form'],
+                    'options' => $config['moduleThemes']['form'],
                 ])?>
 
-                <?=GC\Render::action('/admin/parts/input/select2-tags.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/select2-tags.html.php', [
                     'id' => 'emails',
                     'name' => 'emails',
                     'label' => 'Odbiorcy mailowi',
@@ -47,7 +47,7 @@ $_POST['form'] = $content;
                 ])?>
             </div>
 
-            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz moduł',
             ])?>
 

@@ -8,7 +8,7 @@ $localization = json_decode($message['localization'], true);
 
 $headTitle = $trans('Wyświetl wiadomość');
 $breadcrumbs->push([
-    'url' => $request->path,
+    'url' => $request->url,
     'name' => $headTitle,
 ]);
 
@@ -74,17 +74,17 @@ $_POST = $message;
             </table>
 
             <div class="simple-box">
-                <?=GC\Render::action('/admin/parts/input/selectbox.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
                     'name' => 'status',
                     'label' => 'Status',
                     'help' => 'Status wiadomości jest pomocny przy filtrowaniu wiadomości.',
                     'options' => array_map(function ($status) {
                         return $status['name'];
-                    }, GC\Data::get('config')['formStatuses']),
+                    }, $config['formStatuses']),
                 ])?>
             </div>
 
-            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz status',
             ])?>
 

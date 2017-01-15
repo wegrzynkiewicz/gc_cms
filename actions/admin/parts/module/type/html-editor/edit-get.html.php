@@ -10,12 +10,12 @@ $_POST['content'] = $content;
     <div class="col-lg-12">
         <form action="" method="post" class="form-horizontal">
 
-            <?=GC\Render::action('/admin/parts/input/textarea.html.php', [
+            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/textarea.html.php', [
                 'name' => 'content',
                 'label' => 'Treść modułu',
             ])?>
 
-            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz moduł tekstowy',
             ])?>
 

@@ -2,7 +2,7 @@
 
 $headTitle = $trans('Edycja widżetu tekstowego "%s"', [$widget['name']]);
 $breadcrumbs->push([
-    'url' => $request->path,
+    'url' => $request->url,
     'name' => $headTitle,
 ]);
 
@@ -17,13 +17,13 @@ $_POST['content'] = $content;
         <form action="" method="post" class="form-horizontal">
 
             <div class="simple-box">
-                <?=GC\Render::action('/admin/parts/input/textarea.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/textarea.html.php', [
                     'name' => 'content',
                     'label' => 'Treść widżetu',
                 ])?>
             </div>
 
-            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'cancelHref' => "/admin/widget/list",
                 'saveLabel' => 'Zapisz zmiany',
             ])?>

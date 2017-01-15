@@ -2,7 +2,7 @@
 
 /** Plik zawiera definicje najważniejszych stałych i właściwości dla aplikacji */
 
-define('START_TIME', server('REQUEST_TIME_FLOAT', microtime(true))); # początkowy czas odpalenia aplikacji
+define('START_TIME', server('REQUEST_TIME_FLOAT', microtime(true))); # początkowy czas uruchomienia aplikacji
 define('TEMPLATE', 'bootstrap-example'); # nazwa używanego szablonu
 define('ASSETS_URL', '/assets'); # adres do katalogu z zasobami
 define('ROOT_PATH', realpath(__DIR__.'/../../')); # ścieżka do katalogu głównego serwera www
@@ -19,7 +19,7 @@ ini_set('display_startup_errors', 1); # włącza wyświetlanie startowych błęd
 ini_set('error_log', ROOT_PATH.'/tmp/logs/'.date('Y-m-d').'.error.log'); # zmienia ścieżkę logowania błędów
 ini_set('max_execution_time', 300); # określa maksymalny czas trwania skryptu
 ini_set('date.timezone', 'Europe/Warsaw'); # ustawienie domyślnej strefy czasowej
-ini_set('session.name', 'TOLmEeE4ouK9lWuFigwvPqVhxLgtfj7k5kVqhIWL'); # zmiana nazwy ciastka sesyjnego
+ini_set('session.name', def($generated, 'session.name')); # zmiana nazwy ciastka sesyjnego
 ini_set('session.use_trans_sid', 0);
 ini_set('session.use_strict_mode', 1);
 ini_set('session.cookie_httponly', 1); # ustawia ciastko tylko do odczytu, nie jest możliwe odczyt document.cookie w js
@@ -47,9 +47,9 @@ return [
     'noImageUrl' => '/admin/images/no-image.jpg', # ścieżka do obrazka w przypadku braku obrazka
     'password' => [
         'minLength' => 8, # minimalna długość hasła
-        'staticSalt' => '81qU6GlSusOZNxrWQF0x5xNaWT0odCfM4x4im4p3', # unikalna, sól dla wszystkich użytkowników, nie zmieniać nigdy
+        'staticSalt' => def($generated, 'password.salt'), # unikalna, sól dla wszystkich użytkowników, nie zmieniać nigdy
         'options' => [ # opcje dla generatora haseł
-            'cost' => 11,
+            'cost' => 11, # ilość iteracji
         ]
     ],
     'session' => [
@@ -79,7 +79,7 @@ return [
         'folder' => ROOT_PATH.'/app/storage/locales', # katalog do ktorego są zapisywane tłumaczenia
         'key' => 'trnsl.1.1.20161215T151949Z.587eb49efd9a9be2.a1eb760e6bf78076ea004f12eeb22b37902aadc2', # klucz do api translatora w serwisie Yandex
     ],
-    'email' => [ # ustawienia serwera pocztowego do rozsyłania emaili
+    'mailer' => [ # ustawienia serwera pocztowego do rozsyłania emaili
         'smtp' => true, # czy użwać mailera smtp?
         'host' => 'smtp.emaillabs.net.pl', # host serwera pocztowego
         'port' => 587, # post hosta
@@ -227,7 +227,7 @@ return [
         '~^/old-service/index\.php\?id=(\d+)\&theme=([a-z]+?)$~' => '/old-service/$1/$2',
     ],
     'dump' => [ # zawiera informacje dla eksportera bazy danych
-        'path' => ROOT_PATH.'/app/storage/dumps', # ścieżka do katalogu z rzutami bazy danych
+        'path' => ROOT_PATH.'/app/storage/dumps/'.date('Y-m'), # ścieżka do katalogu z rzutami bazy danych
         'tmpPath' => ROOT_PATH.'/tmp', # ścieżka tymczasowa dla eksportera
         'settings' => [
             'include-tables' => [],

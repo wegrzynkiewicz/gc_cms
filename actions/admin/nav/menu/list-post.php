@@ -6,4 +6,4 @@ $positions = array_filter($positions, function ($node) {
 });
 GC\Model\Menu\Tree::update($nav_id, $positions);
 
-GC\Response::redirect($breadcrumbs->getBeforeLastUrl());
+GC\Response::redirect($breadcrumbs->getBeforeLast('url'));

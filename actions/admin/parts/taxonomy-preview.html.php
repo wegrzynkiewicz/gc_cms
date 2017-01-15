@@ -6,7 +6,7 @@
                 <?=e($node['name'])?>
             </a>
             <?php if ($node->hasChildren()): ?>
-                <?=GC\Render::action('/admin/parts/taxonomy-preview.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/taxonomy-preview.html.php', [
                     'tree' => $node,
                     'taxonomyUrl' => $taxonomyUrl,
                 ])?>

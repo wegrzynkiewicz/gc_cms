@@ -20,7 +20,7 @@
 
     <?php if (count($node['children'])): ?>
         <ul <?=$attr?>>
-            <?=GC\Render::action('/admin/parts/sidebar/items.html.php', [
+            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/sidebar/items.html.php', [
                 'menu' => $node['children'],
                 'staff' => $staff,
                 'attr' => 'class="nav nav-third-level collapse"'

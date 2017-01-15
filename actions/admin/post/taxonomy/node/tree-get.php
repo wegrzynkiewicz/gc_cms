@@ -27,7 +27,7 @@ $tree = GC\Model\Post\Node::buildTreeWithFrameByTaxonomyId($tax_id);
             <input name="positions" type="hidden"/>
             <?php if ($tree->hasChildren()):?>
                 <ol id="sortable" class="sortable">
-                    <?=GC\Render::action('/admin/post/taxonomy/node/tree-node.html.php', [
+                    <?=GC\Render::file(ACTIONS_PATH.'/admin/post/taxonomy/node/tree-node.html.php', [
                         'tree' => $tree,
                     ])?>
                 </ol>
@@ -36,7 +36,7 @@ $tree = GC\Model\Post\Node::buildTreeWithFrameByTaxonomyId($tax_id);
                     <?=$trans('Brak węzłów w %s', [$taxonomy['name']])?>
                 </div>
             <?php endif?>
-            <?=GC\Render::action('/admin/parts/input/submitButtons.html.php', [
+            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz pozycję',
             ])?>
         </form>

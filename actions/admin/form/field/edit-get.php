@@ -4,7 +4,7 @@ $field = GC\Model\Form\Field::fetchByPrimaryId($field_id);
 
 $headTitle = $trans('Edycja pola "%s"', [$field['name']]);
 $breadcrumbs->push([
-    'url' => $request->path,
+    'url' => $request->url,
     'name' => $headTitle,
 ]);
 

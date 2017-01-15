@@ -22,11 +22,11 @@ class Database
     }
 
     /**
-     * Pobiera z configa dane połączeniowe i initializuje połączenie z bazą
+     * Jeżeli nie wystąpił żaden błąd podczas transakcji wtedy commit
      */
     public function __destruct()
     {
-        if ($this->pdo->inTransaction()) {
+        if ($this->pdo->inTransaction() and error_get_last() === null) {
             $this->pdo->commit();
         }
     }

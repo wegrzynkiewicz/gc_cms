@@ -3,7 +3,7 @@
 $newPassword = $_POST['new_password'];
 $confirmPassword = $_POST['confirm_password'];
 
-$user = GC\Model\Staff\Staff::fetchByPrimaryId($staff['staff_id']);
+$user = GC\Model\Staff\Staff::fetchByPrimaryId($_SESSION['staff']['staff_id']);
 
 if ($newPassword !== $confirmPassword) {
     $error = $trans('Podane nowe hasła nie są identyczne');
@@ -11,8 +11,8 @@ if ($newPassword !== $confirmPassword) {
     return require ACTIONS_PATH.'/admin/account/force-change-password-get.php';
 }
 
-if (strlen($newPassword) < GC\Data::get('config')['password']['minLength']) {
-    $error = $trans('Hasło nie może być krótsze niż %s znaków', GC\Data::get('config')['password']['minLength']);
+if (strlen($newPassword) < $config['password']['minLength']) {
+    $error = $trans('Hasło nie może być krótsze niż %s znaków', $config['password']['minLength']);
 
     return require ACTIONS_PATH.'/admin/account/force-change-password-get.php';
 }

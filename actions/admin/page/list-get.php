@@ -45,7 +45,7 @@ $pages = GC\Model\Page::selectWithFrames()->fetchByPrimaryKey();
                     </thead>
                     <tbody>
                         <?php foreach ($pages as $page_id => $page): ?>
-                            <?=GC\Render::action('/admin/page/list-item.html.php', [
+                            <?=GC\Render::file(ACTIONS_PATH.'/admin/page/list-item.html.php', [
                                 'page_id' => $page_id,
                                 'page' => $page,
                             ])?>
@@ -99,7 +99,7 @@ $pages = GC\Model\Page::selectWithFrames()->fetchByPrimaryKey();
         });
         $('[data-table]').DataTable({
             order: [[2, 'asc']],
-            iDisplayLength: <?=GC\Data::get('config')['dataTable']['iDisplayLength']?>,
+            iDisplayLength: <?=$config['dataTable']['iDisplayLength']?>,
         });
     });
 </script>
