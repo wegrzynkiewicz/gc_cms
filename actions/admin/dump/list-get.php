@@ -63,7 +63,7 @@ $dumps = GC\Model\Dump::select()->sort('creation_datetime', 'DESC')->fetchByPrim
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans("Utwórz kopię zapasową")?>
+                    <?=$trans('Utwórz kopię zapasową')?>
                 </h2>
             </div>
             <div class="modal-body">

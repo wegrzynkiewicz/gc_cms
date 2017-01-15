@@ -10,6 +10,7 @@ $breadcrumbs->push([
     'name' => 'Dashboard',
     'icon' => 'fa-dashboard',
 ]);
+GC\Data::set('breadcrumbs', $breadcrumbs);
 
 # utworzenie obiektu reprezentującego pracownika, sprawdza czy jest zalogowany
 GC\Data::set('staff', GC\Auth\Staff::createFromSession());

@@ -1,5 +1,6 @@
 <?php
 
+$field_id = intval(array_shift($_PARAMETERS));
 $options = [];
 if ($field_id > 0) {
     $field = GC\Model\Form\Field::fetchByPrimaryId($field_id);

@@ -1,7 +1,8 @@
 <?php
 
+$page_id = intval(array_shift($_PARAMETERS));
 $page = GC\Model\Page::selectWithFrameByPrimaryId($page_id);
-$headTitle = $trans("Edycja strony %s", [$page['name']]);
+$headTitle = $trans('Edycja strony %s', [$page['name']]);
 $breadcrumbs->push([
     'url' => $request->url,
     'name' => $headTitle,

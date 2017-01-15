@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = $trans("Wymagana zmiana hasła");
+$headTitle = $trans('Wymagana zmiana hasła');
 $_POST = [];
 
 require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>

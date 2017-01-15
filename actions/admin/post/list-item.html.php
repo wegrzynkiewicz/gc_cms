@@ -42,14 +42,14 @@
             title="<?=$trans('Podejrzyj ten wpis')?>"
             class="btn btn-primary btn-sm">
             <i class="fa fa-search fa-fw"></i>
-            <?=$trans("Podgląd")?>
+            <?=$trans('Podgląd')?>
         </a>
 
         <a href="<?=GC\Url::mask("/{$post_id}/module/list")?>"
             title="<?=$trans('Wyświetl moduły wpisu')?>"
             class="btn btn-success btn-sm">
             <i class="fa fa-file-text-o fa-fw"></i>
-            <?=$trans("Moduły")?>
+            <?=$trans('Moduły')?>
         </a>
 
         <a data-toggle="modal"
@@ -59,7 +59,7 @@
             title="<?=$trans('Usuń wpis')?>"
             class="btn btn-danger btn-sm">
             <i class="fa fa-times fa-fw"></i>
-            <?=$trans("Usuń")?>
+            <?=$trans('Usuń')?>
         </a>
     </td>
 </tr>

@@ -78,11 +78,6 @@ GC\Data::registerLazyService('database', function () use (&$config, &$logger) {
     return $database;
 });
 
-# serwis pomocniczy do tworzenia nawigacji
-GC\Data::registerLazyService('breadcrumbs', function () {
-    return new GC\Breadcrumbs();
-});
-
 # serwis reprezentujący żądanie
 $request = new GC\Request();
 GC\Data::set('request', $request);

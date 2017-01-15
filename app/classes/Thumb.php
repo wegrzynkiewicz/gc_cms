@@ -2,6 +2,8 @@
 
 namespace GC;
 
+use GC\Data;
+
 class Thumb
 {
     private $url = '';
@@ -18,7 +20,7 @@ class Thumb
         $this->height = $height;
         $this->extension = strtolower(pathinfo($imageUrl, PATHINFO_EXTENSION));
 
-        $options = \$config['thumb']['options'];
+        $options = Data::get('config')['thumb']['options'];
         if (isset($options[$this->extension])) {
             $this->params = $options[$this->extension];
             $this->url = $this->makeUrl();
@@ -48,7 +50,7 @@ class Thumb
      */
     private function makeUrl()
     {
-        $thumbsUrl      = \$config['thumb']['thumbsUrl'];
+        $thumbsUrl      = Data::get('config')['thumb']['thumbsUrl'];
         $imageUrl       = urldecode($this->imageUrl);
         $sufix          = '/'.$this->width.'x'.$this->height;
         $normalized     = normalize($imageUrl);
@@ -76,7 +78,7 @@ class Thumb
     public function generate()
     {
         $imageUrl = urldecode($this->imageUrl);
-        $thumbPath = \$config['thumb']['thumbsPath'];
+        $thumbPath = Data::get('config')['thumb']['thumbsPath'];
         $destFilePath   = "{$thumbPath}{$this->url}";
         $sourceFilePath = "{$thumbPath}{$imageUrl}";
 

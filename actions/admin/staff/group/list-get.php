@@ -75,11 +75,11 @@ foreach ($permissions as $permission) {
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans("Czy na pewno usunąć?")?>
+                    <?=$trans('Czy na pewno usunąć?')?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=$trans("Czy jesteś pewien, że chcesz usunąć grupę pracowników")?>
+                <?=$trans('Czy jesteś pewien, że chcesz usunąć grupę pracowników')?>
                 <span id="name" style="font-weight:bold; color:red;"></span>?
             </div>
             <div class="modal-footer">

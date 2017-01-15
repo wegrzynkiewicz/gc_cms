@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = $trans("Zmiana hasła");
+$headTitle = $trans('Zmiana hasła');
 $breadcrumbs->push([
     'url' => $request->url,
     'name' => $headTitle,

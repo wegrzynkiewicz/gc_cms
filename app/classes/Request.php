@@ -19,7 +19,7 @@ class Request
         # pobierz wszystkie najistotniejsze informacje o żądaniu
         $rootUrl = dirname($_SERVER['SCRIPT_NAME']);
         $rawRequest = $_SERVER['REQUEST_URI'];
-        $this->url = rtrim(parse_url($rawRequest, \PHP_URL_PATH), '/');
+        $this->url = '/'.trim(parse_url($rawRequest, \PHP_URL_PATH), '/');
         $this->method = strtolower($_SERVER['REQUEST_METHOD']);
 
         Data::get('logger')->request(

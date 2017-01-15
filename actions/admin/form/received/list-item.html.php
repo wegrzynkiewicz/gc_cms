@@ -26,7 +26,7 @@ $status = $config['formStatuses'][$message['status']];
             title="<?=$trans('Usuń wiadomość')?>"
             class="btn btn-danger btn-sm">
             <i class="fa fa-times fa-fw"></i>
-            <?=$trans("Usuń")?>
+            <?=$trans('Usuń')?>
         </a>
     </td>
 </tr>

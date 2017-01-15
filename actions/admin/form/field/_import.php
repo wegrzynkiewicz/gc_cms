@@ -9,4 +9,3 @@ $breadcrumbs->push([
     'name' => $headTitle,
     'icon' => 'fa-envelope-open-o',
 ]);
-$field_id = intval(array_shift($_PARAMETERS));

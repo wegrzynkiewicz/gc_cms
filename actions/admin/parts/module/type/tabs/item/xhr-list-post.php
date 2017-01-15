@@ -25,7 +25,7 @@ $items = GC\Model\Module\Item::joinAllWithFrameByForeign($module_id);
                             title="<?=$trans('Wyświetl moduły zakładi')?>"
                             class="btn btn-success btn-xs">
                             <i class="fa fa-file-text-o fa-fw"></i>
-                            <?=$trans("Moduły")?>
+                            <?=$trans('Moduły')?>
                         </a>
                         <a data-toggle="modal"
                             data-id="<?=e($item_id)?>"

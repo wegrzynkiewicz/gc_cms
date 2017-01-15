@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = $trans("Resetowanie hasła");
+$headTitle = $trans('Resetowanie hasła');
 
 require ACTIONS_PATH.'/auth/forgot/verify-validate.html.php';
 require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>

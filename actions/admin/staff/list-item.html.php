@@ -34,7 +34,7 @@ $avatarUrl = empty($staff['avatar'])
             title="<?=$trans('Usuń pracownika')?>"
             class="btn btn-danger btn-md">
             <i class="fa fa-times fa-fw"></i>
-            <?=$trans("Usuń")?>
+            <?=$trans('Usuń')?>
         </a>
     </td>
 </tr>

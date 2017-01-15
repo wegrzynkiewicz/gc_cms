@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = $trans("Formularze");
+$headTitle = $trans('Formularze');
 GC\Url::extendMask('/form%s');
 $breadcrumbs->push([
     'url' => GC\Url::mask('/list'),

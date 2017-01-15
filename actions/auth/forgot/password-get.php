@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = $trans("Zapomniałem hasła");
+$headTitle = $trans('Zapomniałem hasła');
 
 require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
 

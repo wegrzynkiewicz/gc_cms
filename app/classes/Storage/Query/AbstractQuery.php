@@ -25,21 +25,27 @@ abstract class AbstractQuery
     {
         $this->conditions[] = $sqlPart;
         $this->addParams($passedParams);
+
+        return $this;
     }
 
     public function clearLimit()
     {
         $this->limit = null;
+
+        return $this;
     }
 
     public function clearSort()
     {
         $this->sort = [];
+
+        return $this;
     }
 
     public function equals($column, $passedParam)
     {
-        $this->condition("{$column} = ?", [$passedParam]);
+        $this->condition("{$column} = ?", [(string)$passedParam]);
 
         return $this;
     }
@@ -135,6 +141,8 @@ abstract class AbstractQuery
         }
 
         $this->params = array_merge($this->params, $passedParams);
+
+        return $this;
     }
 
     protected abstract function buildSQL();

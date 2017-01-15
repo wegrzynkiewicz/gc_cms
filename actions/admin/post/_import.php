@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = $trans("Wpisy");
+$headTitle = $trans('Wpisy');
 GC\Url::extendMask('/post%s');
 $breadcrumbs->push([
     'url' => GC\Url::mask('/list'),

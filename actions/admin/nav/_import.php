@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = $trans("Nawigacje");
+$headTitle = $trans('Nawigacje');
 GC\Url::extendMask('/nav%s');
 $breadcrumbs->push([
     'url' => GC\Url::mask('/list'),

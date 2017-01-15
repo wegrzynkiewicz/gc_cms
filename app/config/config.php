@@ -11,7 +11,7 @@ define('ACTIONS_PATH', ROOT_PATH.'/actions'); # ścieżka do katalogu z plikami 
 define('TEMPLATE_PATH', ROOT_PATH.'/templates/'.TEMPLATE); # ścieżka do plików szablonu
 define('TEMPLATE_ASSETS_URL', '/templates/'.TEMPLATE); # adres do zasobów w katalogu z szablonem
 
-chdir(ROOT_PATH); # zmienia bieżący katalog o jeden poziom wyżej niż web root
+chdir(ROOT_PATH); # zmienia bieżący katalog na root
 
 ini_set('error_reporting', E_ALL); # raportuje napotkane błędy
 ini_set('display_errors', 1); # włącza wyświetlanie błędów

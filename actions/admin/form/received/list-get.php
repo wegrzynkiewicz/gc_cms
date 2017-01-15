@@ -63,11 +63,11 @@ $count = GC\Model\Form\Sent::select()
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans("Czy na pewno usunąć?")?>
+                    <?=$trans('Czy na pewno usunąć?')?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=$trans("Czy jesteś pewien, że chcesz usunąć nadesłany formularz")?>
+                <?=$trans('Czy jesteś pewien, że chcesz usunąć nadesłany formularz')?>
                 <span id="sent_name" style="font-weight:bold; color:red;"></span>?
             </div>
             <div class="modal-footer">
@@ -97,7 +97,7 @@ $count = GC\Model\Form\Sent::select()
             title="<?=$trans('Usuń wiadomość')?>"
             class="btn btn-danger btn-sm">
             <i class="fa fa-times fa-fw"></i>
-            <?=$trans("Usuń")?>
+            <?=$trans('Usuń')?>
         </a>
     </div>
 </script>

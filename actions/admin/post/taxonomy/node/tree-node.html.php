@@ -15,14 +15,14 @@
                     title="<?=$trans('Podejrzyj ten węzeł')?>"
                     class="btn btn-primary btn-xs">
                     <i class="fa fa-search fa-fw"></i>
-                    <?=$trans("Podgląd")?>
+                    <?=$trans('Podgląd')?>
                 </a>
 
                 <a href="<?=GC\Url::mask("/{$node_id}/module/list")?>"
                     title="<?=$trans('Wyświetl moduły węzła')?>"
                     class="btn btn-success btn-xs">
                     <i class="fa fa-file-text-o fa-fw"></i>
-                    <?=$trans("Moduły")?>
+                    <?=$trans('Moduły')?>
                 </a>
 
                 <a data-toggle="modal"

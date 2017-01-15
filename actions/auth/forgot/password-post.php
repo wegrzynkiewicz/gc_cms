@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = $trans("Wysłano e-maila z weryfikacją przypomnienia hasła");
+$headTitle = $trans('Wysłano e-maila z weryfikacją przypomnienia hasła');
 
 $user = GC\Model\Staff\Staff::select()->equals('email', $_POST['login'])->fecht();
 

@@ -2,6 +2,8 @@
 
 namespace GC\Storage\Query;
 
+use GC\Assert;
+
 class Select extends AbstractQuery
 {
     protected $extract = '*';
@@ -59,5 +61,41 @@ class Select extends AbstractQuery
         }
 
         return ob_get_clean();
+    }
+
+    public function buildForDataTables(array $data)
+    {
+        $columnNames = [];
+        $searchableColumns = [];
+        foreach ($data['columns'] as $number => $column) {
+            $name = $column['name'];
+            Assert::column($name);
+            $columnNames[$number] = $name;
+
+            if ($column['searchable']) {
+                $searchableColumns[] = $column;
+            }
+        }
+
+        $this->pagination($data['start'], $data['length']);
+
+        if (isset($data['order'])) {
+            foreach ($data['order'] as $order) {
+                $this->sort($columnNames[$order['column']], $order['dir']);
+            }
+        }
+
+        if (isset($data['search']) and $data['search']['value']) {
+            $orCondition = '';
+            $values = [];
+            foreach ($searchableColumns as $column) {
+                $orCondition[] = $column['name'].' LIKE ?';
+                $values[] = '%'.$data['search']['value'].'%';
+            }
+            $condition = implode(' OR ', $orCondition);
+            $this->condition($condition, $values);
+        }
+
+        return $this;
     }
 }

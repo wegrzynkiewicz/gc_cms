@@ -55,13 +55,13 @@ $tree = GC\Model\Post\Node::buildTreeWithFrameByTaxonomyId($tax_id);
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans("Czy na pewno usunąć?")?>
+                    <?=$trans('Czy na pewno usunąć?')?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=$trans("Czy jesteś pewien, że chcesz usunąć węzeł")?>
+                <?=$trans('Czy jesteś pewien, że chcesz usunąć węzeł')?>
                 <span id="node_name" style="font-weight:bold; color:red;"></span>
-                <?=$trans("i wszystkie jego podwęzły?")?>?
+                <?=$trans('i wszystkie jego podwęzły?')?>?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">

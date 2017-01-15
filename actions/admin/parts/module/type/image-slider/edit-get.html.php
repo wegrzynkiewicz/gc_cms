@@ -58,7 +58,7 @@ $_POST = $module;
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans("Edytujesz zdjęcie ")?>
+                    <?=$trans('Edytujesz zdjęcie ')?>
                     <span id="editModalName"></span>
                 </h2>
             </div>
@@ -88,11 +88,11 @@ $_POST = $module;
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans("Czy na pewno usunąć?")?>
+                    <?=$trans('Czy na pewno usunąć?')?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=$trans("Czy jesteś pewien, że chcesz usunąć ten slajd?")?>
+                <?=$trans('Czy jesteś pewien, że chcesz usunąć ten slajd?')?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">

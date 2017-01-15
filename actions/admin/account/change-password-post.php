@@ -29,6 +29,6 @@ GC\Model\Staff\Staff::updateByPrimaryId($user['staff_id'], [
     'password' => GC\Auth\Password::hash($newPassword),
 ]);
 
-setNotice($trans("Twoje hasło zostało zmienione"));
+setNotice($trans('Twoje hasło zostało zmienione'));
 
 GC\Response::redirect($breadcrumbs->getLast('url'));

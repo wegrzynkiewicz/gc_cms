@@ -1,5 +1,6 @@
 <?php
 
+$field_id = 0;
 $headTitle = $trans('Dodawanie nowego pola');
 $breadcrumbs->push([
     'url' => $request->url,

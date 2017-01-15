@@ -3,12 +3,12 @@
 $getModuleTemplate = function ($type, $theme) use ($request) {
 
     $templates = [
-        "/modules/{$type}/{$theme}-{$request->method}.html.php",
-        "/modules/{$type}/{$theme}.html.php",
+        TEMPLATE_PATH."/modules/{$type}/{$theme}-{$request->method}.html.php",
+        TEMPLATE_PATH."/modules/{$type}/{$theme}.html.php",
     ];
 
     foreach ($templates as $template) {
-        if (is_readable(TEMPLATE_PATH.$template)) {
+        if (is_readable($template)) {
             return $template;
         }
     }

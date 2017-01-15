@@ -4,7 +4,6 @@ namespace GC\Model\Form;
 
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\PrimaryTrait;
-use GC\Storage\Utility\CriteriaTrait;
 use GC\Data;
 
 class Sent extends AbstractModel
@@ -13,7 +12,6 @@ class Sent extends AbstractModel
     public static $primary = 'sent_id';
 
     use PrimaryTrait;
-    use CriteriaTrait;
 
     public static function insertToForm($form_id, $data, $localization)
     {

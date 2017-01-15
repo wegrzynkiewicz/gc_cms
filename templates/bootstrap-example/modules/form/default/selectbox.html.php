@@ -5,7 +5,7 @@ foreach ($settings['options'] as $value) {
     $options[$value] = $value;
 }
 
-echo GC\Render::action("/admin/parts/input/selectbox.html.php", [
+echo GC\Render::file(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
     'name' => $name,
     'label' => $field['name'],
     'help' => $field['help'],

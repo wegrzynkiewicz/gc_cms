@@ -71,7 +71,7 @@ $_POST = array_merge($module, $settings);
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans("Edytujesz zdjęcie ")?>
+                    <?=$trans('Edytujesz zdjęcie ')?>
                     <span id="editModalName"></span>
                 </h2>
             </div>
@@ -101,11 +101,11 @@ $_POST = array_merge($module, $settings);
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans("Czy na pewno usunąć?")?>
+                    <?=$trans('Czy na pewno usunąć?')?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=$trans("Czy jesteś pewien, że chcesz usunąć to zdjęcie?")?>
+                <?=$trans('Czy jesteś pewien, że chcesz usunąć to zdjęcie?')?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">

@@ -1,6 +1,6 @@
 <?php
 
-$mail->Subject = $trans("Utworzyliśmy dla Ciebie konto pracownika w serwisie")." ".$_SERVER['HTTP_HOST'];
+$mail->Subject = $trans('Utworzyliśmy dla Ciebie konto pracownika w serwisie')." ".$_SERVER['HTTP_HOST'];
 
 require ACTIONS_PATH.'/admin/parts/email/header.html.php'; ?>
 

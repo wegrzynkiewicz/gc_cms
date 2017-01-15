@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = $trans("Grupy pracowników");
+$headTitle = $trans('Grupy pracowników');
 GC\Url::extendMask('/group%s');
 $breadcrumbs->push([
     'url' => GC\Url::mask('/list'),

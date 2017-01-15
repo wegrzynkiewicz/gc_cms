@@ -26,7 +26,7 @@
                 </button>
             </div>
             <div class="panel-body">
-                <?=GC\Render::action("/admin/parts/module/type/{$type}/grid-preview.html.php", [
+                <?=GC\Render::file("/admin/parts/module/type/{$type}/grid-preview.html.php", [
                     'module_id' => $module['module_id'],
                     'module' => $module,
                     'content' => $module['content'],

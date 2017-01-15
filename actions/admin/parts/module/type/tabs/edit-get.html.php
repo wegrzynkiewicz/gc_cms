@@ -49,7 +49,7 @@ $_POST['content'] = $content;
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans("Dodaj nową zakładkę")?>
+                    <?=$trans('Dodaj nową zakładkę')?>
                 </h2>
             </div>
             <div class="modal-body">
@@ -81,7 +81,7 @@ $_POST['content'] = $content;
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans("Edytujesz zakładkę")?>
+                    <?=$trans('Edytujesz zakładkę')?>
                 </h2>
             </div>
             <div id="editModalContent" class="modal-body">
@@ -110,11 +110,11 @@ $_POST['content'] = $content;
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans("Czy na pewno usunąć?")?>
+                    <?=$trans('Czy na pewno usunąć?')?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=$trans("Czy jesteś pewien, że chcesz usunąć zakładkę")?>
+                <?=$trans('Czy jesteś pewien, że chcesz usunąć zakładkę')?>
                 <span id="deleteName" style="font-weight:bold; color:red;"></span>?
             </div>
             <div class="modal-footer">

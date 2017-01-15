@@ -52,11 +52,11 @@ $fields = GC\Model\Form\Field::joinAllWithKeyByForeign($form_id);
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans("Czy na pewno usunąć?")?>
+                    <?=$trans('Czy na pewno usunąć?')?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=$trans("Czy jesteś pewien, że chcesz usunąć pole")?>
+                <?=$trans('Czy jesteś pewien, że chcesz usunąć pole')?>
                 <span id="name" style="font-weight:bold; color:red;"></span>?
             </div>
             <div class="modal-footer">
@@ -85,7 +85,8 @@ $(function(){
     $('#sortable').nestedSortable({
         handle: 'div',
         items: 'li',
-        toleranceElement: '> div'
+        toleranceElement: '> div',
+        maxLevels: 1
     });
 
     $("#savePosition").submit(function(event) {

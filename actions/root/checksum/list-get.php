@@ -74,11 +74,11 @@ usort($checksums, function ($a, $b) {
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans("Czy na pewno odświeżyć?")?>
+                    <?=$trans('Czy na pewno odświeżyć?')?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=$trans("Czy jesteś pewien, że chcesz odświeżyć wszystkie pliki?")?>
+                <?=$trans('Czy jesteś pewien, że chcesz odświeżyć wszystkie pliki?')?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -104,11 +104,11 @@ usort($checksums, function ($a, $b) {
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans("Czy na pewno odświeżyć?")?>
+                    <?=$trans('Czy na pewno odświeżyć?')?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=$trans("Czy jesteś pewien, że chcesz odświeżyć plik")?>
+                <?=$trans('Czy jesteś pewien, że chcesz odświeżyć plik')?>
                 <span id="name" style="font-weight:bold; color:blue;"></span>?
             </div>
             <div class="modal-footer">

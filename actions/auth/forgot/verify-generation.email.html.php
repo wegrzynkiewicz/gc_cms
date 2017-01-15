@@ -1,6 +1,6 @@
 <?php
 
-$mail->Subject = $trans("Czy zapomniałeś hasła?");
+$mail->Subject = $trans('Czy zapomniałeś hasła?');
 
 require ACTIONS_PATH.'/admin/parts/email/header.html.php'; ?>
 

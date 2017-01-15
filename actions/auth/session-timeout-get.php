@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = $trans("Czas trwania sesji minął");
+$headTitle = $trans('Czas trwania sesji minął');
 
 unset($_SESSION['staff']);
 

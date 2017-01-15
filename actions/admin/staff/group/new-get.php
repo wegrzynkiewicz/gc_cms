@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = $trans("Dodawanie nowej grupy pracowników");
+$headTitle = $trans('Dodawanie nowej grupy pracowników');
 $breadcrumbs->push([
     'url' => $request->url,
     'name' => $headTitle,

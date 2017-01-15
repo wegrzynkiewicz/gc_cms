@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = $trans("Zostałeś wylogowany");
+$headTitle = $trans('Zostałeś wylogowany');
 
 unset($_SESSION['staff']);
 

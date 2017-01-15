@@ -18,7 +18,7 @@
             title="<?=$trans('Usuń grupę')?>"
             class="btn btn-danger btn-md">
             <i class="fa fa-times fa-fw"></i>
-            <?=$trans("Usuń")?>
+            <?=$trans('Usuń')?>
         </a>
     </td>
 </tr>

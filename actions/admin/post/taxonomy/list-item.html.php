@@ -21,7 +21,7 @@
             title="<?=$trans('Wyświetl węzły podziału')?>"
             class="btn btn-success btn-sm">
             <i class="fa fa-file-text-o fa-fw"></i>
-            <?=$trans("Węzły")?>
+            <?=$trans('Węzły')?>
         </a>
     </td>
 </tr>

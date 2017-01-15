@@ -69,11 +69,11 @@ $modules = GC\Model\Module\Module::joinAllWithKeyByForeign($frame_id);
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans("Czy na pewno usunąć?")?>
+                    <?=$trans('Czy na pewno usunąć?')?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=$trans("Czy jesteś pewien, że chcesz usunąć ten moduł?")?>
+                <?=$trans('Czy jesteś pewien, że chcesz usunąć ten moduł?')?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -96,7 +96,7 @@ $modules = GC\Model\Module\Module::joinAllWithKeyByForeign($frame_id);
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans("Ustawienia wiersza")?>
+                    <?=$trans('Ustawienia wiersza')?>
                 </h2>
             </div>
             <div id="rowSettingsModalContent" class="modal-body">
