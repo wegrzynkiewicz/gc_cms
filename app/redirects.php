@@ -7,7 +7,7 @@ $fullRequest = rtrim("{$request->url}?{$request->query}", '?');
 foreach ($config['rewrites'] as $pattern => $destination) {
     if (preg_match($pattern, $fullRequest)) {
         $result = preg_replace($pattern, $destination, $fullRequest);
-        GC\Response::redirect($result, 301); # 301 Moved Permanently
+        redirect($result, 301); # 301 Moved Permanently
     }
 }
 
@@ -44,7 +44,7 @@ $targetUrl = $protocol.'://'.$www.$domain.$targetPort.$uri;
 # przekierowanie na docelowy adres, pomocne przy seo
 if ($currentUrl !== $targetUrl) {
     $logger->seo("From: {$currentUrl} To: {$targetUrl}");
-    GC\Response::redirect($targetUrl, 301);  # 301 Moved Permanently
+    redirect($targetUrl, 301);  # 301 Moved Permanently
 }
 
 # jeżeli strona jest w budowie wtedy zwróć komunikat o budowie, chyba, że masz uprawnienie

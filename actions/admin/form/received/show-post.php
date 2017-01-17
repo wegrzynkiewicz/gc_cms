@@ -7,4 +7,4 @@ GC\Model\Form\Sent::updateByPrimaryId($sent_id, [
 
 setNotice($trans('Status wiadomośći został zaktualizowany.'));
 
-GC\Response::redirect($breadcrumbs->getLast('url'));
+redirect($breadcrumbs->getLast('url'));

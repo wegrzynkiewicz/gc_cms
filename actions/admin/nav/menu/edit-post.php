@@ -7,4 +7,4 @@ GC\Model\Menu\Menu::updateByPrimaryId($menu_id, [
     'target' => isset($_POST['target']) ? $_POST['target'] : '_self',
 ]);
 
-GC\Response::redirect($breadcrumbs->getLast('url'));
+redirect($breadcrumbs->getLast('url'));

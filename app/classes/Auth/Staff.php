@@ -53,7 +53,7 @@ class Staff extends AbstractEntity
 
         # jezeli istnieje flaga, ze trzeba zmienić hasło wtedy przekieruj
         if ($data['force_change_password']) {
-            Response::redirect('/auth/force-change-password');
+            redirect('/auth/force-change-password');
         }
 
         Data::get('logger')->staff($data['name']);
@@ -66,7 +66,7 @@ class Staff extends AbstractEntity
     {
         unset($_SESSION['staff']);
         Data::get('logger')->logout($message);
-        Response::redirect('/auth/login');
+        redirect('/auth/login');
     }
 
     /**
@@ -127,7 +127,7 @@ class Staff extends AbstractEntity
         if (!$this->hasPermissions($permissions)) {
             Data::get('logger')->deny("Not authorized", $permissions);
             $perm = count($permissions) > 0 ? array_shift($permissions) : 'default';
-            Response::redirect("/admin/account/deny/{$perm}");
+            redirect("/admin/account/deny/{$perm}");
         }
     }
 

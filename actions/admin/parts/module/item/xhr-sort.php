@@ -7,5 +7,5 @@ $positions = array_filter($_POST['positions'], function ($node) {
 });
 GC\Model\Module\ItemPosition::updatePositionsByModuleId($module_id, $positions);
 
-GC\Response::setMimeType('application/json');
+header("Content-Type: application/json; charset=utf-8");
 http_response_code(204);

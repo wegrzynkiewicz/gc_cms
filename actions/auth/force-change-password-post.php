@@ -30,4 +30,4 @@ GC\Model\Staff\Staff::updateByPrimaryId($user['staff_id'], [
 
 setNotice($trans('Twoje hasło zostało zmienione.'));
 
-GC\Response::redirect('/admin');
+redirect('/admin');

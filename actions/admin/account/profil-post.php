@@ -5,4 +5,4 @@ GC\Model\Staff\Staff::updateByPrimaryId($staff_id, [
     'lang' => post('lang'),
 ]);
 
-GC\Response::redirect($breadcrumbs->getBeforeLast('url'));
+redirect($breadcrumbs->getBeforeLast('url'));

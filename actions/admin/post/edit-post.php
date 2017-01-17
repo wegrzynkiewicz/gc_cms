@@ -17,4 +17,4 @@ GC\Model\Post\Post::update($post_id, [
 
 setNotice($trans('Wpis "%s" został zaktualizowany.', [$post['name']]));
 
-GC\Response::redirect($breadcrumbs->getLast('url'));
+redirect($breadcrumbs->getLast('url'));

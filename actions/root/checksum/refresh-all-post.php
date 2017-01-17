@@ -10,4 +10,4 @@ foreach($getFiles() as $file) {
 }
 
 setNotice($trans('Odświeżono wszystkie pliki.'));
-GC\Response::redirect($breadcrumbs->getLast('url'));
+redirect($breadcrumbs->getLast('url'));

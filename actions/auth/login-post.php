@@ -1,7 +1,7 @@
 <?php
 
 if (isset($_SESSION['staff'])) {
-    GC\Response::redirect('/admin');
+    redirect('/admin');
 }
 
 $password = post('password');
@@ -33,4 +33,4 @@ if (GC\Auth\Password::needsRehash($user['password'])) {
 
 GC\Auth\Staff::registerSession($user['staff_id']);
 GC\Storage\Backup::make(sprintf('Po zalogowaniu użytkownika %s', $user['name']));
-GC\Response::redirect('/admin');
+redirect('/admin');

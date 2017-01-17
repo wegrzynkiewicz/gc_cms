@@ -14,5 +14,5 @@ GC\Model\Module\File::updateByPrimaryId($file_id, [
     'settings' => json_encode($settings),
 ]);
 
-GC\Response::setMimeType('application/json');
+header("Content-Type: application/json; charset=utf-8");
 http_response_code(204);

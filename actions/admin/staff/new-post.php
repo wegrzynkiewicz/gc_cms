@@ -24,4 +24,4 @@ $mail->buildTemplate(
 $mail->addAddress($_POST['email']);
 $mail->send();
 
-GC\Response::redirect($breadcrumbs->getLast('url'));
+redirect($breadcrumbs->getLast('url'));

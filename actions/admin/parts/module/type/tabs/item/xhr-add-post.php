@@ -9,5 +9,5 @@ GC\Model\Module\Item::insertWithModuleId([
     'frame_id' => $frame_id,
 ], $module_id);
 
-GC\Response::setMimeType('application/json');
+header("Content-Type: application/json; charset=utf-8");
 http_response_code(204);

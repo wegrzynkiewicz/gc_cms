@@ -1,7 +1,7 @@
 <?php
 
 if (count($_SEGMENTS)<2) {
-    GC\Response::redirect('/admin');
+    redirect('/admin');
 }
 
 $email64 = array_shift($_SEGMENTS);

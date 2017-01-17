@@ -11,4 +11,4 @@ GC\Model\Module\Frame::updateByFrameId($page['frame_id'], [
 
 setNotice($trans('Strona "%s" została zaktualizowana.', [$_POST['name']]));
 
-GC\Response::redirect($breadcrumbs->getLast('url'));
+redirect($breadcrumbs->getLast('url'));

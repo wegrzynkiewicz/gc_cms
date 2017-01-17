@@ -6,4 +6,4 @@ $group_id = GC\Model\Staff\Group::insert([
 ]);
 GC\Model\Staff\Group::updatePermissions($group_id, $permissions);
 
-GC\Response::redirect($breadcrumbs->getLast('url'));
+redirect($breadcrumbs->getLast('url'));

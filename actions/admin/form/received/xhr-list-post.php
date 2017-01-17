@@ -21,7 +21,7 @@ $recordsTotal = intval(GC\Model\Form\Sent::select()
     ->fetch()['count']);
 
 # kontent jaki zostanie zwrócony
-GC\Response::setMimeType('application/json');
+header("Content-Type: application/json; charset=utf-8");
 echo json_encode([
     'draw' => intval(post('draw', 1)),
     'recordsTotal' => $recordsTotal,

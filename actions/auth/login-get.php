@@ -1,7 +1,7 @@
 <?php
 
 if (isset($_SESSION['staff'])) {
-    GC\Response::redirect('/admin');
+    redirect('/admin');
 }
 
 $headTitle = $trans('Logowanie do panelu administracyjnego');

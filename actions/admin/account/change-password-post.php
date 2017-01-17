@@ -31,4 +31,4 @@ GC\Model\Staff\Staff::updateByPrimaryId($user['staff_id'], [
 
 setNotice($trans('Twoje hasło zostało zmienione'));
 
-GC\Response::redirect($breadcrumbs->getLast('url'));
+redirect($breadcrumbs->getLast('url'));

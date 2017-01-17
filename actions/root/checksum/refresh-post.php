@@ -12,4 +12,4 @@ GC\Model\Checksum::insert([
 ]);
 
 setNotice($trans('Plik "%s" został odświeżony.', [$file]));
-GC\Response::redirect($breadcrumbs->getLast('url'));
+redirect($breadcrumbs->getLast('url'));

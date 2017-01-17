@@ -7,5 +7,5 @@ GC\Model\Module\Frame::updateByPrimaryId($item['frame_id'], [
     'name' => post('name'),
 ]);
 
-GC\Response::setMimeType('application/json');
+header("Content-Type: application/json; charset=utf-8");
 http_response_code(204);

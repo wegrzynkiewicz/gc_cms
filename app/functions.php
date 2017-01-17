@@ -331,3 +331,26 @@ function normalize($unformatted)
 
     return $url;
 }
+
+function redirect($location, $code = 303)
+{
+    $url = GC\Url::make($location);
+    absoluteRedirect($url, $code);
+}
+
+function absoluteRedirect($location, $code = 303)
+{
+    http_response_code($code);
+    header("Location: {$location}");
+
+    GC\Data::get('logger')->redirect(
+        sprintf("%s %s :: Time: %ss :: Memory: %sMiB",
+            $code,
+            $location,
+            microtime(true) - START_TIME,
+            memory_get_peak_usage(true) / 1048576
+        )
+    );
+
+    die();
+}

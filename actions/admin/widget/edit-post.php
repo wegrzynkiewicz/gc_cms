@@ -2,4 +2,4 @@
 
 require ACTIONS_PATH.'/admin/widget/edit-get.php';
 
-GC\Response::redirect($breadcrumbs->getLast('url'));
+redirect($breadcrumbs->getLast('url'));

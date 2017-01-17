@@ -5,5 +5,5 @@ if (isPost()) {
     GC\Model\Module\Item::deleteFrameByPrimaryId($item_id);
 }
 
-GC\Response::setMimeType('application/json');
+header("Content-Type: application/json; charset=utf-8");
 http_status_code(204);

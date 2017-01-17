@@ -9,4 +9,4 @@ GC\Model\Module\Module::deleteModuleByPrimaryId($module_id);
 
 setNotice($trans("%s został usunięty", [$config['modules'][$moduleType]['name']]));
 
-GC\Response::redirect($breadcrumbs->getLast('url'));
+redirect($breadcrumbs->getLast('url'));

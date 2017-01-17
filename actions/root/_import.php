@@ -2,7 +2,7 @@
 
 # panel roota jest dostępny tylko jeżeli jest włączony debug
 if (!$config['debug']['enabled']) {
-    GC\Response::redirect('/');
+    redirect('/');
 }
 
 # utworzenie obiektu reprezentującego pracownika, sprawdza czy jest zalogowany
@@ -12,7 +12,7 @@ GC\Data::set('staff', $staff);
 
 # panel roota jest dostępny tylko dla pracowników z polem 'root'
 if (!$staff['root']) {
-    GC\Response::redirect('/');
+    redirect('/');
 }
 
 $breadcrumbs = new GC\Breadcrumbs();
