@@ -39,7 +39,7 @@ trait JoinTrait
      /**
       * Usuń wszystkie rekordy dla klucza obcego równego $frame_id
       */
-     protected static function deleteAllByForeign($foreign_id)
+     public static function deleteAllByForeign($foreign_id)
      {
          $sql = self::sql("DELETE rows FROM ::table AS rows LEFT JOIN ::joinTable AS p USING (::primary) WHERE p.::joinForeign = ?");
          $affectedRows = Data::get('database')->execute($sql, [intval($foreign_id)]);
@@ -50,7 +50,7 @@ trait JoinTrait
      /**
       * Usuwa rekordy, które nie posiadają przynależności do innej tabelki
       */
-     protected static function deleteUnassignedByForeign()
+     public static function deleteUnassignedByForeign()
      {
          $sql = self::sql("DELETE rows FROM ::table AS rows LEFT JOIN ::joinTable AS p USING(::primary) WHERE p.::joinForeign IS NULL");
          $affectedRows = Data::get('database')->execute($sql);

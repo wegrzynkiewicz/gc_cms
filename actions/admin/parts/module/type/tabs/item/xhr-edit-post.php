@@ -1,11 +1,15 @@
 <?php
 
-$item_id = intval(array_shift($_SEGMENTS));
-$item = GC\Model\Module\Item::selectWithFrameByPrimaryId($item_id);
+$item_id = intval(array_pop($_PARAMETERS));
+
+# pobranie zakładki z ramką
+$item = GC\Model\Module\Item::select()
+    ->source('::frame')
+    ->equals('item_id', $item_id)
+    ->fetch();
 
 GC\Model\Module\Frame::updateByPrimaryId($item['frame_id'], [
     'name' => post('name'),
 ]);
 
-header("Content-Type: application/json; charset=utf-8");
 http_response_code(204);

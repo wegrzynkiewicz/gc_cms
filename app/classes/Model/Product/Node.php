@@ -5,24 +5,21 @@ namespace GC\Model\Product;
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\NodeTrait;
 use GC\Storage\Utility\PrimaryTrait;
-use GC\Storage\Utility\TaxonomyTrait;
 use GC\Storage\Utility\ContainFrameTrait;
 use GC\Storage\AbstractNode;
 use GC\Data;
 
 class Node extends AbstractNode
 {
-    public static $table   = '::product_nodes';
-    public static $treeTable = '::product_tree';
-    public static $primary = 'node_id';
-    public static $taxonomy = 'tax_id';
+    public static $table      = '::product_nodes';
+    public static $frame      = '::product_nodes LEFT JOIN ::frames USING (frame_id)';
+    public static $tree       = '::product_nodes LEFT JOIN ::frames USING (frame_id) LEFT JOIN ::product_tree USING (node_id)';
+    public static $membership = '::product_nodes LEFT JOIN ::frames USING (frame_id) LEFT JOIN ::product_membership USING (node_id)';
 
-    public static $primaryIdLabel = "node_id";
-    public static $parentIdLabel  = "parent_id";
+    public static $primary = 'node_id';
 
     use NodeTrait;
     use PrimaryTrait;
-    use TaxonomyTrait;
     use ContainFrameTrait;
 
     /**

@@ -54,7 +54,7 @@ trait ContainFrameTrait
     /**
      * Usuwa (stronę), rusztowanie (strony) i moduły (strony)
      */
-    protected static function deleteFrameByPrimaryId($primary_id)
+    public static function deleteFrameByPrimaryId($primary_id)
     {
         # pobierz informacje o rusztowaniu o id głownym
         $row = static::selectWithFrameByPrimaryId($primary_id);

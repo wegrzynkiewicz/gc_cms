@@ -14,6 +14,7 @@ class Item extends AbstractModel
     public static $primary     = 'item_id';
     public static $joinTable   = '::module_item_pos';
     public static $joinForeign = 'module_id';
+    public static $frame       = '::module_items LEFT JOIN ::frames USING (frame_id)';
 
     use PrimaryTrait;
     use JoinTrait;
@@ -26,18 +27,5 @@ class Item extends AbstractModel
             static::deleteFrameByPrimaryId($item_id);
         }
         static::deleteAllByForeign($module_id);
-    }
-
-    public static function insertWithModuleId(array $data, $module_id)
-    {
-        $item_id = parent::insert($data);
-
-        ItemPosition::insert([
-            'module_id' => $module_id,
-            'item_id' => $item_id,
-            'position' => ItemPosition::selectMaxPositionBy('module_id', $module_id),
-        ]);
-
-        return $item_id;
     }
 }

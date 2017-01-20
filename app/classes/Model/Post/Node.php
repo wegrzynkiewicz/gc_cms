@@ -9,7 +9,6 @@ use GC\Storage\Utility\TaxonomyTrait;
 use GC\Storage\Utility\ContainFrameTrait;
 use GC\Storage\AbstractNode;
 use GC\Data;
-use GC\Data;
 
 class Node extends AbstractNode
 {

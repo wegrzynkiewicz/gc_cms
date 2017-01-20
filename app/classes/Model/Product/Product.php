@@ -10,6 +10,7 @@ use GC\Data;
 class Product extends AbstractModel
 {
     public static $table   = '::products';
+    public static $frame   = '::products LEFT JOIN ::frames USING (frame_id)';
     public static $primary = 'product_id';
 
     use PrimaryTrait;

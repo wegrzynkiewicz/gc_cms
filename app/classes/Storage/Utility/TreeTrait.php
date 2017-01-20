@@ -25,7 +25,7 @@ trait TreeTrait
         return $maxOrder['maximum'] + 1;
     }
 
-    protected static function update($tax_id, array $positions)
+    public static function updateByTaxId($tax_id, array $positions)
     {
         static::delete()->equals(static::$taxonomy, $tax_id)->execute();
 

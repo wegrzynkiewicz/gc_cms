@@ -2,9 +2,10 @@
 
 namespace GC\Model\Module;
 
+use GC\Data;
+use GC\Auth\Staff;
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\PrimaryTrait;
-use GC\Data;
 
 class Frame extends AbstractModel
 {
@@ -24,7 +25,7 @@ class Frame extends AbstractModel
     {
         $data['creation_datetime'] = sqldate();
         $data['modify_datetime'] = sqldate();
-        $data['lang'] = GC\Auth\Staff::getEditorLang();
+        $data['lang'] = Staff::getEditorLang();
         $data['settings'] = json_encode([]);
 
         return parent::insert($data);

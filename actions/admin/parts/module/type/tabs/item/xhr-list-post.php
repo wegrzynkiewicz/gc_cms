@@ -1,4 +1,5 @@
 <?php
+$module_id = intval(array_shift($_PARAMETERS));
 $items = GC\Model\Module\Item::joinAllWithFrameByForeign($module_id);
 ?>
 

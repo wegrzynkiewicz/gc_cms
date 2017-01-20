@@ -159,7 +159,7 @@ $(function(){
     });
 
     $('#editModal').on('show.bs.modal', function(e) {
-        var url = "<?=GC\Url::make("/admin/parts/module/{$module_id}/type/tabs/item/xhr-edit")?>/"+$(e.relatedTarget).data('id');
+        var url = "<?=GC\Url::make("/admin/parts/module/type/tabs/item/xhr-edit")?>/"+$(e.relatedTarget).data('id');
         $.get(url, function(data) {
             $('#editModalContent').html(data);
             $('#editModalForm').attr('action', url);

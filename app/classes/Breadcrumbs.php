@@ -2,8 +2,6 @@
 
 namespace GC;
 
-use GC\ArrayHelper;
-
 class Breadcrumbs
 {
     protected $links = array();
@@ -25,7 +23,7 @@ class Breadcrumbs
 
     public function getBeforeLast($index)
     {
-        return ArrayHelper::getValueByKeys(
+        return getValueByKeys(
             $this->links,
             [count($this->links)-2, $index],
             '/'
@@ -34,7 +32,7 @@ class Breadcrumbs
 
     public function getLast($index)
     {
-        return ArrayHelper::getValueByKeys(
+        return getValueByKeys(
             $this->links,
             [count($this->links)-1, $index],
             '/'

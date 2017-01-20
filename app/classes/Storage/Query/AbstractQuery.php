@@ -55,42 +55,6 @@ abstract class AbstractQuery
         return $this->database->execute($this->getSQL(), $this->params);
     }
 
-    public function fetch()
-    {
-        $this->limit(1);
-
-        return $this->database->fetch($this->getSQL(), $this->params);
-    }
-
-    public function fetchAll()
-    {
-        return $this->database->fetchAll($this->getSQL(), $this->params);
-    }
-
-    public function fetchByKey($key)
-    {
-        return $this->database->fetchByKey($this->getSQL(), $this->params, $key);
-    }
-
-    public function fetchByPrimaryKey()
-    {
-        return $this->database->fetchByKey(
-            $this->getSQL(),
-            $this->params,
-            get_class_vars($this->modelClass)['primary']
-        );
-    }
-
-    public function fetchByMap($keyLabel, $valueLabel)
-    {
-        return $this->database->fetchByMap(
-            $this->getSQL(),
-            $this->params,
-            $keyLabel,
-            $valueLabel
-        );
-    }
-
     public function source($sqlParts)
     {
         $this->source = $sqlParts;

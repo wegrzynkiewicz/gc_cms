@@ -1,42 +1,46 @@
 <?php
-
-# pobierz ilość wysłanych wiadomości dla formularza
-$count = GC\Model\Form\Sent::select()
+$count = GC\Model\Product\Product::select()
     ->fields('COUNT(*) AS count')
-    ->equals('form_id', $form_id)
     ->fetch()['count'];
-
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
-<?php require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <div class="btn-toolbar pull-right">
+                <a href="<?=GC\Url::mask('/new')?>" type="button" class="btn btn-success btn-md">
+                    <i class="fa fa-plus fa-fw"></i>
+                    <?=$trans('Dodaj nowy produkt')?>
+                </a>
+            </div>
+            <h1><?=($headTitle)?></h1>
+        </div>
+    </div>
+</div>
+
+<?php require ACTIONS_PATH.'/admin/parts/breadcrumbs.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">
         <div class="simple-box">
             <?php if ($count == 0): ?>
-                <?=$trans('Nie znaleziono żadnego wysłanego formularza w języku: ')?>
+                <?=$trans('Nie znaleziono żadnego produktu w języku: ')?>
                 <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/language.html.php', [
                     'lang' => GC\Auth\Staff::getEditorLang(),
                 ])?>
             <?php else: ?>
                 <form action="" method="post" id="form" class="form-horizontal">
-                    <table class="table vertical-middle" data-table="">
+                    <table class="table vertical-middle" data-table="" style="width:100%">
                         <thead>
                             <tr>
+                                <th data-name="image"
+                                    data-searchable="0"
+                                    data-sortable="0"></th>
                                 <th data-name="name"
                                     data-searchable="1"
                                     data-sortable="1">
-                                    <?=$trans('Pierwsze pole formularza')?>
-                                </th>
-                                <th data-name="status"
-                                    data-searchable="0"
-                                    data-sortable="1">
-                                    <?=$trans('Status wiadomości')?>
-                                </th>
-                                <th data-name="sent_datetime"
-                                    data-searchable="1"
-                                    data-sortable="1">
-                                    <?=$trans('Data nadesłania')?>
+                                    <?=$trans('Nazwa produktu')?>
                                 </th>
                                 <th data-name="options"
                                     data-searchable="0"
@@ -55,11 +59,8 @@ $count = GC\Model\Form\Sent::select()
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm"
-            method="post"
-            action="<?=GC\Url::mask("/delete")?>"
-            class="modal-content">
-            <input name="sent_id" type="hidden" value="">
+        <form id="deleteModalForm" method="post" action="<?=GC\Url::mask('/delete')?>" class="modal-content">
+            <input name="product_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
@@ -69,8 +70,8 @@ $count = GC\Model\Form\Sent::select()
                 </h2>
             </div>
             <div class="modal-body">
-                <?=$trans('Czy jesteś pewien, że chcesz usunąć nadesłany formularz')?>
-                <span id="sent_name" style="font-weight:bold; color:red;"></span>?
+                <?=$trans('Czy jesteś pewien, że chcesz usunąć produkt')?>
+                <span id="product_name" style="font-weight:bold; color:red;"></span>?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -84,61 +85,69 @@ $count = GC\Model\Form\Sent::select()
     </div>
 </div>
 
-<script id="options-template" type="text/html">
-    <div class="text-right">
-        <a href="<?=GC\Url::mask("/")?>{{sent_id}}/show"
+<script id="row-template" type="text/html">
+    <td style="width:64px">
+        <img src="{{image}}" width="64"/>
+    </td>
+
+    <td>
+        <a href="<?=GC\Url::mask()?>/{{product_id}}/edit"
+            title="<?=$trans('Edytuj stronę')?>">
+            {{name}}
+        </a>
+    </td>
+
+    <td class="text-right">
+        <a href="<?=GC\Url::make("/page")?>/{{product_id}}"
+            target="_blank"
+            title="<?=$trans('Podejrzyj tą stronę')?>"
             class="btn btn-primary btn-sm">
             <i class="fa fa-search fa-fw"></i>
             <?=$trans('Podgląd')?>
         </a>
 
+        <a href="<?=GC\Url::mask()?>/{{product_id}}/module/list"
+            title="<?=$trans('Wyświetl moduły strony')?>"
+            class="btn btn-success btn-sm">
+            <i class="fa fa-file-text-o fa-fw"></i>
+            <?=$trans('Moduły')?>
+        </a>
+
         <a data-toggle="modal"
-            data-id="{{sent_id}}"
+            data-id="{{product_id}}"
             data-name="{{name}}"
             data-target="#deleteModal"
-            title="<?=$trans('Usuń wiadomość')?>"
+            title="<?=$trans('Usuń stronę')?>"
             class="btn btn-danger btn-sm">
             <i class="fa fa-times fa-fw"></i>
             <?=$trans('Usuń')?>
         </a>
-    </div>
+    </td>
 </script>
 
 <?php require ACTIONS_PATH.'/admin/parts/assets/footer.html.php'; ?>
 
 <script>
     $(function(){
-        var optionsTemplate = $('#options-template').html();
-        var statuses = <?=json_encode($config['formStatuses'])?>;
+        var rowTemplate = $('#row-template').html();
         var table = $('[data-table]').DataTable({
-            order: [[2, 'desc']],
+            order: [[1, 'asc']],
             iDisplayLength: <?=$config['dataTable']['iDisplayLength']?>,
 	        processing: true,
             serverSide: true,
             searchDelay: 500,
+            autoWidth: false,
             ajax: {
                 url: '<?=GC\Url::mask("/xhr-list")?>',
                 type: 'POST'
             },
             createdRow: function (row, data, index) {
-                $(row).addClass(statuses[data['status']]['class']);
+                $(row).html(Mustache.render(rowTemplate, data));
             },
             columns: [
+                {data: "image"},
                 {data: "name"},
-                {
-                    data: "status",
-                    render: function (data, type, row) {
-                        return statuses[row['status']]['name'];
-                    }
-                },
-                {data: "sent_datetime"},
-                {
-                    data: 'options',
-                    render: function (data, type, row) {
-                        return Mustache.render(optionsTemplate, row);
-                    }
-                }
-            ]
+            ],
         });
 
         $('#deleteModalForm').on('submit', function(e) {
@@ -150,8 +159,8 @@ $count = GC\Model\Form\Sent::select()
         });
 
         $('#deleteModal').on('show.bs.modal', function(e) {
-            $(this).find('#sent_name').html($(e.relatedTarget).data('name'));
-            $(this).find('[name="sent_id"]').val($(e.relatedTarget).data('id'));
+            $(this).find('#product_name').html($(e.relatedTarget).data('name'));
+            $(this).find('[name="product_id"]').val($(e.relatedTarget).data('id'));
         });
     });
 </script>

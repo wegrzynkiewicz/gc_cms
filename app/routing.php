@@ -3,9 +3,12 @@
 /** Plik ładuje odpowiednią akcję poprzez warunki routingu */
 
 $url = trim($request->url, '/');
+$parts = explode('/', $url);
 
-$_PARAMETERS = [];
-$_SEGMENTS = explode('/', $url);
+$_PARAMETERS = array_filter($parts, 'intval');
+$_SEGMENTS = array_filter($parts, function ($segment) {
+    return intval($segment) === 0;
+});
 
 # jeżeli adres bez ścieżki wtedy załaduj akcję główną
 if (empty($url)) {
@@ -16,7 +19,7 @@ if (empty($url)) {
 # sprawdza pierwszy segment w adresie czy nie jest jednym z dostępnych języków
 $lang = $_SEGMENTS[0];
 if (GC\Validate::installedLang($lang)) {
-    GC\Visitor::$langRequest = $lang;
+    GC\Auth\Visitor::$langRequest = $lang;
     array_shift($_SEGMENTS);
 }
 
@@ -66,8 +69,6 @@ while (count($_SEGMENTS) > 0) {
         $logger->routing("Start :: {$file}");
         return require $file;
     }
-
-    $_PARAMETERS[] = $segment;
 }
 
 $_SEGMENTS = $copySegments;

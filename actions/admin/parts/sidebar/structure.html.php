@@ -66,6 +66,28 @@ return [
         'perms' => [],
         'children' => [],
     ],
+    'products' => [
+        'name' => $trans('Katalog produktów'),
+        'path' => '#',
+        'icon' => 'shopping-basket',
+        'perms' => [],
+        'children' => [
+            'all_products' => [
+                'name' => $trans('Wyświetl wszystkie produkty'),
+                'path' => '/admin/product/list',
+                'icon' => '',
+                'perms' => [],
+                'children' => [],
+            ],
+            'product_taxonomy' => [
+                'name' => $trans('Wyświetl podziały produktów'),
+                'path' => '/admin/product/taxonomy/list',
+                'icon' => '',
+                'perms' => [],
+                'children' => [],
+            ],
+        ],
+    ],
     'widgets' => [
         'name' => $trans('Widżety'),
         'path' => '/admin/widget/list',
@@ -133,7 +155,7 @@ return [
     ],
     'root' => [
         'name' => 'Panel programisty',
-        'path' => '',
+        'path' => '#',
         'icon' => 'bug',
         'perms' => ['root'],
         'children' => [

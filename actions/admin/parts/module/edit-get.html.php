@@ -1,5 +1,7 @@
 <?php
 
+$module_id = intval(array_shift($_PARAMETERS));
+
 $module = GC\Model\Module\Module::fetchByPrimaryId($module_id);
 $type = $module['type'];
 $content = $module['content'];

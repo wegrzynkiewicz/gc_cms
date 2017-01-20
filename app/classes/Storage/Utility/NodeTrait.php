@@ -41,7 +41,7 @@ trait NodeTrait
     /**
      * Usuwa węzeł i wszystkie podwęzły które nie należą do żadnej grupy i nie posiadają rodzica
      */
-    protected static function deleteNodeByPrimaryId($primary_id)
+    public static function deleteNodeByPrimaryId($primary_id)
     {
         static::deleteByPrimaryId($primary_id);
         static::deleteWithoutParentId();
@@ -50,7 +50,7 @@ trait NodeTrait
     /**
      * Usuwa węzły, które nie należą do żadnej grupy i nie posiadają rodzica
      */
-    protected static function deleteWithoutParentId()
+    public static function deleteWithoutParentId()
     {
         $sql = self::sql("DELETE n FROM ::table AS n LEFT JOIN ::treeTable AS p USING(::primary) WHERE p.::taxonomy IS NULL");
         $affectedRows = Data::get('database')->execute($sql);
