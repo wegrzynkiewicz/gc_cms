@@ -11,26 +11,47 @@ use Lcobucci\JWT\Signer\Hmac\Sha256;
 
 class CSRFToken
 {
+    private $config;
+
+    public function __construct()
+    {
+        $this->config = &Data::get('config')['csrf'];
+    }
+
+    /**
+     * Sprawdza czy token został już zarejestrowany
+     */
+    public function isRegistered()
+    {
+        if (!isset($_COOKIE[$this->config['cookieName']])) {
+            return false;
+        }
+
+        if (!isset($_SESSION['csrfToken'])) {
+            return false;
+        }
+
+        return true;
+    }
+
     /**
      * Tworzy token i dodaje ciasteczko przeglądarce
      */
-    public static function register()
+    public function register()
     {
-        $csrfConfig = &Data::get('config')['csrf'];
-
         $builder = new Builder();
         $signer = new Sha256();
 
         $tokenString = (string)$builder
             ->setIssuer(server('SERVER_NAME')) // Configures the issuer (iss claim)
             ->setIssuedAt(time()) // Configures the time that the token was issue (iat claim)
-            ->setExpiration(time() + $csrfConfig['expires']) // Configures the expiration time of the token (exp claim)
+            ->setExpiration(time() + $this->config['expires']) // Configures the expiration time of the token (exp claim)
             ->setId(session_id())
-            ->sign($signer, $csrfConfig['secretKey']) // creates a signature using "testing" as key
+            ->sign($signer, $this->config['secretKey']) // creates a signature using "testing" as key
             ->getToken(); // Retrieves the generated token
 
         setcookie(
-            $csrfConfig['cookieName'], # cookie name
+            $this->config['cookieName'], # cookie name
             $tokenString, # value
             0, # expires
             '/', # path
@@ -43,11 +64,11 @@ class CSRFToken
     }
 
     /**
-     * Weryfikuje poprawność tokenu
+     * Weryfikuje poprawność tokenu, rzuca wyjątek jeżeli nieprawidłowy
      */
-    public static function assert()
+    public function assert()
     {
-        if (!static::validate()) {
+        if (!$this->validate()) {
             throw new ValidCSRFTokenException();
         }
     }
@@ -55,11 +76,10 @@ class CSRFToken
     /**
      * Weryfikuje poprawność tokenu
      */
-    public static function validate()
+    public function validate()
     {
         $logger = Data::get('logger');
-        $csrfConfig = &Data::get('config')['csrf'];
-        $tokenString = def($_COOKIE, $csrfConfig['cookieName'], null);
+        $tokenString = def($_COOKIE, $this->config['cookieName'], null);
 
         if ($tokenString === null) {
             $logger->csrf('Cookie failed');
@@ -87,7 +107,7 @@ class CSRFToken
             return false;
         }
 
-        if (!$token->verify($signer, $csrfConfig['secretKey'])) {
+        if (!$token->verify($signer, $this->config['secretKey'])) {
             $logger->csrf('Encrypting failed');
 
             return false;
@@ -95,6 +115,7 @@ class CSRFToken
 
         if ($tokenString !== def($_SESSION, 'csrfToken', null)) {
             $logger->csrf('Session failed');
+
             return false;
         }
 

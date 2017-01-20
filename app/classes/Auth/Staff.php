@@ -159,12 +159,16 @@ class Staff extends AbstractEntity
         # rozpoczęcie sesji
         session_start();
 
+        $tokenCSRF = new CSRFToken();
+
         # sprawdzenie poprawności tokenu csrf, tylko gdy metoda post
         if (Data::get('request')->isMethod('POST')) {
-            CSRFToken::assert();
+            $tokenCSRF->assert();
         }
 
-        # utworzenie nowego tokenu
-        CSRFToken::register();
+        # utworzenie nowego tokenu, jeżeli nie został zarejestrowany
+        if ($tokenCSRF->isRegistered()) {
+            $tokenCSRF->register();
+        }
     }
 }
