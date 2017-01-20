@@ -1,5 +1,5 @@
 /app/storage
-/app/start.php
+/app/config/generated.php
 /composer.lock
 /external
 /tmp
