@@ -2,6 +2,20 @@
 
 /** Plik zawiera inicjalizacje wszystkich globalnych serwisów w aplikacji */
 
+# załadowanie wartości wygenerowanych
+$generated = require __DIR__.'/config/generated.php';
+if (empty($generated)) {
+    $generated = [
+        'datetime' => date('Y-m-d H:i:s'),
+        'password.salt' => GC\Auth\Password::random(40),
+        'csrf.secretKey' => GC\Auth\Password::random(40),
+        'csrf.cookieName' => GC\Auth\Password::random(40),
+        'session.staff.cookieName' => GC\Auth\Password::random(40),
+        'session.visitor.cookieName' => GC\Auth\Password::random(40),
+    ];
+    GC\Disc::exportDataToPHPFile($generated, __DIR__.'/config/generated.php');
+}
+
 # załadowanie pliku konfiguracyjnego
 $config = require __DIR__.'/config/config.php';
 GC\Data::set('config', $config);
