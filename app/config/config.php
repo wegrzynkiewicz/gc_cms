@@ -20,7 +20,7 @@ ini_set('display_startup_errors', 1); # włącza wyświetlanie startowych błęd
 ini_set('error_log', ROOT_PATH.'/tmp/logs/'.date('Y-m-d').'.error.log'); # zmienia ścieżkę logowania błędów
 ini_set('max_execution_time', 300); # określa maksymalny czas trwania skryptu
 ini_set('date.timezone', 'Europe/Warsaw'); # ustawienie domyślnej strefy czasowej
-ini_set('session.name', def($generated, 'session.visitor.cookieName')); # zmiana nazwy ciastka sesyjnego
+ini_set('session.name', $generated['session.visitor.cookieName']); # zmiana nazwy ciastka sesyjnego
 ini_set('session.use_trans_sid', 0);
 ini_set('session.use_strict_mode', 1);
 ini_set('session.cookie_httponly', 1); # ustawia ciastko tylko do odczytu, nie jest możliwe odczyt document.cookie w js
@@ -50,18 +50,18 @@ return [
     'noImageUrl' => '/admin/images/no-image.jpg', # ścieżka do obrazka w przypadku braku obrazka
     'password' => [
         'minLength' => 8, # minimalna długość hasła
-        'staticSalt' => def($generated, 'password.salt'), # unikalna, sól dla wszystkich użytkowników, jeżeli ulegnie zmianie, żaden pracownik nie będzie mógł się zalogować
+        'staticSalt' => $generated['password.salt'], # unikalna, sól dla wszystkich użytkowników, jeżeli ulegnie zmianie, żaden pracownik nie będzie mógł się zalogować
         'options' => [ # opcje dla generatora haseł
             'cost' => 11, # ilość iteracji
         ],
     ],
     'session' => [ # ustawienia sesji
         'staff' => [ # ustawienia sesji dla pracownika
-            'cookieName' => def($generated, 'session.staff.cookieName'), # nazwa ciastka sesyjnego dla pracownika
+            'cookieName' => $generated['session.staff.cookieName'], # nazwa ciastka sesyjnego dla pracownika
             'timeout' => 1800, # czas jaki musi upłynąć po zalogowaniu, aby wylogowało pracownika z automatu, w sekundach
         ],
         'visitor' => [ # ustawienia sesji dla odwiedzającego
-            'cookieName' => def($generated, 'session.visitor.cookieName'), # nazwa ciastka sesyjnego dla odwiedzającego
+            'cookieName' => $generated['session.visitor.cookieName'], # nazwa ciastka sesyjnego dla odwiedzającego
         ],
     ],
     'avatar' => [
@@ -104,8 +104,8 @@ return [
     ],
     'csrf' => [ # zawiera konfiguracje tokenu csrf
         'expires' => 1800, # czas po którym token jest nieważny
-        'secretKey' => def($generated, 'csrf.secretKey'), # klucz, za pomocą którego walidowany jest token
-        'cookieName' => def($generated, 'csrf.cookieName'), # nazwa ciastka, które przechowuje token CSRF
+        'secretKey' => $generated['csrf.secretKey'], # klucz, za pomocą którego walidowany jest token
+        'cookieName' => $generated['csrf.cookieName'], # nazwa ciastka, które przechowuje token CSRF
     ],
     'reCaptcha' => [ # zawiera konfiguracje dla recaptchy od googla
         'public' => '6Le88g4UAAAAAJ_VW4XML20c2tWSWFSv29lkGeVp', # publiczny klucz

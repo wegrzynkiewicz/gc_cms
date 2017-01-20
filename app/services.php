@@ -3,17 +3,16 @@
 /** Plik zawiera inicjalizacje wszystkich globalnych serwisów w aplikacji */
 
 # załadowanie wartości wygenerowanych
-$generated = require __DIR__.'/config/generated.php';
-if (empty($generated)) {
+$generated = @include __DIR__.'/storage/generated.php';
+if (!$generated) {
     $generated = [
-        'datetime' => date('Y-m-d H:i:s'),
         'password.salt' => GC\Auth\Password::random(40),
         'csrf.secretKey' => GC\Auth\Password::random(40),
         'csrf.cookieName' => GC\Auth\Password::random(40),
         'session.staff.cookieName' => GC\Auth\Password::random(40),
         'session.visitor.cookieName' => GC\Auth\Password::random(40),
     ];
-    GC\Disc::exportDataToPHPFile($generated, __DIR__.'/config/generated.php');
+    GC\Disc::exportDataToPHPFile($generated, __DIR__.'/storage/generated.php');
 }
 
 # załadowanie pliku konfiguracyjnego
@@ -71,7 +70,7 @@ GC\Data::set('trans', $trans);
 # serwis translacji tekstu, jeżeli translacja wyłączona wtedy utwórz atrapę
 GC\Data::registerLazyService('translator', function () use (&$config) {
     return $config['translator']['enabled']
-        ? new GC\Translation\FileTranslator($config['translator']['folder'].'/'.GC\Auth\Visitor::getLang().'.json')
+        ? new GC\Translation\FileTranslator($config['translator']['folder'].'/'.GC\Auth\Visitor::getLang().'.php')
         : new GC\Translation\NullTranslator();
 });
 

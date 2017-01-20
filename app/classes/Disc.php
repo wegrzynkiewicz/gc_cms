@@ -12,13 +12,12 @@ class Disc
      */
     public static function exportDataToPHPFile($data, $file)
     {
-        if (!is_writable($file)) {
-            return;
-        }
+        static::makeFile($file);
 
-        static::makeDirRecursive(dirname($file));
+        $date = sqldate();
+        $export = var_export($data, true);
 
-        $content = "<?php\n\nreturn ".var_export($data, true).';';
+        $content = "<?php\n\n/** @generated {$date} */\n\nreturn {$export};";
         file_put_contents($file, $content);
     }
 

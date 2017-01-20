@@ -15,17 +15,15 @@ class FileTranslator
         $this->translationPath = $translationPath;
 
         if (is_readable($this->translationPath)) {
-            $json = file_get_contents($this->translationPath);
-            $this->translations = json_decode($json, true);
+            $this->translations = require $this->translationPath;
         }
     }
 
     public function __destruct()
     {
         if ($this->refresh) {
-            $json = json_encode($this->translations, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
             Disc::makeFile($this->translationPath);
-            file_put_contents($this->translationPath, $json);
+            Disc::exportDataToPHPFile($this->translations, $this->translationPath);
         }
     }
 
