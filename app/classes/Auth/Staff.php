@@ -167,7 +167,7 @@ class Staff extends AbstractEntity
         }
 
         # utworzenie nowego tokenu, jeżeli nie został zarejestrowany
-        if ($tokenCSRF->isRegistered()) {
+        if (!$tokenCSRF->isRegistered()) {
             $tokenCSRF->register();
         }
     }
