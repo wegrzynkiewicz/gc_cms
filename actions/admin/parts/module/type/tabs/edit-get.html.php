@@ -102,7 +102,7 @@ $_POST['content'] = $content;
     <div class="modal-dialog" role="document">
         <form id="deleteModalForm"
             method="post"
-            action="<?=GC\Url::mask("/admin/parts/module/{$module_id}/item/xhr-delete")?>"
+            action="<?=GC\Url::make("/admin/parts/module/item/xhr-delete")?>"
             class="modal-content">
             <input name="item_id" type="hidden" value="">
             <div class="modal-header">
@@ -180,7 +180,7 @@ $(function(){
     });
 
     $("#sortableForm").submit(function(e) {
-        var url = "<?=GC\Url::mask("/admin/parts/module/{$module_id}/item/xhr-sort")?>";
+        var url = "<?=GC\Url::make("/admin/parts/module/{$module_id}/item/xhr-sort")?>";
         $.post(url, {
             positions: $("#sortable").sortable("toArray")
         });

@@ -16,6 +16,16 @@ class CSRFToken
     public function __construct()
     {
         $this->config = &Data::get('config')['csrf'];
+
+        # sprawdzenie poprawności tokenu csrf, tylko gdy metoda post
+        if (Data::get('request')->isMethod('POST')) {
+            $this->assert();
+        }
+
+        # utworzenie nowego JWT, jeżeli nie został zarejestrowany
+        if (!$this->isRegistered()) {
+            $this->register();
+        }
     }
 
     /**
@@ -53,7 +63,7 @@ class CSRFToken
         setcookie(
             $this->config['cookieName'], # cookie name
             $tokenString, # value
-            0, # expires
+            time() + $this->config['expires'], # expires
             '/', # path
             '', # domain
             false, # secure
@@ -61,6 +71,8 @@ class CSRFToken
         );
 
         $_SESSION['csrfToken'] = $tokenString;
+
+        Data::get('logger')->csrf('Register', [$tokenString]);
     }
 
     /**
@@ -78,13 +90,10 @@ class CSRFToken
      */
     public function validate()
     {
-        $logger = Data::get('logger');
         $tokenString = def($_COOKIE, $this->config['cookieName'], null);
 
         if ($tokenString === null) {
-            $logger->csrf('Cookie failed');
-
-            return false;
+            return $this->abort('Cookie failed');
         }
 
         $signer = new Sha256();
@@ -92,9 +101,7 @@ class CSRFToken
         $token = $parser->parse($tokenString);
 
         if (!$token) {
-            $logger->csrf('Parsing failed');
-
-            return false;
+            return $this->abort('Parsing failed');
         }
 
         $data = new ValidationData();
@@ -102,25 +109,31 @@ class CSRFToken
         $data->setId(session_id());
 
         if (!$token->validate($data)) {
-            $logger->csrf('Validating failed');
-
-            return false;
+            return $this->abort('Validating failed');
         }
 
         if (!$token->verify($signer, $this->config['secretKey'])) {
-            $logger->csrf('Encrypting failed');
-
-            return false;
+            return $this->abort('Encrypting failed');
         }
 
         if ($tokenString !== def($_SESSION, 'csrfToken', null)) {
-            $logger->csrf('Session failed');
-
-            return false;
+            return $this->abort('Session failed');
         }
 
-        $logger->csrf('OK', [$tokenString]);
+        Data::get('logger')->csrf('OK');
 
         return true;
+    }
+
+    /**
+     * Niszczy dane tokenu
+     */
+    public function abort($message)
+    {
+        Data::get('logger')->csrf($message);
+        setcookie($this->config['cookieName'], null);
+        unset($_SESSION['csrfToken']);
+
+        return false;
     }
 }

@@ -10,6 +10,10 @@ GC\Auth\Staff::startSession();
 $staff = GC\Auth\Staff::createFromSession();
 GC\Data::set('staff', $staff);
 
+# stworzenie i weryfikacja tokenu CSRF
+$tokenCSRF = new GC\Auth\CSRFToken();
+GC\Data::set('tokenCSRF', $tokenCSRF);
+
 # panel roota jest dostępny tylko dla pracowników z polem 'root'
 if (!$staff['root']) {
     redirect('/');

@@ -1,11 +1,25 @@
 <?php
 
-$module_id = intval(array_shift($_SEGMENTS));
-$positions = $_POST['positions'];
-$positions = array_filter($_POST['positions'], function ($node) {
-    return isset($node['id']);
-});
-GC\Model\Module\ItemPosition::updatePositionsByModuleId($module_id, $positions);
+$module_id = intval(array_shift($_PARAMETERS));
 
-header("Content-Type: application/json; charset=utf-8");
+# dekoduj nadesłaną wartość position
+$positions = json_decode(post('positions', []), true);
+
+# usuń wszystkie rekordy budujące drzewo
+GC\Model\Module\ItemPosition::delete()
+    ->equals('module_id', $module_id)
+    ->execute();
+
+# każdą nadesłaną pozycję wstaw do bazy danych
+$pos = 1;
+foreach ($positions as $node) {
+    if (isset($node['id'])) {
+        GC\Model\Module\ItemPosition::insert([
+            'module_id' => $module_id,
+            'file_id' => $node['id'],
+            'position' => $pos++,
+        ]);
+    }
+}
+
 http_response_code(204);

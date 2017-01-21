@@ -1,8 +1,4 @@
 <?php
 
-GC\Model\Module\Module::updateByPrimaryId($module_id, [
-    'content' => post('content'),
-    'theme' => 'default',
-]);
-
-redirect($breadcrumbs->getBeforeLast('url'));
+setNotice($trans('Kolejność zakładek została zaktualizowana.'));
+redirect($breadcrumbs->getLast('url'));
