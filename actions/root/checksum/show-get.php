@@ -7,7 +7,7 @@ $headTitle = sprintf('Źródło pliku "%s"', $file);
 $breadcrumbs->push([
     'url' => $request->url,
     'name' => $headTitle,
-    'icon' => 'fa-file-o',
+    'icon' => 'file-o',
 ]);
 
 $filepath = ROOT_PATH.$file;

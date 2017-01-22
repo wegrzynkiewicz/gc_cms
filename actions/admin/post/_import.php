@@ -5,5 +5,5 @@ GC\Url::extendMask('/post%s');
 $breadcrumbs->push([
     'url' => GC\Url::mask('/list'),
     'name' => $headTitle,
-    'icon' => 'fa-pencil-square-o',
+    'icon' => 'pencil-square-o',
 ]);

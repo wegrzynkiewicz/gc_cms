@@ -4,7 +4,7 @@ $headTitle = $trans('Zmiana hasła');
 $breadcrumbs->push([
     'url' => $request->url,
     'name' => $headTitle,
-    'icon' => 'fa-unlock-alt',
+    'icon' => 'unlock-alt',
 ]);
 
 $_POST = [];

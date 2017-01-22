@@ -5,6 +5,6 @@ GC\Url::extendMask('/dump%s');
 $breadcrumbs->push([
     'url' => GC\Url::mask('/list'),
     'name' => $headTitle,
-    'icon' => 'fa-database',
+    'icon' => 'database',
 ]);
 $dump_id = intval(array_shift($_PARAMETERS));

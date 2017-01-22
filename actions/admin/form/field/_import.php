@@ -7,5 +7,5 @@ GC\Url::extendMask("/{$form_id}/field%s");
 $breadcrumbs->push([
     'url' => GC\Url::mask('/list'),
     'name' => $headTitle,
-    'icon' => 'fa-envelope-open-o',
+    'icon' => 'envelope-open-o',
 ]);

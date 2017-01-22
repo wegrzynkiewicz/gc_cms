@@ -5,5 +5,5 @@ GC\Url::extendMask('/staff%s');
 $breadcrumbs->push([
     'url' => GC\Url::mask('/list'),
     'name' => $headTitle,
-    'icon' => 'fa-users',
+    'icon' => 'users',
 ]);

@@ -5,5 +5,5 @@ GC\Url::extendMask('/nav%s');
 $breadcrumbs->push([
     'url' => GC\Url::mask('/list'),
     'name' => $headTitle,
-    'icon' => 'fa-sitemap',
+    'icon' => 'sitemap',
 ]);

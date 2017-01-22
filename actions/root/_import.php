@@ -23,9 +23,9 @@ $breadcrumbs = new GC\Breadcrumbs();
 $breadcrumbs->push([
     'url' => '/admin',
     'name' => 'Dashboard',
-    'icon' => 'fa-dashboard',
+    'icon' => 'dashboard',
 ]);
 $breadcrumbs->push([
     'name' => 'Panel programisty',
-    'icon' => 'fa-bug',
+    'icon' => 'bug',
 ]);
