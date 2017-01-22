@@ -8,7 +8,13 @@ $breadcrumbs->push([
 ]);
 
 $getFiles = function () {
-    return array_filter(GC\Disc::globRecursive('*.*'), function ($value) {
+    $webDataPath = realpath(WEB_PATH.'/data');
+    return array_filter(GC\Disc::globRecursive('*.*'), function ($value) use (&$webDataPath) {
+
+        if (strpos(realpath($value), $webDataPath) !== false) {
+            return false;
+        }
+
         return in_array(pathinfo($value, PATHINFO_EXTENSION), [
             'php', 'js', 'css', 'json', 'txt', 'md', 'html'
         ]);
