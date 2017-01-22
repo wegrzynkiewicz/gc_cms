@@ -10,6 +10,7 @@ use GC\Data;
 class Page extends AbstractModel
 {
     public static $table   = '::pages';
+    public static $frame   = '::pages JOIN ::frames USING(frame_id)';
     public static $primary = 'page_id';
 
     use PrimaryTrait;

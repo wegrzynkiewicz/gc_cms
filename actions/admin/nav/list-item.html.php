@@ -1,4 +1,3 @@
-<?php $tree = GC\Model\Menu\Menu::buildTreeByTaxonomyId($nav_id) ?>
 <tr>
     <td><?=e($nav['name'])?></td>
     <td>
@@ -16,7 +15,7 @@
         <?php endif ?>
     </td>
     <td class="text-right">
-        <a href="<?=GC\Url::mask("/{$nav_id}/menu/list")?>"
+        <a href="<?=GC\Url::mask("/{$nav_id}/menu/tree")?>"
             class="btn btn-success btn-sm">
             <i class="fa fa-file-text-o fa-fw"></i>
             <?=$trans('Węzły nawigacji')?>

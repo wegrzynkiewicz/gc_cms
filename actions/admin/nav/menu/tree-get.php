@@ -1,7 +1,17 @@
 <?php
 
-$pages = GC\Model\Page::selectWithFrames()->fetchByPrimaryKey();
-$menuTree = GC\Model\Menu\Menu::buildTreeByTaxonomyId($nav_id);
+# pobierz wszystkie strony
+$pages = GC\Model\Page::select()
+    ->source('::frame')
+    ->equals('lang', GC\Auth\Staff::getEditorLang())
+    ->sort('name', 'ASC')
+    ->fetchByPrimaryKey();
+
+# pobierz węzły nawigacji i zbuduj z nich drzewo
+$menuTree = GC\Model\Menu\Menu::select()
+    ->source('::tree')
+    ->equals('nav_id', $nav_id)
+    ->fetchTree();
 
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
@@ -29,7 +39,7 @@ $menuTree = GC\Model\Menu\Menu::buildTreeByTaxonomyId($nav_id);
 
             <?php if ($menuTree->hasChildren()):?>
                 <ol id="sortable" class="sortable">
-                    <?=GC\Render::file(ACTIONS_PATH.'/admin/nav/menu/list-items.html.php', [
+                    <?=GC\Render::file(ACTIONS_PATH.'/admin/nav/menu/tree-items.html.php', [
                         'menu' => $menuTree,
                         'nav_id' => $nav_id,
                         'pages' => $pages,
@@ -46,12 +56,6 @@ $menuTree = GC\Model\Menu\Menu::buildTreeByTaxonomyId($nav_id);
             ])?>
 
         </form>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12">
-
     </div>
 </div>
 

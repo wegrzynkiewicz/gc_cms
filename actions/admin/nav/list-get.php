@@ -1,9 +1,31 @@
 <?php
 
+# pobierz wszystkie posortowane nawigacje z języka
 $navs = GC\Model\Menu\Taxonomy::select()
     ->equals('lang', GC\Auth\Staff::getEditorLang())
-    ->sort('name')
+    ->sort('name', 'ASC')
     ->fetchByPrimaryKey();
+
+# pobierz wszystkie węzły przygotowane do budowy drzewa
+$menus = GC\Model\Menu\Menu::select()
+    ->fields(['menu_id', 'nav_id', 'parent_id', 'name'])
+    ->source('::tree')
+    ->sort('position', 'ASC')
+    ->fetchAll();
+
+# umieść każdy węzeły dla konkretnych nawigacji
+$navsNodes = [];
+foreach ($menus as $menu) {
+    $navsNodes[$menu['nav_id']][] = $menu;
+}
+
+# zbuduj drzewa dla konkretnych nawigacji
+$menuTrees = [];
+foreach ($navs as $nav_id => $nav) {
+    $menuTrees[$nav_id] = isset($navsNodes[$nav_id])
+        ? GC\Model\Menu\Menu::createTree($navsNodes[$nav_id])
+        : null;
+}
 
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
@@ -31,6 +53,7 @@ $navs = GC\Model\Menu\Taxonomy::select()
                             <?=GC\Render::file(ACTIONS_PATH.'/admin/nav/list-item.html.php', [
                                 'nav_id' => $nav_id,
                                 'nav' => $nav,
+                                'tree' => $menuTrees[$nav_id],
                             ])?>
                         <?php endforeach ?>
                     </tbody>

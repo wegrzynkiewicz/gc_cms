@@ -1,8 +1,13 @@
 <?php
 
-$node = GC\Model\Menu\Menu::fetchByPrimaryId($menu_id);
+$menu_id = intval(array_shift($_PARAMETERS));
 
-$headTitle = $trans('Edycja węzła "%s"', [$node['name']]);
+# pobranie węzła o zadanym kluczu
+$node = GC\Model\Menu\Menu::select()
+    ->equals('menu_id', $menu_id)
+    ->fetch();
+
+$headTitle = $trans('%s - edycja węzła', [$node['name']]);
 $breadcrumbs->push([
     'url' => $request->url,
     'name' => $headTitle,

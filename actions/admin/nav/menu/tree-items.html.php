@@ -32,7 +32,7 @@
 
         <?php if ($node->hasChildren()): ?>
             <ol>
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/nav/menu/list-items.html.php', [
+                <?=GC\Render::file(ACTIONS_PATH.'/admin/nav/menu/tree-items.html.php', [
                     'menu' => $node,
                     'pages' => $pages,
                 ])?>

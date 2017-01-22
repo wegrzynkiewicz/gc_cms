@@ -11,13 +11,9 @@ use GC\Url;
 
 class Menu extends AbstractNode
 {
-    public static $table        = '::menus';
-    public static $primary      = 'menu_id';
-    public static $treeTable    = '::menu_tree';
-    public static $taxonomy     = 'nav_id';
-
-    public static $primaryIdLabel = "menu_id";
-    public static $parentIdLabel  = "parent_id";
+    public static $table   = '::menus';
+    public static $tree    = '::menus LEFT JOIN ::menu_tree USING (menu_id)';
+    public static $primary = 'menu_id';
 
     use NodeTrait;
     use PrimaryTrait;
