@@ -10,7 +10,7 @@
             <input
                 id="<?=e($name)?>"
                 name="<?=e($name)?>"
-                value="<?=e(inputValue($name))?>"
+                value="<?=e(post($name))?>"
                 type="text"
                 autocomplete="off"
                 class="form-control input">

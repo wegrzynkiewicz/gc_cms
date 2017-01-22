@@ -10,7 +10,7 @@
             <?php if (isset($placeholder)): ?>
                 placeholder="<?=$trans($placeholder)?>"
             <?php endif ?>
-            value="<?=e(inputValue($name))?>"
+            value="<?=e(post($name))?>"
             type="<?=e($type)?>"
             autocomplete="off"
             class="form-control input">

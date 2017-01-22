@@ -30,7 +30,7 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                                 <div class="form-group">
                                     <input name="email"
                                         placeholder="<?=$trans('E-mail')?>"
-                                        value="<?=inputValue('email')?>"
+                                        value="<?=post('email')?>"
                                         autofocus
                                         class="form-control">
                                 </div>

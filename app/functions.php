@@ -58,18 +58,6 @@ function sqldate($time = null)
 /**
  * Pomocnicza dla sprawdzania czy dany element w tabeli $_POST istnieje
  */
-function inputValue($postName, $default = '')
-{
-    if (isset($_POST[$postName])) {
-        return $_POST[$postName];
-    }
-
-    return $default;
-}
-
-/**
- * Pomocnicza dla sprawdzania czy dany element w tabeli $_POST istnieje
- */
 function post($name, $default = '')
 {
     return isset($_POST[$name]) ? $_POST[$name] : $default;

@@ -1,4 +1,4 @@
-<?php $selectedValue = inputValue($name) ?>
+<?php $selectedValue = post($name) ?>
 <div class="form-group">
     <label class="col-md-12 col-sm-12 col-xs-12" for="<?=$name?>">
         <?=$trans($label)?>

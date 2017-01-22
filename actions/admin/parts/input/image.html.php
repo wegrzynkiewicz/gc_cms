@@ -1,5 +1,5 @@
 <?php
-    $value = inputValue($name);
+    $value = post($name);
     $preview = empty($value) ? GC\Url::assets($config['noImageUrl']): $value;
 ?>
 

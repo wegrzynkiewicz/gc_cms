@@ -1,4 +1,4 @@
-<?php $selectValue = inputValue($name) ?>
+<?php $selectValue = post($name) ?>
 <div class="form-group">
     <?php if (isset($label)): ?>
         <label class="col-md-12 col-sm-12 col-xs-12" for="<?=e($name)?>">

@@ -8,6 +8,6 @@
             <?php if (isset($placeholder)): ?>
                 placeholder="<?=$trans($placeholder)?>"
             <?php endif ?>
-            class="form-control input-l vertical_resize"><?=e(inputValue($name))?></textarea>
+            class="form-control input-l vertical_resize"><?=e(post($name))?></textarea>
     </div>
 </div>
