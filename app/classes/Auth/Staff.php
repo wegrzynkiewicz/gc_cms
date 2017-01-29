@@ -14,10 +14,9 @@ class Staff extends AbstractEntity
 {
     private $permissions = [];
 
-    public function __construct($staff_id)
+    public function __construct($staff_id = 0)
     {
-        # pobieranie pracownika z bazy danych
-        $data = ModelStaff::select()
+        $staffQuery = ModelStaff::select()
             ->fields([
                 'staff_id',
                 'name',
@@ -25,13 +24,25 @@ class Staff extends AbstractEntity
                 'root',
                 'lang',
                 'force_change_password',
-            ])
-            ->equals('staff_id', $staff_id)
-            ->fetch();
+            ]);
+
+        if ($staff_id === 0) {
+            $data = $staffQuery
+                ->source('::session')
+                ->equals('session_id', session_id())
+                ->fetch();
+        } else {
+            $staffQuery
+                ->source('::table')
+                ->equals('staff_id', $staff_id);
+        }
+
+        # pobieranie pracownika z bazy danych
+        $data = $staffQuery->fetch();
 
         # jezeli taki pracownik nie istnieje
         if (!$data) {
-            static::abort("Staff entity id {$staff_id} does not exists");
+            static::abort("Staff session does not exists");
         }
 
         # całość jest łatwym do odczytu obiektem Entity
@@ -44,13 +55,6 @@ class Staff extends AbstractEntity
             ->equals('staff_id', $staff_id)
             ->fetchByMap('name', 'name');
 
-        # jeżeli czas trwania sesji minął
-        if (time() > $_SESSION['staff']['sessionTimeout']) {
-            static::abort('Session timeout');
-        }
-
-        static::refreshSessionTimeout();
-
         # jezeli istnieje flaga, ze trzeba zmienić hasło wtedy przekieruj
         if ($data['force_change_password']) {
             redirect('/auth/force-change-password');
@@ -62,30 +66,23 @@ class Staff extends AbstractEntity
     /**
      * Niszczy dane pracownika w sesji i przekierowuje na panel logowania
      */
-    public static function abort($message)
+    public function abort($message)
     {
         unset($_SESSION['staff']);
+        StaffSession::destroy();
         Data::get('logger')->logout($message);
         redirect('/auth/login');
     }
 
     /**
-     * Pobiera dane sesyjne i tworzy obiekt pracownika na podstawie sesji
+     * Niszczy dane pracownika w sesji i przekierowuje na panel logowania
      */
-    public static function createFromSession()
+    public static function abort($message)
     {
-        # jeżeli sesja nie istnieje wtedy przekieruj na logowanie
-        if (!isset($_SESSION['staff'])) {
-            static::abort('Session does not exists');
-        }
-
-        # jeżeli encja nie istnieje wtedy przekieruj na logowanie
-        if (!isset($_SESSION['staff']['staff_id'])) {
-            static::abort('Staff id does not exists');
-        }
-
-        # utworz obiekt reprezentujacy pracownika
-        return new static($_SESSION['staff']['staff_id']);
+        unset($_SESSION['staff']);
+        StaffSession::destroy();
+        Data::get('logger')->logout($message);
+        redirect('/auth/login');
     }
 
     /**
@@ -129,34 +126,5 @@ class Staff extends AbstractEntity
             $perm = count($permissions) > 0 ? array_shift($permissions) : 'default';
             redirect("/admin/account/deny/{$perm}");
         }
-    }
-
-    /**
-     * Tworzy sesję dla zadanego $staff_id
-     */
-    public static function registerSession($staff_id)
-    {
-        $_SESSION['staff']['staff_id'] = $staff_id;
-        static::refreshSessionTimeout();
-    }
-
-    /**
-     * Aktualizuje czas do automatycznego wylogowania
-     */
-    public static function refreshSessionTimeout()
-    {
-        $_SESSION['staff']['sessionTimeout'] = time() + Data::get('config')['session']['staff']['timeout'];
-    }
-
-    /**
-     * Aktualizuje czas do automatycznego wylogowania
-     */
-    public static function startSession()
-    {
-        # zmiana nazwy ciastka sesyjnego dla pracownika
-        ini_set('session.name', Data::get('config')['session']['staff']['cookieName']);
-
-        # rozpoczęcie sesji
-        session_start();
     }
 }

@@ -2,14 +2,14 @@
 
 /* Plik ładowany przed każdą akcją w panelu admina */
 
-# utworzenie obiektu reprezentującego pracownika, sprawdza czy jest zalogowany
-GC\Auth\Staff::startSession();
-$staff = GC\Auth\Staff::createFromSession();
-GC\Data::set('staff', $staff);
+$session = new GC\Auth\StaffSession();
+$session->start();
+$session->redirectIfNonExists();
+GC\Data::set('session', $session);
 
-# stworzenie i weryfikacja tokenu CSRF
-$tokenCSRF = new GC\Auth\CSRFToken();
-GC\Data::set('tokenCSRF', $tokenCSRF);
+# utworzenie obiektu reprezentującego pracownika
+$staff = new GC\Auth\Staff();
+GC\Data::set('staff', $staff);
 
 GC\Url::extendMask('/admin%s');
 

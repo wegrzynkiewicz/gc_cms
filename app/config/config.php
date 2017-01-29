@@ -20,7 +20,7 @@ ini_set('display_startup_errors', 1); # włącza wyświetlanie startowych błęd
 ini_set('error_log', ROOT_PATH.'/tmp/logs/'.date('Y-m-d').'.error.log'); # zmienia ścieżkę logowania błędów
 ini_set('max_execution_time', 300); # określa maksymalny czas trwania skryptu
 ini_set('date.timezone', 'Europe/Warsaw'); # ustawienie domyślnej strefy czasowej
-ini_set('session.name', $generated['session.visitor.cookieName']); # zmiana nazwy ciastka sesyjnego
+ini_set('session.name', $generated['session.visitor.cookie.name']); # zmiana nazwy ciastka sesyjnego
 ini_set('session.use_trans_sid', 0);
 ini_set('session.use_strict_mode', 1);
 ini_set('session.cookie_httponly', 1); # ustawia ciastko tylko do odczytu, nie jest możliwe odczyt document.cookie w js
@@ -57,11 +57,15 @@ return [
     ],
     'session' => [ # ustawienia sesji
         'staff' => [ # ustawienia sesji dla pracownika
-            'cookieName' => $generated['session.staff.cookieName'], # nazwa ciastka sesyjnego dla pracownika
-            'timeout' => 1800, # czas jaki musi upłynąć po zalogowaniu, aby wylogowało pracownika z automatu, w sekundach
+            'cookie' => [ # ustawienia ciastka sesyjnego
+                'name' => $generated['session.staff.cookie.name'], # nazwa ciastka sesyjnego dla pracownika
+                'lifetime' => 1800, # czas jaki musi upłynąć po zalogowaniu, aby wylogowało pracownika z automatu, w sekundach
+            ],
         ],
         'visitor' => [ # ustawienia sesji dla odwiedzającego
-            'cookieName' => $generated['session.visitor.cookieName'], # nazwa ciastka sesyjnego dla odwiedzającego
+            'cookie' => [ # ustawienia ciastka sesyjnego
+                'name' => $generated['session.visitor.cookie.name'], # nazwa ciastka sesyjnego dla odwiedzającego
+            ],
         ],
     ],
     'avatar' => [

@@ -9,8 +9,8 @@ if (!$generated) {
         'password.salt' => GC\Auth\Password::random(40),
         'csrf.secretKey' => GC\Auth\Password::random(40),
         'csrf.cookieName' => GC\Auth\Password::random(40),
-        'session.staff.cookieName' => GC\Auth\Password::random(40),
-        'session.visitor.cookieName' => GC\Auth\Password::random(40),
+        'session.staff.cookie.name' => GC\Auth\Password::random(40),
+        'session.visitor.cookie.name' => GC\Auth\Password::random(40),
     ];
     GC\Disc::exportDataToPHPFile($generated, __DIR__.'/storage/generated.php');
 }
