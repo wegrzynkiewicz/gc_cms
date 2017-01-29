@@ -16,12 +16,12 @@ $_POST['content'] = $content;
     <div class="col-lg-12">
         <form action="" method="post" class="form-horizontal">
 
-            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/textarea.html.php', [
+            <?=render(ACTIONS_PATH.'/admin/parts/input/textarea.html.php', [
                 'name' => 'content',
                 'label' => 'Treść widżetu',
             ])?>
 
-            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
+            <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz zmiany',
             ])?>
 

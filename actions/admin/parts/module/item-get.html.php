@@ -7,9 +7,9 @@ $item_id = intval(array_shift($_SEGMENTS));
 $item = GC\Model\Module\Item::selectWithFrameByPrimaryId($item_id);
 $frame_id = $item['frame_id'];
 
-GC\Url::extendMask("/{$module_id}%s");
+$uri->extendMask("/{$module_id}%s");
 require ACTIONS_PATH."/admin/parts/module/type/{$moduleType}/_import.php";
-GC\Url::extendMask("/item/{$item_id}/module%s");
+$uri->extendMask("/item/{$item_id}/module%s");
 require ACTIONS_PATH."/admin/parts/module/type/{$moduleType}/item.html.php";
 
 $moduleName = intval(array_shift($_SEGMENTS));

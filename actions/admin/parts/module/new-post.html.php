@@ -9,4 +9,4 @@ $module_id = GC\Model\Module\Module::insertWithFrameId([
 
 setNotice($trans("%s został utworzony. Edytujesz go teraz.", [$config['modules'][$moduleType]['name']]));
 
-redirect(GC\Url::mask("/{$module_id}/edit"));
+redirect($uri->mask("/{$module_id}/edit"));

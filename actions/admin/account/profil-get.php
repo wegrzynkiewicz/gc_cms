@@ -9,7 +9,7 @@ $_POST = GC\Data::get('staff')->getData();
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=GC\Url::mask("/change-password")?>" type="button" class="btn btn-success btn-md">
+                <a href="<?=$uri->mask("/change-password")?>" type="button" class="btn btn-success btn-md">
                     <i class="fa fa-unlock-alt fa-fw"></i>
                     <?=$trans('Zmień hasło')?>
                 </a>
@@ -25,14 +25,14 @@ $_POST = GC\Data::get('staff')->getData();
     <div class="col-lg-12">
         <form action="" method="post" id="form" class="form-horizontal">
             <div class="simple-box">
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/select2-language.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/input/select2-language.html.php', [
                     'name' => 'lang',
                     'label' => 'Język',
                     'help' => 'Wyświetla panel i komunikaty w tym języku',
                 ])?>
             </div>
 
-            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
+            <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz profil',
             ])?>
 

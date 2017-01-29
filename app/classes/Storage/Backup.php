@@ -2,7 +2,6 @@
 
 namespace GC\Storage;
 
-use GC\Disc;
 use GC\Logger;
 use GC\Password;
 use GC\Data;
@@ -15,7 +14,7 @@ class Backup
 
     public static function make($name)
     {
-        $dumpPath = Data::get('config')['dump']['path'];
+        $dumpPath = getConfig()['dump']['path'];
         $time = time();
         $creation_datetime = date('Y-m-d-His', $time);
         $filepath = "{$dumpPath}/dump-{$creation_datetime}.sql.gz";
@@ -31,12 +30,12 @@ class Backup
 
     public static function export($filename)
     {
-        Disc::makeFile($filename);
+        makeFile($filename);
 
-        $dumpConfig = Data::get('config')['dump'];
-        $dbConfig = Data::get('config')['database'];
+        $dumpConfig = getConfig()['dump'];
+        $dbConfig = getConfig()['database'];
 
-        Data::get('logger')->dumpExport(relativePath($filename));
+        logger('[DUMP-EXPORT]', [relativePath($filename)]);
 
         $dump = new IMysqldump\Mysqldump(
             $dbConfig['dns'],
@@ -52,11 +51,11 @@ class Backup
     {
         $file = $filepath;
 
-        Data::get('logger')->dumpImport($file);
+        logger('[DUMP-IMPORT]', [$file]);
 
         if (pathinfo($filepath, \PATHINFO_EXTENSION) === 'gz') {
 
-            $path = Data::get('config')['dump']['tmpPath'];
+            $path = getConfig()['dump']['tmpPath'];
             $file = $path.'/'.basename($filepath, '.gz');
             static::decompress($filepath, $file);
             static::openAndExecute($file);
@@ -83,7 +82,7 @@ class Backup
             if (preg_match('~' . preg_quote(static::$delimiter, '~') . '\s*$~iS', end($query)) === 1) {
                 $query = trim(implode('', $query));
 
-                Data::get('database')->pdo->exec($query);
+                Database::getInstance()->pdo->exec($query);
             }
 
             if (is_string($query) === true) {
@@ -100,7 +99,7 @@ class Backup
             return;
         }
 
-        Disc::makeFile($destination);
+        makeFile($destination);
 
         $file = gzopen($filepath, 'rb');
         $outFile = fopen($destination, 'wb');

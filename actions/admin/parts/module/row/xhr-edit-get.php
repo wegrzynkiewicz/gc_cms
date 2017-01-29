@@ -9,7 +9,7 @@ if (!isset($_POST['gutter'])) {
     $_POST['gutter'] = 20;
 }
 
-echo GC\Render::file(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
+echo render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
     'name' => 'widthType',
     'label' => 'Szerokość wiersza',
     'help' => 'Określa zachowanie szerokości wiersza względem szerokości strony.',
@@ -19,19 +19,19 @@ echo GC\Render::file(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
     ],
 ]);
 
-echo GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
+echo render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
     'name' => 'gutter',
     'label' => 'Odstęp kafelków (w pikselach)',
     'help' => 'Ustawia odstęp w pikselach pomiędzy modułami w wierszu.',
 ]);
 
-echo GC\Render::file(ACTIONS_PATH.'/admin/parts/input/colorpicker.html.php', [
+echo render(ACTIONS_PATH.'/admin/parts/input/colorpicker.html.php', [
     'name' => 'bgColor',
     'label' => 'Kolor tła',
     'help' => 'Pozwala na wybranie koloru tła wiersza. Zostaw puste jeżeli nie chcesz ustawiać koloru.',
 ]);
 
-echo GC\Render::file(ACTIONS_PATH.'/admin/parts/input/image.html.php', [
+echo render(ACTIONS_PATH.'/admin/parts/input/image.html.php', [
     'name' => 'bgImage',
     'label' => 'Zdjęcie tła',
     'placeholder' => 'Ścieżka do pliku zdjęcia',

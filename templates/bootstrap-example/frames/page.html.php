@@ -12,7 +12,7 @@ require TEMPLATE_PATH.'/parts/header.html.php'; ?>
     </div>
 </div>
 
-<?=GC\Render::file(TEMPLATE_PATH.'/parts/module/wrapper.html.php', [
+<?=render(TEMPLATE_PATH.'/parts/module/wrapper.html.php', [
     'frame_id' => $frame_id,
     'frame' => $frame,
     'container' => true,

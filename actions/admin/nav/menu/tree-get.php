@@ -4,7 +4,7 @@
 $pages = GC\Model\Page::select()
     ->source('::frame')
     ->equals('lang', GC\Auth\Staff::getEditorLang())
-    ->sort('name', 'ASC')
+    ->order('name', 'ASC')
     ->fetchByPrimaryKey();
 
 # pobierz węzły nawigacji i zbuduj z nich drzewo
@@ -20,7 +20,7 @@ $menuTree = GC\Model\Menu\Menu::select()
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=GC\Url::mask('/new')?>" type="button" class="btn btn-success">
+                <a href="<?=$uri->mask('/new')?>" type="button" class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
                     <?=$trans('Dodaj nowy węzeł')?>
                 </a>
@@ -39,7 +39,7 @@ $menuTree = GC\Model\Menu\Menu::select()
 
             <?php if ($menuTree->hasChildren()):?>
                 <ol id="sortable" class="sortable">
-                    <?=GC\Render::file(ACTIONS_PATH.'/admin/nav/menu/tree-items.html.php', [
+                    <?=render(ACTIONS_PATH.'/admin/nav/menu/tree-items.html.php', [
                         'menu' => $menuTree,
                         'nav_id' => $nav_id,
                         'pages' => $pages,
@@ -51,7 +51,7 @@ $menuTree = GC\Model\Menu\Menu::select()
                 </div>
             <?php endif?>
 
-            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
+            <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz pozycję',
             ])?>
 
@@ -61,7 +61,7 @@ $menuTree = GC\Model\Menu\Menu::select()
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=GC\Url::mask("/delete")?>" class="modal-content">
+        <form id="deleteModalForm" method="post" action="<?=$uri->mask("/delete")?>" class="modal-content">
             <input name="menu_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">

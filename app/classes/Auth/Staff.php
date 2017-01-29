@@ -2,7 +2,6 @@
 
 namespace GC\Auth;
 
-use GC\Data;
 use GC\Url;
 use GC\Logger;
 use GC\Response;
@@ -14,9 +13,9 @@ class Staff extends AbstractEntity
 {
     private $permissions = [];
 
-    public function __construct($staff_id = 0)
+    public function __construct()
     {
-        $staffQuery = ModelStaff::select()
+        $data = $staffQuery = ModelStaff::select()
             ->fields([
                 'staff_id',
                 'name',
@@ -24,21 +23,10 @@ class Staff extends AbstractEntity
                 'root',
                 'lang',
                 'force_change_password',
-            ]);
-
-        if ($staff_id === 0) {
-            $data = $staffQuery
-                ->source('::session')
-                ->equals('session_id', session_id())
-                ->fetch();
-        } else {
-            $staffQuery
-                ->source('::table')
-                ->equals('staff_id', $staff_id);
-        }
-
-        # pobieranie pracownika z bazy danych
-        $data = $staffQuery->fetch();
+            ])
+            ->source('::session')
+            ->equals('session_id', session_id())
+            ->fetch();
 
         # jezeli taki pracownik nie istnieje
         if (!$data) {
@@ -52,7 +40,7 @@ class Staff extends AbstractEntity
         $this->permissions = Permission::select()
             ->fields('DISTINCT name')
             ->source('::staff_membership JOIN ::staff_permissions USING(group_id)')
-            ->equals('staff_id', $staff_id)
+            ->equals('staff_id', $data['staff_id'])
             ->fetchByMap('name', 'name');
 
         # jezeli istnieje flaga, ze trzeba zmienić hasło wtedy przekieruj
@@ -60,7 +48,7 @@ class Staff extends AbstractEntity
             redirect('/auth/force-change-password');
         }
 
-        Data::get('logger')->staff($data['name']);
+        logger('[STAFF]', [$data['name']]);
     }
 
     /**
@@ -70,18 +58,7 @@ class Staff extends AbstractEntity
     {
         unset($_SESSION['staff']);
         StaffSession::destroy();
-        Data::get('logger')->logout($message);
-        redirect('/auth/login');
-    }
-
-    /**
-     * Niszczy dane pracownika w sesji i przekierowuje na panel logowania
-     */
-    public static function abort($message)
-    {
-        unset($_SESSION['staff']);
-        StaffSession::destroy();
-        Data::get('logger')->logout($message);
+        logger("[LOGOUT] {$message}");
         redirect('/auth/login');
     }
 
@@ -95,7 +72,7 @@ class Staff extends AbstractEntity
             return $_SESSION['staff']['langEditor'];
         }
 
-        return Data::get('config')['lang']['editorDefault'];
+        return getConfig()['lang']['editorDefault'];
     }
 
     /**
@@ -122,7 +99,7 @@ class Staff extends AbstractEntity
     public function redirectIfUnauthorized(array $permissions = [])
     {
         if (!$this->hasPermissions($permissions)) {
-            Data::get('logger')->deny("Not authorized", $permissions);
+            logger('[DENY] Not authorized', $permissions);
             $perm = count($permissions) > 0 ? array_shift($permissions) : 'default';
             redirect("/admin/account/deny/{$perm}");
         }

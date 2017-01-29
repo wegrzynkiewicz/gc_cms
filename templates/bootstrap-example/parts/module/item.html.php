@@ -1,6 +1,6 @@
 <div id="module_<?=e($module['module_id'])?>"
     data-theme="<?=e($module['theme'])?>">
-    <?=GC\Render::file($template, [
+    <?=render($template, [
         'module_id' => $module['module_id'],
         'module' => $module,
         'type' => $module['type'],

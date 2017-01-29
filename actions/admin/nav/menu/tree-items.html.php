@@ -3,7 +3,7 @@
     <li id="node_<?=e($menu_id)?>" data-id="<?=e($menu_id)?>">
         <div class="sortable-content">
             <div class="col-lg-4">
-                <a href="<?=GC\Url::mask("/$menu_id/edit")?>">
+                <a href="<?=$uri->mask("/$menu_id/edit")?>">
                     <?=e($node['name'])?>
                 </a>
             </div>
@@ -21,7 +21,7 @@
             </div>
 
             <div class="pull-right" style="margin-right: 30px">
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/nav/menu/list-preview/'.$node['type'].'.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/nav/menu/list-preview/'.$node['type'].'.html.php', [
                     'node' => $node,
                     'pages' => $pages,
                 ])?>
@@ -32,7 +32,7 @@
 
         <?php if ($node->hasChildren()): ?>
             <ol>
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/nav/menu/tree-items.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/nav/menu/tree-items.html.php', [
                     'menu' => $node,
                     'pages' => $pages,
                 ])?>

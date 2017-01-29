@@ -16,7 +16,7 @@ $modules = GC\Model\Module\Module::joinAllWithKeyByForeign($frame_id);
                     <i class="fa fa-search fa-fw"></i>
                     <?=$trans('Podgląd')?>
                 </a>
-                <a href="<?=GC\Url::mask("/new")?>"
+                <a href="<?=$uri->mask("/new")?>"
                     type="button"
                     class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
@@ -42,7 +42,7 @@ $modules = GC\Model\Module\Module::joinAllWithKeyByForeign($frame_id);
                     <div id="grid-rows-wrapper"></div>
                     <div class="grid-stack">
                         <?php foreach ($modules as $module_id => $module): ?>
-                            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/module/list-item.html.php', [
+                            <?=render(ACTIONS_PATH.'/admin/parts/module/list-item.html.php', [
                                 'module_id' => $module_id,
                                 'module' => $module,
                                 'type' => $module['type'],
@@ -52,7 +52,7 @@ $modules = GC\Model\Module\Module::joinAllWithKeyByForeign($frame_id);
                 </div>
             <?php endif ?>
 
-            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
+            <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz pozycje kafelków',
             ])?>
 
@@ -62,7 +62,7 @@ $modules = GC\Model\Module\Module::joinAllWithKeyByForeign($frame_id);
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=GC\Url::mask('/delete')?>" class="modal-content">
+        <form id="deleteModalForm" method="post" action="<?=$uri->mask('/delete')?>" class="modal-content">
             <input name="module_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
@@ -163,7 +163,7 @@ $modules = GC\Model\Module\Module::joinAllWithKeyByForeign($frame_id);
     });
 
     $('#rowSettingsModal').on('show.bs.modal', function(e) {
-        var url = "<?=GC\Url::make("/admin/parts/module/row/{$frame_id}/xhr-edit")?>/"+$(e.relatedTarget).data('y');
+        var url = "<?=$uri->make("/admin/parts/module/row/{$frame_id}/xhr-edit")?>/"+$(e.relatedTarget).data('y');
         $.get(url, function(data) {
             $('#rowSettingsModalContent').html(data);
             $('#rowSettingsModalForm').attr('action', url);
@@ -183,7 +183,7 @@ $modules = GC\Model\Module\Module::joinAllWithKeyByForeign($frame_id);
             };
         });
 
-        var url = "<?=GC\Url::make("/admin/parts/module/row/{$frame_id}/xhr-sort")?>/";
+        var url = "<?=$uri->make("/admin/parts/module/row/{$frame_id}/xhr-sort")?>/";
         $.post(url, {
             grid: JSON.stringify(serializedData),
         });

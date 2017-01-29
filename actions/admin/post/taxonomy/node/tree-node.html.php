@@ -3,14 +3,14 @@
     <li id="node_<?=e($node_id)?>" data-id="<?=e($node_id)?>">
         <div class="sortable-content">
             <div class="col-lg-4">
-                <a href="<?=GC\Url::mask("/{$node_id}/edit")?>">
+                <a href="<?=$uri->mask("/{$node_id}/edit")?>">
                     <?=e($node['name'])?>
                 </a>
             </div>
 
             <div class="pull-right">
 
-                <a href="<?=GC\Url::make("/post/node/{$node_id}")?>"
+                <a href="<?=$uri->make("/post/node/{$node_id}")?>"
                     target="_blank"
                     title="<?=$trans('Podejrzyj ten węzeł')?>"
                     class="btn btn-primary btn-xs">
@@ -18,7 +18,7 @@
                     <?=$trans('Podgląd')?>
                 </a>
 
-                <a href="<?=GC\Url::mask("/{$node_id}/module/list")?>"
+                <a href="<?=$uri->mask("/{$node_id}/module/list")?>"
                     title="<?=$trans('Wyświetl moduły węzła')?>"
                     class="btn btn-success btn-xs">
                     <i class="fa fa-file-text-o fa-fw"></i>
@@ -41,7 +41,7 @@
 
         <?php if ($node->hasChildren()): ?>
             <ol>
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/post/taxonomy/node/tree-node.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/post/taxonomy/node/tree-node.html.php', [
                     'tree' => $node,
                 ])?>
             </ol>

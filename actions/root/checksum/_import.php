@@ -1,15 +1,15 @@
 <?php
 
 $headTitle = "Sumy kontrolne plików";
-GC\Url::extendMask('/root/checksum%s');
+$uri->extendMask('/root/checksum%s');
 $breadcrumbs->push([
-    'url' => GC\Url::mask('/list'),
+    'url' => $uri->mask('/list'),
     'name' => $headTitle,
 ]);
 
 $getFiles = function () {
     $webDataPath = realpath(WEB_PATH.'/data');
-    return array_filter(GC\Disc::globRecursive('*.*'), function ($value) use (&$webDataPath) {
+    return array_filter(globRecursive('*.*'), function ($value) use (&$webDataPath) {
 
         if (strpos(realpath($value), $webDataPath) !== false) {
             return false;

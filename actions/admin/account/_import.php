@@ -1,9 +1,9 @@
 <?php
 
 $headTitle = $trans('Profil użytkownika');
-GC\Url::extendMask('/account%s');
+$uri->extendMask('/account%s');
 $breadcrumbs->push([
-    'url' => GC\Url::mask('/profil'),
+    'url' => $uri->mask('/profil'),
     'name' => $headTitle,
     'icon' => 'user',
 ]);

@@ -8,7 +8,7 @@ $staffList = GC\Model\Staff\Staff::select()
 $groups = GC\Model\Staff\Group::select()
     ->fields(['staff_id', 'name', 'group_id'])
     ->source('::staff_membership LEFT JOIN ::staff_groups USING(group_id)')
-    ->sort('name', 'ASC')
+    ->order('name', 'ASC')
     ->fetchAll();
 
 $staffGroups = [];
@@ -33,7 +33,7 @@ foreach ($permissions as $permission) {
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=GC\Url::mask("/new")?>" type="button" class="btn btn-success">
+                <a href="<?=$uri->mask("/new")?>" type="button" class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
                     <?=$trans('Dodaj nowego pracownika')?>
                 </a>
@@ -68,7 +68,7 @@ foreach ($permissions as $permission) {
                     </thead>
                     <tbody>
                         <?php foreach ($staffList as $staff_id => $row): ?>
-                            <?=GC\Render::file(ACTIONS_PATH.'/admin/staff/list-item.html.php', [
+                            <?=render(ACTIONS_PATH.'/admin/staff/list-item.html.php', [
                                 'staff_id' => $staff_id,
                                 'staff' => $row,
                                 'groups' => def($staffGroups, $staff_id, []),
@@ -85,7 +85,7 @@ foreach ($permissions as $permission) {
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=GC\Url::mask("/delete")?>" class="modal-content">
+        <form id="deleteModalForm" method="post" action="<?=$uri->mask("/delete")?>" class="modal-content">
             <input name="staff_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">

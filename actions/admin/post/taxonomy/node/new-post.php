@@ -5,7 +5,7 @@ $frame_id = GC\Model\Module\Frame::insert([
     'type' => 'post-node',
     'keywords' => post('keywords'),
     'description' => post('description'),
-    'image' => GC\Url::upload($_POST['image']),
+    'image' => $uri->upload($_POST['image']),
 ]);
 
 GC\Model\Post\Node::insertWithTaxonomyId([

@@ -7,6 +7,6 @@ $breadcrumbs->push([
     'name' => $headTitle,
 ]);
 
-$refreshUrl = GC\Url::mask('/types');
+$refreshUrl = $uri->mask('/types');
 
 require ACTIONS_PATH.'/admin/form/field/form.html.php';

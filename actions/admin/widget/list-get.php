@@ -2,7 +2,7 @@
 
 $widgets = GC\Model\Widget::select()
     ->equals('lang', GC\Auth\Staff::getEditorLang())
-    ->sort('name', 'ASC')
+    ->order('name', 'ASC')
     ->fetchByPrimaryKey();
 
 ?>
@@ -14,7 +14,7 @@ $widgets = GC\Model\Widget::select()
         <div class="simple-box">
             <?php if (empty($widgets)): ?>
                 <?=$trans('Nie znaleziono żadnych widżetów w języku: ')?>
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/language.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
                     'lang' => GC\Auth\Staff::getEditorLang(),
                 ])?>
             <?php else: ?>
@@ -33,7 +33,7 @@ $widgets = GC\Model\Widget::select()
                         <?php foreach ($widgets as $widget_id => $widget): ?>
                             <tr>
                                 <td>
-                                    <a href="<?=GC\Url::mask("/{$widget_id}/edit")?>"
+                                    <a href="<?=$uri->mask("/{$widget_id}/edit")?>"
                                         title="<?=$trans('Edytuj widżet')?>">
                                         <?=e($widget['name'])?>
                                     </a>

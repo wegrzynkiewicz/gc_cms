@@ -9,6 +9,8 @@ use GC\Data;
  */
 class Database
 {
+    private static $instance = null;
+
     public $pdo = null;
     public $prefix;
 
@@ -16,7 +18,7 @@ class Database
     {
         $this->pdo = $pdo;
 
-        if (Data::get('request')->isMethod('POST')) {
+        if (getConfig()['instance']['request']->isMethod('POST')) {
             $this->pdo->beginTransaction();
         }
     }
@@ -123,6 +125,30 @@ class Database
     }
 
     /**
+     * Tworzy i pobiera tą samą instancję bazy danych dla aplikacji
+     */
+    public static function getInstance()
+    {
+        if (static::$instance === null) {
+
+            $dbConfig = &getConfig()['database'];
+            $pdo = new \PDO(
+                $dbConfig['dns'],
+                $dbConfig['username'],
+                $dbConfig['password']
+            );
+            $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            $database = new static($pdo);
+            $database->prefix = $dbConfig['prefix'];
+
+            logger('[DATABASE]', [$dbConfig['dns']]);
+            static::$instance = $database;
+        }
+
+        return static::$instance;
+    }
+
+    /**
      * Wywołuje i loguje zapytania
      */
     private function wrapQuery($sql, array $values, $callback)
@@ -132,8 +158,8 @@ class Database
             return $this->prefix.$matches[1];
         }, $sql);
 
-        Data::get('logger')->query(
-            ($this->pdo->inTransaction() ? '(TRANSACTION) :: ' : '').$sql,
+        logger(
+            '[QUERY] '.($this->pdo->inTransaction() ? '(TRANSACTION) :: ' : '').$sql,
             $values
         );
 

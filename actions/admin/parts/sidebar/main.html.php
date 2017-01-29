@@ -15,7 +15,7 @@
                 </div>
             </li> -->
 
-            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/sidebar/items.html.php', [
+            <?=render(ACTIONS_PATH.'/admin/parts/sidebar/items.html.php', [
                 'menu' => $menu,
                 'attr' => 'class="nav nav-second-level"',
             ])?>
@@ -28,7 +28,7 @@
     $(function() {
         $('#nav_files').elfinderInput({
             title: '<?=$trans('Przeglądaj pliki')?>',
-            url: '<?=GC\Url::make('/admin/elfinder/connector')?>',
+            url: '<?=$uri->make('/admin/elfinder/connector')?>',
             lang: '<?=GC\Auth\Visitor::getLang()?>',
         }, function() {
 

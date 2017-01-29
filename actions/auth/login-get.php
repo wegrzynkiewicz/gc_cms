@@ -47,9 +47,9 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                                 </button>
 
                                 <div class="btn-group btn-group-justified" style="margin-top:5px">
-                                    <a href="<?=GC\Url::mask("/")?>" class="btn btn-link">
+                                    <a href="<?=$uri->make("/")?>" class="btn btn-link">
                                         <?=$trans('Przejdź na stronę główną')?></a>
-                                    <a href="<?=GC\Url::mask("/auth/forgot/password")?>" class="btn btn-link">
+                                    <a href="<?=$uri->make("/auth/forgot/password")?>" class="btn btn-link">
                                         <?=$trans('Zapomniałem hasła')?></a>
                                 </div>
                             </form>

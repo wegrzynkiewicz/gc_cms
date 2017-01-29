@@ -19,21 +19,13 @@ abstract class AbstractModel extends AbstractEntity
     }
 
     /**
-     * Zwraca obiekt bazy danych na którym wykonywane są zapytania
-     */
-    public static function getDatabase()
-    {
-        return Data::get('database');
-    }
-
-    /**
      * Buduje i wykonuje zapytanie INSERT dla zadanych danych
      */
     public static function insert(array $data)
     {
         list($columns, $values) = static::buildInsertSyntax($data);
         $sql = static::sql("INSERT INTO ::table ({$columns}) VALUES ({$values})");
-        $row_id = static::getDatabase()->insert($sql, array_values($data));
+        $row_id = Database::getInstance()->insert($sql, array_values($data));
 
         return $row_id;
     }
@@ -59,7 +51,7 @@ abstract class AbstractModel extends AbstractEntity
     {
         list($columns, $values) = static::buildInsertSyntax($data);
         $sql = static::sql("REPLACE INTO ::table ({$columns}) VALUES ({$values})");
-        static::getDatabase()->execute($sql, array_values($data));
+        Database::getInstance()->execute($sql, array_values($data));
     }
 
     public static function select()
@@ -84,18 +76,5 @@ abstract class AbstractModel extends AbstractEntity
         $columns = implode(', ', $columns);
 
         return [$columns, $values];
-    }
-
-    protected static function buildUpdateSyntax(array $data)
-    {
-        $columns = [];
-        foreach ($data as $column => $value) {
-            Assert::column($column);
-            $columns[] = "{$column} = ?";
-        }
-
-        $mergedColumns = implode(', ', $columns);
-
-        return $mergedColumns;
     }
 }

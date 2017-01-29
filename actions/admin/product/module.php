@@ -11,14 +11,14 @@ $product = GC\Model\Product\Product::select()
 $frame_id = $product['frame_id'];
 
 $headTitle = $trans('Moduły produktu "%s"', [$product['name']]);
-GC\Url::extendMask("/{$product_id}/module%s");
+$uri->extendMask("/{$product_id}/module%s");
 $breadcrumbs->push([
-    'url' => GC\Url::mask('/list'),
+    'url' => $uri->mask('/list'),
     'name' => $headTitle,
 ]);
 
 $getPreviewUrl = function () use ($product_id) {
-    return GC\Url::make("/product/{$product_id}");
+    return $uri->make("/product/{$product_id}");
 };
 
 $action = array_shift($_SEGMENTS);

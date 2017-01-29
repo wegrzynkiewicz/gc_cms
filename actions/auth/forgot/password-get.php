@@ -23,7 +23,7 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                                 </p>
                             <?php endif ?>
 
-                            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
+                            <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                                 'name' => 'login',
                                 'label' => 'Adres email',
                                 'help' => 'Na wprowadzony powyżej adres email zostanie wysłane nowe hasło',
@@ -34,9 +34,9 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                             </button>
 
                             <div class="btn-group btn-group-justified" style="margin-top:5px">
-                                <a href="<?=GC\Url::make("/")?>" class="btn btn-link">
+                                <a href="<?=$uri->make("/")?>" class="btn btn-link">
                                     <?=$trans('Przejdź na stronę główną')?></a>
-                                <a href="<?=GC\Url::make("/auth/login")?>" class="btn btn-link">
+                                <a href="<?=$uri->make("/auth/login")?>" class="btn btn-link">
                                     <?=$trans('Wróć do logowania')?></a>
                             </div>
 

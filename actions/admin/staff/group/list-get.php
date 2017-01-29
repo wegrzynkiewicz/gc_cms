@@ -20,7 +20,7 @@ foreach ($permissions as $permission) {
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=GC\Url::mask("/new")?>" type="button" class="btn btn-success">
+                <a href="<?=$uri->mask("/new")?>" type="button" class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
                     <?=$trans('Dodaj nową grupę pracowników')?>
                 </a>
@@ -52,7 +52,7 @@ foreach ($permissions as $permission) {
                     </thead>
                     <tbody>
                         <?php foreach ($groups as $group_id => $group): ?>
-                            <?=GC\Render::file(ACTIONS_PATH.'/admin/staff/group/list-item.html.php', [
+                            <?=render(ACTIONS_PATH.'/admin/staff/group/list-item.html.php', [
                                 'group_id' => $group_id,
                                 'group' => $group,
                                 'permissions' => $groupPermissions[$group_id],
@@ -68,7 +68,7 @@ foreach ($permissions as $permission) {
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=GC\Url::mask('/delete')?>" class="modal-content">
+        <form id="deleteModalForm" method="post" action="<?=$uri->mask('/delete')?>" class="modal-content">
             <input name="group_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">

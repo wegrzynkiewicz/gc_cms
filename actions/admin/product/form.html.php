@@ -3,14 +3,14 @@
 # pobierz wszystkie posortowane taksonomie z danego języka
 $taxonomies = GC\Model\Product\Taxonomy::select()
     ->equals('lang', GC\Auth\Staff::getEditorLang())
-    ->sort('name', 'ASC')
+    ->order('name', 'ASC')
     ->fetchByPrimaryKey();
 
 # pobierz wszystkie węzły przygotowane do budowy drzewa
 $nodes = GC\Model\Product\Node::select()
     ->fields(['node_id', 'tax_id', 'parent_id', 'name'])
     ->source('::tree')
-    ->sort('position', 'ASC')
+    ->order('position', 'ASC')
     ->fetchAll();
 
 # umieść każdy węzeły dla konkretnych taksonomii
@@ -35,22 +35,22 @@ foreach ($taxonomies as $tax_id => $taxonomy) {
     <div class="col-lg-12">
         <form action="" method="post" class="form-horizontal">
             <div class="simple-box">
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
                     'label' => 'Nazwa produktu',
                 ])?>
 
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'keywords',
                     'label' => 'Tagi i słowa kluczowe (meta keywords)',
                 ])?>
 
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/textarea.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/input/textarea.html.php', [
                     'name' => 'description',
                     'label' => 'Opis podstrony (meta description)',
                 ])?>
 
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/image.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/input/image.html.php', [
                     'name' => 'image',
                     'label' => 'Zdjęcie wyróżniające',
                     'placeholder' => 'Ścieżka do pliku zdjęcia',
@@ -61,7 +61,7 @@ foreach ($taxonomies as $tax_id => $taxonomy) {
                 <?php $tree = $taxonomyTrees[$tax_id]?>
                 <?php if ($tree and $tree->hasChildren()): ?>
                     <div class="simple-box">
-                        <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/checkbox-tree.html.php', [
+                        <?=render(ACTIONS_PATH.'/admin/parts/input/checkbox-tree.html.php', [
                             'id' => $tax_id,
                             'name' => "taxonomy[{$tax_id}]",
                             'label' => $taxonomy['name'],
@@ -73,7 +73,7 @@ foreach ($taxonomies as $tax_id => $taxonomy) {
                 <?php endif ?>
             <?php endforeach ?>
 
-            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
+            <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz wpis',
             ])?>
         </form>

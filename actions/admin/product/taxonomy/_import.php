@@ -1,8 +1,8 @@
 <?php
 
 $headTitle = $trans('Podziały produktów');
-GC\Url::extendMask('/taxonomy%s');
+$uri->extendMask('/taxonomy%s');
 $breadcrumbs->push([
-    'url' => GC\Url::mask('/list'),
+    'url' => $uri->mask('/list'),
     'name' => $headTitle,
 ]);

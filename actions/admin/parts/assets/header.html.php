@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css" />
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.4.0/css/bootstrap-colorpicker.min.css" />
 
-<link rel="stylesheet" href="<?=GC\Url::assets("/admin/styles/main.css")?>">
+<link rel="stylesheet" href="<?=$uri->assets("/admin/styles/main.css")?>">
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/metisMenu/1.1.3/metisMenu.min.js"></script>
@@ -42,9 +42,9 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.4.0/js/bootstrap-colorpicker.min.js"></script>
 
-<script src="<?=GC\Url::assets("/admin/scripts/elfinder-input.js")?>"></script>
-<script src="<?=GC\Url::assets("/admin/ckeditor/elfinder-integration.js")?>"></script>
-<script src="<?=GC\Url::assets("/common/scripts/jquery.photoswipe.js")?>"></script>
+<script src="<?=$uri->assets("/admin/scripts/elfinder-input.js")?>"></script>
+<script src="<?=$uri->assets("/admin/ckeditor/elfinder-integration.js")?>"></script>
+<script src="<?=$uri->assets("/common/scripts/jquery.photoswipe.js")?>"></script>
 
 <script>
 $.extend(true, $.fn.dataTable.defaults, {

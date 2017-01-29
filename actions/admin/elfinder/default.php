@@ -23,7 +23,7 @@
 			$(function() {
 				$('#elfinder').elfinder({
                      height: $(window).height()-2,
-                     url: '<?=GC\Url::make('/admin/elfinder/connector')?>',
+                     url: '<?=$uri->make('/admin/elfinder/connector')?>',
                      lang: '<?=GC\Auth\Visitor::getLang()?>',
 				});
 			});

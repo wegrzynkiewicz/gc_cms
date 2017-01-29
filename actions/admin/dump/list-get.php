@@ -1,6 +1,6 @@
 <?php
 
-$dumps = GC\Model\Dump::select()->sort('creation_datetime', 'DESC')->fetchByPrimaryKey();
+$dumps = GC\Model\Dump::select()->order('creation_datetime', 'DESC')->fetchByPrimaryKey();
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
@@ -39,7 +39,7 @@ $dumps = GC\Model\Dump::select()->sort('creation_datetime', 'DESC')->fetchByPrim
                     </thead>
                     <tbody>
                         <?php foreach ($dumps as $dump_id => $dump): ?>
-                            <?=GC\Render::file(ACTIONS_PATH.'/admin/dump/list-item.html.php', [
+                            <?=render(ACTIONS_PATH.'/admin/dump/list-item.html.php', [
                                 'dump_id' => $dump_id,
                                 'dump' => $dump,
                             ])?>
@@ -56,7 +56,7 @@ $dumps = GC\Model\Dump::select()->sort('creation_datetime', 'DESC')->fetchByPrim
     <div class="modal-dialog">
         <form id="addModalForm"
             method="post"
-            action="<?=GC\Url::mask("/new")?>"
+            action="<?=$uri->mask("/new")?>"
             class="modal-content form-horizontal">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
@@ -67,7 +67,7 @@ $dumps = GC\Model\Dump::select()->sort('creation_datetime', 'DESC')->fetchByPrim
                 </h2>
             </div>
             <div class="modal-body">
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
                     'label' => 'Nazwa kopii zapasowej',
                 ])?>

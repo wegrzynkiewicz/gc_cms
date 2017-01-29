@@ -2,6 +2,6 @@
 
 $headTitle = $trans('Moduły zakładki "%s"', [$item['name']]);
 $breadcrumbs->push([
-    'url' => GC\Url::mask("/list"),
+    'url' => $uri->mask("/list"),
     'name' => $headTitle,
 ]);

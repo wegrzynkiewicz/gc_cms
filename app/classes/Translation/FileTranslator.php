@@ -2,8 +2,6 @@
 
 namespace GC\Translation;
 
-use GC\Disc;
-
 class FileTranslator
 {
     public $refresh = false;
@@ -22,8 +20,8 @@ class FileTranslator
     public function __destruct()
     {
         if ($this->refresh) {
-            Disc::makeFile($this->translationPath);
-            Disc::exportDataToPHPFile($this->translations, $this->translationPath);
+            makeFile($this->translationPath);
+            exportDataToPHPFile($this->translations, $this->translationPath);
         }
     }
 

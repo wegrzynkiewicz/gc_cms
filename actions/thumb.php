@@ -8,7 +8,7 @@ $imageUrl64 = array_shift($_SEGMENTS);
 $token = array_shift($_SEGMENTS);
 $thumbWidth = array_shift($_SEGMENTS);
 $imageUrl = base64_decode($imageUrl64);
-$imagePath = WEB_PATH.GC\Url::root($imageUrl);
+$imagePath = WEB_PATH.$uri->root($imageUrl);
 
 if (!is_readable($imagePath)) {
     return http_response_code(400);

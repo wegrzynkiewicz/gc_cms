@@ -1,6 +1,6 @@
 <tr>
     <td>
-        <a href="<?=GC\Url::mask("/{$group_id}/edit")?>"
+        <a href="<?=$uri->mask("/{$group_id}/edit")?>"
             title="<?=$trans('Edytuj grupę')?>">
             <?=e($group['name'])?>
         </a>

@@ -17,14 +17,14 @@ $_POST['content'] = $content;
         <form action="" method="post" class="form-horizontal">
 
             <div class="simple-box">
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/image.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/input/image.html.php', [
                     'name' => 'content',
                     'label' => 'Zdjęcie',
                     'placeholder' => 'Ścieżka do pliku zdjęcia',
                 ])?>
             </div>
 
-            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
+            <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz zmiany',
             ])?>
 

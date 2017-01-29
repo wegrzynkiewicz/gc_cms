@@ -6,7 +6,7 @@ GC\Model\Module\Frame::updateByFrameId($node['frame_id'], [
     'name' => post('name'),
     'keywords' => post('keywords'),
     'description' => post('description'),
-    'image' => GC\Url::upload($_POST['image']),
+    'image' => $uri->upload($_POST['image']),
 ]);
 
 setNotice($trans('Węzeł "%s" został zaktualizowany.', [$node['name']]));

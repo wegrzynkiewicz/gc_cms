@@ -1,7 +1,7 @@
 <?php
 $staffName = e($staff['name']);
 $avatarUrl = empty($staff['avatar'])
-    ? GC\Url::assets($config['avatar']['noAvatarUrl'])
+    ? $uri->assets($config['avatar']['noAvatarUrl'])
     : GC\Thumb::make($staff['avatar'], 40, 40);
 ?>
 <tr>
@@ -9,14 +9,14 @@ $avatarUrl = empty($staff['avatar'])
         <img src="<?=$avatarUrl?>"
             height="40" style="margin-right:5px"/>
 
-        <a href="<?=GC\Url::mask("/{$staff_id}/edit")?>"
+        <a href="<?=$uri->mask("/{$staff_id}/edit")?>"
             title="<?=$trans('Edytuj pracownika')?>">
             <?=$staffName?>
         </a>
     </td>
     <td>
         <?php foreach ($groups as $group_id => $group): ?>
-            <a href="<?=GC\Url::mask("/group/{$group_id}/edit")?>"
+            <a href="<?=$uri->mask("/group/{$group_id}/edit")?>"
                 title="<?=$trans('Przejdź do grupy')?>">
                 <?=$trans($group)?></a><br>
         <?php endforeach ?>

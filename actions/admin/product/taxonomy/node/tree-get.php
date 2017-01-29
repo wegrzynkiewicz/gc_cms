@@ -11,7 +11,7 @@ $tree = GC\Model\Product\Node::select()
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=GC\Url::mask('/new')?>" type="button" class="btn btn-success">
+                <a href="<?=$uri->mask('/new')?>" type="button" class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
                     <?=$trans('Dodaj nowy węzeł')?>
                 </a>
@@ -29,7 +29,7 @@ $tree = GC\Model\Product\Node::select()
             <input name="positions" type="hidden"/>
             <?php if ($tree->hasChildren()):?>
                 <ol id="sortable" class="sortable">
-                    <?=GC\Render::file(ACTIONS_PATH.'/admin/product/taxonomy/node/tree-node.html.php', [
+                    <?=render(ACTIONS_PATH.'/admin/product/taxonomy/node/tree-node.html.php', [
                         'tree' => $tree,
                     ])?>
                 </ol>
@@ -38,7 +38,7 @@ $tree = GC\Model\Product\Node::select()
                     <?=$trans('Brak węzłów w %s', [$taxonomy['name']])?>
                 </div>
             <?php endif?>
-            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
+            <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz pozycję',
             ])?>
         </form>
@@ -49,7 +49,7 @@ $tree = GC\Model\Product\Node::select()
     <div class="modal-dialog" role="document">
         <form id="deleteModalForm"
             method="post"
-            action="<?=GC\Url::mask('/delete')?>"
+            action="<?=$uri->mask('/delete')?>"
             class="modal-content">
             <input name="node_id" type="hidden" value="">
             <div class="modal-header">

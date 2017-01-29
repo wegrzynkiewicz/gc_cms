@@ -56,7 +56,7 @@ usort($checksums, function ($a, $b) {
     </thead>
     <tbody style="font-family: monospace;">
         <?php foreach ($checksums as $checksum): ?>
-            <?=GC\Render::file(ACTIONS_PATH.'/root/checksum/list-item.html.php', [
+            <?=render(ACTIONS_PATH.'/root/checksum/list-item.html.php', [
                 'checksum' => $checksum,
             ])?>
         <?php endforeach ?>
@@ -67,7 +67,7 @@ usort($checksums, function ($a, $b) {
     <div class="modal-dialog" role="document">
         <form id="refreshAllModalForm"
             method="post"
-            action="<?=GC\Url::mask("/refresh-all")?>"
+            action="<?=$uri->mask("/refresh-all")?>"
             class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
@@ -96,7 +96,7 @@ usort($checksums, function ($a, $b) {
     <div class="modal-dialog" role="document">
         <form id="refreshModalForm"
             method="post"
-            action="<?=GC\Url::mask("/refresh")?>"
+            action="<?=$uri->mask("/refresh")?>"
             class="modal-content">
             <input name="file" type="hidden" value="">
             <div class="modal-header">

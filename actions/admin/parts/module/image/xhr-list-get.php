@@ -8,7 +8,7 @@
     </div>
 <?php else: ?>
     <?php foreach ($files as $file_id => $image): ?>
-        <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/module/image/xhr-list-item.html.php', [
+        <?=render(ACTIONS_PATH.'/admin/parts/module/image/xhr-list-item.html.php', [
             'file_id' => $file_id,
             'image' => $image,
         ])?>

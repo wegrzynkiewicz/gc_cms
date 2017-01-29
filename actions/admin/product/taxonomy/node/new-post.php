@@ -8,7 +8,7 @@ $frame_id = GC\Model\Module\Frame::insert([
     'type' => 'product-node',
     'keywords' => post('keywords'),
     'description' => post('description'),
-    'image' => GC\Url::upload($_POST['image']),
+    'image' => $uri->upload($_POST['image']),
 ]);
 
 # dodaj węzeł

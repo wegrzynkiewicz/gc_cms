@@ -1,9 +1,9 @@
 <?php
 
 $headTitle = $trans('Produkty');
-GC\Url::extendMask('/product%s');
+$uri->extendMask('/product%s');
 $breadcrumbs->push([
-    'url' => GC\Url::mask('/list'),
+    'url' => $uri->mask('/list'),
     'name' => $headTitle,
     'icon' => 'shopping-basket',
 ]);

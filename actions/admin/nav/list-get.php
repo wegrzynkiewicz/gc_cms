@@ -3,14 +3,14 @@
 # pobierz wszystkie posortowane nawigacje z języka
 $navs = GC\Model\Menu\Taxonomy::select()
     ->equals('lang', GC\Auth\Staff::getEditorLang())
-    ->sort('name', 'ASC')
+    ->order('name', 'ASC')
     ->fetchByPrimaryKey();
 
 # pobierz wszystkie węzły przygotowane do budowy drzewa
 $menus = GC\Model\Menu\Menu::select()
     ->fields(['menu_id', 'nav_id', 'parent_id', 'name'])
     ->source('::tree')
-    ->sort('position', 'ASC')
+    ->order('position', 'ASC')
     ->fetchAll();
 
 # umieść każdy węzeły dla konkretnych nawigacji
@@ -36,7 +36,7 @@ foreach ($navs as $nav_id => $nav) {
         <div class="simple-box">
             <?php if (empty($navs)): ?>
                 <?=$trans('Nie znaleziono żadnej nawigacji w języku: ')?>
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/language.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
                     'lang' => GC\Auth\Staff::getEditorLang(),
                 ])?>
             <?php else: ?>
@@ -50,7 +50,7 @@ foreach ($navs as $nav_id => $nav) {
                     </thead>
                     <tbody>
                         <?php foreach ($navs as $nav_id => $nav): ?>
-                            <?=GC\Render::file(ACTIONS_PATH.'/admin/nav/list-item.html.php', [
+                            <?=render(ACTIONS_PATH.'/admin/nav/list-item.html.php', [
                                 'nav_id' => $nav_id,
                                 'nav' => $nav,
                                 'tree' => $menuTrees[$nav_id],

@@ -1,9 +1,9 @@
 <?php
 
 $headTitle = $trans('Nawigacje');
-GC\Url::extendMask('/nav%s');
+$uri->extendMask('/nav%s');
 $breadcrumbs->push([
-    'url' => GC\Url::mask('/list'),
+    'url' => $uri->mask('/list'),
     'name' => $headTitle,
     'icon' => 'sitemap',
 ]);

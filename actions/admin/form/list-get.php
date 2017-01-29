@@ -2,12 +2,12 @@
 
 $forms = GC\Model\Form\Form::select()
     ->equals('lang', GC\Auth\Staff::getEditorLang())
-    ->sort('name', 'ASC')
+    ->order('name', 'ASC')
     ->fetchByPrimaryKey();
 
 $counts = GC\Model\Form\Sent::select()
     ->fields("form_id, SUM(status = 'unread') AS unread")
-    ->groupBy('form_id')
+    ->group('form_id')
     ->fetchByKey('form_id');
 
 ?>
@@ -19,7 +19,7 @@ $counts = GC\Model\Form\Sent::select()
         <div class="simple-box">
             <?php if (empty($forms)): ?>
                 <?=$trans('Nie znaleziono żadnego formularza w języku: ')?>
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/language.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
                     'lang' => GC\Auth\Staff::getEditorLang(),
                 ])?>
             <?php else: ?>
@@ -33,7 +33,7 @@ $counts = GC\Model\Form\Sent::select()
                     </thead>
                     <tbody>
                         <?php foreach ($forms as $form_id => $form): ?>
-                            <?=GC\Render::file(ACTIONS_PATH.'/admin/form/list-item.html.php', [
+                            <?=render(ACTIONS_PATH.'/admin/form/list-item.html.php', [
                                 'form_id' => $form_id,
                                 'form' => $form,
                                 'counts' => $counts,

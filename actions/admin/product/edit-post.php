@@ -14,7 +14,7 @@ GC\Model\Module\Frame::update()
         'name' => post('name'),
         'keywords' => post('keywords'),
         'description' => post('description'),
-        'image' => GC\Url::upload(post('image')),
+        'image' => $uri->upload(post('image')),
     ])
     ->equals('frame_id', $product['frame_id'])
     ->execute();

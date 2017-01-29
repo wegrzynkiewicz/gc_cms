@@ -24,7 +24,7 @@ trait ContainFrameTrait
         return static::select()
             ->source('::table JOIN ::frames USING(frame_id)')
             ->equals('lang', Staff::getEditorLang())
-            ->sort('name', 'ASC');
+            ->order('name', 'ASC');
     }
 
     /**
@@ -34,7 +34,7 @@ trait ContainFrameTrait
     {
         Assert::column($column);
         $sql = self::sql("SELECT ::primary, {$column} FROM ::table AS b JOIN ::frames AS f USING(frame_id) WHERE ::lang ORDER BY f.name ASC");
-        $map = Data::get('database')->fetchByMap($sql, [], static::$primary, $column);
+        $map = Database::getInstance()->fetchByMap($sql, [], static::$primary, $column);
 
         return $map;
     }
@@ -46,7 +46,7 @@ trait ContainFrameTrait
     {
         # pobierz dane rusztowania dla (strony) o id podstawowego
         $sql = self::sql("SELECT * FROM ::table AS b JOIN ::frames AS f USING(frame_id) WHERE ::primary = ? LIMIT 1");
-        $row = Data::get('database')->fetch($sql, [intval($primary_id)]);
+        $row = Database::getInstance()->fetch($sql, [intval($primary_id)]);
 
         return $row;
     }

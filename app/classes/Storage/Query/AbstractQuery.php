@@ -3,11 +3,10 @@
 namespace GC\Storage\Query;
 
 use GC\Assert;
-use GC\Data;
+use GC\Storage\Database;
 
 abstract class AbstractQuery
 {
-    protected $database;
     protected $modelClass;
     protected $source = "::table";
     protected $conditions = [];
@@ -18,7 +17,6 @@ abstract class AbstractQuery
     public function __construct($modelClass)
     {
         $this->modelClass = $modelClass;
-        $this->database = call_user_func([$this->modelClass, 'getDatabase']);
     }
 
     public function condition($sqlPart, $passedParams = [])
@@ -52,7 +50,7 @@ abstract class AbstractQuery
 
     public function execute()
     {
-        return $this->database->execute($this->getSQL(), $this->params);
+        return Database::getInstance()->execute($this->getSQL(), $this->params);
     }
 
     public function source($sqlParts)

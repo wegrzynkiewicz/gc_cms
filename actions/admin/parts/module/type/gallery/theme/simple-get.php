@@ -11,7 +11,7 @@ $_POST = $settings;
 
 ?>
 
-<?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
+<?=render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
     'name' => 'thumbsPerRow',
     'label' => 'Ilość miniaturek na wiersz galerii',
     'options' => [
@@ -24,7 +24,7 @@ $_POST = $settings;
     ]
 ])?>
 
-<?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
+<?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
     'name' => 'gutter',
     'label' => 'Odstęp pomiędzy miniaturkami (w pikselach)',
     'help' => 'Ustawia odstęp w pikselach pomiędzy miniaturkami w wierszu.',

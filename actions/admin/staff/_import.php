@@ -1,9 +1,9 @@
 <?php
 
 $headTitle = $trans('Pracownicy');
-GC\Url::extendMask('/staff%s');
+$uri->extendMask('/staff%s');
 $breadcrumbs->push([
-    'url' => GC\Url::mask('/list'),
+    'url' => $uri->mask('/list'),
     'name' => $headTitle,
     'icon' => 'users',
 ]);

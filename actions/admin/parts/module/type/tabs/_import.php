@@ -2,6 +2,6 @@
 
 $headTitle = $trans('Edycja modułu zakładek');
 $breadcrumbs->push([
-    'url' => GC\Url::mask('/edit'),
+    'url' => $uri->mask('/edit'),
     'name' => $headTitle,
 ]);

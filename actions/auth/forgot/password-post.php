@@ -12,7 +12,7 @@ if (!$user) {
 
 $email64 = base64_encode($user['email']);
 $regeneration = [
-    'verifyHash' => GC\Auth\Password::random(80),
+    'verifyHash' => randomPassword(80),
     'time' => time(),
 ];
 
@@ -61,9 +61,9 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                         </p>
 
                         <div class="btn-group btn-group-justified" style="margin-top:5px">
-                            <a href="<?=GC\Url::mask("/")?>" class="btn btn-link">
+                            <a href="<?=$uri->mask("/")?>" class="btn btn-link">
                                 <?=$trans('Przejdź na stronę główną')?></a>
-                            <a href="<?=GC\Url::mask("/auth/login")?>" class="btn btn-link">
+                            <a href="<?=$uri->mask("/auth/login")?>" class="btn btn-link">
                             <?=$trans('Wróć do logowania')?></a>
                         </div>
 

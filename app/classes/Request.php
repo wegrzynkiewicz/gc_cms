@@ -8,34 +8,33 @@ class Request
 {
     const FRONT_CONTROLLER_URL = '/index.php';
 
-    public $url = '';
+    public $uri = '';
     public $query = '';
     public $method = '';
-    public static $rootUrl = '';
-    public static $frontControllerUrl = '';
+    public $rootUrl = '';
+    public $frontControllerUrl = '';
+    public $mask = '';
 
-    public function __construct()
+    public function __construct($method, $uri, $script)
     {
         # pobierz wszystkie najistotniejsze informacje o żądaniu
-        $rootUrl = dirname($_SERVER['SCRIPT_NAME']);
-        $rawRequest = $_SERVER['REQUEST_URI'];
-        $this->url = '/'.trim(parse_url($rawRequest, \PHP_URL_PATH), '/');
-        $this->method = strtolower($_SERVER['REQUEST_METHOD']);
+        $rootUrl = dirname($script);
+        $rawRequest = $uri;
+        $this->uri = '/'.trim(parse_url($rawRequest, \PHP_URL_PATH), '/');
+        $this->method = strtolower($method);
 
-        Data::get('logger')->request(
-            $_SERVER['REQUEST_METHOD'].' '.$this->url, $_REQUEST
-        );
+        logger('[REQUEST] '.strtoupper($method).' '.$this->uri, $_REQUEST);
 
         # jeżeli aplikacja jest zainstalowana w katalogu, wtedy pomiń ścieżkę katalogu
-        if ($rootUrl and strpos($this->url, $rootUrl) === 0) {
-            $this->url = substr($this->url, strlen($rootUrl));
-            static::$rootUrl = $rootUrl;
+        if ($rootUrl and strpos($this->uri, $rootUrl) === 0) {
+            $this->uri = substr($this->uri, strlen($rootUrl));
+            $this->rootUrl = $rootUrl;
         }
 
         # jeżeli ścieżka zawiera front controller, wtedy usuń go
-        if (strpos($this->url, static::FRONT_CONTROLLER_URL) === 0) {
-            $this->url = substr($this->url, strlen(static::FRONT_CONTROLLER_URL));
-            static::$frontControllerUrl = static::FRONT_CONTROLLER_URL;
+        if (strpos($this->uri, static::FRONT_CONTROLLER_URL) === 0) {
+            $this->uri = substr($this->uri, strlen(static::FRONT_CONTROLLER_URL));
+            $this->frontControllerUrl = static::FRONT_CONTROLLER_URL;
         }
     }
 
@@ -48,14 +47,69 @@ class Request
     }
 
     /**
-     * Sprawdza czy wysłane żądanie jest AJAXem
+     * Generuje przednie części adresu dla plików w katalogu głównym
      */
-    public function isXHR()
+    public function root($path)
     {
-        if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
-            return strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+        return $this->rootUrl.$path; # generowane przez routing
+    }
+
+    /**
+     * Generuje przednie części adresu dla plików nieźródłowych
+     */
+    public function assets($path)
+    {
+        return $this->rootUrl.ASSETS_URL.$path;
+    }
+
+    /**
+     * Generuje przednie części adresu dla plików nieźródłowych w szablonie
+     */
+    public function templateAssets($path)
+    {
+        return $this->rootUrl.TEMPLATE_ASSETS_URL.$path;
+    }
+
+    /**
+     * Generuje przednie części adresu
+     */
+    public function make($path)
+    {
+        if ($path === "#") {
+            return $path;
         }
 
-        return false;
+        return $this->rootUrl.$this->frontControllerUrl.$path;
+    }
+
+    /**
+     * Generuje przednie części adresu
+     */
+    public function mask($path = '')
+    {
+        return $this->make(sprintf($this->mask, $path));
+    }
+
+    /**
+     * Usuwa przednie części adresu, aby nie zawierały domeny lub rootUrl
+     */
+    public function upload($path)
+    {
+        if (strlen($this->rootUrl) <= 0) {
+            return $path;
+        }
+
+        if ($path and strpos($path, $this->rootUrl) === 0) {
+            $path = substr($path, strlen($this->rootUrl));
+        }
+
+        return $path;
+    }
+
+    /**
+     */
+    public function extendMask($mask)
+    {
+        $this->mask = sprintf($this->mask, $mask);
     }
 }

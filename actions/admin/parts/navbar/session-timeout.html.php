@@ -10,8 +10,8 @@
 
     <script>
         $(function() {
-            var timeoutUrl = "<?=GC\Url::make('/auth/session-timeout')?>";
-            var refreshUrl = "<?=GC\Url::make('/admin/account/session-refresh')?>";
+            var timeoutUrl = "<?=$uri->make('/auth/session-timeout')?>";
+            var refreshUrl = "<?=$uri->make('/admin/account/session-refresh')?>";
             var sessionTimeout = <?=e($config['session']['staff']['cookie']['lifetime'])?>;
 
             var finalTime = new Date();

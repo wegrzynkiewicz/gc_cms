@@ -20,7 +20,7 @@ trait JoinTrait
      public static function joinAllWithKeyByForeign($foreign_id)
      {
          $sql = self::sql("SELECT * FROM ::table LEFT JOIN ::joinTable AS p USING (::primary) WHERE p.::joinForeign = ? ORDER BY position ASC");
-         $rows = Data::get('database')->fetchByKey($sql, [intval($foreign_id)], static::$primary);
+         $rows = Database::getInstance()->fetchByKey($sql, [intval($foreign_id)], static::$primary);
 
          return $rows;
      }
@@ -31,7 +31,7 @@ trait JoinTrait
      public static function joinAllWithFrameByForeign($foreign_id)
      {
          $sql = self::sql("SELECT * FROM ::table LEFT JOIN ::frames USING (frame_id) LEFT JOIN ::joinTable AS p USING (::primary) WHERE p.::joinForeign = ? ORDER BY position ASC");
-         $rows = Data::get('database')->fetchByKey($sql, [intval($foreign_id)], static::$primary);
+         $rows = Database::getInstance()->fetchByKey($sql, [intval($foreign_id)], static::$primary);
 
          return $rows;
      }
@@ -42,7 +42,7 @@ trait JoinTrait
      public static function deleteAllByForeign($foreign_id)
      {
          $sql = self::sql("DELETE rows FROM ::table AS rows LEFT JOIN ::joinTable AS p USING (::primary) WHERE p.::joinForeign = ?");
-         $affectedRows = Data::get('database')->execute($sql, [intval($foreign_id)]);
+         $affectedRows = Database::getInstance()->execute($sql, [intval($foreign_id)]);
 
          return $affectedRows;
      }
@@ -53,7 +53,7 @@ trait JoinTrait
      public static function deleteUnassignedByForeign()
      {
          $sql = self::sql("DELETE rows FROM ::table AS rows LEFT JOIN ::joinTable AS p USING(::primary) WHERE p.::joinForeign IS NULL");
-         $affectedRows = Data::get('database')->execute($sql);
+         $affectedRows = Database::getInstance()->execute($sql);
 
          return $affectedRows;
      }

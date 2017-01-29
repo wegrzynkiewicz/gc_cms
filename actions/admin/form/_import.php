@@ -1,9 +1,9 @@
 <?php
 
 $headTitle = $trans('Formularze');
-GC\Url::extendMask('/form%s');
+$uri->extendMask('/form%s');
 $breadcrumbs->push([
-    'url' => GC\Url::mask('/list'),
+    'url' => $uri->mask('/list'),
     'name' => $headTitle,
     'icon' => 'envelope-o',
 ]);

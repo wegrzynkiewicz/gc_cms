@@ -3,14 +3,14 @@
 # pobierz wszystkie posortowane taksonomie z języka
 $taxonomies = GC\Model\Product\Taxonomy::select()
     ->equals('lang', GC\Auth\Staff::getEditorLang())
-    ->sort('name', 'ASC')
+    ->order('name', 'ASC')
     ->fetchByPrimaryKey();
 
 # pobierz wszystkie węzły przygotowane do budowy drzewa
 $nodes = GC\Model\Product\Node::select()
     ->fields(['node_id', 'tax_id', 'parent_id', 'name'])
     ->source('::tree')
-    ->sort('position', 'ASC')
+    ->order('position', 'ASC')
     ->fetchAll();
 
 # umieść każdy węzeły dla konkretnych taksonomii
@@ -36,7 +36,7 @@ foreach ($taxonomies as $tax_id => $taxonomy) {
         <div class="simple-box">
             <?php if (empty($taxonomies)): ?>
                 <?=$trans('Nie znaleziono podziałów wpisów w języku: ')?>
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/language.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
                     'lang' => GC\Auth\Staff::getEditorLang(),
                 ])?>
             <?php else: ?>
@@ -54,7 +54,7 @@ foreach ($taxonomies as $tax_id => $taxonomy) {
                     </thead>
                     <tbody>
                         <?php foreach ($taxonomies as $tax_id => $taxonomy): ?>
-                            <?=GC\Render::file(ACTIONS_PATH.'/admin/product/taxonomy/list-item.html.php', [
+                            <?=render(ACTIONS_PATH.'/admin/product/taxonomy/list-item.html.php', [
                                 'tax_id' => $tax_id,
                                 'taxonomy' => $taxonomy,
                                 'tree' => $taxonomyTrees[$tax_id],

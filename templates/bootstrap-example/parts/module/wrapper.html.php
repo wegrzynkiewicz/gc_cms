@@ -4,7 +4,7 @@
         <?=$trans('Nie znaleziono modułów')?>
     </div>
 <?php else: ?>
-    <?=GC\Render::file(TEMPLATE_PATH.'/parts/module/loop.html.php', [
+    <?=render(TEMPLATE_PATH.'/parts/module/loop.html.php', [
         'frame' => $frame,
         'modules' => $modules,
         'container' => $container,

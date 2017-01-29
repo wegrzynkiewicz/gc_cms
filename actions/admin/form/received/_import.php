@@ -3,9 +3,9 @@
 $form_id = intval(array_shift($_PARAMETERS));
 $form = GC\Model\Form\Form::fetchByPrimaryId($form_id);
 $headTitle = $trans('Nadesłane dla "%s"', [$form['name']]);
-GC\Url::extendMask("/{$form_id}/received%s");
+$uri->extendMask("/{$form_id}/received%s");
 $breadcrumbs->push([
-    'url' => GC\Url::mask('/list'),
+    'url' => $uri->mask('/list'),
     'name' => $headTitle,
     'icon' => 'envelope-open-o',
 ]);

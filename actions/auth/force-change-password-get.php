@@ -28,14 +28,14 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                                 </p>
                             <?php endif ?>
 
-                            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
+                            <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                                 'name' => 'new_password',
                                 'type' => 'password',
                                 'label' => 'Nowe hasło',
                                 'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', $config['password']['minLength']),
                             ])?>
 
-                            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
+                            <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                                 'name' => 'confirm_password',
                                 'type' => 'password',
                                 'label' => 'Powtórz nowe hasło',

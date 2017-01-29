@@ -1,4 +1,4 @@
-<?php $preview = GC\Url::root(def($settings, 'url', '')) ?>
+<?php $preview = $uri->root(def($settings, 'url', '')) ?>
 
 <div id="photo_<?=e($module_id)?>" class="text-center" data-gallery="photoswipe">
     <a href="<?=e($preview)?>"

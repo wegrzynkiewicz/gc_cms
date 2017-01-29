@@ -15,7 +15,7 @@ $requiredCore = [
     [
         'name' => 'MySQL',
         'required' => '5.6',
-        'current' => GC\Data::get('database')->fetch('SELECT VERSION() AS version')['version'],
+        'current' => GC\Storage\Database::getInstance()->fetch('SELECT VERSION() AS version')['version'],
     ],
 ];
 

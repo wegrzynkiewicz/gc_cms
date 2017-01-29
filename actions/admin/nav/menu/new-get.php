@@ -6,6 +6,6 @@ $breadcrumbs->push([
     'name' => $headTitle,
 ]);
 
-$refreshUrl = GC\Url::mask("/edit-views");
+$refreshUrl = $uri->mask("/edit-views");
 
 require ACTIONS_PATH.'/admin/nav/menu/form.html.php';

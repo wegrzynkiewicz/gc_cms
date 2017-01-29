@@ -5,7 +5,6 @@ namespace GC\Model\Post;
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\PrimaryTrait;
 use GC\Storage\Utility\ContainFrameTrait;
-use GC\Data;
 
 class Post extends AbstractModel
 {

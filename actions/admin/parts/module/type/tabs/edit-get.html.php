@@ -31,7 +31,7 @@ $_POST['content'] = $content;
 
             <div id="items"></div>
 
-            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
+            <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz położenie zakładek',
             ])?>
         </form>
@@ -42,7 +42,7 @@ $_POST['content'] = $content;
     <div class="modal-dialog">
         <form id="addModalForm"
             method="post"
-            action="<?=GC\Url::make("/admin/parts/module/{$module_id}/type/tabs/item/xhr-add")?>"
+            action="<?=$uri->make("/admin/parts/module/{$module_id}/type/tabs/item/xhr-add")?>"
             class="modal-content form-horizontal">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
@@ -53,7 +53,7 @@ $_POST['content'] = $content;
                 </h2>
             </div>
             <div class="modal-body">
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
                     'label' => 'Nazwa pojedyńczej zakładki',
                 ])?>
@@ -102,7 +102,7 @@ $_POST['content'] = $content;
     <div class="modal-dialog" role="document">
         <form id="deleteModalForm"
             method="post"
-            action="<?=GC\Url::make("/admin/parts/module/item/xhr-delete")?>"
+            action="<?=$uri->make("/admin/parts/module/item/xhr-delete")?>"
             class="modal-content">
             <input name="item_id" type="hidden" value="">
             <div class="modal-header">
@@ -135,8 +135,8 @@ $_POST['content'] = $content;
 $(function(){
 
     function refreshItems() {
-        $.post("<?=GC\Url::make("/admin/parts/module/{$module_id}/type/tabs/item/xhr-list")?>", {
-            moduleUrl: "<?=GC\Url::mask("/item/%s/module/list")?>"
+        $.post("<?=$uri->make("/admin/parts/module/{$module_id}/type/tabs/item/xhr-list")?>", {
+            moduleUrl: "<?=$uri->mask("/item/%s/module/list")?>"
         }, function(data) {
             $('#items').html(data);
         });
@@ -159,7 +159,7 @@ $(function(){
     });
 
     $('#editModal').on('show.bs.modal', function(e) {
-        var url = "<?=GC\Url::make("/admin/parts/module/type/tabs/item/xhr-edit")?>/"+$(e.relatedTarget).data('id');
+        var url = "<?=$uri->make("/admin/parts/module/type/tabs/item/xhr-edit")?>/"+$(e.relatedTarget).data('id');
         $.get(url, function(data) {
             $('#editModalContent').html(data);
             $('#editModalForm').attr('action', url);
@@ -180,7 +180,7 @@ $(function(){
     });
 
     $("#sortableForm").submit(function(e) {
-        var url = "<?=GC\Url::make("/admin/parts/module/{$module_id}/item/xhr-sort")?>";
+        var url = "<?=$uri->make("/admin/parts/module/{$module_id}/item/xhr-sort")?>";
         $.post(url, {
             positions: $("#sortable").sortable("toArray")
         });

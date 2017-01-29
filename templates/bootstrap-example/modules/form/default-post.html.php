@@ -14,7 +14,7 @@ foreach ($fields as $field_id => $field) {
     $data[$field['name']] = post("formField_$field_id");
 }
 
-$localization = GC\IP::info(GC\Auth\Visitor::getIP());
+$localization = infoIP(getVisitorIP());
 
 if (count($settings['emails']) > 0) {
     foreach ($settings['emails'] as $email) {

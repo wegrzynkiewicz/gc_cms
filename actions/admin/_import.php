@@ -5,19 +5,19 @@
 $session = new GC\Auth\StaffSession();
 $session->start();
 $session->redirectIfNonExists();
-GC\Data::set('session', $session);
+$config['instance']['session'] = $session;
 
 # utworzenie obiektu reprezentującego pracownika
 $staff = new GC\Auth\Staff();
-GC\Data::set('staff', $staff);
+$config['instance']['staff'] = $staff;
 
-GC\Url::extendMask('/admin%s');
+$uri->extendMask('/admin%s');
 
 # utworzenie okruszków chleba dla całego panelu admina
 $breadcrumbs = new GC\Breadcrumbs();
 $breadcrumbs->push([
-    'url' => GC\Url::mask(),
+    'url' => $uri->mask(),
     'name' => 'Dashboard',
     'icon' => 'dashboard',
 ]);
-GC\Data::set('breadcrumbs', $breadcrumbs);
+$config['instance']['breadcrumbs'] = $breadcrumbs;

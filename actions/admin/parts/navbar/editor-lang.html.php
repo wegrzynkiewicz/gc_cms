@@ -7,7 +7,7 @@ $langs = $config['langs'];
             <span class="hidden-xs">
                 <?=$trans('Edytuj: ')?>
             </span>
-            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/language.html.php', [
+            <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
                 'lang' => GC\Auth\Staff::getEditorLang(),
             ])?>
             <b class="caret"></b>
@@ -15,8 +15,8 @@ $langs = $config['langs'];
         <ul class="dropdown-menu dropdown-user">
             <?php foreach ($langs as $code => $lang): ?>
                 <li>
-                    <a href="<?=GC\Url::make("/admin/account/change-editor-lang/{$code}")?>">
-                        <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/language.html.php', [
+                    <a href="<?=$uri->make("/admin/account/change-editor-lang/{$code}")?>">
+                        <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
                             'lang' => $code,
                         ])?>
                     </a>

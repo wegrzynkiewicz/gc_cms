@@ -3,6 +3,7 @@
 namespace GC\Storage\Query;
 
 use GC\Assert;
+use GC\Storage\Database;
 
 class Select extends AbstractQuery
 {
@@ -16,9 +17,9 @@ class Select extends AbstractQuery
         return $this;
     }
 
-    public function groupBy($groupBy)
+    public function group($group)
     {
-        $this->groupBy = $groupBy;
+        $this->groupBy = $group;
 
         return $this;
     }
@@ -27,22 +28,22 @@ class Select extends AbstractQuery
     {
         $this->limit(1);
 
-        return $this->database->fetch($this->getSQL(), $this->params);
+        return Database::getInstance()->fetch($this->getSQL(), $this->params);
     }
 
     public function fetchAll()
     {
-        return $this->database->fetchAll($this->getSQL(), $this->params);
+        return Database::getInstance()->fetchAll($this->getSQL(), $this->params);
     }
 
     public function fetchByKey($key)
     {
-        return $this->database->fetchByKey($this->getSQL(), $this->params, $key);
+        return Database::getInstance()->fetchByKey($this->getSQL(), $this->params, $key);
     }
 
     public function fetchByPrimaryKey()
     {
-        return $this->database->fetchByKey(
+        return Database::getInstance()->fetchByKey(
             $this->getSQL(),
             $this->params,
             get_class_vars($this->modelClass)['primary']
@@ -51,7 +52,7 @@ class Select extends AbstractQuery
 
     public function fetchByMap($keyLabel, $valueLabel)
     {
-        return $this->database->fetchByMap(
+        return Database::getInstance()->fetchByMap(
             $this->getSQL(),
             $this->params,
             $keyLabel,
@@ -62,7 +63,7 @@ class Select extends AbstractQuery
     public function fetchTree()
     {
         $records = $this
-            ->sort('position', 'ASC')
+            ->order('position', 'ASC')
             ->fetchAll();
 
         return call_user_func([$this->modelClass, 'createTree'], $records);
@@ -126,7 +127,7 @@ class Select extends AbstractQuery
 
         if (isset($data['order'])) {
             foreach ($data['order'] as $order) {
-                $this->sort($columnNames[$order['column']], $order['dir']);
+                $this->order($columnNames[$order['column']], $order['dir']);
             }
         }
 

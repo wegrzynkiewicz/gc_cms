@@ -1,4 +1,4 @@
-<?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
+<?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
     'name' => $name,
     'label' => $field['name'],
     'help' => $field['help']

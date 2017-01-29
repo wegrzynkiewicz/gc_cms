@@ -9,7 +9,7 @@ $count = GC\Model\Product\Product::select()
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=GC\Url::mask('/new')?>" type="button" class="btn btn-success btn-md">
+                <a href="<?=$uri->mask('/new')?>" type="button" class="btn btn-success btn-md">
                     <i class="fa fa-plus fa-fw"></i>
                     <?=$trans('Dodaj nowy produkt')?>
                 </a>
@@ -26,7 +26,7 @@ $count = GC\Model\Product\Product::select()
         <div class="simple-box">
             <?php if ($count == 0): ?>
                 <?=$trans('Nie znaleziono żadnego produktu w języku: ')?>
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/language.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
                     'lang' => GC\Auth\Staff::getEditorLang(),
                 ])?>
             <?php else: ?>
@@ -59,7 +59,7 @@ $count = GC\Model\Product\Product::select()
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=GC\Url::mask('/delete')?>" class="modal-content">
+        <form id="deleteModalForm" method="post" action="<?=$uri->mask('/delete')?>" class="modal-content">
             <input name="product_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
@@ -91,14 +91,14 @@ $count = GC\Model\Product\Product::select()
     </td>
 
     <td>
-        <a href="<?=GC\Url::mask()?>/{{product_id}}/edit"
+        <a href="<?=$uri->mask()?>/{{product_id}}/edit"
             title="<?=$trans('Edytuj stronę')?>">
             {{name}}
         </a>
     </td>
 
     <td class="text-right">
-        <a href="<?=GC\Url::make("/page")?>/{{product_id}}"
+        <a href="<?=$uri->make("/page")?>/{{product_id}}"
             target="_blank"
             title="<?=$trans('Podejrzyj tą stronę')?>"
             class="btn btn-primary btn-sm">
@@ -106,7 +106,7 @@ $count = GC\Model\Product\Product::select()
             <?=$trans('Podgląd')?>
         </a>
 
-        <a href="<?=GC\Url::mask()?>/{{product_id}}/module/list"
+        <a href="<?=$uri->mask()?>/{{product_id}}/module/list"
             title="<?=$trans('Wyświetl moduły strony')?>"
             class="btn btn-success btn-sm">
             <i class="fa fa-file-text-o fa-fw"></i>
@@ -138,7 +138,7 @@ $count = GC\Model\Product\Product::select()
             searchDelay: 500,
             autoWidth: false,
             ajax: {
-                url: '<?=GC\Url::mask("/xhr-list")?>',
+                url: '<?=$uri->mask("/xhr-list")?>',
                 type: 'POST'
             },
             createdRow: function (row, data, index) {

@@ -9,8 +9,8 @@ $nav = GC\Model\Menu\Taxonomy::select()
     ->fetch();
 
 $headTitle = $trans('%s - węzły', [$nav['name']]);
-GC\Url::extendMask("/{$nav_id}/menu%s");
+$uri->extendMask("/{$nav_id}/menu%s");
 $breadcrumbs->push([
-    'url' => GC\Url::mask('/tree'),
+    'url' => $uri->mask('/tree'),
     'name' => $headTitle,
 ]);

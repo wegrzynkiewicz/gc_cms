@@ -17,13 +17,13 @@ $_POST['content'] = $content;
         <form action="" method="post" class="form-horizontal">
 
             <div class="simple-box">
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/textarea.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/input/textarea.html.php', [
                     'name' => 'content',
                     'label' => 'Treść widżetu',
                 ])?>
             </div>
 
-            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
+            <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'cancelHref' => "/admin/widget/list",
                 'saveLabel' => 'Zapisz zmiany',
             ])?>

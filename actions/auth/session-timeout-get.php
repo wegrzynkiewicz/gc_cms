@@ -23,7 +23,7 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                         </p>
 
                         <div class="btn-group btn-group-justified" style="margin-top:5px">
-                            <a href="<?=GC\Url::mask("/auth/login")?>" class="btn btn-link">
+                            <a href="<?=$uri->mask("/auth/login")?>" class="btn btn-link">
                             <?=$trans('Zaloguj się ponownie')?></a>
                         </div>
 

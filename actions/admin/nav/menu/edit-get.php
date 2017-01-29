@@ -14,6 +14,6 @@ $breadcrumbs->push([
 ]);
 
 $_POST = $node;
-$refreshUrl = GC\Url::mask("/{$menu_id}/edit-views");
+$refreshUrl = $uri->mask("/{$menu_id}/edit-views");
 
 require ACTIONS_PATH.'/admin/nav/menu/form.html.php';

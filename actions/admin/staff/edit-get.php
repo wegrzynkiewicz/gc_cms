@@ -11,7 +11,7 @@ $breadcrumbs->push([
 $groups = array_keys(GC\Model\Staff\Group::select()
     ->fields(['group_id', 'name'])
     ->source('::staff_membership LEFT JOIN ::staff_groups USING(group_id)')
-    ->sort('name', 'ASC')
+    ->order('name', 'ASC')
     ->fetchByMap('group_id', 'name'));
 
 $_POST = $user;
@@ -23,7 +23,7 @@ $_POST = $user;
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=GC\Url::mask("/{$staff_id}/force-change-password")?>" type="button" class="btn btn-success">
+                <a href="<?=$uri->mask("/{$staff_id}/force-change-password")?>" type="button" class="btn btn-success">
                     <i class="fa fa-unlock-alt fa-fw"></i>
                     <?=$trans('Wymuś zmianę hasła')?>
                 </a>

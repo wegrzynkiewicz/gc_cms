@@ -6,29 +6,29 @@
         <form action="" method="post" id="form" class="form-horizontal">
 
             <div class="simple-box">
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
                     'label' => 'Nazwa strony',
                 ])?>
 
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'keywords',
                     'label' => 'Tagi i słowa kluczowe (meta keywords)',
                 ])?>
 
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/textarea.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/input/textarea.html.php', [
                     'name' => 'description',
                     'label' => 'Opis podstrony (meta description)',
                 ])?>
 
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/image.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/input/image.html.php', [
                     'name' => 'image',
                     'label' => 'Zdjęcie wyróżniające',
                     'placeholder' => 'Ścieżka do pliku zdjęcia',
                 ])?>
             </div>
 
-            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
+            <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz stronę',
             ])?>
 

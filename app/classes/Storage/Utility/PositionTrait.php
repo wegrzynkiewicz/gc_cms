@@ -14,7 +14,7 @@ trait PositionTrait
     {
         Assert::column($column);
         $sql = self::sql("SELECT MAX(position) AS maximum FROM ::table WHERE {$column} = ? LIMIT 1");
-        $maxOrder =  Data::get('database')->fetch($sql, [$value]);
+        $maxOrder =  Database::getInstance()->fetch($sql, [$value]);
 
         return $maxOrder['maximum'] + 1;
     }

@@ -1,7 +1,7 @@
 <?php $dest = $node['destination']; ?>
 <?php if (isset($pages[$dest])): ?>
     <?=$trans($config['nodeTypes']['page'])?>
-    <a href="<?=GC\Url::make("/admin/page/{$dest}/edit")?>">
+    <a href="<?=$uri->make("/admin/page/{$dest}/edit")?>">
         <?=e($pages[$dest]['name'])?>
     </a>
 <?php else: ?>

@@ -1,6 +1,6 @@
 <?php
     $value = post($name);
-    $preview = empty($value) ? GC\Url::assets($config['noImageUrl']): $value;
+    $preview = empty($value) ? $uri->assets($config['noImageUrl']): $value;
 ?>
 
 <div class="form-group">
@@ -52,7 +52,7 @@
 
         $('#<?=$name?>_select').elfinderInput({
             title: '<?=$trans('Wybierz plik')?>',
-            url: '<?=GC\Url::make('/admin/elfinder/connector')?>',
+            url: '<?=$uri->make('/admin/elfinder/connector')?>',
             lang: '<?=GC\Auth\Visitor::getLang()?>',
         }, function(file) {
             $('#<?=$name?>_preview').attr('src', file);
@@ -60,7 +60,7 @@
         });
 
         $('#<?=$name?>_delete').click( function(){
-            $('#<?=$name?>_preview').attr('src', '<?=GC\Url::assets($config['noImageUrl'])?>');
+            $('#<?=$name?>_preview').attr('src', '<?=$uri->assets($config['noImageUrl'])?>');
             $('#<?=$name?>_source').val('');
         })
     });

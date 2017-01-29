@@ -15,7 +15,7 @@ $count = GC\Model\Form\Sent::select()
         <div class="simple-box">
             <?php if ($count == 0): ?>
                 <?=$trans('Nie znaleziono żadnego wysłanego formularza w języku: ')?>
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/language.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
                     'lang' => GC\Auth\Staff::getEditorLang(),
                 ])?>
             <?php else: ?>
@@ -57,7 +57,7 @@ $count = GC\Model\Form\Sent::select()
     <div class="modal-dialog" role="document">
         <form id="deleteModalForm"
             method="post"
-            action="<?=GC\Url::mask("/delete")?>"
+            action="<?=$uri->mask("/delete")?>"
             class="modal-content">
             <input name="sent_id" type="hidden" value="">
             <div class="modal-header">
@@ -86,7 +86,7 @@ $count = GC\Model\Form\Sent::select()
 
 <script id="options-template" type="text/html">
     <div class="text-right">
-        <a href="<?=GC\Url::mask("/")?>{{sent_id}}/show"
+        <a href="<?=$uri->mask("/")?>{{sent_id}}/show"
             class="btn btn-primary btn-sm">
             <i class="fa fa-search fa-fw"></i>
             <?=$trans('Podgląd')?>
@@ -117,7 +117,7 @@ $count = GC\Model\Form\Sent::select()
             serverSide: true,
             searchDelay: 500,
             ajax: {
-                url: '<?=GC\Url::mask("/xhr-list")?>',
+                url: '<?=$uri->mask("/xhr-list")?>',
                 type: 'POST'
             },
             createdRow: function (row, data, index) {

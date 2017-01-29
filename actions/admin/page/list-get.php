@@ -9,7 +9,7 @@ $pages = GC\Model\Page::selectWithFrames()->fetchByPrimaryKey();
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=GC\Url::mask('/new')?>" type="button" class="btn btn-success btn-md">
+                <a href="<?=$uri->mask('/new')?>" type="button" class="btn btn-success btn-md">
                     <i class="fa fa-plus fa-fw"></i>
                     <?=$trans('Dodaj nową stronę')?>
                 </a>
@@ -33,7 +33,7 @@ $pages = GC\Model\Page::selectWithFrames()->fetchByPrimaryKey();
         <div class="simple-box">
             <?php if (empty($pages)): ?>
                 <?=$trans('Nie znaleziono żadnej strony w języku: ')?>
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/language.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
                     'lang' => GC\Auth\Staff::getEditorLang(),
                 ])?>
             <?php else: ?>
@@ -47,7 +47,7 @@ $pages = GC\Model\Page::selectWithFrames()->fetchByPrimaryKey();
                     </thead>
                     <tbody>
                         <?php foreach ($pages as $page_id => $page): ?>
-                            <?=GC\Render::file(ACTIONS_PATH.'/admin/page/list-item.html.php', [
+                            <?=render(ACTIONS_PATH.'/admin/page/list-item.html.php', [
                                 'page_id' => $page_id,
                                 'page' => $page,
                             ])?>
@@ -64,7 +64,7 @@ $pages = GC\Model\Page::selectWithFrames()->fetchByPrimaryKey();
     <div class="modal-dialog" role="document">
         <form id="deleteModalForm"
             method="post"
-            action="<?=GC\Url::mask("/delete")?>"
+            action="<?=$uri->mask("/delete")?>"
             class="modal-content">
             <input name="page_id" type="hidden" value="">
             <div class="modal-header">

@@ -13,26 +13,26 @@ $_POST['theme'] = $module['theme'];
         <form action="" method="post" class="form-horizontal">
 
             <div class="simple-box">
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
                     'label' => 'Nazwa zdjęcia',
                 ])?>
 
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
                     'name' => 'theme',
                     'label' => 'Szablon',
                     'help' => 'Wybierz jeden z dostępnych szablonów dla zdjęcia',
                     'options' => $config['moduleThemes']['photo'],
                 ])?>
 
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/image.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/input/image.html.php', [
                     'name' => 'url',
                     'label' => 'Zdjęcie',
                     'placeholder' => 'Ścieżka do pliku zdjęcia',
                 ])?>
             </div>
 
-            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
+            <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz moduł zdjęcia',
             ])?>
 

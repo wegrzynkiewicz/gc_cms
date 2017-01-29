@@ -17,14 +17,14 @@ if (strlen($newPassword) < $config['password']['minLength']) {
     return require ACTIONS_PATH.'/admin/account/force-change-password-get.php';
 }
 
-if (GC\Auth\Password::verify($newPassword, $user['password'])) {
+if (verifyPassword($newPassword, $user['password'])) {
     $error = $trans('Nowe hasło nie może być takie samo jak poprzednie');
 
     return require ACTIONS_PATH.'/admin/account/force-change-password-get.php';
 }
 
 GC\Model\Staff\Staff::updateByPrimaryId($user['staff_id'], [
-    'password' => GC\Auth\Password::hash($newPassword),
+    'password' => hashPassword($newPassword),
     'force_change_password' => 0,
 ]);
 

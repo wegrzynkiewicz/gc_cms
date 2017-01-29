@@ -10,7 +10,7 @@ if (!is_array($settings)) {
     $settings = [];
 }
 
-GC\Url::extendMask("/{$module_id}%s");
+$uri->extendMask("/{$module_id}%s");
 
 require ACTIONS_PATH."/admin/parts/module/type/{$type}/_import.php";
 

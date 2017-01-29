@@ -4,7 +4,7 @@ namespace GC\Debug;
 
 class NullLogger
 {
-    public function __call($name, array $arguments)
+    public function info($message, array $params = [], $label = '')
     {
     }
 }

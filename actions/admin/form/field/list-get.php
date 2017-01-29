@@ -9,7 +9,7 @@ $fields = GC\Model\Form\Field::joinAllWithKeyByForeign($form_id);
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=GC\Url::mask("/new")?>" type="button" class="btn btn-success">
+                <a href="<?=$uri->mask("/new")?>" type="button" class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
                     <?=$trans('Dodaj nowe pole')?>
                 </a>
@@ -31,12 +31,12 @@ $fields = GC\Model\Form\Field::joinAllWithKeyByForeign($form_id);
             <?php else:?>
                 <input name="positions" type="hidden"/>
                 <ol id="sortable" class="sortable">
-                    <?=GC\Render::file(ACTIONS_PATH.'/admin/form/field/list-items.html.php', [
+                    <?=render(ACTIONS_PATH.'/admin/form/field/list-items.html.php', [
                         'fields' => $fields,
                     ])?>
                 </ol>
             <?php endif?>
-            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
+            <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz pozycję',
             ])?>
         </form>
@@ -45,7 +45,7 @@ $fields = GC\Model\Form\Field::joinAllWithKeyByForeign($form_id);
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=GC\Url::mask("/delete")?>" class="modal-content">
+        <form id="deleteModalForm" method="post" action="<?=$uri->mask("/delete")?>" class="modal-content">
             <input name="field_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">

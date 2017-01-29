@@ -29,7 +29,7 @@ $_POST = $module;
             class="form-horizontal">
 
             <div class="simple-box">
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
                     'name' => 'theme',
                     'label' => 'Szablon',
                     'help' => 'Wybierz jeden z dostępnych szablonów slajdera zdjęć',
@@ -42,7 +42,7 @@ $_POST = $module;
                 </div>
             </div>
 
-            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
+            <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz',
             ])?>
 
@@ -80,7 +80,7 @@ $_POST = $module;
     <div class="modal-dialog">
         <form id="deleteModalForm"
             method="post"
-            action="<?=GC\Url::make("/admin/parts/module/{$module_id}/image/xhr-delete")?>"
+            action="<?=$uri->make("/admin/parts/module/{$module_id}/image/xhr-delete")?>"
             class="modal-content">
             <input name="file_id" type="hidden" value="">
             <div class="modal-header">
@@ -112,7 +112,7 @@ $_POST = $module;
 $(function() {
 
     function refreshImages() {
-        var url = "<?=GC\Url::make("/admin/parts/module/{$module_id}/image/xhr-list")?>";
+        var url = "<?=$uri->make("/admin/parts/module/{$module_id}/image/xhr-list")?>";
         $.get(url, function(data) {
             $('#images')
                 .html(data)
@@ -139,7 +139,7 @@ $(function() {
     });
 
     $('#editModal').on('show.bs.modal', function(e) {
-        var url = "<?=GC\Url::make("/admin/parts/module/{$module_id}/type/image-slider/slide/xhr-edit")?>/"+$(e.relatedTarget).data('id');
+        var url = "<?=$uri->make("/admin/parts/module/{$module_id}/type/image-slider/slide/xhr-edit")?>/"+$(e.relatedTarget).data('id');
         $.get(url, function(data) {
             $('#editModalContent').html(data);
             $('#editModalForm').attr('action', url);
@@ -159,7 +159,7 @@ $(function() {
     });
 
     $("#sortableForm").on('submit', function(event) {
-        var url = "<?=GC\Url::make("/admin/parts/module/{$module_id}/image/xhr-sort")?>";
+        var url = "<?=$uri->make("/admin/parts/module/{$module_id}/image/xhr-sort")?>";
         $.post(url, {
             positions: $("#images").sortable("toArray")
         });
@@ -167,10 +167,10 @@ $(function() {
 
     $('#select_images').elfinderInputMultiple({
         title: '<?=$trans('Wybierz wiele zdjęć')?>',
-        url: '<?=GC\Url::make('/admin/elfinder/connector')?>',
+        url: '<?=$uri->make('/admin/elfinder/connector')?>',
         lang: '<?=GC\Auth\Visitor::getLang()?>',
     }, function(urls) {
-        $.post("<?=GC\Url::make("/admin/parts/module/{$module_id}/image/xhr-add")?>", {
+        $.post("<?=$uri->make("/admin/parts/module/{$module_id}/image/xhr-add")?>", {
             urls: urls
         }, function() {
             refreshImages();

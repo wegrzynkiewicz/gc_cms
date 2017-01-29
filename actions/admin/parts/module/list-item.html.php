@@ -13,7 +13,7 @@
     <div class="grid-stack-item-content">
         <div class="panel panel-default panel-module">
             <div class="panel-heading">
-                <a href="<?=GC\Url::mask("/{$module_id}/edit")?>">
+                <a href="<?=$uri->mask("/{$module_id}/edit")?>">
                     <?=$trans($config['modules'][$module['type']]['name'])?>
                 </a>
                 <button data-toggle="modal"
@@ -26,7 +26,7 @@
                 </button>
             </div>
             <div class="panel-body">
-                <?=GC\Render::file(ACTIONS_PATH."/admin/parts/module/type/{$type}/grid-preview.html.php", [
+                <?=render(ACTIONS_PATH."/admin/parts/module/type/{$type}/grid-preview.html.php", [
                     'module_id' => $module['module_id'],
                     'module' => $module,
                     'content' => $module['content'],

@@ -9,7 +9,7 @@ $breadcrumbs->push([
     'name' => $headTitle,
 ]);
 
-$refreshUrl = GC\Url::mask("/{$field_id}/types");
+$refreshUrl = $uri->mask("/{$field_id}/types");
 $_POST = $field;
 
 require ACTIONS_PATH.'/admin/form/field/form.html.php';

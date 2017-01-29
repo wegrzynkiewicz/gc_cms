@@ -10,6 +10,23 @@ function e($string)
     return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
 }
 
+/**
+ *
+ */
+function &getConfig()
+{
+    global $config;
+
+    return $config;
+}
+
+function logger($message, array $params = [])
+{
+    global $config;
+
+    return $config['instance']['logger']->info($message, $params);
+}
+
 function purifyHtml($dirtyHtml)
 {
     $config = HTMLPurifier_Config::createDefault();
@@ -53,6 +70,17 @@ function sqldate($time = null)
     }
 
     return date('Y-m-d H:i:s', $time);
+}
+
+/**
+ * Zwraca obiekt DataTime z mikrosekundami
+ */
+function getMicroDateTime()
+{
+    $time = microtime(true);
+    $micro = sprintf("%06d", ($time - floor($time)) * 1000000);
+
+    return new DateTime(date('Y-m-d H:i:s.'.$micro, $time));
 }
 
 /**
@@ -243,7 +271,7 @@ function curlReCaptcha()
         if ($response) {
             return json_decode($response, true);
         }
-        GC\Data::get('logger')->curl($url.' '.curl_error($curl));
+        logger("[CURL] {$url}", [curl_error($curl)]);
     }
 
     return [
@@ -322,8 +350,10 @@ function normalize($unformatted)
 
 function redirect($location, $code = 303)
 {
-    $url = GC\Url::make($location);
-    absoluteRedirect($url, $code);
+    global $config;
+
+    $uri = $config['instance']['uri']->make($location);
+    absoluteRedirect($uri, $code);
 }
 
 function absoluteRedirect($location, $code = 303)
@@ -331,8 +361,8 @@ function absoluteRedirect($location, $code = 303)
     http_response_code($code);
     header("Location: {$location}");
 
-    GC\Data::get('logger')->redirect(
-        sprintf("%s %s :: Time: %ss :: Memory: %sMiB",
+    logger(
+        sprintf("[REDIRECT] %s %s :: Time: %ss :: Memory: %sMiB",
             $code,
             $location,
             microtime(true) - START_TIME,
@@ -427,4 +457,223 @@ function setValueByKeys(array &$array, array $keys, $value)
    }
 
    $arrayCurrent[$lastKey] = $value;
+}
+
+/**
+ * Zwraca pseudo losowy ciąg znaków o zadanej długości
+ */
+function randomPassword($length)
+{
+    $string = openssl_random_pseudo_bytes(ceil($length));
+    $string = base64_encode($string);
+    $string = str_replace(['/', '+', '='], '', $string);
+    $string = substr($string, 0, $length);
+
+    return $string;
+}
+
+/**
+ * Haszuje wprowadzony ciąg znaków
+ */
+function hashPassword($securePassword)
+{
+    return password_hash(
+        saltPassword($securePassword),
+        PASSWORD_DEFAULT,
+        getConfig()['password']['options']
+    );
+}
+
+/**
+ * Sprawdza czy hasło potrzebuje zostać zmienione na inne
+ */
+function passwordNeedsRehash($passwordHash)
+{
+    return password_needs_rehash(
+        $passwordHash,
+        PASSWORD_DEFAULT,
+        getConfig()['password']['options']
+    );
+}
+
+/**
+ * Sprawdza poprawność hasła i hasza
+ */
+function verifyPassword($securePassword, $passwordHash)
+{
+    return password_verify(saltPassword($securePassword), $passwordHash);
+}
+
+/**
+ * Dodaje indywidualną sól dla każdego serwisu do wprowadzonego hasła
+ */
+function saltPassword($securePassword)
+{
+    return $securePassword.getConfig()['password']['staticSalt'];
+}
+
+function getVisitorIP()
+{
+    if (!empty($_SERVER['HTTP_CLIENT_IP']) && Validate::ip($_SERVER['HTTP_CLIENT_IP'])) {
+        return $_SERVER['HTTP_CLIENT_IP'];
+    }
+
+    if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        if (strpos($_SERVER['HTTP_X_FORWARDED_FOR'], ',') !== false) {
+            $iplist = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+            foreach ($iplist as $ip) {
+                if (Validate::ip($ip)) {
+                    return $ip;
+                }
+            }
+        } elseif (Validate::ip($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            return $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }
+    }
+
+    if (!empty($_SERVER['HTTP_X_FORWARDED']) && Validate::ip($_SERVER['HTTP_X_FORWARDED'])) {
+        return $_SERVER['HTTP_X_FORWARDED'];
+    }
+
+    if (!empty($_SERVER['HTTP_X_CLUSTER_CLIENT_IP']) && Validate::ip($_SERVER['HTTP_X_CLUSTER_CLIENT_IP'])) {
+        return $_SERVER['HTTP_X_CLUSTER_CLIENT_IP'];
+    }
+
+    if (!empty($_SERVER['HTTP_FORWARDED_FOR']) && Validate::ip($_SERVER['HTTP_FORWARDED_FOR'])) {
+        return $_SERVER['HTTP_FORWARDED_FOR'];
+    }
+
+    if (!empty($_SERVER['HTTP_FORWARDED']) && Validate::ip($_SERVER['HTTP_FORWARDED'])) {
+        return $_SERVER['HTTP_FORWARDED'];
+    }
+
+    return $_SERVER['REMOTE_ADDR'];
+}
+
+/**
+ * Zapisuje zadane dane do pliku w formie łatwego do odczytu pliku PHP
+ */
+function infoIP($ip = null)
+{
+    if (!Validate::ip($ip)) {
+        return $ip;
+    }
+
+    $continents = array(
+        "AF" => "Africa",
+        "AN" => "Antarctica",
+        "AS" => "Asia",
+        "EU" => "Europe",
+        "OC" => "Australia (Oceania)",
+        "NA" => "North America",
+        "SA" => "South America"
+    );
+
+    $ipdat = json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=".$ip));
+
+    return [
+        "ip" => $ip,
+        "city" => $ipdat->geoplugin_city,
+        "state" => $ipdat->geoplugin_regionName,
+        "country" => $ipdat->geoplugin_countryName,
+        "countryCode" => $ipdat->geoplugin_countryCode,
+        "continent" => def($continents, strtoupper($ipdat->geoplugin_continentCode)),
+        "continentCode" => $ipdat->geoplugin_continentCode,
+        "userAgent" => server('HTTP_USER_AGENT', ''),
+    ];
+}
+
+/**
+ * Tworzy wrapper dla renderowania pliku
+ */
+function render($templateName, array $arguments = [])
+{
+    global $config;
+
+    extract($config['instance']);
+    extract($arguments, EXTR_OVERWRITE);
+
+    ob_start();
+    require $templateName;
+
+    return ob_get_clean();
+}
+
+/**
+ * Zapisuje zadane dane do pliku w formie łatwego do odczytu pliku PHP
+ */
+function exportDataToPHPFile($data, $file)
+{
+    makeFile($file);
+
+    $date = sqldate();
+    $export = var_export($data, true);
+
+    $content = "<?php\n\n/** @generated {$date} */\n\nreturn {$export};";
+    file_put_contents($file, $content);
+}
+
+/**
+ * Wyszukuje wszystkie pliki rekursywnie w katalogu
+ */
+function globRecursive($pattern, $flags = 0)
+{
+    $files = glob($pattern, $flags);
+    foreach (glob(dirname($pattern).'/*', GLOB_ONLYDIR|GLOB_NOSORT) as $dir) {
+        $files = array_merge($files, globRecursive($dir.'/'.basename($pattern), $flags));
+    }
+
+    return $files;
+}
+
+/**
+ * Tworzy rekursywnie katalogi
+ */
+function makeDirRecursive($dir, $mode = 0775)
+{
+    $path = '';
+    $dirs = explode('/', trim($dir, '/ '));
+
+    while (count($dirs)) {
+        $folder = array_shift($dirs);
+        $path .= $folder.'/';
+        if (!is_readable($path) and !is_dir($path)) {
+            mkdir($path, $mode);
+        }
+        chmod($path, $mode);
+    }
+}
+
+/**
+ * Tworzy plik oraz katalogi, jeżeli ich brakuje
+ */
+function makeFile($filepath, $mode = 0775)
+{
+    makeDirRecursive(dirname($filepath));
+    if (!file_exists($filepath)) {
+        touch($filepath);
+    }
+    chmod($filepath, $mode);
+}
+
+/**
+ * Usuwa katalogu oraz pliki i katalogi wewnątrz
+ */
+function removeDirRecursive($dir)
+{
+    if (is_dir($dir)) {
+        $objects = scandir($dir);
+        foreach ($objects as $object) {
+            if ($object != "." && $object != "..") {
+                $file = $dir.DIRECTORY_SEPARATOR.$object;
+                if (filetype($file) == "dir") {
+                    removeDirRecursive($file);
+                } else {
+                    unlink($file);
+                }
+            }
+        }
+        reset($objects);
+        rmdir($dir);
+    }
 }

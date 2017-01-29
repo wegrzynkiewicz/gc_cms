@@ -3,7 +3,7 @@
 $tax_id = intval(array_shift($_PARAMETERS));
 $taxonomies = GC\Model\Post\Taxonomy::select()
     ->equals('lang', GC\Auth\Staff::getEditorLang())
-    ->sort('name')
+    ->order('name')
     ->fetchByPrimaryKey();
 
 ?>
@@ -15,7 +15,7 @@ $taxonomies = GC\Model\Post\Taxonomy::select()
         <div class="simple-box">
             <?php if (empty($taxonomies)): ?>
                 <?=$trans('Nie znaleziono podziałów wpisów w języku: ')?>
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/language.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
                     'lang' => GC\Auth\Staff::getEditorLang(),
                 ])?>
             <?php else: ?>
@@ -33,7 +33,7 @@ $taxonomies = GC\Model\Post\Taxonomy::select()
                     </thead>
                     <tbody>
                         <?php foreach ($taxonomies as $tax_id => $taxonomy): ?>
-                            <?=GC\Render::file(ACTIONS_PATH.'/admin/post/taxonomy/list-item.html.php', [
+                            <?=render(ACTIONS_PATH.'/admin/post/taxonomy/list-item.html.php', [
                                 'tax_id' => $tax_id,
                                 'taxonomy' => $taxonomy,
                                 'tree' => GC\Model\Post\Node::buildTreeWithFrameByTaxonomyId($tax_id),

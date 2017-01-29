@@ -26,23 +26,23 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                                 <input type="hidden" name="email64" value="<?=$email64?>">
                                 <input type="hidden" name="verifyHash" value="<?=$verifyHash?>">
 
-                                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
+                                <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                                     'name' => 'new_password',
                                     'type' => 'password',
                                     'label' => 'Nowe hasło',
                                     'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', $config['password']['minLength']),
                                 ])?>
 
-                                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
+                                <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                                     'name' => 'confirm_password',
                                     'type' => 'password',
                                     'label' => 'Powtórz nowe hasło',
                                     'help' => 'Powtórz swoje nowe hasło dla bezpieczeństwa',
                                 ])?>
 
-                                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
+                                <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                                     'saveLabel' => 'Zmień hasło',
-                                    'cancelHref' => GC\Url::make('/auth/login'),
+                                    'cancelHref' => $uri->make('/auth/login'),
                                 ])?>
                             </form>
                         <?php endif ?>

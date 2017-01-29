@@ -21,7 +21,7 @@ $_POST = $message;
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=GC\Url::mask("/{$sent_id}/delete")?>"
+                <a href="<?=$uri->mask("/{$sent_id}/delete")?>"
                     type="button"
                     class="btn btn-danger btn-md">
                     <i class="fa fa-trash fa-fw"></i>
@@ -74,7 +74,7 @@ $_POST = $message;
             </table>
 
             <div class="simple-box">
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
                     'name' => 'status',
                     'label' => 'Status',
                     'help' => 'Status wiadomości jest pomocny przy filtrowaniu wiadomości.',
@@ -84,7 +84,7 @@ $_POST = $message;
                 ])?>
             </div>
 
-            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
+            <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zapisz status',
             ])?>
 

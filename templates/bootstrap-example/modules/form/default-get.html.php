@@ -5,7 +5,7 @@ $fields = GC\Model\Form\Field::joinAllWithKeyByForeign($form_id);
 
 <form id="form_<?=$form_id?>" action="" method="post" class="form-horizontal">
     <?php foreach ($fields as $field_id => $field): $fieldType = $field['type']; ?>
-        <?=GC\Render::file(TEMPLATE_PATH."/modules/form/default/{$fieldType}.html.php", [
+        <?=render(TEMPLATE_PATH."/modules/form/default/{$fieldType}.html.php", [
             'name' => "formField_$field_id",
             'field_id' => $field_id,
             'field' => $field,

@@ -1,5 +1,5 @@
 <li>
-    <a href="<?=GC\Url::make($node['path'])?>" id="nav_<?=($node_id)?>">
+    <a href="<?=$uri->make($node['path'])?>" id="nav_<?=($node_id)?>">
 
         <?php if ($node['icon']): ?>
             <i class="fa fa-<?=($node['icon'])?> fa-fw"></i>
@@ -20,7 +20,7 @@
 
     <?php if (count($node['children'])): ?>
         <ul <?=$attr?>>
-            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/sidebar/items.html.php', [
+            <?=render(ACTIONS_PATH.'/admin/parts/sidebar/items.html.php', [
                 'menu' => $node['children'],
                 'staff' => $staff,
                 'attr' => 'class="nav nav-third-level collapse"'

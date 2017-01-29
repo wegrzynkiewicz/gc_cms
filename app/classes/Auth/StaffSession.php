@@ -14,7 +14,7 @@ class StaffSession
     {
         if (session_status() === \PHP_SESSION_NONE) {
 
-            $cookie = Data::get('config')['session']['staff']['cookie'];
+            $cookie = getConfig()['session']['staff']['cookie'];
 
             # zmiana nazwy ciastka sesyjnego dla pracownika
             session_name($cookie['name']);
@@ -26,7 +26,7 @@ class StaffSession
 
             session_start();
 
-            Data::get('logger')->session('Start', [session_id()]);
+            logger('[SESSION] Start', [session_id()]);
         }
 
         // Session::update([
@@ -37,7 +37,7 @@ class StaffSession
 
     public static function cookieExists()
     {
-        $name = Data::get('config')['session']['staff']['cookie']['name'];
+        $name = getConfig()['session']['staff']['cookie']['name'];
 
         return isset($_COOKIE[$name]) and $_COOKIE[$name];
     }
@@ -55,7 +55,7 @@ class StaffSession
     public static function redirectIfNonExists()
     {
         if (!static::cookieExists()) {
-            Data::get('logger')->session('Cookie does not exists');
+            logger('[SESSION] Cookie does not exists');
             redirect('/auth/login');
         }
     }

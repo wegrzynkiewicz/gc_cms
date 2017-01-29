@@ -34,7 +34,7 @@
                     window.close();
                 },
                 resizable: false,
-                url: '<?=GC\Url::make('/admin/elfinder/connector')?>',
+                url: '<?=$uri->make('/admin/elfinder/connector')?>',
                 lang: '<?=GC\Auth\Visitor::getLang()?>',
             }).elfinder('instance');
         });

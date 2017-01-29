@@ -20,7 +20,7 @@ class Thumb
         $this->height = $height;
         $this->extension = strtolower(pathinfo($imageUrl, PATHINFO_EXTENSION));
 
-        $options = Data::get('config')['thumb']['options'];
+        $options = getConfig()['thumb']['options'];
         if (isset($options[$this->extension])) {
             $this->params = $options[$this->extension];
             $this->url = $this->makeUrl();
@@ -50,7 +50,7 @@ class Thumb
      */
     private function makeUrl()
     {
-        $thumbsUrl      = Data::get('config')['thumb']['thumbsUrl'];
+        $thumbsUrl      = getConfig()['thumb']['thumbsUrl'];
         $imageUrl       = urldecode($this->imageUrl);
         $sufix          = '/'.$this->width.'x'.$this->height;
         $normalized     = normalize($imageUrl);
@@ -78,7 +78,7 @@ class Thumb
     public function generate()
     {
         $imageUrl = urldecode($this->imageUrl);
-        $thumbPath = Data::get('config')['thumb']['thumbsPath'];
+        $thumbPath = getConfig()['thumb']['thumbsPath'];
         $destFilePath   = "{$thumbPath}{$this->url}";
         $sourceFilePath = "{$thumbPath}{$imageUrl}";
 
@@ -90,7 +90,7 @@ class Thumb
             return false;
         }
 
-        Disc::makeDirRecursive(pathinfo($destFilePath, PATHINFO_DIRNAME));
+        makeDirRecursive(pathinfo($destFilePath, PATHINFO_DIRNAME));
 
         $loader = $this->params['loader'];
         $sourceImage = $loader($sourceFilePath);

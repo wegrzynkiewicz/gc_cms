@@ -1,7 +1,7 @@
 <?php $base64 = base64_encode($checksum['file']); ?>
 <tr class="<?=$checksum['status'] ? 'success' : 'danger'?>">
     <td>
-        <a href="<?=GC\Url::make("/root/checksum/show/{$base64}")?>">
+        <a href="<?=$uri->make("/root/checksum/show/{$base64}")?>">
             <?=$checksum['file']?>
         </a>
     </td>

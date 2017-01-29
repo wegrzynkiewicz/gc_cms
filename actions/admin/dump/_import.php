@@ -1,9 +1,9 @@
 <?php
 
 $headTitle = $trans('Kopie zapasowe');
-GC\Url::extendMask('/dump%s');
+$uri->extendMask('/dump%s');
 $breadcrumbs->push([
-    'url' => GC\Url::mask('/list'),
+    'url' => $uri->mask('/list'),
     'name' => $headTitle,
     'icon' => 'database',
 ]);

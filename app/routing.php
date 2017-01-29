@@ -2,8 +2,8 @@
 
 /** Plik ładuje odpowiednią akcję poprzez warunki routingu */
 
-$url = trim($request->url, '/');
-$parts = explode('/', $url);
+$requestUri = trim($request->uri, '/');
+$parts = explode('/', $requestUri);
 
 $_PARAMETERS = array_filter($parts, 'intval');
 $_SEGMENTS = array_filter($parts, function ($segment) {
@@ -11,8 +11,8 @@ $_SEGMENTS = array_filter($parts, function ($segment) {
 });
 
 # jeżeli adres bez ścieżki wtedy załaduj akcję główną
-if (empty($url)) {
-    $logger->routing('Homepage');
+if (empty($requestUri)) {
+    logger('[ROUTING] Homepage');
     return require ACTIONS_PATH.'/homepage.php';
 }
 
@@ -25,11 +25,11 @@ if (GC\Validate::installedLang($lang)) {
 
 # jeżeli jedyny segment okazał się być językowym prefiksem wtedy do głowej
 if (count($_SEGMENTS) === 0) {
-    $logger->routing('Homepage with lang');
+    logger('[ROUTING] Homepage with lang');
     return require ACTIONS_PATH."/homepage.php";
 }
 
-# wyszukaj plik w katalogu /actions, który pasuje do adresu url
+# wyszukaj plik w katalogu /actions, który pasuje do adresu uri
 $path = ACTIONS_PATH;
 $copySegments = $_SEGMENTS;
 while (count($_SEGMENTS) > 0) {
@@ -38,21 +38,21 @@ while (count($_SEGMENTS) > 0) {
     # jeżeli istnieje plik "import" to załaduj, ale nie kończ pętli
     $file = "{$path}/{$segment}/_import.php";
     if (file_exists($file)) {
-        $logger->import($file);
+        logger('[IMPORT]', [$file]);
         require $file;
     }
 
     # jeżeli istnieje plik z metodą requesta na początku, załaduj
     $file = "{$path}/{$segment}-{$request->method}.php";
     if (file_exists($file)) {
-        $logger->routing("Nested with method :: {$file}");
+        logger('[ROUTING] Nested with method', [$file]);
         return require $file;
     }
 
     # jeżeli istnieje plik, wtedy załaduj
     $file = "{$path}/{$segment}.php";
     if (file_exists($file)) {
-        $logger->routing("Nested without method :: {$file}");
+        logger('[ROUTING] Nested without method', [$file]);
         return require $file;
     }
 
@@ -66,7 +66,7 @@ while (count($_SEGMENTS) > 0) {
     # jeżeli nie istnieje akcja to spróbuj załadować plik start
     $file = "{$path}/{$segment}/start.php";
     if (file_exists($file)) {
-        $logger->routing("Start :: {$file}");
+        logger('[ROUTING] Start', [$file]);
         return require $file;
     }
 }
@@ -80,7 +80,7 @@ $absoluteSlug = '/'.implode('/', $_SEGMENTS);
 # jeżeli istnieje niestandardowy plik w folderze z szablonem
 $file = TEMPLATE_PATH."/custom/{$slug}.html.php";
 if (file_exists($file)) {
-    $logger->routing("Custom slug :: {$file}");
+    logger('[ROUTING] Custom slug', [$file]);
     return require $file;
 }
 
@@ -89,17 +89,17 @@ $id = intval(count($_SEGMENTS) === 0 ? $slug : array_shift($_SEGMENTS));
 
 # jeżeli ostatni parametr nie jest prawidłową liczbą
 if ($id <= 0) {
-    $logger->routing('Invalid parameter ID');
+    logger('[ROUTING] Invalid parameter ID');
     return require TEMPLATE_PATH.'/errors/404.html.php';
 }
 
 # jeżeli istnieje niestandardowy plik w folderze z szablonem
 $file = TEMPLATE_PATH."/custom/{$id}.html.php";
 if (file_exists($file)) {
-    $logger->routing('Custom ID');
+    logger('[ROUTING] Custom ID');
     return require $file;
 }
 
 # jeżeli żaden plik nie pasuje, wtedy wyświetl błąd 404
-$logger->routing('End point 404');
+logger('[ROUTING] End point');
 return require TEMPLATE_PATH.'/errors/404.html.php';

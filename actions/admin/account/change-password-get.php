@@ -23,21 +23,21 @@ $_POST = [];
                     </div>
                 <?php endif ?>
 
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'old_password',
                     'type' => 'password',
                     'label' => 'Stare hasło',
                     'help' => 'Wprowadź swoje stare hasło dla bezpieczeństwa',
                 ])?>
 
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'new_password',
                     'type' => 'password',
                     'label' => 'Nowe hasło',
                     'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', $config['password']['minLength']),
                 ])?>
 
-                <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'confirm_password',
                     'type' => 'password',
                     'label' => 'Powtórz nowe hasło',
@@ -45,7 +45,7 @@ $_POST = [];
                 ])?>
             </div>
 
-            <?=GC\Render::file(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
+            <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => 'Zmień hasło',
             ])?>
 

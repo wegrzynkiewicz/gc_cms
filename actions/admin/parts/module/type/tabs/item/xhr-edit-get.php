@@ -10,7 +10,7 @@ $item = GC\Model\Module\Item::select()
 
 $_POST = $item;
 
-echo GC\Render::file(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
+echo render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
     'name' => 'name',
     'label' => 'Nazwa pojedyńczej zakładki',
 ])?>

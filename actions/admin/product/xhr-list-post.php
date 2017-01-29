@@ -23,7 +23,7 @@ $recordsTotal = intval(GC\Model\Product\Product::select()
 $products = $query->fetchAll();
 foreach ($products as &$product) {
     $image = empty($product['image'])
-        ? GC\Url::assets($config['noImageUrl'])
+        ? $uri->assets($config['noImageUrl'])
         : $product['image'];
     $product['image'] = GC\Thumb::make($image, 64, 999);
 }

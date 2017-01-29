@@ -3,7 +3,7 @@
 namespace GC;
 
 use GC\Validate;
-use GC\Exception\AssertException;
+use Exception;
 
 class Assert
 {
@@ -13,7 +13,7 @@ class Assert
     public static function __callStatic($name, array $arguments)
     {
         if (!call_user_func_array([Validate::class, $name], $arguments)) {
-            throw new AssertException();
+            throw new Exception();
         }
     }
 }
