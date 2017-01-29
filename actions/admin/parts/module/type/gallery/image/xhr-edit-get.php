@@ -10,7 +10,7 @@ echo render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
 ]);
 
 echo render(ACTIONS_PATH.'/admin/parts/input/image.html.php', [
-    'name' => 'url',
+    'name' => 'uri',
     'label' => 'Zdjęcie',
     'placeholder' => 'Ścieżka do pliku zdjęcia',
 ]);

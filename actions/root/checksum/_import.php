@@ -3,7 +3,7 @@
 $headTitle = "Sumy kontrolne plików";
 $uri->extendMask('/root/checksum%s');
 $breadcrumbs->push([
-    'url' => $uri->mask('/list'),
+    'uri' => $uri->mask('/list'),
     'name' => $headTitle,
 ]);
 

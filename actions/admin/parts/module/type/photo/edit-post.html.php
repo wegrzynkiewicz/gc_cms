@@ -1,12 +1,12 @@
 <?php
 
-$url = $_POST['url'];
+$url = $_POST['uri'];
 $name = $_POST['name'];
 
 $filePath = WEB_PATH.$url;
 list($width, $height) = getimagesize($filePath);
 $settings = [
-    'url' => $url,
+    'uri' => $url,
     'width' => $width,
     'height' => $height,
 ];
@@ -17,4 +17,4 @@ GC\Model\Module\Module::updateByPrimaryId($module_id, [
     'settings' => json_encode($settings),
 ]);
 
-redirect($breadcrumbs->getBeforeLast('url'));
+redirect($breadcrumbs->getBeforeLast('uri'));

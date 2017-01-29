@@ -6,4 +6,4 @@ $positions = array_filter($positions, function ($node) {
 });
 GC\Model\Post\Tree::update($tax_id, $positions);
 
-redirect($breadcrumbs->getBeforeLast('url'));
+redirect($breadcrumbs->getBeforeLast('uri'));

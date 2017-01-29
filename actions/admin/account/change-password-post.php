@@ -4,7 +4,7 @@ $oldPassword = $_POST['old_password'];
 $newPassword = $_POST['new_password'];
 $confirmPassword = $_POST['confirm_password'];
 
-$staff_id = GC\Data::get('staff')['staff_id'];
+$staff_id = $staff['staff_id'];
 $user = GC\Model\Staff\Staff::fetchByPrimaryId($staff_id);
 
 if (strlen($newPassword) < $config['password']['minLength']) {
@@ -31,4 +31,4 @@ GC\Model\Staff\Staff::updateByPrimaryId($user['staff_id'], [
 
 setNotice($trans('Twoje hasło zostało zmienione'));
 
-redirect($breadcrumbs->getLast('url'));
+redirect($breadcrumbs->getLast('uri'));

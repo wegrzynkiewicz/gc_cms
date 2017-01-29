@@ -6,7 +6,7 @@
     <div class="swiper-wrapper">
         <?php foreach ($images as $image_id => $image): ?>
             <div class="swiper-slide"
-                style="background-image: url('<?=GC\Thumb::make($image['url'], 1920, 9999)?>')">
+                style="background-image: url('<?=GC\Thumb::make($image['uri'], 1920, 9999)?>')">
             </div>
         <?php endforeach ?>
     </div>

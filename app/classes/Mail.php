@@ -41,8 +41,8 @@ class Mail extends PHPMailer
     {
         $cssToInlineStyles = new CssToInlineStyles();
         $viewArgs['mail'] = $this;
-        $html = Render::file($templateEmailPath, $viewArgs);
-        $css = Render::file($stylePath);
+        $html = render($templateEmailPath, $viewArgs);
+        $css = render($stylePath);
         $content = $cssToInlineStyles->convert($html, $css);
         $this->Body = $content;
         $this->buildAltBody($content);
@@ -62,7 +62,7 @@ class Mail extends PHPMailer
 
     public function push()
     {
-        $this->hash = Auth\Password::random(40);
+        $this->hash = randomPassword(40);
         ToSend::insert([
             'mail_hash' => $this->hash,
             'receivers' => implode('; ', array_keys($this->all_recipients)),

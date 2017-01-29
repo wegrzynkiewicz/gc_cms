@@ -11,4 +11,4 @@ $product = GC\Model\Product\Product::select()
 GC\Model\Product\Product::deleteFrameByPrimaryId($product_id);
 
 setNotice($trans('Produkt "%s" została usunięta.', [$product['name']]));
-redirect($breadcrumbs->getLast('url'));
+redirect($breadcrumbs->getLast('uri'));

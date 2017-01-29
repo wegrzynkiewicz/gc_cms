@@ -8,14 +8,14 @@
     <div class="module-gallery-preview-row" data-gallery="photoswipe">
         <?php foreach ($images as $image): $is = json_decode($image['settings'], true) ?>
             <div class="module-gallery-preview-wrapper">
-                <a href="<?=e($image['url'])?>"
+                <a href="<?=e($image['uri'])?>"
                     target="_blank"
                     title="<?=e($image['name'])?>"
                     data-photoswipe-item=""
                     data-width="<?=e($is['width'])?>"
                     data-height="<?=e($is['height'])?>"
                     class="thumb-wrapper">
-                    <img src="<?=GC\Thumb::make($image['url'], 120, 70)?>"
+                    <img src="<?=GC\Thumb::make($image['uri'], 120, 70)?>"
                         width="120"
                         width="70"
                         alt="<?=e($image['name'])?>"

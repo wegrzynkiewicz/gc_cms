@@ -25,4 +25,4 @@ GC\Model\Product\Tree::insert([
 ]);
 
 setNotice($trans('Nowy węzeł "%s" dostał dodany do "%s".', [$name, $taxonomy['name']]));
-redirect($breadcrumbs->getLast('url'));
+redirect($breadcrumbs->getLast('uri'));

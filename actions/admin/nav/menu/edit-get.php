@@ -9,7 +9,7 @@ $node = GC\Model\Menu\Menu::select()
 
 $headTitle = $trans('%s - edycja węzła', [$node['name']]);
 $breadcrumbs->push([
-    'url' => $request->url,
+    'uri' => $request->uri,
     'name' => $headTitle,
 ]);
 

@@ -28,8 +28,16 @@ class Database
      */
     public function __destruct()
     {
-        if ($this->pdo->inTransaction() and error_get_last() === null) {
+        if (!$this->pdo->inTransaction()) {
+            return;
+        }
+        
+        if (error_get_last() === null) {
             $this->pdo->commit();
+            logger('[DATABASE] Commit');
+        } else {
+            $this->pdo->rollBack();
+            logger('[DATABASE] RollBack');
         }
     }
 

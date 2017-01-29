@@ -87,7 +87,7 @@ abstract class AbstractQuery
         return $this;
     }
 
-    public function sort($column, $order)
+    public function order($column, $order)
     {
         Assert::column($column);
 

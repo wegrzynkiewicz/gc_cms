@@ -26,4 +26,4 @@ foreach ($nodes as $node_id) {
 }
 
 setNotice($trans('Nowy wpis "%s" została utworzony.', [$_POST['name']]));
-redirect($breadcrumbs->getLast('url'));
+redirect($breadcrumbs->getLast('uri'));

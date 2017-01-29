@@ -24,13 +24,13 @@
             <?php foreach ($images as $image_id => $image): ?>
                 <?php $is = json_decode($image['settings'], true); ?>
                 <div class="col-md-<?=$colWidth?>">
-                    <a href="<?=e($image['url'])?>"
+                    <a href="<?=e($image['uri'])?>"
                         target="_blank"
                         title="<?=e($image['name'])?>"
                         data-photoswipe-item=""
                         data-width="<?=e($is['width'])?>"
                         data-height="<?=e($is['height'])?>">
-                        <img data-thumb="<?=GC\Thumb::lazyGenerate($image['url'])?>"
+                        <img data-thumb="<?=GC\Thumb::lazyGenerate($image['uri'])?>"
                             width="100%"
                             alt="<?=e($image['name'])?>"
                             class="img-responsive">

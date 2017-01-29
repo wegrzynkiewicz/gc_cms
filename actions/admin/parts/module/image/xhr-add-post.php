@@ -10,7 +10,7 @@ foreach ($_POST['urls'] as $url) {
     ];
 
     GC\Model\Module\File::insertWithModuleId([
-        'url' => $uri->upload($url),
+        'uri' => $uri->upload($url),
         'settings' => json_encode($settings),
     ], $module_id);
 }

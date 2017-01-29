@@ -14,4 +14,4 @@ GC\Model\Page::insert([
 
 setNotice($trans('Nowa strona "%s" została utworzona.', [$_POST['name']]));
 
-redirect($breadcrumbs->getLast('url'));
+redirect($breadcrumbs->getLast('uri'));

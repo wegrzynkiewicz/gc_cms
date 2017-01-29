@@ -6,13 +6,12 @@ if (!$config['debug']['enabled']) {
 }
 
 # utworzenie obiektu reprezentującego pracownika, sprawdza czy jest zalogowany
-GC\Auth\Staff::startSession();
 $staff = GC\Auth\Staff::createFromSession();
-GC\Data::set('staff', $staff);
-
+$config['instance']['staff'] = $staff;
+/*
 # stworzenie i weryfikacja tokenu CSRF
 $tokenCSRF = new GC\Auth\CSRFToken();
-GC\Data::set('tokenCSRF', $tokenCSRF);
+GC\Data::set('tokenCSRF', $tokenCSRF);*/
 
 # panel roota jest dostępny tylko dla pracowników z polem 'root'
 if (!$staff['root']) {
@@ -21,7 +20,7 @@ if (!$staff['root']) {
 
 $breadcrumbs = new GC\Breadcrumbs();
 $breadcrumbs->push([
-    'url' => '/admin',
+    'uri' => '/admin',
     'name' => 'Dashboard',
     'icon' => 'dashboard',
 ]);

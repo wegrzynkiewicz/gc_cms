@@ -12,4 +12,4 @@ GC\Model\Module\Module::updateByPrimaryId($module_id, [
 
 setNotice($trans('Moduł formularza został zaktualizowany.'));
 
-redirect($breadcrumbs->getBeforeLast('url'));
+redirect($breadcrumbs->getBeforeLast('uri'));

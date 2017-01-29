@@ -5,4 +5,4 @@ GC\Model\Module\Module::updateByPrimaryId($module_id, [
     'theme' => 'default',
 ]);
 
-redirect($breadcrumbs->getBeforeLast('url'));
+redirect($breadcrumbs->getBeforeLast('uri'));

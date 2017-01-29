@@ -2,6 +2,6 @@
 
 $headTitle = $trans('Edycja modułu tekstowego');
 $breadcrumbs->push([
-    'url' => $uri->mask('/edit'),
+    'uri' => $uri->mask('/edit'),
     'name' => $headTitle,
 ]);

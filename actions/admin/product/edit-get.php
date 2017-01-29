@@ -10,7 +10,7 @@ $product = GC\Model\Product\Product::select()
 
 $headTitle = $trans('Edytowanie produktu "%s"', [$product['name']]);
 $breadcrumbs->push([
-    'url' => $request->url,
+    'uri' => $request->uri,
     'name' => $headTitle,
 ]);
 

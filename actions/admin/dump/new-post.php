@@ -1,4 +1,4 @@
 <?php
 
 GC\Storage\Backup::make($_POST['name']);
-redirect($breadcrumbs->getLast('url'));
+redirect($breadcrumbs->getLast('uri'));

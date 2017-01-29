@@ -7,14 +7,14 @@
     <div class="thumbnail">
 
         <div class="thumb-wrapper">
-            <a href="<?=e($image['url'])?>"
+            <a href="<?=e($image['uri'])?>"
                 target="_blank"
                 title="<?=e($image['name'])?>"
                 data-photoswipe-item=""
                 data-width="<?=e($is['width'])?>"
                 data-height="<?=e($is['height'])?>"
                 class="thumb-wrapper">
-                <img src="<?=GC\Thumb::make($image['url'], 300, 200)?>"
+                <img src="<?=GC\Thumb::make($image['uri'], 300, 200)?>"
                     alt="<?=e($image['name'])?>"
                     class="img-responsive">
             </a>

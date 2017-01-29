@@ -3,7 +3,7 @@
 $headTitle = $trans('Kopie zapasowe');
 $uri->extendMask('/dump%s');
 $breadcrumbs->push([
-    'url' => $uri->mask('/list'),
+    'uri' => $uri->mask('/list'),
     'name' => $headTitle,
     'icon' => 'database',
 ]);

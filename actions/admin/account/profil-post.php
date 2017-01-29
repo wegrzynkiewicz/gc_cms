@@ -1,8 +1,8 @@
 <?php
 
-$staff_id = GC\Data::get('staff')['staff_id'];
+$staff_id = $staff['staff_id'];
 GC\Model\Staff\Staff::updateByPrimaryId($staff_id, [
     'lang' => post('lang'),
 ]);
 
-redirect($breadcrumbs->getBeforeLast('url'));
+redirect($breadcrumbs->getBeforeLast('uri'));

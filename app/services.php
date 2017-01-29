@@ -17,6 +17,7 @@ if (!$generated) {
 
 # załadowanie pliku konfiguracyjnego
 $config = require __DIR__.'/config/config.php';
+$config['instance']['config'] = &$config;
 
 # serwis logowania do pliku lub atrapa
 $logger =

@@ -2,6 +2,6 @@
 
 $headTitle = $trans('Moduły zakładki "%s"', [$item['name']]);
 $breadcrumbs->push([
-    'url' => $uri->mask("/list"),
+    'uri' => $uri->mask("/list"),
     'name' => $headTitle,
 ]);

@@ -13,7 +13,7 @@ $frame_id = $product['frame_id'];
 $headTitle = $trans('Moduły produktu "%s"', [$product['name']]);
 $uri->extendMask("/{$product_id}/module%s");
 $breadcrumbs->push([
-    'url' => $uri->mask('/list'),
+    'uri' => $uri->mask('/list'),
     'name' => $headTitle,
 ]);
 

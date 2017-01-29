@@ -31,4 +31,4 @@ foreach ($nodes as $node_id) {
 }
 
 setNotice($trans('Produkt "%s" został zaktualizowany.', [$product['name']]));
-redirect($breadcrumbs->getLast('url'));
+redirect($breadcrumbs->getLast('uri'));

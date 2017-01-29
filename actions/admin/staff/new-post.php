@@ -24,4 +24,4 @@ $mail->buildTemplate(
 $mail->addAddress($_POST['email']);
 $mail->send();
 
-redirect($breadcrumbs->getLast('url'));
+redirect($breadcrumbs->getLast('uri'));

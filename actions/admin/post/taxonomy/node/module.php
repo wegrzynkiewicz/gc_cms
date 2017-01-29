@@ -6,7 +6,7 @@ $frame_id = $node['frame_id'];
 $headTitle = $trans('Moduły w węźle "%s"', [$node['name']]);
 $uri->extendMask("/{$node_id}/module%s");
 $breadcrumbs->push([
-    'url' => $uri->mask('/list'),
+    'uri' => $uri->mask('/list'),
     'name' => $headTitle,
 ]);
 

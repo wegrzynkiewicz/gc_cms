@@ -6,7 +6,7 @@ $frame_id = $post['frame_id'];
 $headTitle = $trans('Moduły w poście "%s"', [$post['name']]);
 $uri->extendMask("/{$post_id}/module%s");
 $breadcrumbs->push([
-    'url' => $uri->mask('/list'),
+    'uri' => $uri->mask('/list'),
     'name' => $headTitle,
 ]);
 

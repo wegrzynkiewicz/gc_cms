@@ -17,4 +17,4 @@ GC\Model\Form\Position::insert([
 ]);
 
 setNotice($trans('Pole "%s" zostało utworzone.', [$_POST['name']]));
-redirect($breadcrumbs->getLast('url'));
+redirect($breadcrumbs->getLast('uri'));

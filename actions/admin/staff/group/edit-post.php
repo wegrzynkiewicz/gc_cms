@@ -6,4 +6,4 @@ GC\Model\Staff\Group::updateByPrimaryId($group_id, [
 ]);
 GC\Model\Staff\Group::updatePermissions($group_id, post('permissions'));
 
-redirect($breadcrumbs->getLast('url'));
+redirect($breadcrumbs->getLast('uri'));

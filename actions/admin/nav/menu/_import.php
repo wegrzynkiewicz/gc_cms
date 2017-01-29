@@ -11,6 +11,6 @@ $nav = GC\Model\Menu\Taxonomy::select()
 $headTitle = $trans('%s - węzły', [$nav['name']]);
 $uri->extendMask("/{$nav_id}/menu%s");
 $breadcrumbs->push([
-    'url' => $uri->mask('/tree'),
+    'uri' => $uri->mask('/tree'),
     'name' => $headTitle,
 ]);

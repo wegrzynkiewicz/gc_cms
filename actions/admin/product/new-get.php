@@ -2,7 +2,7 @@
 
 $headTitle = $trans('Dodawanie nowego produktu');
 $breadcrumbs->push([
-    'url' => $request->url,
+    'uri' => $request->uri,
     'name' => $headTitle,
 ]);
 

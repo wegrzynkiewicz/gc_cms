@@ -2,7 +2,7 @@
 
 $headTitle = $trans('Dodawanie nowej grupy pracowników');
 $breadcrumbs->push([
-    'url' => $request->url,
+    'uri' => $request->uri,
     'name' => $headTitle,
 ]);
 $permissions = [];

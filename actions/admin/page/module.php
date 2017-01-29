@@ -6,7 +6,7 @@ $frame_id = $page['frame_id'];
 $headTitle = $trans('Moduły na stronie "%s"', [$page['name']]);
 $uri->extendMask("/{$page_id}/module%s");
 $breadcrumbs->push([
-    'url' => $uri->mask('/list'),
+    'uri' => $uri->mask('/list'),
     'name' => $headTitle,
 ]);
 

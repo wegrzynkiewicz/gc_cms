@@ -38,21 +38,21 @@ while (count($_SEGMENTS) > 0) {
     # jeżeli istnieje plik "import" to załaduj, ale nie kończ pętli
     $file = "{$path}/{$segment}/_import.php";
     if (file_exists($file)) {
-        logger('[IMPORT]', [$file]);
+        logger("[IMPORT] {$file}");
         require $file;
     }
 
     # jeżeli istnieje plik z metodą requesta na początku, załaduj
     $file = "{$path}/{$segment}-{$request->method}.php";
     if (file_exists($file)) {
-        logger('[ROUTING] Nested with method', [$file]);
+        logger("[ROUTING] Nested with method {$file}");
         return require $file;
     }
 
     # jeżeli istnieje plik, wtedy załaduj
     $file = "{$path}/{$segment}.php";
     if (file_exists($file)) {
-        logger('[ROUTING] Nested without method', [$file]);
+        logger("[ROUTING] Nested without method {$file}");
         return require $file;
     }
 
@@ -66,7 +66,7 @@ while (count($_SEGMENTS) > 0) {
     # jeżeli nie istnieje akcja to spróbuj załadować plik start
     $file = "{$path}/{$segment}/start.php";
     if (file_exists($file)) {
-        logger('[ROUTING] Start', [$file]);
+        logger("[ROUTING] Start {$file}");
         return require $file;
     }
 }
@@ -80,7 +80,7 @@ $absoluteSlug = '/'.implode('/', $_SEGMENTS);
 # jeżeli istnieje niestandardowy plik w folderze z szablonem
 $file = TEMPLATE_PATH."/custom/{$slug}.html.php";
 if (file_exists($file)) {
-    logger('[ROUTING] Custom slug', [$file]);
+    logger("[ROUTING] Custom slug {$file}");
     return require $file;
 }
 
@@ -96,7 +96,7 @@ if ($id <= 0) {
 # jeżeli istnieje niestandardowy plik w folderze z szablonem
 $file = TEMPLATE_PATH."/custom/{$id}.html.php";
 if (file_exists($file)) {
-    logger('[ROUTING] Custom ID');
+    logger("[ROUTING] Custom ID {$file}");
     return require $file;
 }
 

@@ -13,14 +13,14 @@ class Request
     public $method = '';
     public $rootUrl = '';
     public $frontControllerUrl = '';
-    public $mask = '';
+    public $mask = '%s';
 
     public function __construct($method, $uri, $script)
     {
         # pobierz wszystkie najistotniejsze informacje o żądaniu
         $rootUrl = dirname($script);
         $rawRequest = $uri;
-        $this->uri = '/'.trim(parse_url($rawRequest, \PHP_URL_PATH), '/');
+        $this->uri = parse_url($rawRequest, \PHP_URL_PATH);
         $this->method = strtolower($method);
 
         logger('[REQUEST] '.strtoupper($method).' '.$this->uri, $_REQUEST);
@@ -79,7 +79,7 @@ class Request
             return $path;
         }
 
-        return $this->rootUrl.$this->frontControllerUrl.$path;
+        return rtrim($this->rootUrl.$this->frontControllerUrl.$path, '/');
     }
 
     /**

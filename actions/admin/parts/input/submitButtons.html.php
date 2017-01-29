@@ -1,5 +1,5 @@
 <?php
-$cancelHref = isset($cancelHref) ? $cancelHref : GC\Data::get('breadcrumbs')->getBeforeLast('url');
+$cancelHref = isset($cancelHref) ? $cancelHref : $breadcrumbs->getBeforeLast('uri');
 ?>
 
 <div class="row" style="margin-top:20px">

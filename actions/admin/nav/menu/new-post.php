@@ -7,4 +7,4 @@ GC\Model\Menu\Menu::insertWithNavId([
     'target' => isset($_POST['target']) ? $_POST['target'] : '_self',
 ], $nav_id);
 
-redirect($breadcrumbs->getLast('url'));
+redirect($breadcrumbs->getLast('uri'));

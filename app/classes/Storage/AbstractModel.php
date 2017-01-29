@@ -13,23 +13,6 @@ use GC\Storage\Query;
  */
 abstract class AbstractModel extends AbstractEntity
 {
-    public static function delete()
-    {
-        return new Query\Delete(static::class);
-    }
-
-    /**
-     * Buduje i wykonuje zapytanie INSERT dla zadanych danych
-     */
-    public static function insert(array $data)
-    {
-        list($columns, $values) = static::buildInsertSyntax($data);
-        $sql = static::sql("INSERT INTO ::table ({$columns}) VALUES ({$values})");
-        $row_id = Database::getInstance()->insert($sql, array_values($data));
-
-        return $row_id;
-    }
-
     /**
      * Wyszukuje w zapytaniu fraz :: i podstawia odpowiednie wartości statycznych pol klas.
      */
@@ -44,13 +27,37 @@ abstract class AbstractModel extends AbstractEntity
         }, $pseudoQuery);
     }
 
+    public static function delete()
+    {
+        return new Query\Delete(static::class);
+    }
+
+    /**
+     * Buduje i wykonuje zapytanie INSERT dla zadanych danych
+     */
+    public static function insert(array $data)
+    {
+        $filled = array_fill(0, count($data), '?');
+        $values = implode(', ', $filled);
+        $columns = implode(', ', array_keys($data));
+
+        $sql = static::sql("INSERT INTO ::table ({$columns}) VALUES ({$values})");
+        $row_id = Database::getInstance()->insert($sql, array_values($data));
+
+        return $row_id;
+    }
+
     /**
      * Buduje i wykonuje zapytanie REPLACE dla zadanych danych
      */
     public static function replace(array $data)
     {
-        list($columns, $values) = static::buildInsertSyntax($data);
+        $filled = array_fill(0, count($data), '?');
+        $values = implode(', ', $filled);
+        $columns = implode(', ', array_keys($data));
+
         $sql = static::sql("REPLACE INTO ::table ({$columns}) VALUES ({$values})");
+
         Database::getInstance()->execute($sql, array_values($data));
     }
 
@@ -62,19 +69,5 @@ abstract class AbstractModel extends AbstractEntity
     public static function update()
     {
         return new Query\Update(static::class);
-    }
-
-    protected static function buildInsertSyntax(array $data)
-    {
-        $filled = array_fill(0, count($data), '?');
-        $values = implode(', ', $filled);
-
-        $columns = array_keys($data);
-        array_map(function($column){
-            Assert::column($column);
-        }, $columns);
-        $columns = implode(', ', $columns);
-
-        return [$columns, $values];
     }
 }

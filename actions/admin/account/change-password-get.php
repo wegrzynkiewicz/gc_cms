@@ -2,7 +2,7 @@
 
 $headTitle = $trans('Zmiana hasła');
 $breadcrumbs->push([
-    'url' => $request->url,
+    'uri' => $request->uri,
     'name' => $headTitle,
     'icon' => 'unlock-alt',
 ]);

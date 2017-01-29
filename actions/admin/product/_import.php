@@ -2,8 +2,9 @@
 
 $headTitle = $trans('Produkty');
 $uri->extendMask('/product%s');
+print_r($uri);
 $breadcrumbs->push([
-    'url' => $uri->mask('/list'),
+    'uri' => $uri->mask('/list'),
     'name' => $headTitle,
     'icon' => 'shopping-basket',
 ]);

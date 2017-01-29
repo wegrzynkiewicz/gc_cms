@@ -1,6 +1,6 @@
 <?php
 
-if ($session->cookieExists()) {
+if (GC\Auth\Staff::existsSessionCookie()) {
     redirect('/admin');
 }
 
@@ -31,6 +31,7 @@ if (passwordNeedsRehash($user['password'])) {
     ]);
 }
 
-$session->create($user['staff_id']);
+GC\Auth\Staff::createSession($user['staff_id']);
+
 GC\Storage\Backup::make(sprintf('Po zalogowaniu użytkownika %s', $user['name']));
 redirect('/admin');

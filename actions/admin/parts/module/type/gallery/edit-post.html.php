@@ -11,4 +11,4 @@ GC\Model\Module\Module::updateByPrimaryId($module_id, [
 
 setNotice($trans('Moduł galerii zdjęć został zaktualizowany.'));
 
-redirect($breadcrumbs->getBeforeLast('url'));
+redirect($breadcrumbs->getBeforeLast('uri'));

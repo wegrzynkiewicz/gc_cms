@@ -17,8 +17,13 @@ $httpHost = server('HTTP_HOST', 'localhost');
 $protocol = 'http'.(stripos(server('SERVER_PROTOCOL', 'http'), 'https') === true ? 's' : '');
 $www = substr($httpHost, 0, 4) === 'www.' ? 'www.' : '';
 $domain = server('SERVER_NAME', $httpHost);
-$requestUri = rtrim(server('REQUEST_URI'), '/');
+$requestUri = server('REQUEST_URI');
+$parsed = parse_url($requestUri);
+$path = $parsed['path'];
+$query = def($parsed, 'query');
 $port = intval(server('SERVER_PORT', 80));
+
+$requestUri = $requestUri === '/' ? '' : $requestUri;
 $currentUrl = $protocol.'://'.$httpHost.$requestUri;
 
 # sprawdzenie czy adres który wpisał odbiorca zgadza się z polityką seo
@@ -39,7 +44,11 @@ if ($seoConfig['forcePort'] !== null and $port !== $seoConfig['forcePort']) {
 }
 
 $targetPort = $port === 80 ? '' : ":{$port}";
-$targetUrl = $protocol.'://'.$www.$domain.$targetPort.$requestUri;
+$targetPath = rtrim($path, '/');
+$targetUrl = $protocol.'://'.$www.$domain.$targetPort.$targetPath.'?'.$query;
+
+# targetUrl nie powinien zawierać ? na końcu
+$targetUrl = rtrim($targetUrl, '?');
 
 # przekierowanie na docelowy adres, pomocne przy seo
 if ($currentUrl !== $targetUrl) {

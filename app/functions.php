@@ -27,6 +27,19 @@ function logger($message, array $params = [])
     return $config['instance']['logger']->info($message, $params);
 }
 
+function dd($mixed = null)
+{
+    $backtrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT);
+    $execution = array_shift($backtrace);
+
+    logger(sprintf('[DUMP] %s:%s - %s %s',
+        $execution['file'],
+        $execution['line'],
+        gettype($mixed),
+        print_r($mixed, true)
+    ));
+}
+
 function purifyHtml($dirtyHtml)
 {
     $config = HTMLPurifier_Config::createDefault();
@@ -510,44 +523,6 @@ function verifyPassword($securePassword, $passwordHash)
 function saltPassword($securePassword)
 {
     return $securePassword.getConfig()['password']['staticSalt'];
-}
-
-function getVisitorIP()
-{
-    if (!empty($_SERVER['HTTP_CLIENT_IP']) && Validate::ip($_SERVER['HTTP_CLIENT_IP'])) {
-        return $_SERVER['HTTP_CLIENT_IP'];
-    }
-
-    if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        if (strpos($_SERVER['HTTP_X_FORWARDED_FOR'], ',') !== false) {
-            $iplist = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
-            foreach ($iplist as $ip) {
-                if (Validate::ip($ip)) {
-                    return $ip;
-                }
-            }
-        } elseif (Validate::ip($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            return $_SERVER['HTTP_X_FORWARDED_FOR'];
-        }
-    }
-
-    if (!empty($_SERVER['HTTP_X_FORWARDED']) && Validate::ip($_SERVER['HTTP_X_FORWARDED'])) {
-        return $_SERVER['HTTP_X_FORWARDED'];
-    }
-
-    if (!empty($_SERVER['HTTP_X_CLUSTER_CLIENT_IP']) && Validate::ip($_SERVER['HTTP_X_CLUSTER_CLIENT_IP'])) {
-        return $_SERVER['HTTP_X_CLUSTER_CLIENT_IP'];
-    }
-
-    if (!empty($_SERVER['HTTP_FORWARDED_FOR']) && Validate::ip($_SERVER['HTTP_FORWARDED_FOR'])) {
-        return $_SERVER['HTTP_FORWARDED_FOR'];
-    }
-
-    if (!empty($_SERVER['HTTP_FORWARDED']) && Validate::ip($_SERVER['HTTP_FORWARDED'])) {
-        return $_SERVER['HTTP_FORWARDED'];
-    }
-
-    return $_SERVER['REMOTE_ADDR'];
 }
 
 /**

@@ -1,6 +1,6 @@
 <?php
 
-if ($session->cookieExists()) {
+if (GC\Auth\Staff::existsSessionCookie()) {
     redirect('/admin');
 }
 

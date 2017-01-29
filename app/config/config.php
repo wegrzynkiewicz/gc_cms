@@ -21,6 +21,7 @@ ini_set('error_log', ROOT_PATH.'/tmp/logs/'.date('Y-m-d').'.error.log'); # zmien
 ini_set('max_execution_time', 300); # określa maksymalny czas trwania skryptu
 ini_set('date.timezone', 'Europe/Warsaw'); # ustawienie domyślnej strefy czasowej
 ini_set('session.name', $generated['session.visitor.cookie.name']); # zmiana nazwy ciastka sesyjnego
+ini_set('session.gc_probability', 10); # częstotliwość z jaką następuje czyszczenie sesji
 ini_set('session.use_trans_sid', 0);
 ini_set('session.use_strict_mode', 1);
 ini_set('session.cookie_httponly', 1); # ustawia ciastko tylko do odczytu, nie jest możliwe odczyt document.cookie w js
@@ -57,14 +58,18 @@ return [
     ],
     'session' => [ # ustawienia sesji
         'staff' => [ # ustawienia sesji dla pracownika
+            'useCustomStorage' => false, # ustawienie niestandardowego sposobu przechowywania sesji
+            'lifetime' => 1800, # czas jaki musi upłynąć po zalogowaniu, aby sesja pracownika przedawniła się; w sekundach
             'cookie' => [ # ustawienia ciastka sesyjnego
                 'name' => $generated['session.staff.cookie.name'], # nazwa ciastka sesyjnego dla pracownika
-                'lifetime' => 1800, # czas jaki musi upłynąć po zalogowaniu, aby wylogowało pracownika z automatu, w sekundach
+                'lifetime' => 3600, # czas jaki musi upłynąć po zalogowaniu, aby ciastko przestało być ważne; w sekundach
             ],
         ],
         'visitor' => [ # ustawienia sesji dla odwiedzającego
+            'lifetime' => 1800, # czas jaki musi upłynąć po zalogowaniu, aby sesja odwiedzającego przedawniła się; w sekundach
             'cookie' => [ # ustawienia ciastka sesyjnego
                 'name' => $generated['session.visitor.cookie.name'], # nazwa ciastka sesyjnego dla odwiedzającego
+                'lifetime' => 3600, # czas jaki musi upłynąć po zalogowaniu, aby ciastko przestało być ważne; w sekundach
             ],
         ],
     ],

@@ -21,4 +21,4 @@ foreach ($positions as $menu) {
 }
 
 setNotice($trans('Pozycja węzłów została zapisana.'));
-redirect($breadcrumbs->getLast('url'));
+redirect($breadcrumbs->getLast('uri'));

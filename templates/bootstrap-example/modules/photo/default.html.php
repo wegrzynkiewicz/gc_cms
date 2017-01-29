@@ -1,4 +1,4 @@
-<?php $preview = $uri->root(def($settings, 'url', '')) ?>
+<?php $preview = $uri->root(def($settings, 'uri', '')) ?>
 
 <div id="photo_<?=e($module_id)?>" class="text-center" data-gallery="photoswipe">
     <a href="<?=e($preview)?>"

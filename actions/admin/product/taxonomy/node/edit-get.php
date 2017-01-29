@@ -10,7 +10,7 @@ $node = GC\Model\Product\Node::select()
 
 $headTitle = $trans('Edycja węzła "%s"', [$node['name']]);
 $breadcrumbs->push([
-    'url' => $request->url,
+    'uri' => $request->uri,
     'name' => $headTitle,
 ]);
 

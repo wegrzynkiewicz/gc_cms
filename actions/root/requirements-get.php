@@ -2,7 +2,7 @@
 
 $headTitle = "Wymagania systemowe";
 $breadcrumbs->push([
-    'url' => '/root/requirements',
+    'uri' => '/root/requirements',
     'name' => $headTitle,
 ]);
 

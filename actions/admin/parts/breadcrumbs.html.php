@@ -20,10 +20,10 @@
     <?php if (count($links)): ?>
         <ol class="breadcrumb">
             <?php foreach ($links as $i => $link): ?>
-                <?php $isLink = !(empty($link['url']) or $link['url'] == $request->url); ?>
+                <?php $isLink = !(empty($link['uri']) or $link['uri'] == $request->uri); ?>
                 <li class="<?=$isLink ? '' : 'active'?>">
                     <?php if ($isLink): ?>
-                        <a href="<?=$link['url']?>">
+                        <a href="<?=$link['uri']?>">
                     <?php endif ?>
                         <?php if (isset($link['icon'])): ?>
                             <i class="fa fa-<?=$link['icon']?> fa-fw"></i>

@@ -11,4 +11,4 @@ GC\Model\Module\Frame::updateByFrameId($node['frame_id'], [
 
 setNotice($trans('Węzeł "%s" został zaktualizowany.', [$node['name']]));
 
-redirect($breadcrumbs->getLast('url'));
+redirect($breadcrumbs->getLast('uri'));

@@ -2,13 +2,7 @@
 
 /* Plik ładowany przed każdą akcją w panelu admina */
 
-$session = new GC\Auth\StaffSession();
-$session->start();
-$session->redirectIfNonExists();
-$config['instance']['session'] = $session;
-
-# utworzenie obiektu reprezentującego pracownika
-$staff = new GC\Auth\Staff();
+$staff = GC\Auth\Staff::createFromSession();
 $config['instance']['staff'] = $staff;
 
 $uri->extendMask('/admin%s');
@@ -16,7 +10,7 @@ $uri->extendMask('/admin%s');
 # utworzenie okruszków chleba dla całego panelu admina
 $breadcrumbs = new GC\Breadcrumbs();
 $breadcrumbs->push([
-    'url' => $uri->mask(),
+    'uri' => $uri->mask('/'),
     'name' => 'Dashboard',
     'icon' => 'dashboard',
 ]);
