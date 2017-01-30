@@ -38,6 +38,19 @@ class Staff extends AbstractEntity
     }
 
     /**
+     * Zwraca język edycji danych
+     */
+    public function getEditorLang()
+    {
+        # jeżeli w sesji nie ma języka edytora wtedy ustaw go z configa
+        if (isset($_SESSION['langEditor'])) {
+            return $_SESSION['langEditor'];
+        }
+
+        return getConfig()['lang']['editorDefault'];
+    }
+
+    /**
      * Sprawdza czy pracownik ma uprawnienia do wykonania zadanych akcji
      */
     public function hasPermissions(array $requiredPermissions = [])
@@ -216,18 +229,5 @@ class Staff extends AbstractEntity
             'session_id' => session_id(),
             'expiry_datetime' => sqldate(time() + static::$config['lifetime']),
         ]);
-    }
-
-    /**
-     * Zwraca język edycji danych
-     */
-    public static function getEditorLang()
-    {
-        # jeżeli w sesji nie ma języka edytora wtedy ustaw go z configa
-        if (isset($_SESSION['staff']['langEditor'])) {
-            return $_SESSION['staff']['langEditor'];
-        }
-
-        return getConfig()['lang']['editorDefault'];
     }
 }

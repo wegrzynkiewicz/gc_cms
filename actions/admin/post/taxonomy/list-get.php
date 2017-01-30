@@ -2,7 +2,7 @@
 
 $tax_id = intval(array_shift($_PARAMETERS));
 $taxonomies = GC\Model\Post\Taxonomy::select()
-    ->equals('lang', GC\Auth\Staff::getEditorLang())
+    ->equals('lang', $staff->getEditorLang())
     ->order('name')
     ->fetchByPrimaryKey();
 
@@ -16,7 +16,7 @@ $taxonomies = GC\Model\Post\Taxonomy::select()
             <?php if (empty($taxonomies)): ?>
                 <?=$trans('Nie znaleziono podziałów wpisów w języku: ')?>
                 <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
-                    'lang' => GC\Auth\Staff::getEditorLang(),
+                    'lang' => $staff->getEditorLang(),
                 ])?>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">

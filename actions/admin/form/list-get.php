@@ -1,7 +1,7 @@
 <?php
 
 $forms = GC\Model\Form\Form::select()
-    ->equals('lang', GC\Auth\Staff::getEditorLang())
+    ->equals('lang', $staff->getEditorLang())
     ->order('name', 'ASC')
     ->fetchByPrimaryKey();
 
@@ -20,7 +20,7 @@ $counts = GC\Model\Form\Sent::select()
             <?php if (empty($forms)): ?>
                 <?=$trans('Nie znaleziono żadnego formularza w języku: ')?>
                 <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
-                    'lang' => GC\Auth\Staff::getEditorLang(),
+                    'lang' => $staff->getEditorLang(),
                 ])?>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">

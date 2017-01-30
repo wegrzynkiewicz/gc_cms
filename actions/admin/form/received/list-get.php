@@ -16,7 +16,7 @@ $count = GC\Model\Form\Sent::select()
             <?php if ($count == 0): ?>
                 <?=$trans('Nie znaleziono żadnego wysłanego formularza w języku: ')?>
                 <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
-                    'lang' => GC\Auth\Staff::getEditorLang(),
+                    'lang' => $staff->getEditorLang(),
                 ])?>
             <?php else: ?>
                 <form action="" method="post" id="form" class="form-horizontal">

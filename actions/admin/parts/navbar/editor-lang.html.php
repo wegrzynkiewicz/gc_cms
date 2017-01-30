@@ -8,7 +8,7 @@ $langs = $config['langs'];
                 <?=$trans('Edytuj: ')?>
             </span>
             <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
-                'lang' => GC\Auth\Staff::getEditorLang(),
+                'lang' => $staff->getEditorLang(),
             ])?>
             <b class="caret"></b>
         </a>

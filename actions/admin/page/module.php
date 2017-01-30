@@ -1,6 +1,10 @@
 <?php
 
-$page = GC\Model\Page::selectWithFrameByPrimaryId($page_id);
+$page = GC\Model\Page::select()
+    ->source('::frame')
+    ->equals('page_id', $page_id)
+    ->fetch();
+
 $frame_id = $page['frame_id'];
 
 $headTitle = $trans('Moduły na stronie "%s"', [$page['name']]);

@@ -4,7 +4,12 @@ if ($menu_id) {
     $_POST = GC\Model\Menu\Menu::fetchByPrimaryId($menu_id);
 }
 
-$pageOptions = GC\Model\Page::mapFramesWithPrimaryKeyBy('name');
+# pobierz strony gdzie kluczem jest $page_id, a elementem nazwa strony
+$pageOptions = GC\Model\Page::select()
+    ->source('::frame')
+    ->equals('lang', $staff->getEditorLang())
+    ->order('name', 'ASC')
+    ->fetchByMap('page_id', 'name');
 
 ?>
 

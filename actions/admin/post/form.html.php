@@ -1,7 +1,7 @@
 <?php
 
 $taxonomies = GC\Model\Post\Taxonomy::select()
-    ->equals('lang', GC\Auth\Staff::getEditorLang())
+    ->equals('lang', $staff->getEditorLang())
     ->order('name')
     ->fetchByPrimaryKey();
 

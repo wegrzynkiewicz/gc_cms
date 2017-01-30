@@ -1,7 +1,7 @@
 <?php
 
 $widgets = GC\Model\Widget::select()
-    ->equals('lang', GC\Auth\Staff::getEditorLang())
+    ->equals('lang', $staff->getEditorLang())
     ->order('name', 'ASC')
     ->fetchByPrimaryKey();
 
@@ -15,7 +15,7 @@ $widgets = GC\Model\Widget::select()
             <?php if (empty($widgets)): ?>
                 <?=$trans('Nie znaleziono żadnych widżetów w języku: ')?>
                 <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
-                    'lang' => GC\Auth\Staff::getEditorLang(),
+                    'lang' => $staff->getEditorLang(),
                 ])?>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">

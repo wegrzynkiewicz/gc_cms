@@ -11,7 +11,11 @@ if ($page_id <= 0) {
     return require TEMPLATE_PATH."/errors/404.html.php";
 }
 
-$page = GC\Model\Page::selectWithFrameByPrimaryId($page_id);
+$page = GC\Model\Page::select()
+    ->source('::frame')
+    ->equals('page_id', $page_id)
+    ->fetch();
+
 $frame = $page;
 $frame_id = $page['frame_id'];
 

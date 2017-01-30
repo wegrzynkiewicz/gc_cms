@@ -7,7 +7,6 @@ $generated = @include __DIR__.'/storage/generated.php';
 if (!$generated) {
     $generated = [
         'password.salt' => GC\Auth\Password::random(40),
-        'csrf.secretKey' => GC\Auth\Password::random(40),
         'csrf.cookieName' => GC\Auth\Password::random(40),
         'session.staff.cookie.name' => GC\Auth\Password::random(40),
         'session.visitor.cookie.name' => GC\Auth\Password::random(40),

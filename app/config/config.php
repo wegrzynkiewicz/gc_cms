@@ -113,7 +113,6 @@ return [
     ],
     'csrf' => [ # zawiera konfiguracje tokenu csrf
         'lifetime' => 1800, # czas po którym token jest nieważny
-        'secretKey' => $generated['csrf.secretKey'], # klucz, za pomocą którego walidowany jest token
         'cookieName' => $generated['csrf.cookieName'], # nazwa ciastka, które przechowuje token CSRF
     ],
     'reCaptcha' => [ # zawiera konfiguracje dla recaptchy od googla

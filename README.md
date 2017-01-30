@@ -6,8 +6,7 @@
 * Użycie nagłówka X-Content-Type-Options: nosniff - _Zabrania zgadywania typu MIME_
 * Użycie nagłówka X-XSS-Protection: 1; mode=block - _Chroni przed XSS_
 * Nadanie session.cookie_httponly = 1, flaga HttpOnly
-* Codzienna zmiana nazwy ciastka sesyjnego
-* Generowanie unikatowego tokena CSRF w obrębie sesji
+* Generowanie unikatowego tokena CSRF za każdym żądaniem
 
 # TODO #
 * Usuwanie przestarzałych kopii zapasowych

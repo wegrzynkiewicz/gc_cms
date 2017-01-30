@@ -17,7 +17,7 @@
 
             <?=render(ACTIONS_PATH.'/admin/parts/sidebar/items.html.php', [
                 'menu' => $menu,
-                'attr' => 'class="nav nav-second-level"',
+                'attr' => 'class="nav nav-second-level collapse"',
             ])?>
 
         </ul>

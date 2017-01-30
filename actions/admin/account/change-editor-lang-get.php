@@ -4,5 +4,5 @@
 
 $lang = array_shift($_SEGMENTS);
 GC\Assert::installedLang($lang);
-$_SESSION['staff']['langEditor'] = $lang;
+$_SESSION['langEditor'] = $lang;
 redirect('/admin');

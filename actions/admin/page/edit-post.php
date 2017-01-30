@@ -1,6 +1,9 @@
 <?php
 
-$page = GC\Model\Page::selectWithFrameByPrimaryId($page_id);
+$page = GC\Model\Page::select()
+    ->source('::frame')
+    ->equals('page_id', $page_id)
+    ->fetch();
 
 GC\Model\Module\Frame::updateByFrameId($page['frame_id'], [
     'name' => post('name'),

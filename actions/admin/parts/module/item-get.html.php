@@ -4,7 +4,10 @@ $module = GC\Model\Module\Module::fetchByPrimaryId($module_id);
 $moduleType = $module['type'];
 
 $item_id = intval(array_shift($_SEGMENTS));
-$item = GC\Model\Module\Item::selectWithFrameByPrimaryId($item_id);
+$item = GC\Model\Module\Item::select()
+    ->source('::frame')
+    ->equals('item_id', $item_id)
+    ->fetch();
 $frame_id = $item['frame_id'];
 
 $uri->extendMask("/{$module_id}%s");

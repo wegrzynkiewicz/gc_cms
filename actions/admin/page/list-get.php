@@ -1,6 +1,11 @@
 <?php
 
-$pages = GC\Model\Page::selectWithFrames()->fetchByPrimaryKey();
+# pobierz strony wraz z rusztowaniem według języka i posortowane
+$pages = GC\Model\Page::select()
+    ->source('::frame')
+    ->equals('lang', $staff->getEditorLang())
+    ->order('name', 'ASC')
+    ->fetchByPrimaryKey();
 
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
@@ -34,7 +39,7 @@ $pages = GC\Model\Page::selectWithFrames()->fetchByPrimaryKey();
             <?php if (empty($pages)): ?>
                 <?=$trans('Nie znaleziono żadnej strony w języku: ')?>
                 <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
-                    'lang' => GC\Auth\Staff::getEditorLang(),
+                    'lang' => $staff->getEditorLang(),
                 ])?>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">

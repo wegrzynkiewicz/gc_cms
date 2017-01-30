@@ -2,7 +2,7 @@
 
 $headTitle = $trans('Zostałeś wylogowany');
 
-$session->destroy();
+GC\Auth\Staff::destroySession();
 
 require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
 

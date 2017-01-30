@@ -27,7 +27,7 @@ class CSRFToken
     public static function register()
     {
         $config = &getConfig()['csrf'];
-        $tokenString = GC\Auth\Password::random(40);
+        $tokenString = Password::random(40);
         setcookie(
             $config['cookieName'], # cookie name
             $tokenString, # value

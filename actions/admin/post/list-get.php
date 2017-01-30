@@ -3,7 +3,7 @@
 $posts = GC\Model\Post\Post::selectWithFrames()->fetchByPrimaryKey();
 $nodes = GC\Model\Post\Node::selectAllForTaxonomyTree();
 $taxonomies = GC\Model\Post\Taxonomy::select()
-    ->equals('lang', GC\Auth\Staff::getEditorLang())
+    ->equals('lang', $staff->getEditorLang())
     ->fetchByPrimaryKey();
 
 foreach ($nodes as $node) {
@@ -43,7 +43,7 @@ unset($post);
             <?php if (empty($posts)): ?>
                 <?=$trans('Nie znaleziono żadnych wpisów w języku: ')?>
                 <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
-                    'lang' => GC\Auth\Staff::getEditorLang(),
+                    'lang' => $staff->getEditorLang(),
                 ])?>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">

@@ -14,7 +14,7 @@ class Item extends AbstractModel
     public static $primary     = 'item_id';
     public static $joinTable   = '::module_item_pos';
     public static $joinForeign = 'module_id';
-    public static $frame       = '::module_items LEFT JOIN ::frames USING (frame_id)';
+    public static $frame       = '::module_items JOIN ::frames USING (frame_id)';
 
     use PrimaryTrait;
     use JoinTrait;

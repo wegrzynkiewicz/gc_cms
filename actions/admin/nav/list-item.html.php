@@ -5,7 +5,7 @@
             <div style="margin-left:-20px">
                 <?=render(ACTIONS_PATH.'/admin/parts/taxonomy-preview.html.php', [
                     'tree' => $tree,
-                    'taxonomyUrl' => function($path) use ($nav_id) {
+                    'taxonomyUrl' => function($path) use ($nav_id, &$uri) {
                         return $uri->mask("/{$nav_id}/menu{$path}");
                     },
                 ])?>

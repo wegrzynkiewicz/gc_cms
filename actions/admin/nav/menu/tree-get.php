@@ -3,7 +3,7 @@
 # pobierz wszystkie strony
 $pages = GC\Model\Page::select()
     ->source('::frame')
-    ->equals('lang', GC\Auth\Staff::getEditorLang())
+    ->equals('lang', $staff->getEditorLang())
     ->order('name', 'ASC')
     ->fetchByPrimaryKey();
 
