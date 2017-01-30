@@ -473,59 +473,6 @@ function setValueByKeys(array &$array, array $keys, $value)
 }
 
 /**
- * Zwraca pseudo losowy ciąg znaków o zadanej długości
- */
-function randomPassword($length)
-{
-    $string = openssl_random_pseudo_bytes(ceil($length));
-    $string = base64_encode($string);
-    $string = str_replace(['/', '+', '='], '', $string);
-    $string = substr($string, 0, $length);
-
-    return $string;
-}
-
-/**
- * Haszuje wprowadzony ciąg znaków
- */
-function hashPassword($securePassword)
-{
-    return password_hash(
-        saltPassword($securePassword),
-        PASSWORD_DEFAULT,
-        getConfig()['password']['options']
-    );
-}
-
-/**
- * Sprawdza czy hasło potrzebuje zostać zmienione na inne
- */
-function passwordNeedsRehash($passwordHash)
-{
-    return password_needs_rehash(
-        $passwordHash,
-        PASSWORD_DEFAULT,
-        getConfig()['password']['options']
-    );
-}
-
-/**
- * Sprawdza poprawność hasła i hasza
- */
-function verifyPassword($securePassword, $passwordHash)
-{
-    return password_verify(saltPassword($securePassword), $passwordHash);
-}
-
-/**
- * Dodaje indywidualną sól dla każdego serwisu do wprowadzonego hasła
- */
-function saltPassword($securePassword)
-{
-    return $securePassword.getConfig()['password']['staticSalt'];
-}
-
-/**
  * Zapisuje zadane dane do pliku w formie łatwego do odczytu pliku PHP
  */
 function infoIP($ip = null)

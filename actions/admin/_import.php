@@ -2,8 +2,12 @@
 
 /* Plik ładowany przed każdą akcją w panelu admina */
 
+# utworzenie obiektu repezentującego pracownika
 $staff = GC\Auth\Staff::createFromSession();
 $config['instance']['staff'] = $staff;
+
+# weryfikacja tokenu CSRF
+GC\Auth\CSRFToken::routines($request);
 
 $uri->extendMask('/admin%s');
 

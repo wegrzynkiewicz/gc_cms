@@ -1,10 +1,10 @@
 <?php
 
-$password = randomPassword($config['password']['minLength']);
+$password = GC\Auth\Password::random($config['password']['minLength']);
 
 $staff_id = GC\Model\Staff\Staff::insert([
     'name' => post('name'),
-    'password' => hashPassword($password),
+    'password' => GC\Auth\Password::hash($password),
     'email' => post('email'),
     'avatar' => post('avatar'),
     'lang' => $config['lang']['clientDefault'],

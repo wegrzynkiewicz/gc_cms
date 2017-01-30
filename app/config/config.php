@@ -112,7 +112,7 @@ return [
         'headerTitle' => "Panel administracyjny GrafCenter CMS", # wykorzystywane do wyświetlania w panelowych mailach
     ],
     'csrf' => [ # zawiera konfiguracje tokenu csrf
-        'expires' => 1800, # czas po którym token jest nieważny
+        'lifetime' => 1800, # czas po którym token jest nieważny
         'secretKey' => $generated['csrf.secretKey'], # klucz, za pomocą którego walidowany jest token
         'cookieName' => $generated['csrf.cookieName'], # nazwa ciastka, które przechowuje token CSRF
     ],

@@ -8,10 +8,9 @@ if (!$config['debug']['enabled']) {
 # utworzenie obiektu reprezentującego pracownika, sprawdza czy jest zalogowany
 $staff = GC\Auth\Staff::createFromSession();
 $config['instance']['staff'] = $staff;
-/*
-# stworzenie i weryfikacja tokenu CSRF
-$tokenCSRF = new GC\Auth\CSRFToken();
-GC\Data::set('tokenCSRF', $tokenCSRF);*/
+
+# weryfikacja tokenu CSRF
+GC\Auth\CSRFToken::routines($request);
 
 # panel roota jest dostępny tylko dla pracowników z polem 'root'
 if (!$staff['root']) {
