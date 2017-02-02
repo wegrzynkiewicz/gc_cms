@@ -1,26 +1,24 @@
 <?php
 
 # utwórz zapytanie dla datatables
-$query = GC\Model\Product\Product::select()
-    ->fields(['product_id', 'name', 'image'])
+$products = GC\Model\Product\Product::select()
+    ->fields('SQL_CALC_FOUND_ROWS product_id, name, image')
     ->source('::frame')
-    ->buildForDataTables($_GET);
+    ->buildForDataTables($_GET)
+    ->fetchAll();
 
 # pobierz ilość przefiltrowanych produktów
-$filteredQuery = clone $query;
-$recordsFiltered = intval($filteredQuery
-    ->fields('COUNT(*) AS count')
-    ->clearSort()
-    ->clearLimit()
-    ->fetch()['count']);
+$recordsFiltered = intval(GC\Storage\Database::getInstance()
+    ->fetch("SELECT FOUND_ROWS() AS count;")['count']
+);
 
 # pobierz ilość wszystkich produktów
 $recordsTotal = intval(GC\Model\Product\Product::select()
     ->fields('COUNT(*) AS count')
-    ->fetch()['count']);
+    ->fetch()['count']
+);
 
 # dla każdego produktu utwórz miniaturę
-$products = $query->fetchAll();
 foreach ($products as &$product) {
     $image = empty($product['image'])
         ? $uri->assets($config['noImageUrl'])

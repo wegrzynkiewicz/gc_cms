@@ -363,10 +363,10 @@ function normalize($unformatted)
 
 function redirect($location, $code = 303)
 {
-    global $config;
+    global $uri;
 
-    $uri = $config['instance']['uri']->make($location);
-    absoluteRedirect($uri, $code);
+    $path = $uri->make($location);
+    absoluteRedirect($path, $code);
 }
 
 function absoluteRedirect($location, $code = 303)
@@ -510,8 +510,6 @@ function infoIP($ip = null)
  */
 function render($templateName, array $arguments = [])
 {
-    global $config;
-
     extract($GLOBALS);
     extract($arguments, EXTR_OVERWRITE);
 
@@ -598,4 +596,9 @@ function removeDirRecursive($dir)
         reset($objects);
         rmdir($dir);
     }
+}
+
+function sessionCache()
+{
+
 }

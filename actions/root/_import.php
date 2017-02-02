@@ -7,7 +7,6 @@ if (!$config['debug']['enabled']) {
 
 # utworzenie obiektu reprezentującego pracownika, sprawdza czy jest zalogowany
 $staff = GC\Auth\Staff::createFromSession();
-$config['instance']['staff'] = $staff;
 
 # weryfikacja tokenu CSRF
 GC\Auth\CSRFToken::routines($request);

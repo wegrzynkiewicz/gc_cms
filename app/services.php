@@ -24,7 +24,7 @@ $logger =
         : new GC\Debug\NullLogger();
 
 # serwis służy do zapisywania wyrzuconych wyjątków do loggera
-$logException = function (Exception $exception) use (&$logException, &$logger) {
+$logException = function ($exception) use (&$logException, &$logger) {
     $previous = $exception->getPrevious();
     if ($previous) {
         $logException($previous);
@@ -44,7 +44,7 @@ $errorHandler = function ($severity, $msg, $file, $line, array $context) use (&$
         return false;
     }
     if ($severity & error_reporting()) {
-        throw new ErrorException ($msg, 0, $severity, $file, $line);
+        throw new ErrorException($msg, 0, $severity, $file, $line);
     }
 
     return false;
@@ -52,7 +52,7 @@ $errorHandler = function ($severity, $msg, $file, $line, array $context) use (&$
 set_error_handler($errorHandler);
 
 # niestandardowy łapacz wyjątków, zapisuje tylko wyjątki do loggera
-$exceptionHandler = function (Exception $exception) use (&$logException) {
+$exceptionHandler = function ($exception) use (&$logException) {
     $logException($exception);
     throw $exception;
 };

@@ -2,8 +2,6 @@
 
 namespace GC;
 
-use GC\Logger;
-
 class Request
 {
     const FRONT_CONTROLLER_URL = '/index.php';

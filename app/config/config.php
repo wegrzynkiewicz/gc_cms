@@ -2,7 +2,7 @@
 
 /** Plik zawiera definicje najważniejszych stałych i właściwości dla aplikacji */
 
-define('START_TIME', server('REQUEST_TIME_FLOAT', microtime(true))); # początkowy czas uruchomienia aplikacji
+define('START_TIME', $_SERVER["REQUEST_TIME_FLOAT"]); # początkowy czas uruchomienia aplikacji
 define('TEMPLATE', 'bootstrap-example'); # nazwa używanego szablonu
 define('ASSETS_URL', '/assets'); # adres do katalogu z zasobami
 define('ROOT_PATH', realpath(__DIR__.'/../../')); # ścieżka do katalogu głównego serwera www
@@ -28,8 +28,8 @@ ini_set('session.cookie_httponly', 1); # ustawia ciastko tylko do odczytu, nie j
 ini_set('session.use_cookies', 1); # do przechowywania sesji ma użyć ciastka
 ini_set('session.use_only_cookies', 1); # do przechowywania sesji ma używać tylko ciastka!
 ini_set('session.hash_function', 1); # użycie bardziej złożonej funkcji do hashowania ciastka sesyjnego
+// ini_set('session.save_path', ROOT_PATH.'/app/storage/sessions'); # ścieżka w której będą przechowywane pliki sesji
 ini_set('zlib.output_compression_level', 1); # poziom kompresji wyjścia skryptu
-
 header("Content-Type: text/html; charset=utf-8"); # ustawienie domyślego mimetype i kodowanie
 header('X-Content-Type-Options: nosniff'); # nie pozwala przeglądarce na zgadywanie typu mime nieznanego pliku
 header('X-XSS-Protection: 1; mode=block'); # ustawienie ochrony przeciw XSS, przeglądarka sama wykrywa XSSa
@@ -58,7 +58,6 @@ return [
     ],
     'session' => [ # ustawienia sesji
         'staff' => [ # ustawienia sesji dla pracownika
-            'useCustomStorage' => false, # ustawienie niestandardowego sposobu przechowywania sesji
             'lifetime' => 1800, # czas jaki musi upłynąć po zalogowaniu, aby sesja pracownika przedawniła się; w sekundach
             'cookie' => [ # ustawienia ciastka sesyjnego
                 'name' => $generated['session.staff.cookie.name'], # nazwa ciastka sesyjnego dla pracownika
@@ -89,7 +88,7 @@ return [
         'prefix' => 'gc_'
     ],
     'logger' => [ # ustawienia dla rejestrowania logów
-        'enabled' => true, # uruchamia rejestrowanie logów
+        'enabled' => false, # uruchamia rejestrowanie logów
         'folder' => ROOT_PATH.'/tmp/logs', # katalog do ktorego są zapisywane logi
     ],
     'translator' => [ # ustawienia translatora

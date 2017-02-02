@@ -4,7 +4,6 @@
 
 # utworzenie obiektu repezentującego pracownika
 $staff = GC\Auth\Staff::createFromSession();
-$config['instance']['staff'] = $staff;
 
 # weryfikacja tokenu CSRF
 GC\Auth\CSRFToken::routines($request);
@@ -18,4 +17,3 @@ $breadcrumbs->push([
     'name' => 'Dashboard',
     'icon' => 'dashboard',
 ]);
-$config['instance']['breadcrumbs'] = $breadcrumbs;
