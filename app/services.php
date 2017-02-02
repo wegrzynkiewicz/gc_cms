@@ -16,14 +16,12 @@ if (!$generated) {
 
 # załadowanie pliku konfiguracyjnego
 $config = require __DIR__.'/config/config.php';
-$config['instance']['config'] = &$config;
 
 # serwis logowania do pliku lub atrapa
 $logger =
     $config['logger']['enabled']
         ? new GC\Debug\FileLogger($config['logger']['folder'].'/'.date('Y-m-d').'.log')
         : new GC\Debug\NullLogger();
-$config['instance']['logger'] = $logger;
 
 # serwis służy do zapisywania wyrzuconych wyjątków do loggera
 $logException = function (Exception $exception) use (&$logException, &$logger) {
@@ -38,7 +36,6 @@ $logException = function (Exception $exception) use (&$logException, &$logger) {
         $exception->getTraceAsString()
     ));
 };
-$config['instance']['logException'] = $logException;
 
 # niestandardowy łapacz błędów, na każdym rodzaju błędu przerywa działanie
 $errorHandler = function ($severity, $msg, $file, $line, array $context) use (&$logger) {
@@ -66,13 +63,11 @@ $translator =
     $config['translator']['enabled']
         ? new GC\Translation\FileTranslator($config['translator']['folder'].'/'.GC\Auth\Visitor::getLang().'.php')
         : new GC\Translation\NullTranslator();
-$config['instance']['translator'] = $translator;
 
 # serwis do łatwego tłumaczenia tekstu: $trans('text')
 $trans = function ($text, array $params = []) use ($translator) {
     return $translator->translate($text, $params);
 };
-$config['instance']['trans'] = $trans;
 
 # serwis reprezentujący żądanie
 $request = new GC\Request(
@@ -80,8 +75,6 @@ $request = new GC\Request(
     $_SERVER['REQUEST_URI'],
     $_SERVER['SCRIPT_NAME']
 );
-$config['instance']['request'] = $request;
 
 # serwis uri jest tym samym żądaniem, tylko o krótszej nazwie
 $uri = $request;
-$config['instance']['uri'] = $uri;

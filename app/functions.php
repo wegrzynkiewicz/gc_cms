@@ -22,9 +22,9 @@ function &getConfig()
 
 function logger($message, array $params = [])
 {
-    global $config;
+    global $logger;
 
-    return $config['instance']['logger']->info($message, $params);
+    return $logger->info($message, $params);
 }
 
 function dd($mixed = null)
@@ -512,9 +512,7 @@ function render($templateName, array $arguments = [])
 {
     global $config;
 
-    dd($GLOBALS);
-
-    extract($config['instance']);
+    extract($GLOBALS);
     extract($arguments, EXTR_OVERWRITE);
 
     ob_start();

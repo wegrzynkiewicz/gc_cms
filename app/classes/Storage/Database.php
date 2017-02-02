@@ -18,7 +18,7 @@ class Database
     {
         $this->pdo = $pdo;
 
-        if (getConfig()['instance']['request']->isMethod('POST')) {
+        if (server('REQUEST_METHOD', 'GET') !== 'GET') {
             $this->pdo->beginTransaction();
         }
     }
@@ -31,7 +31,7 @@ class Database
         if (!$this->pdo->inTransaction()) {
             return;
         }
-        
+
         if (error_get_last() === null) {
             $this->pdo->commit();
             logger('[DATABASE] Commit');
