@@ -23,9 +23,6 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                         <?php else: ?>
                             <form action="" method="post" class="form-horizontal">
 
-                                <input type="hidden" name="email64" value="<?=$email64?>">
-                                <input type="hidden" name="verifyHash" value="<?=$verifyHash?>">
-
                                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                                     'name' => 'new_password',
                                     'type' => 'password',

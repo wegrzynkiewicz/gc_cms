@@ -4,7 +4,7 @@
 $query = GC\Model\Product\Product::select()
     ->fields(['product_id', 'name', 'image'])
     ->source('::frame')
-    ->buildForDataTables($_POST);
+    ->buildForDataTables($_GET);
 
 # pobierz ilość przefiltrowanych produktów
 $filteredQuery = clone $query;
@@ -27,6 +27,7 @@ foreach ($products as &$product) {
         : $product['image'];
     $product['image'] = GC\Thumb::make($image, 64, 999);
 }
+unset($product);
 
 # kontent jaki zostanie zwrócony
 header("Content-Type: application/json; charset=utf-8");

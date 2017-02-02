@@ -5,9 +5,9 @@
 $requestUri = trim($request->uri, '/');
 $parts = explode('/', $requestUri);
 
-$_PARAMETERS = array_filter($parts, 'intval');
+$_PARAMETERS = array_filter($parts, 'ctype_digit');
 $_SEGMENTS = array_filter($parts, function ($segment) {
-    return intval($segment) === 0;
+    return !ctype_digit($segment);
 });
 
 # jeżeli adres bez ścieżki wtedy załaduj akcję główną

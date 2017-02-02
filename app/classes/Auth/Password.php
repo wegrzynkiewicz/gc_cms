@@ -4,6 +4,8 @@ namespace GC\Auth;
 
 class Password
 {
+    public static $config;
+
     /**
      * Zwraca pseudo losowy ciąg znaków o zadanej długości
      */
@@ -25,7 +27,7 @@ class Password
         return password_hash(
             static::salt($securePassword),
             PASSWORD_DEFAULT,
-            getConfig()['password']['options']
+            static::$config['options']
         );
     }
 
@@ -37,7 +39,7 @@ class Password
         return password_needs_rehash(
             $passwordHash,
             PASSWORD_DEFAULT,
-            getConfig()['password']['options']
+            static::$config['options']
         );
     }
 
@@ -54,6 +56,8 @@ class Password
      */
     public static function salt($securePassword)
     {
-        return $securePassword.getConfig()['password']['staticSalt'];
+        return $securePassword.static::$config['staticSalt'];
     }
 }
+
+Password::$config = &getConfig()['password'];

@@ -6,9 +6,9 @@ if (isset($error)) {
     redirect('/auth/login');
 }
 
-$new_password = $_POST['new_password'];
+$new_password = post('new_password');
 
-if ($new_password !== $_POST['confirm_password']) {
+if ($new_password !== post('confirm_password')) {
     redirect('/auth/login');
 }
 
@@ -17,7 +17,7 @@ GC\Model\Staff\Staff::updateByPrimaryId($user['staff_id'], [
     'regeneration' => json_encode([]),
 ]);
 
-GC\Auth\Staff::registerSession($user['staff_id']);
+GC\Auth\Staff::createSession($user['staff_id']);
 setNotice($trans('Zostałeś zalogowany, a Twoje hasło zostało zresetowane.'));
 
 redirect('/admin');

@@ -3,9 +3,8 @@
 namespace GC\Auth;
 
 use GC\Model\Session;
-use SessionHandlerInterface;
 
-class DatabaseSessionHandler implements SessionHandlerInterface
+class DatabaseSessionHandler implements \SessionHandlerInterface
 {
     public function open($savePath, $sessionName)
     {

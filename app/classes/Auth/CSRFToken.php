@@ -3,10 +3,11 @@
 namespace GC\Auth;
 
 use GC\Request;
-use RuntimeException;
 
 class CSRFToken
 {
+    public static $config;
+
     public static function routines(Request $request)
     {
         # jeżeli jakakolwiek inna metota niż GET
@@ -26,12 +27,11 @@ class CSRFToken
      */
     public static function register()
     {
-        $config = &getConfig()['csrf'];
         $tokenString = Password::random(40);
         setcookie(
-            $config['cookieName'], # cookie name
+            static::$config['cookieName'], # cookie name
             $tokenString, # value
-            time() + $config['lifetime'], # expires
+            time() + static::$config['lifetime'], # expires
             '/', # path
             '', # domain
             false, # secure
@@ -48,7 +48,7 @@ class CSRFToken
     public static function assert()
     {
         if (!static::validate()) {
-            throw new RuntimeException('CSRFToken is valid');
+            throw new \RuntimeException('CSRFToken is valid');
         }
     }
 
@@ -57,13 +57,11 @@ class CSRFToken
      */
     public static function validate()
     {
-        $cookieName = getConfig()['csrf']['cookieName'];
-
-        if (!isset($_COOKIE[$cookieName])) {
+        if (!isset($_COOKIE[static::$config['cookieName']])) {
             return static::abort('Cookie does not exists');
         }
 
-        $token = $_COOKIE[$cookieName];
+        $token = $_COOKIE[static::$config['cookieName']];
         if (empty($token)) {
             return static::abort('Cookie empty');
         }
@@ -83,7 +81,9 @@ class CSRFToken
     public static function abort($message)
     {
         logger("[CSRF] {$message}");
-        setcookie(getConfig()['csrf']['cookieName'], '', time() - 3600, '/');
+        setcookie(static::$config['cookieName'], '', time() - 3600, '/');
         unset($_SESSION['CSRFToken']);
     }
 }
+
+CSRFToken::$config = &getConfig()['csrf'];

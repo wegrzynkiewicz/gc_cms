@@ -42,7 +42,7 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                                         class="form-control">
                                 </div>
 
-                                <button type="submit" class="btn btn-lg btn-success btn-block">
+                                <button type="submit" class="btn btn-md btn-success btn-block">
                                     <?=$trans('Zaloguj się')?>
                                 </button>
 

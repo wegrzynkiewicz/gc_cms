@@ -512,6 +512,8 @@ function render($templateName, array $arguments = [])
 {
     global $config;
 
+    dd($GLOBALS);
+
     extract($config['instance']);
     extract($arguments, EXTR_OVERWRITE);
 

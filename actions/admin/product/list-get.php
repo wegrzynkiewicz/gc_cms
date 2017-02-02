@@ -139,7 +139,7 @@ $count = GC\Model\Product\Product::select()
             autoWidth: false,
             ajax: {
                 url: '<?=$uri->mask("/xhr-list")?>',
-                type: 'POST'
+                type: 'GET'
             },
             createdRow: function (row, data, index) {
                 $(row).html(Mustache.render(rowTemplate, data));

@@ -34,7 +34,7 @@ class Staff extends AbstractEntity
             redirect('/auth/force-change-password');
         }
 
-        logger('[STAFF] Created', [$this->getProperty('name', 'Unnamed')]);
+        logger('[STAFF] Authenticated', [$this->getProperty('name', 'Unnamed')]);
     }
 
     /**
@@ -85,16 +85,13 @@ class Staff extends AbstractEntity
      */
     public static function existsSessionCookie()
     {
-        $name = getConfig()['session']['staff']['cookie']['name'];
+        $name = static::$config['cookie']['name'];
 
         return isset($_COOKIE[$name]) and !empty($_COOKIE[$name]);
     }
 
     public static function createFromSession()
     {
-        # zmień ustawienia
-        static::configure();
-
         # jeżeli ciastko nie zostało nadesłane lub jest puste
         if (static::existsSessionCookie() === false) {
             static::abort('Cookie does not exists');
@@ -151,9 +148,6 @@ class Staff extends AbstractEntity
      */
     public static function createSession($staff_id)
     {
-        # zmień ustawienia
-        static::configure();
-
         # rozpoczyna sesję
         static::start();
 
@@ -183,10 +177,10 @@ class Staff extends AbstractEntity
     /**
      * Konfiguruje mechanizm przechowywania sesji
      */
-    protected static function configure()
+    public static function initialize()
     {
         # pobierz dane konfiguracyjne z configa
-        static::$config = getConfig()['session']['staff'];
+        static::$config = &getConfig()['session']['staff'];
 
         # zmiana nazwy ciastka sesyjnego dla pracownika
         session_name(static::$config['cookie']['name']);
@@ -231,3 +225,5 @@ class Staff extends AbstractEntity
         ]);
     }
 }
+
+Staff::initialize();

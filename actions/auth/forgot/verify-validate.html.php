@@ -1,7 +1,7 @@
 <?php
 
 if (count($_SEGMENTS)<2) {
-    redirect('/admin');
+    redirect('/auth/login');
 }
 
 $email64 = array_shift($_SEGMENTS);
@@ -9,7 +9,11 @@ $verifyHash = array_shift($_SEGMENTS);
 
 $email = base64_decode($email64);
 
-$user = GC\Model\Staff\Staff::select()->equals('email', $email)->fetch();
+# pobierz pracownika po adresie email
+$user = GC\Model\Staff\Staff::select()
+    ->equals('email', $email)
+    ->fetch();
+
 if (!$user) {
     $error = $trans('Wystąpił problem podczas resetowania hasła');
 

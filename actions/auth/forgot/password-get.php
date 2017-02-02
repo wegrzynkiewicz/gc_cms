@@ -2,7 +2,8 @@
 
 $headTitle = $trans('Zapomniałem hasła');
 
-require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
+?>
+<?php require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
 
 <div class="vertical-center">
     <div class="container">

@@ -30,8 +30,8 @@ ini_set('session.use_only_cookies', 1); # do przechowywania sesji ma używać ty
 ini_set('session.hash_function', 1); # użycie bardziej złożonej funkcji do hashowania ciastka sesyjnego
 ini_set('zlib.output_compression_level', 1); # poziom kompresji wyjścia skryptu
 
-header("Content-Type: text/html; charset=utf-8"); # ustawienie domyślego mimetype i kodowania
-header('X-Content-Type-Options: nosniff'); # Nie pozwala przeglądarce na zgadywanie typu mime nieznanego pliku
+header("Content-Type: text/html; charset=utf-8"); # ustawienie domyślego mimetype i kodowanie
+header('X-Content-Type-Options: nosniff'); # nie pozwala przeglądarce na zgadywanie typu mime nieznanego pliku
 header('X-XSS-Protection: 1; mode=block'); # ustawienie ochrony przeciw XSS, przeglądarka sama wykrywa XSSa
 header_remove('X-Powered-By'); # usuwa informacje o wykorzystywanej wersji php
 
