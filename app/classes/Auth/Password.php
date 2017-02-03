@@ -27,7 +27,7 @@ class Password
         return password_hash(
             static::salt($securePassword),
             PASSWORD_DEFAULT,
-            static::$config['options']
+            $GLOBALS['config']['password']['options']
         );
     }
 
@@ -39,7 +39,7 @@ class Password
         return password_needs_rehash(
             $passwordHash,
             PASSWORD_DEFAULT,
-            static::$config['options']
+            $GLOBALS['config']['password']['options']
         );
     }
 
@@ -56,8 +56,6 @@ class Password
      */
     public static function salt($securePassword)
     {
-        return $securePassword.static::$config['staticSalt'];
+        return $securePassword.$GLOBALS['config']['password']['staticSalt'];
     }
 }
-
-Password::$config = &getConfig()['password'];

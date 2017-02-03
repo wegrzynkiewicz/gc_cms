@@ -25,12 +25,11 @@ class CSRFToken
      */
     public static function register()
     {
-        $config = &getConfig()['csrf'];
         $tokenString = Password::random(40);
         setcookie(
-            $config['cookieName'], # cookie name
+            $GLOBALS['config']['csrf']['cookieName'], # cookie name
             $tokenString, # value
-            time() + $config['lifetime'], # expires
+            time() + $GLOBALS['config']['csrf']['lifetime'], # expires
             '/', # path
             '', # domain
             false, # secure
@@ -38,7 +37,7 @@ class CSRFToken
         );
         $_SESSION['CSRFToken'] = $tokenString;
 
-        logger('[CSRF] Register', [$tokenString]);
+        $GLOBALS['logger']->info('[CSRF] Register', [$tokenString]);
     }
 
     /**
@@ -56,11 +55,11 @@ class CSRFToken
      */
     public static function validate()
     {
-        if (!isset($_COOKIE[getConfig()['csrf']['cookieName']])) {
+        if (!isset($_COOKIE[$GLOBALS['config']['csrf']['cookieName']])) {
             return static::abort('Cookie does not exists');
         }
 
-        $token = $_COOKIE[getConfig()['csrf']['cookieName']];
+        $token = $_COOKIE[$GLOBALS['config']['csrf']['cookieName']];
         if (empty($token)) {
             return static::abort('Cookie empty');
         }
@@ -69,7 +68,7 @@ class CSRFToken
             return static::abort('Session failed');
         }
 
-        logger("[CSRF] Verified");
+        $GLOBALS['logger']->info("[CSRF] Verified");
 
         return true;
     }
@@ -79,8 +78,8 @@ class CSRFToken
      */
     public static function abort($message)
     {
-        logger("[CSRF] {$message}");
-        setcookie(getConfig()['csrf']['cookieName'], '', time() - 3600, '/');
+        $GLOBALS['logger']->info("[CSRF] {$message}");
+        setcookie($GLOBALS['config']['csrf']['cookieName'], '', time() - 3600, '/');
         unset($_SESSION['CSRFToken']);
     }
 }

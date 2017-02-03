@@ -7,7 +7,7 @@ $staff_id = GC\Model\Staff\Staff::insert([
     'password' => GC\Auth\Password::hash($password),
     'email' => post('email'),
     'avatar' => post('avatar'),
-    'lang' => $config['lang']['clientDefault'],
+    'lang' => $config['lang']['visitorDefault'],
     'force_change_password' => 1,
 ]);
 GC\Model\Staff\Staff::updateGroups($staff_id, post('groups', []));

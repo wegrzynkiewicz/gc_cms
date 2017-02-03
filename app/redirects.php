@@ -52,7 +52,7 @@ $targetUrl = rtrim($targetUrl, '?');
 
 # przekierowanie na docelowy adres, pomocne przy seo
 if ($currentUrl !== $targetUrl) {
-    logger("[SEO] From: {$currentUrl} To: {$targetUrl}");
+    $GLOBALS['logger']->info("[SEO] From: {$currentUrl} To: {$targetUrl}");
     redirect($targetUrl, 301);  # 301 Moved Permanently
 }
 
@@ -62,7 +62,7 @@ if ($config['debug']['inConstruction']) {
         $_SESSION['allowInConstruction'] = true;
     }
     if (!isset($_SESSION['allowInConstruction'])) {
-        logger('[RESPONSE] inConstruction');
+        $GLOBALS['logger']->info('[RESPONSE] inConstruction');
         require TEMPLATE_PATH.'/errors/construction.html.php';
         exit;
     }

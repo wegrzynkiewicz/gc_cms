@@ -18,9 +18,9 @@ class Thumb
         $this->imageUrl = $imageUrl;
         $this->width = $width;
         $this->height = $height;
-        $this->extension = strtolower(pathinfo($imageUrl, PATHINFO_EXTENSION));
+        $this->extension = mb_strtolower(pathinfo($imageUrl, PATHINFO_EXTENSION));
 
-        $options = getConfig()['thumb']['options'];
+        $options = $GLOBALS['config']['thumb']['options'];
         if (isset($options[$this->extension])) {
             $this->params = $options[$this->extension];
             $this->url = $this->makeUrl();
@@ -50,7 +50,7 @@ class Thumb
      */
     private function makeUrl()
     {
-        $thumbsUrl      = getConfig()['thumb']['thumbsUrl'];
+        $thumbsUrl      = $GLOBALS['config']['thumb']['thumbsUrl'];
         $imageUrl       = urldecode($this->imageUrl);
         $sufix          = '/'.$this->width.'x'.$this->height;
         $normalized     = normalize($imageUrl);
@@ -78,7 +78,7 @@ class Thumb
     public function generate()
     {
         $imageUrl = urldecode($this->imageUrl);
-        $thumbPath = getConfig()['thumb']['thumbsPath'];
+        $thumbPath = $GLOBALS['config']['thumb']['thumbsPath'];
         $destFilePath   = "{$thumbPath}{$this->url}";
         $sourceFilePath = "{$thumbPath}{$imageUrl}";
 

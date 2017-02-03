@@ -11,7 +11,7 @@ class Validate
 
     public static function installedLang($code)
     {
-        return in_array($code, array_keys(getConfig()['langs']));
+        return in_array($code, array_keys($GLOBALS['config']['langs']));
     }
 
     public static function ip($ip)

@@ -24,7 +24,7 @@ class Staff extends AbstractEntity
             redirect('/auth/force-change-password');
         }
 
-        logger('[STAFF] Authenticated', [$this->getProperty('name', 'Unnamed')]);
+        $GLOBALS['logger']->info('[STAFF] Authenticated', [$this->getProperty('name', 'Unnamed')]);
     }
 
     /**
@@ -37,7 +37,7 @@ class Staff extends AbstractEntity
             return $_SESSION['langEditor'];
         }
 
-        return getConfig()['lang']['editorDefault'];
+        return $GLOBALS['config']['lang']['editorDefault'];
     }
 
     /**
@@ -68,7 +68,7 @@ class Staff extends AbstractEntity
     public function redirectIfUnauthorized(array $permissions = [])
     {
         if (!$this->hasPermissions($permissions)) {
-            logger('[DENY] Not authorized', $permissions);
+            $GLOBALS['logger']->info('[DENY] Not authorized', $permissions);
             $perm = count($permissions) > 0 ? array_shift($permissions) : 'default';
             redirect("/admin/account/deny/{$perm}");
         }
@@ -79,7 +79,7 @@ class Staff extends AbstractEntity
      */
     public static function existsSessionCookie()
     {
-        $name = getConfig()['session']['staff']['cookie']['name'];
+        $name = $GLOBALS['config']['session']['staff']['cookie']['name'];
 
         return isset($_COOKIE[$name]) and !empty($_COOKIE[$name]);
     }
@@ -119,7 +119,7 @@ class Staff extends AbstractEntity
      */
     public static function abort($message, $location = '/auth/login')
     {
-        logger("[STAFF] {$message}");
+        $GLOBALS['logger']->info("[STAFF] {$message}");
         static::destroySession();
         redirect($location);
     }
@@ -178,7 +178,7 @@ class Staff extends AbstractEntity
     protected static function start()
     {
         # pobierz dane konfiguracyjne z configa
-        $config = getConfig()['session']['staff'];
+        $config = $GLOBALS['config']['session']['staff'];
 
         # zmiana nazwy ciastka sesyjnego dla pracownika
         session_name($config['cookie']['name']);
@@ -195,7 +195,7 @@ class Staff extends AbstractEntity
             # rozpocznij sesję, pobierz dane do $_SESSION
             session_start();
 
-            logger('[SESSION]', [session_id()]);
+            $GLOBALS['logger']->info('[SESSION]', [session_id()]);
         }
     }
 
@@ -205,6 +205,6 @@ class Staff extends AbstractEntity
     protected static function refreshSessionLifeTime($staff_id)
     {
         # aktualizacja czasu wygaśnięcia sesji
-        $_SESSION['staff']['expires'] = time() + getConfig()['session']['staff']['lifetime'];
+        $_SESSION['staff']['expires'] = time() + $GLOBALS['config']['session']['staff']['lifetime'];
     }
 }

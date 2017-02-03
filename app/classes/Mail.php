@@ -17,7 +17,7 @@ class Mail extends PHPMailer
         parent::__construct(true);
 
         try {
-            $emailConfig = &getConfig()['mailer'];
+            $emailConfig = $GLOBALS['config']['mailer'];
             $this->SMTPDebug = false;
 
             if ($emailConfig['smtp']) {
@@ -71,7 +71,7 @@ class Mail extends PHPMailer
             'content' => serialize($this),
         ]);
 
-        logger(
+        $GLOBALS['logger']->info(
             "[EMAIL-PUSH] {$this->hash} {$this->Subject}",
             array_keys($this->all_recipients)
         );
@@ -94,7 +94,7 @@ class Mail extends PHPMailer
                 'content' => serialize($this),
             ]);
 
-            logger(
+            $GLOBALS['logger']->info(
                 "[EMAIL-SENT] {$this->hash} {$this->Subject}",
                 array_keys($this->all_recipients)
             );

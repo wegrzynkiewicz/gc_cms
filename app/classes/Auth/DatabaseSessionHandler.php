@@ -43,7 +43,7 @@ class DatabaseSessionHandler implements \SessionHandlerInterface
 
     public function gc($maxlifetime)
     {
-        logger('[SESSION] Garbage collector');
+        $GLOBALS['logger']->info('[SESSION] Garbage collector');
 
         Session::delete()
             ->condition('update_datetime < ?', sqldate(time() - $maxlifetime))

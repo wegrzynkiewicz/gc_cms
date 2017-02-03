@@ -16,7 +16,7 @@ class Cache
 
         # jeżeli istnieje skeszowany $pool wtedy zwróć
         if ($pool and $pool['expires'] > time()) {
-            logger("[CACHE] {$name} was load from cache");
+            $GLOBALS['logger']->info("[CACHE] {$name} was load from cache");
 
             # zwróć skeszowane dane
             return $_SESSION['cache'][$name]['data'];
@@ -31,7 +31,7 @@ class Cache
             'expires' => time() + $ttl,
         ];
 
-        logger("[CACHE] {$name} was regenerate");
+        $GLOBALS['logger']->info("[CACHE] {$name} was regenerate");
 
         # zwróć wytworzone dane
         return $result;

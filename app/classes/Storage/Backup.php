@@ -14,7 +14,7 @@ class Backup
 
     public static function make($name)
     {
-        $dumpPath = getConfig()['dump']['path'];
+        $dumpPath = $GLOBALS['config']['dump']['path'];
         $time = time();
         $creation_datetime = date('Y-m-d-His', $time);
         $filepath = "{$dumpPath}/dump-{$creation_datetime}.sql.gz";
@@ -32,10 +32,10 @@ class Backup
     {
         makeFile($filename);
 
-        $dumpConfig = getConfig()['dump'];
-        $dbConfig = getConfig()['database'];
+        $dumpConfig = $GLOBALS['config']['dump'];
+        $dbConfig = $GLOBALS['config']['database'];
 
-        logger('[DUMP-EXPORT] '.relativePath($filename));
+        $GLOBALS['logger']->info('[DUMP-EXPORT] '.relativePath($filename));
 
         $dump = new IMysqldump\Mysqldump(
             $dbConfig['dns'],
@@ -51,11 +51,11 @@ class Backup
     {
         $file = $filepath;
 
-        logger("[DUMP-IMPORT] {$filename}");
+        $GLOBALS['logger']->info("[DUMP-IMPORT] {$filename}");
 
         if (pathinfo($filepath, \PATHINFO_EXTENSION) === 'gz') {
 
-            $path = getConfig()['dump']['tmpPath'];
+            $path = $GLOBALS['config']['dump']['tmpPath'];
             $file = $path.'/'.basename($filepath, '.gz');
             static::decompress($filepath, $file);
             static::openAndExecute($file);

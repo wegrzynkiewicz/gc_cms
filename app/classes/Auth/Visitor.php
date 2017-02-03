@@ -19,7 +19,7 @@ class Visitor
             return static::$langRequest;
         }
 
-        return getConfig()['lang']['clientDefault'];
+        return $GLOBALS['config']['lang']['visitorDefault'];
     }
 
     /**
