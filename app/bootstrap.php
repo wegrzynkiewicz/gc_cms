@@ -2,6 +2,7 @@
 
 /** Plik wejścia, ładuje autoloader klas, funkcje oraz uruchamia routing */
 
+require __DIR__.'/../vendor/autoload.php';
 require __DIR__.'/functions.php';
 require __DIR__.'/services.php';
 require __DIR__.'/redirects.php';

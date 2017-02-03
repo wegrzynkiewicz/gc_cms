@@ -2,35 +2,6 @@
 
 /** Plik zawiera inicjalizacje wszystkich globalnych serwisów w aplikacji */
 
-# zarejestrowanie niestandardowego autoloadera klas, aby przyśpieszyć ładowanie
-spl_autoload_register(function ($classNameWithNamespace) {
-
-    # jeżeli nazwa klasy zaczyna się od GC\
-    if (strpos($classNameWithNamespace, 'GC\\') === 0) {
-
-        # utwórz ścieżkę składającą się z nazwy klasy bez "GC\"
-        $pathToFile = '/classes/'.substr($classNameWithNamespace, 3).'.php';
-
-        # załaduj plik z klasą i wyjdź z funkcji
-        return require __DIR__.$pathToFile;
-    }
-
-    # utwórz zmienną, która raz zainicjowana nie zmieni wartości podczas
-    # kolejnej inicjalizacji, celem sprawdzenia czy composer zostałzaładowany
-    static $composerLoaded = false;
-
-    if ($composerLoaded === false) {
-
-        # załaduj composera dopiero, wtedy jeżeli nasz autoloading zawiedzie
-        $composerLoader = require_once __DIR__.'/../vendor/autoload.php';
-        $composerLoader->loadClass($classNameWithNamespace);
-
-        # zmień wartość, aby zapobiec ponownemu załadowaniu composera
-        $composerLoaded = true;
-    }
-
-}, true, true);
-
 # załadowanie wartości wygenerowanych
 $generated = @include __DIR__.'/storage/generated.php';
 
