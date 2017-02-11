@@ -1,5 +1,9 @@
 <?php
 
+require ACTIONS_PATH.'/admin/_import.php';
+require ACTIONS_PATH.'/admin/staff/_import.php';
+require ACTIONS_PATH.'/admin/staff/group/_import.php';
+
 $groups = GC\Model\Staff\Group::select()
     ->fields(['group_id', 'name'])
     ->fetchByPrimaryKey();

@@ -1,3 +1,4 @@
+<?php require ACTIONS_PATH.'/admin/_import.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>

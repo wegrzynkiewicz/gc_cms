@@ -1,7 +1,12 @@
 <?php
+
+require ACTIONS_PATH.'/admin/_import.php';
+require ACTIONS_PATH.'/admin/product/_import.php';
+
 $count = GC\Model\Product\Product::select()
     ->fields('COUNT(*) AS count')
     ->fetch()['count'];
+    
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 

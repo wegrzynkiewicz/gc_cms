@@ -1,5 +1,10 @@
 <?php
 
+require ACTIONS_PATH.'/admin/_import.php';
+require ACTIONS_PATH.'/admin/product/_import.php';
+require ACTIONS_PATH.'/admin/product/taxonomy/_import.php';
+require ACTIONS_PATH.'/admin/product/taxonomy/node/_import.php';
+
 $node_id = intval(array_shift($_PARAMETERS));
 
 # pobierz węzeł razem z ramką o $node_id

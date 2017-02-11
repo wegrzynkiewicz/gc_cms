@@ -35,13 +35,6 @@ $copySegments = $_SEGMENTS;
 while (count($_SEGMENTS) > 0) {
     $segment = array_shift($_SEGMENTS);
 
-    # jeżeli istnieje plik "import" to załaduj, ale nie kończ pętli
-    $file = "{$path}/{$segment}/_import.php";
-    if (file_exists($file)) {
-        $logger->info("[IMPORT] {$file}");
-        require $file;
-    }
-
     # jeżeli istnieje plik z metodą requesta na początku, załaduj
     $file = "{$path}/{$segment}-{$request->method}.php";
     if (file_exists($file)) {

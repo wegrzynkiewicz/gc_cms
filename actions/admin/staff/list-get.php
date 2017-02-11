@@ -1,5 +1,8 @@
 <?php
 
+require ACTIONS_PATH.'/admin/_import.php';
+require ACTIONS_PATH.'/admin/staff/_import.php';
+
 $staffList = GC\Model\Staff\Staff::select()
     ->fields(['staff_id', 'name'])
     ->equals('root', 0)

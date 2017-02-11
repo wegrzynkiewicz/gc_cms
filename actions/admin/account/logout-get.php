@@ -1,5 +1,8 @@
 <?php
 
+require ACTIONS_PATH.'/admin/_import.php';
+require ACTIONS_PATH.'/admin/account/_import.php';
+
 $headTitle = $trans('Zostałeś wylogowany');
 
 GC\Auth\Staff::destroySession();

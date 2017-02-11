@@ -1,5 +1,8 @@
 <?php
 
+require ACTIONS_PATH.'/admin/_import.php';
+require ACTIONS_PATH.'/admin/product/_import.php';
+
 # utwórz zapytanie dla datatables
 $products = GC\Model\Product\Product::select()
     ->fields('SQL_CALC_FOUND_ROWS product_id, name, image')

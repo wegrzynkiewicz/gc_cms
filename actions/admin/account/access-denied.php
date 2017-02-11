@@ -2,6 +2,9 @@
 
 $headTitle = $trans('Brak dostępu');
 
+require ACTIONS_PATH.'/admin/_import.php';
+require ACTIONS_PATH.'/admin/account/_import.php';
+
 $permission = array_shift($_SEGMENTS);
 
 ?>

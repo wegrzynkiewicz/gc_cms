@@ -1,5 +1,8 @@
 <?php
 
+require ACTIONS_PATH.'/admin/_import.php';
+require ACTIONS_PATH.'/admin/staff/_import.php';
+
 $password = GC\Auth\Password::random($config['password']['minLength']);
 
 $staff_id = GC\Model\Staff\Staff::insert([

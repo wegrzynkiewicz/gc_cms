@@ -1,5 +1,8 @@
 <?php
 
+require ACTIONS_PATH.'/admin/_import.php';
+require ACTIONS_PATH.'/admin/dump/_import.php';
+
 $dumps = GC\Model\Dump::select()->order('creation_datetime', 'DESC')->fetchByPrimaryKey();
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>

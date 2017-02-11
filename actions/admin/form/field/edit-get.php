@@ -1,5 +1,9 @@
 <?php
 
+require ACTIONS_PATH.'/admin/_import.php';
+require ACTIONS_PATH.'/admin/form/_import.php';
+require ACTIONS_PATH.'/admin/form/field/_import.php';
+
 $field_id = intval(array_shift($_PARAMETERS));
 $field = GC\Model\Form\Field::fetchByPrimaryId($field_id);
 

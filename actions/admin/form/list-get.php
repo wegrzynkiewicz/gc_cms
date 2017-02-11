@@ -1,5 +1,8 @@
 <?php
 
+require ACTIONS_PATH.'/admin/_import.php';
+require ACTIONS_PATH.'/admin/form/_import.php';
+
 $forms = GC\Model\Form\Form::select()
     ->equals('lang', $staff->getEditorLang())
     ->order('name', 'ASC')

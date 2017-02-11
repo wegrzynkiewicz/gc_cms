@@ -1,5 +1,9 @@
 <?php
 
+require ACTIONS_PATH.'/admin/_import.php';
+require ACTIONS_PATH.'/admin/form/_import.php';
+require ACTIONS_PATH.'/admin/form/received/_import.php';
+
 $sent_id = intval(array_shift($_PARAMETERS));
 $message = GC\Model\Form\Sent::fetchByPrimaryId($sent_id);
 $data = json_decode($message['data'], true);

@@ -1,5 +1,7 @@
 <?php
 
+require ACTIONS_PATH.'/admin/_import.php';
+
 error_reporting(0);
 
 // Enable FTP connector netmount

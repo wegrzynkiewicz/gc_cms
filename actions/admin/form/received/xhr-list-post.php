@@ -1,5 +1,9 @@
 <?php
 
+require ACTIONS_PATH.'/admin/_import.php';
+require ACTIONS_PATH.'/admin/form/_import.php';
+require ACTIONS_PATH.'/admin/form/received/_import.php';
+
 # utwórz zapytanie dla datatables
 $received = $query = GC\Model\Form\Sent::select()
     ->fields('SQL_CALC_FOUND_ROWS sent_id, name, status, sent_datetime')

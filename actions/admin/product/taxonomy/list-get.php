@@ -1,5 +1,9 @@
 <?php
 
+require ACTIONS_PATH.'/admin/_import.php';
+require ACTIONS_PATH.'/admin/product/_import.php';
+require ACTIONS_PATH.'/admin/product/taxonomy/_import.php';
+
 # pobierz wszystkie posortowane taksonomie z języka
 $taxonomies = GC\Model\Product\Taxonomy::select()
     ->equals('lang', $staff->getEditorLang())

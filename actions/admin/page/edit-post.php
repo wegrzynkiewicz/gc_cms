@@ -1,5 +1,8 @@
 <?php
 
+require ACTIONS_PATH.'/admin/_import.php';
+require ACTIONS_PATH.'/admin/page/_import.php';
+
 $page = GC\Model\Page::select()
     ->source('::frame')
     ->equals('page_id', $page_id)

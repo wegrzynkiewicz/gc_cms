@@ -1,9 +1,16 @@
 <?php
+
+require ACTIONS_PATH.'/admin/_import.php';
+require ACTIONS_PATH.'/admin/product/_import.php';
+require ACTIONS_PATH.'/admin/product/taxonomy/_import.php';
+require ACTIONS_PATH.'/admin/product/taxonomy/node/_import.php';
+
 $tree = GC\Model\Product\Node::select()
     ->fields(['node_id', 'parent_id', 'name'])
     ->source('::tree')
     ->equals('tax_id', $tax_id)
     ->fetchTree();
+    
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 

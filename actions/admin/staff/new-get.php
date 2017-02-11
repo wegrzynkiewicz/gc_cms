@@ -1,5 +1,8 @@
 <?php
 
+require ACTIONS_PATH.'/admin/_import.php';
+require ACTIONS_PATH.'/admin/staff/_import.php';
+
 $headTitle = $trans('Dodawanie nowego pracownika');
 $breadcrumbs->push([
     'uri' => $request->uri,

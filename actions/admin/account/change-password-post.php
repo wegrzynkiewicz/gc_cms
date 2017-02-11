@@ -1,5 +1,8 @@
 <?php
 
+require ACTIONS_PATH.'/admin/_import.php';
+require ACTIONS_PATH.'/admin/account/_import.php';
+
 $oldPassword = $_POST['old_password'];
 $newPassword = $_POST['new_password'];
 $confirmPassword = $_POST['confirm_password'];

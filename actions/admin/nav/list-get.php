@@ -1,5 +1,8 @@
 <?php
 
+require ACTIONS_PATH.'/admin/_import.php';
+require ACTIONS_PATH.'/admin/nav/_import.php';
+
 # pobierz wszystkie posortowane nawigacje z języka
 $navs = GC\Model\Menu\Taxonomy::select()
     ->equals('lang', $staff->getEditorLang())

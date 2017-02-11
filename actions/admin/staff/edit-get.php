@@ -1,5 +1,8 @@
 <?php
 
+require ACTIONS_PATH.'/admin/_import.php';
+require ACTIONS_PATH.'/admin/staff/_import.php';
+
 $staff_id = intval(array_shift($_PARAMETERS));
 $user = GC\Model\Staff\Staff::fetchByPrimaryId($staff_id);
 $headTitle = $trans('Edytowanie pracownika "%s"', [$user['name']]);

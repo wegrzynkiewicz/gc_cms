@@ -1,5 +1,9 @@
 <?php
 
+require ACTIONS_PATH.'/admin/_import.php';
+require ACTIONS_PATH.'/admin/form/_import.php';
+require ACTIONS_PATH.'/admin/form/received/_import.php';
+
 # pobierz ilość wysłanych wiadomości dla formularza
 $count = GC\Model\Form\Sent::select()
     ->fields('COUNT(*) AS count')

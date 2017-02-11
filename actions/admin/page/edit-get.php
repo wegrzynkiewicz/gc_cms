@@ -1,5 +1,8 @@
 <?php
 
+require ACTIONS_PATH.'/admin/_import.php';
+require ACTIONS_PATH.'/admin/page/_import.php';
+
 $page_id = intval(array_shift($_PARAMETERS));
 $page = GC\Model\Page::select()
     ->source('::frame')

@@ -1,5 +1,8 @@
 <?php
 
+require ACTIONS_PATH.'/admin/_import.php';
+require ACTIONS_PATH.'/admin/widget/_import.php';
+
 $widgets = GC\Model\Widget::select()
     ->equals('lang', $staff->getEditorLang())
     ->order('name', 'ASC')

@@ -1,5 +1,9 @@
 <?php
 
+require ACTIONS_PATH.'/admin/_import.php';
+require ACTIONS_PATH.'/admin/nav/_import.php';
+require ACTIONS_PATH.'/admin/nav/menu/_import.php';
+
 GC\Model\Menu\Menu::insertWithNavId([
     'name' => post('name'),
     'type' => post('type'),

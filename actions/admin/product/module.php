@@ -1,5 +1,8 @@
 <?php
 
+require ACTIONS_PATH.'/admin/_import.php';
+require ACTIONS_PATH.'/admin/product/_import.php';
+
 $product_id = intval(array_shift($_PARAMETERS));
 
 # pobranie produktu wraz z ramką po $product_id
