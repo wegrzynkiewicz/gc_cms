@@ -19,13 +19,13 @@ $_POST['content'] = $content;
             <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/image.html.php', [
                     'name' => 'content',
-                    'label' => 'Zdjęcie',
-                    'placeholder' => 'Ścieżka do pliku zdjęcia',
+                    'label' => $trans('Zdjęcie'),
+                    'placeholder' => $trans('Ścieżka do pliku zdjęcia'),
                 ])?>
             </div>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => 'Zapisz zmiany',
+                'saveLabel' => $trans('Zapisz zmiany'),
             ])?>
 
         </form>

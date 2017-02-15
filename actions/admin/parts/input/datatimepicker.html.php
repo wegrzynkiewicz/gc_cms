@@ -1,14 +1,14 @@
-<?php $type = isset($type) ? $type : 'text' ?>
+<?php $type = isset($type) ? $type : 'text'; ?>
 <div class="form-group">
-    <label class="col-md-12 col-sm-12 col-xs-12" for="<?=e($name)?>">
-        <?=$trans($label)?>
+    <label class="col-md-12 col-sm-12 col-xs-12" for="<?=$name?>">
+        <?=$label?>
     </label>
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="input-group date">
-            <input id="<?=e($name)?>"
-            name="<?=e($name)?>"
+            <input id="<?=$name?>"
+            name="<?=$name?>"
             <?php if (isset($placeholder)): ?>
-                placeholder="<?=$trans($placeholder)?>"
+                placeholder="<?=$placeholder?>"
             <?php endif ?>
             value="<?=e(post($name))?>"
             type="text"
@@ -20,7 +20,7 @@
         </div>
         <?php if (isset($help)): ?>
             <span class="help-block">
-                <?=$trans($help)?>
+                <?=$help?>
             </span>
         <?php endif ?>
     </div>
@@ -28,7 +28,7 @@
 
 <script type="text/javascript">
     $(function(){
-        $('#<?=e($name)?>').datetimepicker({
+        $('#<?=$name?>').datetimepicker({
             locale: '<?=GC\Auth\Visitor::getLang()?>',
             format: 'YYYY-MM-DD HH:mm:ss'
         });

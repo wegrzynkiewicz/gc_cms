@@ -80,8 +80,8 @@ $_POST = $message;
             <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
                     'name' => 'status',
-                    'label' => 'Status',
-                    'help' => 'Status wiadomości jest pomocny przy filtrowaniu wiadomości.',
+                    'label' => $trans('Status'),
+                    'help' => $trans('Status wiadomości jest pomocny przy filtrowaniu wiadomości.'),
                     'options' => array_map(function ($status) {
                         return $status['name'];
                     }, $config['formStatuses']),
@@ -89,7 +89,7 @@ $_POST = $message;
             </div>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => 'Zapisz status',
+                'saveLabel' => $trans('Zapisz status'),
             ])?>
 
         </form>

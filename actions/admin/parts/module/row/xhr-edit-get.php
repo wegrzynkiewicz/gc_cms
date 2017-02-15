@@ -11,8 +11,8 @@ if (!isset($_POST['gutter'])) {
 
 echo render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
     'name' => 'widthType',
-    'label' => 'Szerokość wiersza',
-    'help' => 'Określa zachowanie szerokości wiersza względem szerokości strony.',
+    'label' => $trans('Szerokość wiersza'),
+    'help' => $trans('Określa zachowanie szerokości wiersza względem szerokości strony.'),
     'options' => [
         'wrap' => 'Wyśrodkowany wiersz węższy od szerokości strony',
         'fluid' => 'Rozciągnięty wiersz na całą szerokość strony',
@@ -21,19 +21,19 @@ echo render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
 
 echo render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
     'name' => 'gutter',
-    'label' => 'Odstęp kafelków (w pikselach)',
-    'help' => 'Ustawia odstęp w pikselach pomiędzy modułami w wierszu.',
+    'label' => $trans('Odstęp kafelków (w pikselach)'),
+    'help' => $trans('Ustawia odstęp w pikselach pomiędzy modułami w wierszu.'),
 ]);
 
 echo render(ACTIONS_PATH.'/admin/parts/input/colorpicker.html.php', [
     'name' => 'bgColor',
-    'label' => 'Kolor tła',
-    'help' => 'Pozwala na wybranie koloru tła wiersza. Zostaw puste jeżeli nie chcesz ustawiać koloru.',
+    'label' => $trans('Kolor tła'),
+    'help' => $trans('Pozwala na wybranie koloru tła wiersza. Zostaw puste jeżeli nie chcesz ustawiać koloru.'),
 ]);
 
 echo render(ACTIONS_PATH.'/admin/parts/input/image.html.php', [
     'name' => 'bgImage',
-    'label' => 'Zdjęcie tła',
-    'placeholder' => 'Ścieżka do pliku zdjęcia',
-    'help' => 'Pozwala na wybranie zdjęcia w tle wiersza. Zostaw puste jeżeli nie chcesz zdjęcia tła.',
+    'label' => $trans('Zdjęcie tła'),
+    'placeholder' => $trans('Ścieżka do pliku zdjęcia'),
+    'help' => $trans('Pozwala na wybranie zdjęcia w tle wiersza. Zostaw puste jeżeli nie chcesz zdjęcia tła.'),
 ]);

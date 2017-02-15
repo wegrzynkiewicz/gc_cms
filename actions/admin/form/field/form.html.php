@@ -8,22 +8,22 @@
             <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
-                    'label' => 'Nazwa pola',
+                    'label' => $trans('Nazwa pola'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'help',
-                    'label' => 'Krótki opis',
-                    'help' => 'Warto poinstruować użytkownika co należy wpisać w to pole.',
+                    'label' => $trans('Krótki opis'),
+                    'help' => $trans('Warto poinstruować użytkownika co należy wpisać w to pole.'),
                 ])?>
 
                 <?php if ($field_id == 0): ?>
                     <?=render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
                         'name' => 'type',
-                        'label' => 'Typ pola',
-                        'help' => 'Typ pola określa jego wygląd i zachowanie. Typu nie można później zmienić.',
-                        'options' => $config['formFieldTypes'],
-                        'firstOption' => 'Wybierz typ pola',
+                        'label' => $trans('Typ pola'),
+                        'help' => $trans('Typ pola określa jego wygląd i zachowanie. Typu nie można później zmienić.'),
+                        'options' => array_trans($config['formFieldTypes']),
+                        'firstOption' => $trans('Wybierz typ pola'),
                     ])?>
                 <?php endif ?>
             </div>
@@ -37,7 +37,7 @@
             </div>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => 'Zapisz węzeł',
+                'saveLabel' => $trans('Zapisz węzeł'),
             ])?>
 
         </form>

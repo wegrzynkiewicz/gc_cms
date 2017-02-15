@@ -46,7 +46,7 @@ $tree = GC\Model\Product\Node::select()
                 </div>
             <?php endif?>
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => 'Zapisz pozycję',
+                'saveLabel' => $trans('Zapisz pozycję'),
             ])?>
         </form>
     </div>

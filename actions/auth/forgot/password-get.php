@@ -26,8 +26,8 @@ $headTitle = $trans('Zapomniałem hasła');
 
                             <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                                 'name' => 'login',
-                                'label' => 'Adres email',
-                                'help' => 'Na wprowadzony powyżej adres email zostanie wysłane nowe hasło',
+                                'label' => $trans('Adres email'),
+                                'help' => $trans('Na wprowadzony powyżej adres email zostanie wysłane nowe hasło'),
                             ])?>
 
                             <button type="submit" class="btn btn-lg btn-success btn-block">

@@ -1,15 +1,15 @@
 <div class="form-group">
-    <label class="col-md-12 col-sm-12 col-xs-12" for="<?=e($name)?>">
-        <?=$trans($label)?>
+    <label class="col-md-12 col-sm-12 col-xs-12" for="<?=$name?>">
+        <?=$label?>
     </label>
     <div class="col-md-12 col-sm-12 col-xs-12">
-        <div id="color_<?=e($name)?>" class="input-group colorpicker-component">
+        <div id="color_<?=$name?>" class="input-group colorpicker-component">
             <span class="input-group-addon">
                 <i style="background-color: rgb(0, 0, 0);"></i>
             </span>
             <input
-                id="<?=e($name)?>"
-                name="<?=e($name)?>"
+                id="<?=$name?>"
+                name="<?=$name?>"
                 value="<?=e(post($name))?>"
                 type="text"
                 autocomplete="off"
@@ -17,7 +17,7 @@
         </div>
         <?php if (isset($help)): ?>
             <span class="help-block">
-                <?=$trans($help)?>
+                <?=$help?>
             </span>
         <?php endif ?>
     </div>
@@ -25,7 +25,7 @@
 
 <script>
     $(function() {
-        $('#color_<?=e($name)?>').colorpicker({
+        $('#color_<?=$name?>').colorpicker({
             align: 'left',
             customClass: 'colorpicker-2x',
             sliders: {

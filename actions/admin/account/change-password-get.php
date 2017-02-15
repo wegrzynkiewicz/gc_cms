@@ -29,27 +29,27 @@ $_POST = [];
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'old_password',
                     'type' => 'password',
-                    'label' => 'Stare hasło',
-                    'help' => 'Wprowadź swoje stare hasło dla bezpieczeństwa',
+                    'label' => $trans('Stare hasło'),
+                    'help' => $trans('Wprowadź swoje stare hasło dla bezpieczeństwa'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'new_password',
                     'type' => 'password',
-                    'label' => 'Nowe hasło',
-                    'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', $config['password']['minLength']),
+                    'label' => $trans('Nowe hasło'),
+                    'help' => $trans('Twoje hasło musi składać się z przynajmniej %s znaków', [$config['password']['minLength']]),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'confirm_password',
                     'type' => 'password',
-                    'label' => 'Powtórz nowe hasło',
-                    'help' => 'Powtórz swoje nowe hasło dla bezpieczeństwa',
+                    'label' => $trans('Powtórz nowe hasło'),
+                    'help' => $trans('Powtórz swoje nowe hasło dla bezpieczeństwa'),
                 ])?>
             </div>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => 'Zmień hasło',
+                'saveLabel' => $trans('Zmień hasło'),
             ])?>
 
         </form>

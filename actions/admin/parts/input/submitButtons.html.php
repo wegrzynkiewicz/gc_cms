@@ -13,7 +13,7 @@ $cancelHref = isset($cancelHref) ? $cancelHref : $breadcrumbs->getBeforeLast('ur
         <div class="col-md-6 col-sm-6 col-xs-6 text-right">
             <button type="submit" class="btn btn-success btn-md">
                 <i class="fa fa-floppy-o fa-fw"></i>
-                <?=$trans($saveLabel)?>
+                <?=$saveLabel?>
             </button>
         </div>
     <?php endif ?>

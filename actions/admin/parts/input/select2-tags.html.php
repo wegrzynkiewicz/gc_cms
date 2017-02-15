@@ -1,11 +1,11 @@
 <div class="form-group">
-    <label class="col-md-12 col-sm-12 col-xs-12" for="<?=e($name)?>">
+    <label class="col-md-12 col-sm-12 col-xs-12" for="<?=$name?>">
         <?=$trans($label)?>
     </label>
     <div class="col-md-12 col-sm-12 col-xs-12">
         <select
-            id="<?=e($name)?>"
-            name="<?=e($name)?>[]"
+            id="<?=$name?>"
+            name="<?=$name?>[]"
             multiple="multiple"
             class="form-control input hideSearch">
 
@@ -24,14 +24,14 @@
 
 <script>
     $(function() {
-        $("#<?=e($name)?>").select2({
+        $("#<?=$name?>").select2({
             <?php if (isset($placeholder)): ?>
                 placeholder: "<?=$trans($placeholder)?>",
             <?php endif ?>
             tags: true,
             minimumResultsForSearch: Infinity
         });
-        $('#<?=e($name)?>').on('select2:opening select2:close', function(e){
+        $('#<?=$name?>').on('select2:opening select2:close', function(e){
             $('body').toggleClass('kill-all-select2-dropdowns', e.type=='select2:opening');
         });
     });

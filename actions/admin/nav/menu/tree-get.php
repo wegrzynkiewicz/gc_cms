@@ -56,7 +56,7 @@ $menuTree = GC\Model\Menu\Menu::select()
             <?php endif?>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => 'Zapisz pozycję',
+                'saveLabel' => $trans('Zapisz pozycję'),
             ])?>
 
         </form>

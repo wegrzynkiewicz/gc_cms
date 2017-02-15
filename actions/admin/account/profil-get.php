@@ -30,13 +30,13 @@ $_POST = $staff->getData();
             <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/select2-language.html.php', [
                     'name' => 'lang',
-                    'label' => 'Język',
-                    'help' => 'Wyświetla panel i komunikaty w tym języku',
+                    'label' => $trans('Język'),
+                    'help' => $trans('Wyświetla panel i komunikaty w tym języku'),
                 ])?>
             </div>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => 'Zapisz profil',
+                'saveLabel' => $trans('Zapisz profil'),
             ])?>
 
         </form>

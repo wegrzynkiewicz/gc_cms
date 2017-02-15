@@ -31,15 +31,15 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                             <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                                 'name' => 'new_password',
                                 'type' => 'password',
-                                'label' => 'Nowe hasło',
+                                'label' => $trans('Nowe hasło'),
                                 'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', $config['password']['minLength']),
                             ])?>
 
                             <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                                 'name' => 'confirm_password',
                                 'type' => 'password',
-                                'label' => 'Powtórz nowe hasło',
-                                'help' => 'Powtórz swoje nowe hasło w celu wyeliminowania pomyłki',
+                                'label' => $trans('Powtórz nowe hasło'),
+                                'help' => $trans('Powtórz swoje nowe hasło w celu wyeliminowania pomyłki'),
                             ])?>
 
                             <button type="submit" class="btn btn-lg btn-success btn-block">

@@ -33,8 +33,8 @@ $_POST = array_merge($module, $settings);
                     <legend><?=$trans('Ustawienia galerii zdjęć')?></legend>
                     <?=render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
                         'name' => 'theme',
-                        'label' => 'Szablon',
-                        'help' => 'Wybierz jeden z dostępnych szablonów galerii',
+                        'label' => $trans('Szablon'),
+                        'help' => $trans('Wybierz jeden z dostępnych szablonów galerii'),
                         'options' => $config['moduleThemes']['gallery'],
                     ])?>
                 </fieldset>
@@ -56,7 +56,7 @@ $_POST = array_merge($module, $settings);
             </div>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => 'Zapisz',
+                'saveLabel' => $trans('Zapisz'),
             ])?>
 
         </form>

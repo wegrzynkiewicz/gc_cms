@@ -8,12 +8,12 @@ if ($menu_id) {
 
 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
     'name' => 'destination',
-    'label' => 'Pełny adres do strony WWW',
-    'help' => 'Wpisz adres strony do której węzeł ma przekierowywać',
+    'label' => $trans('Pełny adres do strony WWW'),
+    'help' => $trans('Wpisz adres strony do której węzeł ma przekierowywać'),
 ])?>
 
 <?=render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
     'name' => 'target',
-    'label' => 'Sposób załadowania adresu',
+    'label' => $trans('Sposób załadowania adresu'),
     'options' => $config['navNodeTargets'],
 ])?>

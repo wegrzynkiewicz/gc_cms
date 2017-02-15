@@ -53,7 +53,7 @@ $modules = GC\Model\Module\Module::joinAllWithKeyByForeign($frame_id);
             <?php endif ?>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => 'Zapisz pozycje kafelków',
+                'saveLabel' => $trans('Zapisz pozycje kafelków'),
             ])?>
 
         </form>

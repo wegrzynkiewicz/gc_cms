@@ -12,5 +12,5 @@ $_POST = $item;
 
 echo render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
     'name' => 'name',
-    'label' => 'Nazwa pojedyńczej zakładki',
+    'label' => $trans('Nazwa pojedyńczej zakładki'),
 ])?>

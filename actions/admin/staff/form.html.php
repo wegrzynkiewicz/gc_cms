@@ -15,32 +15,32 @@ $groupOptions = GC\Model\Staff\Group::select()
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/image.html.php', [
                     'name' => 'avatar',
-                    'label' => 'Avatar pracownika',
-                    'placeholder' => 'Ścieżka do pliku zdjęcia',
+                    'label' => $trans('Avatar pracownika'),
+                    'placeholder' => $trans('Ścieżka do pliku zdjęcia'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
-                    'label' => 'Imię i nazwisko pracownika',
+                    'label' => $trans('Imię i nazwisko pracownika'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'email',
-                    'label' => 'Adres E-mail',
-                    'help' => 'Adres E-mailowy służy do logowaniu pracownika do panelu',
+                    'label' => $trans('Adres E-mail'),
+                    'help' => $trans('Adres E-mailowy służy do logowaniu pracownika do panelu'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/select2-multi.html.php', [
                     'name' => 'groups',
-                    'label' => 'Przynależność do grup pracowników',
-                    'help' => 'Możesz wybrać jaką pracownik ma pełnić funkcję i jakie uprawnienia otrzyma. Pracownik może przynależyć do wielu grup.',
+                    'label' => $trans('Przynależność do grup pracowników'),
+                    'help' => $trans('Możesz wybrać jaką pracownik ma pełnić funkcję i jakie uprawnienia otrzyma. Pracownik może przynależyć do wielu grup.'),
                     'options' => $groupOptions,
                     'selectedValues' => $groups,
                 ])?>
             </div>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => 'Zapisz ustawienia',
+                'saveLabel' => $trans('Zapisz ustawienia'),
             ])?>
 
         </form>

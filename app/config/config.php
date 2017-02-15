@@ -208,8 +208,8 @@ return [
     'database' => [
         'dns' => 'mysql:host=localhost;dbname=_gc_cms;charset=utf8',
         'host' => 'localhost',
-        'username' => 'tester',
-        'password' => 'tester',
+        'username' => 'root',
+        'password' => '',
         'name' => '_gc_cms',
         'prefix' => 'gc_'
     ],

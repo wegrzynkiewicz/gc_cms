@@ -31,8 +31,8 @@ $_POST = $module;
             <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
                     'name' => 'theme',
-                    'label' => 'Szablon',
-                    'help' => 'Wybierz jeden z dostępnych szablonów slajdera zdjęć',
+                    'label' => $trans('Szablon'),
+                    'help' => $trans('Wybierz jeden z dostępnych szablonów slajdera zdjęć'),
                     'options' => $config['moduleThemes']['image-slider'],
                 ])?>
             </div>
@@ -43,7 +43,7 @@ $_POST = $module;
             </div>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => 'Zapisz',
+                'saveLabel' => $trans('Zapisz'),
             ])?>
 
         </form>

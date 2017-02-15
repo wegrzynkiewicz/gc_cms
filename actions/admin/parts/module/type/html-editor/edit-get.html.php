@@ -12,11 +12,11 @@ $_POST['content'] = $content;
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/textarea.html.php', [
                 'name' => 'content',
-                'label' => 'Treść modułu',
+                'label' => $trans('Treść modułu'),
             ])?>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => 'Zapisz moduł tekstowy',
+                'saveLabel' => $trans('Zapisz moduł tekstowy'),
             ])?>
 
         </form>

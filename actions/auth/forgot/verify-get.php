@@ -26,19 +26,19 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                                     'name' => 'new_password',
                                     'type' => 'password',
-                                    'label' => 'Nowe hasło',
-                                    'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', $config['password']['minLength']),
+                                    'label' => $trans('Nowe hasło'),
+                                    'help' => $trans('Twoje hasło musi składać się z przynajmniej %s znaków', [$config['password']['minLength']]),
                                 ])?>
 
                                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                                     'name' => 'confirm_password',
                                     'type' => 'password',
-                                    'label' => 'Powtórz nowe hasło',
-                                    'help' => 'Powtórz swoje nowe hasło dla bezpieczeństwa',
+                                    'label' => $trans('Powtórz nowe hasło'),
+                                    'help' => $trans('Powtórz swoje nowe hasło dla bezpieczeństwa'),
                                 ])?>
 
                                 <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                                    'saveLabel' => 'Zmień hasło',
+                                    'saveLabel' => $trans('Zmień hasło'),
                                     'cancelHref' => $uri->make('/auth/login'),
                                 ])?>
                             </form>

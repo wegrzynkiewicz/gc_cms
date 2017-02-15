@@ -1,12 +1,12 @@
 <?php $type = isset($type) ? $type : 'text' ?>
 <div class="form-group">
-    <label class="col-md-12 col-sm-12 col-xs-12" for="<?=e($name)?>">
+    <label class="col-md-12 col-sm-12 col-xs-12" for="<?=$name?>">
         <?=$trans($label)?>
     </label>
     <div class="col-md-12 col-sm-12 col-xs-12">
         <input
-            id="<?=e($name)?>"
-            name="<?=e($name)?>"
+            id="<?=$name?>"
+            name="<?=$name?>"
             <?php if (isset($placeholder)): ?>
                 placeholder="<?=$trans($placeholder)?>"
             <?php endif ?>

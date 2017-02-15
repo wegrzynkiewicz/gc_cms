@@ -15,14 +15,14 @@ $pageOptions = GC\Model\Page::select()
 
 <?=render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
     'name' => 'destination',
-    'label' => 'Strona',
-    'help' => 'Wybierz stronę do której wezeł ma kierować',
+    'label' => $trans('Strona'),
+    'help' => $trans('Wybierz stronę do której wezeł ma kierować'),
     'options' => $pageOptions,
-    'firstOption' => 'Wybierz stronę',
+    'firstOption' => $trans('Wybierz stronę'),
 ])?>
 
 <?=render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
     'name' => 'target',
-    'label' => 'Sposób załadowania adresu',
+    'label' => $trans('Sposób załadowania adresu'),
     'options' => $config['navNodeTargets'],
 ])?>

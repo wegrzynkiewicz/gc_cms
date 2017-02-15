@@ -13,7 +13,7 @@ $_POST = $settings;
 
 <?=render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
     'name' => 'thumbsPerRow',
-    'label' => 'Ilość miniaturek na wiersz galerii',
+    'label' => $trans('Ilość miniaturek na wiersz galerii'),
     'options' => [
         12 => 12,
         6 => 6,
@@ -26,6 +26,6 @@ $_POST = $settings;
 
 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
     'name' => 'gutter',
-    'label' => 'Odstęp pomiędzy miniaturkami (w pikselach)',
-    'help' => 'Ustawia odstęp w pikselach pomiędzy miniaturkami w wierszu.',
+    'label' => $trans('Odstęp pomiędzy miniaturkami (w pikselach)'),
+    'help' => $trans('Ustawia odstęp w pikselach pomiędzy miniaturkami w wierszu.'),
 ])?>

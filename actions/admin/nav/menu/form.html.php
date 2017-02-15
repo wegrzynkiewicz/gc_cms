@@ -8,15 +8,15 @@
             <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
-                    'label' => 'Nazwa węzła',
+                    'label' => $trans('Nazwa węzła'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
                     'name' => 'type',
-                    'label' => 'Typ węzła',
-                    'help' => 'Wybierz typ węzła nawigacji w menu',
+                    'label' => $trans('Typ węzła'),
+                    'help' => $trans('Wybierz typ węzła nawigacji w menu'),
                     'options' => $config['nodeTypes'],
-                    'firstOption' => 'Wybierz typ węzła',
+                    'firstOption' => $trans('Wybierz typ węzła'),
                 ])?>
             </div>
 
@@ -27,7 +27,7 @@
             </div>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => 'Zapisz węzeł',
+                'saveLabel' => $trans('Zapisz węzeł'),
             ])?>
 
         </form>

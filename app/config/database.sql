@@ -72,8 +72,8 @@ CREATE TABLE `gc_frames` (
   `name` text NOT NULL,
   `type` varchar(32) NOT NULL,
   `lang` varchar(2) NOT NULL,
-  `creation_date` datetime NOT NULL,
-  `modify_date` datetime NOT NULL,
+  `creation_datetime` datetime NOT NULL,
+  `modify_datetime` datetime NOT NULL,
   `image` tinytext NOT NULL,
   `keywords` text NOT NULL,
   `description` text NOT NULL,
@@ -150,7 +150,7 @@ CREATE TABLE `gc_modules` (
 CREATE TABLE `gc_module_files` (
   `file_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` tinytext NOT NULL,
-  `url` tinytext NOT NULL,
+  `uri` tinytext NOT NULL,
   `settings` text NOT NULL,
   PRIMARY KEY (`file_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -279,6 +279,15 @@ CREATE TABLE `gc_product_membership` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
+CREATE TABLE `gc_product_meta` (
+  `product_id` int(10) unsigned NOT NULL,
+  `name` varchar(32) NOT NULL,
+  `value` tinytext NOT NULL,
+  KEY `product_id` (`product_id`),
+  CONSTRAINT `gc_product_meta_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `gc_products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
 CREATE TABLE `gc_product_nodes` (
   `node_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `frame_id` int(10) unsigned NOT NULL,
@@ -308,14 +317,6 @@ CREATE TABLE `gc_product_tree` (
   CONSTRAINT `gc_product_tree_ibfk_3` FOREIGN KEY (`parent_id`) REFERENCES `gc_product_tree` (`node_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `gc_product_tree_ibfk_4` FOREIGN KEY (`node_id`) REFERENCES `gc_product_nodes` (`node_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `gc_product_tree_ibfk_5` FOREIGN KEY (`tax_id`) REFERENCES `gc_product_taxonomies` (`tax_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-CREATE TABLE `gc_sessions` (
-  `session_id` varchar(40) NOT NULL,
-  `update_datetime` datetime NOT NULL,
-  `data` mediumtext NOT NULL,
-  PRIMARY KEY (`session_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -370,4 +371,4 @@ CREATE TABLE `gc_widgets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
--- 2017-01-14 23:45:09
+-- 2017-02-15 22:23:10

@@ -6,7 +6,7 @@
                 <input
                     type="checkbox"
                     class="tree-checkbox"
-                    name="<?=e($name)?>[]"
+                    name="<?=$name?>[]"
                     <?=checked(in_array($primary_id, $checkedValues))?>
                     value="<?=e($primary_id)?>">
                 <?=e($node['name'])?>

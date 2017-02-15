@@ -32,7 +32,7 @@ $_POST['content'] = $content;
             <div id="items"></div>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => 'Zapisz położenie zakładek',
+                'saveLabel' => $trans('Zapisz położenie zakładek'),
             ])?>
         </form>
     </div>
@@ -55,7 +55,7 @@ $_POST['content'] = $content;
             <div class="modal-body">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
-                    'label' => 'Nazwa pojedyńczej zakładki',
+                    'label' => $trans('Nazwa pojedyńczej zakładki'),
                 ])?>
             </div>
             <div class="modal-footer">

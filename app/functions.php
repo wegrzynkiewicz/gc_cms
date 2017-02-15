@@ -322,6 +322,14 @@ function array_rebuild(array $array, $callback)
 }
 
 /**
+ *
+ */
+function array_trans(array $array)
+{
+   return array_rebuild($array, $GLOBALS['trans']);
+}
+
+/**
  * Dzieli tablice na $p równych tablic
  */
 function array_partition(array $array, $p)

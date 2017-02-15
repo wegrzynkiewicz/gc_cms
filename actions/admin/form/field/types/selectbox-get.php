@@ -14,8 +14,8 @@ if ($field_id > 0) {
 <?=render(ACTIONS_PATH.'/admin/parts/input/select2-tags.html.php', [
     'id' => 'options',
     'name' => 'options',
-    'label' => 'Możliwe wybory',
-    'help' => 'Należy wpisać dostępne dla użytkowników wartości do wybrania. Należy potwierdzić klawiszem ENTER.',
+    'label' => $trans('Możliwe wybory'),
+    'help' => $trans('Należy wpisać dostępne dla użytkowników wartości do wybrania. Należy potwierdzić klawiszem ENTER.'),
     'options' => $options,
     'selectedValues' => $options,
 ])?>

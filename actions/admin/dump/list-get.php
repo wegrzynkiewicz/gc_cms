@@ -72,7 +72,7 @@ $dumps = GC\Model\Dump::select()->order('creation_datetime', 'DESC')->fetchByPri
             <div class="modal-body">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
-                    'label' => 'Nazwa kopii zapasowej',
+                    'label' => $trans('Nazwa kopii zapasowej'),
                 ])?>
             </div>
             <div class="modal-footer">

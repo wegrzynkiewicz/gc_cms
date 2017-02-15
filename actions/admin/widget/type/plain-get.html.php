@@ -19,13 +19,13 @@ $_POST['content'] = $content;
             <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/textarea.html.php', [
                     'name' => 'content',
-                    'label' => 'Treść widżetu',
+                    'label' => $trans('Treść widżetu'),
                 ])?>
             </div>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'cancelHref' => "/admin/widget/list",
-                'saveLabel' => 'Zapisz zmiany',
+                'saveLabel' => $trans('Zapisz zmiany'),
             ])?>
 
         </form>

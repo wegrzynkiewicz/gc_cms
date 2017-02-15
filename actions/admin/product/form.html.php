@@ -37,23 +37,23 @@ foreach ($taxonomies as $tax_id => $taxonomy) {
             <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
-                    'label' => 'Nazwa produktu',
+                    'label' => $trans('Nazwa produktu'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'keywords',
-                    'label' => 'Tagi i słowa kluczowe (meta keywords)',
+                    'label' => $trans('Tagi i słowa kluczowe (meta keywords)'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/textarea.html.php', [
                     'name' => 'description',
-                    'label' => 'Opis podstrony (meta description)',
+                    'label' => $trans('Opis podstrony (meta description)'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/image.html.php', [
                     'name' => 'image',
-                    'label' => 'Zdjęcie wyróżniające',
-                    'placeholder' => 'Ścieżka do pliku zdjęcia',
+                    'label' => $trans('Zdjęcie wyróżniające'),
+                    'placeholder' => $trans('Ścieżka do pliku zdjęcia'),
                 ])?>
             </div>
 
@@ -74,7 +74,7 @@ foreach ($taxonomies as $tax_id => $taxonomy) {
             <?php endforeach ?>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => 'Zapisz wpis',
+                'saveLabel' => $trans('Zapisz wpis'),
             ])?>
         </form>
     </div>

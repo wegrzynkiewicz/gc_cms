@@ -6,11 +6,11 @@ $_POST = $image;
 
 echo render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
     'name' => 'name',
-    'label' => 'Krótki tytuł slajdu',
+    'label' => $trans('Krótki tytuł slajdu'),
 ]);
 
 echo render(ACTIONS_PATH.'/admin/parts/input/image.html.php', [
     'name' => 'uri',
-    'label' => 'Slajd',
-    'placeholder' => 'Ścieżka do pliku zdjęcia',
+    'label' => $trans('Slajd'),
+    'placeholder' => $trans('Ścieżka do pliku zdjęcia'),
 ]);

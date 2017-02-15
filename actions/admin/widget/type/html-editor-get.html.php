@@ -18,11 +18,11 @@ $_POST['content'] = $content;
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/textarea.html.php', [
                 'name' => 'content',
-                'label' => 'Treść widżetu',
+                'label' => $trans('Treść widżetu'),
             ])?>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => 'Zapisz zmiany',
+                'saveLabel' => $trans('Zapisz zmiany'),
             ])?>
 
         </form>

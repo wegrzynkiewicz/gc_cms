@@ -8,8 +8,8 @@
             <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
-                    'label' => 'Nazwa grupy',
-                    'help' => 'Nazwa grupy pomaga określić odpowiedzialność członków grupy (np. Sprzedawcy, Administratorzy)'
+                    'label' => $trans('Nazwa grupy'),
+                    'help' => $trans('Nazwa grupy pomaga określić odpowiedzialność członków grupy (np. Sprzedawcy, Administratorzy)')
                 ])?>
 
                 <fieldset>
@@ -37,7 +37,7 @@
             </div>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => 'Zapisz grupę',
+                'saveLabel' => $trans('Zapisz grupę'),
             ])?>
 
         </form>
