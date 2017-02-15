@@ -9,6 +9,7 @@ $staff = GC\Auth\Staff::createFromSession();
 GC\Auth\CSRFToken::routines($request);
 
 $uri->extendMask('/admin%s');
+$translator->domain = 'admin';
 
 # utworzenie okruszków chleba dla całego panelu admina
 $breadcrumbs = new GC\Breadcrumbs();
