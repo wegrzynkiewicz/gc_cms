@@ -2,22 +2,35 @@
 
 namespace GC\Auth;
 
-use GC\Url;
-use GC\Logger;
-use GC\Response;
 use GC\Storage\AbstractEntity;
 use GC\Model\Staff\Staff as ModelStaff;
-use GC\Model\Staff\Session as ModelStaffSession;
 use GC\Model\Staff\Permission as Permission;
 
 class Staff extends AbstractEntity
 {
     private $permissions = [];
 
-    public function __construct(array $data = [], array $permissions = [])
+    public function __construct($staff_id)
     {
+        # pobierz dane o pracowniku z tabelki sesji
+        $entity = ModelStaff::select()
+            ->equals('staff_id', $staff_id)
+            ->fetch();
+
+        # jezeli sesja pracownika nie istnieje w bazie danych
+        if (!$entity) {
+            static::abort("Staff does not exists in database");
+        }
+
         # całość jest łatwym do odczytu obiektem Entity
-        parent::__construct($data);
+        parent::__construct($entity);
+
+        # pobiera uprawnienia pracownika
+        $this->permissions = Permission::select()
+            ->fields('DISTINCT name')
+            ->source('::staff_membership JOIN ::staff_permissions USING(group_id)')
+            ->equals('staff_id', $staff_id)
+            ->fetchByMap('name', 'name');
 
         # jezeli istnieje flaga, ze trzeba zmienić hasło wtedy przekieruj
         if ($this->getProperty('force_change_password', false)) {
@@ -94,24 +107,17 @@ class Staff extends AbstractEntity
         # rozpoczyna sesję
         static::start();
 
-        $staff_id = getValueByKeys($_SESSION, ['staff', 'entity', 'staff_id'], null);
+        $staff_id = getValueByKeys($_SESSION, ['staff', 'staff_id'], null);
 
         if ($staff_id === null) {
             static::abort('Session variable does not contain valid data');
-        }
-
-        if ($_SESSION['staff']['expires'] <= time()) {
-            static::abort('Session expired', '/auth/session-expired');
         }
 
         # aktualizacja czasu wygaśnięcia sesji
         static::refreshSessionLifeTime($staff_id);
 
         # utworzenie obiektu pracownika
-        return new static(
-            $_SESSION['staff']['entity'],
-            $_SESSION['staff']['permissions']
-        );
+        return new static($_SESSION['staff']['staff_id']);
     }
 
     /**
@@ -132,29 +138,7 @@ class Staff extends AbstractEntity
         # rozpoczyna sesję
         static::start();
 
-        # pobierz dane o pracowniku z tabelki sesji
-        $entity = ModelStaff::select()
-            ->equals('staff_id', $staff_id)
-            ->fetch();
-
-        # jezeli sesja pracownika nie istnieje w bazie danych
-        if (!$entity) {
-            static::abort("Staff does not exists in database");
-        }
-
-        $_SESSION['staff']['entity'] = $entity;
-
-        # pobiera uprawnienia pracownika
-        $permissions = Permission::select()
-            ->fields('DISTINCT name')
-            ->source('::staff_membership JOIN ::staff_permissions USING(group_id)')
-            ->equals('staff_id', $staff_id)
-            ->fetchByMap('name', 'name');
-
-        $_SESSION['staff']['permissions'] = $permissions;
-
-        # aktualizacja czasu wygaśnięcia sesji
-        static::refreshSessionLifeTime($staff_id);
+        $_SESSION['staff']['staff_id'] = $staff_id;
     }
 
     /**
@@ -204,6 +188,15 @@ class Staff extends AbstractEntity
      */
     protected static function refreshSessionLifeTime($staff_id)
     {
+        # jeżeli czas wygaśnięcia sesji istnieje
+        if (isset($_SESSION['staff']['expires'])) {
+
+            # jeżeli minął czas trwania sesji
+            if ($_SESSION['staff']['expires'] <= time()) {
+                static::abort('Session expired', '/auth/session-expired');
+            }
+        }
+
         # aktualizacja czasu wygaśnięcia sesji
         $_SESSION['staff']['expires'] = time() + $GLOBALS['config']['session']['staff']['lifetime'];
     }

@@ -23,7 +23,7 @@
             <div class="pull-right" style="margin-right: 30px">
                 <?=render(ACTIONS_PATH.'/admin/nav/menu/list-preview/'.$node['type'].'.html.php', [
                     'node' => $node,
-                    'pages' => $pages,
+                    'frames' => $frames,
                 ])?>
             </div>
 
@@ -34,7 +34,7 @@
             <ol>
                 <?=render(ACTIONS_PATH.'/admin/nav/menu/tree-items.html.php', [
                     'menu' => $node,
-                    'pages' => $pages,
+                    'frames' => $frames,
                 ])?>
             </ol>
         <?php endif ?>

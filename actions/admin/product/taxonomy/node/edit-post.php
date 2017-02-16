@@ -15,7 +15,7 @@ $node = GC\Model\Product\Node::select()
     ->fetch();
 
 # zaktualizuj ramkę po frame_id
-GC\Model\Module\Frame::update()
+GC\Model\Frame::update()
     ->set([
         'name' => post('name'),
         'keywords' => post('keywords'),

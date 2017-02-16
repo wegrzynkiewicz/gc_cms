@@ -1,6 +1,6 @@
 <?php
 
-$frame_id = GC\Model\Module\Frame::insert([
+$frame_id = GC\Model\Frame::insert([
     'name' => post('name'),
     'type' => 'post',
     'keywords' => post('keywords'),

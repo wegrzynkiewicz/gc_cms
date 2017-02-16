@@ -3,7 +3,7 @@
 namespace GC\Storage\Utility;
 
 use GC\Assert;
-use GC\Model\Module\Frame;
+use GC\Model\Frame;
 use GC\Model\Module\Module;
 use GC\Data;
 use GC\Auth\Staff;

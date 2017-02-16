@@ -3,7 +3,7 @@
 require ACTIONS_PATH.'/admin/_import.php';
 require ACTIONS_PATH.'/admin/page/_import.php';
 
-$frame_id = GC\Model\Module\Frame::insert([
+$frame_id = GC\Model\Frame::insert([
     'name' => post('name'),
     'type' => 'page',
     'keywords' => post('keywords'),

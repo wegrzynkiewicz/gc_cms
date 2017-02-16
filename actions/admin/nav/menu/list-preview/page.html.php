@@ -1,8 +1,8 @@
 <?php $dest = $node['destination']; ?>
-<?php if (isset($pages[$dest])): ?>
+<?php if (isset($frames[$dest])): ?>
     <?=$trans($config['nodeTypes']['page'])?>
     <a href="<?=$uri->make("/admin/page/{$dest}/edit")?>">
-        <?=e($pages[$dest]['name'])?>
+        <?=e($frames[$dest]['name'])?>
     </a>
 <?php else: ?>
     <span class="text-danger">

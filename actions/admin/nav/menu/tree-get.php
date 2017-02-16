@@ -4,9 +4,8 @@ require ACTIONS_PATH.'/admin/_import.php';
 require ACTIONS_PATH.'/admin/nav/_import.php';
 require ACTIONS_PATH.'/admin/nav/menu/_import.php';
 
-# pobierz wszystkie strony
-$pages = GC\Model\Page::select()
-    ->source('::frame')
+# pobierz wszystkie rusztowania
+$frames = GC\Model\Frame::select()
     ->equals('lang', $staff->getEditorLang())
     ->order('name', 'ASC')
     ->fetchByPrimaryKey();
@@ -46,7 +45,7 @@ $menuTree = GC\Model\Menu\Menu::select()
                     <?=render(ACTIONS_PATH.'/admin/nav/menu/tree-items.html.php', [
                         'menu' => $menuTree,
                         'nav_id' => $nav_id,
-                        'pages' => $pages,
+                        'frames' => $frames,
                     ])?>
                 </ol>
             <?php else:?>
@@ -106,7 +105,8 @@ $(function(){
     $('#sortable').nestedSortable({
         handle: 'div',
         items: 'li',
-        toleranceElement: '> div'
+        toleranceElement: '> div',
+        maxLevels: <?=$nav['maxlevels']?>
     });
 
     $("#savePosition").submit(function(event) {

@@ -3,7 +3,7 @@
 $module_id = intval(array_shift($_PARAMETERS));
 
 # dodanie ramki
-$frame_id = GC\Model\Module\Frame::insert([
+$frame_id = GC\Model\Frame::insert([
     'name' => post('name'),
     'type' => 'tabs-item',
 ]);

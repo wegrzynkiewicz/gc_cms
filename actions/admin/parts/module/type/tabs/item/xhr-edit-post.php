@@ -8,7 +8,7 @@ $item = GC\Model\Module\Item::select()
     ->equals('item_id', $item_id)
     ->fetch();
 
-GC\Model\Module\Frame::updateByPrimaryId($item['frame_id'], [
+GC\Model\Frame::updateByPrimaryId($item['frame_id'], [
     'name' => post('name'),
 ]);
 

@@ -5,9 +5,6 @@
 # utworzenie obiektu repezentującego pracownika
 $staff = GC\Auth\Staff::createFromSession();
 
-# weryfikacja tokenu CSRF
-GC\Auth\CSRFToken::routines($request);
-
 $uri->extendMask('/admin%s');
 $translator->domain = 'admin';
 

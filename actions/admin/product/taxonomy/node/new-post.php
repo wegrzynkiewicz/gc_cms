@@ -8,7 +8,7 @@ require ACTIONS_PATH.'/admin/product/taxonomy/node/_import.php';
 $name = post('name');
 
 # wstaw ramkę do bazy z podstawowymi danymi
-$frame_id = GC\Model\Module\Frame::insert([
+$frame_id = GC\Model\Frame::insert([
     'name' => $name,
     'type' => 'product-node',
     'keywords' => post('keywords'),

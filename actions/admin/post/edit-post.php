@@ -2,7 +2,7 @@
 
 $post = GC\Model\Post\Post::selectWithFrameByPrimaryId($post_id);
 
-GC\Model\Module\Frame::updateByFrameId($post['frame_id'], [
+GC\Model\Frame::updateByFrameId($post['frame_id'], [
     'name' => post('name'),
     'keywords' => post('keywords'),
     'description' => post('description'),

@@ -4,7 +4,7 @@ require ACTIONS_PATH.'/admin/_import.php';
 require ACTIONS_PATH.'/admin/product/_import.php';
 
 # dodaj ramkę do bazy
-$frame_id = GC\Model\Module\Frame::insert([
+$frame_id = GC\Model\Frame::insert([
     'name' => post('name'),
     'type' => 'product',
     'keywords' => post('keywords'),

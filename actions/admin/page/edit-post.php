@@ -8,7 +8,7 @@ $page = GC\Model\Page::select()
     ->equals('page_id', $page_id)
     ->fetch();
 
-GC\Model\Module\Frame::updateByFrameId($page['frame_id'], [
+GC\Model\Frame::updateByFrameId($page['frame_id'], [
     'name' => post('name'),
     'keywords' => post('keywords'),
     'description' => post('description'),

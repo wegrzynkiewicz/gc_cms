@@ -418,7 +418,9 @@ abstract class AbstractNode extends AbstractModel
 
     public static function createTree(array $list)
     {
-        $rootNode = new static([]);
+        $rootNode = new static([
+            'name' => 'rootNode',
+        ]);
 
         if (count($list) > 0) {
             $nodes = [];

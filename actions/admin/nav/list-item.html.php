@@ -1,7 +1,7 @@
 <tr>
     <td><?=e($nav['name'])?></td>
     <td>
-        <?php if ($tree->hasChildren()): ?>
+        <?php if ($tree and $tree->hasChildren()): ?>
             <div style="margin-left:-20px">
                 <?=render(ACTIONS_PATH.'/admin/parts/taxonomy-preview.html.php', [
                     'tree' => $tree,

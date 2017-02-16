@@ -2,7 +2,7 @@
 
 namespace GC\Storage\Utility;
 
-use GC\Data;
+use GC\Storage\Database;
 
 trait TreeTrait
 {
@@ -23,20 +23,5 @@ trait TreeTrait
         $maxOrder =  Database::getInstance()->fetch($sql, $data);
 
         return $maxOrder['maximum'] + 1;
-    }
-
-    public static function updateByTaxId($tax_id, array $positions)
-    {
-        static::delete()->equals(static::$taxonomy, $tax_id)->execute();
-
-        foreach ($positions as $node) {
-            $parent_id = $node['parent_id'];
-            static::insert([
-                static::$taxonomy => $tax_id,
-                static::$primary => $node['id'],
-                'parent_id' => $parent_id,
-                'position' => static::selectMaxPositionByTaxonomyIdAndParentId($tax_id, $parent_id),
-            ]);
-        }
     }
 }
