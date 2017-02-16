@@ -3,7 +3,7 @@
 require ACTIONS_PATH.'/admin/_import.php';
 require ACTIONS_PATH.'/admin/page/_import.php';
 
-$frame_id = intval(array_shift($_PARAMETERS));
+$frame_id = intval(post('frame_id'));
 
 # pobierz stronę po kluczu głównym
 $page = GC\Model\Frame::select()

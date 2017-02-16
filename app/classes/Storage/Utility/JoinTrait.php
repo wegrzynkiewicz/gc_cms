@@ -2,7 +2,7 @@
 
 namespace GC\Storage\Utility;
 
-use GC\Data;
+use GC\Storage\Database;
 
 /**
  * Zbior funkcji pomagających operować na rekordach które przynależą do jakiejś grupy

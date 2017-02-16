@@ -158,14 +158,6 @@ $count = GC\Model\Frame::select()
             ],
         });
 
-        $('#deleteModalForm').on('submit', function(e) {
-            e.preventDefault();
-            $.post($(this).attr('action'), $(this).serialize(), function() {
-                table.ajax.reload();
-                $('#deleteModal').modal('hide');
-            });
-        });
-
         $('#deleteModal').on('show.bs.modal', function(e) {
             $(this).find('#frame_name').html($(e.relatedTarget).data('name'));
             $(this).find('[name="frame_id"]').val($(e.relatedTarget).data('id'));

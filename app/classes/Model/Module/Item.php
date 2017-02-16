@@ -17,8 +17,7 @@ class Item extends AbstractModel
     public static $frame       = '::module_items JOIN ::frames USING (frame_id)';
 
     use PrimaryTrait;
-    use JoinTrait;
-    use ContainFrameTrait;
+    use JoinTrait; 
 
     public static function deleteItemsByForeign($module_id)
     {
