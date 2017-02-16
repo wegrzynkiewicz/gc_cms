@@ -331,7 +331,7 @@ function absoluteRedirect($location, $code = 303)
     header("Location: {$location}");
 
     $GLOBALS['logger']->info(
-        sprintf("[REDIRECT] %s %s :: Time: %ss :: Memory: %sMiB",
+        sprintf("[REDIRECT] %s %s :: Time: %.3fs :: Memory: %sMiB",
             $code,
             $location,
             microtime(true) - START_TIME,
