@@ -3,18 +3,13 @@
 namespace GC\Model\Module;
 
 use GC\Storage\AbstractModel;
-use GC\Storage\Utility\PrimaryTrait;
 use GC\Storage\Utility\JoinTrait;
-use GC\Data;
 
 class File extends AbstractModel
 {
     public static $table       = '::module_files';
-    public static $primary     = 'file_id';
-    public static $joinTable   = '::module_file_pos';
-    public static $joinForeign = 'module_id';
+    public static $frame       = '::module_files JOIN ::frames USING (frame_id)';
 
-    use PrimaryTrait;
     use JoinTrait;
 
     public static function insertWithModuleId(array $data, $module_id)

@@ -3,7 +3,6 @@
 namespace GC\Model\Staff;
 
 use GC\Storage\AbstractModel;
-use GC\Storage\Utility\PrimaryTrait;
 use GC\Url;
 use GC\Logger;
 use GC\Response;
@@ -15,8 +14,6 @@ class Staff extends AbstractModel
     public static $table   = '::staff';
     public static $primary = 'staff_id';
     public static $session = '::staff JOIN ::staff_sessions USING(staff_id)';
-
-    use PrimaryTrait;
 
     /**
      * Aktualizuje grupy pracownikow dla pracownika o $staff_id

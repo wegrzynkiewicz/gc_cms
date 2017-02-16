@@ -10,7 +10,8 @@ $page = GC\Model\Frame::select()
     ->equals('frame_id', $frame_id)
     ->fetch();
 
-GC\Model\Frame::deleteFrameByPrimaryId($frame_id);
+# usuń stronę i wszystkie jej moduły
+GC\Model\Frame::deleteByFrameId($frame_id);
 
 flashBox($trans('Strona "%s" została usunięta.', [$page['name']]));
 redirect($breadcrumbs->getLast('uri'));

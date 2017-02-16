@@ -1,19 +1,29 @@
 <?php
 
+$module_id = intval(array_shift($_PARAMETERS));
+
+# pobierz moduł po kluczu głównym
 $module = GC\Model\Module\Module::fetchByPrimaryId($module_id);
+
 $moduleType = $module['type'];
 
-$item_id = intval(array_shift($_SEGMENTS));
-$item = GC\Model\Module\Item::select()
+$frame_id = intval(array_shift($_PARAMETERS));
+
+# pobierz zakładkę o numerze $tab_id
+$tab = GC\Model\Module\Tab::select()
     ->source('::frame')
-    ->equals('item_id', $item_id)
+    ->equals('frame_id', $frame_id)
     ->fetch();
-$frame_id = $item['frame_id'];
 
 $uri->extendMask("/{$module_id}%s");
 require ACTIONS_PATH."/admin/parts/module/type/{$moduleType}/_import.php";
-$uri->extendMask("/item/{$item_id}/module%s");
-require ACTIONS_PATH."/admin/parts/module/type/{$moduleType}/item.html.php";
+
+$headTitle = $trans('Moduły zakładki "%s"', [$tab['name']]);
+$uri->extendMask("/tab/{$frame_id}/module%s");
+$breadcrumbs->push([
+    'uri' => $uri->mask("/grid"),
+    'name' => $headTitle,
+]);
 
 $moduleName = intval(array_shift($_SEGMENTS));
 if ($moduleName == 'module') {

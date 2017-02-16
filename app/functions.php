@@ -294,7 +294,7 @@ function normalize($unformattedString)
     static $regex = [
         # usuwa wszystkie znaki oprócz:
         # cyfr, liter, kropki, myślnika, podkreślnika
-        '/[^a-z0-9\._\-]/' => '',
+        '/[^a-z0-9\._\-\/]/' => '',
         # redukuje nadmiar myślinków
         '/[\-]+/' => '-',
         # redukuje nadmiar kropek

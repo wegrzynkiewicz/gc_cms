@@ -50,6 +50,11 @@ $count = GC\Model\Frame::select()
                                     data-sortable="1">
                                     <?=$trans('Nazwa strony')?>
                                 </th>
+                                <th data-name="slug"
+                                    data-searchable="1"
+                                    data-sortable="1">
+                                    <?=$trans('Adres strony')?>
+                                </th>
                                 <th data-name="options"
                                     data-searchable="0"
                                     data-sortable="0"
@@ -105,14 +110,15 @@ $count = GC\Model\Frame::select()
         </a>
     </td>
 
-    <td class="text-right">
-        <a href="<?=$uri->make("/page")?>/{{frame_id}}"
+    <td>
+        <a href="<?=$uri->root('')?>{{slug}}"
             target="_blank"
-            title="<?=$trans('Podejrzyj tą stronę')?>"
-            class="btn btn-primary btn-sm">
-            <i class="fa fa-search fa-fw"></i>
-            <?=$trans('Podgląd')?>
+            title="<?=$trans('Podejrzyj tą stronę')?>">
+            {{slug}}
         </a>
+    </td>
+
+    <td class="text-right">
 
         <a href="<?=$uri->mask()?>/{{frame_id}}/module/grid"
             title="<?=$trans('Wyświetl moduły strony')?>"
@@ -155,6 +161,7 @@ $count = GC\Model\Frame::select()
             columns: [
                 {data: "image"},
                 {data: "name"},
+                {data: "slug"},
             ],
         });
 

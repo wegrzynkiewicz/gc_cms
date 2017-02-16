@@ -1,11 +1,13 @@
 <?php
 
-$item_id = intval(array_pop($_PARAMETERS));
+require ACTIONS_PATH.'/admin/_import.php';
+
+$frame_id = intval(get('frame_id'));
 
 # pobranie zakładki z ramką
-$item = GC\Model\Module\Item::select()
+$item = GC\Model\Module\Tab::select()
     ->source('::frame')
-    ->equals('item_id', $item_id)
+    ->equals('frame_id', $frame_id)
     ->fetch();
 
 $_POST = $item;

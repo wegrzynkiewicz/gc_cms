@@ -13,187 +13,77 @@
 /*                                                                            */
 /******************************************************************************/
 
-# początkowy czas uruchomienia aplikacji
-define('START_TIME', $_SERVER["REQUEST_TIME_FLOAT"]);
+define('START_TIME', $_SERVER["REQUEST_TIME_FLOAT"]); # początkowy czas uruchomienia aplikacji
+define('TEMPLATE', 'bootstrap-example'); # nazwa używanego szablonu
+define('ASSETS_URL', '/assets'); # adres do katalogu z zasobami
+define('ROOT_PATH', realpath(__DIR__.'/../../')); # ścieżka do katalogu głównego serwera www
+define('WEB_PATH', ROOT_PATH.'/web'); # ścieżka do katalogu an który jest nakierowana domena
+define('ACTIONS_PATH', ROOT_PATH.'/actions'); # ścieżka do katalogu z plikami kontrolerów i szablonów
+define('TEMPLATE_PATH', ROOT_PATH.'/templates/'.TEMPLATE); # ścieżka do katalogu z szablonem
+define('TEMPLATE_ASSETS_URL', '/templates/'.TEMPLATE); # adres do zasobów w katalogu z szablonem
 
-# nazwa używanego szablonu
-define('TEMPLATE', 'bootstrap-example');
+chdir(ROOT_PATH); # zmienia bieżący katalog na root
 
-# adres do katalogu z zasobami
-define('ASSETS_URL', '/assets');
-
-# ścieżka do katalogu głównego serwera www
-define('ROOT_PATH', realpath(__DIR__.'/../../'));
-
-# ścieżka do katalogu an który jest nakierowana domena
-define('WEB_PATH', ROOT_PATH.'/web');
-
-# ścieżka do katalogu z plikami kontrolerów i szablonów
-define('ACTIONS_PATH', ROOT_PATH.'/actions');
-
-# ścieżka do katalogu z szablonem
-define('TEMPLATE_PATH', ROOT_PATH.'/templates/'.TEMPLATE);
-
-# adres do zasobów w katalogu z szablonem
-define('TEMPLATE_ASSETS_URL', '/templates/'.TEMPLATE);
-
-# zmienia bieżący katalog na root
-chdir(ROOT_PATH);
-
-# zabrania tworzenia zmiennych z danych wysyłanych przez żądanie
-ini_set('register_globals', 0);
-
-# raportuje napotkane błędy
-ini_set('error_reporting', E_ALL);
-
-# włącza wyświetlanie błędów
-ini_set('display_errors', 1);
-
-# włącza wyświetlanie startowych błędów
-ini_set('display_startup_errors', 1);
-
-# zmienia ścieżkę logowania błędów
-ini_set('error_log', ROOT_PATH.'/tmp/logs/'.date('Y-m-d').'.error.log');
-
-# określa maksymalny czas trwania skryptu
-ini_set('max_execution_time', 300);
-
-# ustawienie domyślnej strefy czasowej
-ini_set('date.timezone', 'Europe/Warsaw');
-
-# zmiana nazwy ciastka sesyjnego
-ini_set('session.name', 'PSV');
-
-# częstotliwość z jaką następuje czyszczenie sesji
-ini_set('session.gc_probability', 10);
-
+ini_set('register_globals', 0); # zabrania tworzenia zmiennych z danych wysyłanych przez żądanie
+ini_set('error_reporting', E_ALL); # raportuje napotkane błędy
+ini_set('display_errors', 1); # włącza wyświetlanie błędów
+ini_set('display_startup_errors', 1); # włącza wyświetlanie startowych błędów
+ini_set('error_log', ROOT_PATH.'/tmp/logs/'.date('Y-m-d').'.error.log'); # zmienia ścieżkę logowania błędów
+ini_set('max_execution_time', 300); # określa maksymalny czas trwania skryptu
+ini_set('date.timezone', 'Europe/Warsaw'); # ustawienie domyślnej strefy czasowej
+ini_set('session.name', 'PSV'); # zmiana nazwy ciastka sesyjnego
+ini_set('session.gc_probability', 10); # częstotliwość z jaką następuje czyszczenie sesji
 ini_set('session.use_trans_sid', 0);
-
 ini_set('session.use_strict_mode', 1);
+ini_set('session.cookie_httponly', 1); # ustawia ciastko tylko do odczytu, nie jest możliwe odczyt document.cookie w js
+ini_set('session.use_cookies', 1); # do przechowywania sesji ma użyć ciastka
+ini_set('session.use_only_cookies', 1); # do przechowywania sesji ma używać tylko ciastka!
+ini_set('session.hash_function', 1); # użycie bardziej złożonej funkcji do hashowania ciastka sesyjnego
+// ini_set('session.save_path', ROOT_PATH.'/app/storage/sessions'); # ścieżka w której będą przechowywane pliki sesji
+ini_set('zlib.output_compression_level', 1); # poziom kompresji wyjścia skryptu
 
-# ustawia ciastko tylko do odczytu, nie jest możliwe odczyt document.cookie w js
-ini_set('session.cookie_httponly', 1);
-
-# do przechowywania sesji ma użyć ciastka
-ini_set('session.use_cookies', 1);
-
-# do przechowywania sesji ma używać tylko ciastka!
-ini_set('session.use_only_cookies', 1);
-
-# użycie bardziej złożonej funkcji do hashowania ciastka sesyjnego
-ini_set('session.hash_function', 1);
-
-# ścieżka w której będą przechowywane pliki sesji
-// ini_set('session.save_path', ROOT_PATH.'/app/storage/sessions');
-
-# poziom kompresji wyjścia skryptu
-ini_set('zlib.output_compression_level', 1);
-
-# ustawienie domyślego mimetype i kodowanie
-header("Content-Type: text/html; charset=utf-8");
-
-# nie pozwala przeglądarce na zgadywanie typu mime nieznanego pliku
-header('X-Content-Type-Options: nosniff');
-
-# ustawienie ochrony przeciw XSS, przeglądarka sama wykrywa XSSa
-header('X-XSS-Protection: 1; mode=block');
-
-# usuwa informacje o wykorzystywanej wersji php
-header_remove('X-Powered-By');
+header("Content-Type: text/html; charset=utf-8"); # ustawienie domyślego mimetype i kodowanie
+header('X-Content-Type-Options: nosniff'); # nie pozwala przeglądarce na zgadywanie typu mime nieznanego pliku
+header('X-XSS-Protection: 1; mode=block'); # ustawienie ochrony przeciw XSS, przeglądarka sama wykrywa XSSa
+header_remove('X-Powered-By'); # usuwa informacje o wykorzystywanej wersji php
 
 return [
-
-    # opcje związane z wyświetlaniem błędów
-    'debug' => [
-
-        # zezwala na nietypowe akcje (np: zmiana hasła admina)
-        'enabled' => true,
-
-        # wyświetla komunikat "strona w budowie" za każdym żądaniem
-        'inConstruction' => false,
+    'debug' => [ # opcje związane z wyświetlaniem błędów
+        'enabled' => true, # zezwala na nietypowe akcje (np: zmiana hasła admina)
+        'inConstruction' => false, # wyświetla komunikat "strona w budowie" za każdym żądaniem
     ],
-
-    # związane z nazwą adresu url witryny
-    'seo' => [
-
-        # wartość logiczna, nakazuje przekierowywanie na adres z lub bez https,
-        # null jeżeli możliwość wejścia z każdego protokolu
-        'forceHTTPS' => false,
-
-        # wartość logiczna, nakazuje przekierowywanie na adres z lub bez www,
-        # null jeżeli możliwość wejścia z każdego www.
-        'forceWWW' => false,
-
-        # nakazuje przekierowywanie na zadaną domenę,
-        # null jeżeli możliwość wejścia z każdej domeny.
-        'forceDomain' => null,
-
-        # nakazuje przekierowywanie na zadany port,
-        # null jeżeli możliwość wejścia z każdego portu.
-        'forcePort' => null,
+    'seo' => [ # związane z nazwą adresu url witryny
+        'forceHTTPS' => false, # null jeżeli możliwość wejścia z każdego protokolu, wartość logiczna, nakazuje przekierowywanie na adres z lub bez https,
+        'forceWWW' => false, # null jeżeli możliwość wejścia z każdego www, wartość logiczna, nakazuje przekierowywanie na adres z lub bez www,
+        'forceDomain' => null, # null jeżeli możliwość wejścia z każdej domeny, nakazuje przekierowywanie na zadaną domenę,
+        'forcePort' => null, # null jeżeli możliwość wejścia z każdego portu, nakazuje przekierowywanie na zadany port,
     ],
-
-    # wyświetlana w prawym gornym rogu panelu admina
-    'adminNavbarTitle' => 'Panel Administracyjny',
-
-    # nazwa doklejana do <title> strony w panelu admina
-    'adminHeadTitleBase' => 'Acme Panel Administracyjny',
-
-    # ścieżka do obrazka w przypadku braku obrazka
-    'noImageUrl' => '/admin/images/no-image.jpg',
-
-    # zawiera ustawienia dotyczące polityki haseł
-    'password' => [
-        # minimalna długość hasła
-        'minLength' => 8,
+    'adminNavbarTitle' => 'Panel Administracyjny', # wyświetlana w prawym gornym rogu panelu admina
+    'adminHeadTitleBase' => 'Acme Panel Administracyjny', # nazwa doklejana do <title> strony w panelu admina
+    'noImageUrl' => '/admin/images/no-image.jpg', # ścieżka do obrazka w przypadku braku obrazka
+    'password' => [ # zawiera ustawienia dotyczące polityki haseł
+        'minLength' => 8, # minimalna długość hasła
     ],
-
-    # ustawienia sesji
-    'session' => [
-
-        # ustawienia sesji dla pracownika
-        'staff' => [
-
-            # czas jaki musi upłynąć po zalogowaniu, aby sesja pracownika przedawniła się; w sekundach
-            'lifetime' => 1800,
-
-            # ustawienia ciastka sesyjnego
-            'cookie' => [
-
-                # nazwa ciastka sesyjnego dla pracownika
-                'name' => 'PSS',
-
-                # czas jaki musi upłynąć, aby ciastko wygasło; w sekundach
-                'lifetime' => 3600,
+    'session' => [ # ustawienia sesji
+        'staff' => [ # ustawienia sesji dla pracownika
+            'lifetime' => 1800, # czas jaki musi upłynąć po zalogowaniu, aby sesja pracownika przedawniła się; w sekundach
+            'cookie' => [ # ustawienia ciastka sesyjnego
+                'name' => 'PSS', # nazwa ciastka sesyjnego dla pracownika
+                'lifetime' => 3600, # czas jaki musi upłynąć, aby ciastko wygasło; w sekundach
             ],
         ],
-
-        # ustawienia sesji dla odwiedzającego
-        'visitor' => [
-
-            # czas jaki musi upłynąć po zalogowaniu, aby sesja odwiedzającego przedawniła się; w sekundach
-            'lifetime' => 1800,
-
-            # ustawienia ciastka sesyjnego
-            'cookie' => [
-
-                # nazwa ciastka sesyjnego dla odwiedzającego
-                'name' => 'PSV',
-
-                # czas jaki musi upłynąć po zalogowaniu, aby ciastko przestało być ważne; w sekundach
-                'lifetime' => 3600,
+        'visitor' => [ # ustawienia sesji dla odwiedzającego
+            'lifetime' => 1800, # czas jaki musi upłynąć po zalogowaniu, aby sesja odwiedzającego przedawniła się; w sekundach
+            'cookie' => [ # ustawienia ciastka sesyjnego
+                'name' => 'PSV', # nazwa ciastka sesyjnego dla odwiedzającego
+                'lifetime' => 3600, # czas jaki musi upłynąć po zalogowaniu, aby ciastko przestało być ważne; w sekundach
             ],
         ],
     ],
-
     'avatar' => [
-
-        # ściezka do domyślnego obrazka avatara
-        'noAvatarUrl' => '/admin/images/no-avatar.jpg',
+        'noAvatarUrl' => '/admin/images/no-avatar.jpg', # ściezka do domyślnego obrazka avatara
     ],
-
-    # zawiera parametry połączeniowe do bazy danych
-    'database' => [
+    'database' => [ # zawiera parametry połączeniowe do bazy danych
         'dns' => 'mysql:host=localhost;dbname=_gc_cms;charset=utf8',
         'host' => 'localhost',
         'username' => 'root',
@@ -201,89 +91,37 @@ return [
         'name' => '_gc_cms',
         'prefix' => 'gc_'
     ],
-
-    # ustawienia dla rejestrowania logów
-    'logger' => [
-
-        # uruchamia rejestrowanie logów
-        'enabled' => true,
-
-        # katalog do ktorego są zapisywane logi
-        'folder' => ROOT_PATH.'/tmp/logs',
+    'logger' => [ # ustawienia dla rejestrowania logów
+        'enabled' => true, # uruchamia rejestrowanie logów
+        'folder' => ROOT_PATH.'/tmp/logs', # katalog do ktorego są zapisywane logi
     ],
-
-    # ustawienia translatora
-    'translator' => [
-
-        # czy włączyć tłumaczenie komunikatów
-        'enabled' => true,
-
-        # katalog do ktorego są zapisywane tłumaczenia
-        'folder' => ROOT_PATH.'/app/storage/locales',
-
-        # klucz do api translatora w serwisie Yandex
-        'key' => 'trnsl.1.1.20161215T151949Z.587eb49efd9a9be2.a1eb760e6bf78076ea004f12eeb22b37902aadc2',
+    'translator' => [ # ustawienia translatora
+        'enabled' => true, # czy włączyć tłumaczenie komunikatów
+        'folder' => ROOT_PATH.'/app/storage/locales', # katalog do ktorego są zapisywane tłumaczenia
+        'key' => 'trnsl.1.1.20161215T151949Z.587eb49efd9a9be2.a1eb760e6bf78076ea004f12eeb22b37902aadc2', # klucz do api translatora w serwisie Yandex
     ],
-
-    # ustawienia serwera pocztowego do rozsyłania emaili
-    'mailer' => [
-
-        # czy użwać mailera smtp?
-        'smtp' => true,
-
-        # host serwera pocztowego
-        'host' => 'smtp.emaillabs.net.pl',
-
-        # post hosta
-        'port' => 587,
-
-        # nazwa konta pocztowego
-        'username' => '1.wegrzynkiewicz.smtp',
-
-        # hasło konta pocztowego
-        'password' => '9pf1SdUuZxZzagJN6235ShyTXGLCWCiHbI4Lh6pd',
-
-        # szyfrowanie wiadomości email
-        'SMTPsecure' => 'tls',
-
-        # adres email w nagłówku from, zostaw puste, aby wygenerować z nazwą domeny
-        'fromEmail' => 'from@localhost',
-
-        # nazwa użytkownika w nagłówku from
-        'fromName' => null,
-
-        # nazwa użytkownika w nagłówku reply
-        'replyEmail' => 'noreply@localhost',
-
-        # nazwa użytkownika w nagłówku reply
-        'replyName' => null,
-
-        # ile może się wysłać wiadomości na raz za jednym żądaniem
-        'limitPerOnce' => 10,
-
-        # wykorzystywane do wyświetlania w panelowych mailach
-        'headerTitle' => "Panel administracyjny GrafCenter CMS",
+    'mailer' => [ # ustawienia serwera pocztowego do rozsyłania emaili
+        'smtp' => true, # czy użwać mailera smtp?
+        'host' => 'smtp.emaillabs.net.pl', # host serwera pocztowego
+        'port' => 587, # post hosta
+        'username' => '1.wegrzynkiewicz.smtp', # nazwa konta pocztowego
+        'password' => '9pf1SdUuZxZzagJN6235ShyTXGLCWCiHbI4Lh6pd', # hasło konta pocztowego
+        'SMTPsecure' => 'tls', # szyfrowanie wiadomości email
+        'fromEmail' => 'from@localhost', # adres email w nagłówku from, zostaw puste, aby wygenerować z nazwą domeny
+        'fromName' => null, # nazwa użytkownika w nagłówku from
+        'replyEmail' => 'noreply@localhost', # nazwa użytkownika w nagłówku reply
+        'replyName' => null, # nazwa użytkownika w nagłówku reply
+        'limitPerOnce' => 10, # ile może się wysłać wiadomości na raz za jednym żądaniem
+        'headerTitle' => "Panel administracyjny GrafCenter CMS", # wykorzystywane do wyświetlania w panelowych mailach
     ],
-
-    # zawiera konfiguracje dla recaptchy od googla
-    'reCaptcha' => [
-
-        # publiczny klucz
-        'public' => '6Le88g4UAAAAAJ_VW4XML20c2tWSWFSv29lkGeVp',
-
-        # prywatny klucz
-        'secret' => '6Le88g4UAAAAAIOFZyOilvhdWRP3IIOWdkdQ7gAf',
+    'reCaptcha' => [ # zawiera konfiguracje dla recaptchy od googla
+        'public' => '6Le88g4UAAAAAJ_VW4XML20c2tWSWFSv29lkGeVp', # publiczny klucz
+        'secret' => '6Le88g4UAAAAAIOFZyOilvhdWRP3IIOWdkdQ7gAf', # prywatny klucz
     ],
-
-    # dotyczą pluginu DataTables
-    'dataTable' => [
-
-        # ilość rekordów domyślnie wyświetlanych na jedną strone
-        'iDisplayLength' => 50,
+    'dataTable' => [ # dotyczą pluginu DataTables
+        'iDisplayLength' => 50, # ilość rekordów domyślnie wyświetlanych na jedną strone
     ],
-
-    # zainstalowane języki w aplikacji
-    'langs' => [
+    'langs' => [ # zainstalowane języki w aplikacji
         'pl' => [
             'name' => 'Polski',
             'flag' => 'pl',
@@ -297,19 +135,11 @@ return [
             'flag' => 'de',
         ],
     ],
-
-    # ustawienia języków
-    'lang' => [
-
-        # domyśly język gdy nie wiadomo jakiego języka oczekuje odwiedzający
-        'visitorDefault' => 'pl',
-
-        # domyślny język edytowania w panelu admina
-        'editorDefault' => 'pl',
+    'lang' => [ # ustawienia języków
+        'visitorDefault' => 'pl', # domyśly język gdy nie wiadomo jakiego języka oczekuje odwiedzający
+        'editorDefault' => 'pl', # domyślny język edytowania w panelu admina
     ],
-
-    # rodzaje zainstalowanych modułów
-    'modules' => [
+    'modules' => [ # rodzaje zainstalowanych modułów
         'html-editor' => [
             'name' => 'Moduł tekstowy',
             'description' => 'Wyświelta treść HTML poprzez edytor WYSIWYG.',
@@ -352,23 +182,17 @@ return [
             'themes' => [],
         ],
     ],
-
-    # rodzaje węzłów nawigacji
-    'nodeTypes' => [
+    'nodeTypes' => [ # rodzaje węzłów nawigacji
         'empty' => 'Nieklikalny węzeł',
         'external' => 'Kieruj na adres',
         'homepage' => 'Kieruj na stronę główną',
         'page' => 'Kieruj na istniejącą stronę',
     ],
-
-    # rodzaje zainstalowanych pól formularzy
-    'formFieldTypes' => [
+    'formFieldTypes' => [ # rodzaje zainstalowanych pól formularzy
         'editbox' => 'Zwykłe pole tekstowe',
         'selectbox' => 'Pole jednokrotnego wyboru',
     ],
-
-    # statusy jakie nadesłany formularz może otrzymać
-    'formStatuses' => [
+    'formStatuses' => [ # statusy jakie nadesłany formularz może otrzymać
         'unread' => [
             'name' => 'Nieprzeczytana',
             'class' => 'font-bold',
@@ -390,34 +214,20 @@ return [
             'class' => 'text-danger danger',
         ],
     ],
-
-    # typy widżetów
-    'widgetTypes' => [
+    'widgetTypes' => [ # typy widżetów
         'plain' => 'Zwykły tekst',
         'html-editor' => 'Formatowany tekst HTML',
         'image' => 'Zdjęcie',
     ],
-
-    # zawiera uprawnienia dostępne dla pracownikow
-    'permissions' => [
+    'permissions' => [ # zawiera uprawnienia dostępne dla pracownikow
         'manage_staff' => 'Zarządzanie pracownikami',
         'manage_staff_groups' => 'Zarządzanie grupami pracowników',
     ],
-
-    # ustawienia generatora miniaturek
-    'thumb' => [
-
-        # czy generować miniaturki?
-        'enabled' => true,
-
-        # ścieżka do katalogu z miniaturkami, należy do tego dodać thumbsUrl
-        'thumbsPath' => ROOT_PATH.'/web',
-
-        # adres do katalogu z miniaturkami
-        'thumbsUrl' => '/thumbs',
-
-        # ustawienia dla generatora miniaturek
-        'options' => [
+    'thumb' => [ # ustawienia generatora miniaturek
+        'enabled' => true, # czy generować miniaturki?
+        'thumbsPath' => ROOT_PATH.'/web', # ścieżka do katalogu z miniaturkami, należy do tego dodać thumbsUrl
+        'thumbsUrl' => '/thumbs', # adres do katalogu z miniaturkami
+        'options' => [ # ustawienia dla generatora miniaturek
             'jpg' => [
                 'loader' => 'imagecreatefromjpeg',
                 'saver' => 'imagejpeg',
@@ -434,30 +244,17 @@ return [
             ],
         ],
     ],
-
-    # dostępne atrybuty target dla węzłów nawigacji
-    'navNodeTargets' => [
+    'navNodeTargets' => [ # dostępne atrybuty target dla węzłów nawigacji
         '_self'     => 'Załaduj w tym samym oknie',
         '_blank' => 'Załaduj w nowym oknie',
     ],
-
-    # zawiera niestandardowe przekierowania $regex => $destination
-    'rewrites' => [
-        '~^/old-service/index\.php\?id=(\d+)\&theme=([a-z]+?)$~'
-            => '/old-service/$1/$2',
+    'rewrites' => [ # zawiera niestandardowe przekierowania $regex => $destination
+        '~^/old-service/index\.php\?id=(\d+)\&theme=([a-z]+?)$~' => '/old-service/$1/$2',
     ],
-
-    # zawiera informacje dla eksportera bazy danych
-    'dump' => [
-
-        # ścieżka do katalogu z rzutami bazy danych
-        'path' => ROOT_PATH.'/app/storage/dumps/'.date('Y-m'),
-
-        # ścieżka tymczasowa dla eksportera
-        'tmpPath' => ROOT_PATH.'/tmp',
-
-        # ustawienia dla MySQLDump
-        'settings' => [
+    'dump' => [ # zawiera informacje dla eksportera bazy danych
+        'path' => ROOT_PATH.'/app/storage/dumps/'.date('Y-m'), # ścieżka do katalogu z rzutami bazy danych
+        'tmpPath' => ROOT_PATH.'/tmp', # ścieżka tymczasowa dla eksportera
+        'settings' => [ # ustawienia dla MySQLDump
             'include-tables' => [],
             'exclude-tables' => [
                 '/checksums$/',

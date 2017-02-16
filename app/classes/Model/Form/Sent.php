@@ -3,15 +3,11 @@
 namespace GC\Model\Form;
 
 use GC\Storage\AbstractModel;
-use GC\Storage\Utility\PrimaryTrait;
-use GC\Data;
 
 class Sent extends AbstractModel
 {
     public static $table   = '::form_sent';
     public static $primary = 'sent_id';
-
-    use PrimaryTrait;
 
     public static function insertToForm($form_id, $data, $localization)
     {

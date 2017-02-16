@@ -2,12 +2,10 @@
 
 namespace GC\Model\Module;
 
+use GC\Model\Frame;
 use GC\Model\Module\File;
-use GC\Model\Module\Item;
+use GC\Model\Module\Tab;
 use GC\Storage\AbstractModel;
-use GC\Storage\Utility\PrimaryTrait;
-use GC\Storage\Utility\JoinTrait;
-use GC\Data;
 
 class Module extends AbstractModel
 {
@@ -15,38 +13,53 @@ class Module extends AbstractModel
     public static $primary = 'module_id';
     public static $grid    = '::modules LEFT JOIN ::module_grid USING (module_id)';
 
-    use PrimaryTrait;
-    use JoinTrait;
-
-    public static function deleteModuleByPrimaryId($module_id)
+    /**
+     * Usuwa moduł i wszystkie jego pliki i zakładki
+     */
+    public static function deleteByModuleId($module_id)
     {
-        static::deleteByPrimaryId($module_id);
-        File::deleteUnassignedByForeign();
-        Item::deleteItemsByForeign($module_id);
-        Item::deleteUnassignedByForeign();
-    }
+        # pobierz zakładki tego modułu
+        $tabs = Tab::select()
+            ->fields('frame_id')
+            ->source('::frame')
+            ->equals('module_id', $module_id)
+            ->fetchAll();
 
-    public static function deleteModulesByForeign($frame_id)
-    {
-        $modules = static::joinAllWithKeyByForeign($frame_id);
-        foreach ($modules as $module_id => $module) {
-            Item::deleteItemsByForeign($module_id);
+        # dla każdej zakładki usuń rusztowanie
+        foreach ($tabs as $tab) {
+            Frame::deleteByFrameId($tab['frame_id']);
         }
-        static::deleteAllByForeign($frame_id);
-        File::deleteUnassignedByForeign();
-        Item::deleteUnassignedByForeign();
+
+        # pobierz pliki tego modułu
+        $files = File::select()
+            ->fields('frame_id')
+            ->source('::frame')
+            ->equals('module_id', $module_id)
+            ->fetchAll();
+
+        # dla każdego pliku usuń rusztowanie
+        foreach ($files as $file) {
+            Frame::deleteByFrameId($file['frame_id']);
+        }
+
+        # usuń właściwy moduł
+        static::deleteByPrimaryId($module_id);
     }
 
-    public static function insertWithFrameId(array $data, $frame_id)
+    /**
+     * Usuwa moduły i ich dodatki dla całego rusztowania
+     */
+    public static function deleteByFrameId($frame_id)
     {
-        $module_id = parent::insert($data);
+        # pobierz wszystkie moduły
+        $modules = static::select()
+            ->source('::grid')
+            ->equals('frame_id', $frame_id)
+            ->fetchByPrimaryKey();
 
-        Position::insert([
-            'frame_id' => $frame_id,
-            'module_id' => $module_id,
-            'position' => '0:999:12:1',
-        ]);
-
-        return $module_id;
+        # dla każdego modułu usuń jego dodatki
+        foreach ($modules as $module_id => $modules) {
+            static::deleteByModuleId($module_id);
+        }
     }
 }

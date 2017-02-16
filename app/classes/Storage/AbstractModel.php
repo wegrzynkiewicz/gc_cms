@@ -70,4 +70,38 @@ abstract class AbstractModel extends AbstractEntity
     {
         return new Query\Update(static::class);
     }
+
+    /**
+     * Pobiera rekord o zadanym kluczu głownym
+     */
+    public static function fetchByPrimaryId($primary_id)
+    {
+        return static::select(static::class)
+            ->equals(static::$primary, $primary_id)
+            ->limit(1)
+            ->fetch();
+    }
+
+    /**
+     * Aktualizuje dane $data rekordu o zadanym kluczu głownym
+     */
+    public static function updateByPrimaryId($primary_id, array $data = [])
+    {
+        static::update(static::class)
+            ->set($data)
+            ->equals(static::$primary, $primary_id)
+            ->limit(1)
+            ->execute();
+    }
+
+    /**
+     * Usuwa rekord o zadanym kluczu głownym
+     */
+    public static function deleteByPrimaryId($primary_id)
+    {
+        return static::delete(static::class)
+            ->equals(static::$primary, $primary_id)
+            ->limit(1)
+            ->execute();
+    }
 }

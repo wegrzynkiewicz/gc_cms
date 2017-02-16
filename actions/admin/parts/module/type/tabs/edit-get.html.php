@@ -2,7 +2,10 @@
 
 require ACTIONS_PATH."/admin/parts/module/type/tabs/_import.php";
 
-$_POST['content'] = $content;
+$tabs = GC\Model\Module\Tab::select()
+    ->source('::frame')
+    ->equals('module_id', $module_id)
+    ->fetchByKey('frame_id');
 
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
@@ -29,9 +32,29 @@ $_POST['content'] = $content;
 <div class="row">
     <div class="col-lg-12">
         <form id="sortableForm" action="" method="post">
+            <input type="hidden" name="positions">
+
             <h3><?=$trans('Zakładki')?></h3>
 
-            <div id="items"></div>
+            <?php if (empty($tabs)): ?>
+                <div class="simple-box">
+                    <?=$trans('Nie znaleziono zakładek')?>
+                </div>
+            <?php else: ?>
+                <ol id="sortable" class="sortable">
+                    <?php foreach ($tabs as $tab): ?>
+                        <?=render(ACTIONS_PATH.'/admin/parts/module/type/tabs/tab.html.php', $tab)?>
+                    <?php endforeach?>
+                </ol>
+                <script>
+                    $('#sortable').nestedSortable({
+                        handle: 'div',
+                        items: 'li',
+                        toleranceElement: '> div',
+                        maxLevels: 1
+                    });
+                </script>
+            <?php endif ?>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => $trans('Zapisz położenie zakładek'),
@@ -44,7 +67,7 @@ $_POST['content'] = $content;
     <div class="modal-dialog">
         <form id="addModalForm"
             method="post"
-            action="<?=$uri->make("/admin/parts/module/{$module_id}/type/tabs/item/xhr-add")?>"
+            action=""
             class="modal-content form-horizontal">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
@@ -78,6 +101,7 @@ $_POST['content'] = $content;
             method="post"
             action=""
             class="modal-content form-horizontal">
+            <input name="frame_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
@@ -104,9 +128,9 @@ $_POST['content'] = $content;
     <div class="modal-dialog" role="document">
         <form id="deleteModalForm"
             method="post"
-            action="<?=$uri->make("/admin/parts/module/item/xhr-delete")?>"
+            action=""
             class="modal-content">
-            <input name="item_id" type="hidden" value="">
+            <input name="frame_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
@@ -136,59 +160,42 @@ $_POST['content'] = $content;
 <script>
 $(function(){
 
-    function refreshItems() {
-        $.post("<?=$uri->make("/admin/parts/module/{$module_id}/type/tabs/item/xhr-list")?>", {
-            moduleUrl: "<?=$uri->mask("/item/%s/module/list")?>"
-        }, function(data) {
-            $('#items').html(data);
-        });
-    }
+    var addUri    = '<?=$uri->make("/admin/parts/module/{$module_id}/type/tabs/item/xhr-add")?>';
+    var sortUri   = '<?=$uri->make("/admin/parts/module/{$module_id}/type/tabs/item/xhr-sort")?>';
+    var editUri   = '<?=$uri->make("/admin/parts/module/type/tabs/item/xhr-edit")?>';
+    var deleteUri = '<?=$uri->make("/admin/parts/module/type/tabs/item/xhr-delete")?>';
 
     $('#addModalForm').on('submit', function(e) {
-        e.preventDefault();
-        $.post($(this).attr('action'), $(this).serialize(), function() {
-            refreshItems();
-            $('#addModal').modal('hide');
-        });
+        $.post(addUri, $(this).serialize());
     });
 
     $('#editModalForm').on('submit', function(e) {
-        e.preventDefault();
-        $.post($(this).attr('action'), $(this).serialize(), function() {
-            refreshItems();
-            $('#editModal').modal('hide');
-        });
+        $.post(editUri, $(this).serialize());
     });
 
     $('#editModal').on('show.bs.modal', function(e) {
-        var url = "<?=$uri->make("/admin/parts/module/type/tabs/item/xhr-edit")?>/"+$(e.relatedTarget).data('id');
-        $.get(url, function(data) {
+        $.get(editUri, {
+            frame_id: $(e.relatedTarget).data('id'),
+        }, function(data) {
             $('#editModalContent').html(data);
-            $('#editModalForm').attr('action', url);
+            $('[name="frame_id"]').val($(e.relatedTarget).data('id'));
         });
     });
 
     $('#deleteModalForm').on('submit', function(e) {
-        e.preventDefault();
-        $.post($(this).attr('action'), $(this).serialize(), function() {
-            refreshItems();
-            $('#deleteModal').modal('hide');
-        });
+        $.post(deleteUri, $(this).serialize());
     });
 
     $('#deleteModal').on('show.bs.modal', function(e) {
-        $(this).find('[name="item_id"]').val($(e.relatedTarget).data('id'));
+        $(this).find('[name="frame_id"]').val($(e.relatedTarget).data('id'));
         $(this).find('#deleteName').html($(e.relatedTarget).data('name'));
     });
 
     $("#sortableForm").submit(function(e) {
-        var url = "<?=$uri->make("/admin/parts/module/{$module_id}/item/xhr-sort")?>";
-        $.post(url, {
-            positions: $("#sortable").sortable("toArray")
+        $.post(sortUri, {
+            positions: JSON.stringify($('#sortable').sortable('toArray')),
         });
     });
-
-    refreshItems();
 });
 </script>
 
