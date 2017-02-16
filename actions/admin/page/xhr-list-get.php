@@ -1,7 +1,7 @@
 <?php
 
 require ACTIONS_PATH.'/admin/_import.php';
-require ACTIONS_PATH.'/admin/product/_import.php';
+require ACTIONS_PATH.'/admin/page/_import.php';
 
 # utwórz zapytanie dla datatables
 $frames = GC\Model\Frame::select()

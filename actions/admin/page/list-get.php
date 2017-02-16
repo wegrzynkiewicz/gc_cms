@@ -114,7 +114,7 @@ $count = GC\Model\Frame::select()
             <?=$trans('Podgląd')?>
         </a>
 
-        <a href="<?=$uri->mask()?>/{{frame_id}}/module/list"
+        <a href="<?=$uri->mask()?>/{{frame_id}}/module/grid"
             title="<?=$trans('Wyświetl moduły strony')?>"
             class="btn btn-success btn-sm">
             <i class="fa fa-file-text-o fa-fw"></i>

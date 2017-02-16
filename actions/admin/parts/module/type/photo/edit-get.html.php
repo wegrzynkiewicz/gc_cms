@@ -1,7 +1,8 @@
 <?php
 
+require ACTIONS_PATH."/admin/parts/module/type/photo/_import.php";
+
 $_POST = $settings;
-post('name') = $content;
 $_POST['theme'] = $module['theme'];
 
 ?>

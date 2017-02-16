@@ -1,6 +1,6 @@
 <?php
 
-$_POST['content'] = $content;
+require ACTIONS_PATH."/admin/parts/module/type/html-editor/_import.php";
 
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>

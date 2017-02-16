@@ -11,10 +11,9 @@ use GC\Data;
 
 class Module extends AbstractModel
 {
-    public static $table       = '::modules';
-    public static $primary     = 'module_id';
-    public static $joinTable   = '::module_pos';
-    public static $joinForeign = 'frame_id';
+    public static $table   = '::modules';
+    public static $primary = 'module_id';
+    public static $grid    = '::modules LEFT JOIN ::module_grid USING (module_id)';
 
     use PrimaryTrait;
     use JoinTrait;

@@ -1,5 +1,7 @@
 <?php
 
+require ACTIONS_PATH."/admin/parts/module/type/image-slider/_import.php";
+
 $_POST = $module;
 
 ?>

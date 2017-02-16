@@ -1,6 +1,10 @@
 <?php
 
-$modules = GC\Model\Module\Module::joinAllWithKeyByForeign($frame_id);
+# pobierz moduły wraz z pozycjami grida dla rusztowania $frame_id
+$modules = GC\Model\Module\Module::select()
+    ->source('::grid')
+    ->equals('frame_id', $frame_id)
+    ->fetchByPrimaryKey();
 
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
@@ -9,7 +13,7 @@ $modules = GC\Model\Module\Module::joinAllWithKeyByForeign($frame_id);
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=$getPreviewUrl()?>"
+                <a href="<?=getFrameSlug($frame)?>"
                     target="_blank"
                     type="button"
                     class="btn btn-primary">
@@ -33,6 +37,7 @@ $modules = GC\Model\Module\Module::joinAllWithKeyByForeign($frame_id);
 <div class="row">
     <div class="col-lg-12">
         <form id="gridForm" action="" method="post" class="form-horizontal">
+            <input type="hidden" name="grid">
             <?php if (empty($modules)): ?>
                 <div class="simple-box">
                     <?=$trans('Brak modułów')?>
@@ -42,11 +47,7 @@ $modules = GC\Model\Module\Module::joinAllWithKeyByForeign($frame_id);
                     <div id="grid-rows-wrapper"></div>
                     <div class="grid-stack">
                         <?php foreach ($modules as $module_id => $module): ?>
-                            <?=render(ACTIONS_PATH.'/admin/parts/module/list-item.html.php', [
-                                'module_id' => $module_id,
-                                'module' => $module,
-                                'type' => $module['type'],
-                            ])?>
+                            <?=render(ACTIONS_PATH.'/admin/parts/module/grid-item.html.php', $module)?>
                         <?php endforeach ?>
                     </div>
                 </div>
@@ -137,9 +138,12 @@ $modules = GC\Model\Module\Module::joinAllWithKeyByForeign($frame_id);
     var grid = $('.grid-stack').gridstack({
         cellHeight: 215,
         verticalMargin: 20
-    }).on('change', refreshRow).data('gridstack');
+    }).on('change', refreshRows).data('gridstack');
 
-    function refreshRow() {
+    function refreshRows() {
+        if (!grid) {
+            return;
+        }
         var y = 0;
         var content = '';
         $('#grid-rows-wrapper').html();
@@ -153,7 +157,7 @@ $modules = GC\Model\Module\Module::joinAllWithKeyByForeign($frame_id);
         $('#grid-rows-wrapper').html(content);
     }
 
-    refreshRow();
+    refreshRows();
 
     $('#rowSettingsModalForm').on('submit', function(e) {
         e.preventDefault();
@@ -170,7 +174,7 @@ $modules = GC\Model\Module\Module::joinAllWithKeyByForeign($frame_id);
         });
     });
 
-    function saveGridPosition() {
+    $("#gridForm").submit(function(event) {
         var serializedData = _.map($('.grid-stack .grid-stack-item:visible'), function (el) {
             el = $(el);
             var node = el.data('_gridstack_node');
@@ -182,17 +186,7 @@ $modules = GC\Model\Module\Module::joinAllWithKeyByForeign($frame_id);
                 height: node.height
             };
         });
-
-        var url = "<?=$uri->make("/admin/parts/module/row/{$frame_id}/xhr-sort")?>/";
-        $.post(url, {
-            grid: JSON.stringify(serializedData),
-        });
-    }
-
-    saveGridPosition();
-
-    $("#gridForm").submit(function(event) {
-        saveGridPosition();
+        $('[name="grid"]').val(JSON.stringify(serializedData));
     });
 
 </script>

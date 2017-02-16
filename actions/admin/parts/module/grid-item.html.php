@@ -1,10 +1,9 @@
-<?php list($x, $y, $w, $h) = explode(":", $module['position']); ?>
-<div id="grid_<?=e($module_id)?>"
-    data-id="<?=e($module_id)?>"
-    data-gs-x="<?=e($x)?>"
-    data-gs-y="<?=e($y)?>"
-    data-gs-width="<?=e($w)?>"
-    data-gs-height="<?=e($h)?>"
+<div id="grid_<?=$module_id?>"
+    data-id="<?=$module_id?>"
+    data-gs-x="<?=$x?>"
+    data-gs-y="<?=$y?>"
+    data-gs-width="<?=$w?>"
+    data-gs-height="<?=$h?>"
     data-gs-min-width="2"
     data-gs-min-height="1"
     data-gs-max-width="12"
@@ -14,10 +13,10 @@
         <div class="panel panel-default panel-module">
             <div class="panel-heading">
                 <a href="<?=$uri->mask("/{$module_id}/edit")?>">
-                    <?=$trans($config['modules'][$module['type']]['name'])?>
+                    <?=$trans($config['modules'][$type]['name'])?>
                 </a>
                 <button data-toggle="modal"
-                    data-id="<?=e($module_id)?>"
+                    data-id="<?=$module_id?>"
                     data-target="#deleteModal"
                     title="<?=$trans('Usuń moduł')?>"
                     type="button"
@@ -26,12 +25,7 @@
                 </button>
             </div>
             <div class="panel-body">
-                <?=render(ACTIONS_PATH."/admin/parts/module/type/{$type}/grid-preview.html.php", [
-                    'module_id' => $module['module_id'],
-                    'module' => $module,
-                    'content' => $module['content'],
-                    'settings' => json_decode($module['settings'], true),
-                ])?>
+                <?=render(ACTIONS_PATH."/admin/parts/module/type/{$type}/grid-preview.html.php", $module)?>
             </div>
         </div>
     </div>

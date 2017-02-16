@@ -1,5 +1,7 @@
 <?php
 
+require ACTIONS_PATH."/admin/parts/module/type/html-editor/_import.php";
+
 GC\Model\Module\Module::updateByPrimaryId($module_id, [
     'content' => post('content'),
     'theme' => 'default',

@@ -1,12 +1,10 @@
 <?php
 
-$module_id = intval($_POST['module_id']);
+$module_id = intval(post('module_id'));
 $module = GC\Model\Module\Module::fetchByPrimaryId($module_id);
-$moduleType = $module['type'];
 
 GC\Model\Module\File::deleteAllByForeign($module_id);
 GC\Model\Module\Module::deleteModuleByPrimaryId($module_id);
 
-flashBox($trans("%s został usunięty", [$config['modules'][$moduleType]['name']]));
-
+flashBox($trans("%s został usunięty", [$config['modules'][$module['type']]['name']]));
 redirect($breadcrumbs->getLast('uri'));

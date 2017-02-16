@@ -1,5 +1,7 @@
 <?php
 
+require ACTIONS_PATH."/admin/parts/module/type/gallery/_import.php";
+
 $theme = $_POST['theme'];
 
 require ACTIONS_PATH."/admin/parts/module/type/gallery/theme/{$theme}-{$request->method}.php";
@@ -10,5 +12,4 @@ GC\Model\Module\Module::updateByPrimaryId($module_id, [
 ]);
 
 flashBox($trans('Moduł galerii zdjęć został zaktualizowany.'));
-
 redirect($breadcrumbs->getBeforeLast('uri'));

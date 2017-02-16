@@ -1,5 +1,7 @@
 <?php
 
+require ACTIONS_PATH."/admin/parts/module/type/form/_import.php";
+
 $emails = def($_POST, 'emails', []);
 sort($emails);
 $settings['emails'] = $emails;
@@ -11,5 +13,4 @@ GC\Model\Module\Module::updateByPrimaryId($module_id, [
 ]);
 
 flashBox($trans('Moduł formularza został zaktualizowany.'));
-
-redirect($breadcrumbs->getBeforeLast('uri'));
+redirect($breadcrumbs->getLast('uri'));

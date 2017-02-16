@@ -314,6 +314,19 @@ function makeSlug($string)
 }
 
 /**
+ * Tworzy przyjazny adres dla wyszukiwarek na podstawie rekordu z tabeli ::frames
+ */
+function getFrameSlug($frame)
+{
+    $slug = def($frame, 'slug', null);
+    if ($slug) {
+        return $slug;
+    }
+
+    return makeSlug(def($frame, 'name', null)).'/'.intval(def($frame, 'frame_id', 0));
+}
+
+/**
  * Funkcja przekierowuje na adres obowiązujący wewnątrz aplikacji
  */
 function redirect($location, $code = 303)

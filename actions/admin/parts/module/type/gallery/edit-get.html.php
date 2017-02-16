@@ -1,5 +1,7 @@
 <?php
 
+require ACTIONS_PATH."/admin/parts/module/type/gallery/_import.php";
+
 $_POST = array_merge($module, $settings);
 
 ?>
