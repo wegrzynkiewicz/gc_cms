@@ -4,7 +4,6 @@ namespace GC\Model\Menu;
 
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\NodeTrait;
-use GC\Storage\Utility\PrimaryTrait;
 use GC\Storage\AbstractNode;
 
 class Menu extends AbstractNode
@@ -15,5 +14,4 @@ class Menu extends AbstractNode
     public static $primary  = 'menu_id';
 
     use NodeTrait;
-    use PrimaryTrait;
 }

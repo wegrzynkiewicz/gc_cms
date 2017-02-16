@@ -17,7 +17,7 @@
                     'help' => $trans('Warto poinstruować użytkownika co należy wpisać w to pole.'),
                 ])?>
 
-                <?php if ($field_id == 0): ?>
+                <?php if (!isset($fieldType)): ?>
                     <?=render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
                         'name' => 'type',
                         'label' => $trans('Typ pola'),
@@ -30,9 +30,13 @@
 
             <div class="simple-box">
                 <div id="fieldType">
-                    <span class="text-muted">
-                        <?=$trans('Wybierz typ pola')?>
-                    </span>
+                    <?php if (isset($fieldType)): ?>
+                        <?=$fieldType?>
+                    <?php else: ?>
+                        <span class="text-muted">
+                            <?=$trans('Wybierz typ pola')?>
+                        </span>
+                    <?php endif ?>
                 </div>
             </div>
 
@@ -48,19 +52,11 @@
 
 <script>
 $(function() {
-    function refreshType(fieldType) {
-        $.get("<?=$refreshUrl?>/"+fieldType, function(data) {
+    $('#type').change(function() {
+        $.get("<?=$uri->mask('/types')?>/"+$(this).val(), function(data) {
             $('#fieldType').html(data);
         });
-    }
-
-    $('#type').change(function() {
-        refreshType($(this).val());
     });
-
-    <?php if (isset($_POST['type'])): ?>
-        refreshType("<?=e($_POST['type'])?>");
-    <?php endif ?>
 });
 </script>
 

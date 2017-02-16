@@ -1,6 +1,6 @@
 <div class="form-group">
     <label class="col-md-12 col-sm-12 col-xs-12" for="<?=$name?>">
-        <?=$trans($label)?>
+        <?=$label?>
     </label>
     <div class="col-md-12 col-sm-12 col-xs-12">
         <select
@@ -10,13 +10,13 @@
             class="form-control input hideSearch">
 
             <?php foreach ($options as $caption): ?>
-                <option value="<?=e($caption)?>" <?=selected(in_array($caption, $selectedValues))?>><?=$trans($caption)?></option>
+                <option value="<?=e($caption)?>" <?=selected(in_array($caption, $selectedValues))?>><?=$caption?></option>
             <?php endforeach; ?>
 
         </select>
         <?php if (isset($help)): ?>
             <span class="help-block">
-                <?=$trans($help)?>
+                <?=$help?>
             </span>
         <?php endif ?>
     </div>
@@ -26,7 +26,7 @@
     $(function() {
         $("#<?=$name?>").select2({
             <?php if (isset($placeholder)): ?>
-                placeholder: "<?=$trans($placeholder)?>",
+                placeholder: "<?=$placeholder?>",
             <?php endif ?>
             tags: true,
             minimumResultsForSearch: Infinity

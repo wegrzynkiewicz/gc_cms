@@ -6,8 +6,6 @@ $breadcrumbs->push([
     'name' => $headTitle,
 ]);
 
-$_POST['content'] = $content;
-
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 <?php require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>
@@ -24,7 +22,6 @@ $_POST['content'] = $content;
             </div>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'cancelHref' => "/admin/widget/list",
                 'saveLabel' => $trans('Zapisz zmiany'),
             ])?>
 

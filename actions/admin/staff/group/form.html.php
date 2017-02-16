@@ -11,7 +11,9 @@
                     'label' => $trans('Nazwa grupy'),
                     'help' => $trans('Nazwa grupy pomaga określić odpowiedzialność członków grupy (np. Sprzedawcy, Administratorzy)')
                 ])?>
+            </div>
 
+            <div class="simple-box">
                 <fieldset>
                     <legend>
                         <?=$trans('Uprawnienia grupy')?>

@@ -3,16 +3,11 @@
 namespace GC\Model\Post;
 
 use GC\Storage\AbstractModel;
-use GC\Storage\Utility\PrimaryTrait;
-use GC\Storage\Utility\ContainFrameTrait;
 
 class Post extends AbstractModel
 {
     public static $table   = '::posts';
     public static $primary = 'post_id';
-
-    use PrimaryTrait;
-    use ContainFrameTrait;
 
     public static function update($post_id, array $data, array $relations)
     {

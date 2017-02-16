@@ -104,4 +104,23 @@ abstract class AbstractModel extends AbstractEntity
             ->limit(1)
             ->execute();
     }
+
+    public static function fetchMeta($meta_id)
+    {
+        return static::select(static::class)
+            ->fields(['name', 'value'])
+            ->equals(static::$meta_id, $meta_id)
+            ->fetchByMap('name', 'value');
+    }
+
+    public static function updateMeta($meta_id, array $data)
+    {
+        foreach ($data as $name => $value) {
+            static::replace([
+                static::$meta_id => $meta_id,
+                'name' => $name,
+                'value' => $value,
+            ]);
+        }
+    }
 }

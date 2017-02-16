@@ -4,7 +4,12 @@ require ACTIONS_PATH.'/admin/_import.php';
 require ACTIONS_PATH.'/admin/form/_import.php';
 require ACTIONS_PATH.'/admin/form/field/_import.php';
 
-$fields = GC\Model\Form\Field::joinAllWithKeyByForeign($form_id);
+# pobierz posortowane pola formularzy
+$fields = GC\Model\Form\Field::select()
+    ->source('::fields')
+    ->equals('form_id', $form_id)
+    ->order('position', 'ASC')
+    ->fetchByPrimaryKey();
 
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
@@ -35,9 +40,9 @@ $fields = GC\Model\Form\Field::joinAllWithKeyByForeign($form_id);
             <?php else:?>
                 <input name="positions" type="hidden"/>
                 <ol id="sortable" class="sortable">
-                    <?=render(ACTIONS_PATH.'/admin/form/field/list-items.html.php', [
-                        'fields' => $fields,
-                    ])?>
+                    <?php foreach ($fields as $field_id => $field): ?>
+                        <?=render(ACTIONS_PATH.'/admin/form/field/list-item.html.php', $field)?>
+                    <?php endforeach?>
                 </ol>
             <?php endif?>
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [

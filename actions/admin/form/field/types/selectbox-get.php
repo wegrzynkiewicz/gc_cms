@@ -1,11 +1,14 @@
 <?php
 
-$field_id = intval(array_shift($_PARAMETERS));
+require ACTIONS_PATH.'/admin/_import.php';
+require ACTIONS_PATH.'/admin/form/_import.php';
+require ACTIONS_PATH.'/admin/form/field/_import.php';
+
 $options = [];
-if ($field_id > 0) {
-    $field = GC\Model\Form\Field::fetchByPrimaryId($field_id);
-    $settings = json_decode($field['settings'], true);
-    $options = $settings['options'];
+if (isset($field_id) and $field_id > 0) {
+    # pobierz meta tagi dla pola formularza
+    $meta = GC\Model\Form\Meta::fetchMeta($field_id);
+    $options = json_decode($meta['options']);
 }
 
 ?>

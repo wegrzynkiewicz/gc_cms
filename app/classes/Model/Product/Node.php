@@ -4,8 +4,6 @@ namespace GC\Model\Product;
 
 use GC\Storage\AbstractModel;
 use GC\Storage\Utility\NodeTrait;
-use GC\Storage\Utility\PrimaryTrait;
-use GC\Storage\Utility\ContainFrameTrait;
 use GC\Storage\AbstractNode;
 use GC\Data;
 
@@ -19,8 +17,6 @@ class Node extends AbstractNode
     public static $primary = 'node_id';
 
     use NodeTrait;
-    use PrimaryTrait;
-    use ContainFrameTrait;
 
     /**
      * Pobiera wszystkie kategorie dla wszystkich postow włącznie z taksonomią

@@ -6,8 +6,6 @@ $breadcrumbs->push([
     'name' => $headTitle,
 ]);
 
-$_POST['content'] = $content;
-
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 <?php require ACTIONS_PATH.'/admin/parts/page-header.html.php'; ?>

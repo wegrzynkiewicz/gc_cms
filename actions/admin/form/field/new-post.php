@@ -4,21 +4,29 @@ require ACTIONS_PATH.'/admin/_import.php';
 require ACTIONS_PATH.'/admin/form/_import.php';
 require ACTIONS_PATH.'/admin/form/field/_import.php';
 
-$type = post('type');
-$settings = [];
+# wstaw pole do tabeli
+$field_id = GC\Model\Form\Field::insert([
+    'name' => post('name'),
+    'type' => post('type'),
+    'help' => post('help'),
+]);
 
-require ACTIONS_PATH."/admin/form/field/types/{$type}-{$request->method}.php";
+# pobierz największą pozycję dla pola w formularzu
+$position = GC\Model\Form\Position::select()
+    ->fields('MAX(position) AS max')
+    ->equals('form_id', $form_id)
+    ->fetch()['max'];
 
+# wstaw przynależność pola do formularza
 GC\Model\Form\Position::insert([
     'form_id' => $form_id,
-    'field_id' => GC\Model\Form\Field::insert([
-        'name' => post('name'),
-        'type' => $type,
-        'help' => post('help'),
-        'settings' => json_encode($settings, JSON_UNESCAPED_UNICODE),
-    ]),
-    'position' => GC\Model\Form\Position::selectMaxPositionBy('form_id', $form_id),
+    'field_id' => $field_id,
+    'position' => $position+1,
 ]);
+
+# wykonaj indywidualną akcję dla innego typu pola formularza
+$type = post('type');
+require ACTIONS_PATH."/admin/form/field/types/{$type}-post.php";
 
 flashBox($trans('Pole "%s" zostało utworzone.', [post('name')]));
 redirect($breadcrumbs->getLast('uri'));
