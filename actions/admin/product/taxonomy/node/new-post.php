@@ -13,7 +13,7 @@ $frame_id = GC\Model\Frame::insert([
     'type' => 'product-node',
     'keywords' => post('keywords'),
     'description' => post('description'),
-    'image' => $uri->upload($_POST['image']),
+    'image' => $uri->upload(post('image')),
 ]);
 
 # dodaj węzeł
@@ -29,5 +29,5 @@ GC\Model\Product\Tree::insert([
     'position' => GC\Model\Product\Tree::selectMaxPositionByTaxonomyIdAndParentId($tax_id, null),
 ]);
 
-setNotice($trans('Nowy węzeł "%s" dostał dodany do "%s".', [$name, $taxonomy['name']]));
+flashBox($trans('Nowy węzeł "%s" dostał dodany do "%s".', [$name, $taxonomy['name']]));
 redirect($breadcrumbs->getLast('uri'));

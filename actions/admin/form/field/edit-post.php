@@ -18,6 +18,6 @@ GC\Model\Form\Field::updateByPrimaryId($field_id, [
     'settings' => json_encode($settings, JSON_UNESCAPED_UNICODE),
 ]);
 
-setNotice($trans('Pole "%s" zostało zaktualizowane.', [$field['name']]));
+flashBox($trans('Pole "%s" zostało zaktualizowane.', [$field['name']]));
 
 redirect($breadcrumbs->getLast('uri'));

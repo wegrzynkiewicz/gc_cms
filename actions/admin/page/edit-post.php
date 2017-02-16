@@ -3,18 +3,15 @@
 require ACTIONS_PATH.'/admin/_import.php';
 require ACTIONS_PATH.'/admin/page/_import.php';
 
-$page = GC\Model\Page::select()
-    ->source('::frame')
-    ->equals('page_id', $page_id)
-    ->fetch();
+$frame_id = intval(array_shift($_PARAMETERS));
 
-GC\Model\Frame::updateByFrameId($page['frame_id'], [
+GC\Model\Frame::updateByFrameId($frame_id, [
     'name' => post('name'),
+    'slug' => post('slug'),
     'keywords' => post('keywords'),
     'description' => post('description'),
-    'image' => $uri->upload($_POST['image']),
+    'image' => $uri->upload(post('image')),
 ]);
 
-setNotice($trans('Strona "%s" została zaktualizowana.', [$_POST['name']]));
-
+flashBox($trans('Strona "%s" została zaktualizowana.', [post('name')]));
 redirect($breadcrumbs->getLast('uri'));

@@ -20,5 +20,5 @@ GC\Model\Form\Position::insert([
     'position' => GC\Model\Form\Position::selectMaxPositionBy('form_id', $form_id),
 ]);
 
-setNotice($trans('Pole "%s" zostało utworzone.', [$_POST['name']]));
+flashBox($trans('Pole "%s" zostało utworzone.', [post('name')]));
 redirect($breadcrumbs->getLast('uri'));

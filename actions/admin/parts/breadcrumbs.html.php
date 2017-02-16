@@ -1,21 +1,3 @@
-
-<?php if (isset($_SESSION['notice'])): ?>
-    <div class="alert alert-<?=$_SESSION['notice']['theme']?> alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert">
-            <span>&times;</span>
-        </button>
-        <?=$_SESSION['notice']['message']?>
-    </div>
-
-    <script>
-        $(".alert").delay(4000).slideUp(200, function() {
-            $(this).alert('close');
-        });
-    </script>
-
-    <?php unset($_SESSION['notice']); ?>
-<?php endif ?>
-
 <?php if (isset($breadcrumbs)): $links = $breadcrumbs->getLinks() ?>
     <?php if (count($links)): ?>
         <ol class="breadcrumb">
@@ -36,4 +18,24 @@
             <?php endforeach ?>
         </ol>
     <?php endif ?>
+<?php endif ?>
+
+<?php if (isset($_SESSION['flashBox'])): ?>
+
+    <div class="alert alert-<?=$_SESSION['flashBox']['theme']?> alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+        <?=$_SESSION['flashBox']['message']?>
+    </div>
+
+    <?php if ($_SESSION['flashBox']['time'] > 0): ?>
+        <script>
+            $(".alert").delay(<?=$_SESSION['flashBox']['time']?>).slideUp(200, function() {
+                $(this).alert('close');
+            });
+        </script>
+    <?php endif ?>
+
+    <?php unset($_SESSION['flashBox']); ?>
 <?php endif ?>

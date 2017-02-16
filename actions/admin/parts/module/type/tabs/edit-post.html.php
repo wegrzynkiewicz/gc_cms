@@ -1,4 +1,4 @@
 <?php
 
-setNotice($trans('Kolejność zakładek została zaktualizowana.'));
+flashBox($trans('Kolejność zakładek została zaktualizowana.'));
 redirect($breadcrumbs->getLast('uri'));

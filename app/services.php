@@ -2,32 +2,6 @@
 
 /** Plik zawiera inicjalizacje wszystkich globalnych serwisów w aplikacji */
 
-# załadowanie wartości wygenerowanych
-$generated = @include __DIR__.'/storage/generated.php';
-
-# jeżeli wygenerowane wartości nie istnieją
-if (!$generated) {
-
-    # wygeneruj losowe kryptograficznie bezpieczne wartości
-    $generated = [
-
-        # używana do solenia wszystkich haseł w aplikacji
-        'password.salt' => GC\Auth\Password::random(40),
-
-        # nazwa ciastka, w którym jest zapisany token CSRF
-        'csrf.cookieName' => GC\Auth\Password::random(40),
-
-        # nazwa ciastka sesyjnego dla pracownika
-        'session.staff.cookie.name' => GC\Auth\Password::random(40),
-
-        # nazwa ciastka sesyjnego dla odwiedzającego
-        'session.visitor.cookie.name' => GC\Auth\Password::random(40),
-    ];
-
-    # zapisz do łatwego w odczytaniu pliku PHP
-    exportDataToPHPFile($generated, __DIR__.'/storage/generated.php');
-}
-
 # załadowanie pliku konfiguracyjnego
 $config = require __DIR__.'/config/config.php';
 

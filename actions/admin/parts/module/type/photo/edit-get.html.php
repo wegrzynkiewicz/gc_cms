@@ -1,7 +1,7 @@
 <?php
 
 $_POST = $settings;
-$_POST['name'] = $content;
+post('name') = $content;
 $_POST['theme'] = $module['theme'];
 
 ?>

@@ -124,6 +124,22 @@ function post($name, $default = '')
 }
 
 /**
+ * Pomocna do sprawdzania czy dany element istnieje w tabeli $_REQUEST
+ */
+function request($name, $default = '')
+{
+    return isset($_REQUEST[$name]) ? $_REQUEST[$name] : $default;
+}
+
+/**
+ * Pomocna do sprawdzania czy dany element istnieje w tabeli $_GET
+ */
+function get($name, $default = '')
+{
+    return isset($_GET[$name]) ? $_GET[$name] : $default;
+}
+
+/**
  * Zwraca spreparowaną date dla MySQL. Można podać czas w zmiennej $timestamp
  */
 function sqldate($timestamp = null)
@@ -150,11 +166,12 @@ function getMicroDateTime()
  * Ustawia krótkie wiadomości, które są wyświetlane po wykonaniu jakiejś akcji, np coś zostało usunięte.
  * $message należy przetłumaczyć samodzielnie. W rzeczywistości dodaje tylko dane do zmiennej sesyjnej.
  */
-function setNotice($message, $theme = 'success')
+function flashBox($message, $theme = 'success', $time = 4000)
 {
-    $_SESSION['notice'] = [
+    $_SESSION['flashBox'] = [
         'message' => $message,
         'theme' => $theme,
+        'time' => $time,
     ];
 }
 
@@ -193,6 +210,16 @@ function relativePath($absolutePath)
 function randomColor()
 {
     return sprintf('#%06X', mt_rand(0, 0xFFFFFF));
+}
+
+function random($length)
+{
+    $string = openssl_random_pseudo_bytes(ceil($length));
+    $string = base64_encode($string);
+    $string = str_replace(['/', '+', '='], '', $string);
+    $string = substr($string, 0, $length);
+
+    return $string;
 }
 
 /**
@@ -266,8 +293,8 @@ function normalize($unformattedString)
     # zastosuj wyrażenia na ich odpowiedniki
     static $regex = [
         # usuwa wszystkie znaki oprócz:
-        # cyfr, liter, kropki, myślnika, podkreślnika i slasha
-        '/[^a-z0-9\._\-\/]/' => '',
+        # cyfr, liter, kropki, myślnika, podkreślnika
+        '/[^a-z0-9\._\-]/' => '',
         # redukuje nadmiar myślinków
         '/[\-]+/' => '-',
         # redukuje nadmiar kropek
@@ -276,6 +303,14 @@ function normalize($unformattedString)
     $normalizing = preg_replace(array_keys($regex), $regex, $normalizing);
 
     return $normalizing;
+}
+
+/**
+ * Tworzy przyjazny adres dla wyszukiwarek na podstawie wprowadzonego ciągu
+ */
+function makeSlug($string)
+{
+    return '/'.trim(normalize($string), '/');
 }
 
 /**
@@ -401,6 +436,16 @@ function render($templateName, array $arguments = [])
     require $templateName;
 
     return ob_get_clean();
+}
+
+/**
+ * Działa tak samo jak render(), tylko że wyświetla rezultat
+ */
+function display($templateName, array $arguments = [])
+{
+    echo render($templateName, $arguments);
+
+    return '';
 }
 
 /**

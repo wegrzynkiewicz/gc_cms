@@ -2,7 +2,7 @@
 
 # pobierz węzły nawigacji i zbuduj z nich drzewo
 $menu = GC\Model\Menu\Menu::select()
-    ->fields('parent_id, ::menus.*, link')
+    ->fields('parent_id, ::menus.*, slug')
     ->source('::taxonomy')
     ->equals('workname', 'top')
     ->equals('::menu_taxonomies.lang', GC\Auth\Visitor::getLang())

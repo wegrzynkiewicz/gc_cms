@@ -16,7 +16,7 @@ if (strlen($newPassword) < $config['password']['minLength']) {
     return require ACTIONS_PATH.'/admin/account/change-password-get.php';
 }
 
-if (!GC\Auth\Password::verify($oldPassword, $user['password'])) {
+if (!password_verify($oldPassword, $user['password'])) {
     $error = $trans('Stare hasło nie zgadza się z obecnym hasłem');
 
     return require ACTIONS_PATH.'/admin/account/change-password-get.php';
@@ -29,9 +29,9 @@ if ($newPassword !== $confirmPassword) {
 }
 
 GC\Model\Staff\Staff::updateByPrimaryId($user['staff_id'], [
-    'password' => GC\Auth\Password::hash($newPassword),
+    'password' => password_hash($newPassword, \PASSWORD_DEFAULT),
 ]);
 
-setNotice($trans('Twoje hasło zostało zmienione'));
+flashBox($trans('Twoje hasło zostało zmienione'));
 
 redirect($breadcrumbs->getLast('uri'));

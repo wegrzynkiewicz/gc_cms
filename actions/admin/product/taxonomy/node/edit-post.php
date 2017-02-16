@@ -25,5 +25,5 @@ GC\Model\Frame::update()
     ->equals('frame_id', $node['frame_id'])
     ->execute();
 
-setNotice($trans('Węzeł "%s" został zaktualizowany.', [$node['name']]));
+flashBox($trans('Węzeł "%s" został zaktualizowany.', [$node['name']]));
 redirect($breadcrumbs->getLast('uri'));

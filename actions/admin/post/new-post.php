@@ -5,7 +5,7 @@ $frame_id = GC\Model\Frame::insert([
     'type' => 'post',
     'keywords' => post('keywords'),
     'description' => post('description'),
-    'image' => $uri->upload($_POST['image']),
+    'image' => $uri->upload(post('image')),
 ]);
 
 $relations = isset($_POST['taxonomy']) ? array_unchunk($_POST['taxonomy']) : [];
@@ -15,5 +15,5 @@ GC\Model\Post\Post::insertWithRelations([
     'publication_datetime' => post('publication_datetime'),
 ], $relations);
 
-setNotice($trans('Nowy wpis "%s" została utworzony.', [$_POST['name']]));
+flashBox($trans('Nowy wpis "%s" została utworzony.', [post('name')]));
 redirect($breadcrumbs->getLast('uri'));

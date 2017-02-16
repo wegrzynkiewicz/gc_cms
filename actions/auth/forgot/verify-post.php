@@ -13,11 +13,11 @@ if ($new_password !== post('confirm_password')) {
 }
 
 GC\Model\Staff\Staff::updateByPrimaryId($user['staff_id'], [
-    'password' => GC\Auth\Password::hash($new_password),
+    'password' => password_hash($new_password, \PASSWORD_DEFAULT),
     'regeneration' => json_encode([]),
 ]);
 
 GC\Auth\Staff::createSession($user['staff_id']);
-setNotice($trans('Zostałeś zalogowany, a Twoje hasło zostało zresetowane.'));
+flashBox($trans('Zostałeś zalogowany, a Twoje hasło zostało zresetowane.'));
 
 redirect('/admin');

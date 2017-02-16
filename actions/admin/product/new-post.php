@@ -9,7 +9,7 @@ $frame_id = GC\Model\Frame::insert([
     'type' => 'product',
     'keywords' => post('keywords'),
     'description' => post('description'),
-    'image' => $uri->upload($_POST['image']),
+    'image' => $uri->upload(post('image')),
 ]);
 
 # dodaj produkt do bazy
@@ -28,5 +28,5 @@ foreach ($nodes as $node_id) {
     ]);
 }
 
-setNotice($trans('Nowy wpis "%s" została utworzony.', [$_POST['name']]));
+flashBox($trans('Nowy wpis "%s" została utworzony.', [post('name')]));
 redirect($breadcrumbs->getLast('uri'));

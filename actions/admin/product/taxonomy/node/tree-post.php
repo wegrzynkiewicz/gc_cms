@@ -25,5 +25,5 @@ foreach ($positions as $node) {
     }
 }
 
-setNotice($trans('Pozycja węzłów została zapisana.'));
+flashBox($trans('Pozycja węzłów została zapisana.'));
 redirect($breadcrumbs->getLast('uri'));

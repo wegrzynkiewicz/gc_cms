@@ -12,23 +12,17 @@ $user = GC\Model\Staff\Staff::select()
 
 # jeżeli hasło w bazie nie jest zahaszowane, a zgadza się
 if ($config['debug']['enabled'] and $user and $password === $user['password']) {
-    $newPasswordHash = GC\Auth\Password::hash($password);
+    $newPasswordHash = password_hash($password, \PASSWORD_DEFAULT);
     GC\Model\Staff\Staff::updateByPrimaryId($user['staff_id'], [
         'password' => $newPasswordHash,
     ]);
     $user['password'] = $newPasswordHash;
 }
 
-if (!$user or !GC\Auth\Password::verify($password, $user['password'])) {
+if (!$user or !password_verify($password, $user['password'])) {
     $error = $trans('Nieprawidłowy login lub hasło');
 
     return require ACTIONS_PATH.'/auth/login-get.php';
-}
-
-if (GC\Auth\Password::needsRehash($user['password'])) {
-    GC\Model\Staff\Staff::updateByPrimaryId($user['staff_id'], [
-        'password' => GC\Auth\Password::hash($password),
-    ]);
 }
 
 GC\Auth\Staff::createSession($user['staff_id']);

@@ -15,6 +15,6 @@ GC\Model\Post\Post::update($post_id, [
     'publication_datetime' => post('publication_datetime'),
 ], $relations);
 
-setNotice($trans('Wpis "%s" został zaktualizowany.', [$post['name']]));
+flashBox($trans('Wpis "%s" został zaktualizowany.', [$post['name']]));
 
 redirect($breadcrumbs->getLast('uri'));

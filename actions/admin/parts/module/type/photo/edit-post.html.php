@@ -1,7 +1,7 @@
 <?php
 
 $url = $_POST['uri'];
-$name = $_POST['name'];
+$name = post('name');
 
 $filePath = WEB_PATH.$url;
 list($width, $height) = getimagesize($filePath);

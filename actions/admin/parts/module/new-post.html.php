@@ -7,6 +7,6 @@ $module_id = GC\Model\Module\Module::insertWithFrameId([
     'settings' => json_encode([]),
 ], $frame_id);
 
-setNotice($trans("%s został utworzony. Edytujesz go teraz.", [$config['modules'][$moduleType]['name']]));
+flashBox($trans("%s został utworzony. Edytujesz go teraz.", [$config['modules'][$moduleType]['name']]));
 
 redirect($uri->mask("/{$module_id}/edit"));

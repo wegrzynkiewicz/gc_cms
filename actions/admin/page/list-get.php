@@ -3,12 +3,12 @@
 require ACTIONS_PATH.'/admin/_import.php';
 require ACTIONS_PATH.'/admin/page/_import.php';
 
-# pobierz strony wraz z rusztowaniem według języka i posortowane
-$pages = GC\Model\Page::select()
-    ->source('::frame')
+# pobierz liczbę stron
+$count = GC\Model\Frame::select()
+    ->fields('COUNT(*) AS count')
+    ->equals('type', 'page')
     ->equals('lang', $staff->getEditorLang())
-    ->order('name', 'ASC')
-    ->fetchByPrimaryKey();
+    ->fetch()['count'];
 
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
@@ -29,39 +29,36 @@ $pages = GC\Model\Page::select()
 
 <?php require ACTIONS_PATH.'/admin/parts/breadcrumbs.html.php'; ?>
 
-<!-- <div class="alert alert-info alert-dismissible">
-    <button type="button" class="close" data-dismiss="alert">
-        <span>&times;</span>
-    </button>
-    <strong>Pomoc:</strong> <?=$trans('')?>
-</div> -->
-
 <div class="row">
     <div class="col-md-12">
         <div class="simple-box">
-            <?php if (empty($pages)): ?>
+            <?php if ($count == 0): ?>
                 <?=$trans('Nie znaleziono żadnej strony w języku: ')?>
                 <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
                     'lang' => $staff->getEditorLang(),
                 ])?>
             <?php else: ?>
-                <table class="table vertical-middle" data-table="">
-                    <thead>
-                        <tr>
-                            <th style="width:1px"><?=$trans('Zdjęcie')?></th>
-                            <th><?=$trans('Nazwa strony')?></th>
-                            <th class="text-right no-sort"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($pages as $page_id => $page): ?>
-                            <?=render(ACTIONS_PATH.'/admin/page/list-item.html.php', [
-                                'page_id' => $page_id,
-                                'page' => $page,
-                            ])?>
-                        <?php endforeach ?>
-                    </tbody>
-                </table>
+                <form action="" method="post" id="form" class="form-horizontal">
+                    <table class="table vertical-middle" data-table="" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th data-name="image"
+                                    data-searchable="0"
+                                    data-sortable="0"></th>
+                                <th data-name="name"
+                                    data-searchable="1"
+                                    data-sortable="1">
+                                    <?=$trans('Nazwa strony')?>
+                                </th>
+                                <th data-name="options"
+                                    data-searchable="0"
+                                    data-sortable="0"
+                                    class="text-right"></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </form>
             <?php endif ?>
         </div>
         <?php require ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php'; ?>
@@ -70,11 +67,8 @@ $pages = GC\Model\Page::select()
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm"
-            method="post"
-            action="<?=$uri->mask("/delete")?>"
-            class="modal-content">
-            <input name="page_id" type="hidden" value="">
+        <form id="deleteModalForm" method="post" action="<?=$uri->mask('/delete')?>" class="modal-content">
+            <input name="frame_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
@@ -85,7 +79,7 @@ $pages = GC\Model\Page::select()
             </div>
             <div class="modal-body">
                 <?=$trans('Czy jesteś pewien, że chcesz usunąć stronę')?>
-                <span id="name" style="font-weight:bold; color:red;"></span>?
+                <span id="frame_name" style="font-weight:bold; color:red;"></span>?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -99,17 +93,82 @@ $pages = GC\Model\Page::select()
     </div>
 </div>
 
+<script id="row-template" type="text/html">
+    <td style="width:64px">
+        <img src="{{image}}" width="64"/>
+    </td>
+
+    <td>
+        <a href="<?=$uri->mask()?>/{{frame_id}}/edit"
+            title="<?=$trans('Edytuj stronę')?>">
+            {{name}}
+        </a>
+    </td>
+
+    <td class="text-right">
+        <a href="<?=$uri->make("/page")?>/{{frame_id}}"
+            target="_blank"
+            title="<?=$trans('Podejrzyj tą stronę')?>"
+            class="btn btn-primary btn-sm">
+            <i class="fa fa-search fa-fw"></i>
+            <?=$trans('Podgląd')?>
+        </a>
+
+        <a href="<?=$uri->mask()?>/{{frame_id}}/module/list"
+            title="<?=$trans('Wyświetl moduły strony')?>"
+            class="btn btn-success btn-sm">
+            <i class="fa fa-file-text-o fa-fw"></i>
+            <?=$trans('Moduły')?>
+        </a>
+
+        <a data-toggle="modal"
+            data-id="{{frame_id}}"
+            data-name="{{name}}"
+            data-target="#deleteModal"
+            title="<?=$trans('Usuń stronę')?>"
+            class="btn btn-danger btn-sm">
+            <i class="fa fa-times fa-fw"></i>
+            <?=$trans('Usuń')?>
+        </a>
+    </td>
+</script>
+
 <?php require ACTIONS_PATH.'/admin/parts/assets/footer.html.php'; ?>
 
 <script>
     $(function(){
-        $('#deleteModal').on('show.bs.modal', function(e) {
-            $(this).find('#name').html($(e.relatedTarget).data('name'));
-            $(this).find('[name="page_id"]').val($(e.relatedTarget).data('id'));
-        });
-        $('[data-table]').DataTable({
-            order: [[2, 'asc']],
+        var rowTemplate = $('#row-template').html();
+        var table = $('[data-table]').DataTable({
+            order: [[1, 'asc']],
             iDisplayLength: <?=$config['dataTable']['iDisplayLength']?>,
+	        processing: true,
+            serverSide: true,
+            searchDelay: 500,
+            autoWidth: false,
+            ajax: {
+                url: '<?=$uri->mask("/xhr-list")?>',
+                type: 'GET'
+            },
+            createdRow: function (row, data, index) {
+                $(row).html(Mustache.render(rowTemplate, data));
+            },
+            columns: [
+                {data: "image"},
+                {data: "name"},
+            ],
+        });
+
+        $('#deleteModalForm').on('submit', function(e) {
+            e.preventDefault();
+            $.post($(this).attr('action'), $(this).serialize(), function() {
+                table.ajax.reload();
+                $('#deleteModal').modal('hide');
+            });
+        });
+
+        $('#deleteModal').on('show.bs.modal', function(e) {
+            $(this).find('#frame_name').html($(e.relatedTarget).data('name'));
+            $(this).find('[name="frame_id"]').val($(e.relatedTarget).data('id'));
         });
     });
 </script>

@@ -5,13 +5,13 @@ $frame_id = GC\Model\Frame::insert([
     'type' => 'post-node',
     'keywords' => post('keywords'),
     'description' => post('description'),
-    'image' => $uri->upload($_POST['image']),
+    'image' => $uri->upload(post('image')),
 ]);
 
 GC\Model\Post\Node::insertWithTaxonomyId([
     'frame_id' => $frame_id,
 ], $tax_id);
 
-setNotice($trans('Nowy węzeł "%s" dostał dodany do "%s".', [$_POST['name'], $taxonomy['name']]));
+flashBox($trans('Nowy węzeł "%s" dostał dodany do "%s".', [post('name'), $taxonomy['name']]));
 
 redirect($breadcrumbs->getLast('uri'));

@@ -62,7 +62,7 @@ ini_set('max_execution_time', 300);
 ini_set('date.timezone', 'Europe/Warsaw');
 
 # zmiana nazwy ciastka sesyjnego
-ini_set('session.name', $generated['session.visitor.cookie.name']);
+ini_set('session.name', 'PSV');
 
 # częstotliwość z jaką następuje czyszczenie sesji
 ini_set('session.gc_probability', 10);
@@ -144,20 +144,8 @@ return [
 
     # zawiera ustawienia dotyczące polityki haseł
     'password' => [
-
         # minimalna długość hasła
         'minLength' => 8,
-
-        # unikalna, sól dla wszystkich użytkowników, jeżeli ulegnie zmianie,
-        # żaden pracownik nie będzie mógł się zalogować
-        'staticSalt' => $generated['password.salt'],
-
-        # opcje dla funkcji haszującej
-        'options' => [
-
-            # ilość iteracji
-            'cost' => 11,
-        ],
     ],
 
     # ustawienia sesji
@@ -173,7 +161,7 @@ return [
             'cookie' => [
 
                 # nazwa ciastka sesyjnego dla pracownika
-                'name' => $generated['session.staff.cookie.name'],
+                'name' => 'PSS',
 
                 # czas jaki musi upłynąć, aby ciastko wygasło; w sekundach
                 'lifetime' => 3600,
@@ -190,7 +178,7 @@ return [
             'cookie' => [
 
                 # nazwa ciastka sesyjnego dla odwiedzającego
-                'name' => $generated['session.visitor.cookie.name'],
+                'name' => 'PSV',
 
                 # czas jaki musi upłynąć po zalogowaniu, aby ciastko przestało być ważne; w sekundach
                 'lifetime' => 3600,
@@ -275,16 +263,6 @@ return [
 
         # wykorzystywane do wyświetlania w panelowych mailach
         'headerTitle' => "Panel administracyjny GrafCenter CMS",
-    ],
-
-    # zawiera konfiguracje tokenu csrf
-    'csrf' => [
-
-        # czas po którym token jest nieważny
-        'lifetime' => 1800,
-
-        # nazwa ciastka, które przechowuje token CSRF
-        'cookieName' => $generated['csrf.cookieName'],
     ],
 
     # zawiera konfiguracje dla recaptchy od googla

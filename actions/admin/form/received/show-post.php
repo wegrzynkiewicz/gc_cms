@@ -9,6 +9,6 @@ GC\Model\Form\Sent::updateByPrimaryId($sent_id, [
     'status' => post('status'),
 ]);
 
-setNotice($trans('Status wiadomośći został zaktualizowany.'));
+flashBox($trans('Status wiadomośći został zaktualizowany.'));
 
 redirect($breadcrumbs->getLast('uri'));

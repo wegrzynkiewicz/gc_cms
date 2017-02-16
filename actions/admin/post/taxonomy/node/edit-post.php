@@ -6,9 +6,9 @@ GC\Model\Frame::updateByFrameId($node['frame_id'], [
     'name' => post('name'),
     'keywords' => post('keywords'),
     'description' => post('description'),
-    'image' => $uri->upload($_POST['image']),
+    'image' => $uri->upload(post('image')),
 ]);
 
-setNotice($trans('Węzeł "%s" został zaktualizowany.', [$node['name']]));
+flashBox($trans('Węzeł "%s" został zaktualizowany.', [$node['name']]));
 
 redirect($breadcrumbs->getLast('uri'));

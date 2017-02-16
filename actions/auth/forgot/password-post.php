@@ -14,7 +14,7 @@ if (!$user) {
 
 $email64 = base64_encode($user['email']);
 $regeneration = [
-    'verifyHash' => GC\Auth\Password::random(40),
+    'verifyHash' => random(40),
     'time' => time(),
 ];
 

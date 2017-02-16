@@ -10,6 +10,6 @@ GC\Model\Module\Module::updateByPrimaryId($module_id, [
     'settings' => json_encode($settings, JSON_UNESCAPED_UNICODE),
 ]);
 
-setNotice($trans('Moduł formularza został zaktualizowany.'));
+flashBox($trans('Moduł formularza został zaktualizowany.'));
 
 redirect($breadcrumbs->getBeforeLast('uri'));

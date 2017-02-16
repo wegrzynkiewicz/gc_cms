@@ -3,12 +3,14 @@
 require ACTIONS_PATH.'/admin/_import.php';
 require ACTIONS_PATH.'/admin/page/_import.php';
 
-$page_id = intval(post('page_id'));
-$page = GC\Model\Page::select()
-    ->source('::frame')
-    ->equals('page_id', $page_id)
-    ->fetch();
-GC\Model\Page::deleteFrameByPrimaryId($page_id);
+$frame_id = intval(array_shift($_PARAMETERS));
 
-setNotice($trans('Strona "%s" została usunięta.', [$page['name']]));
+# pobierz stronę po kluczu głównym
+$page = GC\Model\Frame::select()
+    ->equals('frame_id', $frame_id)
+    ->fetch();
+
+GC\Model\Frame::deleteFrameByPrimaryId($frame_id);
+
+flashBox($trans('Strona "%s" została usunięta.', [$page['name']]));
 redirect($breadcrumbs->getLast('uri'));

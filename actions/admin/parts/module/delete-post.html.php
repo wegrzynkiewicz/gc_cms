@@ -7,6 +7,6 @@ $moduleType = $module['type'];
 GC\Model\Module\File::deleteAllByForeign($module_id);
 GC\Model\Module\Module::deleteModuleByPrimaryId($module_id);
 
-setNotice($trans("%s został usunięty", [$config['modules'][$moduleType]['name']]));
+flashBox($trans("%s został usunięty", [$config['modules'][$moduleType]['name']]));
 
 redirect($breadcrumbs->getLast('uri'));
