@@ -4,5 +4,13 @@ require ACTIONS_PATH.'/admin/_import.php';
 require ACTIONS_PATH.'/admin/staff/_import.php';
 require ACTIONS_PATH.'/admin/staff/group/_import.php';
 
-GC\Model\Staff\Group::deleteByPrimaryId(post('group_id'));
+$group_id = intval(post('group_id'));
+
+# pobierz grupę po kluczu głównym
+$group = GC\Model\Staff\Group::fetchByPrimaryId($group_id);
+
+# usuń grupę pracowników
+GC\Model\Staff\Group::deleteByPrimaryId($group_id);
+
+flashBox($trans('Grupa pracowników "%s" została usunięta.', [$group['name']]));
 redirect($breadcrumbs->getLast('uri'));

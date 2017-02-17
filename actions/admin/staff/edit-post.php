@@ -4,20 +4,27 @@ require ACTIONS_PATH.'/admin/_import.php';
 require ACTIONS_PATH.'/admin/staff/_import.php';
 
 $staff_id = intval(array_shift($_PARAMETERS));
-$email = post('email');
+$groups = post('groups', []);
 
-$existedStaff = GC\Model\Staff\Staff::select()->equals('email', $email)->fetch();
-if ($existedStaff and $existedStaff['staff_id'] != $staff_id) {
-    $error = $trans('Taki adres email już istnieje');
-
-    return require ACTIONS_PATH.'/admin/staff/edit-get.php';
-}
-
+# zaktualizuj pracownika po kluczu głównym
 GC\Model\Staff\Staff::updateByPrimaryId($staff_id, [
     'name' => post('name'),
     'email' => post('email'),
     'avatar' => post('avatar'),
 ]);
-GC\Model\Staff\Staff::updateGroups($staff_id, post('groups', []));
 
+# usuń wszystkie grupy tego pracownika
+GC\Model\Staff\Membership::delete()
+    ->equals('staff_id', $staff_id)
+    ->execute();
+
+# wstaw przynależność pracownika do grup
+foreach ($groups as $group_id) {
+    GC\Model\Staff\Membership::insert([
+        'group_id' => $group_id,
+        'staff_id' => $staff_id,
+    ]);
+}
+
+flashBox($trans('Pracownik "%s" został zaktualizowany.', [post('name')]));
 redirect($breadcrumbs->getLast('uri'));

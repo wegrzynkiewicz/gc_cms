@@ -2,8 +2,6 @@
 
 namespace GC;
 
-use GC\Model\Frame as ModelFrame;
-
 class Validate
 {
     public static function column($string)
@@ -23,11 +21,21 @@ class Validate
 
     public static function slug($slug, $frame_id = 0)
     {
-        $frame = ModelFrame::select()
+        $frame = \GC\Model\Frame::select()
             ->equals('slug', $slug)
             ->condition('frame_id != ?', $frame_id)
             ->fetch();
 
         return !$frame;
+    }
+
+    public static function staffEmail($email, $staff_id = 0)
+    {
+        $user = \GC\Model\Staff\Staff::select()
+            ->equals('email', $email)
+            ->condition('staff_id != ?', $staff_id)
+            ->fetch();
+
+        return !$user;
     }
 }

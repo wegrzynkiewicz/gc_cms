@@ -4,17 +4,19 @@ require ACTIONS_PATH.'/admin/_import.php';
 require ACTIONS_PATH.'/admin/staff/_import.php';
 require ACTIONS_PATH.'/admin/staff/group/_import.php';
 
+# pobierz wszystkie grupy
 $groups = GC\Model\Staff\Group::select()
     ->fields(['group_id', 'name'])
     ->fetchByPrimaryKey();
 
-$permissions = GC\Model\Staff\Permission::select()
+# pobierz wszystkie uprawnienia
+$groupPermissions = GC\Model\Staff\Permission::select()
     ->fields(['group_id', 'name'])
     ->fetchAll();
 
-$groupPermissions = [];
-foreach ($permissions as $permission) {
-    $groupPermissions[$permission['group_id']][] = $permission['name'];
+# przyporządkuj każdej grupie własne uprawnienia
+foreach ($groupPermissions as $permission) {
+    $groups[$permission['group_id']]['permissions'][] = $permission['name'];
 }
 
 ?>
@@ -55,12 +57,8 @@ foreach ($permissions as $permission) {
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($groups as $group_id => $group): ?>
-                            <?=render(ACTIONS_PATH.'/admin/staff/group/list-item.html.php', [
-                                'group_id' => $group_id,
-                                'group' => $group,
-                                'permissions' => $groupPermissions[$group_id],
-                            ])?>
+                        <?php foreach ($groups as $group): ?>
+                            <?=render(ACTIONS_PATH.'/admin/staff/group/list-item.html.php', $group)?>
                         <?php endforeach ?>
                     </tbody>
                 </table>

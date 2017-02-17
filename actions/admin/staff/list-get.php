@@ -3,30 +3,33 @@
 require ACTIONS_PATH.'/admin/_import.php';
 require ACTIONS_PATH.'/admin/staff/_import.php';
 
-$staffList = GC\Model\Staff\Staff::select()
+# pobierz pracowników, którzy nie są kontem roota
+$users = GC\Model\Staff\Staff::select()
     ->fields(['staff_id', 'name'])
     ->equals('root', 0)
     ->fetchByPrimaryKey();
 
+# pobierz wszystkie grupy pracowników
 $groups = GC\Model\Staff\Group::select()
     ->fields(['staff_id', 'name', 'group_id'])
-    ->source('::staff_membership LEFT JOIN ::staff_groups USING(group_id)')
+    ->source('::groups')
     ->order('name', 'ASC')
     ->fetchAll();
 
-$staffGroups = [];
+# przypisz każdemu pracownikowi jego grupy
 foreach ($groups as $group) {
-    $staffGroups[$group['staff_id']][$group['group_id']] = $group['name'];
+    $users[$group['staff_id']]['groups'][$group['group_id']] = $group['name'];
 }
 
+# pobierz wszystkie uprawnienia dla pracownika
 $permissions = GC\Model\Staff\Permission::select()
     ->fields('DISTINCT name, staff_id')
     ->source('::staff_membership JOIN ::staff_permissions USING(group_id)')
     ->fetchAll();
 
-$staffPermissions = [];
+# przypisz każdemu pracownikowi jego uprawnienia
 foreach ($permissions as $permission) {
-    $staffPermissions[$permission['staff_id']][] = $permission['name'];
+    $users[$permission['staff_id']]['permissions'][] = $permission['name'];
 }
 
 ?>
@@ -51,32 +54,27 @@ foreach ($permissions as $permission) {
 <div class="row">
     <div class="col-md-12">
         <div class="simple-box">
-            <?php if (empty($staffList)): ?>
+            <?php if (empty($users)): ?>
                 <?=$trans('Nie znaleziono żadnych pracowników.')?>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">
                     <thead>
                         <tr>
-                            <th class="col-md-3 col-lg-3">
+                            <th>
                                 <?=$trans('Pracownik')?>
                             </th>
-                            <th class="col-md-4 col-lg-4">
+                            <th>
                                 <?=$trans('Grupy')?>
                             </th>
-                            <th class="col-md-4 col-lg-4">
+                            <th>
                                 <?=$trans('Uprawnienia')?>
                             </th>
-                            <th class="col-md-1 col-lg-1 text-right"></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($staffList as $staff_id => $row): ?>
-                            <?=render(ACTIONS_PATH.'/admin/staff/list-item.html.php', [
-                                'staff_id' => $staff_id,
-                                'staff' => $row,
-                                'groups' => def($staffGroups, $staff_id, []),
-                                'permissions' => def($staffPermissions, $staff_id, []),
-                            ])?>
+                        <?php foreach ($users as $user): ?>
+                            <?=render(ACTIONS_PATH.'/admin/staff/list-item.html.php', $user)?>
                         <?php endforeach ?>
                     </tbody>
                 </table>

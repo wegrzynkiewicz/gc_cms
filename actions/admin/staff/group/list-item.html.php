@@ -6,14 +6,18 @@
         </a>
     </td>
     <td>
-        <?php foreach ($permissions as $permission): ?>
-            <?=$trans($config['permissions'][$permission])?> <br>
-        <?php endforeach ?>
+        <?php dd($GLOBALS); if (isset($permissions) and $permissions): ?>
+            <?php foreach ($permissions as $permission): ?>
+                <?=$trans($config['permissions'][$permission])?> <br>
+            <?php endforeach ?>
+        <?php else: ?>
+            <?=$trans('Ta grupa nie posiada nadanych żadnych uprawnień.')?>
+        <?php endif ?>
     </td>
     <td class="text-right">
         <a data-toggle="modal"
-            data-id="<?=e($group_id)?>"
-            data-name="<?=e($group['name'])?>"
+            data-id="<?=$group_id?>"
+            data-name="<?=$name?>"
             data-target="#deleteModal"
             title="<?=$trans('Usuń grupę')?>"
             class="btn btn-danger btn-md">

@@ -5,9 +5,19 @@ require ACTIONS_PATH.'/admin/staff/_import.php';
 require ACTIONS_PATH.'/admin/staff/group/_import.php';
 
 $permissions = post('permissions', []);
+
+# wstaw grupę
 $group_id = GC\Model\Staff\Group::insert([
     'name' => post('name'),
 ]);
-GC\Model\Staff\Group::updatePermissions($group_id, $permissions);
 
+# wstaw uprawnienia grupy
+foreach ($permissions as $permission) {
+    GC\Model\Staff\Permission::insert([
+        'group_id' => $group_id,
+        'name' => $permission,
+    ]);
+}
+
+flashBox($trans('Nowa grupa pracowników "%s" została utworzona.', [post('name')]));
 redirect($breadcrumbs->getLast('uri'));

@@ -1,7 +1,9 @@
 <?php
+
 $groupOptions = GC\Model\Staff\Group::select()
     ->fields(['group_id', 'name'])
     ->fetchByMap('group_id', 'name');
+
 ?>
 
 <div class="row">
@@ -9,10 +11,6 @@ $groupOptions = GC\Model\Staff\Group::select()
         <form action="" method="post" id="form" class="form-horizontal">
 
             <div class="simple-box">
-                <?php if (isset($error)): ?>
-                    <p class="text-center"><?=e($error)?></p>
-                <?php endif ?>
-
                 <?=render(ACTIONS_PATH.'/admin/parts/input/image.html.php', [
                     'name' => 'avatar',
                     'label' => $trans('Avatar pracownika'),
@@ -27,7 +25,7 @@ $groupOptions = GC\Model\Staff\Group::select()
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'email',
                     'label' => $trans('Adres E-mail'),
-                    'help' => $trans('Adres E-mailowy służy do logowaniu pracownika do panelu'),
+                    'help' => $trans('Adres E-mail służy do logowaniu pracownika do panelu'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/select2-multi.html.php', [
@@ -54,21 +52,25 @@ $(function () {
     $('#form').validate({
         rules: {
             name: {
-                required: true
+                required: true,
             },
             email: {
                 email: true,
-                required: true
-            }
+                required: true,
+                remote: {
+                    url: "<?=$uri->make("/admin/api/validate/xhr-staff-email/{$staff_id}")?>",
+                },
+            },
         },
         messages: {
             name: {
-                required: "<?=$trans('Imię i nazwisko jest wymagane')?>"
+                required: "<?=$trans('Imię i nazwisko jest wymagane')?>",
             },
             email: {
                 email: "<?=$trans('Adres E-mail nie jest prawidłowy')?>",
-                required: "<?=$trans('Adres E-mail jest wymagany')?>"
-            }
+                required: "<?=$trans('Adres E-mail jest wymagany')?>",
+                remote: "<?=$trans('Adres E-mail jest już wykorzystywany')?>",
+            },
         },
     });
 });

@@ -4,7 +4,9 @@ require ACTIONS_PATH.'/admin/_import.php';
 require ACTIONS_PATH.'/admin/staff/_import.php';
 
 $password = random($config['password']['minLength']);
+$groups = post('groups', []);
 
+# wstaw nowego pracownika do bazy
 $staff_id = GC\Model\Staff\Staff::insert([
     'name' => post('name'),
     'password' => password_hash($password, \PASSWORD_DEFAULT),
@@ -13,8 +15,16 @@ $staff_id = GC\Model\Staff\Staff::insert([
     'lang' => $config['lang']['visitorDefault'],
     'force_change_password' => 1,
 ]);
-GC\Model\Staff\Staff::updateGroups($staff_id, post('groups', []));
 
+# wstaw przynależność pracownika do grup
+foreach ($groups as $group_id) {
+    GC\Model\Staff\Membership::insert([
+        'group_id' => $group_id,
+        'staff_id' => $staff_id,
+    ]);
+}
+
+# wyślij maila z hasłem
 $mail = new GC\Mail();
 $mail->buildTemplate(
     ACTIONS_PATH.'/admin/staff/staff-created.email.html.php',
@@ -27,4 +37,5 @@ $mail->buildTemplate(
 $mail->addAddress($_POST['email']);
 $mail->send();
 
+flashBox($trans('Pracownik "%s" został utworzony.', [post('name')]));
 redirect($breadcrumbs->getLast('uri'));

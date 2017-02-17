@@ -2,8 +2,6 @@
 
 namespace GC;
 
-use GC\Data;
-
 class Thumb
 {
     private $url = '';
@@ -65,7 +63,7 @@ class Thumb
      */
     public static function lazyGenerate($imageUrl)
     {
-        $token = Auth\Password::random(40);
+        $token = random(40);
         $imageUrl64 = base64_encode($imageUrl);
         $_SESSION['lazyGenerate'][$imageUrl][$token] = true;
 

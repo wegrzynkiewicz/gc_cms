@@ -1,8 +1,7 @@
 <?php
-$staffName = e($staff['name']);
-$avatarUrl = empty($staff['avatar'])
+$avatarUrl = empty($avatar)
     ? $uri->assets($config['avatar']['noAvatarUrl'])
-    : GC\Thumb::make($staff['avatar'], 40, 40);
+    : GC\Thumb::make($avatar, 40, 40);
 ?>
 <tr>
     <td>
@@ -11,25 +10,33 @@ $avatarUrl = empty($staff['avatar'])
 
         <a href="<?=$uri->mask("/{$staff_id}/edit")?>"
             title="<?=$trans('Edytuj pracownika')?>">
-            <?=$staffName?>
+            <?=e($name)?>
         </a>
     </td>
     <td>
-        <?php foreach ($groups as $group_id => $group): ?>
-            <a href="<?=$uri->mask("/group/{$group_id}/edit")?>"
-                title="<?=$trans('Przejdź do grupy')?>">
-                <?=$trans($group)?></a><br>
-        <?php endforeach ?>
+        <?php if (isset($groups) and $groups): ?>
+            <?php foreach ($groups as $group_id => $group): ?>
+                <a href="<?=$uri->mask("/group/{$group_id}/edit")?>"
+                    title="<?=$trans('Przejdź do grupy')?>">
+                    <?=$trans($group)?></a><br>
+            <?php endforeach ?>
+        <?php else: ?>
+            <?=$trans('Ten pracownik nie jest przypisany do żadnej grupy.')?>
+        <?php endif ?>
     </td>
     <td>
-        <?php foreach ($permissions as $permission): ?>
-            <?=$trans($config['permissions'][$permission])?> <br>
-        <?php endforeach ?>
+        <?php if (isset($permissions) and $permissions): ?>
+            <?php foreach ($permissions as $permission): ?>
+                <?=$trans($config['permissions'][$permission])?> <br>
+            <?php endforeach ?>
+        <?php else: ?>
+            <?=$trans('Ten pracownik nie posiada żadnych uprawnień.')?>
+        <?php endif ?>
     </td>
     <td class="text-right">
         <a data-toggle="modal"
             data-id="<?=$staff_id?>"
-            data-name="<?=$staffName?>"
+            data-name="<?=e($name)?>"
             data-target="#deleteModal"
             title="<?=$trans('Usuń pracownika')?>"
             class="btn btn-danger btn-md">
