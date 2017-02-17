@@ -1,13 +1,13 @@
 <?php
 
-require ACTIONS_PATH.'/admin/_import.php';
-require ACTIONS_PATH.'/admin/account/_import.php';
+require ACTIONS_PATH.'/auth/_import.php';
 
 $headTitle = $trans('Zostałeś wylogowany');
 
-GC\Auth\Staff::destroySession();
+unset($_SESSION['staff']);
 
-require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
+?>
+<?php require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
 
 <div class="vertical-center">
     <div class="container">
@@ -15,23 +15,20 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
             <div class="col-md-6 col-md-offset-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">
+                        <h3 class="panel-title text-center">
                             <?=($headTitle)?>
                         </h3>
                     </div>
                     <div class="panel-body">
 
-                        <p class="text-center">
+                        <p class="text-center" style="margin-bottom:20px">
                             <?=$trans('Zostałeś bezpiecznie wylogowany z panelu admina.')?><br>
                             <?=$trans('Mamy nadzieje, że praca z naszym systemem była przyjemna :)')?>
                         </p>
 
-                        <div class="btn-group btn-group-justified" style="margin-top:5px">
-                            <a href="<?=$uri->make("/")?>" class="btn btn-link">
-                                <?=$trans('Przejdź na stronę główną')?></a>
-                            <a href="<?=$uri->make("/auth/login")?>" class="btn btn-link">
-                            <?=$trans('Wróć do logowania')?></a>
-                        </div>
+                        <a href="<?=$uri->make("/auth/login")?>" class="btn btn-md btn-success btn-block">
+                            <?=$trans('Zaloguj się ponownie')?>
+                        </a>
 
                     </div>
                 </div>

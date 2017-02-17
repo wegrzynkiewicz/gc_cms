@@ -4,7 +4,7 @@ require ACTIONS_PATH.'/admin/_import.php';
 require ACTIONS_PATH.'/admin/form/_import.php';
 
 $forms = GC\Model\Form\Form::select()
-    ->equals('lang', $staff->getEditorLang())
+    ->equals('lang', GC\Staff::getInstance()->getEditorLang())
     ->order('name', 'ASC')
     ->fetchByPrimaryKey();
 
@@ -23,7 +23,7 @@ $counts = GC\Model\Form\Sent::select()
             <?php if (empty($forms)): ?>
                 <?=$trans('Nie znaleziono żadnego formularza w języku: ')?>
                 <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
-                    'lang' => $staff->getEditorLang(),
+                    'lang' => GC\Staff::getInstance()->getEditorLang(),
                 ])?>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">

@@ -35,7 +35,7 @@ $headTitle = $trans('Zapomniałem hasła');
                             </button>
 
                             <div class="btn-group btn-group-justified" style="margin-top:5px">
-                                <a href="<?=$uri->make("/")?>" class="btn btn-link">
+                                <a href="<?=$uri->root()?>/" class="btn btn-link">
                                     <?=$trans('Przejdź na stronę główną')?></a>
                                 <a href="<?=$uri->make("/auth/login")?>" class="btn btn-link">
                                     <?=$trans('Wróć do logowania')?></a>

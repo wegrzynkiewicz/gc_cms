@@ -5,14 +5,8 @@ if (!$config['debug']['enabled']) {
     redirect('/');
 }
 
-# utworzenie obiektu reprezentującego pracownika, sprawdza czy jest zalogowany
-$staff = GC\Auth\Staff::createFromSession();
-
-# weryfikacja tokenu CSRF
-GC\Auth\CSRFToken::routines($request);
-
 # panel roota jest dostępny tylko dla pracowników z polem 'root'
-if (!$staff['root']) {
+if (!GC\Staff::getInstance()['root']) {
     redirect('/');
 }
 

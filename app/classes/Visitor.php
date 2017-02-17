@@ -1,8 +1,7 @@
 <?php
 
-namespace GC\Auth;
+namespace GC;
 
-use GC\Data;
 use GC\Validate;
 
 class Visitor

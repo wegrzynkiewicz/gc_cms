@@ -5,15 +5,15 @@ require ACTIONS_PATH.'/auth/forgot/_import.php';
 
 $headTitle = $trans('Resetowanie hasła');
 
-# utworzenie obiektu repezentującego pracownika
-$staff = GC\Auth\Staff::createFromSession();
+# pobranie klucza głównego zalogowanego pracownika
+$staff_id = GC\Staff::getInstance()['staff_id'];
 
 # pobierz wszystkie meta dane
-$meta = GC\Model\Staff\Meta::fetchMeta($staff['staff_id']);
+$meta = GC\Model\Staff\Meta::fetchMeta($staff_id);
 
 # jeżeli regeneracja jest nieaktualna wtedy przekieruj
 if (!isset($meta['regenerationVerifyHash'])) {
-    GC\Auth\Staff::destroySession();
+    unset($_SESSION['staff']);
     redirect('/login');
 }
 

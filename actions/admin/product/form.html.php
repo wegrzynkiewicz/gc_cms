@@ -2,7 +2,7 @@
 
 # pobierz wszystkie posortowane taksonomie z danego języka
 $taxonomies = GC\Model\Product\Taxonomy::select()
-    ->equals('lang', $staff->getEditorLang())
+    ->equals('lang', GC\Staff::getInstance()->getEditorLang())
     ->order('name', 'ASC')
     ->fetchByPrimaryKey();
 

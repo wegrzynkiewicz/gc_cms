@@ -6,7 +6,7 @@ require ACTIONS_PATH.'/admin/product/taxonomy/_import.php';
 
 # pobierz wszystkie posortowane taksonomie z języka
 $taxonomies = GC\Model\Product\Taxonomy::select()
-    ->equals('lang', $staff->getEditorLang())
+    ->equals('lang', GC\Staff::getInstance()->getEditorLang())
     ->order('name', 'ASC')
     ->fetchByPrimaryKey();
 
@@ -41,7 +41,7 @@ unset($taxonomy);
             <?php if (empty($taxonomies)): ?>
                 <?=$trans('Nie znaleziono podziałów wpisów w języku: ')?>
                 <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
-                    'lang' => $staff->getEditorLang(),
+                    'lang' => GC\Staff::getInstance()->getEditorLang(),
                 ])?>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">

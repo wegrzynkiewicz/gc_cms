@@ -4,7 +4,7 @@ require ACTIONS_PATH."/admin/parts/module/type/form/_import.php";
 
 $installedForms = GC\Model\Form\Form::select()
     ->fields('::primary, name')
-    ->equals('lang', $staff->getEditorLang())
+    ->equals('lang', GC\Staff::getInstance()->getEditorLang())
     ->order('name', 'ASC')
     ->fetchByMap('form_id', 'name');
 

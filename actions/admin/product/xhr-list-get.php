@@ -7,7 +7,7 @@ require ACTIONS_PATH.'/admin/product/_import.php';
 $frames = GC\Model\Frame::select()
     ->fields('SQL_CALC_FOUND_ROWS frame_id, name, image, slug')
     ->equals('type', 'product')
-    ->equals('lang', $staff->getEditorLang())
+    ->equals('lang', GC\Staff::getInstance()->getEditorLang())
     ->buildForDataTables($_GET)
     ->fetchAll();
 
@@ -20,7 +20,7 @@ $recordsFiltered = intval(GC\Storage\Database::getInstance()
 $recordsTotal = intval(GC\Model\Frame::select()
     ->fields('COUNT(*) AS count')
     ->equals('type', 'product')
-    ->equals('lang', $staff->getEditorLang())
+    ->equals('lang', GC\Staff::getInstance()->getEditorLang())
     ->fetch()['count']
 );
 

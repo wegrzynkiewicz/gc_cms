@@ -3,7 +3,6 @@
 namespace GC\Storage;
 
 use GC\Assert;
-use GC\Data;
 use GC\Storage\Query;
 
 /**

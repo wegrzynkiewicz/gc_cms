@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<?=GC\Auth\Visitor::getLang()?>">
+<html lang="<?=GC\Visitor::getLang()?>">
 <head>
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 	<meta content="width=device-width, initial-scale=1" name="viewport">

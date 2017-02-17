@@ -3,7 +3,9 @@
 require ACTIONS_PATH.'/auth/_import.php';
 
 $newPassword = $_POST['new_password'];
-$staff_id = $staff['staff_id'];
+
+# pobranie klucza głównego zalogowanego pracownika
+$staff_id = $_SESSION['staff']['staff_id'];
 
 # zaktualizuj dane pracownika
 GC\Model\Staff\Staff::updateByPrimaryId($staff_id, [

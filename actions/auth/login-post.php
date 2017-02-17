@@ -2,7 +2,7 @@
 
 require ACTIONS_PATH.'/auth/_import.php';
 
-if (GC\Auth\Staff::existsSessionCookie()) {
+if (isset($_SESSION['staff'])) {
     redirect('/admin');
 }
 
@@ -27,7 +27,8 @@ elseif (!$user or !password_verify($password, $user['password'])) {
     ]);
 }
 
-GC\Auth\Staff::createSession($user['staff_id']);
+# ustawienie sesji pracownika
+$_SESSION['staff']['staff_id'] = $user['staff_id'];
 
 GC\Storage\Backup::make(sprintf('Po zalogowaniu użytkownika %s', $user['name']));
 redirect('/admin');

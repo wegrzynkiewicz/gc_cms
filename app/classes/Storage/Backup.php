@@ -3,8 +3,6 @@
 namespace GC\Storage;
 
 use GC\Logger;
-use GC\Password;
-use GC\Data;
 use GC\Model\Dump;
 use Ifsnop\Mysqldump as IMysqldump;
 

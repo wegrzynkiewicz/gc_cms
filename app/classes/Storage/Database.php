@@ -2,8 +2,6 @@
 
 namespace GC\Storage;
 
-use GC\Data;
-
 /**
  * Słuzy do wykonywania zapytań do bazy danych
  */

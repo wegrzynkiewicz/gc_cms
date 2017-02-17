@@ -5,7 +5,8 @@ require ACTIONS_PATH.'/admin/account/_import.php';
 
 $newPassword = post('new_password');
 
-$staff_id = $staff['staff_id'];
+# pobranie klucza głównego zalogowanego pracownika
+$staff_id = GC\Staff::getInstance()['staff_id'];
 
 # zaktualizuj hasło zalogowanego pracownika
 GC\Model\Staff\Staff::updateByPrimaryId($staff_id, [

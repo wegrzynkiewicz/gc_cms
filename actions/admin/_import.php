@@ -3,7 +3,7 @@
 /* Plik ładowany przed każdą akcją w panelu admina */
 
 # utworzenie obiektu repezentującego pracownika
-$staff = GC\Auth\Staff::createFromSession();
+GC\Staff::getInstance();
 
 $uri->extendMask('/admin%s');
 $translator->domain = 'admin';

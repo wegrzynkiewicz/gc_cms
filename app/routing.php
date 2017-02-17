@@ -19,7 +19,7 @@ if (empty($requestUri)) {
 # sprawdza pierwszy segment w adresie czy nie jest jednym z dostępnych języków
 $lang = $_SEGMENTS[0];
 if (strlen($lang) === 2 and GC\Validate::installedLang($lang)) {
-    GC\Auth\Visitor::$langRequest = $lang;
+    GC\Visitor::$langRequest = $lang;
     array_shift($_SEGMENTS);
 }
 

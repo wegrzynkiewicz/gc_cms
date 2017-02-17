@@ -25,7 +25,7 @@
 				$('#elfinder').elfinder({
                      height: $(window).height()-2,
                      url: '<?=$uri->make('/admin/elfinder/connector')?>',
-                     lang: '<?=GC\Auth\Visitor::getLang()?>',
+                     lang: '<?=GC\Visitor::getLang()?>',
 				});
 			});
 		</script>

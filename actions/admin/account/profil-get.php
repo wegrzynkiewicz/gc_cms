@@ -3,7 +3,7 @@
 require ACTIONS_PATH.'/admin/_import.php';
 require ACTIONS_PATH.'/admin/account/_import.php';
 
-$_POST = $staff->getData();
+$_POST = GC\Staff::getInstance()->getData();
 
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>

@@ -7,7 +7,7 @@ require ACTIONS_PATH.'/admin/product/_import.php';
 $count = GC\Model\Frame::select()
     ->fields('COUNT(*) AS count')
     ->equals('type', 'product')
-    ->equals('lang', $staff->getEditorLang())
+    ->equals('lang', GC\Staff::getInstance()->getEditorLang())
     ->fetch()['count'];
 
 ?>
@@ -35,7 +35,7 @@ $count = GC\Model\Frame::select()
             <?php if ($count == 0): ?>
                 <?=$trans('Nie znaleziono żadnej strony w języku: ')?>
                 <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
-                    'lang' => $staff->getEditorLang(),
+                    'lang' => GC\Staff::getInstance()->getEditorLang(),
                 ])?>
             <?php else: ?>
                 <form action="" method="post" id="form" class="form-horizontal">
@@ -111,7 +111,7 @@ $count = GC\Model\Frame::select()
     </td>
 
     <td>
-        <a href="<?=$uri->root('')?>{{slug}}"
+        <a href="<?=$uri->root()?>/{{slug}}"
             target="_blank"
             title="<?=$trans('Podejrzyj ten produkt')?>">
             {{slug}}

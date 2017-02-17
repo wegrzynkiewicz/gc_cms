@@ -1,4 +1,4 @@
-<?php $visitorLang = GC\Auth\Visitor::getLang(); ?>
+<?php $visitorLang = GC\Visitor::getLang(); ?>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/i18n/<?=$visitorLang?>.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/elfinder/2.1.15/js/i18n/elfinder.<?=$visitorLang?>.min.js"></script>

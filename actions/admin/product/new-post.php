@@ -7,7 +7,7 @@ require ACTIONS_PATH.'/admin/product/_import.php';
 $frame_id = GC\Model\Frame::insert([
     'name' => post('name'),
     'type' => 'product',
-    'lang' => $staff->getEditorLang(),
+    'lang' => GC\Staff::getInstance()->getEditorLang(),
     'slug' => empty(post('slug')) ? '' : makeSlug(post('slug')),
     'keywords' => post('keywords'),
     'description' => post('description'),

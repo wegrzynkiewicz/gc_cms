@@ -6,7 +6,7 @@ require ACTIONS_PATH.'/admin/nav/menu/_import.php';
 
 # pobierz wszystkie rusztowania
 $frames = GC\Model\Frame::select()
-    ->equals('lang', $staff->getEditorLang())
+    ->equals('lang', GC\Staff::getInstance()->getEditorLang())
     ->order('name', 'ASC')
     ->fetchByPrimaryKey();
 

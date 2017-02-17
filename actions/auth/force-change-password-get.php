@@ -5,7 +5,8 @@ require ACTIONS_PATH.'/auth/_import.php';
 $headTitle = $trans('Wymagana zmiana hasła');
 $_POST = [];
 
-require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
+?>
+<?php require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
 
 <div class="vertical-center">
     <div class="container">
@@ -20,13 +21,13 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                     <div class="panel-body">
                         <form action="" method="post" id="form" class="form-horizontal">
 
-                            <p class="text-center">
-                                <?=$trans('Dla bezpieczeństwa musisz zmienić swoje hasło')?>
-                            </p>
-
                             <?php if (isset($error)): ?>
                                 <p class="text-danger text-center">
                                     <?=e($error)?>
+                                </p>
+                            <?php else: ?>
+                                <p class="text-center">
+                                    <?=$trans('Dla bezpieczeństwa musisz zmienić swoje hasło')?>
                                 </p>
                             <?php endif ?>
 
@@ -44,7 +45,7 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
                                 'help' => $trans('Powtórz swoje nowe hasło w celu wyeliminowania pomyłki'),
                             ])?>
 
-                            <button type="submit" class="btn btn-lg btn-success btn-block">
+                            <button type="submit" class="btn btn-md btn-success btn-block">
                                 <?=$trans('Zmień hasło')?>
                             </button>
 

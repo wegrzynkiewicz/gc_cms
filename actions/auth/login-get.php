@@ -2,7 +2,7 @@
 
 require ACTIONS_PATH.'/auth/_import.php';
 
-if (GC\Auth\Staff::existsSessionCookie()) {
+if (isset($_SESSION['staff'])) {
     redirect('/admin');
 }
 
@@ -46,7 +46,7 @@ $headTitle = $trans('Logowanie do panelu administracyjnego');
                             </button>
 
                             <div class="btn-group btn-group-justified" style="margin-top:5px">
-                                <a href="<?=$uri->make("/")?>" class="btn btn-link">
+                                <a href="<?=$uri->root()?>/" class="btn btn-link">
                                     <?=$trans('Przejdź na stronę główną')?></a>
                                 <a href="<?=$uri->make("/auth/forgot/password")?>" class="btn btn-link">
                                     <?=$trans('Zapomniałem hasła')?></a>

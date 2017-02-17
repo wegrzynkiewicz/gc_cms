@@ -5,7 +5,7 @@ require ACTIONS_PATH.'/admin/nav/_import.php';
 
 # pobierz wszystkie posortowane nawigacje z języka
 $navs = GC\Model\Menu\Taxonomy::select()
-    ->equals('lang', $staff->getEditorLang())
+    ->equals('lang', GC\Staff::getInstance()->getEditorLang())
     ->order('name', 'ASC')
     ->fetchByPrimaryKey();
 
@@ -40,7 +40,7 @@ foreach ($navs as $nav_id => $nav) {
             <?php if (empty($navs)): ?>
                 <?=$trans('Nie znaleziono żadnej nawigacji w języku: ')?>
                 <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
-                    'lang' => $staff->getEditorLang(),
+                    'lang' => GC\Staff::getInstance()->getEditorLang(),
                 ])?>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">

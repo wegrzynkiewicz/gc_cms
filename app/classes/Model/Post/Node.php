@@ -2,11 +2,7 @@
 
 namespace GC\Model\Post;
 
-use GC\Storage\AbstractModel;
-use GC\Storage\Utility\NodeTrait;
-use GC\Storage\Utility\TaxonomyTrait;
 use GC\Storage\AbstractNode;
-use GC\Data;
 
 class Node extends AbstractNode
 {
@@ -17,8 +13,6 @@ class Node extends AbstractNode
 
     public static $primaryIdLabel = "node_id";
     public static $parentIdLabel  = "parent_id";
-
-    use NodeTrait;
 
     /**
      * Pobiera wszystkie kategorie dla wszystkich postow włącznie z taksonomią

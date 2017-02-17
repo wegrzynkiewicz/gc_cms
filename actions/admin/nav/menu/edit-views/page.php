@@ -7,7 +7,7 @@ if ($menu_id) {
 # pobierz strony gdzie kluczem jest $page_id, a elementem nazwa strony
 $pageOptions = GC\Model\Page::select()
     ->source('::frame')
-    ->equals('lang', $staff->getEditorLang())
+    ->equals('lang', GC\Staff::getInstance()->getEditorLang())
     ->order('name', 'ASC')
     ->fetchByMap('page_id', 'name');
 

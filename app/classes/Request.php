@@ -47,9 +47,9 @@ class Request
     /**
      * Generuje przednie części adresu dla plików w katalogu głównym
      */
-    public function root($path)
+    public function root($path = '')
     {
-        return $this->rootUrl.$path; # generowane przez routing
+        return rtrim($this->rootUrl.$path, '/'); # generowane przez routing
     }
 
     /**

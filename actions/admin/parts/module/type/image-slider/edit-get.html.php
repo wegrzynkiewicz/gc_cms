@@ -170,7 +170,7 @@ $(function() {
     $('#select_images').elfinderInputMultiple({
         title: '<?=$trans('Wybierz wiele zdjęć')?>',
         url: '<?=$uri->make('/admin/elfinder/connector')?>',
-        lang: '<?=GC\Auth\Visitor::getLang()?>',
+        lang: '<?=GC\Visitor::getLang()?>',
     }, function(urls) {
         $.post("<?=$uri->make("/admin/parts/module/{$module_id}/image/xhr-add")?>", {
             urls: urls

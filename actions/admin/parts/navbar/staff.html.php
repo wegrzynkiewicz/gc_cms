@@ -2,7 +2,7 @@
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
         <i class="fa fa-user fa-fw"></i>
         <span class="hidden-xs hidden-sm">
-            <?=e($staff['name'])?>
+            <?=e(GC\Staff::getInstance()['name'])?>
         </span>
         <b class="caret"></b>
     </a>
@@ -21,7 +21,7 @@
         </li>
         <li class="divider"></li>
         <li>
-            <a href="<?=$uri->make("/admin/account/logout")?>">
+            <a href="<?=$uri->make("/auth/logout")?>">
                 <i class="fa fa-sign-out fa-fw"></i>
                 <?=$trans('Wyloguj się')?>
             </a>

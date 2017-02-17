@@ -3,7 +3,8 @@
 require ACTIONS_PATH.'/admin/_import.php';
 require ACTIONS_PATH.'/admin/account/_import.php';
 
-$staff_id = $staff['staff_id'];
+# pobranie klucza głównego zalogowanego pracownika
+$staff_id = GC\Staff::getInstance()['staff_id'];
 
 # zaktualizuj profil pracownika
 GC\Model\Staff\Staff::updateByPrimaryId($staff_id, [
@@ -11,4 +12,4 @@ GC\Model\Staff\Staff::updateByPrimaryId($staff_id, [
 ]);
 
 flashBox($trans('Twój profil został zaktualizowany.'));
-redirect($breadcrumbs->getBeforeLast('uri'));
+redirect($breadcrumbs->getLast('uri'));

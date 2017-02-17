@@ -22,7 +22,6 @@
         <ul <?=$attr?>>
             <?=render(ACTIONS_PATH.'/admin/parts/sidebar/items.html.php', [
                 'menu' => $node['children'],
-                'staff' => $staff,
                 'attr' => 'class="nav nav-third-level collapse"'
             ])?>
         </ul>

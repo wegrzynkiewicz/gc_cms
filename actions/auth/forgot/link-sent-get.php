@@ -29,7 +29,7 @@ $headTitle = $trans('Wysłano e-maila z weryfikacją przypomnienia hasła');
                         </a>
 
                         <div class="btn-group btn-group-justified" style="margin-top:5px">
-                            <a href="<?=$uri->make("/")?>" class="btn btn-link">
+                            <a href="<?=$uri->root()?>/" class="btn btn-link">
                                 <?=$trans('Przejdź na stronę główną')?></a>
                         </div>
 

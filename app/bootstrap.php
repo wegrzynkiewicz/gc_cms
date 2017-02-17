@@ -7,6 +7,8 @@ require __DIR__.'/functions.php';
 require __DIR__.'/services.php';
 require __DIR__.'/redirects.php';
 
+session_start();
+
 ob_start('ob_gzhandler') or ob_start();
 require __DIR__.'/routing.php';
 ob_end_flush();
