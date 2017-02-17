@@ -5,12 +5,12 @@ require ACTIONS_PATH.'/admin/page/_import.php';
 
 $frame_id = intval(post('frame_id'));
 
-# pobierz stronę po kluczu głównym
+# pobierz rusztowanie po kluczu głównym
 $page = GC\Model\Frame::select()
     ->equals('frame_id', $frame_id)
     ->fetch();
 
-# usuń stronę i wszystkie jej moduły
+# usuń rusztowanie i wszystkie jej moduły
 GC\Model\Frame::deleteByFrameId($frame_id);
 
 flashBox($trans('Strona "%s" została usunięta.', [$page['name']]));

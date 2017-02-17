@@ -3,27 +3,31 @@
 require ACTIONS_PATH.'/admin/_import.php';
 require ACTIONS_PATH.'/admin/product/_import.php';
 
-$product_id = intval(array_shift($_PARAMETERS));
+$frame_id = intval(array_shift($_PARAMETERS));
 
-# pobranie produktu wraz z ramką po $product_id
-$product = GC\Model\Product\Product::select()
-    ->source('::frame')
-    ->equals('product_id', $product_id)
+# pobierz stronę po kluczu głównym
+$frame = GC\Model\Frame::select()
+    ->equals('frame_id', $frame_id)
     ->fetch();
 
-$headTitle = $trans('Edytowanie produktu "%s"', [$product['name']]);
+# jeżeli nie znaleziono rusztowania wtedy przekieruj
+if (!$frame) {
+    flashBox($trans('Wystąpił błąd. Szukany produkt nie został znaleziony.'), 'danger');
+    redirect($breadcrumbs->getLast('uri'));
+}
+
+$headTitle = $trans('Edytowanie produktu "%s"', [$frame['name']]);
 $breadcrumbs->push([
     'uri' => $request->uri,
     'name' => $headTitle,
 ]);
 
-$_POST = $product;
+$_POST = $frame;
 
 # pobranie kluczy node_id, do których przynależy produkt
-$checkedValues = array_keys(GC\Model\Product\Node::select()
+$checkedValues = array_keys(GC\Model\Product\Membership::select()
     ->fields(['node_id'])
-    ->source('::membership')
-    ->equals('product_id', $product_id)
+    ->equals('frame_id', $frame_id)
     ->fetchByMap('node_id', 'node_id'));
 
 require ACTIONS_PATH.'/admin/product/form.html.php';

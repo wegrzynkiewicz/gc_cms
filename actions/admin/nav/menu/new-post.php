@@ -11,11 +11,18 @@ $menu_id = GC\Model\Menu\Menu::insert([
     'target' => post('target', '_self'),
 ]);
 
+# pobierz największą pozycję dla węzła w drzewie
+$position = GC\Model\Menu\Tree::select()
+    ->fields('MAX(position) AS max')
+    ->equals('nav_id', $nav_id)
+    ->equals('parent_id', null)
+    ->fetch()['max'];
+
 GC\Model\Menu\Tree::insert([
     'nav_id' => $nav_id,
     'menu_id' => $menu_id,
     'parent_id' => null,
-    'position' => GC\Model\Menu\Tree::selectMaxPositionByTaxonomyIdAndParentId($nav_id, null),
+    'position' => $position + 1,
 ]);
 
 redirect($breadcrumbs->getLast('uri'));

@@ -1,17 +1,17 @@
 <?php
 
 require ACTIONS_PATH.'/admin/_import.php';
-require ACTIONS_PATH.'/admin/product/_import.php';
+require ACTIONS_PATH.'/admin/page/_import.php';
 
-$product_id = intval(post('product_id'));
+$frame_id = intval(post('frame_id'));
 
-# pobranie produktu wraz z ramką po $product_id
-$product = GC\Model\Product\Product::select()
-    ->source('::frame')
-    ->equals('product_id', $product_id)
+# pobierz rusztowanie po kluczu głównym
+$page = GC\Model\Frame::select()
+    ->equals('frame_id', $frame_id)
     ->fetch();
 
-GC\Model\Product\Product::deleteFrameByPrimaryId($product_id);
+# usuń rusztowanie i wszystkie jej moduły
+GC\Model\Frame::deleteByFrameId($frame_id);
 
-flashBox($trans('Produkt "%s" została usunięta.', [$product['name']]));
+flashBox($trans('Produkt "%s" został usunięty.', [$page['name']]));
 redirect($breadcrumbs->getLast('uri'));

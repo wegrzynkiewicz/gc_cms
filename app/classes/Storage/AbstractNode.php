@@ -12,9 +12,9 @@ abstract class AbstractNode extends AbstractModel
     private $parent = null;
     private $children = [];
 
-    public function getPrimaryId()
+    public function getNodeId()
     {
-        return $this->getProperty(static::$primary);
+        return $this->getProperty(static::$node);
     }
 
     public function addChildAtPosition(AbstractNode $child, $position)

@@ -1,4 +1,4 @@
-<?php foreach ($tree->getChildren() as $node): $node_id = $node->getPrimaryId(); ?>
+<?php foreach ($tree->getChildren() as $node): $node_id = $node->getNodeId(); ?>
 
     <li id="node_<?=e($node_id)?>" data-id="<?=e($node_id)?>">
         <div class="sortable-content">

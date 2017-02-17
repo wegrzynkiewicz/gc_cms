@@ -16,7 +16,7 @@
                 <?=$trans('Podgląd')?>
             </a>
 
-            <a href="<?=$uri->mask("/{$frame_id}/module/list")?>"
+            <a href="<?=$uri->mask("/{$frame_id}/module/grid")?>"
                 title="<?=$trans('Wyświetl moduły węzła')?>"
                 class="btn btn-success btn-xs">
                 <i class="fa fa-file-text-o fa-fw"></i>

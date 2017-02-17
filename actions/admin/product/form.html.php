@@ -20,12 +20,12 @@ foreach ($nodes as $node) {
 }
 
 # zbuduj drzewa dla konkretnych taksonomii
-$taxonomyTrees = [];
-foreach ($taxonomies as $tax_id => $taxonomy) {
-    $taxonomyTrees[$tax_id] = isset($taxonomyNodes[$tax_id])
+foreach ($taxonomies as $tax_id => &$taxonomy) {
+    $taxonomy['tree'] = isset($taxonomyNodes[$tax_id])
         ? GC\Model\Product\Tree::createTree($taxonomyNodes[$tax_id])
         : null;
 }
+unset($taxonomy);
 
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
@@ -64,7 +64,7 @@ foreach ($taxonomies as $tax_id => $taxonomy) {
             </div>
 
             <?php foreach ($taxonomies as $tax_id => $taxonomy): ?>
-                <?php $tree = $taxonomyTrees[$tax_id]?>
+                <?php $tree = $taxonomy['tree']?>
                 <?php if ($tree and $tree->hasChildren()): ?>
                     <div class="simple-box">
                         <?=render(ACTIONS_PATH.'/admin/parts/input/checkbox-tree.html.php', [
@@ -80,7 +80,7 @@ foreach ($taxonomies as $tax_id => $taxonomy) {
             <?php endforeach ?>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => $trans('Zapisz wpis'),
+                'saveLabel' => $trans('Zapisz produkt'),
             ])?>
         </form>
     </div>

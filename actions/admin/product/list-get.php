@@ -3,7 +3,7 @@
 require ACTIONS_PATH.'/admin/_import.php';
 require ACTIONS_PATH.'/admin/product/_import.php';
 
-# pobierz ilość produktów
+# pobierz liczbę stron
 $count = GC\Model\Frame::select()
     ->fields('COUNT(*) AS count')
     ->equals('type', 'product')
@@ -33,7 +33,7 @@ $count = GC\Model\Frame::select()
     <div class="col-md-12">
         <div class="simple-box">
             <?php if ($count == 0): ?>
-                <?=$trans('Nie znaleziono żadnego produktu w języku: ')?>
+                <?=$trans('Nie znaleziono żadnej strony w języku: ')?>
                 <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
                     'lang' => $staff->getEditorLang(),
                 ])?>
@@ -49,6 +49,11 @@ $count = GC\Model\Frame::select()
                                     data-searchable="1"
                                     data-sortable="1">
                                     <?=$trans('Nazwa produktu')?>
+                                </th>
+                                <th data-name="slug"
+                                    data-searchable="1"
+                                    data-sortable="1">
+                                    <?=$trans('Adres strony produktu')?>
                                 </th>
                                 <th data-name="options"
                                     data-searchable="0"
@@ -68,7 +73,7 @@ $count = GC\Model\Frame::select()
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <form id="deleteModalForm" method="post" action="<?=$uri->mask('/delete')?>" class="modal-content">
-            <input name="product_id" type="hidden" value="">
+            <input name="frame_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
@@ -79,7 +84,7 @@ $count = GC\Model\Frame::select()
             </div>
             <div class="modal-body">
                 <?=$trans('Czy jesteś pewien, że chcesz usunąć produkt')?>
-                <span id="product_name" style="font-weight:bold; color:red;"></span>?
+                <span id="frame_name" style="font-weight:bold; color:red;"></span>?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -99,33 +104,34 @@ $count = GC\Model\Frame::select()
     </td>
 
     <td>
-        <a href="<?=$uri->mask()?>/{{product_id}}/edit"
-            title="<?=$trans('Edytuj stronę')?>">
+        <a href="<?=$uri->mask()?>/{{frame_id}}/edit"
+            title="<?=$trans('Edytuj produkt')?>">
             {{name}}
         </a>
     </td>
 
-    <td class="text-right">
-        <a href="<?=$uri->make("/page")?>/{{product_id}}"
+    <td>
+        <a href="<?=$uri->root('')?>{{slug}}"
             target="_blank"
-            title="<?=$trans('Podejrzyj tą stronę')?>"
-            class="btn btn-primary btn-sm">
-            <i class="fa fa-search fa-fw"></i>
-            <?=$trans('Podgląd')?>
+            title="<?=$trans('Podejrzyj ten produkt')?>">
+            {{slug}}
         </a>
+    </td>
 
-        <a href="<?=$uri->mask()?>/{{product_id}}/module/list"
-            title="<?=$trans('Wyświetl moduły strony')?>"
+    <td class="text-right">
+
+        <a href="<?=$uri->mask()?>/{{frame_id}}/module/grid"
+            title="<?=$trans('Wyświetl moduły produktu')?>"
             class="btn btn-success btn-sm">
             <i class="fa fa-file-text-o fa-fw"></i>
             <?=$trans('Moduły')?>
         </a>
 
         <a data-toggle="modal"
-            data-id="{{product_id}}"
+            data-id="{{frame_id}}"
             data-name="{{name}}"
             data-target="#deleteModal"
-            title="<?=$trans('Usuń stronę')?>"
+            title="<?=$trans('Usuń produkt')?>"
             class="btn btn-danger btn-sm">
             <i class="fa fa-times fa-fw"></i>
             <?=$trans('Usuń')?>
@@ -155,20 +161,13 @@ $count = GC\Model\Frame::select()
             columns: [
                 {data: "image"},
                 {data: "name"},
+                {data: "slug"},
             ],
         });
 
-        $('#deleteModalForm').on('submit', function(e) {
-            e.preventDefault();
-            $.post($(this).attr('action'), $(this).serialize(), function() {
-                table.ajax.reload();
-                $('#deleteModal').modal('hide');
-            });
-        });
-
         $('#deleteModal').on('show.bs.modal', function(e) {
-            $(this).find('#product_name').html($(e.relatedTarget).data('name'));
-            $(this).find('[name="product_id"]').val($(e.relatedTarget).data('id'));
+            $(this).find('#frame_name').html($(e.relatedTarget).data('name'));
+            $(this).find('[name="frame_id"]').val($(e.relatedTarget).data('id'));
         });
     });
 </script>

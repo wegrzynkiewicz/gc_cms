@@ -1,4 +1,4 @@
-<?php foreach ($tree->getChildren() as $node): $primary_id = $node->getPrimaryId(); ?>
+<?php foreach ($tree->getChildren() as $node): $primary_id = $node->getNodeId(); ?>
 
     <div id="node_container_<?=e($primary_id)?>" class="tree-checkbox-container">
         <div id="node_<?=e($primary_id)?>" class="checkbox">
