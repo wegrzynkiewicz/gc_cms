@@ -1,7 +1,6 @@
 <?php
 
 require ACTIONS_PATH.'/auth/_import.php';
-require ACTIONS_PATH.'/auth/forgot/_import.php';
 
 # pobierz pracownika po wprowadzonym adresie emailowym
 $user = GC\Model\Staff\Staff::select()

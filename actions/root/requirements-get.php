@@ -1,5 +1,7 @@
 <?php
 
+require ACTIONS_PATH.'/root/_import.php';
+
 $headTitle = "Wymagania systemowe";
 $breadcrumbs->push([
     'uri' => '/root/requirements',

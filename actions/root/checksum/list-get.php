@@ -1,5 +1,8 @@
 <?php
 
+require ACTIONS_PATH.'/root/_import.php';
+require ACTIONS_PATH.'/root/checksum/_import.php';
+
 $stored = GC\Model\Checksum::select()
     ->fields(['file', 'hash'])
     ->fetchByPrimaryKey();

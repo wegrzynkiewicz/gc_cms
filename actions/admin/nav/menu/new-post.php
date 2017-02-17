@@ -7,8 +7,9 @@ require ACTIONS_PATH.'/admin/nav/menu/_import.php';
 $menu_id = GC\Model\Menu\Menu::insert([
     'name' => post('name'),
     'type' => post('type'),
-    'destination' => post('destination'),
+    'destination' => post('destination', ''),
     'target' => post('target', '_self'),
+    'frame_id' => post('frame_id', null),
 ]);
 
 # pobierz największą pozycję dla węzła w drzewie
@@ -27,6 +28,7 @@ GC\Model\Menu\Tree::insert([
 
 # pobierz węzeł po kluczu głównym
 $menu = GC\Model\Menu\Menu::select()
+    ->fields('::fields')
     ->source('::tree_frame')
     ->equals('menu_id', $menu_id)
     ->fetchObject();

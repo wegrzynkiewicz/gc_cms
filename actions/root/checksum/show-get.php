@@ -1,5 +1,8 @@
 <?php
 
+require ACTIONS_PATH.'/root/_import.php';
+require ACTIONS_PATH.'/root/checksum/_import.php';
+
 $base64 = array_shift($_SEGMENTS);
 $file = base64_decode($base64);
 
@@ -29,7 +32,7 @@ $padLength = strlen($lineCount);
 </div>
 
 <pre class="simple-box" style="padding:5px; line-height: 1.1; ">
-<?php foreach($lines as $i => $line): $lineNumber = str_pad($i+1,  $padLength, '0', STR_PAD_LEFT) ?>
+<?php foreach ($lines as $i => $line): $lineNumber = str_pad($i+1,  $padLength, '0', STR_PAD_LEFT) ?>
 <span style="color: #999999"> <?=$lineNumber?> | </span><?=trim($line)?>
 
 <?php endforeach ?>

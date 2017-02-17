@@ -8,10 +8,12 @@ $menu_id = intval(array_shift($_PARAMETERS));
 
 # pobranie węzła o zadanym kluczu
 $node = GC\Model\Menu\Menu::select()
+    ->fields('::fields')
+    ->source('::tree_frame')
     ->equals('menu_id', $menu_id)
-    ->fetch();
+    ->fetchObject();
 
-$headTitle = $trans('Edycja węzła "%s"', [$node['name']]);
+$headTitle = $trans('Edycja węzła "%s"', [$node->getName()]);
 $breadcrumbs->push([
     'uri' => $request->uri,
     'name' => $headTitle,
@@ -19,6 +21,6 @@ $breadcrumbs->push([
 
 $_POST = $node;
 $type = $node['type'];
-$nodeType = render(ACTIONS_PATH."/admin/nav/menu/types/{$type}.php", $node);
+$nodeType = render(ACTIONS_PATH."/admin/nav/menu/types/{$type}.php", $node->getData());
 
 require ACTIONS_PATH.'/admin/nav/menu/form.html.php';

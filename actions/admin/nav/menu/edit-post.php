@@ -15,6 +15,7 @@ GC\Model\Menu\Menu::updateByPrimaryId($menu_id, [
 
 # pobierz węzeł po kluczu głównym
 $menu = GC\Model\Menu\Menu::select()
+    ->fields('::fields')
     ->source('::tree_frame')
     ->equals('menu_id', $menu_id)
     ->fetchObject();

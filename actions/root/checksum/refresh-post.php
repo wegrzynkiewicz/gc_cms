@@ -1,5 +1,8 @@
 <?php
 
+require ACTIONS_PATH.'/root/_import.php';
+require ACTIONS_PATH.'/root/checksum/_import.php';
+
 $file = $_POST['file'];
 $filepath = ROOT_PATH.$file;
 

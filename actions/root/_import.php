@@ -12,7 +12,7 @@ if (!GC\Staff::getInstance()['root']) {
 
 $breadcrumbs = new GC\Breadcrumbs();
 $breadcrumbs->push([
-    'uri' => '/admin',
+    'uri' => $uri->make('/admin'),
     'name' => 'Dashboard',
     'icon' => 'dashboard',
 ]);

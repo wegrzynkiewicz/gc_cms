@@ -1,7 +1,6 @@
 <?php
 
 require ACTIONS_PATH.'/auth/_import.php';
-require ACTIONS_PATH.'/auth/forgot/_import.php';
 
 $headTitle = $trans('Wysłano e-maila z weryfikacją przypomnienia hasła');
 
@@ -14,7 +13,7 @@ $headTitle = $trans('Wysłano e-maila z weryfikacją przypomnienia hasła');
             <div class="col-md-6 col-md-offset-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">
+                        <h3 class="panel-title text-center">
                             <?=($headTitle)?>
                         </h3>
                     </div>

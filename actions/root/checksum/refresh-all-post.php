@@ -1,6 +1,10 @@
 <?php
 
-GC\Model\Checksum::delete()->execute();
+require ACTIONS_PATH.'/root/_import.php';
+require ACTIONS_PATH.'/root/checksum/_import.php';
+
+GC\Model\Checksum::delete()
+    ->execute();
 
 foreach($getFiles() as $file) {
     GC\Model\Checksum::insert([

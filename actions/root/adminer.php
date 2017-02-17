@@ -1,5 +1,7 @@
 <?php
 
+require ACTIONS_PATH.'/root/_import.php';
+
 error_reporting(0);
 restore_error_handler();
 

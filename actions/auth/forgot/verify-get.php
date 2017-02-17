@@ -1,7 +1,6 @@
 <?php
 
 require ACTIONS_PATH.'/auth/_import.php';
-require ACTIONS_PATH.'/auth/forgot/_import.php';
 
 $validate = function() use ($_SEGMENTS)
 {
