@@ -5,12 +5,12 @@ require ACTIONS_PATH.'/admin/product/_import.php';
 require ACTIONS_PATH.'/admin/product/taxonomy/_import.php';
 require ACTIONS_PATH.'/admin/product/taxonomy/node/_import.php';
 
-$tree = GC\Model\Product\Node::select()
-    ->fields(['node_id', 'parent_id', 'name'])
-    ->source('::tree')
+$tree = GC\Model\Product\Tree::select()
+    ->fields(['frame_id', 'parent_id', 'name'])
+    ->source('::nodes')
     ->equals('tax_id', $tax_id)
     ->fetchTree();
-    
+
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 
@@ -36,15 +36,20 @@ $tree = GC\Model\Product\Node::select()
             <input name="positions" type="hidden"/>
             <?php if ($tree->hasChildren()):?>
                 <ol id="sortable" class="sortable">
-                    <?=render(ACTIONS_PATH.'/admin/product/taxonomy/node/tree-node.html.php', [
-                        'tree' => $tree,
-                    ])?>
+                    <?php foreach ($tree->getChildren() as $node): ?>
+                        <?=render(ACTIONS_PATH.'/admin/product/taxonomy/node/tree-node.html.php', [
+                            'node' => $node,
+                            'name' => e($node['name']),
+                            'frame_id' => $node['frame_id'],
+                        ])?>
+                    <?php endforeach?>
                 </ol>
             <?php else:?>
                 <div class="simple-box">
                     <?=$trans('Brak węzłów w %s', [$taxonomy['name']])?>
                 </div>
             <?php endif?>
+
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => $trans('Zapisz pozycję'),
             ])?>
@@ -58,7 +63,7 @@ $tree = GC\Model\Product\Node::select()
             method="post"
             action="<?=$uri->mask('/delete')?>"
             class="modal-content">
-            <input name="node_id" type="hidden" value="">
+            <input name="frame_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
@@ -91,7 +96,8 @@ $(function(){
     $('#sortable').nestedSortable({
         handle: 'div',
         items: 'li',
-        toleranceElement: '> div'
+        toleranceElement: '> div',
+        maxLevels: <?=$taxonomy['maxlevels']?>
     });
 
     $("#savePosition").submit(function(event) {
@@ -101,7 +107,7 @@ $(function(){
 
    $('#deleteModal').on('show.bs.modal', function(e) {
        $(this).find('#node_name').html($(e.relatedTarget).data('name'));
-       $(this).find('[name="node_id"]').val($(e.relatedTarget).data('id'));
+       $(this).find('[name="frame_id"]').val($(e.relatedTarget).data('id'));
    });
 });
 </script>

@@ -43,7 +43,11 @@ abstract class AbstractQuery
 
     public function equals($column, $passedParam)
     {
-        $this->condition("{$column} = ?", [(string)$passedParam]);
+        if ($passedParam === null) {
+            $this->condition("{$column} IS NULL");
+        } else {
+            $this->condition("{$column} = ?", [$passedParam]);
+        }
 
         return $this;
     }

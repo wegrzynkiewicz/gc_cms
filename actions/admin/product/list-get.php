@@ -3,10 +3,13 @@
 require ACTIONS_PATH.'/admin/_import.php';
 require ACTIONS_PATH.'/admin/product/_import.php';
 
-$count = GC\Model\Product\Product::select()
+# pobierz ilość produktów
+$count = GC\Model\Frame::select()
     ->fields('COUNT(*) AS count')
+    ->equals('type', 'product')
+    ->equals('lang', $staff->getEditorLang())
     ->fetch()['count'];
-    
+
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
 

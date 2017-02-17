@@ -11,22 +11,26 @@ $name = post('name');
 $frame_id = GC\Model\Frame::insert([
     'name' => $name,
     'type' => 'product-node',
+    'lang' => $staff->getEditorLang(),
+    'slug' => empty(post('slug')) ? '' : makeSlug(post('slug')),
     'keywords' => post('keywords'),
     'description' => post('description'),
     'image' => $uri->upload(post('image')),
 ]);
 
-# dodaj węzeł
-$node_id = GC\Model\Product\Node::insert([
-    'frame_id' => $frame_id,
-]);
+# pobierz największą pozycję dla węzła w drzewie
+$position = GC\Model\Product\Tree::select()
+    ->fields('MAX(position) AS max')
+    ->equals('tax_id', $tax_id)
+    ->equals('parent_id', null)
+    ->fetch()['max'];
 
 # dodaj węzeł do pozycji w drzewie taksonomi
 GC\Model\Product\Tree::insert([
     'tax_id' => $tax_id,
-    'node_id' => $node_id,
+    'frame_id' => $frame_id,
     'parent_id' => null,
-    'position' => GC\Model\Product\Tree::selectMaxPositionByTaxonomyIdAndParentId($tax_id, null),
+    'position' => $position+1,
 ]);
 
 flashBox($trans('Nowy węzeł "%s" dostał dodany do "%s".', [$name, $taxonomy['name']]));

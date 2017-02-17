@@ -4,7 +4,6 @@ $nav_id = intval(array_shift($_PARAMETERS));
 
 # pobranie nawigacji o zadanym kluczu
 $nav = GC\Model\Menu\Taxonomy::select()
-    ->fields(['name'])
     ->equals('nav_id', $nav_id)
     ->fetch();
 

@@ -15,12 +15,21 @@ GC\Model\Product\Tree::delete()
 
 # każdą nadesłaną pozycję wstaw do bazy danych
 foreach ($positions as $node) {
+
     if (isset($node['id'])) {
+
+        # pobierz największą pozycję dla węzła w drzewie
+        $position = GC\Model\Product\Tree::select()
+            ->fields('MAX(position) AS max')
+            ->equals('tax_id', $tax_id)
+            ->equals('parent_id', $node['parent_id'])
+            ->fetch()['max'];
+
         GC\Model\Product\Tree::insert([
             'tax_id' => $tax_id,
-            'node_id' => $node['id'],
+            'frame_id' => $node['id'],
             'parent_id' => $node['parent_id'],
-            'position' => GC\Model\Product\Tree::selectMaxPositionByTaxonomyIdAndParentId($tax_id, $node['parent_id']),
+            'position' => $position+1,
         ]);
     }
 }

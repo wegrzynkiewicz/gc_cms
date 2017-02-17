@@ -7,9 +7,9 @@ $taxonomies = GC\Model\Product\Taxonomy::select()
     ->fetchByPrimaryKey();
 
 # pobierz wszystkie węzły przygotowane do budowy drzewa
-$nodes = GC\Model\Product\Node::select()
-    ->fields(['node_id', 'tax_id', 'parent_id', 'name'])
-    ->source('::tree')
+$nodes = GC\Model\Product\Tree::select()
+    ->fields(['tax_id', 'frame_id', 'parent_id', 'name'])
+    ->source('::nodes')
     ->order('position', 'ASC')
     ->fetchAll();
 
@@ -23,7 +23,7 @@ foreach ($nodes as $node) {
 $taxonomyTrees = [];
 foreach ($taxonomies as $tax_id => $taxonomy) {
     $taxonomyTrees[$tax_id] = isset($taxonomyNodes[$tax_id])
-        ? GC\Model\Product\Node::createTree($taxonomyNodes[$tax_id])
+        ? GC\Model\Product\Tree::createTree($taxonomyNodes[$tax_id])
         : null;
 }
 
@@ -38,6 +38,12 @@ foreach ($taxonomies as $tax_id => $taxonomy) {
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
                     'label' => $trans('Nazwa produktu'),
+                ])?>
+
+                <?=render(ACTIONS_PATH.'/admin/parts/input/slug.html.php', [
+                    'name' => 'slug',
+                    'label' => $trans('Adres produktu'),
+                    'help' => $trans('Zostaw pusty, aby generować adres na podstawie nazwy'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [

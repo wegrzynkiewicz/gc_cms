@@ -427,7 +427,7 @@ abstract class AbstractNode extends AbstractModel
             $parents = [];
             foreach ($list as $entity) {
                 $node = new static($entity);
-                $id = intval($entity[static::$primary]);
+                $id = intval($entity[static::$node]);
                 $pid = intval($entity['parent_id']);
                 $nodes[$id] = $node;
                 $parents[$pid][$id] = $node;
@@ -444,7 +444,7 @@ abstract class AbstractNode extends AbstractModel
     {
         $tree = [];
         foreach ($childrenOfNode as $child) {
-            $id = $child[static::$primary];
+            $id = $child[static::$node];
             if (isset($allChildrenOfParents[$id])) {
                 $child->pushChildren(static::createBranch(
                     $allChildrenOfParents, $allChildrenOfParents[$id]

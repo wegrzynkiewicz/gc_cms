@@ -1,13 +1,10 @@
 <tr>
-    <td><?=e($taxonomy['name'])?></td>
+    <td><?=e($name)?></td>
     <td>
         <?php if ($tree and $tree->hasChildren()): ?>
             <div style="margin-left:-20px">
-                <?=render(ACTIONS_PATH.'/admin/parts/taxonomy-preview.html.php', [
+                <?=render(ACTIONS_PATH.'/admin/product/taxonomy/tree-preview.html.php', [
                     'tree' => $tree,
-                    'taxonomyUrl' => function($path) use ($tax_id) {
-                        return $uri->mask("/{$tax_id}/node{$path}");
-                    },
                 ])?>
             </div>
         <?php else: ?>

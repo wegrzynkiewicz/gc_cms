@@ -4,10 +4,19 @@
 <div class="row">
     <div class="col-lg-12">
         <form action="" method="post" id="form" class="form-horizontal">
+
             <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
                     'label' => $trans('Nazwa węzła'),
+                ])?>
+            </div>
+
+            <div class="simple-box">
+                <?=render(ACTIONS_PATH.'/admin/parts/input/slug.html.php', [
+                    'name' => 'slug',
+                    'label' => $trans('Adres węzła'),
+                    'help' => $trans('Zostaw pusty, aby generować adres na podstawie nazwy'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [

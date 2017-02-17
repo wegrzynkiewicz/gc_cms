@@ -6,12 +6,13 @@
         <form action="" method="post" id="form" class="form-horizontal">
 
             <div class="simple-box">
-
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
                     'label' => $trans('Nazwa strony'),
                 ])?>
+            </div>
 
+            <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/slug.html.php', [
                     'name' => 'slug',
                     'label' => $trans('Adres strony'),

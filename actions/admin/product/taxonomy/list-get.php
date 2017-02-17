@@ -11,9 +11,9 @@ $taxonomies = GC\Model\Product\Taxonomy::select()
     ->fetchByPrimaryKey();
 
 # pobierz wszystkie węzły przygotowane do budowy drzewa
-$nodes = GC\Model\Product\Node::select()
-    ->fields(['node_id', 'tax_id', 'parent_id', 'name'])
-    ->source('::tree')
+$nodes = GC\Model\Product\Tree::select()
+    ->fields(['tax_id', 'frame_id', 'parent_id', 'name'])
+    ->source('::nodes')
     ->order('position', 'ASC')
     ->fetchAll();
 
@@ -24,12 +24,12 @@ foreach ($nodes as $node) {
 }
 
 # zbuduj drzewa dla konkretnych taksonomii
-$taxonomyTrees = [];
-foreach ($taxonomies as $tax_id => $taxonomy) {
-    $taxonomyTrees[$tax_id] = isset($taxonomyNodes[$tax_id])
-        ? GC\Model\Product\Node::createTree($taxonomyNodes[$tax_id])
+foreach ($taxonomies as $tax_id => &$taxonomy) {
+    $taxonomy['tree'] = isset($taxonomyNodes[$tax_id])
+        ? GC\Model\Product\Tree::createTree($taxonomyNodes[$tax_id])
         : null;
 }
+unset($taxonomy);
 
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
@@ -57,12 +57,8 @@ foreach ($taxonomies as $tax_id => $taxonomy) {
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($taxonomies as $tax_id => $taxonomy): ?>
-                            <?=render(ACTIONS_PATH.'/admin/product/taxonomy/list-item.html.php', [
-                                'tax_id' => $tax_id,
-                                'taxonomy' => $taxonomy,
-                                'tree' => $taxonomyTrees[$tax_id],
-                            ])?>
+                        <?php foreach ($taxonomies as $taxonomy): ?>
+                            <?=render(ACTIONS_PATH.'/admin/product/taxonomy/list-item.html.php', $taxonomy)?>
                         <?php endforeach ?>
                     </tbody>
                 </table>
