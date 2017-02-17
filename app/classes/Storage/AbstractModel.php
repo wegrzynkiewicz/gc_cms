@@ -123,4 +123,14 @@ abstract class AbstractModel extends AbstractEntity
             ]);
         }
     }
+
+    public static function deleteMeta($meta_id, array $data)
+    {
+        foreach ($data as $name) {
+            static::delete()
+                ->equals(static::$meta_id, $meta_id)
+                ->equals('name', $name)
+                ->execute();
+        }
+    }
 }

@@ -27,6 +27,7 @@ $_POST = $staff->getData();
 <div class="row">
     <div class="col-lg-12">
         <form action="" method="post" id="form" class="form-horizontal">
+
             <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/select2-language.html.php', [
                     'name' => 'lang',

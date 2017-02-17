@@ -1,9 +1,52 @@
 <?php
 
-$headTitle = $trans('Resetowanie hasła');
+require ACTIONS_PATH.'/auth/_import.php';
+require ACTIONS_PATH.'/auth/forgot/_import.php';
 
-require ACTIONS_PATH.'/auth/forgot/verify-validate.html.php';
-require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
+$validate = function() use ($_SEGMENTS)
+{
+    # link ma zawierać równo dwa segmenty
+    if (count($_SEGMENTS)<2) {
+        return false;
+    }
+
+    $email64 = array_shift($_SEGMENTS);
+    $email = base64_decode($email64);
+    $regenerationVerifyHash = array_shift($_SEGMENTS);
+
+    # pobierz pracownika po adresie email
+    $user = GC\Model\Staff\Staff::select()
+        ->equals('email', $email)
+        ->fetch();
+
+    if (!$user) {
+        return false;
+    }
+
+    # pobierz wszystkie meta dane
+    $meta = GC\Model\Staff\Meta::fetchMeta($user['staff_id']);
+
+    if (!isset($meta['regenerationVerifyHash']) or $meta['regenerationVerifyHash'] !== $regenerationVerifyHash) {
+        return false;
+    }
+
+    if (!isset($meta['regenerationVerifyTime']) or time() - $meta['regenerationVerifyTime'] > 3600) {
+        return false;
+    }
+
+    GC\Auth\Staff::createSession($user['staff_id']);
+
+    return true;
+};
+
+if ($validate() === true) {
+    redirect('/auth/forgot/enter-new-password');
+}
+
+$headTitle = $trans('Wystąpił problem podczas resetowia hasła');
+
+?>
+<?php require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
 
 <div class="vertical-center">
     <div class="container">
@@ -11,38 +54,25 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
             <div class="col-md-6 col-md-offset-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">
+                        <h3 class="panel-title text-center">
                             <?=($headTitle)?>
                         </h3>
                     </div>
                     <div class="panel-body">
-                        <?php if (isset($error)): ?>
-                            <div class="text-danger text-center">
-                                <?=e($error)?>
-                            </div>
-                        <?php else: ?>
-                            <form action="" method="post" class="form-horizontal">
 
-                                <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
-                                    'name' => 'new_password',
-                                    'type' => 'password',
-                                    'label' => $trans('Nowe hasło'),
-                                    'help' => $trans('Twoje hasło musi składać się z przynajmniej %s znaków', [$config['password']['minLength']]),
-                                ])?>
+                        <p class="text-center" style="margin-bottom:20px">
+                            <?=$trans('Link do zmiany hasła wygasł lub hasło zostało już zresetowane');?>
+                        </p>
 
-                                <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
-                                    'name' => 'confirm_password',
-                                    'type' => 'password',
-                                    'label' => $trans('Powtórz nowe hasło'),
-                                    'help' => $trans('Powtórz swoje nowe hasło dla bezpieczeństwa'),
-                                ])?>
+                        <a href="<?=$uri->make("/auth/login")?>" class="btn btn-md btn-success btn-block">
+                            <?=$trans('Wróć do logowania')?>
+                        </a>
 
-                                <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                                    'saveLabel' => $trans('Zmień hasło'),
-                                    'cancelHref' => $uri->make('/auth/login'),
-                                ])?>
-                            </form>
-                        <?php endif ?>
+                        <div class="btn-group btn-group-justified" style="margin-top:5px">
+                            <a href="<?=$uri->make("/")?>" class="btn btn-link">
+                                <?=$trans('Przejdź na stronę główną')?></a>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -51,33 +81,6 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
 </div>
 
 <?php require ACTIONS_PATH.'/admin/parts/assets/footer.html.php'; ?>
-
-<script>
-$(function () {
-    $('form').validate({
-        rules: {
-            new_password: {
-                required: true,
-                minlength : <?=e($config['password']['minLength'])?>
-            },
-            confirm_password: {
-                required: true,
-                equalTo: "#new_password"
-            }
-        },
-        messages: {
-            new_password: {
-                required: "<?=$trans('Wprowadź nowe hasło')?>",
-                minlength: "<?=$trans('Nowe hasło powinno mieć przynajmniej %s znaków', [$config['password']['minLength']])?>"
-            },
-            confirm_password: {
-                required: "<?=$trans('Musisz powtórzyć swoje nowe hasło dla bezpieczeństwa')?>",
-                equalTo: "<?=$trans('Hasła nie są jednakowe')?>"
-            }
-        },
-    });
-});
-</script>
 
 </body>
 </html>

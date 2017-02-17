@@ -1,5 +1,7 @@
 <?php
 
+require ACTIONS_PATH.'/auth/_import.php';
+
 $headTitle = $trans('Czas trwania sesji minął');
 
 require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>

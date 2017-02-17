@@ -1,28 +1,30 @@
 <?php
 
+require ACTIONS_PATH.'/auth/_import.php';
+
 if (GC\Auth\Staff::existsSessionCookie()) {
     redirect('/admin');
 }
 
 $password = post('password');
 
+# pobierz pracownika po adresie email
 $user = GC\Model\Staff\Staff::select()
-    ->equals('email', $_POST['email'])
+    ->equals('email', post('login'))
     ->fetch();
 
-# jeżeli hasło w bazie nie jest zahaszowane, a zgadza się
+# jeżeli debug włączony i hasło w bazie nie jest zahaszowane, a zgadza się
 if ($config['debug']['enabled'] and $user and $password === $user['password']) {
-    $newPasswordHash = password_hash($password, \PASSWORD_DEFAULT);
+    # zaktualizuj hasło pracownika na hash
     GC\Model\Staff\Staff::updateByPrimaryId($user['staff_id'], [
-        'password' => $newPasswordHash,
+        'password' => password_hash($password, \PASSWORD_DEFAULT),
     ]);
-    $user['password'] = $newPasswordHash;
 }
-
-if (!$user or !password_verify($password, $user['password'])) {
-    $error = $trans('Nieprawidłowy login lub hasło');
-
-    return require ACTIONS_PATH.'/auth/login-get.php';
+# jeżeli użytkownik nie istnieje, albo hasło jest nieprawidłowe
+elseif (!$user or !password_verify($password, $user['password'])) {
+    return display(ACTIONS_PATH.'/auth/login-get.php', [
+        'error' => $trans('Nieprawidłowy login lub hasło'),
+    ]);
 }
 
 GC\Auth\Staff::createSession($user['staff_id']);

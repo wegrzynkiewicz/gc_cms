@@ -1,11 +1,24 @@
 <?php
 
 require ACTIONS_PATH.'/auth/_import.php';
+require ACTIONS_PATH.'/auth/forgot/_import.php';
 
-$headTitle = $trans('Wymagana zmiana hasła');
-$_POST = [];
+$headTitle = $trans('Resetowanie hasła');
 
-require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
+# utworzenie obiektu repezentującego pracownika
+$staff = GC\Auth\Staff::createFromSession();
+
+# pobierz wszystkie meta dane
+$meta = GC\Model\Staff\Meta::fetchMeta($staff['staff_id']);
+
+# jeżeli regeneracja jest nieaktualna wtedy przekieruj
+if (!isset($meta['regenerationVerifyHash'])) {
+    GC\Auth\Staff::destroySession();
+    redirect('/login');
+}
+
+?>
+<?php require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
 
 <div class="vertical-center">
     <div class="container">
@@ -13,41 +26,34 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
             <div class="col-md-6 col-md-offset-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">
+                        <h3 class="panel-title text-center">
                             <?=($headTitle)?>
                         </h3>
                     </div>
                     <div class="panel-body">
-                        <form action="" method="post" id="form" class="form-horizontal">
+                        <form action="" method="post" class="form-horizontal">
 
                             <p class="text-center">
-                                <?=$trans('Dla bezpieczeństwa musisz zmienić swoje hasło')?>
+                                <?=$trans('Weryfikacja adresu email przebiegła pomyślnie. Możesz zmienić swoje hasło.')?>
                             </p>
-
-                            <?php if (isset($error)): ?>
-                                <p class="text-danger text-center">
-                                    <?=e($error)?>
-                                </p>
-                            <?php endif ?>
 
                             <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                                 'name' => 'new_password',
                                 'type' => 'password',
                                 'label' => $trans('Nowe hasło'),
-                                'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', $config['password']['minLength']),
+                                'help' => $trans('Twoje hasło musi składać się z przynajmniej %s znaków', [$config['password']['minLength']]),
                             ])?>
 
                             <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                                 'name' => 'confirm_password',
                                 'type' => 'password',
                                 'label' => $trans('Powtórz nowe hasło'),
-                                'help' => $trans('Powtórz swoje nowe hasło w celu wyeliminowania pomyłki'),
+                                'help' => $trans('Powtórz swoje nowe hasło dla bezpieczeństwa'),
                             ])?>
 
-                            <button type="submit" class="btn btn-lg btn-success btn-block">
+                            <button type="submit" class="btn btn-md btn-success btn-block">
                                 <?=$trans('Zmień hasło')?>
                             </button>
-
                         </form>
                     </div>
                 </div>
@@ -60,7 +66,7 @@ require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
 
 <script>
 $(function () {
-    $('#form').validate({
+    $('form').validate({
         rules: {
             new_password: {
                 required: true,
@@ -74,7 +80,7 @@ $(function () {
         messages: {
             new_password: {
                 required: "<?=$trans('Wprowadź nowe hasło')?>",
-                minlength: "<?=$trans('Nowe hasło powinno mieć przynajmniej %s znaków', $config['password']['minLength'])?>"
+                minlength: "<?=$trans('Nowe hasło powinno mieć przynajmniej %s znaków', [$config['password']['minLength']])?>"
             },
             confirm_password: {
                 required: "<?=$trans('Musisz powtórzyć swoje nowe hasło dla bezpieczeństwa')?>",

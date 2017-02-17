@@ -1,5 +1,8 @@
 <?php
 
+require ACTIONS_PATH.'/auth/_import.php';
+require ACTIONS_PATH.'/auth/forgot/_import.php';
+
 $headTitle = $trans('Zapomniałem hasła');
 
 ?>
@@ -11,26 +14,23 @@ $headTitle = $trans('Zapomniałem hasła');
             <div class="col-md-6 col-md-offset-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">
+                        <h3 class="panel-title text-center">
                             <?=($headTitle)?>
                         </h3>
                     </div>
                     <div class="panel-body">
                         <form action="" method="post" class="form-horizontal">
 
-                            <?php if (isset($error)): ?>
-                                <p class="text-danger text-center">
-                                    <?=e($error)?>
-                                </p>
-                            <?php endif ?>
+                            <p class="text-center" style="margin-bottom:20px">
+                                <?=$trans('Na wprowadzony poniżej adres email zostanie wysłane nowe hasło')?>
+                            </p>
 
                             <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                                 'name' => 'login',
-                                'label' => $trans('Adres email'),
-                                'help' => $trans('Na wprowadzony powyżej adres email zostanie wysłane nowe hasło'),
+                                'placeholder' => $trans('Adres e-mail'),
                             ])?>
 
-                            <button type="submit" class="btn btn-lg btn-success btn-block">
+                            <button type="submit" class="btn btn-md btn-success btn-block">
                                 <?=$trans('Wyślij nowe hasło')?>
                             </button>
 

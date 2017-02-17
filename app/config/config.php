@@ -32,6 +32,7 @@ ini_set('error_log', ROOT_PATH.'/tmp/logs/'.date('Y-m-d').'.error.log'); # zmien
 ini_set('max_execution_time', 300); # określa maksymalny czas trwania skryptu
 ini_set('date.timezone', 'Europe/Warsaw'); # ustawienie domyślnej strefy czasowej
 ini_set('session.name', 'PSV'); # zmiana nazwy ciastka sesyjnego
+ini_set('session.gc_maxlifetime', 3600); # ustaw, aby usuwać sesje starsze niż (w sekundach)
 ini_set('session.gc_probability', 10); # częstotliwość z jaką następuje czyszczenie sesji
 ini_set('session.use_trans_sid', 0);
 ini_set('session.use_strict_mode', 1);
@@ -66,14 +67,12 @@ return [
     ],
     'session' => [ # ustawienia sesji
         'staff' => [ # ustawienia sesji dla pracownika
-            'lifetime' => 1800, # czas jaki musi upłynąć po zalogowaniu, aby sesja pracownika przedawniła się; w sekundach
             'cookie' => [ # ustawienia ciastka sesyjnego
                 'name' => 'PSS', # nazwa ciastka sesyjnego dla pracownika
                 'lifetime' => 3600, # czas jaki musi upłynąć, aby ciastko wygasło; w sekundach
             ],
         ],
         'visitor' => [ # ustawienia sesji dla odwiedzającego
-            'lifetime' => 1800, # czas jaki musi upłynąć po zalogowaniu, aby sesja odwiedzającego przedawniła się; w sekundach
             'cookie' => [ # ustawienia ciastka sesyjnego
                 'name' => 'PSV', # nazwa ciastka sesyjnego dla odwiedzającego
                 'lifetime' => 3600, # czas jaki musi upłynąć po zalogowaniu, aby ciastko przestało być ważne; w sekundach

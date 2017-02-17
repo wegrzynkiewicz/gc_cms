@@ -1,36 +1,37 @@
 <?php
 
-# pobierz pracownika po prowadzonym adresie emailowym
+require ACTIONS_PATH.'/auth/_import.php';
+require ACTIONS_PATH.'/auth/forgot/_import.php';
+
+# pobierz pracownika po wprowadzonym adresie emailowym
 $user = GC\Model\Staff\Staff::select()
     ->equals('email', post('login'))
     ->fetch();
 
 # jeżeli nie znaleziono pracownika wtedy zwróć błąd
 if (!$user) {
-    return print(render(ACTIONS_PATH.'/auth/forgot/password-get.php', [
-        'error' => $trans('Nieprawidłowy adres e-mail'),
-    ]));
+    $error['login'] = $trans('Nieprawidłowy adres e-mail');
+    return display(ACTIONS_PATH.'/auth/forgot/password-get.php');
 }
 
 $email64 = base64_encode($user['email']);
-$regeneration = [
-    'verifyHash' => random(40),
-    'time' => time(),
-];
-
+$regenerationVerifyHash = random(40);
+$regenerationVerifyTime = time();
 $regenerateUrl = sprintf(
     "http://%s/auth/forgot/verify/%s/%s",
-    $_SERVER['HTTP_HOST'], $email64, $regeneration['verifyHash']
+    $_SERVER['HTTP_HOST'], $email64, $regenerationVerifyHash
 );
 
 # zapisz dane regeneracyjne w bazie danych
-GC\Model\Staff\Staff::updateByPrimaryId($user['staff_id'], [
-    'regeneration' => json_encode($regeneration),
+GC\Model\Staff\Meta::updateMeta($user['staff_id'], [
+    'regenerationVerifyHash' => $regenerationVerifyHash,
+    'regenerationVerifyTime' => $regenerationVerifyTime,
 ]);
 
+# wyślij maila z linkiem weryfikującym
 $mail = new GC\Mail();
 $mail->buildTemplate(
-    ACTIONS_PATH.'/auth/forgot/verify-generation.email.html.php',
+    ACTIONS_PATH.'/auth/forgot/regeneration.email.html.php',
     ACTIONS_PATH.'/admin/parts/email/styles.css', [
         'name' => $user['name'],
         'regenerateUrl' => $regenerateUrl,
