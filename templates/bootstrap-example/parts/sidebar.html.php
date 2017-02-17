@@ -4,10 +4,7 @@
         <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
     </div>
 
-    <div class="sidebar-module">
-        <h4><?=$trans('Śmieszne filmiki')?></h4>
-        <?php require TEMPLATE_PATH."/navs/side.html.php"; ?>
-    </div>
+    <?php require TEMPLATE_PATH."/navs/funny-movies.html.php"; ?>
 
     <div class="sidebar-module">
         <h4>Archives</h4>

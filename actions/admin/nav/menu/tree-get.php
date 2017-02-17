@@ -4,15 +4,10 @@ require ACTIONS_PATH.'/admin/_import.php';
 require ACTIONS_PATH.'/admin/nav/_import.php';
 require ACTIONS_PATH.'/admin/nav/menu/_import.php';
 
-# pobierz wszystkie rusztowania
-$frames = GC\Model\Frame::select()
-    ->equals('lang', GC\Staff::getInstance()->getEditorLang())
-    ->order('name', 'ASC')
-    ->fetchByPrimaryKey();
-
 # pobierz węzły nawigacji i zbuduj z nich drzewo
-$menuTree = GC\Model\Menu\Menu::select()
-    ->source('::tree')
+$tree = GC\Model\Menu\Menu::select()
+    ->fields('::fields')
+    ->source('::tree_frame')
     ->equals('nav_id', $nav_id)
     ->fetchTree();
 
@@ -40,13 +35,13 @@ $menuTree = GC\Model\Menu\Menu::select()
         <form id="savePosition" action="" method="post">
             <input name="positions" type="hidden"/>
 
-            <?php if ($menuTree->hasChildren()):?>
+            <?php if ($tree->hasChildren()):?>
                 <ol id="sortable" class="sortable">
-                    <?=render(ACTIONS_PATH.'/admin/nav/menu/tree-items.html.php', [
-                        'menu' => $menuTree,
-                        'nav_id' => $nav_id,
-                        'frames' => $frames,
-                    ])?>
+                    <?php foreach ($tree->getChildren() as $node): ?>
+                        <?=render(ACTIONS_PATH.'/admin/nav/menu/tree-item.html.php', [
+                            'node' => $node,
+                        ])?>
+                    <?php endforeach ?>
                 </ol>
             <?php else:?>
                 <div class="simple-box">

@@ -9,9 +9,46 @@ class Menu extends AbstractNode
     public static $table        = '::menus';
     public static $primary      = 'menu_id';
     public static $node         = 'menu_id';
-    public static $taxonomy     = '::menu_taxonomies LEFT JOIN ::menu_tree USING (nav_id) LEFT JOIN ::menus USING (menu_id) LEFT JOIN ::frames USING (frame_id)';
+    public static $fields       = 'parent_id, ::menus.*, slug, ::frames.name AS frame_name';
     public static $tree         = '::menus LEFT JOIN ::menu_tree USING (menu_id)';
+    public static $tree_frame   = '::menus LEFT JOIN ::menu_tree USING (menu_id) LEFT JOIN ::frames USING (frame_id)';
     public static $aloneNodes   = '::menu_tree RIGHT JOIN ::menus USING(menu_id)';
+
+    /**
+     * Zwraca poprawną nazwę
+     */
+    public function getName()
+    {
+        if ($this->name) {
+            return $this->name;
+        }
+
+        if ($this->frame_name) {
+            return $this->frame_name;
+        }
+
+        return $GLOBALS['trans']('(Bez nazwy)');
+    }
+
+    /**
+     * Zwraca odpowiedni adres docelowego odnośnika
+     */
+    public function getUri()
+    {
+        if ($this->type === 'homepage') {
+            return $GLOBALS['uri']->root('/');
+        }
+
+        if ($this->type === 'external') {
+            return $this->destination;
+        }
+
+        if ($this->slug) {
+            return $this->slug;
+        }
+
+        return makeSlug($this->frame_name.'/'.$this->frame_id);
+    }
 
     /**
      * Usuwa węzeł i wszystkie węzły potomne

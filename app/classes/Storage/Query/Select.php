@@ -60,6 +60,18 @@ class Select extends AbstractQuery
         );
     }
 
+    public function fetchObject()
+    {
+        $record = $this->fetch();
+        if ($record) {
+            $className = $this->modelClass;
+
+            return new $className($record);
+        }
+
+        return null;
+    }
+
     public function fetchTree()
     {
         $records = $this

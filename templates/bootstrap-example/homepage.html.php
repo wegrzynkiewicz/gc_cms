@@ -2,7 +2,8 @@
 
 $headTitle = $trans('Witamy na stronie głównej');
 
-require TEMPLATE_PATH."/parts/header.html.php"; ?>
+?>
+<?php require TEMPLATE_PATH."/parts/header.html.php"; ?>
 
 <div class="container">
     <div class="blog-header">
@@ -84,5 +85,6 @@ require TEMPLATE_PATH."/parts/header.html.php"; ?>
     </div>
 </div>
 
-<?php require TEMPLATE_PATH."/parts/assets/footer.html.php"; ?>
+<?php require TEMPLATE_PATH."/parts/assets.html.php"; ?>
 <?php require TEMPLATE_PATH."/parts/footer.html.php"; ?>
+<?php require TEMPLATE_PATH."/parts/end.html.php"; ?>

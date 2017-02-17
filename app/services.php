@@ -29,9 +29,6 @@ $logException = function ($exception) use (&$logException) {
 # niestandardowy łapacz błędów, na każdym rodzaju błędu rzuca wyjątek
 set_error_handler(function ($severity, $msg, $file, $line, array $context) {
     $GLOBALS['logger']->info("[ERROR] {$msg}", [$file, $line]);
-    if (error_reporting() === 0) {
-        return false;
-    }
     if ($severity & error_reporting()) {
         throw new ErrorException($msg, 0, $severity, $file, $line);
     }

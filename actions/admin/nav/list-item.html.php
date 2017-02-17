@@ -1,13 +1,10 @@
 <tr>
-    <td><?=e($nav['name'])?></td>
+    <td><?=e($name)?></td>
     <td>
-        <?php if ($tree and $tree->hasChildren()): ?>
+        <?php if (isset($tree) and $tree->hasChildren()): ?>
             <div style="margin-left:-20px">
-                <?=render(ACTIONS_PATH.'/admin/parts/taxonomy-preview.html.php', [
-                    'tree' => $tree,
-                    'taxonomyUrl' => function($path) use ($nav_id, &$uri) {
-                        return $uri->mask("/{$nav_id}/menu{$path}");
-                    },
+                <?=render(ACTIONS_PATH.'/admin/nav/tree-preview.html.php', [
+                    'tree' => $tree
                 ])?>
             </div>
         <?php else: ?>

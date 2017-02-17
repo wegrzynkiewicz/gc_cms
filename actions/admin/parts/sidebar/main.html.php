@@ -15,10 +15,13 @@
                 </div>
             </li> -->
 
-            <?=render(ACTIONS_PATH.'/admin/parts/sidebar/items.html.php', [
-                'menu' => $menu,
-                'attr' => 'class="nav nav-second-level collapse"',
-            ])?>
+            <?php foreach ($menu as $node_id => $node): ?>
+                <?=render(ACTIONS_PATH.'/admin/parts/sidebar/item.html.php', [
+                    'node_id' => $node_id,
+                    'node' => $node,
+                    'attr' => 'class="nav nav-second-level collapse"',
+                ])?>
+            <?php endforeach ?>
 
         </ul>
     </div>

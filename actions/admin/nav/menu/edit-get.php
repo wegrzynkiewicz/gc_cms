@@ -18,6 +18,7 @@ $breadcrumbs->push([
 ]);
 
 $_POST = $node;
-$refreshUrl = $uri->mask("/{$menu_id}/edit-views");
+$type = $node['type'];
+$nodeType = render(ACTIONS_PATH."/admin/nav/menu/types/{$type}.php", $node);
 
 require ACTIONS_PATH.'/admin/nav/menu/form.html.php';

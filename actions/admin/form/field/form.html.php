@@ -52,16 +52,13 @@
 
 <script>
 $(function() {
+
     $('#type').change(function() {
         $.get("<?=$uri->mask('/types')?>/"+$(this).val(), function(data) {
             $('#fieldType').html(data);
         });
     });
-});
-</script>
 
-<script>
-$(function () {
     $('#form').validate({
         rules: {
             name: {

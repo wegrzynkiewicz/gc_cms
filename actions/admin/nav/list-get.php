@@ -11,8 +11,8 @@ $navs = GC\Model\Menu\Taxonomy::select()
 
 # pobierz wszystkie węzły przygotowane do budowy drzewa
 $menus = GC\Model\Menu\Menu::select()
-    ->fields(['menu_id', 'nav_id', 'parent_id', 'name'])
-    ->source('::tree')
+    ->fields('::fields, nav_id')
+    ->source('::tree_frame')
     ->order('position', 'ASC')
     ->fetchAll();
 
@@ -23,12 +23,12 @@ foreach ($menus as $menu) {
 }
 
 # zbuduj drzewa dla konkretnych nawigacji
-$menuTrees = [];
-foreach ($navs as $nav_id => $nav) {
-    $menuTrees[$nav_id] = isset($navsNodes[$nav_id])
+foreach ($navs as $nav_id => &$nav) {
+    $nav['tree'] = isset($navsNodes[$nav_id])
         ? GC\Model\Menu\Menu::createTree($navsNodes[$nav_id])
         : null;
 }
+unset($nav);
 
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>
@@ -53,11 +53,7 @@ foreach ($navs as $nav_id => $nav) {
                     </thead>
                     <tbody>
                         <?php foreach ($navs as $nav_id => $nav): ?>
-                            <?=render(ACTIONS_PATH.'/admin/nav/list-item.html.php', [
-                                'nav_id' => $nav_id,
-                                'nav' => $nav,
-                                'tree' => $menuTrees[$nav_id],
-                            ])?>
+                            <?=render(ACTIONS_PATH.'/admin/nav/list-item.html.php', $nav)?>
                         <?php endforeach ?>
                     </tbody>
                 </table>

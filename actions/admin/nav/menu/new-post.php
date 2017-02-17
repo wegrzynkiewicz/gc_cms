@@ -25,4 +25,11 @@ GC\Model\Menu\Tree::insert([
     'position' => $position + 1,
 ]);
 
+# pobierz węzeł po kluczu głównym
+$menu = GC\Model\Menu\Menu::select()
+    ->source('::tree_frame')
+    ->equals('menu_id', $menu_id)
+    ->fetchObject();
+
+flashBox($trans('Menu "%s" zostało utworzone.', [$menu->getName()]));
 redirect($breadcrumbs->getLast('uri'));

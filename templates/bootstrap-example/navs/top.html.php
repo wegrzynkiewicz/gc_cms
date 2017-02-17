@@ -1,11 +1,16 @@
 <?php
 
+# pobierz samą nawigację
+$nav = GC\Model\Menu\Taxonomy::select()
+    ->equals('workname', 'top')
+    ->equals('lang', GC\Visitor::getLang())
+    ->fetch();
+
 # pobierz węzły nawigacji i zbuduj z nich drzewo
 $menu = GC\Model\Menu\Menu::select()
-    ->fields('parent_id, ::menus.*, slug')
-    ->source('::taxonomy')
-    ->equals('workname', 'top')
-    ->equals('::menu_taxonomies.lang', GC\Visitor::getLang())
+    ->fields('::fields')
+    ->source('::tree_frame')
+    ->equals('nav_id', $nav['nav_id'])
     ->fetchTree();
 
 ?>
@@ -15,7 +20,7 @@ $menu = GC\Model\Menu\Menu::select()
         <div class="container">
             <nav class="blog-nav">
                 <?php foreach ($menu->getChildren() as $node): ?>
-                    <?=render(TEMPLATE_PATH.'/parts/menu-node-link.html.php', [
+                    <?=render(TEMPLATE_PATH.'/navs/node.html.php', [
                         'node' => $node,
                         'extend' => 'class="blog-nav-item"',
                     ])?>

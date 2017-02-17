@@ -9,21 +9,24 @@
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
                     'label' => $trans('Nazwa węzła'),
+                    'help' => $trans('Zostaw pustą, aby wygenerować na podstawie nazwy odnośnika'),
                 ])?>
 
-                <?=render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
-                    'name' => 'type',
-                    'label' => $trans('Typ węzła'),
-                    'help' => $trans('Wybierz typ węzła nawigacji w menu'),
-                    'options' => $config['nodeTypes'],
-                    'firstOption' => $trans('Wybierz typ węzła'),
-                ])?>
+                <?php if (!isset($nodeType)): ?>
+                    <?=render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
+                        'name' => 'type',
+                        'label' => $trans('Typ węzła'),
+                        'help' => $trans('Typ pozwala na wybranie niestandardowego zachowania linku.'),
+                        'options' => $config['nodeTypes'],
+                        'firstOption' => $trans('Wybierz typ węzła'),
+                    ])?>
+                <?php endif ?>
             </div>
 
-            <div class="simple-box">
-                <div id="nodeType">
-                    <?=$trans('Wybierz typ węzła')?>
-                </div>
+            <div id="nodeType">
+                <?php if (isset($nodeType)): ?>
+                    <?=$nodeType?>
+                <?php endif ?>
             </div>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
@@ -38,28 +41,15 @@
 
 <script>
 $(function() {
-    function refreshType(nodeType) {
-        $.get("<?=$refreshUrl?>/"+nodeType, function(data) {
+
+    $('#type').change(function() {
+        $.get("<?=$uri->mask('/types')?>/"+$(this).val(), function(data) {
             $('#nodeType').html(data);
         });
-    }
-    $('#type').change(function() {
-        refreshType($(this).val());
     });
 
-    <?php if (isset($_POST['type'])): ?>
-        refreshType("<?=e($_POST['type'])?>");
-    <?php endif ?>
-});
-</script>
-
-<script>
-$(function () {
     $('#form').validate({
         rules: {
-            name: {
-                required: true
-            },
             type: {
                 required: true
             },
@@ -68,9 +58,6 @@ $(function () {
             }
         },
         messages: {
-            name: {
-                required: "<?=$trans('Nazwa węzła jest wymagana')?>"
-            },
             type: {
                 required: "<?=$trans('Wybierz typ węzła')?>"
             },

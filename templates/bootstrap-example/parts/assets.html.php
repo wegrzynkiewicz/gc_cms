@@ -10,13 +10,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha384-bD5m2XNm9nP2xLhY13ZMvm73xzZvv/tfbPzYGjMLduzMLnDc9gzc1sVl3vufMg/U" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha384-DiTOB5DarLwdE9bzATOXhLQp6irFZIhtJreUNJiwMMDiHGu7LdRZeqZBveanC2zo" crossorigin="anonymous"></script>
 
-<?php
-$template = sprintf(TEMPLATE_PATH.'/parts/assets/footer-%s.html.php', GC\Visitor::getLang());
-if (is_readable($template)) {
-    require $template;
-}
-?>
-
 <script src="https://www.google.com/recaptcha/api.js"></script>
 <script src="<?=$uri->assets("/common/scripts/jquery.photoswipe.js")?>"></script>
 
