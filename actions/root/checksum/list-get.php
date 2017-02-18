@@ -8,7 +8,7 @@ $stored = GC\Model\Checksum::select()
     ->fetchByPrimaryKey();
 
 $checksums = [];
-foreach($getFiles() as $file) {
+foreach(getSourceFiles() as $file) {
     $key = trim($file, '.');
     $hash = sha1(file_get_contents($file));
     $checksums[$key] = [

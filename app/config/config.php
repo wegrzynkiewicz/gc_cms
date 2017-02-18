@@ -9,11 +9,12 @@
 /*  | |_| ||  _ <  / ___ \ |  _|  | |___ | |___ | |\  |  | |  | |___ |  _ <   */
 /*   \____||_| \_\/_/   \_\|_|     \____||_____||_| \_|  |_|  |_____||_| \_\  */
 /*                                                                            */
-/*    GrafCenterCMF 1.0.0 made with <3 by @wegrzynkiewicz for @grafcenter     */
+/*       GrafCenterCMF made with <3 by @wegrzynkiewicz for @grafcenter        */
 /*                                                                            */
 /******************************************************************************/
 
 define('START_TIME', $_SERVER["REQUEST_TIME_FLOAT"]); # początkowy czas uruchomienia aplikacji
+define('GCCMF_VERSION', '1.0.0'); # wersja systemu
 define('TEMPLATE', 'bootstrap-example'); # nazwa używanego szablonu
 define('ASSETS_URL', '/assets'); # adres do katalogu z zasobami
 define('ROOT_PATH', realpath(__DIR__.'/../../')); # ścieżka do katalogu głównego serwera www

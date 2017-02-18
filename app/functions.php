@@ -355,6 +355,39 @@ function normalizeSlug($string)
 }
 
 /**
+ * Tworzy prawidłową ścieżkę do pliku z relatywnych katalogów
+ */
+function normalizePath($path)
+{
+    $parts = array(); # Array to build a new path from the good parts
+    $path = str_replace('\\', '/', $path); # Replace backslashes with forwardslashes
+    $path = preg_replace('/\/+/', '/', $path); # Combine multiple slashes into a single slash
+    $segments = explode('/', $path); # Collect path segments
+    $test = ''; # Initialize testing variable
+
+    foreach ($segments as $segment) {
+        if ($segment != '.') {
+            $test = array_pop($parts);
+            if (is_null($test)) {
+                $parts[] = $segment;
+            } elseif ($segment == '..') {
+                if ($test == '..') {
+                    $parts[] = $test;
+                }
+                if ($test == '..' || $test == '') {
+                    $parts[] = $segment;
+                }
+            } else {
+                $parts[] = $test;
+                $parts[] = $segment;
+            }
+        }
+    }
+
+    return implode('/', $parts);
+}
+
+/**
  * Funkcja przekierowuje na adres obowiązujący wewnątrz aplikacji
  */
 function redirect($location, $code = 303)
@@ -518,6 +551,41 @@ function globRecursive($pattern, $flags = 0)
 }
 
 /**
+ * Funkcja pobiera tylko pliki źródłowe aplikacji
+ */
+function getSourceFiles()
+{
+    $webDataPath = realpath(WEB_PATH.'/data');
+
+    return array_filter(globRecursive('*.*'), function ($value) use (&$webDataPath) {
+
+        if (strpos(realpath($value), $webDataPath) !== false) {
+            return false;
+        }
+
+        return in_array(pathinfo($value, PATHINFO_EXTENSION), [
+            'php', 'js', 'css', 'json', 'txt', 'md', 'html'
+        ]);
+    });
+}
+
+/**
+ * Zapisuje do bazy danych sumy kontrolne plików
+ */
+function refreshChecksums()
+{
+    GC\Model\Checksum::delete()
+        ->execute();
+
+    foreach (getSourceFiles() as $file) {
+        GC\Model\Checksum::insert([
+            'file' => trim($file, '.'),
+            'hash' => sha1(file_get_contents($file)),
+        ]);
+    }
+}
+
+/**
  * Tworzy rekursywnie katalogi
  */
 function makeDirRecursive($dir, $mode = 0775)
@@ -661,7 +729,6 @@ function thumbnail($imageUri, $width, $height, $mode = 'outbound')
     return $thumbnailUri;
 }
 
-
 /**
  * Odczytuje cache sesyjny o nazwie $name i czasie życia mniejszym niż $ttl
  * wyrażanym w sekundach. Jeżeli trzeba odświeżyć wartość wtedy wywołuje
@@ -701,7 +768,7 @@ function sessionCache($name, $ttl, $callback)
 function getVisitorLang()
 {
     if ($GLOBALS['request']->lang) {
-       return $GLOBALS['request']->lang;
+        return $GLOBALS['request']->lang;
     }
 
     return $GLOBALS['config']['lang']['visitorDefault'];

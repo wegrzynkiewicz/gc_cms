@@ -4,6 +4,9 @@
 
 require_once __DIR__.'/../app/bootstrap.php';
 
+echo PHP_EOL;
+echo "Dumping translations...".PHP_EOL;
+
 $domains = [
     'admin' => ACTIONS_PATH.'/admin',
     'auth' => ACTIONS_PATH.'/auth',
@@ -24,4 +27,9 @@ foreach ($domains as $domain => $path) {
 
 $json = json_encode($translations, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 $file = TEMP_PATH.'/translations-dump.json';
+
+echo "Creating file: {$file}".PHP_EOL;
+makeDirRecursive(dirname($file));
 file_put_contents($file, $json);
+
+echo 'Translations dumped.'.PHP_EOL;
