@@ -65,6 +65,8 @@ function access($attr, $path, $data, $volume)
 // https://github.com/Studio-42/elFinder/wiki/Connector-configuration-options
 $normalizer = new GC\Normalizer();
 
+$path = WEB_PATH.'/uploads';
+
 $opts = array(
     'debug' => true,
     'bind' => array(
@@ -78,7 +80,7 @@ $opts = array(
     'roots' => array(
         array(
             'driver'        => 'LocalFileSystem',               // driver for accessing file system (REQUIRED)
-            'path'          => WEB_PATH.'/uploads',             // path to files (REQUIRED)
+            'path'          => $path,                           // path to files (REQUIRED)
             'URL'           => $uri->root('/uploads'),          // URL to files (REQUIRED)
             'uploadDeny'    => array('all'),                    // All Mimetypes not allowed to upload
                                                                 // Mimetype `image` and `text/plain` allowed to upload
@@ -88,6 +90,8 @@ $opts = array(
         ),
     )
 );
+
+makeDirRecursive($path);
 
 // run elFinder
 $connector = new elFinderConnector(new elFinder($opts));
