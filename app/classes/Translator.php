@@ -5,7 +5,7 @@ namespace GC;
 class Translator
 {
     private static $instance = null;
-    
+
     public $refresh = false;
     public $translations = [];
     public $translationPath = '';
@@ -51,7 +51,7 @@ class Translator
     {
         if (static::$instance === null) {
             static::$instance = new static(
-                $GLOBALS['config']['translator']['folder'].'/'.getVisitorLang().'.php'
+                $GLOBALS['config']['translator']['folder'].'/'.getVisitorLang().'.json'
             );
         }
 

@@ -166,6 +166,13 @@ return [
                 'perms' => [],
                 'children' => [],
             ],
+            'adminer' => [
+                'name' => 'Adminer',
+                'path' => '/adminer',
+                'icon' => '',
+                'perms' => [],
+                'children' => [],
+            ],
             'requirements' => [
                 'name' => 'Wymagania systemowe',
                 'path' => '/root/requirements',

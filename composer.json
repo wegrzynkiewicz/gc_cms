@@ -14,6 +14,7 @@
         "studio-42/elfinder": "^2.1",
         "ezyang/htmlpurifier": "^4.8",
         "ifsnop/mysqldump-php": "^2.2",
-        "imagine/imagine": "^0.6.3"
+        "imagine/imagine": "^0.6.3",
+        "vrana/adminer": "^4.2"
     }
 }
