@@ -19,5 +19,5 @@ GC\Model\Form\Field::updateByPrimaryId($field_id, [
 $type = $field['type'];
 require ACTIONS_PATH."/admin/form/field/types/{$type}-post.php";
 
-flashBox($trans('Pole "%s" zostało zaktualizowane.', [$field['name']]));
+flashBox(trans('Pole "%s" zostało zaktualizowane.', [$field['name']]));
 redirect($breadcrumbs->getLast('uri'));

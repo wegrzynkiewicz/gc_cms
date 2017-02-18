@@ -10,5 +10,5 @@ echo render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
     'label' => $field['name'],
     'help' => $field['help'],
     'options' => $options,
-    'firstOption' => $trans('Wybierz jedną z opcji'),
+    'firstOption' => trans('Wybierz jedną z opcji'),
 ]);

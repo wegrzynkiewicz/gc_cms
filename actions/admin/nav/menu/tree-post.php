@@ -32,5 +32,5 @@ foreach ($positions as $menu) {
     }
 }
 
-flashBox($trans('Pozycja węzłów została zapisana.'));
+flashBox(trans('Pozycja węzłów została zapisana.'));
 redirect($breadcrumbs->getLast('uri'));

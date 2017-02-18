@@ -23,7 +23,7 @@ if ($config['debug']['enabled'] and $user and $password === $user['password']) {
 # jeżeli użytkownik nie istnieje, albo hasło jest nieprawidłowe
 elseif (!$user or !password_verify($password, $user['password'])) {
     return display(ACTIONS_PATH.'/auth/login-get.php', [
-        'error' => $trans('Nieprawidłowy login lub hasło'),
+        'error' => trans('Nieprawidłowy login lub hasło'),
     ]);
 }
 

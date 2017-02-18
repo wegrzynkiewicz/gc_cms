@@ -9,7 +9,7 @@ $user = GC\Model\Staff\Staff::select()
 
 # jeżeli nie znaleziono pracownika wtedy zwróć błąd
 if (!$user) {
-    $error['login'] = $trans('Nieprawidłowy adres e-mail');
+    $error['login'] = trans('Nieprawidłowy adres e-mail');
     return display(ACTIONS_PATH.'/auth/forgot/password-get.php');
 }
 

@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = $trans('Produkty');
+$headTitle = trans('Produkty');
 $uri->extendMask('/product%s');
 $breadcrumbs->push([
     'uri' => $uri->mask('/list'),

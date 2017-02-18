@@ -37,5 +37,5 @@ $mail->buildTemplate(
 $mail->addAddress($_POST['email']);
 $mail->send();
 
-flashBox($trans('Pracownik "%s" został utworzony.', [post('name')]));
+flashBox(trans('Pracownik "%s" został utworzony.', [post('name')]));
 redirect($breadcrumbs->getLast('uri'));

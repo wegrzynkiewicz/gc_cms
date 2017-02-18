@@ -19,7 +19,7 @@ $tabs = GC\Model\Module\Tab::select()
                     data-target="#addModal"
                     class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
-                    <?=$trans('Dodaj zakładkę')?>
+                    <?=trans('Dodaj zakładkę')?>
                 </button>
             </div>
             <h1><?=($headTitle)?></h1>
@@ -34,11 +34,11 @@ $tabs = GC\Model\Module\Tab::select()
         <form id="sortableForm" action="" method="post">
             <input type="hidden" name="positions">
 
-            <h3><?=$trans('Zakładki')?></h3>
+            <h3><?=trans('Zakładki')?></h3>
 
             <?php if (empty($tabs)): ?>
                 <div class="simple-box">
-                    <?=$trans('Nie znaleziono zakładek')?>
+                    <?=trans('Nie znaleziono zakładek')?>
                 </div>
             <?php else: ?>
                 <ol id="sortable" class="sortable">
@@ -57,7 +57,7 @@ $tabs = GC\Model\Module\Tab::select()
             <?php endif ?>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => $trans('Zapisz położenie zakładek'),
+                'saveLabel' => trans('Zapisz położenie zakładek'),
             ])?>
         </form>
     </div>
@@ -74,21 +74,21 @@ $tabs = GC\Model\Module\Tab::select()
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans('Dodaj nową zakładkę')?>
+                    <?=trans('Dodaj nową zakładkę')?>
                 </h2>
             </div>
             <div class="modal-body">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
-                    'label' => $trans('Nazwa pojedyńczej zakładki'),
+                    'label' => trans('Nazwa pojedyńczej zakładki'),
                 ])?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <?=$trans('Anuluj')?>
+                    <?=trans('Anuluj')?>
                 </button>
                 <button type="submit" value="" class="btn btn-success btn-ok">
-                    <?=$trans('Dodaj')?>
+                    <?=trans('Dodaj')?>
                 </button>
             </div>
         </form>
@@ -107,17 +107,17 @@ $tabs = GC\Model\Module\Tab::select()
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans('Edytujesz zakładkę')?>
+                    <?=trans('Edytujesz zakładkę')?>
                 </h2>
             </div>
             <div id="editModalContent" class="modal-body">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <?=$trans('Anuluj')?>
+                    <?=trans('Anuluj')?>
                 </button>
                 <button type="submit" value="" class="btn btn-success btn-ok">
-                    <?=$trans('Zapisz')?>
+                    <?=trans('Zapisz')?>
                 </button>
             </div>
         </form>
@@ -136,19 +136,19 @@ $tabs = GC\Model\Module\Tab::select()
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans('Czy na pewno usunąć?')?>
+                    <?=trans('Czy na pewno usunąć?')?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=$trans('Czy jesteś pewien, że chcesz usunąć zakładkę')?>
+                <?=trans('Czy jesteś pewien, że chcesz usunąć zakładkę')?>
                 <span id="deleteName" style="font-weight:bold; color:red;"></span>?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <?=$trans('Anuluj')?>
+                    <?=trans('Anuluj')?>
                 </button>
                 <button type="submit" class="btn btn-danger btn-ok">
-                    <?=$trans('Usuń')?>
+                    <?=trans('Usuń')?>
                 </button>
             </div>
         </form>

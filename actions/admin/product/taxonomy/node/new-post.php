@@ -33,5 +33,5 @@ GC\Model\Product\Tree::insert([
     'position' => $position+1,
 ]);
 
-flashBox($trans('Nowy węzeł "%s" dostał dodany do "%s".', [$name, $taxonomy['name']]));
+flashBox(trans('Nowy węzeł "%s" dostał dodany do "%s".', [$name, $taxonomy['name']]));
 redirect($breadcrumbs->getLast('uri'));

@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = $trans('Brak dostępu');
+$headTitle = trans('Brak dostępu');
 
 require ACTIONS_PATH.'/admin/_import.php';
 require ACTIONS_PATH.'/admin/account/_import.php';
@@ -15,11 +15,11 @@ $permission = array_shift($_SEGMENTS);
     <div class="col-lg-12">
         <div class="simple-box">
             <?php if ($permission == 'default'): ?>
-                <?=$trans('Nie masz uprawnień do wykonania tej akcji.')?>
+                <?=trans('Nie masz uprawnień do wykonania tej akcji.')?>
             <?php else: ?>
-                <?=$trans('Nie masz uprawnień do:')?>
+                <?=trans('Nie masz uprawnień do:')?>
                 <strong>
-                    <?=$trans($config['permissions'][$permission])?>
+                    <?=trans($config['permissions'][$permission])?>
                 </strong>
             <?php endif ?>
         </div>

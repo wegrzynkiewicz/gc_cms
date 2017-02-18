@@ -2,7 +2,7 @@
 
 require ACTIONS_PATH.'/admin/_import.php';
 
-$headTitle = $trans('Dashboard');
+$headTitle = trans('Dashboard');
 
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header.html.php'; ?>

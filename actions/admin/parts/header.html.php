@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<?=GC\Visitor::getLang()?>">
+<html lang="<?=getVisitorLang()?>">
 <head>
     <meta charset="utf-8" >
 	<title><?=($headTitle.' - '.$config['adminHeadTitleBase'])?></title>

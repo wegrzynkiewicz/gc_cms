@@ -9,5 +9,5 @@ GC\Model\Frame::updateByFrameId($frame_id, [
     'name' => post('name'),
 ]);
 
-flashBox($trans('Zakładka "%s" została zaktualizowana.', [post('name')]));
+flashBox(trans('Zakładka "%s" została zaktualizowana.', [post('name')]));
 http_response_code(204);

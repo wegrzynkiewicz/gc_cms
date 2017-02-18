@@ -1,17 +1,17 @@
 <tr>
     <td>
         <a href="<?=$uri->mask("/{$group_id}/edit")?>"
-            title="<?=$trans('Edytuj grupę')?>">
+            title="<?=trans('Edytuj grupę')?>">
             <?=e($group['name'])?>
         </a>
     </td>
     <td>
         <?php dd($GLOBALS); if (isset($permissions) and $permissions): ?>
             <?php foreach ($permissions as $permission): ?>
-                <?=$trans($config['permissions'][$permission])?> <br>
+                <?=trans($config['permissions'][$permission])?> <br>
             <?php endforeach ?>
         <?php else: ?>
-            <?=$trans('Ta grupa nie posiada nadanych żadnych uprawnień.')?>
+            <?=trans('Ta grupa nie posiada nadanych żadnych uprawnień.')?>
         <?php endif ?>
     </td>
     <td class="text-right">
@@ -19,10 +19,10 @@
             data-id="<?=$group_id?>"
             data-name="<?=$name?>"
             data-target="#deleteModal"
-            title="<?=$trans('Usuń grupę')?>"
+            title="<?=trans('Usuń grupę')?>"
             class="btn btn-danger btn-md">
             <i class="fa fa-times fa-fw"></i>
-            <?=$trans('Usuń')?>
+            <?=trans('Usuń')?>
         </a>
     </td>
 </tr>

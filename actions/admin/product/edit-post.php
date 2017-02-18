@@ -29,5 +29,5 @@ foreach ($nodes as $node_id) {
     ]);
 }
 
-flashBox($trans('Produkt "%s" został zaktualizowany.', [post('name')]));
+flashBox(trans('Produkt "%s" został zaktualizowany.', [post('name')]));
 redirect($breadcrumbs->getLast('uri'));

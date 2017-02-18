@@ -16,15 +16,15 @@ $pageOptions = GC\Model\Frame::select()
 <div class="simple-box">
     <?=render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
         'name' => 'frame_id',
-        'label' => $trans('Strona'),
-        'help' => $trans('Wybierz stronę do której wezeł ma kierować'),
+        'label' => trans('Strona'),
+        'help' => trans('Wybierz stronę do której wezeł ma kierować'),
         'options' => $pageOptions,
-        'firstOption' => $trans('Wybierz stronę'),
+        'firstOption' => trans('Wybierz stronę'),
     ])?>
 
     <?=render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
         'name' => 'target',
-        'label' => $trans('Sposób załadowania adresu'),
+        'label' => trans('Sposób załadowania adresu'),
         'options' => array_trans($config['navNodeTargets']),
     ])?>
 </div>

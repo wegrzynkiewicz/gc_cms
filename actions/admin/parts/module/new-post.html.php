@@ -27,5 +27,5 @@ GC\Model\Module\Grid::insert([
     'h' => 1,
 ]);
 
-flashBox($trans("%s został utworzony. Edytujesz go teraz.", [$config['modules'][$moduleType]['name']]));
+flashBox(trans("%s został utworzony. Edytujesz go teraz.", [$config['modules'][$moduleType]['name']]));
 redirect($uri->mask("/{$module_id}/edit"));

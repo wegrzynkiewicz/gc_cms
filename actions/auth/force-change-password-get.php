@@ -2,7 +2,7 @@
 
 require ACTIONS_PATH.'/auth/_import.php';
 
-$headTitle = $trans('Wymagana zmiana hasła');
+$headTitle = trans('Wymagana zmiana hasła');
 $_POST = [];
 
 ?>
@@ -27,26 +27,26 @@ $_POST = [];
                                 </p>
                             <?php else: ?>
                                 <p class="text-center">
-                                    <?=$trans('Dla bezpieczeństwa musisz zmienić swoje hasło')?>
+                                    <?=trans('Dla bezpieczeństwa musisz zmienić swoje hasło')?>
                                 </p>
                             <?php endif ?>
 
                             <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                                 'name' => 'new_password',
                                 'type' => 'password',
-                                'label' => $trans('Nowe hasło'),
+                                'label' => trans('Nowe hasło'),
                                 'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', $config['password']['minLength']),
                             ])?>
 
                             <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                                 'name' => 'confirm_password',
                                 'type' => 'password',
-                                'label' => $trans('Powtórz nowe hasło'),
-                                'help' => $trans('Powtórz swoje nowe hasło w celu wyeliminowania pomyłki'),
+                                'label' => trans('Powtórz nowe hasło'),
+                                'help' => trans('Powtórz swoje nowe hasło w celu wyeliminowania pomyłki'),
                             ])?>
 
                             <button type="submit" class="btn btn-md btn-success btn-block">
-                                <?=$trans('Zmień hasło')?>
+                                <?=trans('Zmień hasło')?>
                             </button>
 
                         </form>
@@ -74,12 +74,12 @@ $(function () {
         },
         messages: {
             new_password: {
-                required: "<?=$trans('Wprowadź nowe hasło')?>",
-                minlength: "<?=$trans('Nowe hasło powinno mieć przynajmniej %s znaków', $config['password']['minLength'])?>"
+                required: "<?=trans('Wprowadź nowe hasło')?>",
+                minlength: "<?=trans('Nowe hasło powinno mieć przynajmniej %s znaków', $config['password']['minLength'])?>"
             },
             confirm_password: {
-                required: "<?=$trans('Musisz powtórzyć swoje nowe hasło dla bezpieczeństwa')?>",
-                equalTo: "<?=$trans('Hasła nie są jednakowe')?>"
+                required: "<?=trans('Musisz powtórzyć swoje nowe hasło dla bezpieczeństwa')?>",
+                equalTo: "<?=trans('Hasła nie są jednakowe')?>"
             }
         },
     });

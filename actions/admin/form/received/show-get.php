@@ -10,7 +10,7 @@ $data = json_decode($message['data'], true);
 $name = reset($data);
 $localization = json_decode($message['localization'], true);
 
-$headTitle = $trans('Wyświetl wiadomość');
+$headTitle = trans('Wyświetl wiadomość');
 $breadcrumbs->push([
     'name' => $headTitle,
 ]);
@@ -28,7 +28,7 @@ $_POST = $message;
                     type="button"
                     class="btn btn-danger btn-md">
                     <i class="fa fa-trash fa-fw"></i>
-                    <?=$trans('Usuń wiadomość')?>
+                    <?=trans('Usuń wiadomość')?>
                 </a>
             </div>
             <h1><?=($headTitle)?></h1>
@@ -42,7 +42,7 @@ $_POST = $message;
     <div class="col-lg-12">
         <form action="" method="post" id="form" class="form-horizontal">
 
-            <h3><?=$trans('Treść formularza')?></h3>
+            <h3><?=trans('Treść formularza')?></h3>
             <table class="table table-bordered vertical-middle simple-box">
                 <tbody>
                     <?php foreach ($data as $label => $value): ?>
@@ -54,11 +54,11 @@ $_POST = $message;
                 </tbody>
             </table>
 
-            <h3><?=$trans('Dane lokalizacyjne')?></h3>
+            <h3><?=trans('Dane lokalizacyjne')?></h3>
             <table class="table table-bordered vertical-middle simple-box">
                 <tbody>
                     <tr>
-                        <td><?=$trans('Data wysłania')?></td>
+                        <td><?=trans('Data wysłania')?></td>
                         <td><?=sqldate()?></td>
                     </tr>
                     <tr>
@@ -66,7 +66,7 @@ $_POST = $message;
                         <td><?=def($localization, 'ip')?></td>
                     </tr>
                     <tr>
-                        <td><?=$trans('Kraj / Miasto')?></td>
+                        <td><?=trans('Kraj / Miasto')?></td>
                         <td><?=def($localization, 'country', '').' / '.def($localization, 'city', '')?></td>
                     </tr>
                     <tr>
@@ -79,8 +79,8 @@ $_POST = $message;
             <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
                     'name' => 'status',
-                    'label' => $trans('Status'),
-                    'help' => $trans('Status wiadomości jest pomocny przy filtrowaniu wiadomości.'),
+                    'label' => trans('Status'),
+                    'help' => trans('Status wiadomości jest pomocny przy filtrowaniu wiadomości.'),
                     'options' => array_map(function ($status) {
                         return $status['name'];
                     }, $config['formStatuses']),
@@ -88,7 +88,7 @@ $_POST = $message;
             </div>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => $trans('Zapisz status'),
+                'saveLabel' => trans('Zapisz status'),
             ])?>
 
         </form>

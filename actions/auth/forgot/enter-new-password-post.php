@@ -16,5 +16,5 @@ GC\Model\Staff\Meta::deleteMeta($staff_id, [
     'regenerationVerifyTime',
 ]);
 
-flashBox($trans('Zostałeś zalogowany, a Twoje hasło zostało zresetowane.'));
+flashBox(trans('Zostałeś zalogowany, a Twoje hasło zostało zresetowane.'));
 redirect('/admin');

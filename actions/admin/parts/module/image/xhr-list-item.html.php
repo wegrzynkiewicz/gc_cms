@@ -27,7 +27,7 @@
                 data-id="<?=e($file_id)?>"
                 data-name="<?=e($image['name'])?>"
                 data-target="#editModal"
-                title="<?=$trans('Edytuj zdjęcie')?>"
+                title="<?=trans('Edytuj zdjęcie')?>"
                 class="btn btn-primary btn-xs">
                 <i class="fa fa-cog fa-fw"></i>
             </a>
@@ -37,7 +37,7 @@
                 data-id="<?=e($file_id)?>"
                 data-name="<?=e($image['name'])?>"
                 data-target="#deleteModal"
-                title="<?=$trans('Usuń zdjęcie')?>"
+                title="<?=trans('Usuń zdjęcie')?>"
                 class="btn btn-danger btn-xs">
                 <i class="fa fa-times fa-fw"></i>
             </a>

@@ -68,18 +68,18 @@ function def(array $array, $key, $default = '')
  */
 function getValueByKeys(array $array, array $keys, $default = null)
 {
-   if (count($keys) == 0) {
-       return $default;
-   }
+    if (count($keys) == 0) {
+        return $default;
+    }
 
-   foreach ($keys as $key) {
-       if (!isset($array[$key])) {
-           return $default;
-       }
-       $array = $array[$key];
-   }
+    foreach ($keys as $key) {
+        if (!isset($array[$key])) {
+            return $default;
+        }
+        $array = $array[$key];
+    }
 
-   return $array;
+    return $array;
 }
 
 /**
@@ -90,21 +90,21 @@ function getValueByKeys(array $array, array $keys, $default = null)
  */
 function setValueByKeys(array &$array, array $keys, $value)
 {
-   if (count($keys) == 0) {
-       return;
-   }
+    if (count($keys) == 0) {
+        return;
+    }
 
-   $lastKey = array_pop($keys);
-   $arrayCurrent = &$array;
+    $lastKey = array_pop($keys);
+    $arrayCurrent = &$array;
 
-   foreach ($keys as $key) {
-       if (!isset($arrayCurrent[$key])) {
-           $arrayCurrent[$key] = [];
-       }
-       $arrayCurrent = &$arrayCurrent[$key];
-   }
+    foreach ($keys as $key) {
+        if (!isset($arrayCurrent[$key])) {
+            $arrayCurrent[$key] = [];
+        }
+        $arrayCurrent = &$arrayCurrent[$key];
+    }
 
-   $arrayCurrent[$lastKey] = $value;
+    $arrayCurrent[$lastKey] = $value;
 }
 
 /**
@@ -181,6 +181,14 @@ function flashBox($message, $theme = 'success', $time = 4000)
 function removeOrphan($text)
 {
     return preg_replace('~ ([aiowzu]) ~', ' $1&nbsp;', $text);
+}
+
+/**
+ * Tłumaczy wprowadzony tekst na jego odpowiednik
+ */
+function trans($text, array $params = [])
+{
+    return $GLOBALS['translator']->translate($text, $params);
 }
 
 /**
@@ -353,12 +361,12 @@ function absoluteRedirect($location, $code = 303)
  */
 function array_rebuild(array $array, $callback)
 {
-   $results = [];
-   foreach ($array as $key => $value) {
-       $results[$key] = $callback($value);
-   }
+    $results = [];
+    foreach ($array as $key => $value) {
+        $results[$key] = $callback($value);
+    }
 
-   return $results;
+    return $results;
 }
 
 /**
@@ -366,7 +374,7 @@ function array_rebuild(array $array, $callback)
  */
 function array_trans(array $array)
 {
-   return array_rebuild($array, $GLOBALS['trans']);
+    return array_rebuild($array, $GLOBALS['trans']);
 }
 
 /**
@@ -374,18 +382,18 @@ function array_trans(array $array)
  */
 function array_partition(array $array, $p)
 {
-   $listlen = count($array);
-   $partlen = floor($listlen / $p);
-   $partrem = $listlen % $p;
-   $partition = array();
-   $mark = 0;
-   for ($px = 0; $px < $p; $px++) {
-       $incr = ($px < $partrem) ? $partlen + 1 : $partlen;
-       $partition[$px] = array_slice($array, $mark, $incr);
-       $mark += $incr;
-   }
+    $listlen = count($array);
+    $partlen = floor($listlen / $p);
+    $partrem = $listlen % $p;
+    $partition = array();
+    $mark = 0;
+    for ($px = 0; $px < $p; $px++) {
+        $incr = ($px < $partrem) ? $partlen + 1 : $partlen;
+        $partition[$px] = array_slice($array, $mark, $incr);
+        $mark += $incr;
+    }
 
-   return $partition;
+    return $partition;
 }
 
 /**
@@ -393,7 +401,7 @@ function array_partition(array $array, $p)
  */
 function array_unchunk($array)
 {
-   return call_user_func_array('array_merge', $array);
+    return call_user_func_array('array_merge', $array);
 }
 
 /**
@@ -566,7 +574,7 @@ function curlReCaptcha()
 }
 
 /**
- *
+ * Tworzy adres miniaturki dla zadanego zdjęcia
  */
 function makeThumbnailUri($imageUri, $width, $height)
 {
@@ -583,13 +591,18 @@ function makeThumbnailUri($imageUri, $width, $height)
 }
 
 /**
- *
+ * Zwraca adres do miniaturki zadanego zdjęcia. Tworzy miniaturkę w razie potrzeby
  */
 function thumbnail($imageUri, $width, $height, $mode = 'outbound')
 {
+    # jeżeli generowanie minaturek jest wyłączone wtedy zwróć adres zdjęcia
+    if (!$GLOBALS['config']['thumb']['enabled']) {
+        return $imageUri;
+    }
+
     $thumbsPath     = $GLOBALS['config']['thumb']['thumbsPath'];
-    $thumbnailUri   = makeThumbnailUri($imageUri, $width, $height);
     $imagePath      = $thumbsPath.$imageUri;
+    $thumbnailUri   = makeThumbnailUri($imageUri, $width, $height);
     $thumnailPath   = $thumbsPath.$thumbnailUri;
 
     # jeżeli istnieje miniaturka to zwróć jej adres
@@ -615,4 +628,91 @@ function thumbnail($imageUri, $width, $height, $mode = 'outbound')
 
     # zwróć adres miniaturki
     return $thumbnailUri;
+}
+
+
+/**
+ * Odczytuje cache sesyjny o nazwie $name i czasie życia mniejszym niż $ttl
+ * wyrażanym w sekundach. Jeżeli trzeba odświeżyć wartość wtedy wywołuje
+ * przekazanego $callback i zapisuje rezultat funkcji w cachu
+ */
+function sessionCache($name, $ttl, $callback)
+{
+    # spróbuj pobrać tablice z sesji
+    $pool = getValueByKeys($_SESSION, ['cache', $name], null);
+
+    # jeżeli istnieje skeszowany $pool wtedy zwróć
+    if ($pool and $pool['expires'] > time()) {
+        $GLOBALS['logger']->info("[SESSION-CACHE] {$name} was load from cache");
+
+        # zwróć skeszowane dane
+        return $_SESSION['cache'][$name]['data'];
+    }
+
+    # wywołaj długi callback
+    $result = $callback();
+
+    # zapisz w sesji dane, czyli skeszuj
+    $_SESSION['cache'][$name] = [
+        'data' => $result,
+        'expires' => time() + $ttl,
+    ];
+
+    $GLOBALS['logger']->info("[SESSION-CACHE] {$name} was regenerate");
+
+    # zwróć wytworzone dane
+    return $result;
+}
+
+/**
+ * Zwraca język odwiedzającego stronę
+ */
+function getVisitorLang()
+{
+    if ($GLOBALS['request']->lang) {
+       return $GLOBALS['request']->lang;
+    }
+
+    return $GLOBALS['config']['lang']['visitorDefault'];
+}
+
+/**
+ * Zwraca adres IP clienta
+ */
+function getVisitorIP()
+{
+    if (!empty($_SERVER['HTTP_CLIENT_IP']) && GC\Validate::ip($_SERVER['HTTP_CLIENT_IP'])) {
+        return $_SERVER['HTTP_CLIENT_IP'];
+    }
+
+    if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        if (strpos($_SERVER['HTTP_X_FORWARDED_FOR'], ',') !== false) {
+            $iplist = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+            foreach ($iplist as $ip) {
+                if (GC\Validate::ip($ip)) {
+                    return $ip;
+                }
+            }
+        } elseif (GC\Validate::ip($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            return $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }
+    }
+
+    if (!empty($_SERVER['HTTP_X_FORWARDED']) && GC\Validate::ip($_SERVER['HTTP_X_FORWARDED'])) {
+        return $_SERVER['HTTP_X_FORWARDED'];
+    }
+
+    if (!empty($_SERVER['HTTP_X_CLUSTER_CLIENT_IP']) && GC\Validate::ip($_SERVER['HTTP_X_CLUSTER_CLIENT_IP'])) {
+        return $_SERVER['HTTP_X_CLUSTER_CLIENT_IP'];
+    }
+
+    if (!empty($_SERVER['HTTP_FORWARDED_FOR']) && GC\Validate::ip($_SERVER['HTTP_FORWARDED_FOR'])) {
+        return $_SERVER['HTTP_FORWARDED_FOR'];
+    }
+
+    if (!empty($_SERVER['HTTP_FORWARDED']) && GC\Validate::ip($_SERVER['HTTP_FORWARDED'])) {
+        return $_SERVER['HTTP_FORWARDED'];
+    }
+
+    return $_SERVER['REMOTE_ADDR'];
 }

@@ -12,11 +12,11 @@ $frame = GC\Model\Frame::select()
 
 # jeżeli nie znaleziono rusztowania wtedy przekieruj
 if (!$frame) {
-    flashBox($trans('Wystąpił błąd. Szukany produkt nie został znaleziony.'), 'danger');
+    flashBox(trans('Wystąpił błąd. Szukany produkt nie został znaleziony.'), 'danger');
     redirect($breadcrumbs->getLast('uri'));
 }
 
-$headTitle = $trans('Edytowanie produktu "%s"', [$frame['name']]);
+$headTitle = trans('Edytowanie produktu "%s"', [$frame['name']]);
 $breadcrumbs->push([
     'name' => $headTitle,
 ]);

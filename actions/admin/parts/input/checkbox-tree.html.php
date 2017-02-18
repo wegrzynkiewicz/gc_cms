@@ -18,7 +18,7 @@
             </div>
         <?php else:?>
             <p>
-                <?=$trans('Brak węzłów')?>
+                <?=trans('Brak węzłów')?>
             </p>
         <?php endif?>
     </div>

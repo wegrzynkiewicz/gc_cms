@@ -25,5 +25,5 @@ foreach ($nodes as $node_id) {
     ]);
 }
 
-flashBox($trans('Nowy produkt "%s" została utworzony.', [post('name')]));
+flashBox(trans('Nowy produkt "%s" została utworzony.', [post('name')]));
 redirect($breadcrumbs->getLast('uri'));

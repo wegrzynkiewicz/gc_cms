@@ -1,8 +1,8 @@
 <li>
     <a id="session-refresh" href="#"
-        title="<?=$trans('Kliknij, aby odświeżyć czas')?>">
+        title="<?=trans('Kliknij, aby odświeżyć czas')?>">
         <span class="hidden-xs">
-            <?=$trans('Do końca: ')?>
+            <?=trans('Do końca: ')?>
         </span>
         <i class="fa fa-clock-o fa-fw"></i>
         <span id="session-countdown"><?=date("i:s", $config['session']['staff']['lifetime'])?></span>

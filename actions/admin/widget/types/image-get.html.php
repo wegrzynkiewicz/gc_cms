@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = $trans('Edycja widżetu zdjęcia "%s"', [$widget['name']]);
+$headTitle = trans('Edycja widżetu zdjęcia "%s"', [$widget['name']]);
 $breadcrumbs->push([
     'name' => $headTitle,
 ]);
@@ -16,13 +16,13 @@ $breadcrumbs->push([
             <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/image.html.php', [
                     'name' => 'content',
-                    'label' => $trans('Zdjęcie'),
-                    'placeholder' => $trans('Ścieżka do pliku zdjęcia'),
+                    'label' => trans('Zdjęcie'),
+                    'placeholder' => trans('Ścieżka do pliku zdjęcia'),
                 ])?>
             </div>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => $trans('Zapisz zmiany'),
+                'saveLabel' => trans('Zapisz zmiany'),
             ])?>
 
         </form>

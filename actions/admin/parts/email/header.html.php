@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<?=GC\Visitor::getLang()?>">
+<html lang="<?=getVisitorLang()?>">
 <head>
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 	<meta content="width=device-width, initial-scale=1" name="viewport">
@@ -16,7 +16,7 @@
 				<table border="0" cellpadding="0" cellspacing="0" class="container" width="600">
 					<tr>
 						<td align="left" class="container-padding header">
-                            <?=$trans($config['mailer']['headerTitle'])?>
+                            <?=trans($config['mailer']['headerTitle'])?>
                         </td>
 					</tr>
 					<tr>

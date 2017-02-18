@@ -9,7 +9,7 @@ $group_id = intval(array_shift($_PARAMETERS));
 # pobierz grupę po kluczu głównym
 $group = GC\Model\Staff\Group::fetchByPrimaryId($group_id);
 
-$headTitle = $trans('Edytowanie grupy pracowników "%s"', [$group['name']]);
+$headTitle = trans('Edytowanie grupy pracowników "%s"', [$group['name']]);
 $breadcrumbs->push([
     'name' => $headTitle,
 ]);

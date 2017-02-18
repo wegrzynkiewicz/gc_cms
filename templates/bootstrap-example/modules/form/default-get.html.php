@@ -19,7 +19,7 @@ $fields = GC\Model\Form\Field::joinAllWithKeyByForeign($form_id);
             name="formSubmit_<?=$form_id?>"
             value="1"
             class="btn btn-success btn-md">
-            <?=$trans('Wyślij')?>
+            <?=trans('Wyślij')?>
         </button>
     </div>
 </form>

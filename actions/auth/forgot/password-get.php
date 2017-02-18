@@ -2,7 +2,7 @@
 
 require ACTIONS_PATH.'/auth/_import.php';
 
-$headTitle = $trans('Zapomniałem hasła');
+$headTitle = trans('Zapomniałem hasła');
 
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
@@ -21,23 +21,23 @@ $headTitle = $trans('Zapomniałem hasła');
                         <form action="" method="post" class="form-horizontal">
 
                             <p class="text-center" style="margin-bottom:20px">
-                                <?=$trans('Na wprowadzony poniżej adres email zostanie wysłane nowe hasło')?>
+                                <?=trans('Na wprowadzony poniżej adres email zostanie wysłane nowe hasło')?>
                             </p>
 
                             <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                                 'name' => 'login',
-                                'placeholder' => $trans('Adres e-mail'),
+                                'placeholder' => trans('Adres e-mail'),
                             ])?>
 
                             <button type="submit" class="btn btn-md btn-success btn-block">
-                                <?=$trans('Wyślij nowe hasło')?>
+                                <?=trans('Wyślij nowe hasło')?>
                             </button>
 
                             <div class="btn-group btn-group-justified" style="margin-top:5px">
                                 <a href="<?=$uri->root()?>/" class="btn btn-link">
-                                    <?=$trans('Przejdź na stronę główną')?></a>
+                                    <?=trans('Przejdź na stronę główną')?></a>
                                 <a href="<?=$uri->make("/auth/login")?>" class="btn btn-link">
-                                    <?=$trans('Wróć do logowania')?></a>
+                                    <?=trans('Wróć do logowania')?></a>
                             </div>
 
                         </form>
@@ -61,8 +61,8 @@ $(function () {
         },
         messages: {
             login: {
-                required: "<?=$trans('Wprowadź adres e-mail')?>",
-                email: "<?=$trans('Adres e-mail jest nieprawidłowy')?>"
+                required: "<?=trans('Wprowadź adres e-mail')?>",
+                email: "<?=trans('Adres e-mail jest nieprawidłowy')?>"
             }
         },
     });

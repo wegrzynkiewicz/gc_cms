@@ -8,7 +8,7 @@ $staff_id = intval(array_shift($_PARAMETERS));
 # pobierz pracownika po kluczu głównym
 $user = GC\Model\Staff\Staff::fetchByPrimaryId($staff_id);
 
-$headTitle = $trans('Edytowanie pracownika "%s"', [$user['name']]);
+$headTitle = trans('Edytowanie pracownika "%s"', [$user['name']]);
 $breadcrumbs->push([
     'name' => $headTitle,
 ]);
@@ -31,7 +31,7 @@ $_POST = $user;
             <div class="btn-toolbar pull-right">
                 <a href="<?=$uri->mask("/{$staff_id}/force-change-password")?>" type="button" class="btn btn-success">
                     <i class="fa fa-unlock-alt fa-fw"></i>
-                    <?=$trans('Wymuś zmianę hasła')?>
+                    <?=trans('Wymuś zmianę hasła')?>
                 </a>
             </div>
             <h1><?=($headTitle)?></h1>

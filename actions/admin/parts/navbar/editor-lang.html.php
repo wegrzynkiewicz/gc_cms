@@ -5,7 +5,7 @@ $langs = $config['langs'];
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <span class="hidden-xs">
-                <?=$trans('Edytuj: ')?>
+                <?=trans('Edytuj: ')?>
             </span>
             <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
                 'lang' => GC\Staff::getInstance()->getEditorLang(),

@@ -11,7 +11,7 @@ $tree = GC\Model\Post\Node::buildTreeWithFrameByTaxonomyId($tax_id);
             <div class="btn-toolbar pull-right">
                 <a href="<?=$uri->mask('/new')?>" type="button" class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
-                    <?=$trans('Dodaj nowy węzeł')?>
+                    <?=trans('Dodaj nowy węzeł')?>
                 </a>
             </div>
             <h1><?=($headTitle)?></h1>
@@ -33,11 +33,11 @@ $tree = GC\Model\Post\Node::buildTreeWithFrameByTaxonomyId($tax_id);
                 </ol>
             <?php else:?>
                 <div class="simple-box">
-                    <?=$trans('Brak węzłów w %s', [$taxonomy['name']])?>
+                    <?=trans('Brak węzłów w %s', [$taxonomy['name']])?>
                 </div>
             <?php endif?>
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => $trans('Zapisz pozycję'),
+                'saveLabel' => trans('Zapisz pozycję'),
             ])?>
         </form>
     </div>
@@ -55,20 +55,20 @@ $tree = GC\Model\Post\Node::buildTreeWithFrameByTaxonomyId($tax_id);
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans('Czy na pewno usunąć?')?>
+                    <?=trans('Czy na pewno usunąć?')?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=$trans('Czy jesteś pewien, że chcesz usunąć węzeł')?>
+                <?=trans('Czy jesteś pewien, że chcesz usunąć węzeł')?>
                 <span id="node_name" style="font-weight:bold; color:red;"></span>
-                <?=$trans('i wszystkie jego podwęzły?')?>?
+                <?=trans('i wszystkie jego podwęzły?')?>?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <?=$trans('Anuluj')?>
+                    <?=trans('Anuluj')?>
                 </button>
                 <button type="submit" class="btn btn-danger btn-ok">
-                    <?=$trans('Usuń')?>
+                    <?=trans('Usuń')?>
                 </button>
             </div>
         </form>

@@ -13,15 +13,15 @@
                 ])?>
             </div>
         <?php else: ?>
-            <?=$trans('Ten podział nie posiada węzłów.')?>
+            <?=trans('Ten podział nie posiada węzłów.')?>
         <?php endif ?>
     </td>
     <td class="text-right">
         <a href="<?=$uri->mask("/{$tax_id}/node/tree")?>"
-            title="<?=$trans('Wyświetl węzły podziału')?>"
+            title="<?=trans('Wyświetl węzły podziału')?>"
             class="btn btn-success btn-sm">
             <i class="fa fa-file-text-o fa-fw"></i>
-            <?=$trans('Węzły')?>
+            <?=trans('Węzły')?>
         </a>
     </td>
 </tr>

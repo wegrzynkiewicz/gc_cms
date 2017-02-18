@@ -13,10 +13,10 @@
                 data-id="<?=e($checksum['file'])?>"
                 data-name="<?=e($checksum['file'])?>"
                 data-target="#refreshModal"
-                title="<?=$trans('Odśwież')?>"
+                title="<?=trans('Odśwież')?>"
                 class="btn btn-primary btn-xs">
                 <i class="fa fa-refresh fa-fw"></i>
-                <?=$trans('Odśwież')?>
+                <?=trans('Odśwież')?>
             </button>
         <?php endif ?>
     </td>

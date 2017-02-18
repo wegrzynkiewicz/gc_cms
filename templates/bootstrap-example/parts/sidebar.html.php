@@ -31,7 +31,7 @@
 
     <?php if (isset($widgets['about'])): ?>
         <div class="sidebar-module sidebar-module-inset">
-            <h4><?=$trans('Parę słów o nas')?></h4>
+            <h4><?=trans('Parę słów o nas')?></h4>
             <div>
                 <?=$widgets['about']['content']?>
             </div>

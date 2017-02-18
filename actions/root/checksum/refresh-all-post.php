@@ -13,5 +13,5 @@ foreach($getFiles() as $file) {
     ]);
 }
 
-flashBox($trans('Odświeżono wszystkie pliki.'));
+flashBox(trans('Odświeżono wszystkie pliki.'));
 redirect($breadcrumbs->getLast('uri'));

@@ -30,9 +30,9 @@
 <script>
     $(function() {
         $('#nav_files').elfinderInput({
-            title: '<?=$trans('Przeglądaj pliki')?>',
+            title: '<?=trans('Przeglądaj pliki')?>',
             url: '<?=$uri->make('/admin/elfinder/connector')?>',
-            lang: '<?=GC\Visitor::getLang()?>',
+            lang: '<?=getVisitorLang()?>',
         }, function() {
 
         });

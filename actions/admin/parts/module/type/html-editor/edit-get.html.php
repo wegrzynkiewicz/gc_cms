@@ -12,11 +12,11 @@ require ACTIONS_PATH."/admin/parts/module/type/html-editor/_import.php";
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/textarea.html.php', [
                 'name' => 'content',
-                'label' => $trans('Treść modułu'),
+                'label' => trans('Treść modułu'),
             ])?>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => $trans('Zapisz moduł tekstowy'),
+                'saveLabel' => trans('Zapisz moduł tekstowy'),
             ])?>
 
         </form>

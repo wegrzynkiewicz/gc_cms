@@ -12,13 +12,13 @@ if (isset($field_id) and $field_id > 0) {
 }
 
 ?>
-<p><?=$trans('Pole jednokrotnego wyboru wymaga wprowadzenia możliwych wyborów')?></p>
+<p><?=trans('Pole jednokrotnego wyboru wymaga wprowadzenia możliwych wyborów')?></p>
 
 <?=render(ACTIONS_PATH.'/admin/parts/input/select2-tags.html.php', [
     'id' => 'options',
     'name' => 'options',
-    'label' => $trans('Możliwe wybory'),
-    'help' => $trans('Należy wpisać dostępne dla użytkowników wartości do wybrania. Należy potwierdzić klawiszem ENTER.'),
+    'label' => trans('Możliwe wybory'),
+    'help' => trans('Należy wpisać dostępne dla użytkowników wartości do wybrania. Należy potwierdzić klawiszem ENTER.'),
     'options' => $options,
     'selectedValues' => $options,
 ])?>

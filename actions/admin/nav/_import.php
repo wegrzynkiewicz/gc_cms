@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = $trans('Nawigacje');
+$headTitle = trans('Nawigacje');
 $uri->extendMask('/nav%s');
 $breadcrumbs->push([
     'uri' => $uri->mask('/list'),

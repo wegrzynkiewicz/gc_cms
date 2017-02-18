@@ -3,13 +3,13 @@
 /** Stara się pobrać odpowiednie rusztowanie */
 
 $slug = $request->uri;
-$lang = GC\Visitor::getLang();
+$lang = getVisitorLang();
 $method = $request->method;
 
 
 
 $widgets = GC\Model\Widget::select()
-    ->equals('lang', GC\Visitor::getLang())
+    ->equals('lang', getVisitorLang())
     ->fetchByKey('workname');
 
 $getTemplateFile = function ($name, $theme = 'default') use ($lang, $method)

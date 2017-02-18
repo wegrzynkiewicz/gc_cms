@@ -8,20 +8,20 @@
             <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
-                    'label' => $trans('Nazwa grupy'),
-                    'help' => $trans('Nazwa grupy pomaga określić odpowiedzialność członków grupy (np. Sprzedawcy, Administratorzy)')
+                    'label' => trans('Nazwa grupy'),
+                    'help' => trans('Nazwa grupy pomaga określić odpowiedzialność członków grupy (np. Sprzedawcy, Administratorzy)')
                 ])?>
             </div>
 
             <div class="simple-box">
                 <fieldset>
                     <legend>
-                        <?=$trans('Uprawnienia grupy')?>
+                        <?=trans('Uprawnienia grupy')?>
                     </legend>
 
                     <p>
-                        <?=$trans('Każda grupa posiada indywidualne uprawnienia, które są identyczne dla każdego pracownika w tej grupie.')?>
-                        <?=$trans('W przypadku gdy pracownik należy do wielu grup, uprawnienia te są łączone.')?>
+                        <?=trans('Każda grupa posiada indywidualne uprawnienia, które są identyczne dla każdego pracownika w tej grupie.')?>
+                        <?=trans('W przypadku gdy pracownik należy do wielu grup, uprawnienia te są łączone.')?>
                     </p>
 
                     <?php foreach ($config['permissions'] as $perm => $label): ?>
@@ -31,7 +31,7 @@
                                     type="checkbox"
                                     <?=checked(in_array($perm, $permissions))?>
                                     value="<?=$perm?>">
-                                <?=$trans($label)?>
+                                <?=trans($label)?>
                             </label>
                         </div>
                     <?php endforeach ?>
@@ -39,7 +39,7 @@
             </div>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => $trans('Zapisz grupę'),
+                'saveLabel' => trans('Zapisz grupę'),
             ])?>
 
         </form>
@@ -58,7 +58,7 @@ $(function () {
         },
         messages: {
             name: {
-                required: "<?=$trans('Nazwa grupy jest wymagana')?>"
+                required: "<?=trans('Nazwa grupy jest wymagana')?>"
             }
         },
     });

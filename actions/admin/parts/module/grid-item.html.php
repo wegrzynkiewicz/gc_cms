@@ -13,12 +13,12 @@
         <div class="panel panel-default panel-module">
             <div class="panel-heading">
                 <a href="<?=$uri->mask("/{$module_id}/edit")?>">
-                    <?=$trans($config['modules'][$type]['name'])?>
+                    <?=trans($config['modules'][$type]['name'])?>
                 </a>
                 <button data-toggle="modal"
                     data-id="<?=$module_id?>"
                     data-target="#deleteModal"
-                    title="<?=$trans('Usuń moduł')?>"
+                    title="<?=trans('Usuń moduł')?>"
                     type="button"
                     class="close pull-right">
                     <span>&times;</span>

@@ -39,7 +39,7 @@ unset($taxonomy);
     <div class="col-md-12">
         <div class="simple-box">
             <?php if (empty($taxonomies)): ?>
-                <?=$trans('Nie znaleziono podziałów wpisów w języku: ')?>
+                <?=trans('Nie znaleziono podziałów wpisów w języku: ')?>
                 <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
                     'lang' => GC\Staff::getInstance()->getEditorLang(),
                 ])?>
@@ -48,10 +48,10 @@ unset($taxonomy);
                     <thead>
                         <tr>
                             <th>
-                                <?=$trans('Nazwa podziału produktu')?>
+                                <?=trans('Nazwa podziału produktu')?>
                             </th>
                             <th>
-                                <?=$trans('Podgląd węzłów')?>
+                                <?=trans('Podgląd węzłów')?>
                             </th>
                             <th></th>
                         </tr>

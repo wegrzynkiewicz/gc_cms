@@ -8,17 +8,17 @@
             <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
-                    'label' => $trans('Nazwa węzła'),
-                    'help' => $trans('Zostaw pustą, aby wygenerować na podstawie nazwy odnośnika'),
+                    'label' => trans('Nazwa węzła'),
+                    'help' => trans('Zostaw pustą, aby wygenerować na podstawie nazwy odnośnika'),
                 ])?>
 
                 <?php if (!isset($nodeType)): ?>
                     <?=render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
                         'name' => 'type',
-                        'label' => $trans('Typ węzła'),
-                        'help' => $trans('Typ pozwala na wybranie niestandardowego zachowania linku.'),
+                        'label' => trans('Typ węzła'),
+                        'help' => trans('Typ pozwala na wybranie niestandardowego zachowania linku.'),
                         'options' => $config['nodeTypes'],
-                        'firstOption' => $trans('Wybierz typ węzła'),
+                        'firstOption' => trans('Wybierz typ węzła'),
                     ])?>
                 <?php endif ?>
             </div>
@@ -30,7 +30,7 @@
             </div>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => $trans('Zapisz węzeł'),
+                'saveLabel' => trans('Zapisz węzeł'),
             ])?>
 
         </form>
@@ -59,10 +59,10 @@ $(function() {
         },
         messages: {
             type: {
-                required: "<?=$trans('Wybierz typ węzła')?>"
+                required: "<?=trans('Wybierz typ węzła')?>"
             },
             destination: {
-                required: "<?=$trans('Podaj gdzie ma kierować węzeł')?>"
+                required: "<?=trans('Podaj gdzie ma kierować węzeł')?>"
             }
         },
     });

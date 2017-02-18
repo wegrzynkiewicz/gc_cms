@@ -1,7 +1,7 @@
 <?php
 
 $taxonomy = GC\Model\Post\Taxonomy::fetchByPrimaryId($tax_id);
-$headTitle = $trans('%s - węzły', [$taxonomy['name']]);
+$headTitle = trans('%s - węzły', [$taxonomy['name']]);
 $uri->extendMask("/{$tax_id}/node%s");
 $breadcrumbs->push([
     'uri' => $uri->mask('/tree'),

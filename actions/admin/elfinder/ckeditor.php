@@ -36,7 +36,7 @@
                 },
                 resizable: false,
                 url: '<?=$uri->make('/admin/elfinder/connector')?>',
-                lang: '<?=GC\Visitor::getLang()?>',
+                lang: '<?=getVisitorLang()?>',
             }).elfinder('instance');
         });
     </script>

@@ -6,7 +6,7 @@ if (isset($_SESSION['staff'])) {
     redirect('/admin');
 }
 
-$headTitle = $trans('Logowanie do panelu administracyjnego');
+$headTitle = trans('Logowanie do panelu administracyjnego');
 
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
@@ -32,24 +32,24 @@ $headTitle = $trans('Logowanie do panelu administracyjnego');
 
                             <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                                 'name' => 'login',
-                                'placeholder' => $trans('Adres e-mail'),
+                                'placeholder' => trans('Adres e-mail'),
                             ])?>
 
                             <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                                 'name' => 'password',
                                 'type' => 'password',
-                                'placeholder' => $trans('Hasło'),
+                                'placeholder' => trans('Hasło'),
                             ])?>
 
                             <button type="submit" class="btn btn-md btn-success btn-block">
-                                <?=$trans('Zaloguj się')?>
+                                <?=trans('Zaloguj się')?>
                             </button>
 
                             <div class="btn-group btn-group-justified" style="margin-top:5px">
                                 <a href="<?=$uri->root()?>/" class="btn btn-link">
-                                    <?=$trans('Przejdź na stronę główną')?></a>
+                                    <?=trans('Przejdź na stronę główną')?></a>
                                 <a href="<?=$uri->make("/auth/forgot/password")?>" class="btn btn-link">
-                                    <?=$trans('Zapomniałem hasła')?></a>
+                                    <?=trans('Zapomniałem hasła')?></a>
                             </div>
                         </form>
                     </div>

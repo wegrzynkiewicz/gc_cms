@@ -3,7 +3,7 @@
 $post = GC\Model\Post\Post::selectWithFrameByPrimaryId($post_id);
 $frame_id = $post['frame_id'];
 
-$headTitle = $trans('Moduły w poście "%s"', [$post['name']]);
+$headTitle = trans('Moduły w poście "%s"', [$post['name']]);
 $uri->extendMask("/{$post_id}/module%s");
 $breadcrumbs->push([
     'uri' => $uri->mask('/list'),

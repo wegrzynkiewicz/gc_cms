@@ -6,4 +6,4 @@ require ACTIONS_PATH.'/admin/form/field/_import.php';
 
 ?>
 
-<?=$trans('Zwykłe pole tekstowe pozwala wprowadzić prosty tekst')?>
+<?=trans('Zwykłe pole tekstowe pozwala wprowadzić prosty tekst')?>

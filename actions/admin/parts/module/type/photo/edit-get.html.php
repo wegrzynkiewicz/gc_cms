@@ -16,25 +16,25 @@ $_POST['theme'] = $module['theme'];
             <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
-                    'label' => $trans('Nazwa zdjęcia'),
+                    'label' => trans('Nazwa zdjęcia'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
                     'name' => 'theme',
-                    'label' => $trans('Szablon'),
-                    'help' => $trans('Wybierz jeden z dostępnych szablonów dla zdjęcia'),
+                    'label' => trans('Szablon'),
+                    'help' => trans('Wybierz jeden z dostępnych szablonów dla zdjęcia'),
                     'options' => $config['moduleThemes']['photo'],
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/image.html.php', [
                     'name' => 'uri',
-                    'label' => $trans('Zdjęcie'),
-                    'placeholder' => $trans('Ścieżka do pliku zdjęcia'),
+                    'label' => trans('Zdjęcie'),
+                    'placeholder' => trans('Ścieżka do pliku zdjęcia'),
                 ])?>
             </div>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => $trans('Zapisz moduł zdjęcia'),
+                'saveLabel' => trans('Zapisz moduł zdjęcia'),
             ])?>
 
         </form>

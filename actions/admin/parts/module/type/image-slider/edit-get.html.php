@@ -13,7 +13,7 @@ $_POST = $module;
             <div class="btn-toolbar pull-right">
                 <button id="select_images" class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
-                    <?=$trans('Dodaj zdjęcia')?>
+                    <?=trans('Dodaj zdjęcia')?>
                 </button>
             </div>
             <h1><?=($headTitle)?></h1>
@@ -33,8 +33,8 @@ $_POST = $module;
             <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
                     'name' => 'theme',
-                    'label' => $trans('Szablon'),
-                    'help' => $trans('Wybierz jeden z dostępnych szablonów slajdera zdjęć'),
+                    'label' => trans('Szablon'),
+                    'help' => trans('Wybierz jeden z dostępnych szablonów slajdera zdjęć'),
                     'options' => $config['moduleThemes']['image-slider'],
                 ])?>
             </div>
@@ -45,7 +45,7 @@ $_POST = $module;
             </div>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => $trans('Zapisz'),
+                'saveLabel' => trans('Zapisz'),
             ])?>
 
         </form>
@@ -60,7 +60,7 @@ $_POST = $module;
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans('Edytujesz zdjęcie ')?>
+                    <?=trans('Edytujesz zdjęcie ')?>
                     <span id="editModalName"></span>
                 </h2>
             </div>
@@ -68,10 +68,10 @@ $_POST = $module;
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <?=$trans('Anuluj')?>
+                    <?=trans('Anuluj')?>
                 </button>
                 <button type="submit" value="" class="btn btn-success btn-ok">
-                    <?=$trans('Zapisz')?>
+                    <?=trans('Zapisz')?>
                 </button>
             </div>
         </form>
@@ -90,18 +90,18 @@ $_POST = $module;
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans('Czy na pewno usunąć?')?>
+                    <?=trans('Czy na pewno usunąć?')?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=$trans('Czy jesteś pewien, że chcesz usunąć ten slajd?')?>
+                <?=trans('Czy jesteś pewien, że chcesz usunąć ten slajd?')?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <?=$trans('Anuluj')?>
+                    <?=trans('Anuluj')?>
                 </button>
                 <button type="submit" class="btn btn-danger btn-ok">
-                    <?=$trans('Usuń')?>
+                    <?=trans('Usuń')?>
                 </button>
             </div>
         </form>
@@ -168,9 +168,9 @@ $(function() {
     });
 
     $('#select_images').elfinderInputMultiple({
-        title: '<?=$trans('Wybierz wiele zdjęć')?>',
+        title: '<?=trans('Wybierz wiele zdjęć')?>',
         url: '<?=$uri->make('/admin/elfinder/connector')?>',
-        lang: '<?=GC\Visitor::getLang()?>',
+        lang: '<?=getVisitorLang()?>',
     }, function(urls) {
         $.post("<?=$uri->make("/admin/parts/module/{$module_id}/image/xhr-add")?>", {
             urls: urls

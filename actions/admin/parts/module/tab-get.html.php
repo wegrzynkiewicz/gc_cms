@@ -18,7 +18,7 @@ $tab = GC\Model\Module\Tab::select()
 $uri->extendMask("/{$module_id}%s");
 require ACTIONS_PATH."/admin/parts/module/type/{$moduleType}/_import.php";
 
-$headTitle = $trans('Moduły zakładki "%s"', [$tab['name']]);
+$headTitle = trans('Moduły zakładki "%s"', [$tab['name']]);
 $uri->extendMask("/tab/{$frame_id}/module%s");
 $breadcrumbs->push([
     'uri' => $uri->mask("/grid"),

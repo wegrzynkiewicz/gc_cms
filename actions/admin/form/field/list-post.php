@@ -25,5 +25,5 @@ foreach ($positions as $field) {
     ]);
 }
 
-flashBox($trans('Pozycja pól została zapisana.'));
+flashBox(trans('Pozycja pól została zapisana.'));
 redirect($breadcrumbs->getLast('uri'));

@@ -13,5 +13,5 @@ GC\Model\Staff\Staff::updateByPrimaryId($staff_id, [
     'password' => password_hash($newPassword, \PASSWORD_DEFAULT),
 ]);
 
-flashBox($trans('Twoje hasło zostało zmienione.'));
+flashBox(trans('Twoje hasło zostało zmienione.'));
 redirect($breadcrumbs->getLast('uri'));

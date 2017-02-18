@@ -38,7 +38,7 @@ unset($nav);
     <div class="col-md-12">
         <div class="simple-box">
             <?php if (empty($navs)): ?>
-                <?=$trans('Nie znaleziono żadnej nawigacji w języku: ')?>
+                <?=trans('Nie znaleziono żadnej nawigacji w języku: ')?>
                 <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
                     'lang' => GC\Staff::getInstance()->getEditorLang(),
                 ])?>
@@ -46,8 +46,8 @@ unset($nav);
                 <table class="table vertical-middle" data-table="">
                     <thead>
                         <tr>
-                            <th><?=$trans('Nazwa nawigacji')?></th>
-                            <th><?=$trans('Podgląd węzłów')?></th>
+                            <th><?=trans('Nazwa nawigacji')?></th>
+                            <th><?=trans('Podgląd węzłów')?></th>
                             <th class="text-right"></th>
                         </tr>
                     </thead>

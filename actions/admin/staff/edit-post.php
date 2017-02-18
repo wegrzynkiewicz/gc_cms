@@ -26,5 +26,5 @@ foreach ($groups as $group_id) {
     ]);
 }
 
-flashBox($trans('Pracownik "%s" został zaktualizowany.', [post('name')]));
+flashBox(trans('Pracownik "%s" został zaktualizowany.', [post('name')]));
 redirect($breadcrumbs->getLast('uri'));

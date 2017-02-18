@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = $trans('Formularze');
+$headTitle = trans('Formularze');
 $uri->extendMask('/form%s');
 $breadcrumbs->push([
     'uri' => $uri->mask('/list'),

@@ -13,7 +13,7 @@ $node = GC\Model\Menu\Menu::select()
     ->equals('menu_id', $menu_id)
     ->fetchObject();
 
-$headTitle = $trans('Edycja węzła "%s"', [$node->getName()]);
+$headTitle = trans('Edycja węzła "%s"', [$node->getName()]);
 $breadcrumbs->push([
     'name' => $headTitle,
 ]);

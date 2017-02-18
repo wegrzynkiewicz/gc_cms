@@ -15,5 +15,5 @@ $node = GC\Model\Frame::select()
 # usuń stronę i wszystkie jej moduły
 GC\Model\Product\Tree::deleteByFrameId($frame_id);
 
-flashBox($trans('Węzeł "%s" został usunięty.', [$node['name']]));
+flashBox(trans('Węzeł "%s" został usunięty.', [$node['name']]));
 redirect($breadcrumbs->getLast('uri'));

@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = $trans('Witamy na stronie głównej');
+$headTitle = trans('Witamy na stronie głównej');
 
 ?>
 <?php require TEMPLATE_PATH."/parts/header.html.php"; ?>
@@ -8,10 +8,10 @@ $headTitle = $trans('Witamy na stronie głównej');
 <div class="container">
     <div class="blog-header">
         <h1 class="blog-title">
-            <?=$trans('Prosty blog na GrafCenterCMS')?>
+            <?=trans('Prosty blog na GrafCenterCMS')?>
         </h1>
         <p class="lead blog-description">
-            <?=$trans('Jest to przykładowa wdrożona strona, która ma zobrazować jaki ten CMS jest zajebisty i prosty w deployu')?>
+            <?=trans('Jest to przykładowa wdrożona strona, która ma zobrazować jaki ten CMS jest zajebisty i prosty w deployu')?>
         </p>
     </div>
     <div class="row">

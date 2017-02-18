@@ -8,7 +8,7 @@
             <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="<?=$uri->make("/admin")?>">
-            <?=$trans($config['adminNavbarTitle'])?>
+            <?=trans($config['adminNavbarTitle'])?>
         </a>
     </div>
 

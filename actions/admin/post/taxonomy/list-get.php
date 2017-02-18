@@ -14,7 +14,7 @@ $taxonomies = GC\Model\Post\Taxonomy::select()
     <div class="col-md-12">
         <div class="simple-box">
             <?php if (empty($taxonomies)): ?>
-                <?=$trans('Nie znaleziono podziałów wpisów w języku: ')?>
+                <?=trans('Nie znaleziono podziałów wpisów w języku: ')?>
                 <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
                     'lang' => GC\Staff::getInstance()->getEditorLang(),
                 ])?>
@@ -23,10 +23,10 @@ $taxonomies = GC\Model\Post\Taxonomy::select()
                     <thead>
                         <tr>
                             <th>
-                                <?=$trans('Nazwa podziału')?>
+                                <?=trans('Nazwa podziału')?>
                             </th>
                             <th>
-                                <?=$trans('Podgląd węzłów')?>
+                                <?=trans('Podgląd węzłów')?>
                             </th>
                             <th></th>
                         </tr>

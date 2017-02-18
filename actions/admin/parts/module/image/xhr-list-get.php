@@ -3,7 +3,7 @@
 <?php if (empty($files)): ?>
     <div class="col-md-12">    
         <div class="simple-box">
-            <?=$trans('Nie znaleziono zdjęć')?>
+            <?=trans('Nie znaleziono zdjęć')?>
         </div>
     </div>
 <?php else: ?>

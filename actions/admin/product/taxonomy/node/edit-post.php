@@ -23,5 +23,5 @@ GC\Model\Frame::updateByFrameId($frame_id, [
     'image' => $uri->relative(post('image')),
 ]);
 
-flashBox($trans('Węzeł "%s" został zaktualizowany.', [$node['name']]));
+flashBox(trans('Węzeł "%s" został zaktualizowany.', [$node['name']]));
 redirect($breadcrumbs->getLast('uri'));

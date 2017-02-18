@@ -7,27 +7,27 @@
             <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
-                    'label' => $trans('Nazwa węzła'),
+                    'label' => trans('Nazwa węzła'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'keywords',
-                    'label' => $trans('Tagi i słowa kluczowe (meta keywords)'),
+                    'label' => trans('Tagi i słowa kluczowe (meta keywords)'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/textarea.html.php', [
                     'name' => 'description',
-                    'label' => $trans('Opis podstrony (meta description)'),
+                    'label' => trans('Opis podstrony (meta description)'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/image.html.php', [
                     'name' => 'image',
-                    'label' => $trans('Zdjęcie wyróżniające'),
-                    'placeholder' => $trans('Ścieżka do pliku zdjęcia'),
+                    'label' => trans('Zdjęcie wyróżniające'),
+                    'placeholder' => trans('Ścieżka do pliku zdjęcia'),
                 ])?>
             </div>
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => $trans('Zapisz węzeł'),
+                'saveLabel' => trans('Zapisz węzeł'),
             ])?>
         </form>
     </div>
@@ -45,7 +45,7 @@ $(function () {
         },
         messages: {
             name: {
-                required: "<?=$trans('Nazwa węzła jest wymagana')?>"
+                required: "<?=trans('Nazwa węzła jest wymagana')?>"
             }
         },
     });

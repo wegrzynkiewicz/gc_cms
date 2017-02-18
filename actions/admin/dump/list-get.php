@@ -16,7 +16,7 @@ $dumps = GC\Model\Dump::select()->order('creation_datetime', 'DESC')->fetchByPri
                     data-target="#addModal"
                     class="btn btn-success btn-md">
                     <i class="fa fa-plus fa-fw"></i>
-                    <?=$trans('Utwórz kopię zapasową')?>
+                    <?=trans('Utwórz kopię zapasową')?>
                 </button>
             </div>
             <h1><?=($headTitle)?></h1>
@@ -30,14 +30,14 @@ $dumps = GC\Model\Dump::select()->order('creation_datetime', 'DESC')->fetchByPri
     <div class="col-md-12">
         <div class="simple-box">
             <?php if (empty($dumps)): ?>
-                <?=$trans('Nie znaleziono żadnej kopii zapasowej')?>
+                <?=trans('Nie znaleziono żadnej kopii zapasowej')?>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">
                     <thead>
                         <tr>
-                            <th><?=$trans('Nazwa kopii')?></th>
-                            <th><?=$trans('Data utworzenia')?></th>
-                            <th><?=$trans('Rozmiar')?></th>
+                            <th><?=trans('Nazwa kopii')?></th>
+                            <th><?=trans('Data utworzenia')?></th>
+                            <th><?=trans('Rozmiar')?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -66,21 +66,21 @@ $dumps = GC\Model\Dump::select()->order('creation_datetime', 'DESC')->fetchByPri
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans('Utwórz kopię zapasową')?>
+                    <?=trans('Utwórz kopię zapasową')?>
                 </h2>
             </div>
             <div class="modal-body">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
-                    'label' => $trans('Nazwa kopii zapasowej'),
+                    'label' => trans('Nazwa kopii zapasowej'),
                 ])?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <?=$trans('Anuluj')?>
+                    <?=trans('Anuluj')?>
                 </button>
                 <button type="submit" class="btn btn-success btn-ok">
-                    <?=$trans('Dodaj')?>
+                    <?=trans('Dodaj')?>
                 </button>
             </div>
         </form>

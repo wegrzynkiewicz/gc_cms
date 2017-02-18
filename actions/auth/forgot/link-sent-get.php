@@ -2,7 +2,7 @@
 
 require ACTIONS_PATH.'/auth/_import.php';
 
-$headTitle = $trans('Wysłano e-maila z weryfikacją przypomnienia hasła');
+$headTitle = trans('Wysłano e-maila z weryfikacją przypomnienia hasła');
 
 ?>
 <?php require ACTIONS_PATH.'/admin/parts/header-login.html.php'; ?>
@@ -20,16 +20,16 @@ $headTitle = $trans('Wysłano e-maila z weryfikacją przypomnienia hasła');
                     <div class="panel-body">
 
                         <p class="text-center" style="margin-bottom:20px">
-                            <?=$trans('Na zadany adres email zostały wysłane dalsze instrukcje.')?>
+                            <?=trans('Na zadany adres email zostały wysłane dalsze instrukcje.')?>
                         </p>
 
                         <a href="<?=$uri->make("/auth/login")?>" class="btn btn-md btn-success btn-block">
-                            <?=$trans('Wróć do logowania')?>
+                            <?=trans('Wróć do logowania')?>
                         </a>
 
                         <div class="btn-group btn-group-justified" style="margin-top:5px">
                             <a href="<?=$uri->root()?>/" class="btn btn-link">
-                                <?=$trans('Przejdź na stronę główną')?></a>
+                                <?=trans('Przejdź na stronę główną')?></a>
                         </div>
 
                     </div>

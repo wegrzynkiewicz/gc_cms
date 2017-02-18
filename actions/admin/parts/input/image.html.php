@@ -6,7 +6,7 @@
 <div class="form-group">
 
     <label class="col-md-12 col-sm-12 col-xs-12" for="<?=$name?>">
-        <?=$trans($label)?>
+        <?=$label?>
     </label>
 
     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -26,7 +26,7 @@
                         id="<?=$name?>_source"
                         name="<?=$name?>"
                         <?php if (isset($placeholder)): ?>
-                            placeholder="<?=$trans($placeholder)?>"
+                            placeholder="<?=$placeholder?>"
                         <?php endif ?>
                         class="form-control input"
                         value="<?=e($value)?>"
@@ -35,11 +35,11 @@
                 <br/>
                 <button type="button" id="<?=$name?>_select" class="btn btn-primary btn-xs">
                     <i class="fa fa-cog fa-fw"></i>
-                    <?=$trans('Wybierz zdjęcie')?>
+                    <?=trans('Wybierz zdjęcie')?>
                 </button>
                 <button type="button" id="<?=$name?>_delete" class="btn btn-danger btn-xs">
                     <i class="fa fa-times fa-fw"></i>
-                    <?=$trans('Usuń zdjęcie')?>
+                    <?=trans('Usuń zdjęcie')?>
                 </button>
             </div>
         </div>
@@ -51,9 +51,9 @@
     $(function() {
 
         $('#<?=$name?>_select').elfinderInput({
-            title: '<?=$trans('Wybierz plik')?>',
+            title: '<?=trans('Wybierz plik')?>',
             url: '<?=$uri->make('/admin/elfinder/connector')?>',
-            lang: '<?=GC\Visitor::getLang()?>',
+            lang: '<?=getVisitorLang()?>',
         }, function(file) {
             $('#<?=$name?>_preview').attr('src', file);
             $('#<?=$name?>_source').val(file);

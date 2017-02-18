@@ -13,5 +13,5 @@ $tab = GC\Model\Module\Tab::select()
 # usuń zakładkę
 GC\Model\Frame::deleteByFrameId($frame_id);
 
-flashBox($trans('Zakładka "%s" została usunięta.', [$tab['name']]));
+flashBox(trans('Zakładka "%s" została usunięta.', [$tab['name']]));
 http_response_code(204);

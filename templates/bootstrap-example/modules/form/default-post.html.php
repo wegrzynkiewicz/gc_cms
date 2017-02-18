@@ -14,7 +14,7 @@ foreach ($fields as $field_id => $field) {
     $data[$field['name']] = post("formField_$field_id");
 }
 
-$localization = geoIP(GC\Visitor::getIP());
+$localization = geoIP(getVisitorIP());
 
 if (count($settings['emails']) > 0) {
     foreach ($settings['emails'] as $email) {
@@ -36,5 +36,5 @@ GC\Model\Form\Sent::insertToForm($form_id, $data, $localization);
 
 ?>
 <p class="text-success">
-    <?=$trans('Dziękujemy za wysłanie wiadomości, wkrótce się z Państwem skontaktujemy.')?>
+    <?=trans('Dziękujemy za wysłanie wiadomości, wkrótce się z Państwem skontaktujemy.')?>
 </p>

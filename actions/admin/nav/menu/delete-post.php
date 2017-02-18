@@ -15,5 +15,5 @@ $menu = GC\Model\Menu\Menu::select()
 # usuń węzeł i podwęzły nawigacji
 GC\Model\Menu\Menu::deleteByMenuId($menu_id);
 
-flashBox($trans('Menu "%s" zostało usunięte.', [$menu->getName()]));
+flashBox(trans('Menu "%s" zostało usunięte.', [$menu->getName()]));
 redirect($breadcrumbs->getLast('uri'));

@@ -13,32 +13,32 @@ $groupOptions = GC\Model\Staff\Group::select()
             <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/image.html.php', [
                     'name' => 'avatar',
-                    'label' => $trans('Avatar pracownika'),
-                    'placeholder' => $trans('Ścieżka do pliku zdjęcia'),
+                    'label' => trans('Avatar pracownika'),
+                    'placeholder' => trans('Ścieżka do pliku zdjęcia'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
-                    'label' => $trans('Imię i nazwisko pracownika'),
+                    'label' => trans('Imię i nazwisko pracownika'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'email',
-                    'label' => $trans('Adres E-mail'),
-                    'help' => $trans('Adres E-mail służy do logowaniu pracownika do panelu'),
+                    'label' => trans('Adres E-mail'),
+                    'help' => trans('Adres E-mail służy do logowaniu pracownika do panelu'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/select2-multi.html.php', [
                     'name' => 'groups',
-                    'label' => $trans('Przynależność do grup pracowników'),
-                    'help' => $trans('Możesz wybrać jaką pracownik ma pełnić funkcję i jakie uprawnienia otrzyma. Pracownik może przynależyć do wielu grup.'),
+                    'label' => trans('Przynależność do grup pracowników'),
+                    'help' => trans('Możesz wybrać jaką pracownik ma pełnić funkcję i jakie uprawnienia otrzyma. Pracownik może przynależyć do wielu grup.'),
                     'options' => $groupOptions,
                     'selectedValues' => $groups,
                 ])?>
             </div>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => $trans('Zapisz ustawienia'),
+                'saveLabel' => trans('Zapisz ustawienia'),
             ])?>
 
         </form>
@@ -64,12 +64,12 @@ $(function () {
         },
         messages: {
             name: {
-                required: "<?=$trans('Imię i nazwisko jest wymagane')?>",
+                required: "<?=trans('Imię i nazwisko jest wymagane')?>",
             },
             email: {
-                email: "<?=$trans('Adres E-mail nie jest prawidłowy')?>",
-                required: "<?=$trans('Adres E-mail jest wymagany')?>",
-                remote: "<?=$trans('Adres E-mail jest już wykorzystywany')?>",
+                email: "<?=trans('Adres E-mail nie jest prawidłowy')?>",
+                required: "<?=trans('Adres E-mail jest wymagany')?>",
+                remote: "<?=trans('Adres E-mail jest już wykorzystywany')?>",
             },
         },
     });

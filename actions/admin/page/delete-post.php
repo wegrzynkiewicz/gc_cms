@@ -13,5 +13,5 @@ $page = GC\Model\Frame::select()
 # usuń rusztowanie i wszystkie jej moduły
 GC\Model\Frame::deleteByFrameId($frame_id);
 
-flashBox($trans('Strona "%s" została usunięta.', [$page['name']]));
+flashBox(trans('Strona "%s" została usunięta.', [$page['name']]));
 redirect($breadcrumbs->getLast('uri'));

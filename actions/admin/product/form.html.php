@@ -37,29 +37,29 @@ unset($taxonomy);
             <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
-                    'label' => $trans('Nazwa produktu'),
+                    'label' => trans('Nazwa produktu'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/slug.html.php', [
                     'name' => 'slug',
-                    'label' => $trans('Adres produktu'),
-                    'help' => $trans('Zostaw pusty, aby generować adres na podstawie nazwy'),
+                    'label' => trans('Adres produktu'),
+                    'help' => trans('Zostaw pusty, aby generować adres na podstawie nazwy'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'keywords',
-                    'label' => $trans('Tagi i słowa kluczowe (meta keywords)'),
+                    'label' => trans('Tagi i słowa kluczowe (meta keywords)'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/textarea.html.php', [
                     'name' => 'description',
-                    'label' => $trans('Opis podstrony (meta description)'),
+                    'label' => trans('Opis podstrony (meta description)'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/image.html.php', [
                     'name' => 'image',
-                    'label' => $trans('Zdjęcie wyróżniające'),
-                    'placeholder' => $trans('Ścieżka do pliku zdjęcia'),
+                    'label' => trans('Zdjęcie wyróżniające'),
+                    'placeholder' => trans('Ścieżka do pliku zdjęcia'),
                 ])?>
             </div>
 
@@ -80,7 +80,7 @@ unset($taxonomy);
             <?php endforeach ?>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => $trans('Zapisz produkt'),
+                'saveLabel' => trans('Zapisz produkt'),
             ])?>
         </form>
     </div>
@@ -98,7 +98,7 @@ $(function () {
         },
         messages: {
             name: {
-                required: "<?=$trans('Nazwa produktu jest wymagana')?>"
+                required: "<?=trans('Nazwa produktu jest wymagana')?>"
             },
         },
     });

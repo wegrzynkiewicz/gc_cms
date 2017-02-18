@@ -3,7 +3,7 @@
 # pobierz samą nawigację
 $nav = GC\Model\Menu\Taxonomy::select()
     ->equals('workname', 'top')
-    ->equals('lang', GC\Visitor::getLang())
+    ->equals('lang', getVisitorLang())
     ->fetch();
 
 # pobierz węzły nawigacji i zbuduj z nich drzewo

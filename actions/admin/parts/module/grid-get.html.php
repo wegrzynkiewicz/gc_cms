@@ -18,13 +18,13 @@ $modules = GC\Model\Module\Module::select()
                     type="button"
                     class="btn btn-primary">
                     <i class="fa fa-search fa-fw"></i>
-                    <?=$trans('Podgląd')?>
+                    <?=trans('Podgląd')?>
                 </a>
                 <a href="<?=$uri->mask("/new")?>"
                     type="button"
                     class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
-                    <?=$trans('Dodaj nowy moduł')?>
+                    <?=trans('Dodaj nowy moduł')?>
                 </a>
             </div>
             <h1><?=($headTitle)?></h1>
@@ -40,7 +40,7 @@ $modules = GC\Model\Module\Module::select()
             <input type="hidden" name="grid">
             <?php if (empty($modules)): ?>
                 <div class="simple-box">
-                    <?=$trans('Brak modułów')?>
+                    <?=trans('Brak modułów')?>
                 </div>
             <?php else: ?>
                 <div class="grid-with-rows">
@@ -54,7 +54,7 @@ $modules = GC\Model\Module\Module::select()
             <?php endif ?>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => $trans('Zapisz pozycje kafelków'),
+                'saveLabel' => trans('Zapisz pozycje kafelków'),
             ])?>
 
         </form>
@@ -70,18 +70,18 @@ $modules = GC\Model\Module\Module::select()
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans('Czy na pewno usunąć?')?>
+                    <?=trans('Czy na pewno usunąć?')?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=$trans('Czy jesteś pewien, że chcesz usunąć ten moduł?')?>
+                <?=trans('Czy jesteś pewien, że chcesz usunąć ten moduł?')?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <?=$trans('Anuluj')?>
+                    <?=trans('Anuluj')?>
                 </button>
                 <button type="submit" class="btn btn-danger btn-ok">
-                    <?=$trans('Usuń')?>
+                    <?=trans('Usuń')?>
                 </button>
             </div>
         </form>
@@ -97,17 +97,17 @@ $modules = GC\Model\Module\Module::select()
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans('Ustawienia wiersza')?>
+                    <?=trans('Ustawienia wiersza')?>
                 </h2>
             </div>
             <div id="rowSettingsModalContent" class="modal-body">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <?=$trans('Anuluj')?>
+                    <?=trans('Anuluj')?>
                 </button>
                 <button type="submit" class="btn btn-success btn-ok">
-                    <?=$trans('Zapisz')?>
+                    <?=trans('Zapisz')?>
                 </button>
             </div>
         </form>
@@ -120,7 +120,7 @@ $modules = GC\Model\Module\Module::select()
         data-y="{{y}}"
         data-target="#rowSettingsModal"
         class="simple-box grid-row-settings"
-        title="<?=$trans('Ustawienia wiersza')?>"
+        title="<?=trans('Ustawienia wiersza')?>"
         style="top: {{top}}px">
         <i class="fa fa-gear fa-fw"></i>
     </a>

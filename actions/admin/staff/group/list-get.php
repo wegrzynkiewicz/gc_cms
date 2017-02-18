@@ -28,7 +28,7 @@ foreach ($groupPermissions as $permission) {
             <div class="btn-toolbar pull-right">
                 <a href="<?=$uri->mask("/new")?>" type="button" class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
-                    <?=$trans('Dodaj nową grupę pracowników')?>
+                    <?=trans('Dodaj nową grupę pracowników')?>
                 </a>
             </div>
             <h1><?=($headTitle)?></h1>
@@ -42,16 +42,16 @@ foreach ($groupPermissions as $permission) {
     <div class="col-md-12">
         <div class="simple-box">
             <?php if (empty($groups)): ?>
-                <?=$trans('Nie znaleziono żadnych grup pracowników.')?>
+                <?=trans('Nie znaleziono żadnych grup pracowników.')?>
             <?php else: ?>
                 <table class="table vertical-middle" data-table="">
                     <thead>
                         <tr>
                             <th class="col-md-4 col-lg-4">
-                                <?=$trans('Grupa pracowników')?>
+                                <?=trans('Grupa pracowników')?>
                             </th>
                             <th class="col-md-7 col-lg-7">
-                                <?=$trans('Posiadane uprawnienia')?>
+                                <?=trans('Posiadane uprawnienia')?>
                             </th>
                             <th class="col-md-1 col-lg-1 text-right"></th>
                         </tr>
@@ -77,19 +77,19 @@ foreach ($groupPermissions as $permission) {
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans('Czy na pewno usunąć?')?>
+                    <?=trans('Czy na pewno usunąć?')?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=$trans('Czy jesteś pewien, że chcesz usunąć grupę pracowników')?>
+                <?=trans('Czy jesteś pewien, że chcesz usunąć grupę pracowników')?>
                 <span id="name" style="font-weight:bold; color:red;"></span>?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <?=$trans('Anuluj')?>
+                    <?=trans('Anuluj')?>
                 </button>
                 <button type="submit" class="btn btn-danger btn-ok">
-                    <?=$trans('Usuń')?>
+                    <?=trans('Usuń')?>
                 </button>
             </div>
         </form>

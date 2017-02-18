@@ -33,5 +33,5 @@ $menu = GC\Model\Menu\Menu::select()
     ->equals('menu_id', $menu_id)
     ->fetchObject();
 
-flashBox($trans('Menu "%s" zostało utworzone.', [$menu->getName()]));
+flashBox(trans('Menu "%s" zostało utworzone.', [$menu->getName()]));
 redirect($breadcrumbs->getLast('uri'));

@@ -15,23 +15,23 @@ $taxonomies = GC\Model\Post\Taxonomy::select()
             <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
-                    'label' => $trans('Nazwa wpisu'),
+                    'label' => trans('Nazwa wpisu'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'keywords',
-                    'label' => $trans('Tagi i słowa kluczowe (meta keywords)'),
+                    'label' => trans('Tagi i słowa kluczowe (meta keywords)'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/textarea.html.php', [
                     'name' => 'description',
-                    'label' => $trans('Opis podstrony (meta description)'),
+                    'label' => trans('Opis podstrony (meta description)'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/image.html.php', [
                     'name' => 'image',
-                    'label' => $trans('Zdjęcie wyróżniające'),
-                    'placeholder' => $trans('Ścieżka do pliku zdjęcia'),
+                    'label' => trans('Zdjęcie wyróżniające'),
+                    'placeholder' => trans('Ścieżka do pliku zdjęcia'),
                 ])?>
             </div>
 
@@ -54,12 +54,12 @@ $taxonomies = GC\Model\Post\Taxonomy::select()
             <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/datatimepicker.html.php', [
                     'name' => 'publication_datetime',
-                    'label' => $trans('Data publikacji'),
+                    'label' => trans('Data publikacji'),
                 ])?>
             </div>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => $trans('Zapisz wpis'),
+                'saveLabel' => trans('Zapisz wpis'),
             ])?>
         </form>
     </div>
@@ -81,11 +81,11 @@ $(function () {
         },
         messages: {
             name: {
-                required: "<?=$trans('Nazwa wpisu jest wymagana')?>"
+                required: "<?=trans('Nazwa wpisu jest wymagana')?>"
             },
             publication_datetime: {
-                required: "<?=$trans('Data publikacji jest wymagana')?>",
-                date: "<?=$trans('Data publikacji musi być prawidłową datą w formacie YYYY-MM-DD HH:MM:SS')?>",
+                required: "<?=trans('Data publikacji jest wymagana')?>",
+                date: "<?=trans('Data publikacji musi być prawidłową datą w formacie YYYY-MM-DD HH:MM:SS')?>",
             },
         },
     });

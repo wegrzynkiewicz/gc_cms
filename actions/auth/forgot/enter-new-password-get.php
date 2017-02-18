@@ -2,7 +2,7 @@
 
 require ACTIONS_PATH.'/auth/_import.php';
 
-$headTitle = $trans('Resetowanie hasła');
+$headTitle = trans('Resetowanie hasła');
 
 # pobranie klucza głównego zalogowanego pracownika
 $staff_id = GC\Staff::getInstance()['staff_id'];
@@ -33,25 +33,25 @@ if (!isset($meta['regenerationVerifyHash'])) {
                         <form action="" method="post" class="form-horizontal">
 
                             <p class="text-center">
-                                <?=$trans('Weryfikacja adresu email przebiegła pomyślnie. Możesz zmienić swoje hasło.')?>
+                                <?=trans('Weryfikacja adresu email przebiegła pomyślnie. Możesz zmienić swoje hasło.')?>
                             </p>
 
                             <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                                 'name' => 'new_password',
                                 'type' => 'password',
-                                'label' => $trans('Nowe hasło'),
-                                'help' => $trans('Twoje hasło musi składać się z przynajmniej %s znaków', [$config['password']['minLength']]),
+                                'label' => trans('Nowe hasło'),
+                                'help' => trans('Twoje hasło musi składać się z przynajmniej %s znaków', [$config['password']['minLength']]),
                             ])?>
 
                             <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                                 'name' => 'confirm_password',
                                 'type' => 'password',
-                                'label' => $trans('Powtórz nowe hasło'),
-                                'help' => $trans('Powtórz swoje nowe hasło dla bezpieczeństwa'),
+                                'label' => trans('Powtórz nowe hasło'),
+                                'help' => trans('Powtórz swoje nowe hasło dla bezpieczeństwa'),
                             ])?>
 
                             <button type="submit" class="btn btn-md btn-success btn-block">
-                                <?=$trans('Zmień hasło')?>
+                                <?=trans('Zmień hasło')?>
                             </button>
                         </form>
                     </div>
@@ -78,12 +78,12 @@ $(function () {
         },
         messages: {
             new_password: {
-                required: "<?=$trans('Wprowadź nowe hasło')?>",
-                minlength: "<?=$trans('Nowe hasło powinno mieć przynajmniej %s znaków', [$config['password']['minLength']])?>"
+                required: "<?=trans('Wprowadź nowe hasło')?>",
+                minlength: "<?=trans('Nowe hasło powinno mieć przynajmniej %s znaków', [$config['password']['minLength']])?>"
             },
             confirm_password: {
-                required: "<?=$trans('Musisz powtórzyć swoje nowe hasło dla bezpieczeństwa')?>",
-                equalTo: "<?=$trans('Hasła nie są jednakowe')?>"
+                required: "<?=trans('Musisz powtórzyć swoje nowe hasło dla bezpieczeństwa')?>",
+                equalTo: "<?=trans('Hasła nie są jednakowe')?>"
             }
         },
     });

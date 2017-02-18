@@ -26,31 +26,31 @@ $_POST['form'] = $content;
             <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
                     'name' => 'form',
-                    'label' => $trans('Formularz'),
-                    'help' => $trans('Wybierz formularz który ma zostać wyświetlony'),
+                    'label' => trans('Formularz'),
+                    'help' => trans('Wybierz formularz który ma zostać wyświetlony'),
                     'options' => $installedForms,
-                    'firstOption' => $trans('Wybierz formularz'),
+                    'firstOption' => trans('Wybierz formularz'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
                     'name' => 'theme',
-                    'label' => $trans('Szablon'),
-                    'help' => $trans('Wybierz jeden z dostępnych szablonów dla formularza'),
+                    'label' => trans('Szablon'),
+                    'help' => trans('Wybierz jeden z dostępnych szablonów dla formularza'),
                     'options' => $config['moduleThemes']['form'],
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/select2-tags.html.php', [
                     'id' => 'emails',
                     'name' => 'emails',
-                    'label' => $trans('Odbiorcy mailowi'),
-                    'help' => $trans('Można wpisać adresy mailowe na które zostanie wysłany każdy wypełniony formularz. Należy potwierdzić klawiszem ENTER.'),
+                    'label' => trans('Odbiorcy mailowi'),
+                    'help' => trans('Można wpisać adresy mailowe na które zostanie wysłany każdy wypełniony formularz. Należy potwierdzić klawiszem ENTER.'),
                     'options' => $emails,
                     'selectedValues' => $emails,
                 ])?>
             </div>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => $trans('Zapisz moduł'),
+                'saveLabel' => trans('Zapisz moduł'),
             ])?>
 
         </form>
@@ -69,7 +69,7 @@ $(function () {
         },
         messages: {
             form: {
-                required: "<?=$trans('Musisz wybrać formularz')?>",
+                required: "<?=trans('Musisz wybrać formularz')?>",
             },
         },
     });

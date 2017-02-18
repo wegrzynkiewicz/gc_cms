@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = $trans('Dodawanie nowego wpisu');
+$headTitle = trans('Dodawanie nowego wpisu');
 $breadcrumbs->push([
     'name' => $headTitle,
 ]);

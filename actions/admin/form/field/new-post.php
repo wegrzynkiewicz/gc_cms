@@ -28,5 +28,5 @@ GC\Model\Form\Position::insert([
 $type = post('type');
 require ACTIONS_PATH."/admin/form/field/types/{$type}-post.php";
 
-flashBox($trans('Pole "%s" zostało utworzone.', [post('name')]));
+flashBox(trans('Pole "%s" zostało utworzone.', [post('name')]));
 redirect($breadcrumbs->getLast('uri'));

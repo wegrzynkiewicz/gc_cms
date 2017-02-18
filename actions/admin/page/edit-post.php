@@ -13,5 +13,5 @@ GC\Model\Frame::updateByFrameId($frame_id, [
     'image' => $uri->relative(post('image')),
 ]);
 
-flashBox($trans('Strona "%s" została zaktualizowana.', [post('name')]));
+flashBox(trans('Strona "%s" została zaktualizowana.', [post('name')]));
 redirect($breadcrumbs->getLast('uri'));

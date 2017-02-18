@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = $trans('Kopie zapasowe');
+$headTitle = trans('Kopie zapasowe');
 $uri->extendMask('/dump%s');
 $breadcrumbs->push([
     'uri' => $uri->mask('/list'),

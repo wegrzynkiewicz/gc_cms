@@ -29,7 +29,7 @@
 <script type="text/javascript">
     $(function(){
         $('#<?=$name?>').datetimepicker({
-            locale: '<?=GC\Visitor::getLang()?>',
+            locale: '<?=getVisitorLang()?>',
             format: 'YYYY-MM-DD HH:mm:ss'
         });
     });

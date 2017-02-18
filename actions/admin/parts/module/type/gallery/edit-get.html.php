@@ -13,7 +13,7 @@ $_POST = array_merge($module, $settings);
             <div class="btn-toolbar pull-right">
                 <button id="select_images" class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
-                    <?=$trans('Dodaj zdjęcia')?>
+                    <?=trans('Dodaj zdjęcia')?>
                 </button>
             </div>
             <h1><?=($headTitle)?></h1>
@@ -32,11 +32,11 @@ $_POST = array_merge($module, $settings);
 
             <div class="simple-box">
                 <fieldset>
-                    <legend><?=$trans('Ustawienia galerii zdjęć')?></legend>
+                    <legend><?=trans('Ustawienia galerii zdjęć')?></legend>
                     <?=render(ACTIONS_PATH.'/admin/parts/input/selectbox.html.php', [
                         'name' => 'theme',
-                        'label' => $trans('Szablon'),
-                        'help' => $trans('Wybierz jeden z dostępnych szablonów galerii'),
+                        'label' => trans('Szablon'),
+                        'help' => trans('Wybierz jeden z dostępnych szablonów galerii'),
                         'options' => $config['moduleThemes']['gallery'],
                     ])?>
                 </fieldset>
@@ -45,9 +45,9 @@ $_POST = array_merge($module, $settings);
 
             <div class="simple-box">
                 <fieldset>
-                    <legend><?=$trans('Ustawienia szablonu')?></legend>
+                    <legend><?=trans('Ustawienia szablonu')?></legend>
                     <div id="moduleTheme">
-                        <?=$trans('Wybierz szablon galerii')?>
+                        <?=trans('Wybierz szablon galerii')?>
                     </div>
                 </fieldset>
             </div>
@@ -58,7 +58,7 @@ $_POST = array_merge($module, $settings);
             </div>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => $trans('Zapisz'),
+                'saveLabel' => trans('Zapisz'),
             ])?>
 
         </form>
@@ -73,7 +73,7 @@ $_POST = array_merge($module, $settings);
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans('Edytujesz zdjęcie ')?>
+                    <?=trans('Edytujesz zdjęcie ')?>
                     <span id="editModalName"></span>
                 </h2>
             </div>
@@ -81,10 +81,10 @@ $_POST = array_merge($module, $settings);
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <?=$trans('Anuluj')?>
+                    <?=trans('Anuluj')?>
                 </button>
                 <button type="submit" value="" class="btn btn-success btn-ok">
-                    <?=$trans('Zapisz')?>
+                    <?=trans('Zapisz')?>
                 </button>
             </div>
         </form>
@@ -103,18 +103,18 @@ $_POST = array_merge($module, $settings);
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans('Czy na pewno usunąć?')?>
+                    <?=trans('Czy na pewno usunąć?')?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=$trans('Czy jesteś pewien, że chcesz usunąć to zdjęcie?')?>
+                <?=trans('Czy jesteś pewien, że chcesz usunąć to zdjęcie?')?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <?=$trans('Anuluj')?>
+                    <?=trans('Anuluj')?>
                 </button>
                 <button type="submit" class="btn btn-danger btn-ok">
-                    <?=$trans('Usuń')?>
+                    <?=trans('Usuń')?>
                 </button>
             </div>
         </form>
@@ -196,9 +196,9 @@ $(function() {
     });
 
     $('#select_images').elfinderInputMultiple({
-        title: '<?=$trans('Wybierz wiele zdjęć')?>',
+        title: '<?=trans('Wybierz wiele zdjęć')?>',
         url: '<?=$uri->make('/admin/elfinder/connector')?>',
-        lang: '<?=GC\Visitor::getLang()?>',
+        lang: '<?=getVisitorLang()?>',
     }, function(urls) {
         $.post("<?=$uri->make("/admin/parts/module/{$module_id}/image/xhr-add")?>", {
             urls: urls

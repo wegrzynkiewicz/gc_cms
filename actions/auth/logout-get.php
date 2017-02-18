@@ -2,7 +2,7 @@
 
 require ACTIONS_PATH.'/auth/_import.php';
 
-$headTitle = $trans('Zostałeś wylogowany');
+$headTitle = trans('Zostałeś wylogowany');
 
 unset($_SESSION['staff']);
 
@@ -22,12 +22,12 @@ unset($_SESSION['staff']);
                     <div class="panel-body">
 
                         <p class="text-center" style="margin-bottom:20px">
-                            <?=$trans('Zostałeś bezpiecznie wylogowany z panelu admina.')?><br>
-                            <?=$trans('Mamy nadzieje, że praca z naszym systemem była przyjemna :)')?>
+                            <?=trans('Zostałeś bezpiecznie wylogowany z panelu admina.')?><br>
+                            <?=trans('Mamy nadzieje, że praca z naszym systemem była przyjemna :)')?>
                         </p>
 
                         <a href="<?=$uri->make("/auth/login")?>" class="btn btn-md btn-success btn-block">
-                            <?=$trans('Zaloguj się ponownie')?>
+                            <?=trans('Zaloguj się ponownie')?>
                         </a>
 
                     </div>

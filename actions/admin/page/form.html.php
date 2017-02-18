@@ -8,38 +8,38 @@
             <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
-                    'label' => $trans('Nazwa strony'),
+                    'label' => trans('Nazwa strony'),
                 ])?>
             </div>
 
             <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/slug.html.php', [
                     'name' => 'slug',
-                    'label' => $trans('Adres strony'),
-                    'help' => $trans('Zostaw pusty, aby generować adres na podstawie nazwy'),
+                    'label' => trans('Adres strony'),
+                    'help' => trans('Zostaw pusty, aby generować adres na podstawie nazwy'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'keywords',
-                    'label' => $trans('Tagi i słowa kluczowe (meta keywords)'),
-                    'help' => $trans('(Opcjonalnie)'),
+                    'label' => trans('Tagi i słowa kluczowe (meta keywords)'),
+                    'help' => trans('(Opcjonalnie)'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/textarea.html.php', [
                     'name' => 'description',
-                    'label' => $trans('Opis podstrony (meta description)'),
-                    'help' => $trans('(Opcjonalny)'),
+                    'label' => trans('Opis podstrony (meta description)'),
+                    'help' => trans('(Opcjonalny)'),
                 ])?>
 
                 <?=render(ACTIONS_PATH.'/admin/parts/input/image.html.php', [
                     'name' => 'image',
-                    'label' => $trans('Zdjęcie wyróżniające'),
-                    'placeholder' => $trans('Ścieżka do pliku zdjęcia'),
+                    'label' => trans('Zdjęcie wyróżniające'),
+                    'placeholder' => trans('Ścieżka do pliku zdjęcia'),
                 ])?>
             </div>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => $trans('Zapisz stronę'),
+                'saveLabel' => trans('Zapisz stronę'),
             ])?>
 
         </form>
@@ -63,10 +63,10 @@ $(function () {
         },
         messages: {
             name: {
-                required: "<?=$trans('Nazwa strony jest wymagana')?>",
+                required: "<?=trans('Nazwa strony jest wymagana')?>",
             },
             slug: {
-                remote: "<?=$trans('Podany adres został już zarezerwowany')?>",
+                remote: "<?=trans('Podany adres został już zarezerwowany')?>",
             },
         },
     });

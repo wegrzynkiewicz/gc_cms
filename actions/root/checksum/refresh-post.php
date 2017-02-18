@@ -14,5 +14,5 @@ GC\Model\Checksum::insert([
     'hash' => $hash,
 ]);
 
-flashBox($trans('Plik "%s" został odświeżony.', [$file]));
+flashBox(trans('Plik "%s" został odświeżony.', [$file]));
 redirect($breadcrumbs->getLast('uri'));

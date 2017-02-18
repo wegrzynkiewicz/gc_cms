@@ -1,1 +1,1 @@
-<?=$trans($config['nodeTypes']['homepage'])?>
+<?=trans($config['nodeTypes']['homepage'])?>

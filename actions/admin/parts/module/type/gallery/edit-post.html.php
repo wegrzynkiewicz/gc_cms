@@ -11,5 +11,5 @@ GC\Model\Module\Module::updateByPrimaryId($module_id, [
     'settings' => json_encode($settings, JSON_UNESCAPED_UNICODE),
 ]);
 
-flashBox($trans('Moduł galerii zdjęć został zaktualizowany.'));
+flashBox(trans('Moduł galerii zdjęć został zaktualizowany.'));
 redirect($breadcrumbs->getBeforeLast('uri'));

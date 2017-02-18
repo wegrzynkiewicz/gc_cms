@@ -14,7 +14,7 @@ $_POST = GC\Staff::getInstance()->getData();
             <div class="btn-toolbar pull-right">
                 <a href="<?=$uri->mask("/change-password")?>" type="button" class="btn btn-success btn-md">
                     <i class="fa fa-unlock-alt fa-fw"></i>
-                    <?=$trans('Zmień hasło')?>
+                    <?=trans('Zmień hasło')?>
                 </a>
             </div>
             <h1><?=($headTitle)?></h1>
@@ -31,13 +31,13 @@ $_POST = GC\Staff::getInstance()->getData();
             <div class="simple-box">
                 <?=render(ACTIONS_PATH.'/admin/parts/input/select2-language.html.php', [
                     'name' => 'lang',
-                    'label' => $trans('Język'),
-                    'help' => $trans('Wyświetla panel i komunikaty w tym języku'),
+                    'label' => trans('Język'),
+                    'help' => trans('Wyświetla panel i komunikaty w tym języku'),
                 ])?>
             </div>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => $trans('Zapisz profil'),
+                'saveLabel' => trans('Zapisz profil'),
             ])?>
 
         </form>

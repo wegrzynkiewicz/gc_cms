@@ -15,5 +15,5 @@ GC\Model\Post\Post::insertWithRelations([
     'publication_datetime' => post('publication_datetime'),
 ], $relations);
 
-flashBox($trans('Nowy wpis "%s" została utworzony.', [post('name')]));
+flashBox(trans('Nowy wpis "%s" została utworzony.', [post('name')]));
 redirect($breadcrumbs->getLast('uri'));

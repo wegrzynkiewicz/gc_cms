@@ -107,6 +107,11 @@ return [
         'public' => '6Le88g4UAAAAAJ_VW4XML20c2tWSWFSv29lkGeVp', # publiczny klucz
         'secret' => '6Le88g4UAAAAAIOFZyOilvhdWRP3IIOWdkdQ7gAf', # prywatny klucz
     ],
+    'thumb' => [ # ustawienia generatora miniaturek
+        'enabled' => true, # czy generować miniaturki?
+        'thumbsPath' => ROOT_PATH.'/web', # ścieżka do katalogu z miniaturkami, należy do tego dodać thumbsUri
+        'thumbsUri' => '/thumbs', # adres do katalogu z miniaturkami
+    ],
     'dataTable' => [ # dotyczą pluginu DataTables
         'iDisplayLength' => 50, # ilość rekordów domyślnie wyświetlanych na jedną strone
     ],
@@ -211,27 +216,6 @@ return [
     'permissions' => [ # zawiera uprawnienia dostępne dla pracownikow
         'manage_staff' => 'Zarządzanie pracownikami',
         'manage_staff_groups' => 'Zarządzanie grupami pracowników',
-    ],
-    'thumb' => [ # ustawienia generatora miniaturek
-        'enabled' => true, # czy generować miniaturki?
-        'thumbsPath' => ROOT_PATH.'/web', # ścieżka do katalogu z miniaturkami, należy do tego dodać thumbsUri
-        'thumbsUri' => '/thumbs', # adres do katalogu z miniaturkami
-        'options' => [ # ustawienia dla generatora miniaturek
-            'jpg' => [
-                'loader' => 'imagecreatefromjpeg',
-                'saver' => 'imagejpeg',
-                'mime' => 'image/jpeg',
-                'transparent' => false,
-                'quality' => 90,
-            ],
-            'png' => [
-                'loader' => 'imagecreatefrompng',
-                'saver' => 'imagepng',
-                'mime' => 'image/png',
-                'transparent' => true,
-                'quality' => 9,
-            ],
-        ],
     ],
     'navNodeTargets' => [ # dostępne atrybuty target dla węzłów nawigacji
         '_self'     => 'Załaduj w tym samym oknie',

@@ -23,5 +23,5 @@ GC\Model\Module\Tab::insert([
     'position' => $position + 1,
 ]);
 
-flashBox($trans('Nowa zakładka "%s" została dodana.', [post('name')]));
+flashBox(trans('Nowa zakładka "%s" została dodana.', [post('name')]));
 http_response_code(204);

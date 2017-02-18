@@ -13,7 +13,7 @@ $node = GC\Model\Product\Tree::select()
     ->equals('frame_id', $frame_id)
     ->fetch();
 
-$headTitle = $trans('Edycja węzła "%s"', [$node['name']]);
+$headTitle = trans('Edycja węzła "%s"', [$node['name']]);
 $breadcrumbs->push([
     'name' => $headTitle,
 ]);

@@ -13,5 +13,5 @@ $frame_id = GC\Model\Frame::insert([
     'image' => $uri->relative(post('image')),
 ]);
 
-flashBox($trans('Nowa strona "%s" została utworzona.', [post('name')]));
+flashBox(trans('Nowa strona "%s" została utworzona.', [post('name')]));
 redirect($breadcrumbs->getLast('uri'));

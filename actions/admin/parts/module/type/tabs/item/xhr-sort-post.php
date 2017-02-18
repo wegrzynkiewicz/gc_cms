@@ -24,5 +24,5 @@ foreach ($positions as $node) {
     }
 }
 
-flashBox($trans('Kolejność zakładek została zaktualizowana.'));
+flashBox(trans('Kolejność zakładek została zaktualizowana.'));
 http_response_code(204);

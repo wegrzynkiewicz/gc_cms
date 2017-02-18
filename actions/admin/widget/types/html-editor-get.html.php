@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = $trans('Edycja widżetu formatowanego tekstu HTML "%s"', [$widget['name']]);
+$headTitle = trans('Edycja widżetu formatowanego tekstu HTML "%s"', [$widget['name']]);
 $breadcrumbs->push([
     'name' => $headTitle,
 ]);
@@ -15,11 +15,11 @@ $breadcrumbs->push([
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/textarea.html.php', [
                 'name' => 'content',
-                'label' => $trans('Treść widżetu'),
+                'label' => trans('Treść widżetu'),
             ])?>
 
             <?=render(ACTIONS_PATH.'/admin/parts/input/submitButtons.html.php', [
-                'saveLabel' => $trans('Zapisz zmiany'),
+                'saveLabel' => trans('Zapisz zmiany'),
             ])?>
 
         </form>

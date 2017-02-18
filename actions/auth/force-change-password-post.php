@@ -13,5 +13,5 @@ GC\Model\Staff\Staff::updateByPrimaryId($staff_id, [
     'force_change_password' => 0,
 ]);
 
-flashBox($trans('Twoje hasło zostało zmienione.'));
+flashBox(trans('Twoje hasło zostało zmienione.'));
 redirect('/admin');

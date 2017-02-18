@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = $trans('Wpisy');
+$headTitle = trans('Wpisy');
 $uri->extendMask('/post%s');
 $breadcrumbs->push([
     'uri' => $uri->mask('/list'),

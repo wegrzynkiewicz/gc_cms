@@ -12,7 +12,7 @@
             <?php foreach ($config['langs'] as $code => $lang): ?>
                 <option value="<?=$code?>" data-flag="<?=$lang['flag']?>"
                     <?=selected($selectedValue == $code)?>>
-                    <?=$trans($lang['name'])?>
+                    <?=trans($lang['name'])?>
                 </option>
             <?php endforeach; ?>
 

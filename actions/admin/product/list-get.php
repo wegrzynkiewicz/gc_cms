@@ -19,7 +19,7 @@ $count = GC\Model\Frame::select()
             <div class="btn-toolbar pull-right">
                 <a href="<?=$uri->mask('/new')?>" type="button" class="btn btn-success btn-md">
                     <i class="fa fa-plus fa-fw"></i>
-                    <?=$trans('Dodaj nowy produkt')?>
+                    <?=trans('Dodaj nowy produkt')?>
                 </a>
             </div>
             <h1><?=($headTitle)?></h1>
@@ -33,7 +33,7 @@ $count = GC\Model\Frame::select()
     <div class="col-md-12">
         <div class="simple-box">
             <?php if ($count == 0): ?>
-                <?=$trans('Nie znaleziono żadnej strony w języku: ')?>
+                <?=trans('Nie znaleziono żadnej strony w języku: ')?>
                 <?=render(ACTIONS_PATH.'/admin/parts/language.html.php', [
                     'lang' => GC\Staff::getInstance()->getEditorLang(),
                 ])?>
@@ -48,12 +48,12 @@ $count = GC\Model\Frame::select()
                                 <th data-name="name"
                                     data-searchable="1"
                                     data-sortable="1">
-                                    <?=$trans('Nazwa produktu')?>
+                                    <?=trans('Nazwa produktu')?>
                                 </th>
                                 <th data-name="slug"
                                     data-searchable="1"
                                     data-sortable="1">
-                                    <?=$trans('Adres strony produktu')?>
+                                    <?=trans('Adres strony produktu')?>
                                 </th>
                                 <th data-name="options"
                                     data-searchable="0"
@@ -79,19 +79,19 @@ $count = GC\Model\Frame::select()
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=$trans('Czy na pewno usunąć?')?>
+                    <?=trans('Czy na pewno usunąć?')?>
                 </h2>
             </div>
             <div class="modal-body">
-                <?=$trans('Czy jesteś pewien, że chcesz usunąć produkt')?>
+                <?=trans('Czy jesteś pewien, że chcesz usunąć produkt')?>
                 <span id="frame_name" style="font-weight:bold; color:red;"></span>?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <?=$trans('Anuluj')?>
+                    <?=trans('Anuluj')?>
                 </button>
                 <button type="submit" class="btn btn-danger btn-ok">
-                    <?=$trans('Usuń')?>
+                    <?=trans('Usuń')?>
                 </button>
             </div>
         </form>
@@ -105,7 +105,7 @@ $count = GC\Model\Frame::select()
 
     <td>
         <a href="<?=$uri->mask()?>/{{frame_id}}/edit"
-            title="<?=$trans('Edytuj produkt')?>">
+            title="<?=trans('Edytuj produkt')?>">
             {{name}}
         </a>
     </td>
@@ -113,27 +113,27 @@ $count = GC\Model\Frame::select()
     <td>
         <a href="{{href}}"
             target="_blank"
-            title="<?=$trans('Podejrzyj ten produkt')?>">
+            title="<?=trans('Podejrzyj ten produkt')?>">
             {{slug}}</a>
     </td>
 
     <td class="text-right">
 
         <a href="<?=$uri->mask()?>/{{frame_id}}/module/grid"
-            title="<?=$trans('Wyświetl moduły produktu')?>"
+            title="<?=trans('Wyświetl moduły produktu')?>"
             class="btn btn-success btn-sm">
             <i class="fa fa-file-text-o fa-fw"></i>
-            <?=$trans('Moduły')?>
+            <?=trans('Moduły')?>
         </a>
 
         <a data-toggle="modal"
             data-id="{{frame_id}}"
             data-name="{{name}}"
             data-target="#deleteModal"
-            title="<?=$trans('Usuń produkt')?>"
+            title="<?=trans('Usuń produkt')?>"
             class="btn btn-danger btn-sm">
             <i class="fa fa-times fa-fw"></i>
-            <?=$trans('Usuń')?>
+            <?=trans('Usuń')?>
         </a>
     </td>
 </script>

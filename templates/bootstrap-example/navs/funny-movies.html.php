@@ -3,7 +3,7 @@
 # pobierz samą nawigację
 $nav = GC\Model\Menu\Taxonomy::select()
     ->equals('workname', 'funny-movies')
-    ->equals('::menu_taxonomies.lang', GC\Visitor::getLang())
+    ->equals('::menu_taxonomies.lang', getVisitorLang())
     ->fetch();
 
 # pobierz węzły nawigacji i zbuduj z nich drzewo
@@ -28,7 +28,7 @@ $menu = GC\Model\Menu\Menu::select()
             </ol>
         <?php else: ?>
             <p>
-                <?=$trans('Brak stron do wyświetlenia')?>
+                <?=trans('Brak stron do wyświetlenia')?>
             </p>
         <?php endif ?>
     </div>

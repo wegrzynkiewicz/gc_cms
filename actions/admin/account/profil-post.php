@@ -11,5 +11,5 @@ GC\Model\Staff\Staff::updateByPrimaryId($staff_id, [
     'lang' => post('lang'),
 ]);
 
-flashBox($trans('Twój profil został zaktualizowany.'));
+flashBox(trans('Twój profil został zaktualizowany.'));
 redirect($breadcrumbs->getLast('uri'));

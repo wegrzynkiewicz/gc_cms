@@ -45,13 +45,8 @@ set_exception_handler(function ($exception) use (&$logException) {
 # serwis translacji tekstu, jeżeli translacja wyłączona wtedy utwórz atrapę
 $translator =
     $config['translator']['enabled']
-        ? new GC\Translation\FileTranslator($config['translator']['folder'].'/'.GC\Visitor::getLang().'.php')
+        ? new GC\Translation\FileTranslator($config['translator']['folder'].'/'.getVisitorLang().'.php')
         : new GC\Translation\NullTranslator();
-
-# serwis do łatwego tłumaczenia tekstu: $trans('text')
-$trans = function ($text, array $params = []) use ($translator) {
-    return $translator->translate($text, $params);
-};
 
 # serwis reprezentujący żądanie, serwis uri jest tym samym żądaniem, tylko o krótszej nazwie
 $uri = $request = new GC\Request(

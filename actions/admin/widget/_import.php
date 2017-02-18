@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = $trans('Widżety');
+$headTitle = trans('Widżety');
 $uri->extendMask('/widget%s');
 $breadcrumbs->push([
     'uri' => $uri->mask('/list'),
