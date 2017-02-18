@@ -3,6 +3,14 @@
 /** Plik wejścia, ładuje aplikację i przetwarza żądanie */
 
 require __DIR__.'/bootstrap.php';
+
+# żądanie, obiekt uri jest tym samym żądaniem, tylko o krótszej nazwie
+$uri = $request = new GC\Request(
+    $_SERVER['REQUEST_METHOD'],
+    $_SERVER['REQUEST_URI'],
+    $_SERVER['SCRIPT_NAME']
+);
+
 require __DIR__.'/redirects.php';
 
 session_start();

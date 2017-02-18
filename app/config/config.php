@@ -18,7 +18,9 @@ define('TEMPLATE', 'bootstrap-example'); # nazwa używanego szablonu
 define('ASSETS_URL', '/assets'); # adres do katalogu z zasobami
 define('ROOT_PATH', realpath(__DIR__.'/../../')); # ścieżka do katalogu głównego serwera www
 define('WEB_PATH', ROOT_PATH.'/web'); # ścieżka do katalogu an który jest nakierowana domena
+define('TEMP_PATH', ROOT_PATH.'/tmp'); # ścieżka do katalogu tymczasowego
 define('ACTIONS_PATH', ROOT_PATH.'/actions'); # ścieżka do katalogu z plikami kontrolerów i szablonów
+define('STORAGE_PATH', ROOT_PATH.'/storage'); # ścieżka do katalogu magazynu
 define('TEMPLATE_PATH', ROOT_PATH.'/templates/'.TEMPLATE); # ścieżka do katalogu z szablonem
 define('TEMPLATE_ASSETS_URL', '/templates/'.TEMPLATE); # adres do zasobów w katalogu z szablonem
 
@@ -28,7 +30,7 @@ ini_set('register_globals', 0); # zabrania tworzenia zmiennych z danych wysyłan
 ini_set('error_reporting', E_ALL); # raportuje napotkane błędy
 ini_set('display_errors', 1); # włącza wyświetlanie błędów
 ini_set('display_startup_errors', 1); # włącza wyświetlanie startowych błędów
-ini_set('error_log', ROOT_PATH.'/tmp/logs/'.date('Y-m-d').'.error.log'); # zmienia ścieżkę logowania błędów
+ini_set('error_log', TEMP_PATH.'/logs/'.date('Y-m-d').'.error.log'); # zmienia ścieżkę logowania błędów
 ini_set('max_execution_time', 300); # określa maksymalny czas trwania skryptu
 ini_set('date.timezone', 'Europe/Warsaw'); # ustawienie domyślnej strefy czasowej
 ini_set('session.gc_maxlifetime', 3600); # ustaw, aby usuwać sesje starsze niż (w sekundach)
@@ -39,7 +41,7 @@ ini_set('session.cookie_httponly', 1); # ustawia ciastko tylko do odczytu, nie j
 ini_set('session.use_cookies', 1); # do przechowywania sesji ma użyć ciastka
 ini_set('session.use_only_cookies', 1); # do przechowywania sesji ma używać tylko ciastka!
 ini_set('session.hash_function', 1); # użycie bardziej złożonej funkcji do hashowania ciastka sesyjnego
-// ini_set('session.save_path', ROOT_PATH.'/app/storage/sessions'); # ścieżka w której będą przechowywane pliki sesji
+// ini_set('session.save_path', STORAGE_PATH.'/sessions'); # ścieżka w której będą przechowywane pliki sesji
 ini_set('zlib.output_compression_level', 1); # poziom kompresji wyjścia skryptu
 
 header("Content-Type: text/html; charset=utf-8"); # ustawienie domyślego mimetype i kodowanie
@@ -82,11 +84,11 @@ $config = [
     ],
     'logger' => [ # ustawienia dla rejestrowania logów
         'enabled' => true, # uruchamia rejestrowanie logów
-        'folder' => ROOT_PATH.'/tmp/logs', # katalog do ktorego są zapisywane logi
+        'folder' => TEMP_PATH.'/logs', # katalog do ktorego są zapisywane logi
     ],
     'translator' => [ # ustawienia translatora
         'enabled' => true, # czy włączyć tłumaczenie komunikatów
-        'folder' => ROOT_PATH.'/app/storage/locales', # katalog do ktorego są zapisywane tłumaczenia
+        'folder' => STORAGE_PATH.'/locales', # katalog do ktorego są zapisywane tłumaczenia
         'key' => 'trnsl.1.1.20161215T151949Z.587eb49efd9a9be2.a1eb760e6bf78076ea004f12eeb22b37902aadc2', # klucz do api translatora w serwisie Yandex
     ],
     'mailer' => [ # ustawienia serwera pocztowego do rozsyłania emaili
@@ -229,8 +231,8 @@ $config = [
         '~^/old-service/index\.php\?id=(\d+)\&theme=([a-z]+?)$~' => '/old-service/$1/$2',
     ],
     'dump' => [ # zawiera informacje dla eksportera bazy danych
-        'path' => ROOT_PATH.'/app/storage/dumps/'.date('Y-m'), # ścieżka do katalogu z rzutami bazy danych
-        'tmpPath' => ROOT_PATH.'/tmp', # ścieżka tymczasowa dla eksportera
+        'path' => STORAGE_PATH.'/dumps/'.date('Y-m'), # ścieżka do katalogu z rzutami bazy danych
+        'tmpPath' => TEMP_PATH, # ścieżka tymczasowa dla eksportera
         'settings' => [ # ustawienia dla MySQLDump
             'include-tables' => [],
             'exclude-tables' => [

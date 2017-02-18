@@ -11,6 +11,8 @@ $method = $request->method;
 $widgets = GC\Model\Widget::select()
     ->equals('lang', getVisitorLang())
     ->fetchByKey('workname');
+    
+GC\Translator::$domain = 'template-'.TEMPLATE;
 
 $getTemplateFile = function ($name, $theme = 'default') use ($lang, $method)
 {

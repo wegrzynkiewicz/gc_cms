@@ -1,7 +1,7 @@
-/app/storage
 /app/config/generated.php
 /composer.lock
 /external
+/storage
 /tmp
 /vendor/
 /web/adminer.php

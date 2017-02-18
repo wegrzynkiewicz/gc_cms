@@ -21,10 +21,3 @@ set_exception_handler(function ($exception) {
     logException($exception);
     throw $exception;
 });
-
-# żądanie, obiekt uri jest tym samym żądaniem, tylko o krótszej nazwie
-$uri = $request = new GC\Request(
-    $_SERVER['REQUEST_METHOD'],
-    $_SERVER['REQUEST_URI'],
-    $_SERVER['SCRIPT_NAME']
-);
