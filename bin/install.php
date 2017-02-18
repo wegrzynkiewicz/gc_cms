@@ -18,6 +18,7 @@ $json = file_get_contents(TEMP_PATH.'/translations-dump.json');
 foreach ($config['langs'] as $code => $lang) {
     $path = $config['translator']['folder']."/{$code}.json";
     echo "Creating file: {$path}".PHP_EOL;
+    makeDirRecursive(dirname($path));
     file_put_contents($path, $json);
 }
 echo "Translation files was created.".PHP_EOL;
@@ -39,7 +40,7 @@ refreshChecksums();
 echo "Checksums were verified.".PHP_EOL;
 
 # Usunięcie plików tymczasowych
-require __DIR__.'/temp-remove.php';
+require __DIR__.'/temp-delete.php';
 
 # finalizacja
 echo PHP_EOL;
