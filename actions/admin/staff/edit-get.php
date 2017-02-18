@@ -10,7 +10,6 @@ $user = GC\Model\Staff\Staff::fetchByPrimaryId($staff_id);
 
 $headTitle = $trans('Edytowanie pracownika "%s"', [$user['name']]);
 $breadcrumbs->push([
-    'uri' => $request->uri,
     'name' => $headTitle,
 ]);
 

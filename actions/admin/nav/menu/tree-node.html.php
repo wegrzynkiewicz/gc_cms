@@ -20,7 +20,7 @@
         </div>
 
         <div class="pull-right" style="margin-right: 30px">
-            <?=render(ACTIONS_PATH."/admin/nav/menu/list-preview/{$type}.html.php", [
+            <?=render(ACTIONS_PATH."/admin/nav/menu/node-preview/{$type}.html.php", [
                 'node' => $node,
             ])?>
         </div>

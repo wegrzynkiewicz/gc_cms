@@ -11,7 +11,6 @@ $field = GC\Model\Form\Field::fetchByPrimaryId($field_id);
 
 $headTitle = $trans('Edycja pola "%s"', [$field['name']]);
 $breadcrumbs->push([
-    'uri' => $request->uri,
     'name' => $headTitle,
 ]);
 

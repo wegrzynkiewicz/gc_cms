@@ -6,7 +6,6 @@ require ACTIONS_PATH.'/admin/nav/menu/_import.php';
 
 $headTitle = $trans('Dodawanie nowego węzła');
 $breadcrumbs->push([
-    'uri' => $request->uri,
     'name' => $headTitle,
 ]);
 

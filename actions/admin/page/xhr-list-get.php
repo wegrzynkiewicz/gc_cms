@@ -27,10 +27,10 @@ $recordsTotal = intval(GC\Model\Frame::select()
 # dla każdej strony utwórz miniaturę
 foreach ($frames as &$frame) {
     $image = empty($frame['image'])
-        ? $uri->assets($config['noImageUrl'])
+        ? $config['noImageUri']
         : $frame['image'];
-    $frame['slug'] = $uri->make($frame['slug']);
-    $frame['image'] = GC\Thumb::make($image, 64, 999);
+    $frame['href'] = $uri->make($frame['slug']);
+    $frame['image'] = $uri->root(GC\Thumb::make($image, 64, 64));
 }
 unset($frame);
 

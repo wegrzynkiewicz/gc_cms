@@ -60,7 +60,7 @@ return [
     ],
     'adminNavbarTitle' => 'Panel Administracyjny', # wyświetlana w prawym gornym rogu panelu admina
     'adminHeadTitleBase' => 'Acme Panel Administracyjny', # nazwa doklejana do <title> strony w panelu admina
-    'noImageUrl' => '/admin/images/no-image.jpg', # ścieżka do obrazka w przypadku braku obrazka
+    'noImageUri' => ASSETS_URL.'/admin/images/no-image.jpg', # ścieżka do obrazka w przypadku braku obrazka
     'password' => [ # zawiera ustawienia dotyczące polityki haseł
         'minLength' => 8, # minimalna długość hasła
     ],

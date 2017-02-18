@@ -18,7 +18,6 @@ if (!$frame) {
 
 $headTitle = $trans('Edytowanie produktu "%s"', [$frame['name']]);
 $breadcrumbs->push([
-    'uri' => $request->uri,
     'name' => $headTitle,
 ]);
 

@@ -15,7 +15,6 @@ $node = GC\Model\Product\Tree::select()
 
 $headTitle = $trans('Edycja węzła "%s"', [$node['name']]);
 $breadcrumbs->push([
-    'uri' => $request->uri,
     'name' => $headTitle,
 ]);
 

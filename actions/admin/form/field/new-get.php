@@ -6,7 +6,6 @@ require ACTIONS_PATH.'/admin/form/field/_import.php';
 
 $headTitle = $trans('Dodawanie nowego pola');
 $breadcrumbs->push([
-    'uri' => $request->uri,
     'name' => $headTitle,
 ]);
 

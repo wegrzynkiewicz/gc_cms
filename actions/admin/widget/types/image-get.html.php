@@ -2,7 +2,6 @@
 
 $headTitle = $trans('Edycja widżetu zdjęcia "%s"', [$widget['name']]);
 $breadcrumbs->push([
-    'uri' => $request->uri,
     'name' => $headTitle,
 ]);
 

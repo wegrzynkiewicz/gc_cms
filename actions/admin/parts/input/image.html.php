@@ -1,6 +1,6 @@
 <?php
     $value = post($name);
-    $preview = empty($value) ? $uri->assets($config['noImageUrl']): $value;
+    $preview = empty($value) ? $config['noImageUri']: $value;
 ?>
 
 <div class="form-group">
@@ -13,7 +13,7 @@
         <div class="row">
 
             <div class="col-md-2 image_page_preview">
-                <img id="<?=$name?>_preview" src="<?=e($preview)?>"/>
+                <img id="<?=$name?>_preview" src="<?=$uri->root($preview)?>"/>
             </div>
 
             <div class="col-md-10">
@@ -60,7 +60,7 @@
         });
 
         $('#<?=$name?>_delete').click( function(){
-            $('#<?=$name?>_preview').attr('src', '<?=$uri->assets($config['noImageUrl'])?>');
+            $('#<?=$name?>_preview').attr('src', '<?=$uri->root($config['noImageUri'])?>');
             $('#<?=$name?>_source').val('');
         })
     });

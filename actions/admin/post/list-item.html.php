@@ -1,9 +1,12 @@
-<?php $preview = empty($post['image']) ? $uri->assets($config['noImageUrl']): $post['image']; ?>
-
+<?php
+$preview = empty($post['image'])
+    ? $config['noImageUri']
+    : $post['image'];
+?>
 <tr>
 
     <td>
-        <img src="<?=GC\Thumb::make($preview, 64, 64)?>" height="64"/>
+        <img src="<?=$uri->root(GC\Thumb::make($preview, 64, 64))?>" height="64"/>
     </td>
 
     <td>

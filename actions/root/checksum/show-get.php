@@ -8,7 +8,6 @@ $file = base64_decode($base64);
 
 $headTitle = sprintf('Źródło pliku "%s"', $file);
 $breadcrumbs->push([
-    'uri' => $request->uri,
     'name' => $headTitle,
     'icon' => 'file-o',
 ]);

@@ -11,7 +11,6 @@ $group = GC\Model\Staff\Group::fetchByPrimaryId($group_id);
 
 $headTitle = $trans('Edytowanie grupy pracowników "%s"', [$group['name']]);
 $breadcrumbs->push([
-    'uri' => $request->uri,
     'name' => $headTitle,
 ]);
 

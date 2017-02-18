@@ -2,7 +2,6 @@
 
 $headTitle = $trans('Dodawanie nowego modułu');
 $breadcrumbs->push([
-    'uri' => $request->uri,
     'name' => $headTitle,
 ]);
 

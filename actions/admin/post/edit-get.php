@@ -4,7 +4,6 @@ $post_id = intval(array_shift($_PARAMETERS));
 $post = GC\Model\Post\Post::selectWithFrameByPrimaryId($post_id);
 $headTitle = $trans('Edytowanie wpisu "%s"', [$post['name']]);
 $breadcrumbs->push([
-    'uri' => $request->uri,
     'name' => $headTitle,
 ]);
 

@@ -9,8 +9,8 @@
 
     <?=$trans('o adresie')?>
 
-    <a href="<?=$node->getUri()?>">
-        <?=$node->getUri()?></a>
+    <a href="<?=$uri->make($node->getSlug())?>">
+        <?=$node->getSlug()?></a>
 
     <span style="margin-left: 30px">
         <?=$trans($config['navNodeTargets'][$node['target']])?>

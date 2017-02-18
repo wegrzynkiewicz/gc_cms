@@ -13,13 +13,14 @@ class Request
     public $frontControllerUrl = '';
     public $mask = '%s';
     public $lang = null;
+    public $rawUri = '';
 
-    public function __construct($method, $uri, $script)
+    public function __construct($method, $rawUri, $script)
     {
         # pobierz wszystkie najistotniejsze informacje o żądaniu
         $rootUrl = dirname($script);
-        $rawRequest = $uri;
-        $this->uri = parse_url($rawRequest, \PHP_URL_PATH);
+        $this->rawUri = $rawUri;
+        $this->uri = parse_url($rawUri, \PHP_URL_PATH);
         $this->method = strtolower($method);
 
         $GLOBALS['logger']->info('[REQUEST] '.strtoupper($method).' '.$this->uri, $_REQUEST);
@@ -43,6 +44,9 @@ class Request
                 $this->lang = $code;
             }
         }
+
+        # uri musi mieć zawsze slasha na początku
+        $this->uri = '/'.trim($this->uri, '/');
     }
 
     /**
@@ -58,9 +62,7 @@ class Request
      */
     public function root($path = '')
     {
-        $uri = rtrim($this->rootUrl.$path, '/');
-
-        return empty($uri) ? '/' : $uri;
+        return '/'.trim($this->rootUrl.$path, '/');
     }
 
     /**

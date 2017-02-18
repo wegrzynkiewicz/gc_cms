@@ -12,6 +12,6 @@ $extend = isset($extend) ? $extend : '';
 <?php else: ?>
     <a id="navNode_<?=$menu_id?>"
         <?=$extend?>
-        href="<?=$node->getUri()?>"
+        href="<?=$uri->make($node->getSlug())?>"
         target="<?=$target?>"><?=e($node->getName())?></a>
 <?php endif ?>

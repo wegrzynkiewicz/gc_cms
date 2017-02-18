@@ -33,7 +33,7 @@ class Menu extends AbstractNode
     /**
      * Zwraca odpowiedni adres docelowego odnośnika
      */
-    public function getUri()
+    public function getSlug()
     {
         if ($this->type === 'homepage') {
             return $GLOBALS['uri']->root('/');
@@ -49,7 +49,7 @@ class Menu extends AbstractNode
 
         $slug = normalizeSlug($this->frame_name.'/'.$this->frame_id);
 
-        return $GLOBALS['uri']->make($slug);
+        return $slug;
     }
 
     /**

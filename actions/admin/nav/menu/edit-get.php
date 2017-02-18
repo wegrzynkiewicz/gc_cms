@@ -15,7 +15,6 @@ $node = GC\Model\Menu\Menu::select()
 
 $headTitle = $trans('Edycja węzła "%s"', [$node->getName()]);
 $breadcrumbs->push([
-    'uri' => $request->uri,
     'name' => $headTitle,
 ]);
 

@@ -5,7 +5,6 @@ require ACTIONS_PATH.'/admin/product/_import.php';
 
 $headTitle = $trans('Dodawanie nowego produktu');
 $breadcrumbs->push([
-    'uri' => $request->uri,
     'name' => $headTitle,
 ]);
 

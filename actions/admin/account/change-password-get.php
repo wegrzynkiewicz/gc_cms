@@ -5,7 +5,6 @@ require ACTIONS_PATH.'/admin/account/_import.php';
 
 $headTitle = $trans('Zmiana hasła');
 $breadcrumbs->push([
-    'uri' => $request->uri,
     'name' => $headTitle,
     'icon' => 'unlock-alt',
 ]);

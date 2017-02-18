@@ -18,7 +18,6 @@ if (!$frame) {
 
 $headTitle = $trans('Edycja strony %s', [$frame['name']]);
 $breadcrumbs->push([
-    'uri' => $request->uri,
     'name' => $headTitle,
 ]);
 

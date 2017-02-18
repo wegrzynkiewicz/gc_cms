@@ -2,7 +2,6 @@
 
 $headTitle = $trans('Edycja widżetu formatowanego tekstu HTML "%s"', [$widget['name']]);
 $breadcrumbs->push([
-    'uri' => $request->uri,
     'name' => $headTitle,
 ]);
 

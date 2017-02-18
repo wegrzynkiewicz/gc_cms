@@ -12,7 +12,6 @@ $localization = json_decode($message['localization'], true);
 
 $headTitle = $trans('Wyświetl wiadomość');
 $breadcrumbs->push([
-    'uri' => $request->uri,
     'name' => $headTitle,
 ]);
 

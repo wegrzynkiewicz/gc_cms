@@ -53,7 +53,7 @@ $targetUrl = rtrim($targetUrl, '?');
 # przekierowanie na docelowy adres, pomocne przy seo
 if ($currentUrl !== $targetUrl) {
     $GLOBALS['logger']->info("[SEO] From: {$currentUrl} To: {$targetUrl}");
-    redirect($targetUrl, 301);  # 301 Moved Permanently
+    absoluteRedirect($targetUrl, 301);  # 301 Moved Permanently
 }
 
 # jeżeli strona jest w budowie wtedy zwróć komunikat o budowie, chyba, że masz uprawnienie

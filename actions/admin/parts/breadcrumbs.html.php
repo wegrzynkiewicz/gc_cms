@@ -2,7 +2,7 @@
     <?php if (count($links)): ?>
         <ol class="breadcrumb">
             <?php foreach ($links as $i => $link): ?>
-                <?php $isLink = !(empty($link['uri']) or $link['uri'] == $request->uri); ?>
+                <?php $isLink = !(empty($link['uri']) or $link['uri'] == $request->rawUri); ?>
                 <li class="<?=$isLink ? '' : 'active'?>">
                     <?php if ($isLink): ?>
                         <a href="<?=$link['uri']?>">
