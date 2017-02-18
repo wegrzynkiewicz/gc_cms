@@ -20,7 +20,7 @@ GC\Model\Frame::updateByFrameId($frame_id, [
     'slug' => normalizeSlug(post('slug')),
     'keywords' => post('keywords'),
     'description' => post('description'),
-    'image' => $uri->upload(post('image')),
+    'image' => $uri->relative(post('image')),
 ]);
 
 flashBox($trans('Węzeł "%s" został zaktualizowany.', [$node['name']]));

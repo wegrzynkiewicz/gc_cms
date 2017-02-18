@@ -6,7 +6,7 @@ $preview = empty($post['image'])
 <tr>
 
     <td>
-        <img src="<?=$uri->root(GC\Thumb::make($preview, 64, 64))?>" height="64"/>
+        <img src="<?=$uri->root(thumbnail($preview, 64, 64))?>" height="64"/>
     </td>
 
     <td>

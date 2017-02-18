@@ -4,7 +4,7 @@ $cancelHref = isset($cancelHref) ? $cancelHref : $breadcrumbs->getBeforeLast('ur
 
 <div class="row" style="margin-top:20px">
     <div class="col-md-6 col-sm-6 col-xs-6 text-left">
-        <a href="<?=$uri->make($cancelHref)?>" class="btn btn-warning btn-md">
+        <a href="<?=$uri->make($uri->relative($cancelHref))?>" class="btn btn-warning btn-md">
             <i class="fa fa-arrow-left fa-fw"></i>
             <?=$trans('Wstecz')?>
         </a>

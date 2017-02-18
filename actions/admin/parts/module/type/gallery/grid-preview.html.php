@@ -15,7 +15,7 @@
                     data-width="<?=e($is['width'])?>"
                     data-height="<?=e($is['height'])?>"
                     class="thumb-wrapper">
-                    <img src="<?=GC\Thumb::make($image['uri'], 120, 70)?>"
+                    <img src="<?=$uri->root(thumbnail($image['uri'], 120, 70))?>"
                         width="120"
                         width="70"
                         alt="<?=e($image['name'])?>"

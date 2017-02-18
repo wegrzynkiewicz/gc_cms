@@ -30,7 +30,7 @@
                         data-photoswipe-item=""
                         data-width="<?=e($is['width'])?>"
                         data-height="<?=e($is['height'])?>">
-                        <img data-thumb="<?=GC\Thumb::lazyGenerate($image['uri'])?>"
+                        <img data-thumb="<?=$image['uri']?>"
                             width="100%"
                             alt="<?=e($image['name'])?>"
                             class="img-responsive">

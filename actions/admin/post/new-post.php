@@ -5,7 +5,7 @@ $frame_id = GC\Model\Frame::insert([
     'type' => 'post',
     'keywords' => post('keywords'),
     'description' => post('description'),
-    'image' => $uri->upload(post('image')),
+    'image' => $uri->relative(post('image')),
 ]);
 
 $relations = isset($_POST['taxonomy']) ? array_unchunk($_POST['taxonomy']) : [];

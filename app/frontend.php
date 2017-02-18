@@ -6,6 +6,12 @@ $slug = $request->uri;
 $lang = GC\Visitor::getLang();
 $method = $request->method;
 
+
+
+$widgets = GC\Model\Widget::select()
+    ->equals('lang', GC\Visitor::getLang())
+    ->fetchByKey('workname');
+
 $getTemplateFile = function ($name, $theme = 'default') use ($lang, $method)
 {
     $files = [
@@ -73,7 +79,3 @@ if ($file = $getTemplateFile("frames/{$frame_type}", $theme)) {
     $logger->info("[FRONTEND] Frame {$frame_type} {$file}");
     return require $file;
 }
-
-$widgets = GC\Model\Widget::select()
-    ->equals('lang', GC\Visitor::getLang())
-    ->fetchByKey('workname');

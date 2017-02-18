@@ -214,8 +214,8 @@ return [
     ],
     'thumb' => [ # ustawienia generatora miniaturek
         'enabled' => true, # czy generować miniaturki?
-        'thumbsPath' => ROOT_PATH.'/web', # ścieżka do katalogu z miniaturkami, należy do tego dodać thumbsUrl
-        'thumbsUrl' => '/thumbs', # adres do katalogu z miniaturkami
+        'thumbsPath' => ROOT_PATH.'/web', # ścieżka do katalogu z miniaturkami, należy do tego dodać thumbsUri
+        'thumbsUri' => '/thumbs', # adres do katalogu z miniaturkami
         'options' => [ # ustawienia dla generatora miniaturek
             'jpg' => [
                 'loader' => 'imagecreatefromjpeg',

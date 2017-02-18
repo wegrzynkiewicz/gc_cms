@@ -10,7 +10,7 @@ $frame_id = GC\Model\Frame::insert([
     'slug' => normalizeSlug(post('slug')),
     'keywords' => post('keywords'),
     'description' => post('description'),
-    'image' => $uri->upload(post('image')),
+    'image' => $uri->relative(post('image')),
 ]);
 
 flashBox($trans('Nowa strona "%s" została utworzona.', [post('name')]));

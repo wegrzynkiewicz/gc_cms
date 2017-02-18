@@ -104,7 +104,7 @@ class Request
     /**
      * Usuwa przednie części adresu, aby nie zawierały domeny lub rootUrl
      */
-    public function upload($path)
+    public function relative($path)
     {
         if (strlen($this->rootUrl) <= 0) {
             return $path;

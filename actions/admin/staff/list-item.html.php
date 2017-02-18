@@ -1,12 +1,14 @@
 <?php
-$avatarUrl = empty($avatar)
-    ? $uri->assets($config['avatar']['noAvatarUrl'])
-    : GC\Thumb::make($avatar, 40, 40);
+$avatarUri = empty($avatar)
+    ? $config['noImageUri']
+    : $avatar;
 ?>
 <tr>
     <td>
-        <img src="<?=$avatarUrl?>"
-            height="40" style="margin-right:5px"/>
+        <img src="<?=$uri->root(thumbnail($avatarUri, 64, 64))?>"
+            width="64"
+            height="64"
+            style="margin-right:5px"/>
 
         <a href="<?=$uri->mask("/{$staff_id}/edit")?>"
             title="<?=$trans('Edytuj pracownika')?>">

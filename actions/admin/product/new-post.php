@@ -11,7 +11,7 @@ $frame_id = GC\Model\Frame::insert([
     'slug' => normalizeSlug(post('slug')),
     'keywords' => post('keywords'),
     'description' => post('description'),
-    'image' => $uri->upload(post('image')),
+    'image' => $uri->relative(post('image')),
 ]);
 
 # spłaszcz nadesłane przynależności do węzłów taksonomii

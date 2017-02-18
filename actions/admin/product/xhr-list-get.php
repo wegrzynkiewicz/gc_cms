@@ -30,7 +30,7 @@ foreach ($frames as &$frame) {
         ? $config['noImageUri']
         : $frame['image'];
     $frame['href'] = $uri->make($frame['slug']);
-    $frame['image'] = $uri->root(GC\Thumb::make($image, 64, 999));
+    $frame['image'] = $uri->root(thumbnail($image, 64, 64));
 }
 unset($frame);
 

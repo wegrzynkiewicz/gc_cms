@@ -100,7 +100,7 @@ $count = GC\Model\Frame::select()
 
 <script id="row-template" type="text/html">
     <td style="width:64px">
-        <img src="{{image}}" width="64"/>
+        <img src="{{image}}" width="64" height="64"/>
     </td>
 
     <td>

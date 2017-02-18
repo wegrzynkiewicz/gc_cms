@@ -5,6 +5,6 @@
 /tmp
 /vendor/
 /web/adminer.php
-/web/data
 /web/thumbs
+/web/uploads
 /web/assets/admin/images

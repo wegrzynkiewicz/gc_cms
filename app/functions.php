@@ -322,8 +322,9 @@ function normalizeSlug($string)
  */
 function redirect($location, $code = 303)
 {
-    $path = $GLOBALS['uri']->make($location);
-    absoluteRedirect($path, $code);
+    $uri = $GLOBALS['uri']->relative($location);
+    $uri = $GLOBALS['uri']->make($uri);
+    absoluteRedirect($uri, $code);
 }
 
 /**
@@ -562,4 +563,56 @@ function curlReCaptcha()
     return [
         'success' => false,
     ];
+}
+
+/**
+ *
+ */
+function makeThumbnailUri($imageUri, $width, $height)
+{
+    $thumbsUri      = $GLOBALS['config']['thumb']['thumbsUri'];
+    $imageUri       = urldecode($imageUri);
+    $size           = "{$width}x{$height}";
+    $normalized     = normalize($imageUri);
+    $filename       = pathinfo($normalized, PATHINFO_FILENAME);
+    $folderUri      = dirname($normalized);
+    $extension      = strtolower(pathinfo($imageUri, PATHINFO_EXTENSION));
+    $thumbnailUri   = "{$thumbsUri}{$folderUri}/{$filename}/{$size}.{$extension}";
+
+    return $thumbnailUri;
+}
+
+/**
+ *
+ */
+function thumbnail($imageUri, $width, $height, $mode = 'outbound')
+{
+    $thumbsPath     = $GLOBALS['config']['thumb']['thumbsPath'];
+    $thumbnailUri   = makeThumbnailUri($imageUri, $width, $height);
+    $imagePath      = $thumbsPath.$imageUri;
+    $thumnailPath   = $thumbsPath.$thumbnailUri;
+
+    # jeżeli istnieje miniaturka to zwróć jej adres
+    if (is_readable($thumnailPath)) {
+        return $thumbnailUri;
+    }
+
+    # jeżeli nie istnieje plik zdjęcia to zwróć oryginalny adres
+    if (!is_readable($imagePath)) {
+        return $imageUri;
+    }
+
+    # utwórz katalogi do pliku z miniaturką
+    makeDirRecursive(pathinfo($thumnailPath, PATHINFO_DIRNAME));
+
+    # tworzenie miniaturki
+    $imagine = new Imagine\Gd\Imagine();
+    $size    = new Imagine\Image\Box($width, $height);
+    $imagine
+        ->open($imagePath)
+        ->thumbnail($size, $mode)
+        ->save($thumnailPath);
+
+    # zwróć adres miniaturki
+    return $thumbnailUri;
 }
