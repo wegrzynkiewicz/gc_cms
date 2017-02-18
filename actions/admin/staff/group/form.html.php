@@ -24,14 +24,14 @@
                         <?=trans('W przypadku gdy pracownik należy do wielu grup, uprawnienia te są łączone.')?>
                     </p>
 
-                    <?php foreach ($config['permissions'] as $perm => $label): ?>
+                    <?php foreach (array_trans($config['permissions']) as $perm => $label): ?>
                         <div class="checkbox">
                             <label>
                                 <input name="permissions[]"
                                     type="checkbox"
                                     <?=checked(in_array($perm, $permissions))?>
                                     value="<?=$perm?>">
-                                <?=trans($label)?>
+                                <?=$label?>
                             </label>
                         </div>
                     <?php endforeach ?>

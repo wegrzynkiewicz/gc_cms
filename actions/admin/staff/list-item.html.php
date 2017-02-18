@@ -20,7 +20,7 @@ $avatarUri = empty($avatar)
             <?php foreach ($groups as $group_id => $group): ?>
                 <a href="<?=$uri->mask("/group/{$group_id}/edit")?>"
                     title="<?=trans('Przejdź do grupy')?>">
-                    <?=trans($group)?></a><br>
+                    <?=$group?></a><br>
             <?php endforeach ?>
         <?php else: ?>
             <?=trans('Ten pracownik nie jest przypisany do żadnej grupy.')?>

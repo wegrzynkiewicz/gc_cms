@@ -1,6 +1,6 @@
 <?php
 
-/** Plik wejścia, ładuje autoloader klas, funkcje oraz uruchamia routing */
+/** Plik ładuje autoloader klas oraz funkcje */
 
 require __DIR__.'/../vendor/autoload.php';
 require __DIR__.'/config/config.php';
@@ -28,17 +28,3 @@ $uri = $request = new GC\Request(
     $_SERVER['REQUEST_URI'],
     $_SERVER['SCRIPT_NAME']
 );
-
-require __DIR__.'/redirects.php';
-
-session_start();
-
-ob_start('ob_gzhandler') or ob_start();
-require __DIR__.'/routing.php';
-ob_end_flush();
-
-logger(sprintf('[RESPONSE] %s -- Time: %.3fs -- Memory: %sMiB',
-    http_response_code(),
-    microtime(true) - START_TIME,
-    memory_get_peak_usage(true) / 1048576
-));
