@@ -7,20 +7,17 @@ require_once __DIR__.'/_import.php';
 echo PHP_EOL;
 echo "Creating root staff account...".PHP_EOL;
 $email = $inputValue('Enter root account email (empty to abort): ');
-if ($email) {
-    $password = $inputValue('Enter root password (empty to generate): ');
-    if (empty($password)) {
-        $password = random($config['password']['minLength']);
-        echo 'Your password is: '.$password.PHP_EOL;
-    }
-    $hash = password_hash($password, PASSWORD_DEFAULT);
+if ($email and GC\Validate::staffEmail($email)) {
+    echo 'Your password is: root'.PHP_EOL;
+    $hash = password_hash('root', PASSWORD_DEFAULT);
 
     GC\Model\Staff\Staff::insert([
-        'name' => 'Buildin Master Account',
+        'name' => 'Buildin Root Account',
         'email' => $email,
         'password' => $hash,
         'lang' => 'pl',
         'root' => 1,
+        'force_change_password' => 1,
     ]);
 
     echo "Root staff account was created.".PHP_EOL;

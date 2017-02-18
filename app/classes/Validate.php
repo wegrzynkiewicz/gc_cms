@@ -19,6 +19,11 @@ class Validate
         return filter_var($ip, FILTER_VALIDATE_IP);
     }
 
+    public static function email($email)
+    {
+        return filter_var($email, FILTER_VALIDATE_EMAIL);
+    }
+
     public static function slug($slug, $frame_id = 0)
     {
         if (empty($slug)) {
@@ -35,6 +40,10 @@ class Validate
 
     public static function staffEmail($email, $staff_id = 0)
     {
+        if (!static::email($email)) {
+            return false;
+        }
+
         $user = \GC\Model\Staff\Staff::select()
             ->equals('email', $email)
             ->condition('staff_id != ?', $staff_id)

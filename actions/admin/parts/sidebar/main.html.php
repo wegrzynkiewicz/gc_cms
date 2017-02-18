@@ -1,4 +1,4 @@
-<?php $menu = require ACTIONS_PATH.'/admin/parts/sidebar/structure.html.php'; ?>
+<?php $menu = require ROOT_PATH.'/app/config/admin-nav.php'; ?>
 
 <div class="navbar-default sidebar" role="navigation">
     <div class="sidebar-nav navbar-collapse">

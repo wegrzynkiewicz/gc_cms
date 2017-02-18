@@ -30,7 +30,7 @@ GC\Storage\Database::getInstance()->execute($structure);
 echo "Database structure was created.".PHP_EOL;
 
 # Tworzenie konta roota
-require __DIR__.'/root-create-account.php';
+require __DIR__.'/root-create.php';
 
 # Tworzenie sum kontrolnych
 echo PHP_EOL;
