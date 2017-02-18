@@ -11,7 +11,6 @@ $name = post('name');
 $frame_id = GC\Model\Frame::insert([
     'name' => $name,
     'type' => 'product-node',
-    'lang' => GC\Staff::getInstance()->getEditorLang(),
     'slug' => normalizeSlug(post('slug')),
     'keywords' => post('keywords'),
     'description' => post('description'),

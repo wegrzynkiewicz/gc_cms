@@ -40,7 +40,6 @@ class Request
         # sprawdza pierwszy segment w adresie czy nie jest jednym z dostępnych języków
         foreach ($GLOBALS['config']['langs'] as $code => $lang) {
             if (strpos($this->uri, "/{$code}/") === 0 or $this->uri === "/{$code}") {
-                $this->uri = substr($this->uri, strlen("/{$code}"));
                 $this->lang = $code;
             }
         }
@@ -106,6 +105,8 @@ class Request
      */
     public function relative($path)
     {
+        $path = parse_url($path, PHP_URL_PATH);
+
         if (strlen($this->rootUrl) <= 0) {
             return $path;
         }

@@ -137,6 +137,7 @@ $config = [
         ],
     ],
     'lang' => [ # ustawienia języków
+        'main' => 'pl', # główny język strony, który nie jest wyświetlany w slugu
         'visitorDefault' => 'pl', # domyśly język gdy nie wiadomo jakiego języka oczekuje odwiedzający
         'editorDefault' => 'pl', # domyślny język edytowania w panelu admina
     ],

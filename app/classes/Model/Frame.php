@@ -2,6 +2,7 @@
 
 namespace GC\Model;
 
+use GC\Staff;
 use GC\Validate;
 use GC\Model\Module\Module;
 use GC\Storage\AbstractModel;
@@ -13,9 +14,10 @@ class Frame extends AbstractModel
 
     public static function updateByFrameId($frame_id, array $data)
     {
+        $lang = Staff::getInstance()->getEditorLang();
         $data['modify_datetime'] = sqldate();
         if (isset($data['slug']) and empty($data['slug'])) {
-            $data['slug'] = static::proposeSlug($data['name']);
+            $data['slug'] = static::proposeSlug($data['name'], $lang, $frame_id);
         }
 
         return static::updateByPrimaryId($frame_id, $data);
@@ -23,10 +25,12 @@ class Frame extends AbstractModel
 
     public static function insert(array $data)
     {
+        $lang = Staff::getInstance()->getEditorLang();
         $data['creation_datetime'] = sqldate();
         $data['modify_datetime'] = sqldate();
+        $data['lang'] = $lang;
         if (isset($data['slug']) and empty($data['slug'])) {
-            $data['slug'] = static::proposeSlug($data['name']);
+            $data['slug'] = static::proposeSlug($data['name'], $lang);
         }
 
         return parent::insert($data);
@@ -35,18 +39,23 @@ class Frame extends AbstractModel
     /**
      * Zwraca wolny slug, lub pusty jeżeli jego brak
      */
-    public static function proposeSlug($name)
+    public static function proposeSlug($name, $lang, $frame_id = 0)
     {
         $proposedSlug = normalizeSlug($name);
-        if (Validate::slug($proposedSlug)) {
+
+        if ($lang !== $GLOBALS['config']['lang']['main']) {
+            $proposedSlug = "/{$lang}{$proposedSlug}";
+        }
+
+        if (Validate::slug($proposedSlug, $frame_id)) {
             return $proposedSlug;
         }
 
         $number = 1;
         while (true) {
-            $proposedSlug = normalizeSlug($name.'/'.intval($number));
-            if (Validate::slug($proposedSlug)) {
-                return $proposedSlug;
+            $slug = $proposedSlug.'/'.intval($number);
+            if (Validate::slug($slug, $frame_id)) {
+                return $slug;
             }
             $number++;
         }

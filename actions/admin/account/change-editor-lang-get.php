@@ -8,4 +8,5 @@ require ACTIONS_PATH.'/admin/account/_import.php';
 $lang = array_shift($_SEGMENTS);
 GC\Assert::installedLang($lang);
 $_SESSION['langEditor'] = $lang;
-redirect('/admin');
+
+redirect($_SERVER['HTTP_REFERER']);
