@@ -38,7 +38,7 @@ $tree = GC\Model\Menu\Menu::select()
             <?php if ($tree->hasChildren()):?>
                 <ol id="sortable" class="sortable">
                     <?php foreach ($tree->getChildren() as $node): ?>
-                        <?=render(ACTIONS_PATH.'/admin/nav/menu/tree-item.html.php', [
+                        <?=render(ACTIONS_PATH.'/admin/nav/menu/tree-node.html.php', [
                             'node' => $node,
                         ])?>
                     <?php endforeach ?>

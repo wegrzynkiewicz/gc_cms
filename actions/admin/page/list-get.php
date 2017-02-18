@@ -111,7 +111,7 @@ $count = GC\Model\Frame::select()
     </td>
 
     <td>
-        <a href="<?=$uri->root()?>/{{slug}}"
+        <a href="{{slug}}"
             target="_blank"
             title="<?=$trans('Podejrzyj tą stronę')?>">
             {{slug}}

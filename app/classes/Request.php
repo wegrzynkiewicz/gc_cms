@@ -12,6 +12,7 @@ class Request
     public $rootUrl = '';
     public $frontControllerUrl = '';
     public $mask = '%s';
+    public $lang = null;
 
     public function __construct($method, $uri, $script)
     {
@@ -34,6 +35,14 @@ class Request
             $this->uri = substr($this->uri, strlen(static::FRONT_CONTROLLER_URL));
             $this->frontControllerUrl = static::FRONT_CONTROLLER_URL;
         }
+
+        # sprawdza pierwszy segment w adresie czy nie jest jednym z dostępnych języków
+        foreach ($GLOBALS['config']['langs'] as $code => $lang) {
+            if (strpos($this->uri, "/{$code}/") === 0 or $this->uri === "/{$code}") {
+                $this->uri = substr($this->uri, strlen("/{$code}"));
+                $this->lang = $code;
+            }
+        }
     }
 
     /**
@@ -49,7 +58,9 @@ class Request
      */
     public function root($path = '')
     {
-        return rtrim($this->rootUrl.$path, '/'); # generowane przez routing
+        $uri = rtrim($this->rootUrl.$path, '/');
+
+        return empty($uri) ? '/' : $uri;
     }
 
     /**
@@ -77,7 +88,7 @@ class Request
             return $path;
         }
 
-        return rtrim($this->rootUrl.$this->frontControllerUrl.$path, '/');
+        return $this->root($this->frontControllerUrl.$path);
     }
 
     /**

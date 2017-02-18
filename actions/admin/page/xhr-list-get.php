@@ -29,7 +29,7 @@ foreach ($frames as &$frame) {
     $image = empty($frame['image'])
         ? $uri->assets($config['noImageUrl'])
         : $frame['image'];
-    $frame['slug'] = getFrameSlug($frame);
+    $frame['slug'] = $uri->make($frame['slug']);
     $frame['image'] = GC\Thumb::make($image, 64, 999);
 }
 unset($frame);

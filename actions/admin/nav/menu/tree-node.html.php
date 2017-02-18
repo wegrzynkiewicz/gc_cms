@@ -31,7 +31,7 @@
     <?php if ($node->hasChildren()): ?>
         <ol>
             <?php foreach ($node->getChildren() as $child): ?>
-                <?=render(ACTIONS_PATH.'/admin/nav/menu/tree-item.html.php', [
+                <?=render(__FILE__, [
                     'node' => $child,
                 ])?>
             <?php endforeach ?>

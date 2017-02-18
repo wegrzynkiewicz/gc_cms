@@ -15,9 +15,9 @@ $node = GC\Model\Product\Tree::select()
     ->fetch();
 
 # zaktualizuj ramkę po frame_id
-GC\Model\Frame::updateByPrimaryId($frame_id, [
+GC\Model\Frame::updateByFrameId($frame_id, [
     'name' => post('name'),
-    'slug' => empty(post('slug')) ? '' : makeSlug(post('slug')),
+    'slug' => normalizeSlug(post('slug')),
     'keywords' => post('keywords'),
     'description' => post('description'),
     'image' => $uri->upload(post('image')),

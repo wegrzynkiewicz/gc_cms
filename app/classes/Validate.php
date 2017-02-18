@@ -21,12 +21,16 @@ class Validate
 
     public static function slug($slug, $frame_id = 0)
     {
+        if (empty($slug)) {
+            return false;
+        }
+
         $frame = \GC\Model\Frame::select()
-            ->equals('slug', $slug)
+            ->equals('slug', normalizeSlug($slug))
             ->condition('frame_id != ?', $frame_id)
             ->fetch();
 
-        return !$frame;
+        return $frame === false;
     }
 
     public static function staffEmail($email, $staff_id = 0)

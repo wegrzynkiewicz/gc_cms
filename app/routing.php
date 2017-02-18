@@ -10,28 +10,8 @@ $_SEGMENTS = array_filter($parts, function ($segment) {
     return !ctype_digit($segment);
 });
 
-# jeżeli adres bez ścieżki wtedy załaduj akcję główną
-if (empty($requestUri)) {
-    $logger->info('[ROUTING] Homepage');
-    return require ACTIONS_PATH.'/homepage.php';
-}
-
-# sprawdza pierwszy segment w adresie czy nie jest jednym z dostępnych języków
-$lang = $_SEGMENTS[0];
-if (strlen($lang) === 2 and GC\Validate::installedLang($lang)) {
-    GC\Visitor::$langRequest = $lang;
-    array_shift($_SEGMENTS);
-}
-
-# jeżeli jedyny segment okazał się być językowym prefiksem wtedy do głowej
-if (count($_SEGMENTS) === 0) {
-    $logger->info('[ROUTING] Homepage with lang');
-    return require ACTIONS_PATH."/homepage.php";
-}
-
 # wyszukaj plik w katalogu /actions, który pasuje do adresu uri
 $path = ACTIONS_PATH;
-$copySegments = $_SEGMENTS;
 while (count($_SEGMENTS) > 0) {
     $segment = array_shift($_SEGMENTS);
 
@@ -62,37 +42,11 @@ while (count($_SEGMENTS) > 0) {
         $logger->info("[ROUTING] Start {$file}");
         return require $file;
     }
+
+    break;
 }
 
-$_SEGMENTS = $copySegments;
+unset($_SEGMENTS);
+unset($_PARAMETERS);
 
-# następuje analiza sluga adresu, aby uruchomić odpowiednią akcję
-$slug = array_shift($_SEGMENTS);
-$absoluteSlug = '/'.implode('/', $_SEGMENTS);
-
-# jeżeli istnieje niestandardowy plik w folderze z szablonem
-$file = TEMPLATE_PATH."/custom/{$slug}.html.php";
-if (file_exists($file)) {
-    $logger->info("[ROUTING] Custom slug {$file}");
-    return require $file;
-}
-
-# jeżeli nie istnieje ostatni parametr wtedy zamień sluga na id strony
-$id = intval(count($_SEGMENTS) === 0 ? $slug : array_shift($_SEGMENTS));
-
-# jeżeli ostatni parametr nie jest prawidłową liczbą
-if ($id <= 0) {
-    $logger->info('[ROUTING] Invalid parameter ID');
-    return require TEMPLATE_PATH.'/errors/404.html.php';
-}
-
-# jeżeli istnieje niestandardowy plik w folderze z szablonem
-$file = TEMPLATE_PATH."/custom/{$id}.html.php";
-if (file_exists($file)) {
-    $logger->info("[ROUTING] Custom ID {$file}");
-    return require $file;
-}
-
-# jeżeli żaden plik nie pasuje, wtedy wyświetl błąd 404
-$logger->info('[ROUTING] End point');
-return require TEMPLATE_PATH.'/errors/404.html.php';
+return require __DIR__.'/frontend.php';

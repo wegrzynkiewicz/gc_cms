@@ -2,6 +2,7 @@
 
 namespace GC\Model;
 
+use GC\Validate;
 use GC\Model\Module\Module;
 use GC\Storage\AbstractModel;
 
@@ -13,6 +14,9 @@ class Frame extends AbstractModel
     public static function updateByFrameId($frame_id, array $data)
     {
         $data['modify_datetime'] = sqldate();
+        if (isset($data['slug']) and empty($data['slug'])) {
+            $data['slug'] = static::proposeSlug($data['name']);
+        }
 
         return static::updateByPrimaryId($frame_id, $data);
     }
@@ -21,8 +25,33 @@ class Frame extends AbstractModel
     {
         $data['creation_datetime'] = sqldate();
         $data['modify_datetime'] = sqldate();
+        if (isset($data['slug']) and empty($data['slug'])) {
+            $data['slug'] = static::proposeSlug($data['name']);
+        }
 
         return parent::insert($data);
+    }
+
+    /**
+     * Zwraca wolny slug, lub pusty jeżeli jego brak
+     */
+    public static function proposeSlug($name)
+    {
+        $proposedSlug = normalizeSlug($name);
+        if (Validate::slug($proposedSlug)) {
+            return $proposedSlug;
+        }
+
+        $number = 1;
+        while (true) {
+            $proposedSlug = normalizeSlug($name.'/'.intval($number));
+            if (Validate::slug($proposedSlug)) {
+                return $proposedSlug;
+            }
+            $number++;
+        }
+
+        return '';
     }
 
     /**

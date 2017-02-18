@@ -7,15 +7,6 @@
         </div>
 
         <div class="pull-right">
-
-            <a href="<?=$uri->make("/post/node/{$frame_id}")?>"
-                target="_blank"
-                title="<?=$trans('Podejrzyj ten węzeł')?>"
-                class="btn btn-primary btn-xs">
-                <i class="fa fa-search fa-fw"></i>
-                <?=$trans('Podgląd')?>
-            </a>
-
             <a href="<?=$uri->mask("/{$frame_id}/module/grid")?>"
                 title="<?=$trans('Wyświetl moduły węzła')?>"
                 class="btn btn-success btn-xs">
@@ -32,6 +23,12 @@
                 <i class="fa fa-times fa-fw"></i>
                 <?=$trans('Usuń')?>
             </a>
+        </div>
+
+        <div class="pull-right" style="margin-right: 30px">
+            <?=$trans('Adres węzła')?>
+            <a href="<?=$uri->make($node['slug'])?>">
+                <?=$node['slug']?></a>
         </div>
 
         <div class="clearfix"></div>

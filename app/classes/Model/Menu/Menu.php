@@ -47,7 +47,9 @@ class Menu extends AbstractNode
             return $this->slug;
         }
 
-        return makeSlug($this->frame_name.'/'.$this->frame_id);
+        $slug = normalizeSlug($this->frame_name.'/'.$this->frame_id);
+
+        return $GLOBALS['uri']->make($slug);
     }
 
     /**

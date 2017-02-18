@@ -308,22 +308,13 @@ function normalize($unformattedString)
 /**
  * Tworzy przyjazny adres dla wyszukiwarek na podstawie wprowadzonego ciągu
  */
-function makeSlug($string)
+function normalizeSlug($string)
 {
-    return '/'.trim(normalize($string), '/');
-}
-
-/**
- * Tworzy przyjazny adres dla wyszukiwarek na podstawie rekordu z tabeli ::frames
- */
-function getFrameSlug($frame)
-{
-    $slug = def($frame, 'slug', null);
-    if ($slug) {
-        return $slug;
+    if (empty($string)) {
+        return '';
     }
 
-    return makeSlug(def($frame, 'name', null)).'/'.intval(def($frame, 'frame_id', 0));
+    return '/'.trim(normalize($string), '/');
 }
 
 /**

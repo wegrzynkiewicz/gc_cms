@@ -13,7 +13,7 @@ $modules = GC\Model\Module\Module::select()
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=getFrameSlug($frame)?>"
+                <a href="<?=$frame->slug?>"
                     target="_blank"
                     type="button"
                     class="btn btn-primary">

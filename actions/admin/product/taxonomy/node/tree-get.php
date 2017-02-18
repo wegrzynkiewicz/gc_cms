@@ -6,7 +6,6 @@ require ACTIONS_PATH.'/admin/product/taxonomy/_import.php';
 require ACTIONS_PATH.'/admin/product/taxonomy/node/_import.php';
 
 $tree = GC\Model\Product\Tree::select()
-    ->fields(['frame_id', 'parent_id', 'name'])
     ->source('::nodes')
     ->equals('tax_id', $tax_id)
     ->fetchTree();
