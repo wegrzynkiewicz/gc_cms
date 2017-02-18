@@ -373,7 +373,7 @@ function absoluteRedirect($location, $code = 303)
     header("Location: {$location}");
 
     logger(
-        sprintf("[REDIRECT] %s %s :: Time: %.3fs :: Memory: %sMiB",
+        sprintf("[REDIRECT] %s %s -- Time: %.3fs -- Memory: %sMiB",
             $code,
             $location,
             microtime(true) - START_TIME,
@@ -607,7 +607,7 @@ function curlReCaptcha()
  */
 function makeThumbnailUri($imageUri, $width, $height)
 {
-    $thumbsUri      = $GLOBALS['config']['thumb']['thumbsUri'];
+    $thumbsUri      = $GLOBALS['config']['thumbnail']['thumbsUri'];
     $imageUri       = urldecode($imageUri);
     $size           = "{$width}x{$height}";
     $normalized     = normalize($imageUri);
@@ -625,11 +625,11 @@ function makeThumbnailUri($imageUri, $width, $height)
 function thumbnail($imageUri, $width, $height, $mode = 'outbound')
 {
     # jeżeli generowanie minaturek jest wyłączone wtedy zwróć adres zdjęcia
-    if (!$GLOBALS['config']['thumb']['enabled']) {
+    if (!$GLOBALS['config']['thumbnail']['enabled']) {
         return $imageUri;
     }
 
-    $thumbsPath     = $GLOBALS['config']['thumb']['thumbsPath'];
+    $thumbsPath     = $GLOBALS['config']['thumbnail']['thumbsPath'];
     $imagePath      = $thumbsPath.$imageUri;
     $thumbnailUri   = makeThumbnailUri($imageUri, $width, $height);
     $thumnailPath   = $thumbsPath.$thumbnailUri;
@@ -653,7 +653,9 @@ function thumbnail($imageUri, $width, $height, $mode = 'outbound')
     $imagine
         ->open($imagePath)
         ->thumbnail($size, $mode)
-        ->save($thumnailPath);
+        ->save($thumnailPath, $GLOBALS['config']['thumbnail']['options']);
+
+    logger("[THUMBNAIL] GENERATED {$thumbnailUri}");
 
     # zwróć adres miniaturki
     return $thumbnailUri;

@@ -5,7 +5,7 @@ namespace GC;
 class Logger
 {
     private static $instance = null;
-    
+
     private $filename = "";
 
     private function __construct($filename)
@@ -22,13 +22,14 @@ class Logger
 
     public function info($message, array $params = [])
     {
-        $log = sprintf("[%s] %s :: %s\n",
-            getMicroDateTime()->format('H:i:s.u'),
-            $message,
-            json_encode($params, JSON_UNESCAPED_UNICODE)
-        );
+        $date = getMicroDateTime()->format('H:i:s.u');
+        $log = "[{$date}] {$message}";
 
-        file_put_contents($this->filename, $log, FILE_APPEND);
+        if (!empty($params)) {
+            $log .= ' :: '.json_encode($params, JSON_UNESCAPED_UNICODE);
+        }
+
+        file_put_contents($this->filename, $log.PHP_EOL, FILE_APPEND);
     }
 
     /**

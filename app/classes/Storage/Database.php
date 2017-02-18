@@ -147,7 +147,7 @@ class Database
             $database = new static($pdo);
             $database->prefix = $dbConfig['prefix'];
 
-            logger('[DATABASE]', [$dbConfig['dns']]);
+            logger('[DATABASE] Connected');
             static::$instance = $database;
         }
 
@@ -165,7 +165,7 @@ class Database
         }, $sql);
 
         logger(
-            '[QUERY] '.($this->pdo->inTransaction() ? '(TRANSACTION) :: ' : '').$sql,
+            '[QUERY] '.($this->pdo->inTransaction() ? '(Transaction) :: ' : '').$sql,
             $values
         );
 

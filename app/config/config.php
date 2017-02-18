@@ -107,10 +107,14 @@ $config = [
         'public' => '6Le88g4UAAAAAJ_VW4XML20c2tWSWFSv29lkGeVp', # publiczny klucz
         'secret' => '6Le88g4UAAAAAIOFZyOilvhdWRP3IIOWdkdQ7gAf', # prywatny klucz
     ],
-    'thumb' => [ # ustawienia generatora miniaturek
+    'thumbnail' => [ # ustawienia generatora miniaturek
         'enabled' => true, # czy generować miniaturki?
         'thumbsPath' => ROOT_PATH.'/web', # ścieżka do katalogu z miniaturkami, należy do tego dodać thumbsUri
         'thumbsUri' => '/thumbs', # adres do katalogu z miniaturkami
+        'options' => [ # ustawienia zapisu dla miniaturek
+            'jpeg_quality' => 90, # stopień kompresji dla JPG 0-100
+            'png_compression_level' => 9, # stopień kompresji dla PNG 0-9
+        ],
     ],
     'dataTable' => [ # dotyczą pluginu DataTables
         'iDisplayLength' => 50, # ilość rekordów domyślnie wyświetlanych na jedną strone
