@@ -18,14 +18,14 @@ while (count($_SEGMENTS) > 0) {
     # jeżeli istnieje plik z metodą requesta na początku, załaduj
     $file = "{$path}/{$segment}-{$request->method}.php";
     if (file_exists($file)) {
-        $logger->info("[ROUTING] Nested with method {$file}");
+        logger("[ROUTING] Nested with method {$file}");
         return require $file;
     }
 
     # jeżeli istnieje plik, wtedy załaduj
     $file = "{$path}/{$segment}.php";
     if (file_exists($file)) {
-        $logger->info("[ROUTING] Nested without method {$file}");
+        logger("[ROUTING] Nested without method {$file}");
         return require $file;
     }
 
@@ -39,7 +39,7 @@ while (count($_SEGMENTS) > 0) {
     # jeżeli nie istnieje akcja to spróbuj załadować plik start
     $file = "{$path}/{$segment}/start.php";
     if (file_exists($file)) {
-        $logger->info("[ROUTING] Start {$file}");
+        logger("[ROUTING] Start {$file}");
         return require $file;
     }
 

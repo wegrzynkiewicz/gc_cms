@@ -53,7 +53,7 @@ class Staff extends AbstractEntity
             redirect('/auth/force-change-password');
         }
 
-        $GLOBALS['logger']->info('[STAFF] Authenticated', [$this->getProperty('name', 'Unnamed')]);
+        logger('[STAFF] Authenticated', [$this->getProperty('name', 'Unnamed')]);
     }
 
     /**
@@ -97,7 +97,7 @@ class Staff extends AbstractEntity
     public function redirectIfUnauthorized(array $permissions = [])
     {
         if (!$this->hasPermissions($permissions)) {
-            $GLOBALS['logger']->info('[DENY] Not authorized', $permissions);
+            logger('[DENY] Not authorized', $permissions);
             $perm = count($permissions) > 0 ? array_shift($permissions) : 'default';
             redirect("/admin/account/deny/{$perm}");
         }
@@ -120,7 +120,7 @@ class Staff extends AbstractEntity
      */
     public static function abort($message, $location = '/auth/login')
     {
-        $GLOBALS['logger']->info("[STAFF] {$message}");
+        logger("[STAFF] {$message}");
         unset($_SESSION['staff']);
         redirect($location);
     }

@@ -1,3 +1,3 @@
 <?php
 
-$translator->domain = 'auth';
+GC\Translator::$domain = 'auth';

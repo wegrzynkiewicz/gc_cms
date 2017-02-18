@@ -47,7 +47,7 @@ header('X-Content-Type-Options: nosniff'); # nie pozwala przeglądarce na zgadyw
 header('X-XSS-Protection: 1; mode=block'); # ustawienie ochrony przeciw XSS, przeglądarka sama wykrywa XSSa
 header_remove('X-Powered-By'); # usuwa informacje o wykorzystywanej wersji php
 
-return [
+$config = [
     'debug' => [ # opcje związane z wyświetlaniem błędów
         'enabled' => true, # zezwala na nietypowe akcje (np: zmiana hasła admina)
         'inConstruction' => false, # wyświetla komunikat "strona w budowie" za każdym żądaniem

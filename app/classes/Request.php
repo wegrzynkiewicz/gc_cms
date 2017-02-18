@@ -23,7 +23,7 @@ class Request
         $this->uri = parse_url($rawUri, \PHP_URL_PATH);
         $this->method = strtolower($method);
 
-        $GLOBALS['logger']->info('[REQUEST] '.strtoupper($method).' '.$this->uri, $_REQUEST);
+        logger('[REQUEST] '.strtoupper($method).' '.$this->uri, $_REQUEST);
 
         # jeżeli aplikacja jest zainstalowana w katalogu, wtedy pomiń ścieżkę katalogu
         if ($rootUrl and strpos($this->uri, $rootUrl) === 0) {

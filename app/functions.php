@@ -19,7 +19,7 @@ function dd($mixed = null)
     $backtrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT);
     $execution = array_shift($backtrace);
 
-    $GLOBALS['logger']->info(sprintf('[DUMP] %s:%s - %s %s',
+    logger(sprintf('[DUMP] %s:%s - %s %s',
         $execution['file'],
         $execution['line'],
         gettype($mixed),
@@ -188,7 +188,36 @@ function removeOrphan($text)
  */
 function trans($text, array $params = [])
 {
-    return $GLOBALS['translator']->translate($text, $params);
+    return $GLOBALS['config']['translator']['enabled']
+        ? GC\Translator::getInstance()->translate($text, $params)
+        : vsprintf($text, $params);
+}
+
+/**
+ * Tłumaczy wprowadzony tekst na jego odpowiednik
+ */
+function logger($message, array $params = [])
+{
+    if ($GLOBALS['config']['logger']['enabled']) {
+        GC\Logger::getInstance()->info($message, $params);
+    }
+}
+
+/**
+ * Służy do zapisywania wyrzuconych wyjątków do loggera
+ */
+function logException($exception)
+{
+    $previous = $exception->getPrevious();
+    if ($previous) {
+        logException($previous);
+    }
+    logger(sprintf("[EXCEPTION] %s: %s [%s]\n%s",
+        get_class($exception),
+        $exception->getMessage(),
+        $exception->getCode(),
+        $exception->getTraceAsString()
+    ));
 }
 
 /**
@@ -343,7 +372,7 @@ function absoluteRedirect($location, $code = 303)
     http_response_code($code);
     header("Location: {$location}");
 
-    $GLOBALS['logger']->info(
+    logger(
         sprintf("[REDIRECT] %s %s :: Time: %.3fs :: Memory: %sMiB",
             $code,
             $location,
@@ -565,7 +594,7 @@ function curlReCaptcha()
         if ($response) {
             return json_decode($response, true);
         }
-        $GLOBALS['logger']->info("[CURL] {$url}", [curl_error($curl)]);
+        logger("[CURL] {$url}", [curl_error($curl)]);
     }
 
     return [
@@ -643,7 +672,7 @@ function sessionCache($name, $ttl, $callback)
 
     # jeżeli istnieje skeszowany $pool wtedy zwróć
     if ($pool and $pool['expires'] > time()) {
-        $GLOBALS['logger']->info("[SESSION-CACHE] {$name} was load from cache");
+        logger("[SESSION-CACHE] {$name} was load from cache");
 
         # zwróć skeszowane dane
         return $_SESSION['cache'][$name]['data'];
@@ -658,7 +687,7 @@ function sessionCache($name, $ttl, $callback)
         'expires' => time() + $ttl,
     ];
 
-    $GLOBALS['logger']->info("[SESSION-CACHE] {$name} was regenerate");
+    logger("[SESSION-CACHE] {$name} was regenerate");
 
     # zwróć wytworzone dane
     return $result;

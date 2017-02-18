@@ -36,13 +36,13 @@ $getTemplateFile = function ($name, $theme = 'default') use ($lang, $method)
 
 # jeżeli istnieje statyczna strona główna
 if ($slug === '/' and $file = $getTemplateFile('static/homepage')) {
-    $logger->info('[FRONTEND] Static homepage');
+    logger('[FRONTEND] Static homepage');
     return require $file;
 }
 
 # jeżeli istnieje statyczna strona o takim samym slugu
 if ($file = $getTemplateFile("static{$slug}")) {
-    $logger->info("[FRONTEND] Static {$file}");
+    logger("[FRONTEND] Static {$file}");
     return require $file;
 }
 
@@ -53,7 +53,7 @@ $frame = GC\Model\Frame::select()
 
 # jeżeli nie uda się pobrać rusztowania
 if (!$frame) {
-    $logger->info('[FRONTEND] Frame does not exists 404');
+    logger('[FRONTEND] Frame does not exists 404');
     return require TEMPLATE_PATH.'/errors/404.html.php';
 }
 
@@ -63,19 +63,19 @@ $theme = $frame['theme'];
 
 # jeżeli istnieje niestandardowy plik w folderze z szablonem
 if ($file = $getTemplateFile("custom/{$frame_id}", $theme)) {
-    $logger->info("[FRONTEND] Custom {$file}");
+    logger("[FRONTEND] Custom {$file}");
     return require $file;
 }
 
 # jeżeli slug rusztowania wskazuje na stronę główną
 if ($frame['slug'] == '/' and $file = $getTemplateFile('homepage', $theme)) {
-    $logger->info("[FRONTEND] Homepage {$file}");
+    logger("[FRONTEND] Homepage {$file}");
     return require $file;
 }
 
 # jeżeli istnieje plik rusztowania w folderze z szablonem
 $file = TEMPLATE_PATH."/frames/{$frame_type}.html.php";
 if ($file = $getTemplateFile("frames/{$frame_type}", $theme)) {
-    $logger->info("[FRONTEND] Frame {$frame_type} {$file}");
+    logger("[FRONTEND] Frame {$frame_type} {$file}");
     return require $file;
 }

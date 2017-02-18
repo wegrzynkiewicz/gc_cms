@@ -71,7 +71,7 @@ class Mail extends PHPMailer
             'content' => serialize($this),
         ]);
 
-        $GLOBALS['logger']->info(
+        logger(
             "[EMAIL-PUSH] {$this->hash} {$this->Subject}",
             array_keys($this->all_recipients)
         );
@@ -94,7 +94,7 @@ class Mail extends PHPMailer
                 'content' => serialize($this),
             ]);
 
-            $GLOBALS['logger']->info(
+            logger(
                 "[EMAIL-SENT] {$this->hash} {$this->Subject}",
                 array_keys($this->all_recipients)
             );

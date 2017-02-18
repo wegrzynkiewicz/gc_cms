@@ -6,7 +6,7 @@
 GC\Staff::getInstance();
 
 $uri->extendMask('/admin%s');
-$translator->domain = 'admin';
+GC\Translator::$domain = 'admin';
 
 # utworzenie okruszków chleba dla całego panelu admina
 $breadcrumbs = new GC\Breadcrumbs();

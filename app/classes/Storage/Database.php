@@ -32,10 +32,10 @@ class Database
 
         if (error_get_last() === null) {
             $this->pdo->commit();
-            $GLOBALS['logger']->info('[DATABASE] Commit');
+            logger('[DATABASE] Commit');
         } else {
             $this->pdo->rollBack();
-            $GLOBALS['logger']->info('[DATABASE] RollBack');
+            logger('[DATABASE] RollBack');
         }
     }
 
@@ -147,7 +147,7 @@ class Database
             $database = new static($pdo);
             $database->prefix = $dbConfig['prefix'];
 
-            $GLOBALS['logger']->info('[DATABASE]', [$dbConfig['dns']]);
+            logger('[DATABASE]', [$dbConfig['dns']]);
             static::$instance = $database;
         }
 
@@ -164,7 +164,7 @@ class Database
             return $this->prefix.$matches[1];
         }, $sql);
 
-        $GLOBALS['logger']->info(
+        logger(
             '[QUERY] '.($this->pdo->inTransaction() ? '(TRANSACTION) :: ' : '').$sql,
             $values
         );

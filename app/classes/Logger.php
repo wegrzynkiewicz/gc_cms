@@ -1,12 +1,14 @@
 <?php
 
-namespace GC\Debug;
+namespace GC;
 
-class FileLogger
+class Logger
 {
+    private static $instance = null;
+    
     private $filename = "";
 
-    public function __construct($filename)
+    private function __construct($filename)
     {
         $this->filename = $filename;
 
@@ -27,5 +29,19 @@ class FileLogger
         );
 
         file_put_contents($this->filename, $log, FILE_APPEND);
+    }
+
+    /**
+     * Pobiera instancję loggera. Tworzy ją w razie potrzeby i zapamiętuje
+     */
+    public static function getInstance()
+    {
+        if (static::$instance === null) {
+            static::$instance = new static(
+                $GLOBALS['config']['logger']['folder'].'/'.date('Y-m-d').'.log'
+            );
+        }
+
+        return static::$instance;
     }
 }

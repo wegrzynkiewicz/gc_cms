@@ -33,7 +33,7 @@ class Backup
         $dumpConfig = $GLOBALS['config']['dump'];
         $dbConfig = $GLOBALS['config']['database'];
 
-        $GLOBALS['logger']->info('[DUMP-EXPORT] '.relativePath($filename));
+        logger('[DUMP-EXPORT] '.relativePath($filename));
 
         $dump = new IMysqldump\Mysqldump(
             $dbConfig['dns'],
@@ -49,7 +49,7 @@ class Backup
     {
         $file = $filepath;
 
-        $GLOBALS['logger']->info("[DUMP-IMPORT] {$filename}");
+        logger("[DUMP-IMPORT] {$filename}");
 
         if (pathinfo($filepath, \PATHINFO_EXTENSION) === 'gz') {
 
