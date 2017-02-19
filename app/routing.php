@@ -10,8 +10,8 @@ $_SEGMENTS = array_filter($parts, function ($segment) {
     return !ctype_digit($segment);
 });
 
-# wyszukaj plik w katalogu /actions, który pasuje do adresu uri
-$path = ACTIONS_PATH;
+# wyszukaj plik w katalogu akcji, który pasuje do adresu uri
+$path = ROUTES_PATH;
 while (count($_SEGMENTS) > 0) {
     $segment = array_shift($_SEGMENTS);
 

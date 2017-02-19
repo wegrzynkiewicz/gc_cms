@@ -50,7 +50,7 @@ echo "Translation files was created.".PHP_EOL;
 # utwórz tabele w bazie danych
 echo PHP_EOL;
 echo "Creating database structure...".PHP_EOL;
-$structure = file_get_contents(ROOT_PATH.'/app/config/database.sql');
+$structure = file_get_contents(ROOT_PATH.'/app/etc/database.sql');
 GC\Storage\Database::getInstance()->pdo->exec($structure);
 echo "Database structure was created.".PHP_EOL;
 

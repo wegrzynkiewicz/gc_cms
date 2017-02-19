@@ -1,6 +1,6 @@
 /composer.lock
 /storage
-/tmp
+/cache
 /vendor
 /web/thumbnails
 /web/uploads

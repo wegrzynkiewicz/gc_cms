@@ -3,7 +3,7 @@
 /** Plik ładuje autoloader klas oraz funkcje */
 
 require __DIR__.'/../vendor/autoload.php';
-require __DIR__.'/config/config.php';
+require __DIR__.'/etc/config.php';
 require __DIR__.'/functions.php';
 
 # niestandardowy łapacz błędów, na każdym rodzaju błędu rzuca wyjątek
