@@ -26,7 +26,7 @@ class Logger
         $log = "[{$date}] {$message}";
 
         if (!empty($params)) {
-            $log .= ' :: '.json_encode($params, JSON_UNESCAPED_UNICODE);
+            $log .= ' :: '.json_encode($params, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         }
 
         file_put_contents($this->filename, $log.PHP_EOL, FILE_APPEND);

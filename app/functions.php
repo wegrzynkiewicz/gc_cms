@@ -675,7 +675,7 @@ function curlReCaptcha()
  */
 function makeThumbnailUri($imageUri, $width, $height)
 {
-    $thumbsUri      = $GLOBALS['config']['thumbnail']['thumbsUri'];
+    $thumbsUri      = $GLOBALS['config']['thumbnail']['uri'];
     $imageUri       = urldecode($imageUri);
     $size           = "{$width}x{$height}";
     $normalized     = normalize($imageUri);
@@ -697,10 +697,10 @@ function thumbnail($imageUri, $width, $height, $mode = 'outbound')
         return $imageUri;
     }
 
-    $thumbsPath     = $GLOBALS['config']['thumbnail']['thumbsPath'];
-    $imagePath      = $thumbsPath.$imageUri;
+    $path     = $GLOBALS['config']['thumbnail']['path'];
+    $imagePath      = $path.$imageUri;
     $thumbnailUri   = makeThumbnailUri($imageUri, $width, $height);
-    $thumnailPath   = $thumbsPath.$thumbnailUri;
+    $thumnailPath   = $path.$thumbnailUri;
 
     # jeżeli istnieje miniaturka to zwróć jej adres
     if (is_readable($thumnailPath)) {

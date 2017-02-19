@@ -28,8 +28,13 @@ $removeDirRecursive = function ($dir) use (&$removeDirRecursive)
     }
 };
 
-$removeDirRecursive(TEMP_PATH);
-$path = $config['thumbnail']['thumbsPath'].$config['thumbnail']['thumbsUri'];
-$removeDirRecursive($path);
+$dirs = [
+    TEMP_PATH,
+    $config['thumbnail']['path'].$config['thumbnail']['uri']
+];
+
+foreach ($dirs as $dir) {
+    $removeDirRecursive($dir);
+}
 
 echo "Temporary files and dirs was deleted.".PHP_EOL;

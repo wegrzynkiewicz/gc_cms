@@ -10,6 +10,8 @@ if (!GC\Staff::getInstance()['root']) {
     redirect('/');
 }
 
+GC\Translator::$domain = 'admin';
+
 $breadcrumbs = new GC\Breadcrumbs();
 $breadcrumbs->push([
     'uri' => $uri->make('/admin'),

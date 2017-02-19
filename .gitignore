@@ -1,8 +1,6 @@
 /composer.lock
-/external
 /storage
 /tmp
-/vendor/
-/web/thumbs
+/vendor
+/web/thumbnails
 /web/uploads
-/web/assets/admin/images

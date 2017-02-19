@@ -8,19 +8,28 @@ echo PHP_EOL;
 echo "Dumping translations...".PHP_EOL;
 
 $domains = [
-    'admin' => ACTIONS_PATH.'/admin',
-    'auth' => ACTIONS_PATH.'/auth',
-    'template-'.TEMPLATE => TEMPLATE_PATH,
+    'admin' => [
+        ACTIONS_PATH.'/admin',
+        ACTIONS_PATH.'/root',
+    ],
+    'auth' => [
+        ACTIONS_PATH.'/auth',
+    ],
+    'template-'.TEMPLATE => [
+        TEMPLATE_PATH,
+    ],
 ];
 $translations = [];
 
-foreach ($domains as $domain => $path) {
-    $files = globRecursive($path.'/*.php');
-    foreach ($files as $file) {
-        $content = file_get_contents($file);
-        preg_match_all('~trans\([\'"](.*?)[\'"].*?\)~', $content, $matches, PREG_SET_ORDER);
-        foreach ($matches as $match) {
-            $translations[$domain][$match[1]] = $match[1];
+foreach ($domains as $domain => $paths) {
+    foreach ($paths as $path) {
+        $files = globRecursive($path.'/*.php');
+        foreach ($files as $file) {
+            $content = file_get_contents($file);
+            preg_match_all('~trans\([\'"](.*?)[\'"].*?\)~', $content, $matches, PREG_SET_ORDER);
+            foreach ($matches as $match) {
+                $translations[$domain][$match[1]] = $match[1];
+            }
         }
     }
 }

@@ -42,7 +42,7 @@ ini_set('session.cookie_httponly', 1); # ustawia ciastko tylko do odczytu, nie j
 ini_set('session.use_cookies', 1); # do przechowywania sesji ma użyć ciastka
 ini_set('session.use_only_cookies', 1); # do przechowywania sesji ma używać tylko ciastka!
 ini_set('session.hash_function', 1); # użycie bardziej złożonej funkcji do hashowania ciastka sesyjnego
-// ini_set('session.save_path', STORAGE_PATH.'/sessions'); # ścieżka w której będą przechowywane pliki sesji
+ini_set('session.save_path', STORAGE_PATH.'/sessions'); # ścieżka w której będą przechowywane pliki sesji
 ini_set('zlib.output_compression_level', 1); # poziom kompresji wyjścia skryptu
 
 header("Content-Type: text/html; charset=utf-8"); # ustawienie domyślego mimetype i kodowanie
@@ -112,8 +112,8 @@ $config = [
     ],
     'thumbnail' => [ # ustawienia generatora miniaturek
         'enabled' => true, # czy generować miniaturki?
-        'thumbsPath' => ROOT_PATH.'/web', # ścieżka do katalogu z miniaturkami, należy do tego dodać thumbsUri
-        'thumbsUri' => '/thumbs', # adres do katalogu z miniaturkami
+        'path' => WEB_PATH, # ścieżka do katalogu z miniaturkami, należy do tego dodać 'uri'
+        'uri' => '/thumbnails', # adres do katalogu z miniaturkami
         'options' => [ # ustawienia zapisu dla miniaturek
             'jpeg_quality' => 90, # stopień kompresji dla JPG 0-100
             'png_compression_level' => 9, # stopień kompresji dla PNG 0-9
