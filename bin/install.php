@@ -45,7 +45,7 @@ foreach ($config['langs'] as $code => $lang) {
     makeDirRecursive(dirname($path));
     file_put_contents($path, $json);
 }
-echo "Translation files was created.".PHP_EOL;
+echo "Translation files were created.".PHP_EOL;
 
 # utwórz tabele w bazie danych
 echo PHP_EOL;
