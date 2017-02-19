@@ -19,7 +19,7 @@ define('TEMPLATE', 'bootstrap-example'); # nazwa używanego szablonu
 define('ASSETS_URL', '/assets'); # adres do katalogu z zasobami
 define('ROOT_PATH', realpath(__DIR__.'/../../')); # ścieżka do katalogu głównego serwera www
 define('WEB_PATH', ROOT_PATH.'/web'); # ścieżka do katalogu an który jest nakierowana domena
-define('TEMP_PATH', ROOT_PATH.'/tmp'); # ścieżka do katalogu tymczasowego
+define('TEMP_PATH', ROOT_PATH.'/cache'); # ścieżka do katalogu tymczasowego
 define('ROUTES_PATH', ROOT_PATH.'/routes'); # ścieżka do katalogu z plikami kontrolerów i szablonów
 define('STORAGE_PATH', ROOT_PATH.'/storage'); # ścieżka do katalogu magazynu
 define('TEMPLATE_PATH', ROOT_PATH.'/templates/'.TEMPLATE); # ścieżka do katalogu z szablonem
