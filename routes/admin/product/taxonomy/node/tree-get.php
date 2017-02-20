@@ -104,9 +104,9 @@ $(function(){
         $('[name=positions]').val(JSON.stringify(sortabled));
    });
 
-   $('#deleteModal').on('show.bs.modal', function(e) {
-       $(this).find('#node_name').html($(e.relatedTarget).data('name'));
-       $(this).find('[name="frame_id"]').val($(e.relatedTarget).data('id'));
+   $('#deleteModal').on('show.bs.modal', function (event) {
+       $(this).find('#node_name').html($(event.relatedTarget).data('name'));
+       $(this).find('[name="frame_id"]').val($(event.relatedTarget).data('id'));
    });
 });
 </script>

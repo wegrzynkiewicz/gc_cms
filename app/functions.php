@@ -436,7 +436,7 @@ function array_rebuild(array $array, $callback)
  */
 function array_trans(array $array)
 {
-    return array_rebuild($array, $GLOBALS['trans']);
+    return array_rebuild($array, 'trans');
 }
 
 /**
@@ -461,9 +461,13 @@ function array_partition(array $array, $p)
 /**
  * Łączy wielowymiarową tablice w jedną tablicę
  */
-function array_unchunk($array)
+function array_unchunk(array $array)
 {
-    return call_user_func_array('array_merge', $array);
+    if (count($array)) {
+        return call_user_func_array('array_merge', $array);
+    }
+
+    return [];
 }
 
 /**

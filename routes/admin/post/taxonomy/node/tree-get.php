@@ -78,9 +78,9 @@ $tree = GC\Model\Post\Node::buildTreeWithFrameByTaxonomyId($tax_id);
 <?php require ROUTES_PATH.'/admin/parts/assets/footer.html.php'; ?>
 
 <script>
-    $('#deleteModal').on('show.bs.modal', function(e) {
-        $(this).find('#node_name').html($(e.relatedTarget).data('name'));
-        $(this).find('[name="node_id"]').val($(e.relatedTarget).data('id'));
+    $('#deleteModal').on('show.bs.modal', function (event) {
+        $(this).find('#node_name').html($(event.relatedTarget).data('name'));
+        $(this).find('[name="node_id"]').val($(event.relatedTarget).data('id'));
     });
 </script>
 

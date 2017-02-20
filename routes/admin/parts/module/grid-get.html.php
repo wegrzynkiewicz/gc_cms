@@ -131,8 +131,8 @@ $modules = GC\Model\Module\Module::select()
 <script>
     var rowSettingsTemplate = $('#grid-row-settings').html();
 
-    $('#deleteModal').on('show.bs.modal', function(e) {
-        $(this).find('[name="module_id"]').val($(e.relatedTarget).data('id'));
+    $('#deleteModal').on('show.bs.modal', function (event) {
+        $(this).find('[name="module_id"]').val($(event.relatedTarget).data('id'));
     });
 
     var grid = $('.grid-stack').gridstack({
@@ -159,15 +159,15 @@ $modules = GC\Model\Module\Module::select()
 
     refreshRows();
 
-    $('#rowSettingsModalForm').on('submit', function(e) {
-        e.preventDefault();
+    $('#rowSettingsModalForm').on('submit', function (event) {
+        event.preventDefault();
         $.post($(this).attr('action'), $(this).serialize(), function() {
             $('#rowSettingsModal').modal('hide');
         });
     });
 
-    $('#rowSettingsModal').on('show.bs.modal', function(e) {
-        var url = "<?=$uri->make("/admin/parts/module/row/{$frame_id}/xhr-edit")?>/"+$(e.relatedTarget).data('y');
+    $('#rowSettingsModal').on('show.bs.modal', function (event) {
+        var url = "<?=$uri->make("/admin/parts/module/row/{$frame_id}/xhr-edit")?>/"+$(event.relatedTarget).data('y');
         $.get(url, function(data) {
             $('#rowSettingsModalContent').html(data);
             $('#rowSettingsModalForm').attr('action', url);

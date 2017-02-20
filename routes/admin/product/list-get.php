@@ -164,9 +164,9 @@ $count = GC\Model\Frame::select()
             ],
         });
 
-        $('#deleteModal').on('show.bs.modal', function(e) {
-            $(this).find('#frame_name').html($(e.relatedTarget).data('name'));
-            $(this).find('[name="frame_id"]').val($(e.relatedTarget).data('id'));
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            $(this).find('#frame_name').html($(event.relatedTarget).data('name'));
+            $(this).find('[name="frame_id"]').val($(event.relatedTarget).data('id'));
         });
     });
 </script>

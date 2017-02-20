@@ -1,27 +1,19 @@
-<?php $images = GC\Model\Module\File::joinAllWithKeyByForeign($module_id) ?>
+<?php
 
+$images = GC\Model\Module\File::select()
+    ->source('::moduleFiles')
+    ->equals('module_id', $module_id)
+    ->fetchByPrimaryKey();
+
+?>
 <?php if (empty($images)): ?>
     <div class="text-center">
         <?=trans('Nie znaleziono zdjęć w galerii') ?>
     </div>
 <?php else: ?>
     <div class="module-gallery-preview-row" data-gallery="photoswipe">
-        <?php foreach ($images as $image): $is = json_decode($image['settings'], true) ?>
-            <div class="module-gallery-preview-wrapper">
-                <a href="<?=e($image['uri'])?>"
-                    target="_blank"
-                    title="<?=e($image['name'])?>"
-                    data-photoswipe-item=""
-                    data-width="<?=e($is['width'])?>"
-                    data-height="<?=e($is['height'])?>"
-                    class="thumb-wrapper">
-                    <img src="<?=$uri->root(thumbnail($image['uri'], 120, 70))?>"
-                        width="120"
-                        width="70"
-                        alt="<?=e($image['name'])?>"
-                        class="module-gallery-preview-image">
-                </a>
-            </div>
+        <?php foreach ($images as $file_id => $image): ?>
+            <?=render(ROUTES_PATH.'/admin/parts/module/type/gallery/grid-item.html.php', $image)?>
         <?php endforeach ?>
         <div class="clearfix"></div>
     </div>

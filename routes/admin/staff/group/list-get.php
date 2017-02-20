@@ -100,9 +100,9 @@ foreach ($groupPermissions as $permission) {
 
 <script>
 $(function(){
-    $('#deleteModal').on('show.bs.modal', function(e) {
-        $(this).find('#name').html($(e.relatedTarget).data('name'));
-        $(this).find('[name="group_id"]').val($(e.relatedTarget).data('id'));
+    $('#deleteModal').on('show.bs.modal', function (event) {
+        $(this).find('#name').html($(event.relatedTarget).data('name'));
+        $(this).find('[name="group_id"]').val($(event.relatedTarget).data('id'));
     });
 
     $('[data-table]').DataTable({

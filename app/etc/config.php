@@ -145,7 +145,9 @@ $config = [
         'html-editor' => [
             'name' => 'Moduł tekstowy',
             'description' => 'Wyświelta treść HTML poprzez edytor WYSIWYG.',
-            'themes' => [],
+            'themes' => [
+                'default' => 'Standardowa treść',
+            ],
         ],
         'gallery' => [
             'name' => 'Moduł galerii zdjęć',

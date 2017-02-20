@@ -145,17 +145,17 @@ $count = GC\Model\Form\Sent::select()
             ]
         });
 
-        $('#deleteModalForm').on('submit', function(e) {
-            e.preventDefault();
+        $('#deleteModalForm').on('submit', function (event) {
+            event.preventDefault();
             $.post($(this).attr('action'), $(this).serialize(), function() {
                 table.ajax.reload();
                 $('#deleteModal').modal('hide');
             });
         });
 
-        $('#deleteModal').on('show.bs.modal', function(e) {
-            $(this).find('#sent_name').html($(e.relatedTarget).data('name'));
-            $(this).find('[name="sent_id"]').val($(e.relatedTarget).data('id'));
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            $(this).find('#sent_name').html($(event.relatedTarget).data('name'));
+            $(this).find('[name="sent_id"]').val($(event.relatedTarget).data('id'));
         });
     });
 </script>

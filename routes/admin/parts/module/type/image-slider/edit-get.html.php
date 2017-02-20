@@ -132,32 +132,32 @@ $(function() {
         toleranceElement: '> div',
     });
 
-    $('#editModalForm').on('submit', function(e) {
-        e.preventDefault();
+    $('#editModalForm').on('submit', function (event) {
+        event.preventDefault();
         $.post($(this).attr('action'), $(this).serialize(), function() {
             refreshImages();
             $('#editModal').modal('hide');
         });
     });
 
-    $('#editModal').on('show.bs.modal', function(e) {
-        var url = "<?=$uri->make("/admin/parts/module/{$module_id}/type/image-slider/slide/xhr-edit")?>/"+$(e.relatedTarget).data('id');
+    $('#editModal').on('show.bs.modal', function (event) {
+        var url = "<?=$uri->make("/admin/parts/module/{$module_id}/type/image-slider/slide/xhr-edit")?>/"+$(event.relatedTarget).data('id');
         $.get(url, function(data) {
             $('#editModalContent').html(data);
             $('#editModalForm').attr('action', url);
         });
     });
 
-    $('#deleteModalForm').on('submit', function(e) {
-        e.preventDefault();
+    $('#deleteModalForm').on('submit', function (event) {
+        event.preventDefault();
         $.post($(this).attr('action'), $(this).serialize(), function() {
             refreshImages();
             $('#deleteModal').modal('hide');
         });
     });
 
-    $('#deleteModal').on('show.bs.modal', function(e) {
-        $(this).find('[name="file_id"]').val($(e.relatedTarget).data('id'));
+    $('#deleteModal').on('show.bs.modal', function (event) {
+        $(this).find('[name="file_id"]').val($(event.relatedTarget).data('id'));
     });
 
     $("#sortableForm").on('submit', function(event) {

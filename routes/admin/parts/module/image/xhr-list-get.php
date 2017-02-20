@@ -1,16 +1,18 @@
-<?php $files = GC\Model\Module\File::joinAllWithKeyByForeign($module_id); ?>
+<?php
 
-<?php if (empty($files)): ?>
-    <div class="col-md-12">    
-        <div class="simple-box">
-            <?=trans('Nie znaleziono zdjęć')?>
-        </div>
-    </div>
-<?php else: ?>
-    <?php foreach ($files as $file_id => $image): ?>
-        <?=render(ROUTES_PATH.'/admin/parts/module/image/xhr-list-item.html.php', [
-            'file_id' => $file_id,
-            'image' => $image,
-        ])?>
-    <?php endforeach ?>
-<?php endif ?>
+$module_id = intval(array_shift($_PARAMETERS));
+
+$images = GC\Model\Module\File::select()
+    ->fields(['file_id', 'name', 'slug', 'width', 'height'])
+    ->source('::moduleFiles')
+    ->equals('module_id', $module_id)
+    ->order('position', 'ASC')
+    ->fetchAll();
+
+foreach ($images as &$image) {
+    $image['thumbnail'] = $uri->root(thumbnail($image['slug'], 300, 200));
+}
+unset($image);
+
+header("Content-Type: application/json; charset=utf-8");
+echo json_encode($images);

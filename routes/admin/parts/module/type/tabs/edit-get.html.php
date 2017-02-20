@@ -165,33 +165,33 @@ $(function(){
     var editUri   = '<?=$uri->make("/admin/parts/module/type/tabs/item/xhr-edit")?>';
     var deleteUri = '<?=$uri->make("/admin/parts/module/type/tabs/item/xhr-delete")?>';
 
-    $('#addModalForm').on('submit', function(e) {
+    $('#addModalForm').on('submit', function (event) {
         $.post(addUri, $(this).serialize());
     });
 
-    $('#editModalForm').on('submit', function(e) {
+    $('#editModalForm').on('submit', function (event) {
         $.post(editUri, $(this).serialize());
     });
 
-    $('#editModal').on('show.bs.modal', function(e) {
+    $('#editModal').on('show.bs.modal', function (event) {
         $.get(editUri, {
-            frame_id: $(e.relatedTarget).data('id'),
+            frame_id: $(event.relatedTarget).data('id'),
         }, function(data) {
             $('#editModalContent').html(data);
-            $('[name="frame_id"]').val($(e.relatedTarget).data('id'));
+            $('[name="frame_id"]').val($(event.relatedTarget).data('id'));
         });
     });
 
-    $('#deleteModalForm').on('submit', function(e) {
+    $('#deleteModalForm').on('submit', function (event) {
         $.post(deleteUri, $(this).serialize());
     });
 
-    $('#deleteModal').on('show.bs.modal', function(e) {
-        $(this).find('[name="frame_id"]').val($(e.relatedTarget).data('id'));
-        $(this).find('#deleteName').html($(e.relatedTarget).data('name'));
+    $('#deleteModal').on('show.bs.modal', function (event) {
+        $(this).find('[name="frame_id"]').val($(event.relatedTarget).data('id'));
+        $(this).find('#deleteName').html($(event.relatedTarget).data('name'));
     });
 
-    $("#sortableForm").submit(function(e) {
+    $("#sortableForm").submit(function (event) {
         $.post(sortUri, {
             positions: JSON.stringify($('#sortable').sortable('toArray')),
         });

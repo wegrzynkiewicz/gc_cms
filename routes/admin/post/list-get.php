@@ -112,9 +112,9 @@ unset($post);
 
 <script>
     $(function(){
-        $('#deleteModal').on('show.bs.modal', function(e) {
-            $(this).find('#post_name').html($(e.relatedTarget).data('name'));
-            $(this).find('[name="post_id"]').val($(e.relatedTarget).data('id'));
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            $(this).find('#post_name').html($(event.relatedTarget).data('name'));
+            $(this).find('[name="post_id"]').val($(event.relatedTarget).data('id'));
         });
         $('[data-table]').DataTable({
             order: [[2, 'desc']],

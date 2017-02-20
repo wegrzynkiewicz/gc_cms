@@ -83,9 +83,9 @@ $fields = GC\Model\Form\Field::select()
 <?php require ROUTES_PATH.'/admin/parts/assets/footer.html.php'; ?>
 
 <script>
-    $('#deleteModal').on('show.bs.modal', function(e) {
-        $(this).find('#name').html($(e.relatedTarget).data('name'));
-        $(this).find('[name="field_id"]').val($(e.relatedTarget).data('id'));
+    $('#deleteModal').on('show.bs.modal', function (event) {
+        $(this).find('#name').html($(event.relatedTarget).data('name'));
+        $(this).find('[name="field_id"]').val($(event.relatedTarget).data('id'));
     });
 </script>
 

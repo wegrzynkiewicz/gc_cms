@@ -130,9 +130,9 @@ usort($checksums, function ($a, $b) {
 
 <script>
     $(function(){
-        $('#refreshModal').on('show.bs.modal', function(e) {
-            $(this).find('#name').html($(e.relatedTarget).data('name'));
-            $(this).find('[name="file"]').val($(e.relatedTarget).data('id'));
+        $('#refreshModal').on('show.bs.modal', function (event) {
+            $(this).find('#name').html($(event.relatedTarget).data('name'));
+            $(this).find('[name="file"]').val($(event.relatedTarget).data('id'));
         });
     });
 </script>

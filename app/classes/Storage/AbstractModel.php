@@ -108,7 +108,7 @@ abstract class AbstractModel extends AbstractEntity
     {
         return static::select(static::class)
             ->fields(['name', 'value'])
-            ->equals(static::$meta_id, $meta_id)
+            ->equals(static::$meta, $meta_id)
             ->fetchByMap('name', 'value');
     }
 
@@ -116,7 +116,7 @@ abstract class AbstractModel extends AbstractEntity
     {
         foreach ($data as $name => $value) {
             static::replace([
-                static::$meta_id => $meta_id,
+                static::$meta => $meta_id,
                 'name' => $name,
                 'value' => $value,
             ]);
@@ -127,7 +127,7 @@ abstract class AbstractModel extends AbstractEntity
     {
         foreach ($data as $name) {
             static::delete()
-                ->equals(static::$meta_id, $meta_id)
+                ->equals(static::$meta, $meta_id)
                 ->equals('name', $name)
                 ->execute();
         }

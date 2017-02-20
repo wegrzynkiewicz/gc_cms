@@ -28,7 +28,7 @@ $items = GC\Model\Module\Item::joinAllWithFrameByForeign($module_id);
     <script type="text/javascript">
         $(function(){
             $('#tabs_<?=$module_id?>>ul a').on('click', function (e) {
-                e.preventDefault()
+                event.preventDefault()
                 $(this).tab('show')
             });
 

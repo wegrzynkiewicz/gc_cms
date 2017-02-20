@@ -2,8 +2,6 @@
 
 require ROUTES_PATH."/admin/parts/module/type/gallery/_import.php";
 
-$_POST = array_merge($module, $settings);
-
 ?>
 <?php require ROUTES_PATH.'/admin/parts/header.html.php'; ?>
 
@@ -25,37 +23,26 @@ $_POST = array_merge($module, $settings);
 
 <div class="row">
     <div class="col-lg-12">
-        <form id="sortableForm"
+        <form id="saveForm"
             method="post"
             action=""
             class="form-horizontal">
 
-            <div class="simple-box">
-                <fieldset>
-                    <legend><?=trans('Ustawienia galerii zdjęć')?></legend>
-                    <?=render(ROUTES_PATH.'/admin/parts/input/selectbox.html.php', [
-                        'name' => 'theme',
-                        'label' => trans('Szablon'),
-                        'help' => trans('Wybierz jeden z dostępnych szablonów galerii'),
-                        'options' => $config['moduleThemes']['gallery'],
-                    ])?>
-                </fieldset>
-            </div>
-
+            <input type="hidden" name="positions">
 
             <div class="simple-box">
-                <fieldset>
-                    <legend><?=trans('Ustawienia szablonu')?></legend>
-                    <div id="moduleTheme">
-                        <?=trans('Wybierz szablon galerii')?>
-                    </div>
-                </fieldset>
+                <?=render(ROUTES_PATH.'/admin/parts/input/selectbox.html.php', [
+                    'name' => 'theme',
+                    'label' => trans('Szablon'),
+                    'help' => trans('Szablon określa wygląd i zachowanie galerii'),
+                    'options' => array_trans($config['modules']['gallery']['themes']),
+                    'firstOption' => trans('Wybierz jeden z dostępnych szablonów galerii'),
+                ])?>
             </div>
 
-            <div class="row">
-                <div id="images">
-                </div>
-            </div>
+            <div id="moduleTheme"></div>
+
+            <div id="images" class="row"></div>
 
             <?=render(ROUTES_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => trans('Zapisz'),
@@ -73,7 +60,7 @@ $_POST = array_merge($module, $settings);
                     <span>&times;</span>
                 </button>
                 <h2 class="modal-title">
-                    <?=trans('Edytujesz zdjęcie ')?>
+                    <?=trans('Edytujesz zdjęcie')?>
                     <span id="editModalName"></span>
                 </h2>
             </div>
@@ -123,27 +110,111 @@ $_POST = array_merge($module, $settings);
 
 <?php require ROUTES_PATH.'/admin/parts/assets/footer.html.php'; ?>
 
+<script id="empty-template" type="text/html">
+    <div class="col-md-12">
+        <div class="simple-box">
+            <?=trans('Nie znaleziono zdjęć w galerii.')?>
+        </div>
+    </div>
+</script>
+
+<script id="image-template" type="text/html">
+    <div id="thumb_{{file_id}}"
+        data-id="{{file_id}}"
+        data-sortable-item=""
+        class="col-lg-2 col-md-4 col-xs-6">
+
+        <div class="thumbnail">
+
+            <div class="thumb-wrapper">
+                <a href="{{slug}}"
+                    target="_blank"
+                    title="{{name}}"
+                    data-gallery-item=""
+                    data-width="{{width}}"
+                    data-height="{{height}}"
+                    class="thumb-wrapper">
+                    <img src="{{thumbnail}}"
+                        alt="{{name}}"
+                        class="img-responsive">
+                </a>
+            </div>
+
+            <div class="pull-right">
+
+                <a id="thumb_edit_{{file_id}}"
+                    data-toggle="modal"
+                    data-id="{{file_id}}"
+                    data-name="{{name}}"
+                    data-target="#editModal"
+                    title="<?=trans('Edytuj zdjęcie')?>"
+                    class="btn btn-primary btn-xs">
+                    <i class="fa fa-cog fa-fw"></i>
+                </a>
+
+                <a id="thumb_delete_{{file_id}}"
+                    data-toggle="modal"
+                    data-id="{{file_id}}"
+                    data-name="{{name}}"
+                    data-target="#deleteModal"
+                    title="<?=trans('Usuń zdjęcie')?>"
+                    class="btn btn-danger btn-xs">
+                    <i class="fa fa-times fa-fw"></i>
+                </a>
+            </div>
+
+            <div class="thumb-description" title="{{name}}">
+                {{name}}
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</script>
+
 <script>
 $(function() {
 
+    var imageTemplate       = $('#image-template').html();
+    var emptyTemplate       = $('#empty-template').html();
+    var addUri              = "<?=$uri->make("/admin/parts/module/{$module_id}/image/xhr-add")?>";
+    var refreshImagesUri    = "<?=$uri->make("/admin/parts/module/{$module_id}/image/xhr-list")?>";
+    var refreshThemeUri     = "<?=$uri->make("/admin/parts/module/{$module_id}/type/gallery/theme")?>/";
+    var editUri             = "<?=$uri->make("/admin/parts/module/{$module_id}/type/gallery/image/xhr-edit")?>/";
+
     function refreshImages() {
-        var url = "<?=$uri->make("/admin/parts/module/{$module_id}/image/xhr-list")?>";
-        $.get(url, function(data) {
-            $('#images')
-                .html(data)
-                .photoswipe({
-                    loop: false,
-                    closeOnScroll: false,
-                });
+        $.get(refreshImagesUri, function(data) {
+            if (data.length) {
+                var images = '';
+                $(data).each(function(index, element) {
+                    images += Mustache.render(imageTemplate, element)
+                })
+                $('#images').html(images);
+            } else {
+                $('#images').html(emptyTemplate);
+            }
         });
     }
 
     function refreshTheme(theme) {
-        var url = "<?=$uri->make("/admin/parts/module/{$module_id}/type/gallery/theme")?>/";
-        $.get(url+theme, function(data) {
+        $.get(refreshThemeUri+theme, function(data) {
             $('#moduleTheme').html(data);
         });
     }
+
+    $('#images').nestedSortable({
+       listType: 'div',
+       excludeRoot: true,
+       items: '[data-sortable-item]',
+    });
+
+    $('#images').magnificPopup({
+        delegate: 'a[data-gallery-item]',
+        type: 'image',
+        gallery: {
+            enabled: true,
+        },
+    });
 
     $('#theme').change(function() {
         refreshTheme($(this).val());
@@ -153,46 +224,36 @@ $(function() {
         refreshTheme("<?=e($_POST['theme'])?>");
     <?php endif ?>
 
-    $('#images').nestedSortable({
-        handle: 'div',
-        listType: 'div',
-        items: 'div.sortable-container',
-        toleranceElement: '> div',
-    });
-
-    $('#editModalForm').on('submit', function(e) {
-        e.preventDefault();
+    $('#editModalForm').on('submit', function (event) {
+        event.preventDefault();
         $.post($(this).attr('action'), $(this).serialize(), function() {
             refreshImages();
             $('#editModal').modal('hide');
         });
     });
 
-    $('#editModal').on('show.bs.modal', function(e) {
-        var url = "<?=$uri->make("/admin/parts/module/{$module_id}/type/gallery/image/xhr-edit")?>/"+$(e.relatedTarget).data('id');
-        $.get(url, function(data) {
+    $('#editModal').on('show.bs.modal', function (event) {
+        $.get(editUri + $(event.relatedTarget).data('id'), function(data) {
             $('#editModalContent').html(data);
             $('#editModalForm').attr('action', url);
         });
     });
 
-    $('#deleteModalForm').on('submit', function(e) {
-        e.preventDefault();
+    $('#deleteModalForm').on('submit', function (event) {
+        event.preventDefault();
         $.post($(this).attr('action'), $(this).serialize(), function() {
             refreshImages();
             $('#deleteModal').modal('hide');
         });
     });
 
-    $('#deleteModal').on('show.bs.modal', function(e) {
-        $(this).find('[name="file_id"]').val($(e.relatedTarget).data('id'));
+    $('#deleteModal').on('show.bs.modal', function (event) {
+        $(this).find('[name="file_id"]').val($(event.relatedTarget).data('id'));
     });
 
-    $("#sortableForm").on('submit', function(event) {
-        var url = "<?=$uri->make("/admin/parts/module/{$module_id}/image/xhr-sort")?>";
-        $.post(url, {
-            positions: $("#images").sortable("toArray")
-        });
+    $("#saveForm").on('submit', function (event) {
+        var sortabled = $('#images').nestedSortable('toArray');
+        $('[name=positions]').val(JSON.stringify(sortabled));
     });
 
     $('#select_images').elfinderInputMultiple({
@@ -200,7 +261,7 @@ $(function() {
         url: '<?=$uri->make('/admin/elfinder/connector')?>',
         lang: '<?=getVisitorLang()?>',
     }, function(urls) {
-        $.post("<?=$uri->make("/admin/parts/module/{$module_id}/image/xhr-add")?>", {
+        $.post(addUri, {
             urls: urls
         }, function() {
             refreshImages();

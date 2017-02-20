@@ -1,7 +1,6 @@
 <?php
 
-$image_id = intval($_POST['file_id']);
-GC\Model\Module\File::deleteByPrimaryId($image_id);
+$file_id = intval(post('file_id'));
+GC\Model\Module\File::deleteByPrimaryId($file_id);
 
-header("Content-Type: application/json; charset=utf-8");
-http_status_code(204);
+http_response_code(204);
