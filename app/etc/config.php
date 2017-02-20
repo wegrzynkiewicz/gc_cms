@@ -93,7 +93,7 @@ $config = [
         'key' => 'trnsl.1.1.20161215T151949Z.587eb49efd9a9be2.a1eb760e6bf78076ea004f12eeb22b37902aadc2', # klucz do api translatora w serwisie Yandex
     ],
     'mailer' => [ # ustawienia serwera pocztowego do rozsyłania emaili
-        'smtp' => true, # czy użwać mailera smtp?
+        'smtp' => true, # czy używać mailera smtp?
         'host' => 'smtp.emaillabs.net.pl', # host serwera pocztowego
         'port' => 587, # post hosta
         'username' => '1.wegrzynkiewicz.smtp', # nazwa konta pocztowego

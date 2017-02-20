@@ -1,8 +1,6 @@
 <?php
 
-$settings['gutter'] = $_POST['gutter'];
-$settings['thumbsPerRow'] = intval($_POST['thumbsPerRow']);
-
-if (empty($settings['gutter']) and $settings['gutter'] != 0) {
-    $settings['gutter'] = 20;
-}
+GC\Model\Module\Meta::updateMeta($module_id, [
+    'gutter'            => post('gutter'),
+    'thumbnailsPerRow'  => post('thumbnailsPerRow'),
+]);

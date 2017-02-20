@@ -31,13 +31,16 @@ require ROUTES_PATH."/admin/parts/module/type/gallery/_import.php";
             <input type="hidden" name="positions">
 
             <div class="simple-box">
-                <?=render(ROUTES_PATH.'/admin/parts/input/selectbox.html.php', [
-                    'name' => 'theme',
-                    'label' => trans('Szablon'),
-                    'help' => trans('Szablon określa wygląd i zachowanie galerii'),
-                    'options' => array_trans($config['modules']['gallery']['themes']),
-                    'firstOption' => trans('Wybierz jeden z dostępnych szablonów galerii'),
-                ])?>
+                <fieldset>
+                    <legend><?=trans('Ustawienia galerii')?></legend>
+                    <?=render(ROUTES_PATH.'/admin/parts/input/selectbox.html.php', [
+                        'name' => 'theme',
+                        'label' => trans('Szablon'),
+                        'help' => trans('Szablon określa wygląd i zachowanie galerii'),
+                        'options' => array_trans($config['modules']['gallery']['themes']),
+                        'firstOption' => trans('Wybierz jeden z dostępnych szablonów galerii'),
+                    ])?>
+                </fieldset>
             </div>
 
             <div id="moduleTheme"></div>
@@ -82,7 +85,7 @@ require ROUTES_PATH."/admin/parts/module/type/gallery/_import.php";
     <div class="modal-dialog">
         <form id="deleteModalForm"
             method="post"
-            action="<?=$uri->make("/admin/parts/module/{$module_id}/image/xhr-delete")?>"
+            action=""
             class="modal-content">
             <input name="file_id" type="hidden" value="">
             <div class="modal-header">
@@ -177,10 +180,11 @@ $(function() {
 
     var imageTemplate       = $('#image-template').html();
     var emptyTemplate       = $('#empty-template').html();
+    var editUri             = "<?=$uri->make("/admin/parts/module/image/xhr-edit")?>/";
     var addUri              = "<?=$uri->make("/admin/parts/module/{$module_id}/image/xhr-add")?>";
     var refreshImagesUri    = "<?=$uri->make("/admin/parts/module/{$module_id}/image/xhr-list")?>";
+    var deleteUri           = "<?=$uri->make("/admin/parts/module/{$module_id}/image/xhr-delete")?>";
     var refreshThemeUri     = "<?=$uri->make("/admin/parts/module/{$module_id}/type/gallery/theme")?>/";
-    var editUri             = "<?=$uri->make("/admin/parts/module/{$module_id}/type/gallery/image/xhr-edit")?>/";
 
     function refreshImages() {
         $.get(refreshImagesUri, function(data) {
@@ -220,10 +224,6 @@ $(function() {
         refreshTheme($(this).val());
     });
 
-    <?php if (isset($_POST['theme'])): ?>
-        refreshTheme("<?=e($_POST['theme'])?>");
-    <?php endif ?>
-
     $('#editModalForm').on('submit', function (event) {
         event.preventDefault();
         $.post($(this).attr('action'), $(this).serialize(), function() {
@@ -233,7 +233,8 @@ $(function() {
     });
 
     $('#editModal').on('show.bs.modal', function (event) {
-        $.get(editUri + $(event.relatedTarget).data('id'), function(data) {
+        var url = editUri + $(event.relatedTarget).data('id');
+        $.get(url, function(data) {
             $('#editModalContent').html(data);
             $('#editModalForm').attr('action', url);
         });
@@ -241,7 +242,7 @@ $(function() {
 
     $('#deleteModalForm').on('submit', function (event) {
         event.preventDefault();
-        $.post($(this).attr('action'), $(this).serialize(), function() {
+        $.post(deleteUri, $(this).serialize(), function() {
             refreshImages();
             $('#deleteModal').modal('hide');
         });
@@ -269,6 +270,7 @@ $(function() {
     });
 
     refreshImages();
+    refreshTheme("<?=$theme?>");
 });
 </script>
 

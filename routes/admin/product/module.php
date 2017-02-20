@@ -8,9 +8,9 @@ $frame_id = intval(array_shift($_PARAMETERS));
 # pobierz stronę po kluczu głównym
 $frame = GC\Model\Frame::select()
     ->equals('frame_id', $frame_id)
-    ->fetchObject();
+    ->fetch();
 
-$headTitle = trans('Moduły produktu "%s"', [$frame->name]);
+$headTitle = trans('Moduły produktu "%s"', [$frame['name']]);
 $uri->extendMask("/{$frame_id}/module%s");
 $breadcrumbs->push([
     'uri' => $uri->mask('/grid'),

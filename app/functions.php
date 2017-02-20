@@ -37,6 +37,16 @@ function purifyHtml($dirtyHtml)
 }
 
 /**
+ * Kompresuje kod HTMLa
+ */
+function compressHtml($html)
+{
+    return \zz\Html\HTMLMinify::minify($html, [
+        'optimizationLevel' => \zz\Html\HTMLMinify::OPTIMIZATION_ADVANCED
+    ]);
+}
+
+/**
  * Służy do prostrzego drukowania warunku
  */
 function selected($condition)
@@ -112,7 +122,7 @@ function setValueByKeys(array &$array, array $keys, $value)
  */
 function server($name, $default = '')
 {
-    return isset($_SERVER[$name]) ? $_SERVER[$name] : $default;
+    return (isset($_SERVER[$name]) and $_SERVER[$name]) ? $_SERVER[$name] : $default;
 }
 
 /**
@@ -120,7 +130,7 @@ function server($name, $default = '')
  */
 function post($name, $default = '')
 {
-    return isset($_POST[$name]) ? $_POST[$name] : $default;
+    return (isset($_POST[$name]) and $_POST[$name]) ? $_POST[$name] : $default;
 }
 
 /**
@@ -128,7 +138,7 @@ function post($name, $default = '')
  */
 function request($name, $default = '')
 {
-    return isset($_REQUEST[$name]) ? $_REQUEST[$name] : $default;
+    return (isset($_REQUEST[$name]) and $_REQUEST[$name]) ? $_REQUEST[$name] : $default;
 }
 
 /**
@@ -136,7 +146,7 @@ function request($name, $default = '')
  */
 function get($name, $default = '')
 {
-    return isset($_GET[$name]) ? $_GET[$name] : $default;
+    return (isset($_GET[$name]) and $_GET[$name]) ? $_GET[$name] : $default;
 }
 
 /**
@@ -771,7 +781,7 @@ function sessionCache($name, $ttl, $callback)
  */
 function getVisitorLang()
 {
-    if ($GLOBALS['request']->lang) {
+    if (isset($GLOBALS['request']) and $GLOBALS['request']->lang) {
         return $GLOBALS['request']->lang;
     }
 

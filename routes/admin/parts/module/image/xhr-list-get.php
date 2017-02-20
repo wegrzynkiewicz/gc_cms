@@ -1,5 +1,7 @@
 <?php
 
+require ROUTES_PATH.'/admin/_import.php';
+
 $module_id = intval(array_shift($_PARAMETERS));
 
 $images = GC\Model\Module\File::select()
@@ -11,6 +13,7 @@ $images = GC\Model\Module\File::select()
 
 foreach ($images as &$image) {
     $image['thumbnail'] = $uri->root(thumbnail($image['slug'], 300, 200));
+    $image['slug'] = $uri->root($image['slug']);
 }
 unset($image);
 

@@ -1,16 +1,19 @@
 <?php
 
-$file_id = intval(array_shift($_SEGMENTS));
+require ROUTES_PATH.'/admin/_import.php';
+
+$file_id = intval(array_shift($_PARAMETERS));
 $image = GC\Model\Module\File::fetchByPrimaryId($file_id);
 $_POST = $image;
 
-echo render(ROUTES_PATH.'/admin/parts/input/editbox.html.php', [
+?>
+<?=render(ROUTES_PATH.'/admin/parts/input/editbox.html.php', [
     'name' => 'name',
     'label' => trans('Krótki tytuł zdjęcia'),
-]);
+])?>
 
-echo render(ROUTES_PATH.'/admin/parts/input/image.html.php', [
-    'name' => 'uri',
+<?=render(ROUTES_PATH.'/admin/parts/input/image.html.php', [
+    'name' => 'slug',
     'label' => trans('Zdjęcie'),
     'placeholder' => trans('Ścieżka do pliku zdjęcia'),
-]);
+])?>

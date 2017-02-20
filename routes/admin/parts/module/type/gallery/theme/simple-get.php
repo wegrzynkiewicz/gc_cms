@@ -1,22 +1,19 @@
 <?php
 
-$module = GC\Model\Module\Module::fetchByPrimaryId($module_id);
-$settings = json_decode($module['settings'], true);
+$module_id = intval(array_shift($_PARAMETERS));
 
-if (!isset($settings['gutter'])) {
-    $settings['gutter'] = 20;
-}
+$meta = GC\Model\Module\Meta::fetchMeta($module_id);
+$meta['gutter'] = def($meta, 'gutter', 20);
 
-$_POST = $settings;
+$_POST = $meta;
 
 ?>
-
 <div class="simple-box">
     <fieldset>
-        <legend><?=trans('Ustawienia szablonu')?></legend>
+        <legend><?=trans('Ustawienia szablonu galerii')?></legend>
 
         <?=render(ROUTES_PATH.'/admin/parts/input/selectbox.html.php', [
-            'name' => 'thumbsPerRow',
+            'name' => 'thumbnailsPerRow',
             'label' => trans('Ilość miniaturek na wiersz galerii'),
             'options' => [
                 12 => 12,

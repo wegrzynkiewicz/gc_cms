@@ -40,13 +40,15 @@ class Mail extends PHPMailer
 
     public function buildTemplate($templateEmailPath, $stylePath, array $viewArgs = [])
     {
-        $cssToInlineStyles = new CssToInlineStyles();
         $viewArgs['mail'] = $this;
+
         $html = render($templateEmailPath, $viewArgs);
         $css = render($stylePath);
-        $content = $cssToInlineStyles->convert($html, $css);
-        $this->Body = $content;
-        $this->buildAltBody($content);
+        $compressed = compressHtml(removeOrphan($html));
+
+        $cssToInlineStyles = new CssToInlineStyles();
+        $this->Body = $cssToInlineStyles->convert($compressed, $css);
+        $this->buildAltBody($html);
     }
 
     public function buildAltBody($htmlContent)
@@ -91,7 +93,6 @@ class Mail extends PHPMailer
                 'mail_hash' => $this->hash,
                 'receivers' => implode('; ', array_keys($this->all_recipients)),
                 'subject' => $this->Subject,
-                'content' => serialize($this),
             ]);
 
             logger(
