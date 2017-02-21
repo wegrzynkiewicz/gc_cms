@@ -18,23 +18,10 @@ namespace GC;
  */
 class Normalizer
 {
-    private $keyMap = array(
-        'ls' => 'intersect',
-        'upload' => 'renames'
-    );
-
     public function cmdPreprocess($cmd, &$args, $elfinder, $volume)
     {
-        $key = (isset($this->keyMap[$cmd]))? $this->keyMap[$cmd] : 'name';
-
-        if (isset($args[$key])) {
-            if (is_array($args[$key])) {
-                foreach ($args[$key] as $i => $name) {
-                    $args[$key][$i] = $this->normalize($name);
-                }
-            } else {
-                $args[$key] = $this->normalize($args[$key]);
-            }
+        if (isset($args['name'])) {
+            $args['name'] = $this->normalize($args['name']);
         }
 
         return true;
@@ -42,9 +29,6 @@ class Normalizer
 
     public function onUpLoadPreSave(&$path, &$name, $src, $elfinder, $volume)
     {
-        if ($path) {
-            $path = $this->normalize($path);
-        }
         $name = $this->normalize($name);
 
         return true;

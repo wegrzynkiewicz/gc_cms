@@ -5,8 +5,6 @@
 $slug = trim($request->slug, '/');
 $parts = explode('/', $slug);
 
-dd($request);
-
 $_PARAMETERS = array_filter($parts, 'ctype_digit');
 $_SEGMENTS = array_filter($parts, function ($segment) {
     return !ctype_digit($segment);

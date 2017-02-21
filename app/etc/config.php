@@ -228,7 +228,7 @@ $config = [
         'manage_staff_groups' => 'Zarządzanie grupami pracowników',
     ],
     'navNodeTargets' => [ # dostępne atrybuty target dla węzłów nawigacji
-        '_self'     => 'Załaduj w tym samym oknie',
+        '_self' => 'Załaduj w tym samym oknie',
         '_blank' => 'Załaduj w nowym oknie',
     ],
     'rewrites' => [ # zawiera niestandardowe przekierowania $regex => $destination
@@ -246,6 +246,7 @@ $config = [
                 '/mail_to_send$/',
                 '/mail_sent$/',
                 '/staff$/',
+                '/staff_meta$/',
                 '/staff_groups$/',
                 '/staff_membership$/',
                 '/staff_permissions$/',

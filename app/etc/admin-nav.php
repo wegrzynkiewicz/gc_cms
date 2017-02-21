@@ -168,7 +168,7 @@ return [
             ],
             'adminer' => [
                 'name' => 'Adminer',
-                'path' => '/adminer',
+                'path' => '/root/adminer',
                 'icon' => '',
                 'perms' => [],
                 'children' => [],

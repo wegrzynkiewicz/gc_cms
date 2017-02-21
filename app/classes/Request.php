@@ -29,15 +29,13 @@ class Request
         $this->protocol = 'http'.(stripos(server('SERVER_PROTOCOL', 'http'), 'https') === true ? 's' : '');
         $this->host = server('HTTP_HOST', 'localhost');
         $this->www = substr($this->host, 0, 4) === 'www.';
-        $this->doslug = server('SERVER_NAME', $this->host);
+        $this->domain = server('SERVER_NAME', $this->host);
         $this->port = intval(server('SERVER_PORT', 80));
         $this->uri = parse_url(server('REQUEST_URI'), \PHP_URL_PATH);
         $this->query = parse_url(server('REQUEST_URI'), \PHP_URL_QUERY);
 
         # pobierz wszystkie najistotniejsze informacje o żądaniu
         $rootUrl = dirname(server('SCRIPT_NAME'));
-        dd($_SERVER);
-        dd($rootUrl);
         $this->slug = $this->uri;
 
         logger('[REQUEST] '.strtoupper($this->method).' '.$this->slug, $_REQUEST);
