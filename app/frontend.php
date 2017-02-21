@@ -3,7 +3,6 @@
 /** Stara się pobrać odpowiednie rusztowanie */
 
 $slug = $request->uri;
-$lang = getVisitorLang();
 $method = $request->method;
 
 
@@ -11,19 +10,15 @@ $method = $request->method;
 $widgets = GC\Model\Widget::select()
     ->equals('lang', getVisitorLang())
     ->fetchByKey('workname');
-    
+
 GC\Translator::$domain = 'template-'.TEMPLATE;
 
-$getTemplateFile = function ($name, $theme = 'default') use ($lang, $method)
+$getTemplateFile = function ($name, $theme = 'default') use ($method)
 {
     $files = [
-        TEMPLATE_PATH."/{$name}-{$theme}-{$lang}-{$method}.html.php",
         TEMPLATE_PATH."/{$name}-{$theme}-{$method}.html.php",
-        TEMPLATE_PATH."/{$name}-{$theme}-{$lang}.html.php",
         TEMPLATE_PATH."/{$name}-{$theme}.html.php",
-        TEMPLATE_PATH."/{$name}-{$lang}-{$method}.html.php",
         TEMPLATE_PATH."/{$name}-{$method}.html.php",
-        TEMPLATE_PATH."/{$name}-{$lang}.html.php",
         TEMPLATE_PATH."/{$name}.html.php",
     ];
 

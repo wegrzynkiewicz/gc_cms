@@ -59,6 +59,7 @@ $config = [
         'forceHTTPS' => false, # null jeżeli możliwość wejścia z każdego protokolu, wartość logiczna, nakazuje przekierowywanie na adres z lub bez https,
         'forceWWW' => false, # null jeżeli możliwość wejścia z każdego www, wartość logiczna, nakazuje przekierowywanie na adres z lub bez www,
         'forceDomain' => null, # null jeżeli możliwość wejścia z każdej domeny, nakazuje przekierowywanie na zadaną domenę,
+        'forceIndexPhp' => null, # null jeżeli możliwość wejścia z i bez front controllera, wartość logiczna, nakazuje przekierowywanie front controller
         'forcePort' => null, # null jeżeli możliwość wejścia z każdego portu, nakazuje przekierowywanie na zadany port,
     ],
     'adminNavbarTitle' => 'Panel Administracyjny', # wyświetlana w prawym gornym rogu panelu admina

@@ -7,7 +7,7 @@ $root->addAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
 
 $frames = GC\Model\Frame::select()
     ->fields(['type', 'slug', 'modify_datetime'])
-    ->order('slug', 'ASC')
+    ->order('slug', 'DESC')
     ->fetchAll();
 
 foreach ($frames as $frame) {

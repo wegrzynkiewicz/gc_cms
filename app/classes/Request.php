@@ -4,7 +4,7 @@ namespace GC;
 
 class Request
 {
-    const FRONT_CONTROLLER_URL = '/index.php';
+    const FRONT_CONTROLLER_URI = '/index.php';
 
     public $method = 'GET';
     public $protocol = '';
@@ -13,11 +13,11 @@ class Request
     public $domain = '';
     public $port = 80;
     public $uri = '';
+    public $root = '';
+    public $frontController = false;
+    public $lang = '';
     public $query = '';
 
-    public $rootUrl = '';
-    public $frontControllerUrl = '';
-    public $lang = '';
     public $slug = '';
 
     public $mask = '%s';
@@ -35,21 +35,21 @@ class Request
         $this->query = parse_url(server('REQUEST_URI'), \PHP_URL_QUERY);
 
         # pobierz wszystkie najistotniejsze informacje o żądaniu
-        $rootUrl = dirname(server('SCRIPT_NAME'));
+        $rootUri = dirname(server('SCRIPT_NAME'));
         $this->slug = $this->uri;
 
         logger('[REQUEST] '.strtoupper($this->method).' '.$this->slug, $_REQUEST);
 
         # jeżeli aplikacja jest zainstalowana w katalogu, wtedy pomiń ścieżkę katalogu
-        if ($rootUrl and strpos($this->slug, $rootUrl) === 0) {
-            $this->slug = substr($this->slug, strlen($rootUrl));
-            $this->rootUrl = $rootUrl;
+        if ($rootUri and strpos($this->slug, $rootUri) === 0) {
+            $this->slug = substr($this->slug, strlen($rootUri));
+            $this->root = $rootUri;
         }
 
         # jeżeli ścieżka zawiera front controller, wtedy usuń go
-        if (strpos($this->slug, static::FRONT_CONTROLLER_URL) === 0) {
-            $this->slug = substr($this->slug, strlen(static::FRONT_CONTROLLER_URL));
-            $this->frontControllerUrl = static::FRONT_CONTROLLER_URL;
+        if (strpos($this->slug, static::FRONT_CONTROLLER_URI) === 0) {
+            $this->slug = substr($this->slug, strlen(static::FRONT_CONTROLLER_URI));
+            $this->frontController = true;
         }
 
         # sprawdza pierwszy segment w adresie czy nie jest jednym z dostępnych języków
@@ -70,9 +70,10 @@ class Request
     {
         $www = $this->www ? 'www.' : '';
         $port = $this->port === 80 ? '' : ":{$this->port}";
-        $uri = $this->uri === '/' ? '' : $this->uri;
+        $slug = $this->slug === '/' ? '' : $this->slug;
+        $front = $this->frontController ? static::FRONT_CONTROLLER_URI : '';
 
-        $url = "{$this->protocol}://{$www}{$this->domain}{$port}{$uri}?{$this->query}";
+        $url = "{$this->protocol}://{$www}{$this->domain}{$port}{$this->root}{$front}{$slug}?{$this->query}";
         $url = rtrim($url, '?');
 
         return $url;
@@ -96,6 +97,10 @@ class Request
 
         if ($seo['forceDomain'] !== null) {
             $target->domain = $seo['forceDomain'];
+        }
+
+        if ($seo['forceIndexPhp'] !== null) {
+            $target->frontController = (bool)$seo['forceIndexPhp'];
         }
 
         if ($seo['forcePort'] !== null) {
@@ -140,7 +145,7 @@ class Request
      */
     public function root($uri = '')
     {
-        return '/'.trim($this->rootUrl.$uri, '/');
+        return '/'.trim($this->root.$uri, '/');
     }
 
     /**
@@ -148,7 +153,7 @@ class Request
      */
     public function assets($uri)
     {
-        return $this->rootUrl.ASSETS_URL.$uri;
+        return $this->root.ASSETS_URL.$uri;
     }
 
     /**
@@ -156,7 +161,7 @@ class Request
      */
     public function templateAssets($uri)
     {
-        return $this->rootUrl.TEMPLATE_ASSETS_URL.$uri;
+        return $this->root.TEMPLATE_ASSETS_URL.$uri;
     }
 
     /**
@@ -168,7 +173,9 @@ class Request
             return $uri;
         }
 
-        return $this->root($this->frontControllerUrl.$uri);
+        $front = $this->frontController ? static::FRONT_CONTROLLER_URI : '';
+
+        return $this->root($front.$uri);
     }
 
     /**
@@ -180,18 +187,18 @@ class Request
     }
 
     /**
-     * Usuwa przednie części adresu, aby nie zawierały domeny lub rootUrl
+     * Usuwa przednie części adresu, aby nie zawierały domeny lub rootUri
      */
     public function relative($uri)
     {
         $uri = parse_url($uri, PHP_URL_PATH);
 
-        if (strlen($this->rootUrl) <= 0) {
+        if (strlen($this->root) <= 0) {
             return $uri;
         }
 
-        if ($uri and strpos($uri, $this->rootUrl) === 0) {
-            $uri = substr($uri, strlen($this->rootUrl));
+        if ($uri and strpos($uri, $this->root) === 0) {
+            $uri = substr($uri, strlen($this->root));
         }
 
         return $uri;
