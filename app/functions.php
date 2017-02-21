@@ -588,15 +588,18 @@ function getSourceFiles()
  */
 function refreshChecksums()
 {
-    GC\Model\Checksum::delete()
-        ->execute();
+    \GC\Storage\Database::getInstance()->transaction(function() {
 
-    foreach (getSourceFiles() as $file) {
-        GC\Model\Checksum::insert([
-            'file' => trim($file, '.'),
-            'hash' => sha1(file_get_contents($file)),
-        ]);
-    }
+        \GC\Model\Checksum::delete()
+            ->execute();
+
+        foreach (getSourceFiles() as $file) {
+            \GC\Model\Checksum::insert([
+                'file' => trim($file, '.'),
+                'hash' => sha1(file_get_contents($file)),
+            ]);
+        }
+    });
 }
 
 /**
