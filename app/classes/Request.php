@@ -6,46 +6,127 @@ class Request
 {
     const FRONT_CONTROLLER_URL = '/index.php';
 
+    public $method = 'GET';
+    public $protocol = '';
+    public $host = 'localhost';
+    public $www = false;
+    public $domain = '';
+    public $port = 80;
     public $uri = '';
     public $query = '';
-    public $method = '';
+
     public $rootUrl = '';
     public $frontControllerUrl = '';
+    public $lang = '';
+    public $slug = '';
+
     public $mask = '%s';
-    public $lang = null;
-    public $rawUri = '';
 
-    public function __construct($method, $rawUri, $script)
+    public function __construct()
     {
-        # pobierz wszystkie najistotniejsze informacje o żądaniu
-        $rootUrl = dirname($script);
-        $this->rawUri = $rawUri;
-        $this->uri = parse_url($rawUri, \PHP_URL_PATH);
-        $this->method = strtolower($method);
+        # pobranie najważniejszych danych o adresie strony
+        $this->method = strtolower(server('REQUEST_METHOD', 'GET'));
+        $this->protocol = 'http'.(stripos(server('SERVER_PROTOCOL', 'http'), 'https') === true ? 's' : '');
+        $this->host = server('HTTP_HOST', 'localhost');
+        $this->www = substr($this->host, 0, 4) === 'www.';
+        $this->doslug = server('SERVER_NAME', $this->host);
+        $this->port = intval(server('SERVER_PORT', 80));
+        $this->uri = parse_url(server('REQUEST_URI'), \PHP_URL_PATH);
+        $this->query = parse_url(server('REQUEST_URI'), \PHP_URL_QUERY);
 
-        logger('[REQUEST] '.strtoupper($method).' '.$this->uri, $_REQUEST);
+        # pobierz wszystkie najistotniejsze informacje o żądaniu
+        $rootUrl = dirname(server('SCRIPT_NAME'));
+        dd($_SERVER);
+        dd($rootUrl);
+        $this->slug = $this->uri;
+
+        logger('[REQUEST] '.strtoupper($this->method).' '.$this->slug, $_REQUEST);
 
         # jeżeli aplikacja jest zainstalowana w katalogu, wtedy pomiń ścieżkę katalogu
-        if ($rootUrl and strpos($this->uri, $rootUrl) === 0) {
-            $this->uri = substr($this->uri, strlen($rootUrl));
+        if ($rootUrl and strpos($this->slug, $rootUrl) === 0) {
+            $this->slug = substr($this->slug, strlen($rootUrl));
             $this->rootUrl = $rootUrl;
         }
 
         # jeżeli ścieżka zawiera front controller, wtedy usuń go
-        if (strpos($this->uri, static::FRONT_CONTROLLER_URL) === 0) {
-            $this->uri = substr($this->uri, strlen(static::FRONT_CONTROLLER_URL));
+        if (strpos($this->slug, static::FRONT_CONTROLLER_URL) === 0) {
+            $this->slug = substr($this->slug, strlen(static::FRONT_CONTROLLER_URL));
             $this->frontControllerUrl = static::FRONT_CONTROLLER_URL;
         }
 
         # sprawdza pierwszy segment w adresie czy nie jest jednym z dostępnych języków
         foreach ($GLOBALS['config']['langs'] as $code => $lang) {
-            if (strpos($this->uri, "/{$code}/") === 0 or $this->uri === "/{$code}") {
+            if (strpos($this->slug, "/{$code}/") === 0 or $this->slug === "/{$code}") {
                 $this->lang = $code;
             }
         }
 
-        # uri musi mieć zawsze slasha na początku
-        $this->uri = '/'.trim($this->uri, '/');
+        # slug musi mieć zawsze slasha na początku
+        $this->slug = '/'.trim($this->slug, '/');
+    }
+
+    /**
+     * Zwraca pełny adres żądania
+     */
+    public function getUrl()
+    {
+        $www = $this->www ? 'www.' : '';
+        $port = $this->port === 80 ? '' : ":{$this->port}";
+        $uri = $this->uri === '/' ? '' : $this->uri;
+
+        $url = "{$this->protocol}://{$www}{$this->domain}{$port}{$uri}?{$this->query}";
+        $url = rtrim($url, '?');
+
+        return $url;
+    }
+
+    /**
+     * Przekierowuje na inny adres jeżeli adres url żądania nie zgadza się z polityką seo
+     */
+    public function redirectIfSeoUrlIsInvalid()
+    {
+        $target = clone $this;
+        $seo = $GLOBALS['config']['seo'];
+
+        if ($seo['forceHTTPS'] !== null) {
+            $target->protocol = 'http'.((bool)$seo['forceHTTPS'] ? 's' : '');
+        }
+
+        if ($seo['forceWWW'] !== null) {
+            $target->www = (bool)$seo['forceWWW'];
+        }
+
+        if ($seo['forceDomain'] !== null) {
+            $target->domain = $seo['forceDomain'];
+        }
+
+        if ($seo['forcePort'] !== null) {
+            $target->port = intval($seo['forcePort']);
+        }
+
+        $targetUrl = $target->getUrl();
+        $currentUrl = $this->getUrl();
+
+        # przekierowanie na prawidłowy adres
+        if ($currentUrl !== $targetUrl) {
+            logger("[SEO] From: {$currentUrl} To: {$targetUrl}");
+            absoluteRedirect($targetUrl, 301);  # 301 Moved Permanently
+        }
+    }
+
+    /**
+     * Przekierowuje jeżeli któryś z niestandardowych rewritów okaże się pasować
+     */
+    public function redirectIfRewriteCorrect()
+    {
+        $target = "{$this->slug}?{$this->query}";
+        $target = rtrim($target, '?');
+        foreach ($GLOBALS['config']['rewrites'] as $pattern => $destination) {
+            if (preg_match($pattern, $target)) {
+                $result = preg_replace($pattern, $destination, $target);
+                redirect($result, 301); # 301 Moved Permanently
+            }
+        }
     }
 
     /**
@@ -59,63 +140,74 @@ class Request
     /**
      * Generuje przednie części adresu dla plików w katalogu głównym
      */
-    public function root($path = '')
+    public function root($uri = '')
     {
-        return '/'.trim($this->rootUrl.$path, '/');
+        return '/'.trim($this->rootUrl.$uri, '/');
     }
 
     /**
      * Generuje przednie części adresu dla plików nieźródłowych
      */
-    public function assets($path)
+    public function assets($uri)
     {
-        return $this->rootUrl.ASSETS_URL.$path;
+        return $this->rootUrl.ASSETS_URL.$uri;
     }
 
     /**
      * Generuje przednie części adresu dla plików nieźródłowych w szablonie
      */
-    public function templateAssets($path)
+    public function templateAssets($uri)
     {
-        return $this->rootUrl.TEMPLATE_ASSETS_URL.$path;
+        return $this->rootUrl.TEMPLATE_ASSETS_URL.$uri;
     }
 
     /**
      * Generuje przednie części adresu
      */
-    public function make($path)
+    public function make($uri)
     {
-        if ($path === "#") {
-            return $path;
+        if ($uri === "#") {
+            return $uri;
         }
 
-        return $this->root($this->frontControllerUrl.$path);
+        return $this->root($this->frontControllerUrl.$uri);
     }
 
     /**
      * Generuje przednie części adresu
      */
-    public function mask($path = '')
+    public function mask($uri = '')
     {
-        return $this->make(sprintf($this->mask, $path));
+        return $this->make(sprintf($this->mask, $uri));
     }
 
     /**
      * Usuwa przednie części adresu, aby nie zawierały domeny lub rootUrl
      */
-    public function relative($path)
+    public function relative($uri)
     {
-        $path = parse_url($path, PHP_URL_PATH);
+        $uri = parse_url($uri, PHP_URL_PATH);
 
         if (strlen($this->rootUrl) <= 0) {
-            return $path;
+            return $uri;
         }
 
-        if ($path and strpos($path, $this->rootUrl) === 0) {
-            $path = substr($path, strlen($this->rootUrl));
+        if ($uri and strpos($uri, $this->rootUrl) === 0) {
+            $uri = substr($uri, strlen($this->rootUrl));
         }
 
-        return $path;
+        return $uri;
+    }
+
+    /**
+     * Generuje pełen adres do zasobu wraz z domeną
+     */
+    public function absolute($uri)
+    {
+        $uri = $this->make($uri);
+        $url = "{$this->protocol}://{$this->host}{$uri}";
+
+        return $url;
     }
 
     /**

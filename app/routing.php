@@ -2,8 +2,10 @@
 
 /** Plik ładuje odpowiednią akcję poprzez warunki routingu */
 
-$requestUri = trim($request->uri, '/');
-$parts = explode('/', $requestUri);
+$slug = trim($request->slug, '/');
+$parts = explode('/', $slug);
+
+dd($request);
 
 $_PARAMETERS = array_filter($parts, 'ctype_digit');
 $_SEGMENTS = array_filter($parts, function ($segment) {

@@ -3,6 +3,7 @@
 $images = GC\Model\Module\File::select()
     ->source('::moduleFiles')
     ->equals('module_id', $module_id)
+    ->order('position', 'asc')
     ->fetchByPrimaryKey();
 
 ?>

@@ -5,13 +5,23 @@
 require __DIR__.'/bootstrap.php';
 
 # żądanie, obiekt uri jest tym samym żądaniem, tylko o krótszej nazwie
-$uri = $request = new GC\Request(
-    $_SERVER['REQUEST_METHOD'],
-    $_SERVER['REQUEST_URI'],
-    $_SERVER['SCRIPT_NAME']
-);
+$uri = $request = new GC\Request();
 
-require __DIR__.'/redirects.php';
+# przekierowuje na prawidłowe adresy w razie potrzeby
+$request->redirectIfSeoUrlIsInvalid();
+$request->redirectIfRewriteCorrect();
+
+# jeżeli strona jest w budowie wtedy zwróć komunikat o budowie, chyba, że masz uprawnienie
+if ($config['debug']['inConstruction']) {
+    if (isset($_REQUEST['you-shall-not-pass'])) {
+        $_SESSION['allowInConstruction'] = true;
+    }
+    if (!isset($_SESSION['allowInConstruction'])) {
+        logger('[RESPONSE] inConstruction');
+        require TEMPLATE_PATH.'/errors/construction.html.php';
+        exit;
+    }
+}
 
 session_start();
 
