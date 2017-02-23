@@ -16,7 +16,7 @@ $tab = GC\Model\Module\Tab::select()
     ->fetch();
 
 $uri->extendMask("/{$module_id}%s");
-require ROUTES_PATH."/admin/parts/module/type/{$moduleType}/_import.php";
+require ROUTES_PATH."/admin/module/type/{$moduleType}/_import.php";
 
 $headTitle = trans('Moduły zakładki "%s"', [$tab['name']]);
 $uri->extendMask("/tab/{$frame_id}/module%s");
@@ -31,5 +31,5 @@ if ($moduleName == 'module') {
         $module_id = intval(array_shift($_SEGMENTS));
     }
     $action = array_shift($_SEGMENTS);
-    require ROUTES_PATH."/admin/parts/module/{$action}-{$request->method}.html.php";
+    require ROUTES_PATH."/admin/module/{$action}-{$request->method}.html.php";
 }

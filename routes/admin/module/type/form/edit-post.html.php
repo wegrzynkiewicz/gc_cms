@@ -1,6 +1,6 @@
 <?php
 
-require ROUTES_PATH."/admin/parts/module/type/form/_import.php";
+require ROUTES_PATH."/admin/module/type/form/_import.php";
 
 $emails = def($_POST, 'emails', []);
 sort($emails);

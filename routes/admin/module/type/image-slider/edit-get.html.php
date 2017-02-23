@@ -1,6 +1,6 @@
 <?php
 
-require ROUTES_PATH."/admin/parts/module/type/image-slider/_import.php";
+require ROUTES_PATH."/admin/module/type/image-slider/_import.php";
 
 $_POST = $module;
 
@@ -82,7 +82,7 @@ $_POST = $module;
     <div class="modal-dialog">
         <form id="deleteModalForm"
             method="post"
-            action="<?=$uri->make("/admin/parts/module/{$module_id}/image/xhr-delete")?>"
+            action="<?=$uri->make("/admin/module/{$module_id}/image/xhr-delete")?>"
             class="modal-content">
             <input name="file_id" type="hidden" value="">
             <div class="modal-header">
@@ -114,7 +114,7 @@ $_POST = $module;
 $(function() {
 
     function refreshImages() {
-        var url = "<?=$uri->make("/admin/parts/module/{$module_id}/image/xhr-list")?>";
+        var url = "<?=$uri->make("/admin/module/{$module_id}/image/xhr-list")?>";
         $.get(url, function(data) {
             $('#images')
                 .html(data)
@@ -141,7 +141,7 @@ $(function() {
     });
 
     $('#editModal').on('show.bs.modal', function (event) {
-        var url = "<?=$uri->make("/admin/parts/module/{$module_id}/type/image-slider/slide/xhr-edit")?>/"+$(event.relatedTarget).data('id');
+        var url = "<?=$uri->make("/admin/module/{$module_id}/type/image-slider/slide/xhr-edit")?>/"+$(event.relatedTarget).data('id');
         $.get(url, function(data) {
             $('#editModalContent').html(data);
             $('#editModalForm').attr('action', url);
@@ -161,7 +161,7 @@ $(function() {
     });
 
     $("#sortableForm").on('submit', function(event) {
-        var url = "<?=$uri->make("/admin/parts/module/{$module_id}/image/xhr-sort")?>";
+        var url = "<?=$uri->make("/admin/module/{$module_id}/image/xhr-sort")?>";
         $.post(url, {
             positions: $("#images").sortable("toArray")
         });
@@ -172,7 +172,7 @@ $(function() {
         url: '<?=$uri->make('/admin/elfinder/connector')?>',
         lang: '<?=getVisitorLang()?>',
     }, function(urls) {
-        $.post("<?=$uri->make("/admin/parts/module/{$module_id}/image/xhr-add")?>", {
+        $.post("<?=$uri->make("/admin/module/{$module_id}/image/xhr-add")?>", {
             urls: urls
         }, function() {
             refreshImages();

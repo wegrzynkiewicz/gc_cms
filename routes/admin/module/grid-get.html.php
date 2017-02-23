@@ -47,7 +47,7 @@ $modules = GC\Model\Module\Module::select()
                     <div id="grid-rows-wrapper"></div>
                     <div class="grid-stack">
                         <?php foreach ($modules as $module_id => $module): ?>
-                            <?=render(ROUTES_PATH.'/admin/parts/module/grid-item.html.php', $module)?>
+                            <?=render(ROUTES_PATH.'/admin/module/grid-item.html.php', $module)?>
                         <?php endforeach ?>
                     </div>
                 </div>
@@ -167,7 +167,7 @@ $modules = GC\Model\Module\Module::select()
     });
 
     $('#rowSettingsModal').on('show.bs.modal', function (event) {
-        var url = "<?=$uri->make("/admin/parts/module/row/{$frame_id}/xhr-edit")?>/"+$(event.relatedTarget).data('y');
+        var url = "<?=$uri->make("/admin/module/row/{$frame_id}/xhr-edit")?>/"+$(event.relatedTarget).data('y');
         $.get(url, function(data) {
             $('#rowSettingsModalContent').html(data);
             $('#rowSettingsModalForm').attr('action', url);

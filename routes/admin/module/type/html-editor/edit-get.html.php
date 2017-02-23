@@ -1,6 +1,6 @@
 <?php
 
-require ROUTES_PATH."/admin/parts/module/type/html-editor/_import.php";
+require ROUTES_PATH."/admin/module/type/html-editor/_import.php";
 
 ?>
 <?php require ROUTES_PATH.'/admin/parts/header.html.php'; ?>

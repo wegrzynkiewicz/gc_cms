@@ -1,6 +1,6 @@
 <?php
 
-require ROUTES_PATH."/admin/parts/module/type/tabs/_import.php";
+require ROUTES_PATH."/admin/module/type/tabs/_import.php";
 
 $tabs = GC\Model\Module\Tab::select()
     ->source('::frame')
@@ -43,7 +43,7 @@ $tabs = GC\Model\Module\Tab::select()
             <?php else: ?>
                 <ol id="sortable" class="sortable">
                     <?php foreach ($tabs as $tab): ?>
-                        <?=render(ROUTES_PATH.'/admin/parts/module/type/tabs/tab.html.php', $tab)?>
+                        <?=render(ROUTES_PATH.'/admin/module/type/tabs/tab.html.php', $tab)?>
                     <?php endforeach?>
                 </ol>
                 <script>
@@ -160,10 +160,10 @@ $tabs = GC\Model\Module\Tab::select()
 <script>
 $(function(){
 
-    var addUri    = '<?=$uri->make("/admin/parts/module/{$module_id}/type/tabs/item/xhr-add")?>';
-    var sortUri   = '<?=$uri->make("/admin/parts/module/{$module_id}/type/tabs/item/xhr-sort")?>';
-    var editUri   = '<?=$uri->make("/admin/parts/module/type/tabs/item/xhr-edit")?>';
-    var deleteUri = '<?=$uri->make("/admin/parts/module/type/tabs/item/xhr-delete")?>';
+    var addUri    = '<?=$uri->make("/admin/module/{$module_id}/type/tabs/item/xhr-add")?>';
+    var sortUri   = '<?=$uri->make("/admin/module/{$module_id}/type/tabs/item/xhr-sort")?>';
+    var editUri   = '<?=$uri->make("/admin/module/type/tabs/item/xhr-edit")?>';
+    var deleteUri = '<?=$uri->make("/admin/module/type/tabs/item/xhr-delete")?>';
 
     $('#addModalForm').on('submit', function (event) {
         $.post(addUri, $(this).serialize());

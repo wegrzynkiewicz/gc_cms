@@ -22,4 +22,4 @@ $breadcrumbs->push([
 $frame = $node;
 $action = array_shift($_SEGMENTS);
 
-require ROUTES_PATH."/admin/parts/module/{$action}-{$request->method}.html.php";
+require ROUTES_PATH."/admin/module/{$action}-{$request->method}.html.php";

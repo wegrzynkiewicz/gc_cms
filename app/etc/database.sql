@@ -182,6 +182,18 @@ CREATE TABLE `gc_modules` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
+DROP TABLE IF EXISTS `gc_module_files`;
+CREATE TABLE `gc_module_files` (
+  `file_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` tinytext NOT NULL,
+  `slug` tinytext NOT NULL,
+  `width` smallint(6) unsigned NOT NULL,
+  `height` smallint(6) unsigned NOT NULL,
+  `size` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`file_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
 DROP TABLE IF EXISTS `gc_module_file_meta`;
 CREATE TABLE `gc_module_file_meta` (
   `file_id` int(10) unsigned NOT NULL,
@@ -413,4 +425,4 @@ CREATE TABLE `gc_widgets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
--- 2017-02-23 02:07:20
+-- 2017-02-23 02:41:31

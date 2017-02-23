@@ -1,6 +1,6 @@
 <?php
 
-require ROUTES_PATH."/admin/parts/module/type/gallery/_import.php";
+require ROUTES_PATH."/admin/module/type/gallery/_import.php";
 
 # aktualizuj galerię zdjęć
 GC\Model\Module\Module::updateByPrimaryId($module_id, [
@@ -27,7 +27,7 @@ foreach ($positions as $image) {
 }
 
 $theme = post('theme');
-require ROUTES_PATH."/admin/parts/module/type/gallery/theme/{$theme}-post.php";
+require ROUTES_PATH."/admin/module/type/gallery/theme/{$theme}-post.php";
 
 flashBox(trans('Moduł galerii zdjęć został zaktualizowany.'));
 redirect($breadcrumbs->getBeforeLast('uri'));

@@ -14,8 +14,8 @@ $getPreviewUrl = function () use ($node_id) {
     return $uri->make("/post/node/{$node_id}");
 };
 
-require ROUTES_PATH."/admin/parts/module/_import.php";
+require ROUTES_PATH."/admin/module/_import.php";
 
 $action = array_shift($_SEGMENTS);
 
-require ROUTES_PATH."/admin/parts/module/{$action}-{$request->method}.html.php";
+require ROUTES_PATH."/admin/module/{$action}-{$request->method}.html.php";

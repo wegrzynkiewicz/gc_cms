@@ -1,6 +1,6 @@
 <?php
 
-require ROUTES_PATH."/admin/parts/module/type/photo/_import.php";
+require ROUTES_PATH."/admin/module/type/photo/_import.php";
 
 $_POST = $settings;
 $_POST['theme'] = $module['theme'];

@@ -14,7 +14,7 @@ $images = GC\Model\Module\File::select()
 <?php else: ?>
     <div class="module-gallery-preview-row" data-gallery="photoswipe">
         <?php foreach ($images as $file_id => $image): ?>
-            <?=render(ROUTES_PATH.'/admin/parts/module/type/gallery/grid-item.html.php', $image)?>
+            <?=render(ROUTES_PATH.'/admin/module/type/gallery/grid-item.html.php', $image)?>
         <?php endforeach ?>
         <div class="clearfix"></div>
     </div>

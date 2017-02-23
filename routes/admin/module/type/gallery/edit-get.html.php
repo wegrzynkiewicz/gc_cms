@@ -1,6 +1,6 @@
 <?php
 
-require ROUTES_PATH."/admin/parts/module/type/gallery/_import.php";
+require ROUTES_PATH."/admin/module/type/gallery/_import.php";
 
 ?>
 <?php require ROUTES_PATH.'/admin/parts/header.html.php'; ?>
@@ -180,11 +180,11 @@ $(function() {
 
     var imageTemplate       = $('#image-template').html();
     var emptyTemplate       = $('#empty-template').html();
-    var editUri             = "<?=$uri->make("/admin/parts/module/image/xhr-edit")?>/";
-    var addUri              = "<?=$uri->make("/admin/parts/module/{$module_id}/image/xhr-add")?>";
-    var refreshImagesUri    = "<?=$uri->make("/admin/parts/module/{$module_id}/image/xhr-list")?>";
-    var deleteUri           = "<?=$uri->make("/admin/parts/module/{$module_id}/image/xhr-delete")?>";
-    var refreshThemeUri     = "<?=$uri->make("/admin/parts/module/{$module_id}/type/gallery/theme")?>/";
+    var editUri             = "<?=$uri->make("/admin/module/image/xhr-edit")?>/";
+    var addUri              = "<?=$uri->make("/admin/module/{$module_id}/image/xhr-add")?>";
+    var refreshImagesUri    = "<?=$uri->make("/admin/module/{$module_id}/image/xhr-list")?>";
+    var deleteUri           = "<?=$uri->make("/admin/module/{$module_id}/image/xhr-delete")?>";
+    var refreshThemeUri     = "<?=$uri->make("/admin/module/{$module_id}/type/gallery/theme")?>/";
 
     function refreshImages() {
         $.get(refreshImagesUri, function(data) {

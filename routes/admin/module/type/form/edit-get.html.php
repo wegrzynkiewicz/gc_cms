@@ -1,6 +1,6 @@
 <?php
 
-require ROUTES_PATH."/admin/parts/module/type/form/_import.php";
+require ROUTES_PATH."/admin/module/type/form/_import.php";
 
 $installedForms = GC\Model\Form\Form::select()
     ->fields('::primary, name')
