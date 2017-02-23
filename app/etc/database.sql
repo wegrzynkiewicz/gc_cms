@@ -99,6 +99,16 @@ CREATE TABLE `gc_frames` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
+DROP TABLE IF EXISTS `gc_frame_meta`;
+CREATE TABLE `gc_frame_meta` (
+  `frame_id` int(10) unsigned NOT NULL,
+  `name` varchar(32) NOT NULL,
+  `value` mediumtext NOT NULL,
+  UNIQUE KEY `frame_id_name` (`frame_id`,`name`),
+  CONSTRAINT `gc_frame_meta_ibfk_1` FOREIGN KEY (`frame_id`) REFERENCES `gc_frames` (`frame_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
 DROP TABLE IF EXISTS `gc_mail_sent`;
 CREATE TABLE `gc_mail_sent` (
   `mail_hash` char(40) NOT NULL,
@@ -172,15 +182,25 @@ CREATE TABLE `gc_modules` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_module_files`;
-CREATE TABLE `gc_module_files` (
+DROP TABLE IF EXISTS `gc_module_file_meta`;
+CREATE TABLE `gc_module_file_meta` (
+  `file_id` int(10) unsigned NOT NULL,
+  `name` varchar(32) NOT NULL,
+  `value` mediumtext NOT NULL,
+  UNIQUE KEY `file_id_name` (`file_id`,`name`),
+  CONSTRAINT `gc_module_file_meta_ibfk_1` FOREIGN KEY (`file_id`) REFERENCES `gc_module_files` (`file_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+DROP TABLE IF EXISTS `gc_module_file_pos`;
+CREATE TABLE `gc_module_file_pos` (
   `module_id` int(10) unsigned NOT NULL,
-  `frame_id` int(10) unsigned NOT NULL,
+  `file_id` int(10) unsigned NOT NULL,
   `position` int(10) unsigned NOT NULL,
   KEY `module_id` (`module_id`),
-  KEY `file_id` (`frame_id`),
-  CONSTRAINT `gc_module_files_ibfk_6` FOREIGN KEY (`module_id`) REFERENCES `gc_modules` (`module_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `gc_module_files_ibfk_8` FOREIGN KEY (`frame_id`) REFERENCES `gc_frames` (`frame_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `file_id` (`file_id`),
+  CONSTRAINT `gc_module_file_pos_ibfk_1` FOREIGN KEY (`module_id`) REFERENCES `gc_modules` (`module_id`) ON DELETE CASCADE,
+  CONSTRAINT `gc_module_file_pos_ibfk_2` FOREIGN KEY (`file_id`) REFERENCES `gc_module_files` (`file_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -199,6 +219,16 @@ CREATE TABLE `gc_module_grid` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
+DROP TABLE IF EXISTS `gc_module_meta`;
+CREATE TABLE `gc_module_meta` (
+  `module_id` int(10) unsigned NOT NULL,
+  `name` varchar(32) NOT NULL,
+  `value` mediumtext NOT NULL,
+  UNIQUE KEY `module_id_name` (`module_id`,`name`),
+  CONSTRAINT `gc_module_meta_ibfk_1` FOREIGN KEY (`module_id`) REFERENCES `gc_modules` (`module_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
 DROP TABLE IF EXISTS `gc_module_tabs`;
 CREATE TABLE `gc_module_tabs` (
   `module_id` int(10) unsigned NOT NULL,
@@ -208,6 +238,32 @@ CREATE TABLE `gc_module_tabs` (
   KEY `item_id` (`frame_id`),
   CONSTRAINT `gc_module_tabs_ibfk_4` FOREIGN KEY (`module_id`) REFERENCES `gc_modules` (`module_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `gc_module_tabs_ibfk_6` FOREIGN KEY (`frame_id`) REFERENCES `gc_frames` (`frame_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+DROP TABLE IF EXISTS `gc_popups`;
+CREATE TABLE `gc_popups` (
+  `popup_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `lang` varchar(2) NOT NULL,
+  `name` tinytext NOT NULL,
+  `type` varchar(32) NOT NULL,
+  `display` varchar(32) NOT NULL,
+  `countdown` int(10) unsigned NOT NULL,
+  `show_after_datetime` datetime NOT NULL,
+  `hide_after_datetime` datetime NOT NULL,
+  `content` longtext NOT NULL,
+  PRIMARY KEY (`popup_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+DROP TABLE IF EXISTS `gc_popup_display`;
+CREATE TABLE `gc_popup_display` (
+  `popup_id` int(10) unsigned NOT NULL,
+  `frame_id` int(10) unsigned NOT NULL,
+  KEY `popup_id` (`popup_id`),
+  KEY `frame_id` (`frame_id`),
+  CONSTRAINT `gc_popup_display_ibfk_5` FOREIGN KEY (`popup_id`) REFERENCES `gc_popups` (`popup_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `gc_popup_display_ibfk_6` FOREIGN KEY (`frame_id`) REFERENCES `gc_frames` (`frame_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -357,4 +413,4 @@ CREATE TABLE `gc_widgets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
--- 2017-02-18 19:24:58
+-- 2017-02-23 02:07:20

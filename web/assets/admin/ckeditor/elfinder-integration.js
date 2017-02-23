@@ -4,7 +4,7 @@ $(function() {
         var editor = event.editor;
         var dialogDefinition = event.data.definition;
         var tabCount = dialogDefinition.contents.length;
-        for (var i = 0; i < tabCount; i++) { // cycle to replace the click of button "View on the server"
+        for (var i = 0; i < tabCount; i++) { 
 
             if (!dialogDefinition.contents[i]) {
                 continue;

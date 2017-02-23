@@ -11,6 +11,10 @@ $frames = GC\Model\Frame::select()
     ->fetchAll();
 
 foreach ($frames as $frame) {
+    
+    if (!$frame['slug']) {
+        continue;
+    }
 
     $loc = $uri->absolute($frame['slug']);
     $date = new DateTime($frame['modify_datetime']);

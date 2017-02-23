@@ -35,7 +35,7 @@ $_POST = [];
                                 'name' => 'new_password',
                                 'type' => 'password',
                                 'label' => trans('Nowe hasło'),
-                                'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', $config['password']['minLength']),
+                                'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', [$config['password']['minLength']]),
                             ])?>
 
                             <?=render(ROUTES_PATH.'/admin/parts/input/editbox.html.php', [
@@ -75,7 +75,7 @@ $(function () {
         messages: {
             new_password: {
                 required: "<?=trans('Wprowadź nowe hasło')?>",
-                minlength: "<?=trans('Nowe hasło powinno mieć przynajmniej %s znaków', $config['password']['minLength'])?>"
+                minlength: "<?=trans('Nowe hasło powinno mieć przynajmniej %s znaków', [$config['password']['minLength']])?>"
             },
             confirm_password: {
                 required: "<?=trans('Musisz powtórzyć swoje nowe hasło dla bezpieczeństwa')?>",

@@ -3,7 +3,10 @@
 require ROUTES_PATH.'/admin/_import.php';
 require ROUTES_PATH.'/admin/dump/_import.php';
 
-$dumps = GC\Model\Dump::select()->order('creation_datetime', 'DESC')->fetchByPrimaryKey();
+$dumps = GC\Model\Dump::select()
+    ->order('creation_datetime', 'DESC')
+    ->fetchByPrimaryKey();
+    
 ?>
 <?php require ROUTES_PATH.'/admin/parts/header.html.php'; ?>
 

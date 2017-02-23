@@ -11,6 +11,7 @@ $domains = [
     'admin' => [
         ROUTES_PATH.'/admin',
         ROUTES_PATH.'/root',
+        ROOT_PATH.'/app/etc',
     ],
     'auth' => [
         ROUTES_PATH.'/auth',

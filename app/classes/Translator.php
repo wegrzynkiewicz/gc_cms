@@ -33,12 +33,14 @@ class Translator
     public function translate($text, array $params = [])
     {
         if (!isset($this->translations[static::$domain])) {
+            logger('[TRANSLATOR] Missing domain', [static::$domain]);
             $this->translations[static::$domain] = [];
         }
 
         if (!isset($this->translations[static::$domain][$text])) {
             $this->translations[static::$domain][$text] = $text;
             $this->refresh = true;
+            logger('[TRANSLATOR] Missing translation', [static::$domain, $text]);
         }
 
         return vsprintf($this->translations[static::$domain][$text], $params);

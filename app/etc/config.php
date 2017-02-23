@@ -41,7 +41,6 @@ ini_set('session.use_strict_mode', 1);
 ini_set('session.cookie_httponly', 1); # ustawia ciastko tylko do odczytu, nie jest możliwe odczyt document.cookie w js
 ini_set('session.use_cookies', 1); # do przechowywania sesji ma użyć ciastka
 ini_set('session.use_only_cookies', 1); # do przechowywania sesji ma używać tylko ciastka!
-ini_set('session.hash_function', 1); # użycie bardziej złożonej funkcji do hashowania ciastka sesyjnego
 ini_set('session.save_path', STORAGE_PATH.'/sessions'); # ścieżka w której będą przechowywane pliki sesji
 ini_set('zlib.output_compression_level', 1); # poziom kompresji wyjścia skryptu
 
