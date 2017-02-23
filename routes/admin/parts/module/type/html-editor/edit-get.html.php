@@ -10,9 +10,12 @@ require ROUTES_PATH."/admin/parts/module/type/html-editor/_import.php";
     <div class="col-lg-12">
         <form action="" method="post" class="form-horizontal">
 
-            <?=render(ROUTES_PATH.'/admin/parts/input/textarea.html.php', [
+            <?=render(ROUTES_PATH.'/admin/parts/input/ckeditor.html.php', [
                 'name' => 'content',
                 'label' => trans('Treść modułu'),
+                'options' => [
+                     'customConfig' => '/assets/admin/ckeditor/full_ckeditor.js',
+                ],
             ])?>
 
             <?=render(ROUTES_PATH.'/admin/parts/input/submitButtons.html.php', [
@@ -24,13 +27,4 @@ require ROUTES_PATH."/admin/parts/module/type/html-editor/_import.php";
 </div>
 
 <?php require ROUTES_PATH.'/admin/parts/assets/footer.html.php'; ?>
-
-<script type="text/javascript">
-    $(function(){
-        CKEDITOR.replace('content', {
-             customConfig: '/assets/admin/ckeditor/full_ckeditor.js'
-        });
-    });
-</script>
-
 <?php require ROUTES_PATH.'/admin/parts/footer.html.php'; ?>

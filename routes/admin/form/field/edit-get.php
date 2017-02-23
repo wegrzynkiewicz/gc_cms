@@ -9,7 +9,7 @@ $field_id = intval(array_shift($_PARAMETERS));
 # pobierz pole po kluczu głównym
 $field = GC\Model\Form\Field::fetchByPrimaryId($field_id);
 
-$headTitle = trans('Edycja pola "%s"', [$field['name']]);
+$headTitle = trans('Edycja pola: %s', [$field['name']]);
 $breadcrumbs->push([
     'name' => $headTitle,
 ]);

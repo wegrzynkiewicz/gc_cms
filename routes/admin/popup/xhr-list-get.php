@@ -1,12 +1,11 @@
 <?php
 
 require ROUTES_PATH.'/admin/_import.php';
-require ROUTES_PATH.'/admin/page/_import.php';
+require ROUTES_PATH.'/admin/popup/_import.php';
 
 # utwórz zapytanie dla datatables
-$frames = GC\Model\Frame::select()
-    ->fields('SQL_CALC_FOUND_ROWS frame_id, name, image, slug')
-    ->equals('type', 'page')
+$records = GC\Model\PopUp\PopUp::select()
+    ->fields('SQL_CALC_FOUND_ROWS popup_id, name, type')
     ->equals('lang', GC\Staff::getInstance()->getEditorLang())
     ->buildForDataTables($_GET)
     ->fetchAll();
@@ -17,22 +16,16 @@ $recordsFiltered = intval(GC\Storage\Database::getInstance()
 );
 
 # pobierz ilość wszystkich rekordów
-$recordsTotal = intval(GC\Model\Frame::select()
+$recordsTotal = intval(GC\Model\PopUp\PopUp::select()
     ->fields('COUNT(*) AS count')
-    ->equals('type', 'page')
     ->equals('lang', GC\Staff::getInstance()->getEditorLang())
     ->fetch()['count']
 );
 
-# dla każdej strony utwórz miniaturę
-foreach ($frames as &$frame) {
-    $image = empty($frame['image'])
-        ? $config['noImageUri']
-        : $frame['image'];
-    $frame['href'] = $uri->make($frame['slug']);
-    $frame['image'] = $uri->root(thumbnail($image, 64, 64));
+foreach ($records as &$record) {
+    $record['typeName'] = $config['popupTypes'][$record['type']];
 }
-unset($frame);
+unset($record);
 
 # kontent jaki zostanie zwrócony
 header("Content-Type: application/json; charset=utf-8");
@@ -40,5 +33,5 @@ echo json_encode([
     'draw' => intval(get('draw', 1)),
     'recordsTotal' => $recordsTotal,
     'recordsFiltered' => $recordsFiltered,
-    'data' => $frames,
+    'data' => $records,
 ]);

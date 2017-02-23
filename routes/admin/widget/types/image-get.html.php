@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = trans('Edycja widżetu zdjęcia "%s"', [$widget['name']]);
+$headTitle = trans('Edycja widżetu zdjęcia: %s', [$widget['name']]);
 $breadcrumbs->push([
     'name' => $headTitle,
 ]);

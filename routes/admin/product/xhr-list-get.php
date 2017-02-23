@@ -11,12 +11,12 @@ $frames = GC\Model\Frame::select()
     ->buildForDataTables($_GET)
     ->fetchAll();
 
-# pobierz ilość przefiltrowanych rusztowań
+# pobierz ilość przefiltrowanych rekordów
 $recordsFiltered = intval(GC\Storage\Database::getInstance()
     ->fetch("SELECT FOUND_ROWS() AS count;")['count']
 );
 
-# pobierz ilość wszystkich rusztowań
+# pobierz ilość wszystkich rekordów
 $recordsTotal = intval(GC\Model\Frame::select()
     ->fields('COUNT(*) AS count')
     ->equals('type', 'product')

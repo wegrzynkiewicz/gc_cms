@@ -16,7 +16,7 @@ if (!$frame) {
     redirect($breadcrumbs->getLast('uri'));
 }
 
-$headTitle = trans('Edycja strony %s', [$frame['name']]);
+$headTitle = trans('Edycja strony: %s', [$frame['name']]);
 $breadcrumbs->push([
     'name' => $headTitle,
 ]);

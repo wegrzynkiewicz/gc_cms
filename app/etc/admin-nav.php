@@ -103,6 +103,13 @@ return [
         'badge' => GC\Model\Form\Sent::select()->fields("SUM(status = 'unread') AS unread")->fetch()['unread'],
         'children' => [],
     ],
+    'popup' => [
+        'name' => trans('Wyskakujące okienka'),
+        'path' => '/admin/popup/list',
+        'icon' => 'external-link',
+        'perms' => [],
+        'children' => [],
+    ],
     'files' => [
         'name' => trans('Pliki'),
         'path' => '#',

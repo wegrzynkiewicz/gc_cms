@@ -1,6 +1,6 @@
 <?php
 
-$headTitle = trans('Edycja widżetu formatowanego tekstu HTML "%s"', [$widget['name']]);
+$headTitle = trans('Edycja widżetu formatowanego tekstu HTML: %s', [$widget['name']]);
 $breadcrumbs->push([
     'name' => $headTitle,
 ]);
@@ -13,9 +13,12 @@ $breadcrumbs->push([
     <div class="col-lg-12">
         <form action="" method="post" class="form-horizontal">
 
-            <?=render(ROUTES_PATH.'/admin/parts/input/textarea.html.php', [
+            <?=render(ROUTES_PATH.'/admin/parts/input/ckeditor.html.php', [
                 'name' => 'content',
                 'label' => trans('Treść widżetu'),
+                'options' => [
+                     'customConfig' => '/assets/admin/ckeditor/full_ckeditor.js',
+                ],
             ])?>
 
             <?=render(ROUTES_PATH.'/admin/parts/input/submitButtons.html.php', [
@@ -27,13 +30,4 @@ $breadcrumbs->push([
 </div>
 
 <?php require ROUTES_PATH.'/admin/parts/assets/footer.html.php'; ?>
-
-<script type="text/javascript">
-    $(function(){
-        CKEDITOR.replace('content', {
-             customConfig: '/assets/admin/ckeditor/full_ckeditor.js'
-        });
-    });
-</script>
-
 <?php require ROUTES_PATH.'/admin/parts/footer.html.php'; ?>

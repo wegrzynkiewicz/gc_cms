@@ -1,7 +1,7 @@
 <?php
 $errorMessage = (isset($error) and isset($error[$name])) ? $error[$name] : null;
 ?>
-<div class="form-group">
+<div class="form-group" style="margin-bottom: 20px">
     <?php if (isset($label)): ?>
         <label class="col-md-12 col-sm-12 col-xs-12" for="<?=$name?>">
             <?=$label?>
@@ -25,3 +25,9 @@ $errorMessage = (isset($error) and isset($error[$name])) ? $error[$name] : null;
         <?php endif ?>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(function(){
+        CKEDITOR.replace('<?=$name?>', <?=json_encode($options)?>);
+    });
+</script>

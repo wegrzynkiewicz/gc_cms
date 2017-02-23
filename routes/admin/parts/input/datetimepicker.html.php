@@ -1,8 +1,10 @@
 <?php $type = isset($type) ? $type : 'text'; ?>
 <div class="form-group">
-    <label class="col-md-12 col-sm-12 col-xs-12" for="<?=$name?>">
-        <?=$label?>
-    </label>
+    <?php if (isset($label)): ?>
+        <label class="col-md-12 col-sm-12 col-xs-12" for="<?=$name?>">
+            <?=$label?>
+        </label>
+    <?php endif ?>
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="input-group date">
             <input id="<?=$name?>"

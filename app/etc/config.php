@@ -224,6 +224,11 @@ $config = [
         'html-editor' => 'Formatowany tekst HTML',
         'image' => 'Zdjęcie',
     ],
+    'popupTypes' => [ # typy wyskakujących okienek
+        'html-editor' => 'Formatowany tekst HTML',
+        'fullsize-image' => 'Zdjęcie na całą szerokość',
+        'custom' => 'Specjalnie przygotowany przez programistę',
+    ],
     'permissions' => [ # zawiera uprawnienia dostępne dla pracownikow
         'manage_staff' => 'Zarządzanie pracownikami',
         'manage_staff_groups' => 'Zarządzanie grupami pracowników',
