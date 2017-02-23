@@ -1,3 +1,19 @@
+<?php
+
+$frames = GC\Model\Frame::select()
+    ->fields(['frame_id', 'name', 'type'])
+    ->equals('lang', GC\Staff::getInstance()->getEditorLang())
+    ->fetchByPrimaryKey();
+
+foreach ($frames as &$frame) {
+    $frame = sprintf('%s - %s',
+        $frame['name'],
+        $config['frames'][$frame['type']]['name']
+    );
+}
+unset($frame);
+
+?>
 <?php require ROUTES_PATH.'/admin/parts/header.html.php'; ?>
 <?php require ROUTES_PATH.'/admin/parts/page-header.html.php'; ?>
 
@@ -23,8 +39,6 @@
 
             <div id="popupType"></div>
 
-
-
             <div class="simple-box">
                 <fieldset>
                     <legend><?=trans('Ustawienia okienka')?></legend>
@@ -45,6 +59,14 @@
                         'name' => 'countdown',
                         'label' => trans('Po ilu sekundach okienko ma się wyświetlić?'),
                         'help' => trans('Zostaw puste, jeżeli okienko ma się wyświetlać zaraz po załadowaniu strony'),
+                    ])?>
+
+                    <?=render(ROUTES_PATH.'/admin/parts/input/select2-multi.html.php', [
+                        'name' => 'frames',
+                        'label' => trans('Wyświetl na stronach'),
+                        'help' => trans('Zostaw puste, aby wyświetlić na wszytkich stronach.'),
+                        'options' => $frames,
+                        'selectedValues' => $selectedFrames,
                     ])?>
 
                 </fieldset>

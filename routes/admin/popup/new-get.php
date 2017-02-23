@@ -9,5 +9,6 @@ $breadcrumbs->push([
 ]);
 
 $popup_id = 0;
+$selectedFrames = [];
 
 require ROUTES_PATH.'/admin/popup/form.html.php';

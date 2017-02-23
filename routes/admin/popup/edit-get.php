@@ -15,6 +15,10 @@ $breadcrumbs->push([
     'name' => $headTitle,
 ]);
 
+$selectedFrames = GC\Model\PopUp\Display::select()
+    ->equals('popup_id', $popup_id)
+    ->fetchByMap('frame_id', 'frame_id');
+
 $_POST = $popup;
 $popupType = $popup['type'];
 

@@ -142,6 +142,20 @@ $config = [
         'visitorDefault' => 'pl', # domyśly język gdy nie wiadomo jakiego języka oczekuje odwiedzający
         'editorDefault' => 'pl', # domyślny język edytowania w panelu admina
     ],
+    'frames' => [ # ustawienia i rodzaje rusztowań
+        'page' => [
+            'name' => 'Strona',
+        ],
+        'post' => [
+            'name' => 'Wpis',
+        ],
+        'product' => [
+            'name' => 'Produkt',
+        ],
+        'product-node' => [ # węzeł podziału produktu, czyli np Kategoria produktu
+            'name' => 'Podział produktu',
+        ],
+    ],
     'modules' => [ # rodzaje zainstalowanych modułów
         'html-editor' => [
             'name' => 'Moduł tekstowy',
