@@ -35,7 +35,7 @@ $fields = GC\Model\Form\Field::select()
         <form id="savePosition" action="" method="post">
             <?php if (empty($fields)):?>
                 <div class="simple-box">
-                    <?=trans('Brak pól w formularzu "%s"', [$form['name']])?>
+                    <?=trans('Brak pól w formularzu: %s', [$form['name']])?>
                 </div>
             <?php else:?>
                 <input name="positions" type="hidden"/>

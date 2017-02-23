@@ -6,7 +6,7 @@ require ROUTES_PATH.'/root/checksum/_import.php';
 $base64 = array_shift($_SEGMENTS);
 $file = base64_decode($base64);
 
-$headTitle = sprintf('Źródło pliku "%s"', $file);
+$headTitle = sprintf('Źródło pliku: %s', $file);
 $breadcrumbs->push([
     'name' => $headTitle,
     'icon' => 'file-o',

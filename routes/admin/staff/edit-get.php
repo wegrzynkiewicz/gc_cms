@@ -8,7 +8,7 @@ $staff_id = intval(array_shift($_PARAMETERS));
 # pobierz pracownika po kluczu głównym
 $user = GC\Model\Staff\Staff::fetchByPrimaryId($staff_id);
 
-$headTitle = trans('Edytowanie pracownika "%s"', [$user['name']]);
+$headTitle = trans('Edytowanie pracownika: %s', [$user['name']]);
 $breadcrumbs->push([
     'name' => $headTitle,
 ]);

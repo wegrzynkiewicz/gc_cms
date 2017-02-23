@@ -35,7 +35,7 @@ $_POST = [];
                                 'name' => 'new_password',
                                 'type' => 'password',
                                 'label' => trans('Nowe hasło'),
-                                'help' => sprintf('Twoje hasło musi składać się z przynajmniej %s znaków', [$config['password']['minLength']]),
+                                'help' => trans('Twoje hasło musi składać się z przynajmniej %s znaków', [$config['password']['minLength']]),
                             ])?>
 
                             <?=render(ROUTES_PATH.'/admin/parts/input/editbox.html.php', [

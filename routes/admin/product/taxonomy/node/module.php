@@ -12,7 +12,7 @@ $node = GC\Model\Frame::select()
     ->equals('frame_id', $frame_id)
     ->fetch();
 
-$headTitle = trans('Moduły w węźle "%s"', [$node['name']]);
+$headTitle = trans('Moduły w węźle: %s', [$node['name']]);
 $uri->extendMask("/{$frame_id}/module%s");
 $breadcrumbs->push([
     'uri' => $uri->mask('/grid'),

@@ -16,7 +16,7 @@ if (!$frame) {
     redirect($breadcrumbs->getLast('uri'));
 }
 
-$headTitle = trans('Edytowanie produktu "%s"', [$frame['name']]);
+$headTitle = trans('Edytowanie produktu: %s', [$frame['name']]);
 $breadcrumbs->push([
     'name' => $headTitle,
 ]);
