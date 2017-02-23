@@ -191,4 +191,4 @@ $modules = GC\Model\Module\Module::select()
 
 </script>
 
-<?php require ROUTES_PATH.'/admin/parts/footer.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/parts/end.html.php'; ?>

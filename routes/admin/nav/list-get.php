@@ -64,4 +64,4 @@ unset($nav);
 </div>
 
 <?php require ROUTES_PATH.'/admin/parts/assets/footer.html.php'; ?>
-<?php require ROUTES_PATH.'/admin/parts/footer.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/parts/end.html.php'; ?>
