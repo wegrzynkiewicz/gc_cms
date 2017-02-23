@@ -15,7 +15,6 @@ $popup_id = GC\Model\PopUp\PopUp::insert([
     'countdown' => post('countdown', 0),
     'show_after_datetime' => post('show_after_datetime', '0000-00-00 00:00:00'),
     'hide_after_datetime' => post('hide_after_datetime', '0000-00-00 00:00:00'),
-    'content' => post('content'),
 ]);
 
 GC\Model\PopUp\Display::updateFrames($popup_id, $frames);

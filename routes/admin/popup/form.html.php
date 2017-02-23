@@ -58,7 +58,7 @@ unset($frame);
                     <?=render(ROUTES_PATH.'/admin/parts/input/editbox.html.php', [
                         'name' => 'countdown',
                         'label' => trans('Po ilu sekundach okienko ma się wyświetlić?'),
-                        'help' => trans('Zostaw puste, jeżeli okienko ma się wyświetlać zaraz po załadowaniu strony'),
+                        'help' => trans('Wpisz 0, jeżeli okienko ma się wyświetlać zaraz po załadowaniu strony'),
                     ])?>
 
                     <?=render(ROUTES_PATH.'/admin/parts/input/select2-multi.html.php', [
