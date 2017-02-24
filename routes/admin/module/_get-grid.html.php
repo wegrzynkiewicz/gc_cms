@@ -13,7 +13,7 @@ $modules = GC\Model\Module\Module::select()
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=$uri->root($frame['slug'])?>"
+                <a href="<?=$uri->make($frame['slug'])?>"
                     target="_blank"
                     type="button"
                     class="btn btn-primary">
@@ -47,7 +47,7 @@ $modules = GC\Model\Module\Module::select()
                     <div id="grid-rows-wrapper"></div>
                     <div class="grid-stack">
                         <?php foreach ($modules as $module_id => $module): ?>
-                            <?=render(ROUTES_PATH.'/admin/module/grid-item.html.php', $module)?>
+                            <?=render(ROUTES_PATH.'/admin/module/_grid-item.html.php', $module)?>
                         <?php endforeach ?>
                     </div>
                 </div>

@@ -116,5 +116,5 @@ abstract class AbstractQuery
         return $this;
     }
 
-    protected abstract function buildSQL();
+    abstract protected function buildSQL();
 }

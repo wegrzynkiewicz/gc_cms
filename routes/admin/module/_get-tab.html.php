@@ -30,6 +30,6 @@ if ($moduleName == 'module') {
     if (isset($_SEGMENTS[0]) and intval($_SEGMENTS[0])) {
         $module_id = intval(array_shift($_SEGMENTS));
     }
-    $action = array_shift($_SEGMENTS);
-    require ROUTES_PATH."/admin/module/{$action}-{$request->method}.html.php";
+
+    require ROUTES_PATH."/admin/module/_detect-route.html.php";
 }

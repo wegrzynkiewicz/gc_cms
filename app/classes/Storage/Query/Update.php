@@ -28,7 +28,7 @@ class Update extends AbstractQuery
         echo implode(', ', $columns);
 
         if (count($this->conditions) > 0) {
-            echo " WHERE ".implode(' AND ', array_map(function($condition) {
+            echo " WHERE ".implode(' AND ', array_map(function ($condition) {
                 return "($condition)";
             }, $this->conditions));
         }

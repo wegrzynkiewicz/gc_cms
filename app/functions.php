@@ -576,7 +576,6 @@ function getSourceFiles()
     $webDataPath = realpath(WEB_PATH.'/data');
 
     return array_filter(globRecursive('*.*'), function ($value) use (&$webDataPath) {
-
         if (strpos(realpath($value), $webDataPath) !== false) {
             return false;
         }
@@ -592,8 +591,7 @@ function getSourceFiles()
  */
 function refreshChecksums()
 {
-    \GC\Storage\Database::getInstance()->transaction(function() {
-
+    \GC\Storage\Database::getInstance()->transaction(function () {
         \GC\Model\Checksum::delete()
             ->execute();
 

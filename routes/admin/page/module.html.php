@@ -1,7 +1,7 @@
 <?php
 
 require ROUTES_PATH.'/admin/_import.php';
-require ROUTES_PATH.'/admin/product/_import.php';
+require ROUTES_PATH.'/admin/page/_import.php';
 
 $frame_id = intval(array_shift($_PARAMETERS));
 
@@ -10,13 +10,11 @@ $frame = GC\Model\Frame::select()
     ->equals('frame_id', $frame_id)
     ->fetch();
 
-$headTitle = trans('Moduły produktu: %s', [$frame['name']]);
+$headTitle = trans('Moduły na stronie: %s', [$frame['name']]);
 $uri->extendMask("/{$frame_id}/module%s");
 $breadcrumbs->push([
     'uri' => $uri->mask('/grid'),
     'name' => $headTitle,
 ]);
 
-$action = array_shift($_SEGMENTS);
-
-require ROUTES_PATH."/admin/module/{$action}-{$request->method}.html.php";
+require ROUTES_PATH."/admin/module/_detect-route.html.php";

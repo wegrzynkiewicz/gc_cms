@@ -17,6 +17,4 @@ $breadcrumbs->push([
     'name' => $headTitle,
 ]);
 
-$action = array_shift($_SEGMENTS);
-
-require ROUTES_PATH."/admin/module/{$action}-{$request->method}.html.php";
+require ROUTES_PATH."/admin/module/_detect-route.html.php";

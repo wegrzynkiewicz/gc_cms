@@ -27,7 +27,7 @@ foreach ($positions as $image) {
 }
 
 $theme = post('theme');
-require ROUTES_PATH."/admin/module/type/gallery/theme/{$theme}-post.php";
+require ROUTES_PATH."/admin/module/type/gallery/theme/post-{$theme}.php";
 
 flashBox(trans('Moduł galerii zdjęć został zaktualizowany.'));
 redirect($breadcrumbs->getBeforeLast('uri'));

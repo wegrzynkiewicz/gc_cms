@@ -21,7 +21,7 @@ class Delete extends AbstractQuery
         echo " FROM ".$this->source;
 
         if (count($this->conditions) > 0) {
-            echo " WHERE ".implode(' AND ', array_map(function($condition) {
+            echo " WHERE ".implode(' AND ', array_map(function ($condition) {
                 return "($condition)";
             }, $this->conditions));
         }

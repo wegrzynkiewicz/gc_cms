@@ -55,7 +55,6 @@ abstract class AbstractNode extends AbstractModel
         };
 
         $debug = function ($node, $structure = '') use (&$debug, $getName) {
-
             $children = $node->getChildren();
             $iterator = new \ArrayIterator($children);
             $structure .= empty($structure) ? '' : '   ';

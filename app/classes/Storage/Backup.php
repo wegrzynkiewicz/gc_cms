@@ -52,7 +52,6 @@ class Backup
         logger("[DUMP-IMPORT] {$filename}");
 
         if (pathinfo($filepath, \PATHINFO_EXTENSION) === 'gz') {
-
             $path = $GLOBALS['config']['dump']['tmpPath'];
             $file = $path.'/'.basename($filepath, '.gz');
             static::decompress($filepath, $file);

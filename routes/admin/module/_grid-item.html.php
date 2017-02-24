@@ -25,7 +25,7 @@
                 </button>
             </div>
             <div class="panel-body">
-                <?=render(ROUTES_PATH."/admin/module/type/{$type}/grid-preview.html.php", $module)?>
+                <?=render(ROUTES_PATH."/admin/module/type/{$type}/_grid-preview.html.php", $module)?>
             </div>
         </div>
     </div>

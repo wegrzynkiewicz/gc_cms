@@ -2,17 +2,15 @@
 
 /** Plik ładuje odpowiednią akcję poprzez warunki routingu */
 
-$slug = trim($request->slug, '/');
 $method = $request->method;
-$parts = explode('/', $slug);
+$parts = explode('/', trim($request->slug, '/'));
 
 $_PARAMETERS = array_filter($parts, 'ctype_digit');
 $_SEGMENTS = array_filter($parts, function ($segment) {
     return !ctype_digit($segment);
 });
 
-$findRoutingFile = function ($path, $name) use ($method)
-{
+$findRoutingFile = function ($path, $name) use ($method) {
     $files = [
         "{$path}/{$method}-{$name}.html.php",
         "{$path}/{$method}-{$name}.json.php",

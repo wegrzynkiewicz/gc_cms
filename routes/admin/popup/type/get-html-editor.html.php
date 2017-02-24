@@ -18,6 +18,6 @@ if ($popup_id) {
 <?=render(ROUTES_PATH.'/admin/_parts/input/ckeditor.html.php', [
     'name' => 'content',
     'options' => [
-         'customConfig' => $uri->root('/assets/admin/ckeditor/full_ckeditor.js'),
+         'customConfig' => $uri->root('/assets/admin/scripts/ckeditor-full.js'),
     ],
 ])?>

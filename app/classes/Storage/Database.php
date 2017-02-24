@@ -105,7 +105,6 @@ class Database
     public function insert($sql, array $values = [])
     {
         $this->wrapQuery($sql, $values, function ($statement) {
-
         });
 
         return intval($this->pdo->lastInsertId());
@@ -136,7 +135,6 @@ class Database
     public static function getInstance()
     {
         if (static::$instance === null) {
-
             $dbConfig = $GLOBALS['config']['database'];
             $pdo = new \PDO(
                 $dbConfig['dns'],
