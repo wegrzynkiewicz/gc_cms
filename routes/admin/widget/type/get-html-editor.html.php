@@ -17,7 +17,7 @@ $breadcrumbs->push([
                 'name' => 'content',
                 'label' => trans('Treść widżetu'),
                 'options' => [
-                     'customConfig' => '/assets/admin/ckeditor/full_ckeditor.js',
+                     'customConfig' => $uri->root('/assets/admin/ckeditor/full_ckeditor.js'),
                 ],
             ])?>
 

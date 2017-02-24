@@ -51,7 +51,7 @@ $frame = GC\Model\Frame::select()
 # jeżeli nie uda się pobrać rusztowania
 if (!$frame) {
     logger('[FRONTEND] Frame does not exists 404');
-    return require TEMPLATE_PATH.'/errors/404.html.php';
+    return displayError(404);
 }
 
 $frame_id = $frame['frame_id'];

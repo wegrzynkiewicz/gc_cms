@@ -28,7 +28,6 @@ foreach ($records as &$record) {
 unset($record);
 
 # kontent jaki zostanie zwrócony
-header("Content-Type: application/json; charset=utf-8");
 echo json_encode([
     'draw' => intval(get('draw', 1)),
     'recordsTotal' => $recordsTotal,

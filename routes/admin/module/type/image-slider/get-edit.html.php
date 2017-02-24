@@ -169,8 +169,6 @@ $(function() {
 
     $('#select_images').elfinderInputMultiple({
         title: '<?=trans('Wybierz wiele zdjęć')?>',
-        url: '<?=$uri->make($config['elfinder']['uri'])?>',
-        lang: '<?=getVisitorLang()?>',
     }, function(urls) {
         $.post("<?=$uri->make("/admin/module/{$module_id}/image/add.json")?>", {
             urls: urls

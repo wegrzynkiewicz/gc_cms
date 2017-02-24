@@ -31,8 +31,6 @@
     $(function() {
         $('#nav_files').elfinderInput({
             title: '<?=trans('Przeglądaj pliki')?>',
-            url: '<?=$uri->make($config['elfinder']['uri'])?>',
-            lang: '<?=getVisitorLang()?>',
         }, function() {
 
         });

@@ -31,14 +31,13 @@ foreach ($frames as &$frame) {
         ? $config['noImageUri']
         : $frame['image'];
     $frame['hrefEdit'] = $uri->mask("/{$frame_id}/edit");
-    $frame['hrefGrid'] = $uri->mask("/{$frame_id}/module/grid");
+    $frame['hrefModule'] = $uri->mask("/{$frame_id}/module/grid");
     $frame['hrefSlug'] = $uri->make($frame['slug']);
     $frame['image'] = $uri->root(thumbnail($image, 64, 64));
 }
 unset($frame);
 
 # kontent jaki zostanie zwrócony
-header("Content-Type: application/json; charset=utf-8");
 echo json_encode([
     'draw' => intval(get('draw', 1)),
     'recordsTotal' => $recordsTotal,

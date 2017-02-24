@@ -23,6 +23,12 @@ class Request
     public $mask = '%s';
     public $defaultExtension = '';
 
+    public $mimeTypes = [
+        'html' => 'text/html',
+        'json' => 'application/json',
+        'xml' => 'application/xml',
+    ];
+
     public function __construct()
     {
         # pobranie najważniejszych danych o adresie strony
@@ -65,6 +71,9 @@ class Request
 
         # pozyskaj rozszerzenie ze sluga
         $this->extension = pathinfo($this->slug, PATHINFO_EXTENSION);
+        $this->mimeType = def($this->mimeTypes, $this->extension, 'text/html');
+
+        header("Content-Type: {$this->mimeType}; charset=utf-8");
 
         # jeżeli adres zawiera rozszerzenie HTML_EXTENSION, wtedy usuń je
         if ($this->extension === $this->defaultExtension) {
@@ -194,7 +203,7 @@ class Request
             return $uri;
         }
 
-        $uri = rtrim($this->root.$uri, '/');
+        $uri = rtrim($uri, '/');
         $front = $this->frontController ? static::FRONT_CONTROLLER_URI : '';
 
         $extension = pathinfo($uri, PATHINFO_EXTENSION);

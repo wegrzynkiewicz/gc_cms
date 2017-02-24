@@ -361,7 +361,9 @@ function normalizeSlug($string)
         return '';
     }
 
-    return '/'.trim(normalize($string), '/');
+    $normalized = trim(normalize($string), '/.-');
+
+    return '/'.$normalized;
 }
 
 /**
@@ -523,6 +525,18 @@ function render($templateName, array $arguments = [])
 function display($templateName, array $arguments = [])
 {
     echo render($templateName, $arguments);
+
+    return '';
+}
+
+/**
+ * Ustawia kod błędu i renderuje szablon z templates jeżeli istnieje
+ */
+function displayError($code, array $arguments = [])
+{
+    http_response_code($code);
+    logger("[DISPLAY-ERROR] {$code}");
+    display(TEMPLATE_PATH."/errors/{$code}.html.php", $arguments);
 
     return '';
 }

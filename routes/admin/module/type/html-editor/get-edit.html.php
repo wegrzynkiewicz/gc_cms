@@ -14,7 +14,7 @@ require ROUTES_PATH."/admin/module/type/html-editor/_import.php";
                 'name' => 'content',
                 'label' => trans('Treść modułu'),
                 'options' => [
-                     'customConfig' => '/assets/admin/ckeditor/full_ckeditor.js',
+                     'customConfig' => $uri->root('/assets/admin/ckeditor/full_ckeditor.js'),
                 ],
             ])?>
 

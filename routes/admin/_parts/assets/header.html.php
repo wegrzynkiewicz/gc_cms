@@ -43,13 +43,114 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.4.0/js/bootstrap-colorpicker.min.js"></script>
 
-<script src="<?=$uri->assets("/admin/scripts/elfinder-input.js")?>"></script>
 <script src="<?=$uri->assets("/admin/ckeditor/elfinder-integration.js")?>"></script>
 
-<script>
-$.extend(true, $.fn.dataTable.defaults, {
-    language: {
-        url: "//cdn.datatables.net/plug-ins/1.10.12/i18n/Polish.json"
-    },
+<script type="text/javascript">
+$(function() {
+    $.extend(true, $.fn.dataTable.defaults, {
+        language: {
+            url: "//cdn.datatables.net/plug-ins/1.10.12/i18n/Polish.json"
+        },
+    });
+});
+</script>
+
+<script type="text/javascript">
+$(function() {
+    $.fn.elfinderInputMultiple = function(inputOptions, callback) {
+        $(this).click(function() {
+            var $dialog = $('<div/>').css({"z-index":"99999"});
+            var options = {
+                url: '<?=$uri->make($config['elfinder']['uri'])?>',
+                lang: '<?=getVisitorLang()?>',
+                getFileCallback: function(file) {
+                    $dialog.dialogelfinder('close');
+                    var urls = $.map(file, function(f) {
+                        return f.url;
+                    });
+                    callback(urls);
+                },
+                commandsOptions: {
+                    getfile: {
+                        multiple: true,
+                        oncomplete: "destroy"
+                    }
+                }
+            };
+            $.extend(options, inputOptions);
+            $dialog.dialogelfinder(options);
+        });
+
+        return this;
+    };
+});
+</script>
+
+<script type="text/javascript">
+$(function() {
+    $.fn.elfinderInput = function(inputOptions, callback) {
+        $(this).click(function() {
+            var $dialog = $('<div/>').css({"z-index":"99999"});
+            var options = {
+                url: '<?=$uri->make($config['elfinder']['uri'])?>',
+                lang: '<?=getVisitorLang()?>',
+                getFileCallback: function(file) {
+                    $dialog.dialogelfinder('close');
+                    callback(file.url);
+                },
+            };
+            $.extend(options, inputOptions);
+            $dialog.dialogelfinder(options);
+        });
+        return this;
+    };
+
+});
+</script>
+
+<script type="text/javascript">
+$(function() {
+    CKEDITOR.on('dialogDefinition', function(event) {
+        var editor = event.editor;
+        var dialogDefinition = event.data.definition;
+        var tabCount = dialogDefinition.contents.length;
+        for (var i = 0; i < tabCount; i++) {
+            if (!dialogDefinition.contents[i]) {
+                continue;
+            }
+            var browseButton = dialogDefinition.contents[i].get('browse');
+            if (browseButton !== null) {
+                browseButton.hidden = false;
+                browseButton.onClick = function(dialog, i) {
+                    var dialogName = CKEDITOR.dialog.getCurrent()._.name;
+                    var elfNode = $('<div \>').css({
+                        "z-index": "100000"
+                    });
+                    elfNode.dialogelfinder({
+                        title: '',
+                        url: '<?=$uri->make($config['elfinder']['uri'])?>',
+                        lang: '<?=getVisitorLang()?>',
+                        useBrowserHistory: false,
+                        resizable: false,
+                        getFileCallback: function(file) {
+                            var url = file.url;
+                            var dialog = CKEDITOR.dialog.getCurrent();
+                            if (dialogName == 'image') {
+                                var urlObj = 'txtUrl'
+                            } else if (dialogName == 'flash') {
+                                var urlObj = 'src'
+                            } else if (dialogName == 'files' || dialogName == 'link') {
+                                var urlObj = 'url'
+                            } else {
+                                return;
+                            }
+                            dialog.setValueOf(dialog._.currentTabId, urlObj, url);
+                            elfNode.dialogelfinder('close');
+                        }
+                    });
+                }
+            }
+        }
+    })
 });
 </script>

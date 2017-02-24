@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="<?=getVisitorLang()?>">
 <head>
-    <meta charset="utf-8" >
+    <meta charset="utf-8">
 	<title><?=$headTitle.' - '.$config['adminHeadTitleBase']?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 

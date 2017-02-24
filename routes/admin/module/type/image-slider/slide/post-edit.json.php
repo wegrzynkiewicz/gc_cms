@@ -14,5 +14,4 @@ GC\Model\Module\File::updateByPrimaryId($file_id, [
     'settings' => json_encode($settings),
 ]);
 
-header("Content-Type: application/json; charset=utf-8");
 http_response_code(204);

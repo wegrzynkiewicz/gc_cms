@@ -52,8 +52,6 @@
 
         $('#<?=$name?>_select').elfinderInput({
             title: '<?=trans('Wybierz plik')?>',
-            url: '<?=$uri->make($config['elfinder']['uri'])?>',
-            lang: '<?=getVisitorLang()?>',
         }, function(file) {
             $('#<?=$name?>_preview').attr('src', file);
             $('#<?=$name?>_source').val(file);

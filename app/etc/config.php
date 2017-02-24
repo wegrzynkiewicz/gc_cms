@@ -23,7 +23,7 @@ define('TEMP_PATH', ROOT_PATH.'/cache'); # ścieżka do katalogu tymczasowego
 define('ROUTES_PATH', ROOT_PATH.'/routes'); # ścieżka do katalogu z plikami kontrolerów i szablonów
 define('STORAGE_PATH', ROOT_PATH.'/storage'); # ścieżka do katalogu magazynu
 define('TEMPLATE_PATH', ROOT_PATH.'/templates/'.TEMPLATE); # ścieżka do katalogu z szablonem
-define('TEMPLATE_ASSETS_URL', '/templates/'.TEMPLATE); # adres do zasobów w katalogu z szablonem
+define('TEMPLATE_ASSETS_URL', '/assets/'.TEMPLATE); # adres do zasobów w katalogu z szablonem
 
 chdir(ROOT_PATH); # zmienia bieżący katalog na root
 
@@ -44,7 +44,6 @@ ini_set('session.use_only_cookies', 1); # do przechowywania sesji ma używać ty
 ini_set('session.save_path', STORAGE_PATH.'/sessions'); # ścieżka w której będą przechowywane pliki sesji
 ini_set('zlib.output_compression_level', 1); # poziom kompresji wyjścia skryptu
 
-header("Content-Type: text/html; charset=utf-8"); # ustawienie domyślego mimetype i kodowanie
 header('X-Content-Type-Options: nosniff'); # nie pozwala przeglądarce na zgadywanie typu mime nieznanego pliku
 header('X-XSS-Protection: 1; mode=block'); # ustawienie ochrony przeciw XSS, przeglądarka sama wykrywa XSSa
 header_remove('X-Powered-By'); # usuwa informacje o wykorzystywanej wersji php
@@ -52,7 +51,7 @@ header_remove('X-Powered-By'); # usuwa informacje o wykorzystywanej wersji php
 $config = [
     'debug' => [ # opcje związane z wyświetlaniem błędów
         'enabled' => true, # zezwala na nietypowe akcje (np: zmiana hasła admina)
-        'inConstruction' => false, # wyświetla komunikat "strona w budowie" za każdym żądaniem
+        'construction' => false, # wyświetla komunikat "strona w budowie" za każdym żądaniem
     ],
     'seo' => [ # związane z nazwą adresu url witryny
         # kod odpowiedzi podczas przekierowywania seo, przydatne, aby przeglądarki nie cachowany przekierowań
@@ -72,8 +71,8 @@ $config = [
         # null jeżeli możliwość wejścia z każdego portu,
         # nakazuje przekierowywanie na zadany port,
         'forcePort' => null,
-        # null jeżeli możliwość wejścia z i bez rozszerzenia, jeżeli takiego nie podano,
-        # wartość logiczna, nakazuje przekierowywanie na rozszerzenie .html jeżeli nie jest ono podane
+        # null jeżeli możliwość wejścia bez rozszerzenia
+        # wartość logiczna, nakazuje przekierowywanie na rozszerzenie "html" jeżeli nie jest ono podane
         'forceDefaultExtension' => null,
     ],
     'adminNavbarTitle' => 'Panel Administracyjny', # wyświetlana w prawym gornym rogu panelu admina

@@ -11,22 +11,21 @@ $uri = $request = new GC\Request();
 $request->redirectIfSeoUrlIsInvalid();
 $request->redirectIfRewriteCorrect();
 
-# jeżeli strona jest w budowie wtedy zwróć komunikat o budowie, chyba, że masz uprawnienie
-if ($config['debug']['inConstruction']) {
-    if (isset($_REQUEST['you-shall-not-pass'])) {
-        $_SESSION['allowInConstruction'] = true;
-    }
-    if (!isset($_SESSION['allowInConstruction'])) {
-        logger('[RESPONSE] inConstruction');
-        require TEMPLATE_PATH.'/errors/construction.html.php';
-        exit;
-    }
-}
-
 session_start();
 
+if (isset($_REQUEST['allowInConstruction'])) {
+    $_SESSION['allowInConstruction'] = true;
+}
+
 ob_start('ob_gzhandler') or ob_start();
-require __DIR__.'/routing.php';
+
+# jeżeli strona jest w budowie wtedy zwróć komunikat o budowie
+if ($config['debug']['construction'] and !isset($_SESSION['allowInConstruction'])) {
+    displayError(503);
+} else {
+    require __DIR__.'/routing.php';
+}
+
 ob_end_flush();
 
 logger(sprintf('[RESPONSE] %s -- Time: %.3fs -- Memory: %sMiB',

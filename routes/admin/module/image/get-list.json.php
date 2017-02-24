@@ -17,5 +17,4 @@ foreach ($images as &$image) {
 }
 unset($image);
 
-header("Content-Type: application/json; charset=utf-8");
 echo json_encode($images);
