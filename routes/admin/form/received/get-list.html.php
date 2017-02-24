@@ -121,7 +121,7 @@ $count = GC\Model\Form\Sent::select()
             serverSide: true,
             searchDelay: 500,
             ajax: {
-                url: '<?=$uri->mask("/xhr-list")?>',
+                url: '<?=$uri->mask("/list.json")?>',
                 type: 'POST'
             },
             createdRow: function (row, data, index) {

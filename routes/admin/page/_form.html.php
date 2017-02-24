@@ -57,7 +57,7 @@ $(function () {
             },
             slug: {
                 remote: {
-                    url: "<?=$uri->make("/admin/api/validate/xhr-slug/{$frame_id}")?>",
+                    url: "<?=$uri->make("/admin/api/validate/slug.json/{$frame_id}")?>",
                 },
             },
         },

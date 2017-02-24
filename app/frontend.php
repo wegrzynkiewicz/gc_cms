@@ -16,9 +16,9 @@ GC\Translator::$domain = 'template-'.TEMPLATE;
 $getTemplateFile = function ($name, $theme = 'default') use ($method)
 {
     $files = [
-        TEMPLATE_PATH."/{$name}-{$theme}-{$method}.html.php",
+        TEMPLATE_PATH."/{$method}-{$name}-{$theme}.html.php",
         TEMPLATE_PATH."/{$name}-{$theme}.html.php",
-        TEMPLATE_PATH."/{$name}-{$method}.html.php",
+        TEMPLATE_PATH."/{$method}-{$name}.html.php",
         TEMPLATE_PATH."/{$name}.html.php",
     ];
 

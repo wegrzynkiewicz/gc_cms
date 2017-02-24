@@ -167,7 +167,7 @@ $modules = GC\Model\Module\Module::select()
     });
 
     $('#rowSettingsModal').on('show.bs.modal', function (event) {
-        var url = "<?=$uri->make("/admin/module/row/{$frame_id}/xhr-edit")?>/"+$(event.relatedTarget).data('y');
+        var url = "<?=$uri->make("/admin/module/row/{$frame_id}/edit.json")?>/"+$(event.relatedTarget).data('y');
         $.get(url, function(data) {
             $('#rowSettingsModalContent').html(data);
             $('#rowSettingsModalForm').attr('action', url);

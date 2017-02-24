@@ -153,7 +153,7 @@ $count = GC\Model\Frame::select()
             searchDelay: 500,
             autoWidth: false,
             ajax: {
-                url: '<?=$uri->mask("/xhr-list")?>',
+                url: '<?=$uri->mask("/list.json")?>',
                 type: 'GET'
             },
             createdRow: function (row, data, index) {

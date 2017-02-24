@@ -58,7 +58,7 @@ $(function () {
                 email: true,
                 required: true,
                 remote: {
-                    url: "<?=$uri->make("/admin/api/validate/xhr-staff-email/{$staff_id}")?>",
+                    url: "<?=$uri->make("/admin/api/validate/staff.json-email/{$staff_id}")?>",
                 },
             },
         },

@@ -160,10 +160,10 @@ $tabs = GC\Model\Module\Tab::select()
 <script>
 $(function(){
 
-    var addUri    = '<?=$uri->make("/admin/module/{$module_id}/type/tabs/item/xhr-add")?>';
-    var sortUri   = '<?=$uri->make("/admin/module/{$module_id}/type/tabs/item/xhr-sort")?>';
-    var editUri   = '<?=$uri->make("/admin/module/type/tabs/item/xhr-edit")?>';
-    var deleteUri = '<?=$uri->make("/admin/module/type/tabs/item/xhr-delete")?>';
+    var addUri    = '<?=$uri->make("/admin/module/{$module_id}/type/tabs/item/add.json")?>';
+    var sortUri   = '<?=$uri->make("/admin/module/{$module_id}/type/tabs/item/sort.json")?>';
+    var editUri   = '<?=$uri->make("/admin/module/type/tabs/item/edit.json")?>';
+    var deleteUri = '<?=$uri->make("/admin/module/type/tabs/item/delete.json")?>';
 
     $('#addModalForm').on('submit', function (event) {
         $.post(addUri, $(this).serialize());

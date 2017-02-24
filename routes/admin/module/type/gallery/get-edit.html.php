@@ -180,10 +180,10 @@ $(function() {
 
     var imageTemplate       = $('#image-template').html();
     var emptyTemplate       = $('#empty-template').html();
-    var editUri             = "<?=$uri->make("/admin/module/image/xhr-edit")?>/";
-    var addUri              = "<?=$uri->make("/admin/module/{$module_id}/image/xhr-add")?>";
-    var refreshImagesUri    = "<?=$uri->make("/admin/module/{$module_id}/image/xhr-list")?>";
-    var deleteUri           = "<?=$uri->make("/admin/module/{$module_id}/image/xhr-delete")?>";
+    var editUri             = "<?=$uri->make("/admin/module/image/edit.json")?>/";
+    var addUri              = "<?=$uri->make("/admin/module/{$module_id}/image/add.json")?>";
+    var refreshImagesUri    = "<?=$uri->make("/admin/module/{$module_id}/image/list.json")?>";
+    var deleteUri           = "<?=$uri->make("/admin/module/{$module_id}/image/delete.json")?>";
     var refreshThemeUri     = "<?=$uri->make("/admin/module/{$module_id}/type/gallery/theme")?>/";
 
     function refreshImages() {
