@@ -52,7 +52,7 @@ $headTitle = trans('Zapomniałem hasła');
 
 <script>
 $(function () {
-    $('form').validate({
+    $('#form').validate({
         rules: {
             login: {
                 required: true,

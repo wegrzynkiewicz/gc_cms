@@ -6,7 +6,7 @@ $root = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><urlset/>');
 $root->addAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
 
 $frames = GC\Model\Frame::select()
-    ->fields(['type', 'slug', 'modify_datetime'])
+    ->fields(['type', 'slug', 'modification_datetime'])
     ->order('slug', 'DESC')
     ->fetchAll();
 
@@ -17,7 +17,7 @@ foreach ($frames as $frame) {
     }
 
     $loc = $uri->absolute($frame['slug']);
-    $date = new DateTime($frame['modify_datetime']);
+    $date = new DateTime($frame['modification_datetime']);
 
     $url = $root->addChild('url');
     $url->addChild('loc', $loc);

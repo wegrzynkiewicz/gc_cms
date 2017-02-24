@@ -15,6 +15,8 @@ $frame_id = GC\Model\Frame::insert([
     'keywords' => post('keywords'),
     'description' => post('description'),
     'image' => $uri->relative(post('image')),
+    'publication_datetime' => post('publication_datetime', sqldate()),
+    'visibility' => post('visibility'),
 ]);
 
 # pobierz największą pozycję dla węzła w drzewie

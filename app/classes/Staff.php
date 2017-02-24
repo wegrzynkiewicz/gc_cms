@@ -122,6 +122,6 @@ class Staff extends AbstractEntity
     {
         logger("[STAFF] {$message}");
         unset($_SESSION['staff']);
-        redirect($location);
+        redirect($GLOBALS['uri']->make($location));
     }
 }

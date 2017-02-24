@@ -6,36 +6,40 @@
         <form action="<?=$request->uri?>" method="post" id="form" class="form-horizontal">
 
             <div class="simple-box">
-                <?=render(ROUTES_PATH.'/admin/_parts/input/editbox.html.php', [
-                    'name' => 'name',
-                    'label' => trans('Nazwa strony'),
-                ])?>
+                <fieldset>
+                    <legend><?=trans('Informacje podstawowe')?></legend>
+                    <?=render(ROUTES_PATH.'/admin/_parts/input/editbox.html.php', [
+                        'name' => 'name',
+                        'label' => trans('Nazwa strony'),
+                    ])?>
+
+                    <?=render(ROUTES_PATH.'/admin/_parts/input/image.html.php', [
+                        'name' => 'image',
+                        'label' => trans('Zdjęcie wyróżniające'),
+                        'placeholder' => trans('Ścieżka do pliku zdjęcia'),
+                    ])?>
+                </fieldset>
             </div>
 
+            <?=render(ROUTES_PATH.'/admin/_parts/input/seo-box.html.php')?>
+
             <div class="simple-box">
-                <?=render(ROUTES_PATH.'/admin/_parts/input/slug.html.php', [
-                    'name' => 'slug',
-                    'label' => trans('Adres strony'),
-                    'help' => trans('Zostaw pusty, aby generować adres na podstawie nazwy'),
-                ])?>
+                <fieldset>
+                    <legend><?=trans('Ustawienia')?></legend>
 
-                <?=render(ROUTES_PATH.'/admin/_parts/input/editbox.html.php', [
-                    'name' => 'keywords',
-                    'label' => trans('Tagi i słowa kluczowe (meta keywords)'),
-                    'help' => trans('(Opcjonalnie)'),
-                ])?>
+                    <?=render(ROUTES_PATH.'/admin/_parts/input/selectbox.html.php', [
+                        'name' => 'visibility',
+                        'label' => trans('Widoczność strony'),
+                        'help' => trans('Decyduje o widoczności strony w nawigacji i mapie strony'),
+                        'options' => array_trans($config['frameVisibility'])
+                    ])?>
 
-                <?=render(ROUTES_PATH.'/admin/_parts/input/textarea.html.php', [
-                    'name' => 'description',
-                    'label' => trans('Opis podstrony (meta description)'),
-                    'help' => trans('(Opcjonalny)'),
-                ])?>
-
-                <?=render(ROUTES_PATH.'/admin/_parts/input/image.html.php', [
-                    'name' => 'image',
-                    'label' => trans('Zdjęcie wyróżniające'),
-                    'placeholder' => trans('Ścieżka do pliku zdjęcia'),
-                ])?>
+                    <?=render(ROUTES_PATH.'/admin/_parts/input/datetimepicker.html.php', [
+                        'name' => 'publication_datetime',
+                        'label' => trans('Data publikacji strony'),
+                        'help' => trans('Zostaw puste, aby ustawieć teraźniejszą datę'),
+                    ])?>
+                </fieldset>
             </div>
 
             <?=render(ROUTES_PATH.'/admin/_parts/input/submitButtons.html.php', [
@@ -47,33 +51,4 @@
 </div>
 
 <?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
-
-<script>
-$(function () {
-    $('#form').validate({
-        rules: {
-            name: {
-                required: true,
-            },
-            slug: {
-                remote: {
-                    url: "<?=$uri->make('/admin/validate/slug.json')?>",
-                    data: {
-                        frame_id: <?=$frame_id?>,
-                    },
-                },
-            },
-        },
-        messages: {
-            name: {
-                required: "<?=trans('Nazwa strony jest wymagana')?>",
-            },
-            slug: {
-                remote: "<?=trans('Podany adres został już zarezerwowany')?>",
-            },
-        },
-    });
-});
-</script>
-
 <?php require ROUTES_PATH.'/admin/_parts/end.html.php'; ?>

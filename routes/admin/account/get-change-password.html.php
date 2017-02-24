@@ -59,7 +59,7 @@ $_POST = [];
 
 <script>
 $(function () {
-    $('form').validate({
+    $('#form').validate({
         rules: {
             old_password: {
                 required: true

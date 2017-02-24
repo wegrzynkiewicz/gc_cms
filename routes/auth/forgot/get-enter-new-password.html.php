@@ -65,7 +65,7 @@ if (!isset($meta['regenerationVerifyHash'])) {
 
 <script>
 $(function () {
-    $('form').validate({
+    $('#form').validate({
         rules: {
             new_password: {
                 required: true,

@@ -15,7 +15,7 @@ class Frame extends AbstractModel
     public static function updateByFrameId($frame_id, array $data)
     {
         $lang = Staff::getInstance()->getEditorLang();
-        $data['modify_datetime'] = sqldate();
+        $data['modification_datetime'] = sqldate();
         if (isset($data['slug']) and empty($data['slug'])) {
             $data['slug'] = static::proposeSlug($data['name'], $lang, $frame_id);
         }
@@ -27,7 +27,7 @@ class Frame extends AbstractModel
     {
         $lang = Staff::getInstance()->getEditorLang();
         $data['creation_datetime'] = sqldate();
-        $data['modify_datetime'] = sqldate();
+        $data['modification_datetime'] = sqldate();
         $data['lang'] = $lang;
         if (isset($data['slug']) and empty($data['slug'])) {
             $data['slug'] = static::proposeSlug($data['name'], $lang);

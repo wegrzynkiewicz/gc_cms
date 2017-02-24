@@ -267,6 +267,10 @@ $config = [
         '_self' => 'Załaduj w tym samym oknie',
         '_blank' => 'Załaduj w nowym oknie',
     ],
+    'frameVisibility' => [ # dostępne atrybuty visibility dla rusztowań
+        'all' => 'Widoczna dla wszystkich',
+        'hidden' => 'Ukryta',
+    ],
     'rewrites' => [ # zawiera niestandardowe przekierowania $regex => $destination
         '~^/old-service/index\.php\?id=(\d+)\&theme=([a-z]+?)$~' => '/old-service/$1/$2',
     ],

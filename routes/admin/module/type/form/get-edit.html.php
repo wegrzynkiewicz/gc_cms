@@ -61,7 +61,7 @@ $_POST['form'] = $content;
 
 <script>
 $(function () {
-    $('form').validate({
+    $('#form').validate({
         rules: {
             form: {
                 required: true,

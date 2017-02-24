@@ -89,12 +89,14 @@ CREATE TABLE `gc_frames` (
   `type` varchar(32) NOT NULL,
   `theme` varchar(32) NOT NULL,
   `lang` varchar(2) NOT NULL,
+  `hidden` tinyint(3) unsigned NOT NULL,
   `slug` tinytext NOT NULL,
   `image` tinytext NOT NULL,
   `keywords` text NOT NULL,
   `description` text NOT NULL,
   `creation_datetime` datetime NOT NULL,
-  `modify_datetime` datetime NOT NULL,
+  `publication_datetime` datetime NOT NULL,
+  `modification_datetime` datetime NOT NULL,
   PRIMARY KEY (`frame_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -281,21 +283,12 @@ CREATE TABLE `gc_popup_display` (
 
 DROP TABLE IF EXISTS `gc_post_membership`;
 CREATE TABLE `gc_post_membership` (
-  `post_id` int(10) unsigned NOT NULL,
-  `node_id` int(10) unsigned NOT NULL,
-  KEY `post_id` (`post_id`),
-  KEY `node_id` (`node_id`),
-  CONSTRAINT `gc_post_membership_ibfk_5` FOREIGN KEY (`node_id`) REFERENCES `gc_post_nodes` (`node_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-DROP TABLE IF EXISTS `gc_post_nodes`;
-CREATE TABLE `gc_post_nodes` (
-  `node_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `frame_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`node_id`),
-  KEY `frame_id` (`frame_id`),
-  CONSTRAINT `gc_post_nodes_ibfk_1` FOREIGN KEY (`frame_id`) REFERENCES `gc_frames` (`frame_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  `node_id` int(10) unsigned NOT NULL,
+  KEY `post_id` (`frame_id`),
+  KEY `node_id` (`node_id`),
+  CONSTRAINT `gc_post_membership_ibfk_1` FOREIGN KEY (`frame_id`) REFERENCES `gc_frames` (`frame_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `gc_post_membership_ibfk_2` FOREIGN KEY (`node_id`) REFERENCES `gc_frames` (`frame_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -305,6 +298,7 @@ CREATE TABLE `gc_post_taxonomies` (
   `workname` varchar(32) NOT NULL,
   `lang` varchar(2) NOT NULL,
   `name` tinytext NOT NULL,
+  `maxlevels` tinyint(3) unsigned NOT NULL,
   PRIMARY KEY (`tax_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -312,15 +306,15 @@ CREATE TABLE `gc_post_taxonomies` (
 DROP TABLE IF EXISTS `gc_post_tree`;
 CREATE TABLE `gc_post_tree` (
   `tax_id` int(10) unsigned NOT NULL,
-  `node_id` int(10) unsigned NOT NULL,
+  `frame_id` int(10) unsigned NOT NULL,
   `parent_id` int(10) unsigned DEFAULT NULL,
   `position` int(10) unsigned NOT NULL,
   KEY `tax_id` (`tax_id`),
   KEY `parent_id` (`parent_id`),
-  KEY `node_id` (`node_id`),
-  CONSTRAINT `gc_post_tree_ibfk_1` FOREIGN KEY (`tax_id`) REFERENCES `gc_post_taxonomies` (`tax_id`),
-  CONSTRAINT `gc_post_tree_ibfk_3` FOREIGN KEY (`parent_id`) REFERENCES `gc_post_tree` (`node_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `gc_post_tree_ibfk_4` FOREIGN KEY (`node_id`) REFERENCES `gc_post_nodes` (`node_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `node_id` (`frame_id`),
+  CONSTRAINT `gc_post_tree_ibfk_1` FOREIGN KEY (`tax_id`) REFERENCES `gc_post_taxonomies` (`tax_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `gc_post_tree_ibfk_2` FOREIGN KEY (`frame_id`) REFERENCES `gc_frames` (`frame_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `gc_post_tree_ibfk_3` FOREIGN KEY (`parent_id`) REFERENCES `gc_post_tree` (`frame_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -425,4 +419,4 @@ CREATE TABLE `gc_widgets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
--- 2017-02-23 02:41:31
+-- 2017-02-24 20:14:41

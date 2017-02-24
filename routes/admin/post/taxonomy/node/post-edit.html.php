@@ -21,6 +21,8 @@ GC\Model\Frame::updateByFrameId($frame_id, [
     'keywords' => post('keywords'),
     'description' => post('description'),
     'image' => $uri->relative(post('image')),
+    'publication_datetime' => post('publication_datetime', sqldate()),
+    'visibility' => post('visibility'),
 ]);
 
 flashBox(trans('Węzeł "%s" został zaktualizowany.', [$node['name']]));
