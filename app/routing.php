@@ -16,7 +16,14 @@ while (count($_SEGMENTS) > 0) {
     $segment = array_shift($_SEGMENTS);
 
     # jeżeli istnieje plik z metodą requesta na początku, załaduj
-    $file = "{$path}/{$segment}-{$request->method}.php";
+    $file = "{$path}/{$request->method}-{$segment}.php";
+    if (file_exists($file)) {
+        logger('[ROUTING] '.relativePath($file));
+        return require $file;
+    }
+
+    # jeżeli istnieje plik z metodą requesta na początku, załaduj
+    $file = "{$path}/{$request->method}-{$segment}.html.php";
     if (file_exists($file)) {
         logger('[ROUTING] '.relativePath($file));
         return require $file;

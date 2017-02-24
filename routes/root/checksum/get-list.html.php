@@ -59,7 +59,7 @@ usort($checksums, function ($a, $b) {
     </thead>
     <tbody style="font-family: monospace;">
         <?php foreach ($checksums as $checksum): ?>
-            <?=render(ROUTES_PATH.'/root/checksum/list-item.html.php', [
+            <?=render(ROUTES_PATH.'/root/checksum/_list-item.html.php', [
                 'checksum' => $checksum,
             ])?>
         <?php endforeach ?>

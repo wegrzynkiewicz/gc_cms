@@ -13,15 +13,8 @@ $user = GC\Model\Staff\Staff::select()
     ->equals('email', post('login'))
     ->fetch();
 
-# jeżeli debug włączony i hasło w bazie nie jest zahaszowane, a zgadza się
-if ($config['debug']['enabled'] and $user and $password === $user['password']) {
-    # zaktualizuj hasło pracownika na hash
-    GC\Model\Staff\Staff::updateByPrimaryId($user['staff_id'], [
-        'password' => password_hash($password, \PASSWORD_DEFAULT),
-    ]);
-}
 # jeżeli użytkownik nie istnieje, albo hasło jest nieprawidłowe
-elseif (!$user or !password_verify($password, $user['password'])) {
+if (!$user or !password_verify($password, $user['password'])) {
     return display(ROUTES_PATH.'/auth/login-get.php', [
         'error' => trans('Nieprawidłowy login lub hasło'),
     ]);

@@ -4,6 +4,8 @@ require_once __DIR__.'/_import.php';
 
 foreach (globRecursive('routes/*.php') as $file) {
 
+    $file = realpath(__DIR__.'/../'.$file);
+
     unset($target);
 
     $dirname = dirname($file);
@@ -20,9 +22,9 @@ foreach (globRecursive('routes/*.php') as $file) {
     if (isset($target)) {
         echo PHP_EOL;
         echo $file.PHP_EOL;
-        $dir = $dirname.'/'.$target.PHP_EOL;
-
-        rename($file, $dir);
+        $target = $dirname.'/'.$target;
+        echo $target.PHP_EOL;
+        rename($file, $target);
 
     }
 }
