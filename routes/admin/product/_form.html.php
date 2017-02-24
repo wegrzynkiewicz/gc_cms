@@ -95,10 +95,21 @@ $(function () {
             name: {
                 required: true,
             },
+            slug: {
+                remote: {
+                    url: "<?=$uri->make('/admin/validate/slug.json')?>",
+                    data: {
+                        frame_id: <?=$frame_id?>,
+                    },
+                },
+            },
         },
         messages: {
             name: {
-                required: "<?=trans('Nazwa produktu jest wymagana')?>"
+                required: "<?=trans('Nazwa produktu jest wymagana')?>",
+            },
+            slug: {
+                remote: "<?=trans('Podany adres został już zarezerwowany')?>",
             },
         },
     });

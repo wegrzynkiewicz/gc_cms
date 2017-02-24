@@ -57,7 +57,10 @@ $(function () {
             },
             slug: {
                 remote: {
-                    url: "<?=$uri->make("/admin/api/validate/slug.json/{$frame_id}")?>",
+                    url: "<?=$uri->make('/admin/validate/slug.json')?>",
+                    data: {
+                        frame_id: <?=$frame_id?>,
+                    },
                 },
             },
         },
