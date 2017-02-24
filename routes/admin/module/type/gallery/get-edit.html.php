@@ -14,7 +14,7 @@ require ROUTES_PATH."/admin/module/type/gallery/_import.php";
                     <?=trans('Dodaj zdjęcia')?>
                 </button>
             </div>
-            <h1><?=($headTitle)?></h1>
+            <h1><?=$headTitle?></h1>
         </div>
     </div>
 </div>

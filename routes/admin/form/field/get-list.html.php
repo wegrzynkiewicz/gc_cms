@@ -23,7 +23,7 @@ $fields = GC\Model\Form\Field::select()
                     <?=trans('Dodaj nowe pole')?>
                 </a>
             </div>
-            <h1><?=($headTitle)?></h1>
+            <h1><?=$headTitle?></h1>
         </div>
     </div>
 </div>

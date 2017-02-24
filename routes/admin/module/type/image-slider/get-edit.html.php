@@ -16,7 +16,7 @@ $_POST = $module;
                     <?=trans('Dodaj zdjęcia')?>
                 </button>
             </div>
-            <h1><?=($headTitle)?></h1>
+            <h1><?=$headTitle?></h1>
         </div>
     </div>
 </div>

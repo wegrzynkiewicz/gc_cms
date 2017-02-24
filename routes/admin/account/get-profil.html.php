@@ -17,7 +17,7 @@ $_POST = GC\Staff::getInstance()->getData();
                     <?=trans('Zmień hasło')?>
                 </a>
             </div>
-            <h1><?=($headTitle)?></h1>
+            <h1><?=$headTitle?></h1>
         </div>
     </div>
 </div>

@@ -1,12 +1,12 @@
 <?php if (GC\Staff::getInstance()->hasPermissions($node['perms'])): ?>
     <li>
-        <a href="<?=$uri->make($node['path'])?>" id="nav_<?=($node_id)?>">
+        <a href="<?=$uri->make($node['path'])?>" id="nav_<?=$node_id?>">
 
             <?php if ($node['icon']): ?>
-                <i class="fa fa-<?=($node['icon'])?> fa-fw"></i>
+                <i class="fa fa-<?=$node['icon']?> fa-fw"></i>
             <?php endif ?>
 
-            <?=($node['name'])?>
+            <?=$node['name']?>
 
             <?php if (count($node['children'])): ?>
                 <span class="fa arrow" style="margin-top:3px"></span>

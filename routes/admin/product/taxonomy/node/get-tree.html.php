@@ -22,7 +22,7 @@ $tree = GC\Model\Product\Tree::select()
                     <?=trans('Dodaj nowy węzeł')?>
                 </a>
             </div>
-            <h1><?=($headTitle)?></h1>
+            <h1><?=$headTitle?></h1>
         </div>
     </div>
 </div>

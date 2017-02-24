@@ -31,7 +31,7 @@ $_POST = $message;
                     <?=trans('Usuń wiadomość')?>
                 </a>
             </div>
-            <h1><?=($headTitle)?></h1>
+            <h1><?=$headTitle?></h1>
         </div>
     </div>
 </div>

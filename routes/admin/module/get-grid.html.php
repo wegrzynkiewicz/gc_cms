@@ -27,7 +27,7 @@ $modules = GC\Model\Module\Module::select()
                     <?=trans('Dodaj nowy moduł')?>
                 </a>
             </div>
-            <h1><?=($headTitle)?></h1>
+            <h1><?=$headTitle?></h1>
         </div>
     </div>
 </div>

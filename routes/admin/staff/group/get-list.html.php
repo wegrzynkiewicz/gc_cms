@@ -31,7 +31,7 @@ foreach ($groupPermissions as $permission) {
                     <?=trans('Dodaj nową grupę pracowników')?>
                 </a>
             </div>
-            <h1><?=($headTitle)?></h1>
+            <h1><?=$headTitle?></h1>
         </div>
     </div>
 </div>

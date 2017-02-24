@@ -34,7 +34,7 @@ $_POST = $user;
                     <?=trans('Wymuś zmianę hasła')?>
                 </a>
             </div>
-            <h1><?=($headTitle)?></h1>
+            <h1><?=$headTitle?></h1>
         </div>
     </div>
 </div>

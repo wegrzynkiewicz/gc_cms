@@ -55,7 +55,7 @@ $headTitle = trans('Wystąpił problem podczas resetowia hasła');
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title text-center">
-                            <?=($headTitle)?>
+                            <?=$headTitle?>
                         </h3>
                     </div>
                     <div class="panel-body">

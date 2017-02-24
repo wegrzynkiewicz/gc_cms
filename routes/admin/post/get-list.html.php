@@ -22,7 +22,7 @@ $count = GC\Model\Frame::select()
                     <?=trans('Dodaj nowy wpis')?>
                 </a>
             </div>
-            <h1><?=($headTitle)?></h1>
+            <h1><?=$headTitle?></h1>
         </div>
     </div>
 </div>

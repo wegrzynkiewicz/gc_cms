@@ -44,7 +44,7 @@ foreach ($permissions as $permission) {
                     <?=trans('Dodaj nowego pracownika')?>
                 </a>
             </div>
-            <h1><?=($headTitle)?></h1>
+            <h1><?=$headTitle?></h1>
         </div>
     </div>
 </div>

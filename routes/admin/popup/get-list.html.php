@@ -21,7 +21,7 @@ $count = GC\Model\PopUp\PopUp::select()
                     <?=trans('Dodaj nowe wyskakujące okienko')?>
                 </a>
             </div>
-            <h1><?=($headTitle)?></h1>
+            <h1><?=$headTitle?></h1>
         </div>
     </div>
 </div>

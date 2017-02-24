@@ -22,7 +22,7 @@ $tabs = GC\Model\Module\Tab::select()
                     <?=trans('Dodaj zakładkę')?>
                 </button>
             </div>
-            <h1><?=($headTitle)?></h1>
+            <h1><?=$headTitle?></h1>
         </div>
     </div>
 </div>
