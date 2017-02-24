@@ -3,7 +3,7 @@
 $headTitle = trans('Witamy na stronie głównej');
 
 ?>
-<?php require TEMPLATE_PATH."/parts/header.html.php"; ?>
+<?php require TEMPLATE_PATH."/_parts/header.html.php"; ?>
 
 <div class="container">
     <div class="blog-header">
@@ -80,11 +80,11 @@ $headTitle = trans('Witamy na stronie głównej');
             </nav>
         </div>
 
-        <?php require TEMPLATE_PATH."/parts/sidebar.html.php"; ?>
+        <?php require TEMPLATE_PATH."/_parts/sidebar.html.php"; ?>
 
     </div>
 </div>
 
-<?php require TEMPLATE_PATH."/parts/assets.html.php"; ?>
-<?php require TEMPLATE_PATH."/parts/footer.html.php"; ?>
-<?php require TEMPLATE_PATH."/parts/end.html.php"; ?>
+<?php require TEMPLATE_PATH."/_parts/assets.html.php"; ?>
+<?php require TEMPLATE_PATH."/_parts/footer.html.php"; ?>
+<?php require TEMPLATE_PATH."/_parts/end.html.php"; ?>

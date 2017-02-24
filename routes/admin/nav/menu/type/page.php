@@ -14,7 +14,7 @@ $pageOptions = GC\Model\Frame::select()
 ?>
 
 <div class="simple-box">
-    <?=render(ROUTES_PATH.'/admin/parts/input/selectbox.html.php', [
+    <?=render(ROUTES_PATH.'/admin/_parts/input/selectbox.html.php', [
         'name' => 'frame_id',
         'label' => trans('Strona'),
         'help' => trans('Wybierz stronę do której wezeł ma kierować'),
@@ -22,7 +22,7 @@ $pageOptions = GC\Model\Frame::select()
         'firstOption' => trans('Wybierz stronę'),
     ])?>
 
-    <?=render(ROUTES_PATH.'/admin/parts/input/selectbox.html.php', [
+    <?=render(ROUTES_PATH.'/admin/_parts/input/selectbox.html.php', [
         'name' => 'target',
         'label' => trans('Sposób załadowania adresu'),
         'options' => array_trans($config['navNodeTargets']),

@@ -9,15 +9,15 @@ $widgets = GC\Model\Widget::select()
     ->fetchByPrimaryKey();
 
 ?>
-<?php require ROUTES_PATH.'/admin/parts/header.html.php'; ?>
-<?php require ROUTES_PATH.'/admin/parts/page-header.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/header.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/page-header.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">
         <div class="simple-box">
             <?php if (empty($widgets)): ?>
                 <?=trans('Nie znaleziono żadnych widżetów w języku: ')?>
-                <?=render(ROUTES_PATH.'/admin/parts/language.html.php', [
+                <?=render(ROUTES_PATH.'/admin/_parts/language.html.php', [
                     'lang' => GC\Staff::getInstance()->getEditorLang(),
                 ])?>
             <?php else: ?>
@@ -50,9 +50,9 @@ $widgets = GC\Model\Widget::select()
                 </table>
             <?php endif ?>
         </div>
-        <?php require ROUTES_PATH.'/admin/parts/input/submitButtons.html.php'; ?>
+        <?php require ROUTES_PATH.'/admin/_parts/input/submitButtons.html.php'; ?>
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/assets/footer.html.php'; ?>
-<?php require ROUTES_PATH.'/admin/parts/end.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/end.html.php'; ?>

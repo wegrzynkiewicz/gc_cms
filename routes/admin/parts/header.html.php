@@ -5,9 +5,9 @@
 	<title><?=$headTitle.' - '.$config['adminHeadTitleBase']?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <?php require ROUTES_PATH.'/admin/parts/assets/header.html.php'; ?>
+    <?php require ROUTES_PATH.'/admin/_parts/assets/header.html.php'; ?>
 </head>
 <body>
     <div id="wrapper">
-        <?php require ROUTES_PATH.'/admin/parts/navbar/main.html.php'; ?>
+        <?php require ROUTES_PATH.'/admin/_parts/navbar/main.html.php'; ?>
         <div id="page-wrapper">

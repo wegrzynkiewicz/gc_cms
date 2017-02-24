@@ -16,7 +16,7 @@
             </li> -->
 
             <?php foreach ($menu as $node_id => $node): ?>
-                <?=render(ROUTES_PATH.'/admin/parts/sidebar/item.html.php', [
+                <?=render(ROUTES_PATH.'/admin/_parts/sidebar/item.html.php', [
                     'node_id' => $node_id,
                     'node' => $node,
                     'attr' => 'class="nav nav-second-level collapse"',

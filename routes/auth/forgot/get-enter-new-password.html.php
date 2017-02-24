@@ -17,7 +17,7 @@ if (!isset($meta['regenerationVerifyHash'])) {
 }
 
 ?>
-<?php require ROUTES_PATH.'/admin/parts/header-login.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/header-login.html.php'; ?>
 
 <div class="vertical-center">
     <div class="container">
@@ -36,14 +36,14 @@ if (!isset($meta['regenerationVerifyHash'])) {
                                 <?=trans('Weryfikacja adresu email przebiegła pomyślnie. Możesz zmienić swoje hasło.')?>
                             </p>
 
-                            <?=render(ROUTES_PATH.'/admin/parts/input/editbox.html.php', [
+                            <?=render(ROUTES_PATH.'/admin/_parts/input/editbox.html.php', [
                                 'name' => 'new_password',
                                 'type' => 'password',
                                 'label' => trans('Nowe hasło'),
                                 'help' => trans('Twoje hasło musi składać się z przynajmniej %s znaków', [$config['password']['minLength']]),
                             ])?>
 
-                            <?=render(ROUTES_PATH.'/admin/parts/input/editbox.html.php', [
+                            <?=render(ROUTES_PATH.'/admin/_parts/input/editbox.html.php', [
                                 'name' => 'confirm_password',
                                 'type' => 'password',
                                 'label' => trans('Powtórz nowe hasło'),
@@ -61,7 +61,7 @@ if (!isset($meta['regenerationVerifyHash'])) {
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/assets/footer.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
 
 <script>
 $(function () {

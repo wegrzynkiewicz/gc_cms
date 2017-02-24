@@ -33,7 +33,7 @@ foreach ($permissions as $permission) {
 }
 
 ?>
-<?php require ROUTES_PATH.'/admin/parts/header.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -49,7 +49,7 @@ foreach ($permissions as $permission) {
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/breadcrumbs.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/breadcrumbs.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">
@@ -80,7 +80,7 @@ foreach ($permissions as $permission) {
                 </table>
             <?php endif ?>
         </div>
-        <?php require ROUTES_PATH.'/admin/parts/input/submitButtons.html.php'; ?>
+        <?php require ROUTES_PATH.'/admin/_parts/input/submitButtons.html.php'; ?>
     </div>
 </div>
 
@@ -112,7 +112,7 @@ foreach ($permissions as $permission) {
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/assets/footer.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
 
 <script>
 $(function(){
@@ -127,4 +127,4 @@ $(function(){
 });
 </script>
 
-<?php require ROUTES_PATH.'/admin/parts/end.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/end.html.php'; ?>

@@ -7,7 +7,7 @@ $modules = GC\Model\Module\Module::select()
     ->fetchByPrimaryKey();
 
 ?>
-<?php require ROUTES_PATH.'/admin/parts/header.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -32,7 +32,7 @@ $modules = GC\Model\Module\Module::select()
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/breadcrumbs.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/breadcrumbs.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -53,7 +53,7 @@ $modules = GC\Model\Module\Module::select()
                 </div>
             <?php endif ?>
 
-            <?=render(ROUTES_PATH.'/admin/parts/input/submitButtons.html.php', [
+            <?=render(ROUTES_PATH.'/admin/_parts/input/submitButtons.html.php', [
                 'saveLabel' => trans('Zapisz pozycje kafelków'),
             ])?>
 
@@ -126,7 +126,7 @@ $modules = GC\Model\Module\Module::select()
     </a>
 </script>
 
-<?php require ROUTES_PATH.'/admin/parts/assets/footer.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
 
 <script>
     var rowSettingsTemplate = $('#grid-row-settings').html();
@@ -191,4 +191,4 @@ $modules = GC\Model\Module\Module::select()
 
 </script>
 
-<?php require ROUTES_PATH.'/admin/parts/end.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/end.html.php'; ?>

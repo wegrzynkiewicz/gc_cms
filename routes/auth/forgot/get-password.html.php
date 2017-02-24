@@ -5,7 +5,7 @@ require ROUTES_PATH.'/auth/_import.php';
 $headTitle = trans('Zapomniałem hasła');
 
 ?>
-<?php require ROUTES_PATH.'/admin/parts/header-login.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/header-login.html.php'; ?>
 
 <div class="vertical-center">
     <div class="container">
@@ -24,7 +24,7 @@ $headTitle = trans('Zapomniałem hasła');
                                 <?=trans('Na wprowadzony poniżej adres email zostanie wysłane nowe hasło')?>
                             </p>
 
-                            <?=render(ROUTES_PATH.'/admin/parts/input/editbox.html.php', [
+                            <?=render(ROUTES_PATH.'/admin/_parts/input/editbox.html.php', [
                                 'name' => 'login',
                                 'placeholder' => trans('Adres e-mail'),
                             ])?>
@@ -48,7 +48,7 @@ $headTitle = trans('Zapomniałem hasła');
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/assets/footer.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
 
 <script>
 $(function () {

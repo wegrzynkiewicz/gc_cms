@@ -12,7 +12,7 @@ $item = GC\Model\Module\Tab::select()
 
 $_POST = $item;
 
-echo render(ROUTES_PATH.'/admin/parts/input/editbox.html.php', [
+echo render(ROUTES_PATH.'/admin/_parts/input/editbox.html.php', [
     'name' => 'name',
     'label' => trans('Nazwa pojedyńczej zakładki'),
 ])?>

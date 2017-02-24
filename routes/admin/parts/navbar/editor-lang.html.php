@@ -7,7 +7,7 @@ $langs = $config['langs'];
             <span class="hidden-xs">
                 <?=trans('Edytuj: ')?>
             </span>
-            <?=render(ROUTES_PATH.'/admin/parts/language.html.php', [
+            <?=render(ROUTES_PATH.'/admin/_parts/language.html.php', [
                 'lang' => GC\Staff::getInstance()->getEditorLang(),
             ])?>
             <b class="caret"></b>
@@ -16,7 +16,7 @@ $langs = $config['langs'];
             <?php foreach ($langs as $code => $lang): ?>
                 <li>
                     <a href="<?=$uri->make("/admin/account/change-editor-lang/{$code}")?>">
-                        <?=render(ROUTES_PATH.'/admin/parts/language.html.php', [
+                        <?=render(ROUTES_PATH.'/admin/_parts/language.html.php', [
                             'lang' => $code,
                         ])?>
                     </a>

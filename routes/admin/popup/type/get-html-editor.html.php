@@ -15,7 +15,7 @@ if ($popup_id) {
 
 ?>
 
-<?=render(ROUTES_PATH.'/admin/parts/input/ckeditor.html.php', [
+<?=render(ROUTES_PATH.'/admin/_parts/input/ckeditor.html.php', [
     'name' => 'content',
     'options' => [
          'customConfig' => '/assets/admin/ckeditor/full_ckeditor.js',

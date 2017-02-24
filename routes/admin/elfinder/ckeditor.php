@@ -15,7 +15,7 @@
 <body>
 	<div id="elfinder"></div>
 
-    <?php require ROUTES_PATH.'/admin/parts/assets/footer.html.php'; ?>
+    <?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
 
     <script>
         function getUrlParam(paramName) {

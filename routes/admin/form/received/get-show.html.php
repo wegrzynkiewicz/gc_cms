@@ -18,7 +18,7 @@ $breadcrumbs->push([
 $_POST = $message;
 
 ?>
-<?php require ROUTES_PATH.'/admin/parts/header.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -36,7 +36,7 @@ $_POST = $message;
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/breadcrumbs.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/breadcrumbs.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -77,7 +77,7 @@ $_POST = $message;
             </table>
 
             <div class="simple-box">
-                <?=render(ROUTES_PATH.'/admin/parts/input/selectbox.html.php', [
+                <?=render(ROUTES_PATH.'/admin/_parts/input/selectbox.html.php', [
                     'name' => 'status',
                     'label' => trans('Status'),
                     'help' => trans('Status wiadomości jest pomocny przy filtrowaniu wiadomości.'),
@@ -87,7 +87,7 @@ $_POST = $message;
                 ])?>
             </div>
 
-            <?=render(ROUTES_PATH.'/admin/parts/input/submitButtons.html.php', [
+            <?=render(ROUTES_PATH.'/admin/_parts/input/submitButtons.html.php', [
                 'saveLabel' => trans('Zapisz status'),
             ])?>
 
@@ -95,5 +95,5 @@ $_POST = $message;
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/assets/footer.html.php'; ?>
-<?php require ROUTES_PATH.'/admin/parts/end.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/end.html.php'; ?>

@@ -14,7 +14,7 @@ if (isset($field_id) and $field_id > 0) {
 ?>
 <p><?=trans('Pole jednokrotnego wyboru wymaga wprowadzenia możliwych wyborów')?></p>
 
-<?=render(ROUTES_PATH.'/admin/parts/input/select2-tags.html.php', [
+<?=render(ROUTES_PATH.'/admin/_parts/input/select2-tags.html.php', [
     'id' => 'options',
     'name' => 'options',
     'label' => trans('Możliwe wybory'),

@@ -9,7 +9,7 @@ if (!isset($_POST['gutter'])) {
     $_POST['gutter'] = 20;
 }
 
-echo render(ROUTES_PATH.'/admin/parts/input/selectbox.html.php', [
+echo render(ROUTES_PATH.'/admin/_parts/input/selectbox.html.php', [
     'name' => 'widthType',
     'label' => trans('Szerokość wiersza'),
     'help' => trans('Określa zachowanie szerokości wiersza względem szerokości strony.'),
@@ -19,19 +19,19 @@ echo render(ROUTES_PATH.'/admin/parts/input/selectbox.html.php', [
     ],
 ]);
 
-echo render(ROUTES_PATH.'/admin/parts/input/editbox.html.php', [
+echo render(ROUTES_PATH.'/admin/_parts/input/editbox.html.php', [
     'name' => 'gutter',
     'label' => trans('Odstęp kafelków (w pikselach)'),
     'help' => trans('Ustawia odstęp w pikselach pomiędzy modułami w wierszu.'),
 ]);
 
-echo render(ROUTES_PATH.'/admin/parts/input/colorpicker.html.php', [
+echo render(ROUTES_PATH.'/admin/_parts/input/colorpicker.html.php', [
     'name' => 'bgColor',
     'label' => trans('Kolor tła'),
     'help' => trans('Pozwala na wybranie koloru tła wiersza. Zostaw puste jeżeli nie chcesz ustawiać koloru.'),
 ]);
 
-echo render(ROUTES_PATH.'/admin/parts/input/image.html.php', [
+echo render(ROUTES_PATH.'/admin/_parts/input/image.html.php', [
     'name' => 'bgImage',
     'label' => trans('Zdjęcie tła'),
     'placeholder' => trans('Ścieżka do pliku zdjęcia'),

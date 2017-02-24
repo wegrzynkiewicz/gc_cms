@@ -11,24 +11,24 @@ $groupOptions = GC\Model\Staff\Group::select()
         <form action="" method="post" id="form" class="form-horizontal">
 
             <div class="simple-box">
-                <?=render(ROUTES_PATH.'/admin/parts/input/image.html.php', [
+                <?=render(ROUTES_PATH.'/admin/_parts/input/image.html.php', [
                     'name' => 'avatar',
                     'label' => trans('Avatar pracownika'),
                     'placeholder' => trans('Ścieżka do pliku zdjęcia'),
                 ])?>
 
-                <?=render(ROUTES_PATH.'/admin/parts/input/editbox.html.php', [
+                <?=render(ROUTES_PATH.'/admin/_parts/input/editbox.html.php', [
                     'name' => 'name',
                     'label' => trans('Imię i nazwisko pracownika'),
                 ])?>
 
-                <?=render(ROUTES_PATH.'/admin/parts/input/editbox.html.php', [
+                <?=render(ROUTES_PATH.'/admin/_parts/input/editbox.html.php', [
                     'name' => 'email',
                     'label' => trans('Adres E-mail'),
                     'help' => trans('Adres E-mail służy do logowaniu pracownika do panelu'),
                 ])?>
 
-                <?=render(ROUTES_PATH.'/admin/parts/input/select2-multi.html.php', [
+                <?=render(ROUTES_PATH.'/admin/_parts/input/select2-multi.html.php', [
                     'name' => 'groups',
                     'label' => trans('Przynależność do grup pracowników'),
                     'help' => trans('Możesz wybrać jaką pracownik ma pełnić funkcję i jakie uprawnienia otrzyma. Pracownik może przynależyć do wielu grup.'),
@@ -37,7 +37,7 @@ $groupOptions = GC\Model\Staff\Group::select()
                 ])?>
             </div>
 
-            <?=render(ROUTES_PATH.'/admin/parts/input/submitButtons.html.php', [
+            <?=render(ROUTES_PATH.'/admin/_parts/input/submitButtons.html.php', [
                 'saveLabel' => trans('Zapisz ustawienia'),
             ])?>
 
@@ -45,7 +45,7 @@ $groupOptions = GC\Model\Staff\Group::select()
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/assets/footer.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
 
 <script>
 $(function () {
@@ -76,4 +76,4 @@ $(function () {
 });
 </script>
 
-<?php require ROUTES_PATH.'/admin/parts/end.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/end.html.php'; ?>

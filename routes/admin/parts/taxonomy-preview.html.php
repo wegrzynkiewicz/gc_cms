@@ -6,7 +6,7 @@
                 <?=e($node['name'])?>
             </a>
             <?php if ($node->hasChildren()): ?>
-                <?=render(ROUTES_PATH.'/admin/parts/taxonomy-preview.html.php', [
+                <?=render(ROUTES_PATH.'/admin/_parts/taxonomy-preview.html.php', [
                     'tree' => $node,
                     'taxonomyUrl' => $taxonomyUrl,
                 ])?>

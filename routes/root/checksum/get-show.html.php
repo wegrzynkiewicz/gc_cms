@@ -23,8 +23,8 @@ $lineCount = count($lines);
 $padLength = strlen($lineCount);
 
 ?>
-<?php require ROUTES_PATH.'/admin/parts/header.html.php'; ?>
-<?php require ROUTES_PATH.'/admin/parts/page-header.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/header.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/page-header.html.php'; ?>
 
 <div class="<?=$status ? 'bg-success' : 'bg-danger'?>">
     <pre class="simple-box" style="background-color: initial">SHA1: <span class=""><?=$checksum?></span></pre>
@@ -37,5 +37,5 @@ $padLength = strlen($lineCount);
 <?php endforeach ?>
 </pre>
 
-<?php require ROUTES_PATH.'/admin/parts/assets/footer.html.php'; ?>
-<?php require ROUTES_PATH.'/admin/parts/end.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/end.html.php'; ?>

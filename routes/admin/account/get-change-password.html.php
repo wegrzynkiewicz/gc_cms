@@ -12,8 +12,8 @@ $breadcrumbs->push([
 $_POST = [];
 
 ?>
-<?php require ROUTES_PATH.'/admin/parts/header.html.php'; ?>
-<?php require ROUTES_PATH.'/admin/parts/page-header.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/header.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/page-header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -25,21 +25,21 @@ $_POST = [];
                     </div>
                 <?php endif ?>
 
-                <?=render(ROUTES_PATH.'/admin/parts/input/editbox.html.php', [
+                <?=render(ROUTES_PATH.'/admin/_parts/input/editbox.html.php', [
                     'name' => 'old_password',
                     'type' => 'password',
                     'label' => trans('Stare hasło'),
                     'help' => trans('Wprowadź swoje stare hasło dla bezpieczeństwa'),
                 ])?>
 
-                <?=render(ROUTES_PATH.'/admin/parts/input/editbox.html.php', [
+                <?=render(ROUTES_PATH.'/admin/_parts/input/editbox.html.php', [
                     'name' => 'new_password',
                     'type' => 'password',
                     'label' => trans('Nowe hasło'),
                     'help' => trans('Twoje hasło musi składać się z przynajmniej %s znaków', [$config['password']['minLength']]),
                 ])?>
 
-                <?=render(ROUTES_PATH.'/admin/parts/input/editbox.html.php', [
+                <?=render(ROUTES_PATH.'/admin/_parts/input/editbox.html.php', [
                     'name' => 'confirm_password',
                     'type' => 'password',
                     'label' => trans('Powtórz nowe hasło'),
@@ -47,7 +47,7 @@ $_POST = [];
                 ])?>
             </div>
 
-            <?=render(ROUTES_PATH.'/admin/parts/input/submitButtons.html.php', [
+            <?=render(ROUTES_PATH.'/admin/_parts/input/submitButtons.html.php', [
                 'saveLabel' => trans('Zmień hasło'),
             ])?>
 
@@ -55,7 +55,7 @@ $_POST = [];
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/assets/footer.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
 
 <script>
 $(function () {
@@ -90,4 +90,4 @@ $(function () {
 });
 </script>
 
-<?php require ROUTES_PATH.'/admin/parts/end.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/end.html.php'; ?>

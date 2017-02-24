@@ -2,7 +2,7 @@
 
 $mail->Subject = trans('Czy zapomniałeś hasła?');
 
-require ROUTES_PATH.'/admin/parts/email/header.html.php'; ?>
+require ROUTES_PATH.'/admin/_parts/email/header.html.php'; ?>
 
 <div class="title">
     <?=trans('Witaj')?> <?=e($name)?>!
@@ -22,4 +22,4 @@ require ROUTES_PATH.'/admin/parts/email/header.html.php'; ?>
     <br>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/email/footer.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/email/footer.html.php'; ?>

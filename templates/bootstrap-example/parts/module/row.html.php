@@ -39,7 +39,7 @@ $gutterHalf = ceil($gutter/2);
         <?php list($x, $y, $width, $height) = $module['size']; ?>
         <?php $offset = $x - $previousWidth; ?>
             <div class="col-md-<?=$width?> col-md-offset-<?=$offset?>">
-                <?=render(TEMPLATE_PATH.'/parts/module/item.html.php', [
+                <?=render(TEMPLATE_PATH.'/_parts/module/item.html.php', [
                     'width' => $width,
                     'offset' => $offset,
                     'module' => $module,

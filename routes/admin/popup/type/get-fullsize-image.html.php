@@ -16,7 +16,7 @@ if ($popup_id) {
 ?>
 
 <div class="simple-box">
-    <?=render(ROUTES_PATH.'/admin/parts/input/image.html.php', [
+    <?=render(ROUTES_PATH.'/admin/_parts/input/image.html.php', [
         'name' => 'content',
         'label' => trans('Zdjęcie'),
         'placeholder' => trans('Ścieżka do pliku zdjęcia'),

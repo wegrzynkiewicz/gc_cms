@@ -10,7 +10,7 @@ $count = GC\Model\PopUp\PopUp::select()
     ->fetch()['count'];
 
 ?>
-<?php require ROUTES_PATH.'/admin/parts/header.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -26,14 +26,14 @@ $count = GC\Model\PopUp\PopUp::select()
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/breadcrumbs.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/breadcrumbs.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">
         <div class="simple-box">
             <?php if ($count == 0): ?>
                 <?=trans('Nie znaleziono żadnego wyskakującego okienka w języku: ')?>
-                <?=render(ROUTES_PATH.'/admin/parts/language.html.php', [
+                <?=render(ROUTES_PATH.'/admin/_parts/language.html.php', [
                     'lang' => GC\Staff::getInstance()->getEditorLang(),
                 ])?>
             <?php else: ?>
@@ -62,7 +62,7 @@ $count = GC\Model\PopUp\PopUp::select()
                 </form>
             <?php endif ?>
         </div>
-        <?php require ROUTES_PATH.'/admin/parts/input/submitButtons.html.php'; ?>
+        <?php require ROUTES_PATH.'/admin/_parts/input/submitButtons.html.php'; ?>
     </div>
 </div>
 
@@ -119,7 +119,7 @@ $count = GC\Model\PopUp\PopUp::select()
     </td>
 </script>
 
-<?php require ROUTES_PATH.'/admin/parts/assets/footer.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
 
 <script>
     $(function(){
@@ -151,4 +151,4 @@ $count = GC\Model\PopUp\PopUp::select()
     });
 </script>
 
-<?php require ROUTES_PATH.'/admin/parts/end.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/end.html.php'; ?>

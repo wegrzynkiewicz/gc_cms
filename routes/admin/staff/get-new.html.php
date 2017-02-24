@@ -11,6 +11,6 @@ $breadcrumbs->push([
 $groups = [];
 
 ?>
-<?php require ROUTES_PATH.'/admin/parts/header.html.php'; ?>
-<?php require ROUTES_PATH.'/admin/parts/page-header.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/header.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/_parts/page-header.html.php'; ?>
 <?php require ROUTES_PATH.'/admin/staff/_form.html.php'; ?>
