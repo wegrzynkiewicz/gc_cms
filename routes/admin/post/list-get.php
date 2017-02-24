@@ -1,22 +1,14 @@
 <?php
 
-$posts = GC\Model\Post\Post::selectWithFrames()->fetchByPrimaryKey();
-$nodes = GC\Model\Post\Node::selectAllForTaxonomyTree();
-$taxonomies = GC\Model\Post\Taxonomy::select()
-    ->equals('lang', GC\Staff::getInstance()->getEditorLang())
-    ->fetchByPrimaryKey();
+require ROUTES_PATH.'/admin/_import.php';
+require ROUTES_PATH.'/admin/post/_import.php';
 
-foreach ($nodes as $node) {
-    $posts[$node['post_id']]['taxonomies'][$node['tax_id']][] = $node;
-}
-foreach ($posts as &$post) {
-    if (isset($post['taxonomies'])) {
-        foreach ($post['taxonomies'] as $tax_id => $taxonomy) {
-            $post['taxonomies'][$tax_id] = GC\Model\Post\Node::createTree($taxonomy);
-        }
-    }
-}
-unset($post);
+# pobierz liczbę stron
+$count = GC\Model\Frame::select()
+    ->fields('COUNT(*) AS count')
+    ->equals('type', 'post')
+    ->equals('lang', GC\Staff::getInstance()->getEditorLang())
+    ->fetch()['count'];
 
 ?>
 <?php require ROUTES_PATH.'/admin/parts/header.html.php'; ?>
@@ -39,41 +31,41 @@ unset($post);
 
 <div class="row">
     <div class="col-md-12">
-        <div class="simple-box">
-            <?php if (empty($posts)): ?>
-                <?=trans('Nie znaleziono żadnych wpisów w języku: ')?>
+        <div class="simple-box table-responsive">
+            <?php if ($count == 0): ?>
+                <?=trans('Nie znaleziono żadnego wpisu w języku: ')?>
                 <?=render(ROUTES_PATH.'/admin/parts/language.html.php', [
                     'lang' => GC\Staff::getInstance()->getEditorLang(),
                 ])?>
             <?php else: ?>
-                <table class="table vertical-middle" data-table="">
-                    <thead>
-                        <tr>
-                            <th style="width:1px">
-                                <?=trans('Zdjęcie')?>
-                            </th>
-                            <th>
-                                <?=trans('Nazwa wpisu')?>
-                            </th>
-                            <th>
-                                <?=trans('Data i czas publikacji')?>
-                            </th>
-                            <th>
-                                <?=trans('Podziały')?>
-                            </th>
-                            <th class="text-right"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($posts as $post_id => $post): ?>
-                            <?=render(ROUTES_PATH.'/admin/post/list-item.html.php', [
-                                'post_id' => $post_id,
-                                'post' => $post,
-                                'taxonomies' => $taxonomies,
-                            ])?>
-                        <?php endforeach ?>
-                    </tbody>
-                </table>
+                <form action="" method="post" id="form" class="form-horizontal">
+                    <div class="">
+                    <table class="table vertical-middle" data-table="" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th data-name="image"
+                                    data-searchable="0"
+                                    data-sortable="0"></th>
+                                <th data-name="name"
+                                    data-searchable="1"
+                                    data-sortable="1">
+                                    <?=trans('Nazwa wpisu')?>
+                                </th>
+                                <th data-name="slug"
+                                    data-searchable="1"
+                                    data-sortable="1">
+                                    <?=trans('Adres strony wpisu')?>
+                                </th>
+                                <th data-name="options"
+                                    data-searchable="0"
+                                    data-sortable="0"
+                                    class="text-right"></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                </form>
             <?php endif ?>
         </div>
         <?php require ROUTES_PATH.'/admin/parts/input/submitButtons.html.php'; ?>
@@ -83,7 +75,7 @@ unset($post);
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <form id="deleteModalForm" method="post" action="<?=$uri->mask('/delete')?>" class="modal-content">
-            <input name="post_id" type="hidden" value="">
+            <input name="frame_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
@@ -93,8 +85,8 @@ unset($post);
                 </h2>
             </div>
             <div class="modal-body">
-                <?=trans('Czy jesteś pewien, że chcesz usunąć wpis')?>
-                <span id="post_name" style="font-weight:bold; color:red;"></span>?
+                <?=trans('Czy jesteś pewien, że chcesz usunąć produkt')?>
+                <span id="frame_name" style="font-weight:bold; color:red;"></span>?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -108,17 +100,75 @@ unset($post);
     </div>
 </div>
 
+<script id="row-template" type="text/html">
+    <td style="width:64px">
+        <img src="{{image}}" width="64" height="64"/>
+    </td>
+
+    <td>
+        <a href="<?=$uri->mask()?>/{{frame_id}}/edit"
+            title="<?=trans('Edytuj produkt')?>">
+            {{name}}
+        </a>
+    </td>
+
+    <td>
+        <a href="{{href}}"
+            target="_blank"
+            title="<?=trans('Podejrzyj ten produkt')?>">
+            {{slug}}</a>
+    </td>
+
+    <td class="text-right">
+
+        <a href="<?=$uri->mask()?>/{{frame_id}}/module/grid"
+            title="<?=trans('Wyświetl moduły wpisu')?>"
+            class="btn btn-success btn-sm">
+            <i class="fa fa-file-text-o fa-fw"></i>
+            <?=trans('Moduły')?>
+        </a>
+
+        <a data-toggle="modal"
+            data-id="{{frame_id}}"
+            data-name="{{name}}"
+            data-target="#deleteModal"
+            title="<?=trans('Usuń produkt')?>"
+            class="btn btn-danger btn-sm">
+            <i class="fa fa-times fa-fw"></i>
+            <?=trans('Usuń')?>
+        </a>
+    </td>
+</script>
+
 <?php require ROUTES_PATH.'/admin/parts/assets/footer.html.php'; ?>
 
 <script>
     $(function(){
-        $('#deleteModal').on('show.bs.modal', function (event) {
-            $(this).find('#post_name').html($(event.relatedTarget).data('name'));
-            $(this).find('[name="post_id"]').val($(event.relatedTarget).data('id'));
-        });
-        $('[data-table]').DataTable({
-            order: [[2, 'desc']],
+        var rowTemplate = $('#row-template').html();
+        var table = $('[data-table]').DataTable({
+            order: [[1, 'asc']],
             iDisplayLength: <?=$config['dataTable']['iDisplayLength']?>,
+	        processing: true,
+            serverSide: true,
+            searchDelay: 500,
+            autoWidth: false,
+            ajax: {
+                url: '<?=$uri->mask("/xhr-list")?>',
+                type: 'GET'
+            },
+            createdRow: function (row, data, index) {
+                $(row).html(Mustache.render(rowTemplate, data));
+            },
+            columns: [
+                {data: "image"},
+                {data: "name"},
+                {data: "slug"},
+            ],
+        });
+
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            $(this).find('#frame_name').html($(event.relatedTarget).data('name'));
+            $(this).find('[name="frame_id"]').val($(event.relatedTarget).data('id'));
         });
     });
 </script>

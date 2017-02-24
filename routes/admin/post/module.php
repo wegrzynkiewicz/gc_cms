@@ -1,20 +1,21 @@
 <?php
 
-$post = GC\Model\Post\Post::selectWithFrameByPrimaryId($post_id);
-$frame_id = $post['frame_id'];
+require ROUTES_PATH.'/admin/_import.php';
+require ROUTES_PATH.'/admin/page/_import.php';
 
-$headTitle = trans('Moduły w poście: %s', [$post['name']]);
-$uri->extendMask("/{$post_id}/module%s");
+$frame_id = intval(array_shift($_PARAMETERS));
+
+# pobierz stronę po kluczu głównym
+$frame = GC\Model\Frame::select()
+    ->equals('frame_id', $frame_id)
+    ->fetch();
+
+$headTitle = trans('Moduły wpisu: %s', [$frame['name']]);
+$uri->extendMask("/{$frame_id}/module%s");
 $breadcrumbs->push([
-    'uri' => $uri->mask('/list'),
+    'uri' => $uri->mask('/grid'),
     'name' => $headTitle,
 ]);
-
-$getPreviewUrl = function () use ($post_id) {
-    return $uri->make("/post/{$post_id}");
-};
-
-require ROUTES_PATH."/admin/module/_import.php";
 
 $action = array_shift($_SEGMENTS);
 

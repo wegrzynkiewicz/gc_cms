@@ -1,20 +1,33 @@
 <?php
 
-$post = GC\Model\Post\Post::selectWithFrameByPrimaryId($post_id);
+require ROUTES_PATH.'/admin/_import.php';
+require ROUTES_PATH.'/admin/post/_import.php';
 
-GC\Model\Frame::updateByFrameId($post['frame_id'], [
+$frame_id = intval(array_shift($_PARAMETERS));
+
+GC\Model\Frame::updateByFrameId($frame_id, [
     'name' => post('name'),
+    'slug' => normalizeSlug(post('slug')),
     'keywords' => post('keywords'),
     'description' => post('description'),
-    'image' => post('image'),
+    'image' => $uri->relative(post('image')),
 ]);
 
-$relations = isset($_POST['taxonomy']) ? array_unchunk($_POST['taxonomy']) : [];
+# spłaszcz nadesłane przynależności do węzłów taksonomii
+$nodes = array_unchunk(post('taxonomy', []));
 
-GC\Model\Post\Post::update($post_id, [
-    'publication_datetime' => post('publication_datetime'),
-], $relations);
+# usuń wszyskie przynależności wpisu
+GC\Model\Post\Membership::delete()
+    ->equals('frame_id', $frame_id)
+    ->execute();
 
-flashBox(trans('Wpis "%s" został zaktualizowany.', [$post['name']]));
+# wstaw przynależności wpisu do węzłów taksonomii
+foreach ($nodes as $node_id) {
+    GC\Model\Post\Membership::insert([
+        'frame_id' => intval($frame_id),
+        'node_id' => intval($node_id),
+    ]);
+}
 
+flashBox(trans('Produkt "%s" został zaktualizowany.', [post('name')]));
 redirect($breadcrumbs->getLast('uri'));

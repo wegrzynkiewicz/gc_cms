@@ -39,7 +39,7 @@ unset($taxonomy);
     <div class="col-md-12">
         <div class="simple-box">
             <?php if (empty($taxonomies)): ?>
-                <?=trans('Nie znaleziono podziałów wpisów w języku: ')?>
+                <?=trans('Nie znaleziono podziałów produktów w języku: ')?>
                 <?=render(ROUTES_PATH.'/admin/parts/language.html.php', [
                     'lang' => GC\Staff::getInstance()->getEditorLang(),
                 ])?>

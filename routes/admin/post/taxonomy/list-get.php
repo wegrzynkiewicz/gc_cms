@@ -1,10 +1,35 @@
 <?php
 
-$tax_id = intval(array_shift($_PARAMETERS));
+require ROUTES_PATH.'/admin/_import.php';
+require ROUTES_PATH.'/admin/post/_import.php';
+require ROUTES_PATH.'/admin/post/taxonomy/_import.php';
+
+# pobierz wszystkie posortowane taksonomie z języka
 $taxonomies = GC\Model\Post\Taxonomy::select()
     ->equals('lang', GC\Staff::getInstance()->getEditorLang())
-    ->order('name')
+    ->order('name', 'ASC')
     ->fetchByPrimaryKey();
+
+# pobierz wszystkie węzły przygotowane do budowy drzewa
+$nodes = GC\Model\Post\Tree::select()
+    ->fields(['tax_id', 'frame_id', 'parent_id', 'name'])
+    ->source('::nodes')
+    ->order('position', 'ASC')
+    ->fetchAll();
+
+# umieść każdy węzeły dla konkretnych taksonomii
+$taxonomyNodes = [];
+foreach ($nodes as $node) {
+    $taxonomyNodes[$node['tax_id']][] = $node;
+}
+
+# zbuduj drzewa dla konkretnych taksonomii
+foreach ($taxonomies as $tax_id => &$taxonomy) {
+    $taxonomy['tree'] = isset($taxonomyNodes[$tax_id])
+        ? GC\Model\Post\Tree::createTree($taxonomyNodes[$tax_id])
+        : null;
+}
+unset($taxonomy);
 
 ?>
 <?php require ROUTES_PATH.'/admin/parts/header.html.php'; ?>
@@ -23,7 +48,7 @@ $taxonomies = GC\Model\Post\Taxonomy::select()
                     <thead>
                         <tr>
                             <th>
-                                <?=trans('Nazwa podziału')?>
+                                <?=trans('Nazwa podziału wpisu')?>
                             </th>
                             <th>
                                 <?=trans('Podgląd węzłów')?>
@@ -32,12 +57,8 @@ $taxonomies = GC\Model\Post\Taxonomy::select()
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($taxonomies as $tax_id => $taxonomy): ?>
-                            <?=render(ROUTES_PATH.'/admin/post/taxonomy/list-item.html.php', [
-                                'tax_id' => $tax_id,
-                                'taxonomy' => $taxonomy,
-                                'tree' => GC\Model\Post\Node::buildTreeWithFrameByTaxonomyId($tax_id),
-                            ])?>
+                        <?php foreach ($taxonomies as $taxonomy): ?>
+                            <?=render(ROUTES_PATH.'/admin/post/taxonomy/list-item.html.php', $taxonomy)?>
                         <?php endforeach ?>
                     </tbody>
                 </table>

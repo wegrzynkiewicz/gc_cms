@@ -33,7 +33,7 @@ $count = GC\Model\Frame::select()
     <div class="col-md-12">
         <div class="simple-box">
             <?php if ($count == 0): ?>
-                <?=trans('Nie znaleziono żadnej strony w języku: ')?>
+                <?=trans('Nie znaleziono żadnego produktu w języku: ')?>
                 <?=render(ROUTES_PATH.'/admin/parts/language.html.php', [
                     'lang' => GC\Staff::getInstance()->getEditorLang(),
                 ])?>

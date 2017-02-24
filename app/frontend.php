@@ -2,7 +2,7 @@
 
 /** Stara się pobrać odpowiednie rusztowanie */
 
-$slug = $request->uri;
+$slug = $request->slug;
 $method = $request->method;
 
 

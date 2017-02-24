@@ -1,6 +1,14 @@
 <?php
 
-$tree = GC\Model\Post\Node::buildTreeWithFrameByTaxonomyId($tax_id);
+require ROUTES_PATH.'/admin/_import.php';
+require ROUTES_PATH.'/admin/post/_import.php';
+require ROUTES_PATH.'/admin/post/taxonomy/_import.php';
+require ROUTES_PATH.'/admin/post/taxonomy/node/_import.php';
+
+$tree = GC\Model\Post\Tree::select()
+    ->source('::nodes')
+    ->equals('tax_id', $tax_id)
+    ->fetchTree();
 
 ?>
 <?php require ROUTES_PATH.'/admin/parts/header.html.php'; ?>
@@ -27,15 +35,20 @@ $tree = GC\Model\Post\Node::buildTreeWithFrameByTaxonomyId($tax_id);
             <input name="positions" type="hidden"/>
             <?php if ($tree->hasChildren()):?>
                 <ol id="sortable" class="sortable">
-                    <?=render(ROUTES_PATH.'/admin/post/taxonomy/node/tree-node.html.php', [
-                        'tree' => $tree,
-                    ])?>
+                    <?php foreach ($tree->getChildren() as $node): ?>
+                        <?=render(ROUTES_PATH.'/admin/post/taxonomy/node/tree-node.html.php', [
+                            'node' => $node,
+                            'name' => e($node['name']),
+                            'frame_id' => $node['frame_id'],
+                        ])?>
+                    <?php endforeach?>
                 </ol>
             <?php else:?>
                 <div class="simple-box">
                     <?=trans('Brak węzłów w %s', [$taxonomy['name']])?>
                 </div>
             <?php endif?>
+
             <?=render(ROUTES_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => trans('Zapisz pozycję'),
             ])?>
@@ -49,7 +62,7 @@ $tree = GC\Model\Post\Node::buildTreeWithFrameByTaxonomyId($tax_id);
             method="post"
             action="<?=$uri->mask('/delete')?>"
             class="modal-content">
-            <input name="node_id" type="hidden" value="">
+            <input name="frame_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
@@ -78,18 +91,12 @@ $tree = GC\Model\Post\Node::buildTreeWithFrameByTaxonomyId($tax_id);
 <?php require ROUTES_PATH.'/admin/parts/assets/footer.html.php'; ?>
 
 <script>
-    $('#deleteModal').on('show.bs.modal', function (event) {
-        $(this).find('#node_name').html($(event.relatedTarget).data('name'));
-        $(this).find('[name="node_id"]').val($(event.relatedTarget).data('id'));
-    });
-</script>
-
-<script>
 $(function(){
     $('#sortable').nestedSortable({
         handle: 'div',
         items: 'li',
-        toleranceElement: '> div'
+        toleranceElement: '> div',
+        maxLevels: <?=$taxonomy['maxlevels']?>
     });
 
     $("#savePosition").submit(function(event) {
@@ -97,6 +104,10 @@ $(function(){
         $('[name=positions]').val(JSON.stringify(sortabled));
    });
 
+   $('#deleteModal').on('show.bs.modal', function (event) {
+       $(this).find('#node_name').html($(event.relatedTarget).data('name'));
+       $(this).find('[name="frame_id"]').val($(event.relatedTarget).data('id'));
+   });
 });
 </script>
 

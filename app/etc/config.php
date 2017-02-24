@@ -148,6 +148,9 @@ $config = [
         'post' => [
             'name' => 'Wpis',
         ],
+        'post-node' => [ # węzeł podziału wpisu, czyli np Kategoria wpisu
+            'name' => 'Podział wpisu',
+        ],
         'product' => [
             'name' => 'Produkt',
         ],

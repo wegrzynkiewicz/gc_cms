@@ -1,15 +1,10 @@
 <tr>
+    <td><?=e($name)?></td>
     <td>
-        <?=e($taxonomy['name'])?>
-    </td>
-    <td>
-        <?php if ($tree->hasChildren()): ?>
+        <?php if ($tree and $tree->hasChildren()): ?>
             <div style="margin-left:-20px">
-                <?=render(ROUTES_PATH.'/admin/parts/taxonomy-preview.html.php', [
+                <?=render(ROUTES_PATH.'/admin/post/taxonomy/tree-preview.html.php', [
                     'tree' => $tree,
-                    'taxonomyUrl' => function($path) use ($tax_id) {
-                        return $uri->mask("/{$tax_id}/node{$path}");
-                    },
                 ])?>
             </div>
         <?php else: ?>
@@ -18,7 +13,7 @@
     </td>
     <td class="text-right">
         <a href="<?=$uri->mask("/{$tax_id}/node/tree")?>"
-            title="<?=trans('Wyświetl węzły podziału')?>"
+            title="<?=trans('Wyświetl węzły podziału wpisów')?>"
             class="btn btn-success btn-sm">
             <i class="fa fa-file-text-o fa-fw"></i>
             <?=trans('Węzły')?>

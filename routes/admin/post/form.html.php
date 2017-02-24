@@ -1,9 +1,31 @@
 <?php
 
+# pobierz wszystkie posortowane taksonomie z danego języka
 $taxonomies = GC\Model\Post\Taxonomy::select()
     ->equals('lang', GC\Staff::getInstance()->getEditorLang())
-    ->order('name')
+    ->order('name', 'ASC')
     ->fetchByPrimaryKey();
+
+# pobierz wszystkie węzły przygotowane do budowy drzewa
+$nodes = GC\Model\Post\Tree::select()
+    ->fields(['tax_id', 'frame_id', 'parent_id', 'name'])
+    ->source('::nodes')
+    ->order('position', 'ASC')
+    ->fetchAll();
+
+# umieść każdy węzeły dla konkretnych taksonomii
+$taxonomyNodes = [];
+foreach ($nodes as $node) {
+    $taxonomyNodes[$node['tax_id']][] = $node;
+}
+
+# zbuduj drzewa dla konkretnych taksonomii
+foreach ($taxonomies as $tax_id => &$taxonomy) {
+    $taxonomy['tree'] = isset($taxonomyNodes[$tax_id])
+        ? GC\Model\Post\Tree::createTree($taxonomyNodes[$tax_id])
+        : null;
+}
+unset($taxonomy);
 
 ?>
 <?php require ROUTES_PATH.'/admin/parts/header.html.php'; ?>
@@ -16,6 +38,12 @@ $taxonomies = GC\Model\Post\Taxonomy::select()
                 <?=render(ROUTES_PATH.'/admin/parts/input/editbox.html.php', [
                     'name' => 'name',
                     'label' => trans('Nazwa wpisu'),
+                ])?>
+
+                <?=render(ROUTES_PATH.'/admin/parts/input/slug.html.php', [
+                    'name' => 'slug',
+                    'label' => trans('Adres wpisu'),
+                    'help' => trans('Zostaw pusty, aby generować adres na podstawie nazwy'),
                 ])?>
 
                 <?=render(ROUTES_PATH.'/admin/parts/input/editbox.html.php', [
@@ -36,27 +64,20 @@ $taxonomies = GC\Model\Post\Taxonomy::select()
             </div>
 
             <?php foreach ($taxonomies as $tax_id => $taxonomy): ?>
-                <?php $tree = GC\Model\Post\Node::buildTreeWithFrameByTaxonomyId($tax_id) ?>
-                <?php if ($tree->hasChildren()): ?>
+                <?php $tree = $taxonomy['tree']?>
+                <?php if ($tree and $tree->hasChildren()): ?>
                     <div class="simple-box">
                         <?=render(ROUTES_PATH.'/admin/parts/input/checkbox-tree.html.php', [
-                            'tree' => $tree,
-                            'tax_id' => $tax_id,
+                            'id' => $tax_id,
                             'name' => "taxonomy[{$tax_id}]",
                             'label' => $taxonomy['name'],
-                            'help' => "Do jakich węzłów ma należeć ten post?",
+                            'help' => "Do jakich węzłów ma należeć ten wpis?",
                             'checkedValues' => $checkedValues,
+                            'tree' => $tree,
                         ])?>
                     </div>
                 <?php endif ?>
             <?php endforeach ?>
-
-            <div class="simple-box">
-                <?=render(ROUTES_PATH.'/admin/parts/input/datatimepicker.html.php', [
-                    'name' => 'publication_datetime',
-                    'label' => trans('Data publikacji'),
-                ])?>
-            </div>
 
             <?=render(ROUTES_PATH.'/admin/parts/input/submitButtons.html.php', [
                 'saveLabel' => trans('Zapisz wpis'),
@@ -74,18 +95,10 @@ $(function () {
             name: {
                 required: true,
             },
-            publication_datetime: {
-                required: true,
-                date: true,
-            },
         },
         messages: {
             name: {
                 required: "<?=trans('Nazwa wpisu jest wymagana')?>"
-            },
-            publication_datetime: {
-                required: "<?=trans('Data publikacji jest wymagana')?>",
-                date: "<?=trans('Data publikacji musi być prawidłową datą w formacie YYYY-MM-DD HH:MM:SS')?>",
             },
         },
     });
