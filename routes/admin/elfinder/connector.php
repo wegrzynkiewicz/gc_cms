@@ -68,7 +68,7 @@ $normalizer = new GC\Normalizer();
 $path = WEB_PATH.'/uploads';
 
 $opts = array(
-    'debug' => true,
+    'debug' => $config['debug']['enabled'],
     'bind' => array(
         'upload.pre mkdir.pre mkfile.pre rename.pre archive.pre ls.pre' => array(
         	[$normalizer, 'cmdPreprocess']
