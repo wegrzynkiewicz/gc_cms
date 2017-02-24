@@ -106,7 +106,7 @@ $count = GC\Model\Frame::select()
     </td>
 
     <td>
-        <a href="<?=$uri->mask()?>/{{frame_id}}/edit"
+        <a href="{{hrefEdit}}"
             title="<?=trans('Edytuj produkt')?>">
             {{name}}
         </a>
@@ -121,7 +121,7 @@ $count = GC\Model\Frame::select()
 
     <td class="text-right">
 
-        <a href="<?=$uri->mask()?>/{{frame_id}}/module/grid"
+        <a href="{{hrefModule}}"
             title="<?=trans('Wyświetl moduły wpisu')?>"
             class="btn btn-success btn-sm">
             <i class="fa fa-file-text-o fa-fw"></i>

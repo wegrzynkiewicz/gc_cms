@@ -16,11 +16,12 @@ class Request
     public $root = '';
     public $frontController = false;
     public $lang = '';
+    public $extension = '';
     public $query = '';
 
     public $slug = '';
-
     public $mask = '%s';
+    public $defaultExtension = '';
 
     public function __construct()
     {
@@ -34,6 +35,9 @@ class Request
         $this->uri = parse_url(server('REQUEST_URI'), \PHP_URL_PATH);
         $this->query = parse_url(server('REQUEST_URI'), \PHP_URL_QUERY);
 
+        # pobranie domyślnego rozszerzenia z polityki seo
+        $this->defaultExtension = $GLOBALS['config']['seo']['forceDefaultExtension'];
+
         # pobierz wszystkie najistotniejsze informacje o żądaniu
         $rootUri = dirname(server('SCRIPT_NAME'));
         $this->slug = $this->uri;
@@ -46,7 +50,7 @@ class Request
             $this->root = $rootUri;
         }
 
-        # jeżeli ścieżka zawiera front controller, wtedy usuń go
+        # jeżeli adres zawiera front controller, wtedy usuń go
         if (strpos($this->slug, static::FRONT_CONTROLLER_URI) === 0) {
             $this->slug = substr($this->slug, strlen(static::FRONT_CONTROLLER_URI));
             $this->frontController = true;
@@ -59,8 +63,16 @@ class Request
             }
         }
 
-        # slug musi mieć zawsze slasha na początku
-        $this->slug = '/'.trim($this->slug, '/');
+        # pozyskaj rozszerzenie ze sluga
+        $this->extension = pathinfo($this->slug, PATHINFO_EXTENSION);
+
+        # jeżeli adres zawiera rozszerzenie HTML_EXTENSION, wtedy usuń je
+        if ($this->extension === $this->defaultExtension) {
+            $this->slug = substr($this->slug, 0, -strlen($this->defaultExtension));
+        }
+
+        # slug musi mieć zawsze slasha na początku, bez kropek ani myślników
+        $this->slug = '/'.trim($this->slug, '/.-');
     }
 
     /**
@@ -71,9 +83,10 @@ class Request
         $www = $this->www ? 'www.' : '';
         $port = $this->port === 80 ? '' : ":{$this->port}";
         $slug = $this->slug === '/' ? '' : $this->slug;
+        $extension = $this->extension === $this->defaultExtension ? '.'.$this->defaultExtension : '';
         $front = $this->frontController ? static::FRONT_CONTROLLER_URI : '';
 
-        $url = "{$this->protocol}://{$www}{$this->domain}{$port}{$this->root}{$front}{$slug}?{$this->query}";
+        $url = "{$this->protocol}://{$www}{$this->domain}{$port}{$this->root}{$front}{$slug}{$extension}?{$this->query}";
         $url = rtrim($url, '?');
 
         return $url;
@@ -107,13 +120,21 @@ class Request
             $target->port = intval($seo['forcePort']);
         }
 
+        if ($seo['forcePort'] !== null) {
+            $target->port = intval($seo['forcePort']);
+        }
+
+        if ($seo['forceDefaultExtension'] !== null) {
+            $target->extension = $seo['forceDefaultExtension'] ? $seo['forceDefaultExtension'] : '';
+        }
+
         $targetUrl = $target->getUrl();
         $currentUrl = $this->getUrl();
 
         # przekierowanie na prawidłowy adres
         if ($currentUrl !== $targetUrl) {
             logger("[SEO] From: {$currentUrl} To: {$targetUrl}");
-            redirect($targetUrl, 301);  # 301 Moved Permanently
+            redirect($targetUrl, $seo['responseCode']);
         }
     }
 
@@ -173,9 +194,11 @@ class Request
             return $uri;
         }
 
+        $uri = rtrim($this->root.$uri, '/');
         $front = $this->frontController ? static::FRONT_CONTROLLER_URI : '';
+        $extension = $this->extension === $this->defaultExtension ? '.'.$this->defaultExtension : '';
 
-        return $this->root($front.$uri);
+        return $this->root($front.$uri.$extension);
     }
 
     /**

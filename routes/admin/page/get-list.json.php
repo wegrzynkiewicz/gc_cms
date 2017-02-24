@@ -24,12 +24,15 @@ $recordsTotal = intval(GC\Model\Frame::select()
     ->fetch()['count']
 );
 
-# dla każdej strony utwórz miniaturę
+# dla każdego rusztowania utwórz miniaturkę i wygeneruj linki
 foreach ($frames as &$frame) {
+    $frame_id = $frame['frame_id'];
     $image = empty($frame['image'])
         ? $config['noImageUri']
         : $frame['image'];
-    $frame['href'] = $uri->make($frame['slug']);
+    $frame['hrefEdit'] = $uri->mask("/{$frame_id}/edit");
+    $frame['hrefGrid'] = $uri->mask("/{$frame_id}/module/grid");
+    $frame['hrefSlug'] = $uri->make($frame['slug']);
     $frame['image'] = $uri->root(thumbnail($image, 64, 64));
 }
 unset($frame);
