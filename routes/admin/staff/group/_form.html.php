@@ -47,22 +47,4 @@
 </div>
 
 <?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
-
-<script>
-$(function () {
-    $('#form').validate({
-        rules: {
-            name: {
-                required: true
-            }
-        },
-        messages: {
-            name: {
-                required: "<?=trans('Nazwa grupy jest wymagana')?>"
-            }
-        },
-    });
-});
-</script>
-
 <?php require ROUTES_PATH.'/admin/_parts/end.html.php'; ?>

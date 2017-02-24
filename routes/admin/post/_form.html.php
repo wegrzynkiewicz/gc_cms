@@ -96,39 +96,4 @@ unset($taxonomy);
 </div>
 
 <?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
-
-<script>
-$(function () {
-    $('#form').validate({
-        rules: {
-            name: {
-                required: true,
-            },
-            slug: {
-                remote: {
-                    url: "<?=$uri->make('/admin/validate/slug.json')?>",
-                    data: {
-                        frame_id: <?=$frame_id?>,
-                    },
-                },
-            },
-            publication_datetime: {
-                date: true,
-            },
-        },
-        messages: {
-            name: {
-                required: "<?=trans('Nazwa wpisu jest wymagana')?>"
-            },
-            slug: {
-                remote: "<?=trans('Podany adres został już zarezerwowany')?>",
-            },
-            publication_datetime: {
-                date: "<?=trans('Data publikacji jest nieprawidłowa')?>",
-            },
-        },
-    });
-});
-</script>
-
 <?php require ROUTES_PATH.'/admin/_parts/end.html.php'; ?>

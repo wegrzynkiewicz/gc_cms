@@ -46,34 +46,4 @@ $groupOptions = GC\Model\Staff\Group::select()
 </div>
 
 <?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
-
-<script>
-$(function () {
-    $('#form').validate({
-        rules: {
-            name: {
-                required: true,
-            },
-            email: {
-                email: true,
-                required: true,
-                remote: {
-                    url: "<?=$uri->make("/admin/validate/staff.json-email/{$staff_id}")?>",
-                },
-            },
-        },
-        messages: {
-            name: {
-                required: "<?=trans('Imię i nazwisko jest wymagane')?>",
-            },
-            email: {
-                email: "<?=trans('Adres E-mail nie jest prawidłowy')?>",
-                required: "<?=trans('Adres E-mail jest wymagany')?>",
-                remote: "<?=trans('Adres E-mail jest już wykorzystywany')?>",
-            },
-        },
-    });
-});
-</script>
-
 <?php require ROUTES_PATH.'/admin/_parts/end.html.php'; ?>

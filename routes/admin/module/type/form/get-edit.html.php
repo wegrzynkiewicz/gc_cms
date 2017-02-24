@@ -58,22 +58,4 @@ $_POST['form'] = $content;
 </div>
 
 <?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
-
-<script>
-$(function () {
-    $('#form').validate({
-        rules: {
-            form: {
-                required: true,
-            },
-        },
-        messages: {
-            form: {
-                required: "<?=trans('Musisz wybrać formularz')?>",
-            },
-        },
-    });
-});
-</script>
-
 <?php require ROUTES_PATH.'/admin/_parts/end.html.php'; ?>

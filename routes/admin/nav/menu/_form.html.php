@@ -41,30 +41,10 @@
 
 <script>
 $(function() {
-
     $('#type').change(function() {
         $.get("<?=$uri->mask('/type')?>/"+$(this).val(), function(data) {
             $('#nodeType').html(data);
         });
-    });
-
-    $('#form').validate({
-        rules: {
-            type: {
-                required: true
-            },
-            destination: {
-                required: true
-            }
-        },
-        messages: {
-            type: {
-                required: "<?=trans('Wybierz typ węzła')?>"
-            },
-            destination: {
-                required: "<?=trans('Podaj gdzie ma kierować węzeł')?>"
-            }
-        },
     });
 });
 </script>

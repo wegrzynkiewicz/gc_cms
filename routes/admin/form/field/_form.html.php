@@ -49,35 +49,4 @@
 </div>
 
 <?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
-
-<script>
-$(function() {
-
-    $('#type').change(function() {
-        $.get("<?=$uri->mask('/type')?>/"+$(this).val(), function(data) {
-            $('#fieldType').html(data);
-        });
-    });
-
-    $('#form').validate({
-        rules: {
-            name: {
-                required: true
-            },
-            type: {
-                required: true
-            }
-        },
-        messages: {
-            name: {
-                required: "<?=trans('Nazwa pola jest wymagana')?>"
-            },
-            type: {
-                required: "<?=trans('Wybierz typ pola formularza')?>"
-            }
-        },
-    });
-});
-</script>
-
 <?php require ROUTES_PATH.'/admin/_parts/end.html.php'; ?>

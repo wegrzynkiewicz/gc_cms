@@ -50,24 +50,5 @@ $headTitle = trans('Zapomniałem hasła');
 
 <?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
 
-<script>
-$(function () {
-    $('#form').validate({
-        rules: {
-            login: {
-                required: true,
-                email: true
-            }
-        },
-        messages: {
-            login: {
-                required: "<?=trans('Wprowadź adres e-mail')?>",
-                email: "<?=trans('Adres e-mail jest nieprawidłowy')?>"
-            }
-        },
-    });
-});
-</script>
-
 </body>
 </html>

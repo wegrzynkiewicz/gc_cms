@@ -86,10 +86,11 @@ DROP TABLE IF EXISTS `gc_frames`;
 CREATE TABLE `gc_frames` (
   `frame_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
-  `type` varchar(32) NOT NULL,
-  `theme` varchar(32) NOT NULL,
+  `type` varchar(16) NOT NULL,
+  `theme` varchar(16) NOT NULL,
   `lang` varchar(2) NOT NULL,
-  `hidden` tinyint(3) unsigned NOT NULL,
+  `visibility` varchar(16) NOT NULL,
+  `lock` varchar(16) NOT NULL,
   `slug` tinytext NOT NULL,
   `image` tinytext NOT NULL,
   `keywords` text NOT NULL,
@@ -419,4 +420,4 @@ CREATE TABLE `gc_widgets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
--- 2017-02-24 20:14:41
+-- 2017-02-24 21:03:38

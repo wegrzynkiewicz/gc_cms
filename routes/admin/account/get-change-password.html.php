@@ -56,38 +56,4 @@ $_POST = [];
 </div>
 
 <?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
-
-<script>
-$(function () {
-    $('#form').validate({
-        rules: {
-            old_password: {
-                required: true
-            },
-            new_password: {
-                required: true,
-                minlength : <?=$config['password']['minLength']?>
-            },
-            confirm_password: {
-                required: true,
-                equalTo: "#new_password"
-            }
-        },
-        messages: {
-            old_password: {
-                required: "<?=trans('Stare hasło jest wymagane')?>"
-            },
-            new_password: {
-                required: "<?=trans('Wprowadź nowe hasło')?>",
-                minlength: "<?=trans('Nowe hasło powinno mieć przynajmniej %s znaków', [$config['password']['minLength']])?>"
-            },
-            confirm_password: {
-                required: "<?=trans('Musisz powtórzyć swoje nowe hasło dla bezpieczeństwa')?>",
-                equalTo: "<?=trans('Hasła nie są jednakowe')?>"
-            }
-        },
-    });
-});
-</script>
-
 <?php require ROUTES_PATH.'/admin/_parts/end.html.php'; ?>

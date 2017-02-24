@@ -102,47 +102,4 @@ unset($frame);
     });
 </script>
 
-<script>
-    $(function () {
-        $('#form').validate({
-            rules: {
-                name: {
-                    required: true,
-                },
-                type: {
-                    required: true,
-                },
-                countdown: {
-                    number: true,
-                },
-                show_after_datetime: {
-                    date: true,
-                },
-                hide_after_datetime: {
-                    date: true,
-                    greaterThan: '#show_after_datetime',
-                },
-            },
-            messages: {
-                name: {
-                    required: "<?=trans('Nazwa wyskakującego okienka jest wymagana')?>",
-                },
-                type: {
-                    required: "<?=trans('Typ wyskakującego okienka jest wymagany')?>",
-                },
-                countdown: {
-                    number: "<?=trans('Proszę podać czas w sekundach')?>",
-                },
-                show_after_datetime: {
-                    date: "<?=trans('Data nie jest prawidłowa. Użyj formatu YYYY-MM-DD HH:MM:SS')?>",
-                },
-                hide_after_datetime: {
-                    date: "<?=trans('Data nie jest prawidłowa. Użyj formatu YYYY-MM-DD HH:MM:SS')?>",
-                    greaterThan: "<?=trans('Data zakończenia wyświetlania musi być większa niż data rozpoczęcia')?>",
-                },
-            },
-        });
-    });
-</script>
-
 <?php require ROUTES_PATH.'/admin/_parts/end.html.php'; ?>

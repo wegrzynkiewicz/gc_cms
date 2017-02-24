@@ -63,32 +63,5 @@ if (!isset($meta['regenerationVerifyHash'])) {
 
 <?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
 
-<script>
-$(function () {
-    $('#form').validate({
-        rules: {
-            new_password: {
-                required: true,
-                minlength : <?=e($config['password']['minLength'])?>
-            },
-            confirm_password: {
-                required: true,
-                equalTo: "#new_password"
-            }
-        },
-        messages: {
-            new_password: {
-                required: "<?=trans('Wprowadź nowe hasło')?>",
-                minlength: "<?=trans('Nowe hasło powinno mieć przynajmniej %s znaków', [$config['password']['minLength']])?>"
-            },
-            confirm_password: {
-                required: "<?=trans('Musisz powtórzyć swoje nowe hasło dla bezpieczeństwa')?>",
-                equalTo: "<?=trans('Hasła nie są jednakowe')?>"
-            }
-        },
-    });
-});
-</script>
-
 </body>
 </html>
