@@ -9,8 +9,7 @@
         <select
             id="<?=$name?>"
             name="<?=$name?>"
-            class="form-control input"
-            type="text">
+            class="form-control input">
 
             <?php if (isset($firstOption)): ?>
                 <option value="" disabled="disabled" <?=selected('' == $selectValue)?>>

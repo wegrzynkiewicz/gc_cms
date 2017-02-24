@@ -17,7 +17,7 @@ $_POST = [];
 
 <div class="row">
     <div class="col-lg-12">
-        <form action="" method="post" id="form" class="form-horizontal">
+        <form action="<?=$request->uri?>" method="post" id="form" class="form-horizontal">
             <div class="simple-box">
                 <?php if (isset($error)): ?>
                     <div class="text-danger text-center">

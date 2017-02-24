@@ -2,6 +2,8 @@
 
 /* Plik ładowany przed każdą akcją w panelu admina */
 
+$_SESSION['staff']['staff_id'] = 1;
+
 # utworzenie obiektu repezentującego pracownika
 GC\Staff::getInstance();
 

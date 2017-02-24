@@ -11,7 +11,7 @@ $breadcrumbs->push([
 
 <div class="row">
     <div class="col-lg-12">
-        <form action="" method="post" class="form-horizontal">
+        <form action="<?=$request->uri?>" method="post" class="form-horizontal">
 
             <div class="simple-box">
                 <?=render(ROUTES_PATH.'/admin/_parts/input/image.html.php', [

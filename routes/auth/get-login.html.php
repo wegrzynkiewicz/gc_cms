@@ -22,7 +22,7 @@ $headTitle = trans('Logowanie do panelu administracyjnego');
                         </h3>
                     </div>
                     <div class="panel-body">
-                        <form action="" method="post" class="form-horizontal">
+                        <form action="<?=$request->uri?>" method="post" class="form-horizontal">
 
                             <?php if(isset($error)): ?>
                                 <p class="text-danger text-center" style="margin-bottom:20px">

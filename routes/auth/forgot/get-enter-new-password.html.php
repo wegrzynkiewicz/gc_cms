@@ -30,7 +30,7 @@ if (!isset($meta['regenerationVerifyHash'])) {
                         </h3>
                     </div>
                     <div class="panel-body">
-                        <form action="" method="post" class="form-horizontal">
+                        <form action="<?=$request->uri?>" method="post" class="form-horizontal">
 
                             <p class="text-center">
                                 <?=trans('Weryfikacja adresu email przebiegła pomyślnie. Możesz zmienić swoje hasło.')?>

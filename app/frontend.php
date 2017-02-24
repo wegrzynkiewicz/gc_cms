@@ -71,7 +71,6 @@ if ($frame['slug'] == '/' and $file = $getTemplateFile('homepage', $theme)) {
 }
 
 # jeżeli istnieje plik rusztowania w folderze z szablonem
-$file = TEMPLATE_PATH."/frames/{$frame_type}.html.php";
 if ($file = $getTemplateFile("frames/{$frame_type}", $theme)) {
     logger("[FRONTEND] Frame {$frame_type} {$file}");
     return require $file;

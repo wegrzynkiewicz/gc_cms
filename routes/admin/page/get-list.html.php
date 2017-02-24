@@ -38,7 +38,7 @@ $count = GC\Model\Frame::select()
                     'lang' => GC\Staff::getInstance()->getEditorLang(),
                 ])?>
             <?php else: ?>
-                <form action="" method="post" id="form" class="form-horizontal">
+                <form action="<?=$request->uri?>" method="post" id="form" class="form-horizontal">
                     <table class="table vertical-middle" data-table="" style="width:100%">
                         <thead>
                             <tr>
@@ -111,7 +111,7 @@ $count = GC\Model\Frame::select()
     </td>
 
     <td>
-        <a href="{{href_slug}}"
+        <a href="{{hrefSlug}}"
             target="_blank"
             title="<?=trans('Podejrzyj tą stronę')?>">
             {{slug}}</a>

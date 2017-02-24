@@ -11,7 +11,7 @@ $breadcrumbs->push([
 
 <div class="row">
     <div class="col-lg-12">
-        <form action="" method="post" class="form-horizontal">
+        <form action="<?=$request->uri?>" method="post" class="form-horizontal">
             <h3><?=trans('Dostępne moduły')?></h3>
             <div class="row">
                 <?php foreach ($config['modules'] as $type => $module): ?>

@@ -40,7 +40,7 @@ $_POST = $message;
 
 <div class="row">
     <div class="col-lg-12">
-        <form action="" method="post" id="form" class="form-horizontal">
+        <form action="<?=$request->uri?>" method="post" id="form" class="form-horizontal">
 
             <h3><?=trans('Treść formularza')?></h3>
             <table class="table table-bordered vertical-middle simple-box">

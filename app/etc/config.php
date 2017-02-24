@@ -35,7 +35,7 @@ ini_set('error_log', TEMP_PATH.'/logs/'.date('Y-m-d').'.error.log'); # zmienia �
 ini_set('max_execution_time', 300); # określa maksymalny czas trwania skryptu
 ini_set('date.timezone', 'Europe/Warsaw'); # ustawienie domyślnej strefy czasowej
 ini_set('session.gc_maxlifetime', 3600); # ustaw, aby usuwać sesje starsze niż (w sekundach)
-ini_set('session.gc_probability', 10); # częstotliwość z jaką następuje czyszczenie sesji
+ini_set('session.gc_probability', 20); # częstotliwość z jaką następuje czyszczenie sesji
 ini_set('session.use_trans_sid', 0);
 ini_set('session.use_strict_mode', 1);
 ini_set('session.cookie_httponly', 1); # ustawia ciastko tylko do odczytu, nie jest możliwe odczyt document.cookie w js

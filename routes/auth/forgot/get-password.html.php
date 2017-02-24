@@ -18,7 +18,7 @@ $headTitle = trans('Zapomniałem hasła');
                         </h3>
                     </div>
                     <div class="panel-body">
-                        <form action="" method="post" class="form-horizontal">
+                        <form action="<?=$request->uri?>" method="post" class="form-horizontal">
 
                             <p class="text-center" style="margin-bottom:20px">
                                 <?=trans('Na wprowadzony poniżej adres email zostanie wysłane nowe hasło')?>

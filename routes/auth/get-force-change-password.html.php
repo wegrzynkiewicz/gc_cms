@@ -19,7 +19,7 @@ $_POST = [];
                         </h3>
                     </div>
                     <div class="panel-body">
-                        <form action="" method="post" id="form" class="form-horizontal">
+                        <form action="<?=$request->uri?>" method="post" id="form" class="form-horizontal">
 
                             <?php if (isset($error)): ?>
                                 <p class="text-danger text-center">
