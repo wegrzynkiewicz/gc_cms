@@ -398,19 +398,9 @@ function normalizePath($path)
 }
 
 /**
- * Funkcja przekierowuje na adres obowiązujący wewnątrz aplikacji
+ * Funkcja przekierowuje na odwiedzającego na adres
  */
 function redirect($location, $code = 303)
-{
-    $uri = $GLOBALS['uri']->relative($location);
-    $uri = $GLOBALS['uri']->make($uri);
-    absoluteRedirect($uri, $code);
-}
-
-/**
- * Funkcja przekierowuje na zewnętrzny adres. Ustawia nagłówki i kod odpowiedzi
- */
-function absoluteRedirect($location, $code = 303)
 {
     http_response_code($code);
     header("Location: {$location}");

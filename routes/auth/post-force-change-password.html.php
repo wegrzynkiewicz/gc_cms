@@ -14,4 +14,4 @@ GC\Model\Staff\Staff::updateByPrimaryId($staff_id, [
 ]);
 
 flashBox(trans('Twoje hasło zostało zmienione.'));
-redirect('/admin');
+redirect($uri->make('/admin'));

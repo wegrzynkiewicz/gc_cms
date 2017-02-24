@@ -113,7 +113,7 @@ class Request
         # przekierowanie na prawidłowy adres
         if ($currentUrl !== $targetUrl) {
             logger("[SEO] From: {$currentUrl} To: {$targetUrl}");
-            absoluteRedirect($targetUrl, 301);  # 301 Moved Permanently
+            redirect($targetUrl, 301);  # 301 Moved Permanently
         }
     }
 

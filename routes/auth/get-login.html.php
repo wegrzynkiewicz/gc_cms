@@ -3,7 +3,7 @@
 require ROUTES_PATH.'/auth/_import.php';
 
 if (isset($_SESSION['staff'])) {
-    redirect('/admin');
+    redirect($uri->make('/admin'));
 }
 
 $headTitle = trans('Logowanie do panelu administracyjnego');

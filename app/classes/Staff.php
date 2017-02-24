@@ -50,7 +50,7 @@ class Staff extends AbstractEntity
 
         # jezeli istnieje flaga, ze trzeba zmienić hasło wtedy przekieruj
         if ($this->getProperty('force_change_password', false)) {
-            redirect('/auth/force-change-password');
+            redirect($uri->make('/auth/force-change-password'));
         }
 
         logger('[STAFF] Authenticated', [$this->getProperty('name', 'Unnamed')]);
@@ -99,7 +99,7 @@ class Staff extends AbstractEntity
         if (!$this->hasPermissions($permissions)) {
             logger('[DENY] Not authorized', $permissions);
             $perm = count($permissions) > 0 ? array_shift($permissions) : 'default';
-            redirect("/admin/account/deny/{$perm}");
+            redirect($uri->make("/admin/account/deny/{$perm}"));
         }
     }
 

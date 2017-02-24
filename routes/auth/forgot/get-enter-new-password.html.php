@@ -13,7 +13,7 @@ $meta = GC\Model\Staff\Meta::fetchMeta($staff_id);
 # jeżeli regeneracja jest nieaktualna wtedy przekieruj
 if (!isset($meta['regenerationVerifyHash'])) {
     unset($_SESSION['staff']);
-    redirect('/login');
+    redirect($uri->make('/login'));
 }
 
 ?>

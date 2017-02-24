@@ -3,7 +3,7 @@
 require ROUTES_PATH.'/auth/_import.php';
 
 if (isset($_SESSION['staff'])) {
-    redirect('/admin');
+    redirect($uri->make('/admin'));
 }
 
 $password = post('password');
@@ -24,4 +24,4 @@ if (!$user or !password_verify($password, $user['password'])) {
 $_SESSION['staff']['staff_id'] = $user['staff_id'];
 
 GC\Storage\Backup::make(sprintf('Po zalogowaniu użytkownika %s', $user['name']));
-redirect('/admin');
+redirect($uri->make('/admin'));

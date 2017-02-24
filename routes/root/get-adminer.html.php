@@ -6,5 +6,5 @@ if ($config['debug']['enabled']) {
         'server' => $config['database']['host'],
         'username' => $config['database']['username'],
     ]);
-    absoluteRedirect("/vendor/vrana/adminer/adminer/index.php?{$query}");
+    redirect("/vendor/vrana/adminer/adminer/index.php?{$query}");
 }

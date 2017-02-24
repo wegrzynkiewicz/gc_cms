@@ -39,4 +39,4 @@ $mail->buildTemplate(
 $mail->addAddress($user['email']);
 $mail->send();
 
-redirect('/auth/forgot/link-sent');
+redirect($uri->make('/auth/forgot/link-sent'));

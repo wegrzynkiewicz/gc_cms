@@ -40,7 +40,7 @@ $validate = function() use ($_SEGMENTS)
 };
 
 if ($validate() === true) {
-    redirect('/auth/forgot/enter-new-password');
+    redirect($uri->make('/auth/forgot/enter-new-password'));
 }
 
 $headTitle = trans('Wystąpił problem podczas resetowia hasła');

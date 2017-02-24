@@ -17,4 +17,4 @@ GC\Model\Staff\Meta::deleteMeta($staff_id, [
 ]);
 
 flashBox(trans('Zostałeś zalogowany, a Twoje hasło zostało zresetowane.'));
-redirect('/admin');
+redirect($uri->make('/admin'));
