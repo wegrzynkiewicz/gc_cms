@@ -113,7 +113,7 @@ $count = GC\Model\Frame::select()
     </td>
 
     <td>
-        <a href="{{href}}"
+        <a href="{{hrefSlug}}"
             target="_blank"
             title="<?=trans('Podejrzyj ten produkt')?>">
             {{slug}}</a>

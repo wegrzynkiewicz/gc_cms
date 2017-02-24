@@ -35,7 +35,7 @@
                     window.close();
                 },
                 resizable: false,
-                url: '<?=$uri->make('/admin/elfinder/connector')?>',
+                url: '<?=$uri->make($config['elfinder']['uri'])?>',
                 lang: '<?=getVisitorLang()?>',
             }).elfinder('instance');
         });

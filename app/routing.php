@@ -24,7 +24,7 @@ $findRoutingFile = function ($path, $name) use ($method)
 
     foreach ($files as $file) {
         if (file_exists($file)) {
-            logger('[ROUTING]'.relativePath($file));
+            logger('[ROUTING] '.relativePath($file));
 
             return $file;
         }

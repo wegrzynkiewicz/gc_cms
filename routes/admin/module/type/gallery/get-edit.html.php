@@ -259,7 +259,7 @@ $(function() {
 
     $('#select_images').elfinderInputMultiple({
         title: '<?=trans('Wybierz wiele zdjęć')?>',
-        url: '<?=$uri->make('/admin/elfinder/connector')?>',
+        url: '<?=$uri->make($config['elfinder']['uri'])?>',
         lang: '<?=getVisitorLang()?>',
     }, function(urls) {
         $.post(addUri, {

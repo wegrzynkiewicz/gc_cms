@@ -124,8 +124,8 @@ class Request
             $target->port = intval($seo['forcePort']);
         }
 
-        if ($seo['forceDefaultExtension'] !== null) {
-            $target->extension = $seo['forceDefaultExtension'] ? $seo['forceDefaultExtension'] : '';
+        if ($seo['forceDefaultExtension'] !== null and empty($target->extension)) {
+            $target->extension = $seo['forceDefaultExtension'];
         }
 
         $targetUrl = $target->getUrl();
@@ -196,9 +196,12 @@ class Request
 
         $uri = rtrim($this->root.$uri, '/');
         $front = $this->frontController ? static::FRONT_CONTROLLER_URI : '';
-        $extension = $this->extension === $this->defaultExtension ? '.'.$this->defaultExtension : '';
 
-        return $this->root($front.$uri.$extension);
+        $extension = pathinfo($uri, PATHINFO_EXTENSION);
+        $extension = empty($extension) ? '.'.$this->defaultExtension : '';
+        $uri = trim($front.$uri.$extension, '.');
+
+        return $this->root($uri);
     }
 
     /**

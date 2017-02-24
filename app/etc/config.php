@@ -74,7 +74,7 @@ $config = [
         'forcePort' => null,
         # null jeżeli możliwość wejścia z i bez rozszerzenia, jeżeli takiego nie podano,
         # wartość logiczna, nakazuje przekierowywanie na rozszerzenie .html jeżeli nie jest ono podane
-        'forceDefaultExtension' => 'php',
+        'forceDefaultExtension' => null,
     ],
     'adminNavbarTitle' => 'Panel Administracyjny', # wyświetlana w prawym gornym rogu panelu admina
     'adminHeadTitleBase' => 'Acme Panel Administracyjny', # nazwa doklejana do <title> strony w panelu admina
@@ -270,6 +270,9 @@ $config = [
     ],
     'rewrites' => [ # zawiera niestandardowe przekierowania $regex => $destination
         '~^/old-service/index\.php\?id=(\d+)\&theme=([a-z]+?)$~' => '/old-service/$1/$2',
+    ],
+    'elfinder' => [ # ustwienia dotyczące elfindera
+        'uri' => '/admin/elfinder/connector.json', # adres connectora
     ],
     'dump' => [ # zawiera informacje dla eksportera bazy danych
         'path' => STORAGE_PATH.'/dumps/'.date('Y-m'), # ścieżka do katalogu z rzutami bazy danych
