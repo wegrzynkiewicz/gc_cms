@@ -74,7 +74,7 @@ foreach ($permissions as $permission) {
                     </thead>
                     <tbody>
                         <?php foreach ($users as $user): ?>
-                            <?=render(ROUTES_PATH.'/admin/staff/list-item.html.php', $user)?>
+                            <?=render(ROUTES_PATH.'/admin/staff/_list-item.html.php', $user)?>
                         <?php endforeach ?>
                     </tbody>
                 </table>

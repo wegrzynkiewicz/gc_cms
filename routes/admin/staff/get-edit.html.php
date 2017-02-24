@@ -40,4 +40,4 @@ $_POST = $user;
 </div>
 
 <?php require ROUTES_PATH.'/admin/parts/breadcrumbs.html.php'; ?>
-<?php require ROUTES_PATH.'/admin/staff/form.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/staff/_form.html.php'; ?>

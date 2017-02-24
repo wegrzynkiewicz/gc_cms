@@ -16,6 +16,6 @@ $breadcrumbs->push([
 
 $_POST = $field;
 $type = $field['type'];
-$fieldType = render(ROUTES_PATH."/admin/form/field/types/{$type}-get.php", $field);
+$fieldType = render(ROUTES_PATH."/admin/form/field/type/{$type}-get.php", $field);
 
-require ROUTES_PATH.'/admin/form/field/form.html.php';
+require ROUTES_PATH.'/admin/form/field/_form.html.php';

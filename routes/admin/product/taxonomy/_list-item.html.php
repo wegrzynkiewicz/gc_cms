@@ -3,7 +3,7 @@
     <td>
         <?php if ($tree and $tree->hasChildren()): ?>
             <div style="margin-left:-20px">
-                <?=render(ROUTES_PATH.'/admin/product/taxonomy/tree-preview.html.php', [
+                <?=render(ROUTES_PATH.'/admin/product/taxonomy/_tree-preview.html.php', [
                     'tree' => $tree,
                 ])?>
             </div>

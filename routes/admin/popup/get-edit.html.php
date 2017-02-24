@@ -22,4 +22,4 @@ $selectedFrames = GC\Model\PopUp\Display::select()
 $_POST = $popup;
 $popupType = $popup['type'];
 
-require ROUTES_PATH.'/admin/popup/form.html.php';
+require ROUTES_PATH.'/admin/popup/_form.html.php';

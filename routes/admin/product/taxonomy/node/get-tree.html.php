@@ -36,7 +36,7 @@ $tree = GC\Model\Product\Tree::select()
             <?php if ($tree->hasChildren()):?>
                 <ol id="sortable" class="sortable">
                     <?php foreach ($tree->getChildren() as $node): ?>
-                        <?=render(ROUTES_PATH.'/admin/product/taxonomy/node/tree-node.html.php', [
+                        <?=render(ROUTES_PATH.'/admin/product/taxonomy/node/_tree-node.html.php', [
                             'node' => $node,
                             'name' => e($node['name']),
                             'frame_id' => $node['frame_id'],

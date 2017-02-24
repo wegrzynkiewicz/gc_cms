@@ -10,4 +10,4 @@ $breadcrumbs->push([
 ]);
 $permissions = [];
 
-require ROUTES_PATH.'/admin/staff/group/form.html.php';
+require ROUTES_PATH.'/admin/staff/group/_form.html.php';

@@ -22,4 +22,4 @@ $permissions = GC\Model\Staff\Permission::select()
     ->equals('group_id', $group_id)
     ->fetchByMap('name', 'name');
 
-require ROUTES_PATH.'/admin/staff/group/form.html.php';
+require ROUTES_PATH.'/admin/staff/group/_form.html.php';

@@ -6,7 +6,7 @@ require ROUTES_PATH.'/admin/dump/_import.php';
 $dumps = GC\Model\Dump::select()
     ->order('creation_datetime', 'DESC')
     ->fetchByPrimaryKey();
-    
+
 ?>
 <?php require ROUTES_PATH.'/admin/parts/header.html.php'; ?>
 
@@ -45,7 +45,7 @@ $dumps = GC\Model\Dump::select()
                     </thead>
                     <tbody>
                         <?php foreach ($dumps as $dump_id => $dump): ?>
-                            <?=render(ROUTES_PATH.'/admin/dump/list-item.html.php', [
+                            <?=render(ROUTES_PATH.'/admin/dump/_list-item.html.php', [
                                 'dump_id' => $dump_id,
                                 'dump' => $dump,
                             ])?>

@@ -30,7 +30,7 @@ GC\Model\Staff\Meta::updateMeta($user['staff_id'], [
 # wyślij maila z linkiem weryfikującym
 $mail = new GC\Mail();
 $mail->buildTemplate(
-    ROUTES_PATH.'/auth/forgot/regeneration.email.html.php',
+    ROUTES_PATH.'/auth/forgot/_email-regeneration.html.php',
     ROUTES_PATH.'/admin/parts/email/styles.css', [
         'name' => $user['name'],
         'regenerateUrl' => $regenerateUrl,

@@ -43,7 +43,7 @@
 $(function() {
 
     $('#type').change(function() {
-        $.get("<?=$uri->mask('/types')?>/"+$(this).val(), function(data) {
+        $.get("<?=$uri->mask('/type')?>/"+$(this).val(), function(data) {
             $('#nodeType').html(data);
         });
     });

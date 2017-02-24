@@ -58,7 +58,7 @@ foreach ($groupPermissions as $permission) {
                     </thead>
                     <tbody>
                         <?php foreach ($groups as $group): ?>
-                            <?=render(ROUTES_PATH.'/admin/staff/group/list-item.html.php', $group)?>
+                            <?=render(ROUTES_PATH.'/admin/staff/group/_list-item.html.php', $group)?>
                         <?php endforeach ?>
                     </tbody>
                 </table>

@@ -20,6 +20,6 @@ $breadcrumbs->push([
 
 $_POST = $node;
 $type = $node['type'];
-$nodeType = render(ROUTES_PATH."/admin/nav/menu/types/{$type}.php", $node->getData());
+$nodeType = render(ROUTES_PATH."/admin/nav/menu/type/{$type}.php", $node->getData());
 
-require ROUTES_PATH.'/admin/nav/menu/form.html.php';
+require ROUTES_PATH.'/admin/nav/menu/_form.html.php';

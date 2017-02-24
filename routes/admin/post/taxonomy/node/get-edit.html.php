@@ -20,4 +20,4 @@ $breadcrumbs->push([
 
 $_POST = $node;
 
-require ROUTES_PATH.'/admin/post/taxonomy/node/form.html.php';
+require ROUTES_PATH.'/admin/post/taxonomy/node/_form.html.php';

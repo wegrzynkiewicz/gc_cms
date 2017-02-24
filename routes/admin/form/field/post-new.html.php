@@ -26,7 +26,7 @@ GC\Model\Form\Position::insert([
 
 # wykonaj indywidualną akcję dla innego typu pola formularza
 $type = post('type');
-require ROUTES_PATH."/admin/form/field/types/{$type}-post.php";
+require ROUTES_PATH."/admin/form/field/type/{$type}-post.php";
 
 flashBox(trans('Pole "%s" zostało utworzone.', [post('name')]));
 redirect($breadcrumbs->getLast('uri'));

@@ -10,4 +10,4 @@ $breadcrumbs->push([
 
 $frame_id = 0;
 
-require ROUTES_PATH.'/admin/page/form.html.php';
+require ROUTES_PATH.'/admin/page/_form.html.php';

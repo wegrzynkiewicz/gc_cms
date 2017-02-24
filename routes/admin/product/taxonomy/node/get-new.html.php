@@ -10,4 +10,4 @@ $breadcrumbs->push([
     'name' => $headTitle,
 ]);
 
-require ROUTES_PATH.'/admin/product/taxonomy/node/form.html.php';
+require ROUTES_PATH.'/admin/product/taxonomy/node/_form.html.php';

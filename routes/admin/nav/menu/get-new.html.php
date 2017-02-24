@@ -11,4 +11,4 @@ $breadcrumbs->push([
 
 $refreshUrl = $uri->mask("/edit-views");
 
-require ROUTES_PATH.'/admin/nav/menu/form.html.php';
+require ROUTES_PATH.'/admin/nav/menu/_form.html.php';

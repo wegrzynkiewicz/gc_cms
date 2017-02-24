@@ -23,4 +23,4 @@ $checkedValues = array_keys(GC\Model\Post\Membership::select()
     ->equals('frame_id', $frame_id)
     ->fetchByMap('node_id', 'node_id'));
 
-require ROUTES_PATH.'/admin/post/form.html.php';
+require ROUTES_PATH.'/admin/post/_form.html.php';

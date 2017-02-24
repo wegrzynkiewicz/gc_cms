@@ -36,7 +36,7 @@ $counts = GC\Model\Form\Sent::select()
                     </thead>
                     <tbody>
                         <?php foreach ($forms as $form_id => $form): ?>
-                            <?=render(ROUTES_PATH.'/admin/form/list-item.html.php', [
+                            <?=render(ROUTES_PATH.'/admin/form/_list-item.html.php', [
                                 'form_id' => $form_id,
                                 'form' => $form,
                                 'counts' => $counts,

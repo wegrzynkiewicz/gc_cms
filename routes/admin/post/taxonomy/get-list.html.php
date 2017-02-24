@@ -58,7 +58,7 @@ unset($taxonomy);
                     </thead>
                     <tbody>
                         <?php foreach ($taxonomies as $taxonomy): ?>
-                            <?=render(ROUTES_PATH.'/admin/post/taxonomy/list-item.html.php', $taxonomy)?>
+                            <?=render(ROUTES_PATH.'/admin/post/taxonomy/_list-item.html.php', $taxonomy)?>
                         <?php endforeach ?>
                     </tbody>
                 </table>

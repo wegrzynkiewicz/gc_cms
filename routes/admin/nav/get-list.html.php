@@ -53,7 +53,7 @@ unset($nav);
                     </thead>
                     <tbody>
                         <?php foreach ($navs as $nav_id => $nav): ?>
-                            <?=render(ROUTES_PATH.'/admin/nav/list-item.html.php', $nav)?>
+                            <?=render(ROUTES_PATH.'/admin/nav/_list-item.html.php', $nav)?>
                         <?php endforeach ?>
                     </tbody>
                 </table>

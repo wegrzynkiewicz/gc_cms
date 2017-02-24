@@ -41,7 +41,7 @@ $fields = GC\Model\Form\Field::select()
                 <input name="positions" type="hidden"/>
                 <ol id="sortable" class="sortable">
                     <?php foreach ($fields as $field_id => $field): ?>
-                        <?=render(ROUTES_PATH.'/admin/form/field/list-item.html.php', $field)?>
+                        <?=render(ROUTES_PATH.'/admin/form/field/_list-item.html.php', $field)?>
                     <?php endforeach?>
                 </ol>
             <?php endif?>

@@ -11,4 +11,4 @@ $breadcrumbs->push([
 # wartości do jakich węzłów należy produkt
 $checkedValues = [];
 
-require ROUTES_PATH.'/admin/post/form.html.php';
+require ROUTES_PATH.'/admin/post/_form.html.php';

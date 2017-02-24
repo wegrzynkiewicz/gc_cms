@@ -27,7 +27,7 @@ foreach ($groups as $group_id) {
 # wyślij maila z hasłem
 $mail = new GC\Mail();
 $mail->buildTemplate(
-    ROUTES_PATH.'/admin/staff/staff-created.email.html.php',
+    ROUTES_PATH.'/admin/staff/_email-staff-created.html.php',
     ROUTES_PATH.'/admin/parts/email/styles.css', [
         'name' => post('name'),
         'login' => post('email'),
