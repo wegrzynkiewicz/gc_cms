@@ -5,7 +5,9 @@ $module = GC\Model\Module\Module::fetchByPrimaryId($module_id);
 
 $type = $module['type'];
 $theme = $module['theme'];
-$_POST = $module;
+
+$meta = GC\Model\Module\Meta::fetchMeta($module_id);
+$_POST = array_merge($module, $meta);
 
 $uri->extendMask("/{$module_id}%s");
 

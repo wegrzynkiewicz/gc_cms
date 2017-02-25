@@ -216,6 +216,11 @@ $config = [
             'description' => 'Rozdziela treść pomiędzy klikalne zakładki.',
             'themes' => [],
         ],
+        'youtube' => [
+            'name' => 'Moduł YouTube',
+            'description' => 'Wyświetla film z serwisu YouTube do treści strony.',
+            'themes' => [],
+        ],
     ],
     'nodeTypes' => [ # rodzaje węzłów nawigacji
         'empty' => 'Nieklikalny węzeł',
