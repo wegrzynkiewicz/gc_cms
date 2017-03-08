@@ -6,6 +6,12 @@ $modules = GC\Model\Module\Module::select()
     ->equals('frame_id', $frame_id)
     ->fetchByPrimaryKey();
 
+$metas = GC\Model\Module\Meta::select()
+    ->fetchAll();
+
+foreach ($metas as $meta) {
+    $modules[$meta['module_id']]['meta'][$meta['name']] = $meta['value'];
+}
 ?>
 <?php require ROUTES_PATH.'/admin/_parts/header.html.php'; ?>
 
