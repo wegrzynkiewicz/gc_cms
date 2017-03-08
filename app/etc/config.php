@@ -165,18 +165,23 @@ $config = [
     'frames' => [ # ustawienia i rodzaje rusztowań
         'page' => [
             'name' => 'Strona',
+            'editUri' => '/admin/page/%d/edit',
         ],
         'post' => [
             'name' => 'Wpis',
+            'editUri' => '/admin/post/%d/edit',
         ],
         'post-node' => [ # węzeł podziału wpisu, czyli np Kategoria wpisu
             'name' => 'Podział wpisu',
+            'editUri' => '/admin/post/taxonomy/node/%d/edit',
         ],
         'product' => [
             'name' => 'Produkt',
+            'editUri' => '/admin/product/%d/edit',
         ],
         'product-node' => [ # węzeł podziału produktu, czyli np Kategoria produktu
             'name' => 'Podział produktu',
+            'editUri' => '/admin/product/taxonomy/node/%d/edit',
         ],
     ],
     'modules' => [ # rodzaje zainstalowanych modułów
@@ -227,6 +232,14 @@ $config = [
             'name' => 'Moduł YouTube',
             'description' => 'Wyświetla film z serwisu YouTube.',
             'themes' => [],
+        ],
+        'see-also' => [
+            'name' => 'Moduł: Zobacz także',
+            'description' => 'Wyświetla wybrane treści z możliwością przekierowania',
+            'themes' => [
+                'default' => 'Boksy z miniaturkami',
+                'links' => 'Zwykłe linki',
+            ],
         ],
     ],
     'nodeTypes' => [ # rodzaje węzłów nawigacji
