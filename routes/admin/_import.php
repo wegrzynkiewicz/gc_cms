@@ -5,7 +5,7 @@
 $_SESSION['staff']['staff_id'] = 1;
 
 # utworzenie obiektu repezentującego pracownika
-GC\Staff::getInstance();
+$staff = GC\Staff::getInstance();
 
 $uri->extendMask('/admin%s');
 GC\Translator::$domain = 'admin';

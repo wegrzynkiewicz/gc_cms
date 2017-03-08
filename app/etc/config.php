@@ -225,7 +225,7 @@ $config = [
         ],
         'youtube' => [
             'name' => 'Moduł YouTube',
-            'description' => 'Wyświetla film z serwisu YouTube do treści strony.',
+            'description' => 'Wyświetla film z serwisu YouTube.',
             'themes' => [],
         ],
     ],

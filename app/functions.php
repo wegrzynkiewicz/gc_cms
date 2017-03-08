@@ -542,7 +542,7 @@ function displayError($code, array $arguments = [])
     $files = [
         TEMPLATE_PATH."/errors/{$code}.html.php",
         TEMPLATE_PATH."/errors/{$firstLetter}xx.html.php",
-        TEMPLATE_PATH."/errors/any.html.php",
+        TEMPLATE_PATH."/errors/xxx.html.php",
     ];
 
     foreach ($files as $file) {
