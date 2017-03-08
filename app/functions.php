@@ -536,7 +536,21 @@ function displayError($code, array $arguments = [])
 {
     http_response_code($code);
     logger("[DISPLAY-ERROR] {$code}");
-    display(TEMPLATE_PATH."/errors/{$code}.html.php", $arguments);
+
+    $firstLetter = substr($code, 0, 1);
+
+    $files = [
+        TEMPLATE_PATH."/errors/{$code}.html.php",
+        TEMPLATE_PATH."/errors/{$firstLetter}xx.html.php",
+        TEMPLATE_PATH."/errors/any.html.php",
+    ];
+
+    foreach ($files as $file) {
+        if (file_exists($file)) {
+            display($file, $arguments);
+            break;
+        }
+    }
 
     return '';
 }

@@ -54,25 +54,32 @@ $config = [
         'construction' => false, # wyświetla komunikat "strona w budowie" za każdym żądaniem
     ],
     'seo' => [ # związane z nazwą adresu url witryny
+
         # kod odpowiedzi podczas przekierowywania seo, przydatne, aby przeglądarki nie cachowany przekierowań
         'responseCode' => 303,
+
         # null jeżeli możliwość wejścia z każdego protokolu, wartość logiczna,
-        # nakazuje przekierowywanie na adres z lub bez https,
+        # boolean, nakazuje przekierowywanie na adres z lub bez https,
         'forceHTTPS' => false,
+
         # null jeżeli możliwość wejścia z każdego www, wartość logiczna,
-        # nakazuje przekierowywanie na adres z lub bez www,
+        # boolean, nakazuje przekierowywanie na adres z lub bez www,
         'forceWWW' => false,
+
         # null jeżeli możliwość wejścia z każdej domeny,
-        # nakazuje przekierowywanie na zadaną domenę,
+        # string, nakazuje przekierowywanie na zadaną domenę,
         'forceDomain' => null,
+
         # null jeżeli możliwość wejścia z i bez front controllera,
-        # wartość logiczna, nakazuje przekierowywanie front controller
+        # boolean, nakazuje przekierowywanie front controller
         'forceIndexPhp' => null,
+
         # null jeżeli możliwość wejścia z każdego portu,
-        # nakazuje przekierowywanie na zadany port,
+        # int, nakazuje przekierowywanie na zadany port,
         'forcePort' => null,
+
         # null jeżeli możliwość wejścia bez rozszerzenia
-        # wartość logiczna, nakazuje przekierowywanie na rozszerzenie "html" jeżeli nie jest ono podane
+        # string, nakazuje przekierowywanie na zadane rozszerzenie, jeżeli nie jest ono podane
         'forceDefaultExtension' => null,
     ],
     'adminNavbarTitle' => 'Panel Administracyjny', # wyświetlana w prawym gornym rogu panelu admina

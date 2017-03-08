@@ -16,7 +16,7 @@ foreach ($frames as $frame) {
         continue;
     }
 
-    $loc = $uri->absolute($frame['slug']);
+    $loc = $uri->absolute(trim($frame['slug']));
     $date = new DateTime($frame['modification_datetime']);
 
     $url = $root->addChild('url');

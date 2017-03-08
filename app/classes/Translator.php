@@ -6,9 +6,9 @@ class Translator
 {
     private static $instance = null;
 
-    public $refresh = false;
-    public $translations = [];
-    public $translationPath = '';
+    private $refresh = false;
+    private $translations = [];
+    private $translationPath = '';
     public static $domain = 'visitor';
 
     private function __construct($translationPath)
