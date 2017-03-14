@@ -3,7 +3,7 @@
 $moduleType = post('type');
 
 # wstaw moduł
-$module_id = GC\Model\Module\Module::insert([
+$module_id = GC\Model\Module::insert([
     'type' => $moduleType,
     'theme' => 'default',
 ]);

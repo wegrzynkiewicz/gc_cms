@@ -1,7 +1,7 @@
 <?php
 
 # pobierz moduły wraz z pozycjami grida dla rusztowania $frame_id
-$modules = GC\Model\Module\Module::select()
+$modules = GC\Model\Module::select()
     ->source('::grid')
     ->equals('frame_id', $frame_id)
     ->fetchByPrimaryKey();

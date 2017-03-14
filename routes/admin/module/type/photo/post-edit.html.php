@@ -11,7 +11,7 @@ $settings = [
     'height' => $height,
 ];
 
-GC\Model\Module\Module::updateByPrimaryId($module_id, [
+GC\Model\Module::updateByPrimaryId($module_id, [
     'theme' => post('theme'),
     'content' => $name,
     'settings' => json_encode($settings),

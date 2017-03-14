@@ -1,7 +1,7 @@
 <?php
 
 # pobierz wszystkie posortowane taksonomie z danego języka
-$taxonomies = GC\Model\Product\Taxonomy::select()
+$taxonomies = GC\Model\Frame::select()
     ->equals('lang', GC\Staff::getInstance()->getEditorLang())
     ->order('name', 'ASC')
     ->fetchByPrimaryKey();

@@ -5,8 +5,9 @@ require ROUTES_PATH.'/admin/product/_import.php';
 require ROUTES_PATH.'/admin/product/taxonomy/_import.php';
 
 # pobierz wszystkie posortowane taksonomie z języka
-$taxonomies = GC\Model\Product\Taxonomy::select()
+$taxonomies = GC\Model\Frame::select()
     ->equals('lang', GC\Staff::getInstance()->getEditorLang())
+    ->equals('type', 'product-taxonomy')
     ->order('name', 'ASC')
     ->fetchByPrimaryKey();
 

@@ -3,7 +3,7 @@
 require ROUTES_PATH."/admin/module/type/gallery/_import.php";
 
 # aktualizuj galerię zdjęć
-GC\Model\Module\Module::updateByPrimaryId($module_id, [
+GC\Model\Module::updateByPrimaryId($module_id, [
     'theme' => post('theme'),
 ]);
 

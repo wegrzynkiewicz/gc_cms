@@ -4,7 +4,7 @@ namespace GC\Model;
 
 use GC\Staff;
 use GC\Validate;
-use GC\Model\Module\Module;
+use GC\Model\Module;
 use GC\Storage\AbstractModel;
 
 class Frame extends AbstractModel

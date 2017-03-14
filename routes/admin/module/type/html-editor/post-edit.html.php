@@ -2,7 +2,7 @@
 
 require ROUTES_PATH."/admin/module/type/html-editor/_import.php";
 
-GC\Model\Module\Module::updateByPrimaryId($module_id, [
+GC\Model\Module::updateByPrimaryId($module_id, [
     'content' => post('content'),
     'theme' => 'default',
 ]);

@@ -3,7 +3,7 @@
 $module_id = intval(array_shift($_PARAMETERS));
 
 # pobierz moduł po kluczu głównym
-$module = GC\Model\Module\Module::fetchByPrimaryId($module_id);
+$module = GC\Model\Module::fetchByPrimaryId($module_id);
 
 $moduleType = $module['type'];
 
