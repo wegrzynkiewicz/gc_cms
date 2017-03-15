@@ -1,10 +1,12 @@
 <?php
 
-$headTitle = trans('Edycja strony: %s', [$frame['name']]);
+$headTitle = trans('Dodawanie nowego produktu');
 $breadcrumbs->push([
     'name' => $headTitle,
 ]);
 
+$checkedValues = [];
+
 display(ROUTES_PATH.'/admin/frame/_parts/form.html.php', [
-    'nameCaption' => trans('Nazwa strony'),
+    'nameCaption' => trans('Nazwa produktu'),
 ]);

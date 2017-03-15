@@ -12,6 +12,12 @@ abstract class AbstractNode extends AbstractModel
     private $parent = null;
     private $children = [];
 
+    public function __construct(array $data = [])
+    {
+        $data['node'] = $this;
+        parent::__construct($data);
+    }
+
     public function getNodeId()
     {
         return $this->getProperty(static::$node);

@@ -141,7 +141,7 @@
                 url: '<?=$uri->mask("/list.json")?>',
                 type: 'GET',
                 data: {
-                    type: 'page',
+                    type: '<?=$type?>',
                 },
             },
             createdRow: function (row, data, index) {
