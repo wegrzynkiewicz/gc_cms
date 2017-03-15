@@ -1,6 +1,6 @@
 <?php
 
-namespace GC\Model\Module;
+namespace GC\Model;
 
 use GC\Model\Frame;
 use GC\Model\Module\File;

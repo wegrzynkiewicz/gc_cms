@@ -3,7 +3,7 @@
 require ROUTES_PATH.'/admin/_import.php';
 
 $file_id = intval(array_shift($_PARAMETERS));
-$image = GC\Model\Module\File::fetchByPrimaryId($file_id);
+$image = GC\Model\File::fetchByPrimaryId($file_id);
 $_POST = $image;
 
 ?>

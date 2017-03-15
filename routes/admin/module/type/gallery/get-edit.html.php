@@ -261,7 +261,7 @@ $(function() {
         title: '<?=trans('Wybierz wiele zdjęć')?>',
     }, function(urls) {
         $.post(addUri, {
-            urls: urls
+            urls: urls,
         }, function() {
             refreshImages();
         });

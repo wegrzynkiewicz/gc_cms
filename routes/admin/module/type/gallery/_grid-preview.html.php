@@ -1,10 +1,10 @@
 <?php
 
-$images = GC\Model\Module\File::select()
-    ->source('::moduleFiles')
+$images = GC\Model\Module\FileRelation::select()
+    ->source('::files')
     ->equals('module_id', $module_id)
     ->order('position', 'asc')
-    ->fetchByPrimaryKey();
+    ->fetchByKey('file_id');
 
 ?>
 <?php if (empty($images)): ?>

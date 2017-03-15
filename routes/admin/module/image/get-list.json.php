@@ -4,9 +4,9 @@ require ROUTES_PATH.'/admin/_import.php';
 
 $module_id = intval(array_shift($_PARAMETERS));
 
-$images = GC\Model\Module\File::select()
+$images = GC\Model\Module\FileRelation::select()
     ->fields(['file_id', 'name', 'slug', 'width', 'height'])
-    ->source('::moduleFiles')
+    ->source('::files')
     ->equals('module_id', $module_id)
     ->order('position', 'ASC')
     ->fetchAll();

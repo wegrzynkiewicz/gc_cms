@@ -16,21 +16,21 @@ return [
         'children' => [
             'all_posts' => [
                 'name' => trans('Wyświetl wszystkie wpisy'),
-                'path' => '/admin/post/list',
+                'path' => '/admin/frame/list/post',
                 'icon' => '',
                 'perms' => [],
                 'children' => [],
             ],
             'add_post' => [
                 'name' => trans('Dodaj nowy wpis'),
-                'path' => '/admin/post/new',
+                'path' => '/admin/frame/new/post',
                 'icon' => '',
                 'perms' => [],
                 'children' => [],
             ],
             'post_taxonomy' => [
                 'name' => trans('Wyświetl podziały wpisów'),
-                'path' => '/admin/post/taxonomy/list',
+                'path' => '/admin/frame/list/post-taxonomy',
                 'icon' => '',
                 'perms' => [],
                 'children' => [],
@@ -45,14 +45,14 @@ return [
         'children' => [
             'all_pages' => [
                 'name' => trans('Wyświetl wszystkie strony'),
-                'path' => '/admin/page/list',
+                'path' => '/admin/frame/list/page',
                 'icon' => '',
                 'perms' => [],
                 'children' => [],
             ],
             'add_page' => [
                 'name' => trans('Dodaj nową stronę'),
-                'path' => '/admin/page/new',
+                'path' => '/admin/frame/new/page',
                 'icon' => '',
                 'perms' => [],
                 'children' => [],
@@ -74,14 +74,14 @@ return [
         'children' => [
             'all_products' => [
                 'name' => trans('Wyświetl wszystkie produkty'),
-                'path' => '/admin/product/list',
+                'path' => '/admin/frame/list/product',
                 'icon' => '',
                 'perms' => [],
                 'children' => [],
             ],
             'product_taxonomy' => [
                 'name' => trans('Wyświetl podziały produktów'),
-                'path' => '/admin/product/taxonomy/list',
+                'path' => '/admin/frame/list/product-taxonomy',
                 'icon' => '',
                 'perms' => [],
                 'children' => [],

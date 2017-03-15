@@ -10,7 +10,7 @@ $imagePath = WEB_PATH.$imageUri;
 list($width, $height) = getimagesize($imagePath);
 
 # aktualizacja zdjęcia w bazie danych
-GC\Model\Module\File::updateByPrimaryId($file_id, [
+GC\Model\File::updateByPrimaryId($file_id, [
     'slug' => $imageUri,
     'name' => post('name'),
     'width' => $width,

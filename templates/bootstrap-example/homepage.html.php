@@ -8,7 +8,7 @@ $headTitle = trans('Witamy na stronie głównej');
 <div class="container">
     <div class="blog-header">
         <h1 class="blog-title">
-            <?=trans('Prosty blog na GrafCenterCMS')?>
+            <?=$frame['name']?>
         </h1>
         <p class="lead blog-description">
             <?=trans('Jest to przykładowa wdrożona strona, która ma zobrazować jaki ten CMS jest zajebisty i prosty w deployu')?>

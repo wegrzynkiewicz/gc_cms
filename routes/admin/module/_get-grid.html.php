@@ -12,6 +12,7 @@ $metas = GC\Model\Module\Meta::select()
 foreach ($metas as $meta) {
     $modules[$meta['module_id']]['meta'][$meta['name']] = $meta['value'];
 }
+
 ?>
 <?php require ROUTES_PATH.'/admin/_parts/header.html.php'; ?>
 
@@ -46,7 +47,7 @@ foreach ($metas as $meta) {
             <input type="hidden" name="grid">
             <?php if (empty($modules)): ?>
                 <div class="simple-box">
-                    <?=trans('Brak modułów')?>
+                    <?=trans('Nie znaleziono żadnego modułu.')?>
                 </div>
             <?php else: ?>
                 <div class="grid-with-rows">
@@ -60,7 +61,7 @@ foreach ($metas as $meta) {
             <?php endif ?>
 
             <?=render(ROUTES_PATH.'/admin/_parts/input/submitButtons.html.php', [
-                'saveLabel' => trans('Zapisz pozycje kafelków'),
+                'saveLabel' => empty($modules) ? null : trans('Zapisz pozycje kafelków'),
             ])?>
 
         </form>

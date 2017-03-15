@@ -4,4 +4,4 @@
 $relations = array_unchunk(post('taxonomy', []));
 GC\Model\Frame\Relation::updateRelations($frame_id, $relations);
 
-flashBox(trans('Strona "%s" została zaktualizowana.', [post('name')]));
+flashBox(trans('Produkt "%s" został zaktualizowany.', [post('name')]));
