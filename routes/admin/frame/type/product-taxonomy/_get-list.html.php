@@ -28,6 +28,6 @@ foreach ($taxonomies as $taxonomy_id => &$taxonomy) {
 }
 unset($taxonomy);
 
-display(ROUTES_PATH.'/admin/frame/_parts/list-taxonomies.html.php', [
+echo render(ROUTES_PATH.'/admin/frame/_parts/list-taxonomies.html.php', [
     'nameCaption' => trans('Nazwa podziału produktów'),
 ]);

@@ -21,9 +21,15 @@ ob_start('ob_gzhandler') or ob_start();
 
 # jeżeli strona jest w budowie wtedy zwróć komunikat o budowie
 if ($config['debug']['construction'] and !isset($_SESSION['allowInConstruction'])) {
-    displayError(503);
+    echo renderError(503);
 } else {
-    require __DIR__.'/routing.php';
+    $router = new GC\Router($request->method, $request->slug);
+
+    $_ACTION = $router->resolve();
+    $_PARAMETERS = $router->parameters;
+    $_SEGMENTS = $router->segments;
+
+    require $_ACTION;
 }
 
 ob_end_flush();

@@ -520,19 +520,9 @@ function render($templateName, array $arguments = [])
 }
 
 /**
- * Działa tak samo jak render(), tylko że wyświetla rezultat
- */
-function display($templateName, array $arguments = [])
-{
-    echo render($templateName, $arguments);
-
-    return '';
-}
-
-/**
  * Ustawia kod błędu i renderuje szablon z templates jeżeli istnieje
  */
-function displayError($code, array $arguments = [])
+function renderError($code, array $arguments = [])
 {
     http_response_code($code);
     logger("[DISPLAY-ERROR] {$code}");
@@ -547,8 +537,7 @@ function displayError($code, array $arguments = [])
 
     foreach ($files as $file) {
         if (file_exists($file)) {
-            display($file, $arguments);
-            break;
+            return render($file, $arguments);
         }
     }
 

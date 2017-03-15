@@ -10,7 +10,9 @@ $user = GC\Model\Staff\Staff::select()
 # jeżeli nie znaleziono pracownika wtedy zwróć błąd
 if (!$user) {
     $error['login'] = trans('Nieprawidłowy adres e-mail');
-    return display(ROUTES_PATH.'/auth/forgot/password-get.php');
+    echo render(ROUTES_PATH.'/auth/forgot/password-get.php');
+
+    return;
 }
 
 $email64 = base64_encode($user['email']);

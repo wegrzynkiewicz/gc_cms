@@ -15,9 +15,11 @@ $user = GC\Model\Staff\Staff::select()
 
 # jeżeli użytkownik nie istnieje, albo hasło jest nieprawidłowe
 if (!$user or !password_verify($password, $user['password'])) {
-    return display(ROUTES_PATH.'/auth/login-get.php', [
+    echo render(ROUTES_PATH.'/auth/login-get.php', [
         'error' => trans('Nieprawidłowy login lub hasło'),
     ]);
+
+    return;
 }
 
 # ustawienie sesji pracownika

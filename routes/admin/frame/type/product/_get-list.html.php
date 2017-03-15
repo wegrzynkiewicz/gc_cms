@@ -9,7 +9,7 @@ $count = GC\Model\Frame::select()
     ->equals('lang', GC\Staff::getInstance()->getEditorLang())
     ->fetch()['count'];
 
-display(ROUTES_PATH.'/admin/frame/_parts/list-frames.html.php', [
+echo render(ROUTES_PATH.'/admin/frame/_parts/list-frames.html.php', [
     'addCaption' => trans('Dodaj nowy produkt'),
     'nameCaption' => trans('Nazwa produktu'),
 ]);
