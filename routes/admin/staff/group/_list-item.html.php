@@ -6,7 +6,7 @@
         </a>
     </td>
     <td>
-        <?php dd($GLOBALS); if (isset($permissions) and $permissions): ?>
+        <?php if (isset($permissions) and $permissions): ?>
             <?php foreach ($permissions as $permission): ?>
                 <?=trans($config['permissions'][$permission])?> <br>
             <?php endforeach ?>

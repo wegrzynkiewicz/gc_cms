@@ -3,8 +3,9 @@
 namespace GC\Model;
 
 use GC\Model\Frame;
-use GC\Model\Module\File;
+use GC\Model\File;
 use GC\Model\Module\Tab;
+use GC\Model\Module\FileRelation;
 use GC\Storage\AbstractModel;
 
 class Module extends AbstractModel
@@ -31,15 +32,15 @@ class Module extends AbstractModel
         }
 
         # pobierz pliki tego modułu
-        $files = File::select()
-            ->fields('frame_id')
-            ->source('::frame')
+        $files = FileRelation::select()
+            ->fields('file_id')
+            ->source('::files')
             ->equals('module_id', $module_id)
             ->fetchAll();
 
         # dla każdego pliku usuń rusztowanie
         foreach ($files as $file) {
-            Frame::deleteByFrameId($file['frame_id']);
+            File::deleteByPrimaryId($file['file_id']);
         }
 
         # usuń właściwy moduł

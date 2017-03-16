@@ -10,4 +10,5 @@ $count = GC\Model\Frame::select()
 echo render(ROUTES_PATH.'/admin/frame/_parts/list-frames.html.php', [
     'addCaption' => trans('Dodaj nową stronę'),
     'nameCaption' => trans('Nazwa strony'),
+    'notFoundCaption' => trans('Nie znaleziono żadnej strony w języku: '),
 ]);

@@ -33,6 +33,7 @@ ini_set('display_errors', 1); # włącza wyświetlanie błędów
 ini_set('display_startup_errors', 1); # włącza wyświetlanie startowych błędów
 ini_set('error_log', TEMP_PATH.'/logs/'.date('Y-m-d').'.error.log'); # zmienia ścieżkę logowania błędów
 ini_set('max_execution_time', 300); # określa maksymalny czas trwania skryptu
+ini_set('memory_limit', '256M'); # określa maksymalny rozmiar zaalokowanej pamięci
 ini_set('date.timezone', 'Europe/Warsaw'); # ustawienie domyślnej strefy czasowej
 ini_set('session.gc_maxlifetime', 3600); # ustaw, aby usuwać sesje starsze niż (w sekundach)
 ini_set('session.gc_probability', 20); # częstotliwość z jaką następuje czyszczenie sesji

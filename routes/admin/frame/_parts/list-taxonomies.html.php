@@ -5,7 +5,7 @@
     <div class="col-md-12">
         <div class="simple-box">
             <?php if (empty($taxonomies)): ?>
-                <?=trans('Nie znaleziono podziałów produktów w języku: ')?>
+                <?=trans('Nie znaleziono żadnych podziałów w języku: ')?>
                 <?=render(ROUTES_PATH.'/admin/_parts/language.html.php', [
                     'lang' => GC\Staff::getInstance()->getEditorLang(),
                 ])?>

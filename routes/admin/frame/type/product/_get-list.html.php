@@ -1,7 +1,5 @@
 <?php
 
-dd($GLOBALS);
-
 # pobierz liczbę odpowiednich rusztowań
 $count = GC\Model\Frame::select()
     ->fields('COUNT(*) AS count')
@@ -12,4 +10,5 @@ $count = GC\Model\Frame::select()
 echo render(ROUTES_PATH.'/admin/frame/_parts/list-frames.html.php', [
     'addCaption' => trans('Dodaj nowy produkt'),
     'nameCaption' => trans('Nazwa produktu'),
+    'notFoundCaption' => trans('Nie znaleziono żadnego produktu w języku: '),
 ]);

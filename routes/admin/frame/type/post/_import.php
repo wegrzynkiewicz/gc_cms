@@ -3,7 +3,7 @@
 $headTitle = trans('Wpisy');
 $uri->extendMask('/frame%s');
 $breadcrumbs->push([
-    'uri' => $uri->mask("/list/post"),
+    'uri' => $uri->mask("/list/{$type}"),
     'name' => $headTitle,
-    'icon' => 'files-o',
+    'icon' => 'pencil-square-o',
 ]);

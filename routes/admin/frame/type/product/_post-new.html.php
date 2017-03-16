@@ -4,4 +4,4 @@
 $relations = array_unchunk(post('taxonomy', []));
 GC\Model\Frame\Relation::updateRelations($frame_id, $relations);
 
-flashBox(trans('Nowy produkt "%s" została utworzony.', [post('name')]));
+flashBox(trans('Nowy produkt "%s" został utworzony.', [post('name')]));

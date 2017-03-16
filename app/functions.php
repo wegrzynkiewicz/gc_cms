@@ -719,7 +719,7 @@ function thumbnail($imageUri, $width, $height, $mode = 'outbound')
         return $imageUri;
     }
 
-    $path     = $GLOBALS['config']['thumbnail']['path'];
+    $path           = $GLOBALS['config']['thumbnail']['path'];
     $imagePath      = $path.$imageUri;
     $thumbnailUri   = makeThumbnailUri($imageUri, $width, $height);
     $thumnailPath   = $path.$thumbnailUri;
@@ -738,14 +738,18 @@ function thumbnail($imageUri, $width, $height, $mode = 'outbound')
     makeDirRecursive(pathinfo($thumnailPath, PATHINFO_DIRNAME));
 
     # tworzenie miniaturki
-    $imagine = new Imagine\Gd\Imagine();
-    $size    = new Imagine\Image\Box($width, $height);
-    $imagine
-        ->open($imagePath)
-        ->thumbnail($size, $mode)
-        ->save($thumnailPath, $GLOBALS['config']['thumbnail']['options']);
+    try {
+        $imagine = new Imagine\Gd\Imagine();
+        $size    = new Imagine\Image\Box($width, $height);
+        $imagine
+            ->open($imagePath)
+            ->thumbnail($size, $mode)
+            ->save($thumnailPath, $GLOBALS['config']['thumbnail']['options']);
+    } catch (Imagine\Exception\Exception $e) {
+        logger("[THUMBNAIL] Exception ".$e->getMessage());
+    }
 
-    logger("[THUMBNAIL] GENERATED {$thumbnailUri}");
+    logger("[THUMBNAIL] Generated {$thumbnailUri}");
 
     # zwróć adres miniaturki
     return $thumbnailUri;

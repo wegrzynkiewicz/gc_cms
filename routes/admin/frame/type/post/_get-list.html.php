@@ -10,4 +10,5 @@ $count = GC\Model\Frame::select()
 echo render(ROUTES_PATH.'/admin/frame/_parts/list-frames.html.php', [
     'addCaption' => trans('Dodaj nowy wpis'),
     'nameCaption' => trans('Nazwa wpisu'),
+    'notFoundCaption' => trans('Nie znaleziono żadnego wpisu w języku: '),
 ]);

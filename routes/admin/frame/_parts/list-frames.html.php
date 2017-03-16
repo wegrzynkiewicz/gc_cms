@@ -4,7 +4,7 @@
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=$uri->mask('/new/page')?>" type="button" class="btn btn-success btn-md">
+                <a href="<?=$uri->mask("/new/{$type}")?>" type="button" class="btn btn-success btn-md">
                     <i class="fa fa-plus fa-fw"></i>
                     <?=$addCaption?>
                 </a>
@@ -20,7 +20,7 @@
     <div class="col-md-12">
         <div class="simple-box">
             <?php if ($count == 0): ?>
-                <?=trans('Nie znaleziono żadnej strony w języku: ')?>
+                <?=$notFoundCaption?>
                 <?=render(ROUTES_PATH.'/admin/_parts/language.html.php', [
                     'lang' => GC\Staff::getInstance()->getEditorLang(),
                 ])?>
@@ -35,7 +35,7 @@
                                 <th data-name="name"
                                     data-searchable="1"
                                     data-sortable="1">
-                                    <?=trans('Nazwa strony')?>
+                                    <?=$nameCaption?>
                                 </th>
                                 <th data-name="slug"
                                     data-searchable="1"

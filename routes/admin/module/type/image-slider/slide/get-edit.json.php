@@ -1,7 +1,7 @@
 <?php
 
 $file_id = intval(array_shift($_SEGMENTS));
-$image = GC\Model\Module\File::fetchByPrimaryId($file_id);
+$image = GC\Model\Module\FileRelation::fetchByPrimaryId($file_id);
 $_POST = $image;
 
 echo render(ROUTES_PATH.'/admin/_parts/input/editbox.html.php', [
