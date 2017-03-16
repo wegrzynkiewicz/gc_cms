@@ -5,6 +5,7 @@ namespace GC\Model;
 use GC\Staff;
 use GC\Validate;
 use GC\Model\Module;
+use GC\Model\Frame\Tree;
 use GC\Storage\AbstractModel;
 
 class Frame extends AbstractModel
@@ -53,7 +54,7 @@ class Frame extends AbstractModel
 
         $number = 1;
         while (true) {
-            $slug = $proposedSlug.'/'.intval($number);
+            $slug = $proposedSlug.'-'.intval($number);
             if (Validate::slug($slug, $frame_id)) {
                 return $slug;
             }
@@ -64,10 +65,22 @@ class Frame extends AbstractModel
     }
 
     /**
-     * Usuwa rusztowanie i jego moduły
+     * Usuwa rusztowanie, jego moduły i węzły, jeżeli rusztowanie jest taksonomią
      */
     public static function deleteByFrameId($frame_id)
     {
+        # pobierz wszystkie węzły tej taksonomii
+        $nodes = Tree::select()
+            ->fields('frame_id')
+            ->source('::nodes')
+            ->equals('taxonomy_id', $frame_id)
+            ->fetchByKey('frame_id');
+
+        # usuń każdy węzeł tej taksonomii
+        foreach ($nodes as $node_id => $node) {
+            static::deleteByFrameId($node_id);
+        }
+
         # usuń wszystkie moduły dla rusztowania o frame_id
         Module::deleteByFrameId($frame_id);
 

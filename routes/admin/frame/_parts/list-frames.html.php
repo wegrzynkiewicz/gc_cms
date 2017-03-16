@@ -108,8 +108,8 @@
 
         <a href="{{hrefModule}}"
             title="<?=trans('Wyświetl moduły')?>"
-            class="btn btn-success btn-sm">
-            <i class="fa fa-file-text-o fa-fw"></i>
+            class="btn btn-primary btn-sm">
+            <i class="fa fa-table fa-fw"></i>
             <?=trans('Moduły')?>
         </a>
 

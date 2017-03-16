@@ -2,7 +2,8 @@
     <?php foreach ($tree->getChildren() as $node): ?>
         <?php $node_id = $node['frame_id']; ?>
         <li>
-            <a href="<?=$uri->mask("/{$node_id}/edit")?>">
+            <a href="<?=$uri->mask("/{$node_id}/edit")?>"
+                title="<?=trans('Edytuj ten węzeł')?>">
                 <?=e($node['name'])?>
             </a>
             <?php if ($node->hasChildren()): ?>

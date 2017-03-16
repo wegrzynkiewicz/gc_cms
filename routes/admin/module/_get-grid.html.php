@@ -7,6 +7,8 @@ $modules = GC\Model\Module::select()
     ->fetchByPrimaryKey();
 
 $metas = GC\Model\Module\Meta::select()
+    ->source('::forFrameModules')
+    ->equals('frame_id', $frame_id)
     ->fetchAll();
 
 foreach ($metas as $meta) {
@@ -53,7 +55,7 @@ foreach ($metas as $meta) {
                 <div class="grid-with-rows">
                     <div id="grid-rows-wrapper"></div>
                     <div class="grid-stack">
-                        <?php foreach ($modules as $module_id => $module): ?>
+                        <?php foreach ($modules as $module_id => $module): dd($module); ?>
                             <?=render(ROUTES_PATH.'/admin/module/_grid-item.html.php', $module)?>
                         <?php endforeach ?>
                     </div>

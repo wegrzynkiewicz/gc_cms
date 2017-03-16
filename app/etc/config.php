@@ -166,23 +166,24 @@ $config = [
     'frames' => [ # ustawienia i rodzaje rusztowań
         'page' => [
             'name' => 'Strona',
-            'editUri' => '/admin/page/%d/edit',
         ],
         'post' => [
             'name' => 'Wpis',
-            'editUri' => '/admin/post/%d/edit',
         ],
-        'post-node' => [ # węzeł podziału wpisu, czyli np Kategoria wpisu
+        'post-node' => [ # węzeł podziału wpisu, czyli np. Aktualności
+            'name' => 'Węzeł wpisu',
+        ],
+        'post-taxonomy' => [ # podział wpisu, czyli np. Kategoria wpisu
             'name' => 'Podział wpisu',
-            'editUri' => '/admin/post/taxonomy/node/%d/edit',
         ],
         'product' => [
             'name' => 'Produkt',
-            'editUri' => '/admin/product/%d/edit',
         ],
-        'product-node' => [ # węzeł podziału produktu, czyli np Kategoria produktu
+        'product-node' => [ # węzeł podziału produktu, czyli np. Procesory
+            'name' => 'Węzeł produktu',
+        ],
+        'product-taxonomy' => [ # węzeł podziału produktu, czyli np. Kategoria produktu
             'name' => 'Podział produktu',
-            'editUri' => '/admin/product/taxonomy/node/%d/edit',
         ],
     ],
     'modules' => [ # rodzaje zainstalowanych modułów

@@ -12,8 +12,8 @@
         <div class="pull-right">
             <a href="<?=$uri->mask("/tab/{$frame_id}/module/grid")?>"
                 title="<?=trans('Wyświetl moduły zakładi')?>"
-                class="btn btn-success btn-xs">
-                <i class="fa fa-file-text-o fa-fw"></i>
+                class="btn btn-primary btn-xs">
+                <i class="fa fa-table fa-fw"></i>
                 <?=trans('Moduły')?>
             </a>
             <a data-toggle="modal"

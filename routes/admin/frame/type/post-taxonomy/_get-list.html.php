@@ -29,5 +29,6 @@ foreach ($taxonomies as $taxonomy_id => &$taxonomy) {
 unset($taxonomy);
 
 echo render(ROUTES_PATH.'/admin/frame/_parts/list-taxonomies.html.php', [
+    'addCaption' => trans('Dodaj nowy podział wpisów'),
     'nameCaption' => trans('Nazwa podziału wpisów'),
 ]);

@@ -1,5 +1,20 @@
 <?php require ROUTES_PATH.'/admin/_parts/header.html.php'; ?>
-<?php require ROUTES_PATH.'/admin/_parts/page-header.html.php'; ?>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <div class="btn-toolbar pull-right">
+                <a href="<?=$uri->mask("/new/{$type}")?>" type="button" class="btn btn-success btn-md">
+                    <i class="fa fa-plus fa-fw"></i>
+                    <?=$addCaption?>
+                </a>
+            </div>
+            <h1><?=$headTitle?></h1>
+        </div>
+    </div>
+</div>
+
+<?php require ROUTES_PATH.'/admin/_parts/breadcrumbs.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">
@@ -13,13 +28,17 @@
                 <table class="table vertical-middle" data-table="">
                     <thead>
                         <tr>
+                            <th><!-- Image --></th>
                             <th>
                                 <?=$nameCaption?>
                             </th>
                             <th>
+                                <?=trans('Adres')?>
+                            </th>
+                            <th>
                                 <?=trans('Podgląd węzłów')?>
                             </th>
-                            <th></th>
+                            <th><!-- Buttons --></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,5 +53,44 @@
     </div>
 </div>
 
+<div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <form id="deleteModalForm" method="post" action="<?=$uri->mask('/delete')?>" class="modal-content">
+            <input name="frame_id" type="hidden" value="">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h2 class="modal-title">
+                    <?=trans('Czy na pewno usunąć?')?>
+                </h2>
+            </div>
+            <div class="modal-body">
+                <?=trans('Czy jesteś pewien, że chcesz usunąć podział')?>
+                <span id="frame_name" style="font-weight:bold; color:red;"></span>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <?=trans('Anuluj')?>
+                </button>
+                <button type="submit" class="btn btn-danger btn-ok">
+                    <?=trans('Usuń')?>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
+
+
+<script>
+    $(function(){
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            $(this).find('#frame_name').html($(event.relatedTarget).data('name'));
+            $(this).find('[name="frame_id"]').val($(event.relatedTarget).data('id'));
+        });
+    });
+</script>
+
 <?php require ROUTES_PATH.'/admin/_parts/end.html.php'; ?>

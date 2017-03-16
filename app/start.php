@@ -29,7 +29,11 @@ if ($config['debug']['construction'] and !isset($_SESSION['allowInConstruction']
     $_PARAMETERS = $router->parameters;
     $_SEGMENTS = $router->segments;
 
-    require $_ACTION;
+    if ($_ACTION === null) {
+        echo renderError(404);
+    } else {
+        require $_ACTION;
+    }
 }
 
 ob_end_flush();

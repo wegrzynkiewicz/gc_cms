@@ -43,13 +43,7 @@ class Menu extends AbstractNode
             return $this->destination;
         }
 
-        if ($this->slug) {
-            return $this->slug;
-        }
-
-        $slug = normalizeSlug($this->frame_name.'/'.$this->frame_id);
-
-        return $slug;
+        return $this->slug;
     }
 
     /**

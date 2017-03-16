@@ -14,10 +14,7 @@ $frames = GC\Model\Frame::select()
     ->fetchByPrimaryKey();
 
 foreach ($frames as &$frame) {
-    $frame = sprintf('%s - %s',
-        $frame['name'],
-        $config['frames'][$frame['type']]['name']
-    );
+    $frame = sprintf('%s - %s', $frame['name'], $config['frames'][$frame['type']]['name']);
 }
 unset($frame);
 
@@ -33,7 +30,7 @@ unset($frame);
                     data-target="#addModal"
                     class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
-                    <?=trans('Dodaj stronę')?>
+                    <?=trans('Dodaj')?>
                 </button>
             </div>
             <h1><?=$headTitle?></h1>
@@ -99,7 +96,7 @@ unset($frame);
     </div>
 </div>
 
-<div id="addModal" class="modal fade" tabindex="-1" role="dialog">
+<div id="addModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <form id="addModalForm"
             method="post"
@@ -114,11 +111,11 @@ unset($frame);
                 </h2>
             </div>
             <div class="modal-body">
-                <?=render(ROUTES_PATH.'/admin/_parts/input/selectbox.html.php', [
+                <?=render(ROUTES_PATH.'/admin/_parts/input/select2-single.html.php', [
                     'name' => 'frame_id',
                     'label' => trans('Wybierz stronę'),
                     'options' => $frames,
-                    'firstOption' => trans('Wybierz jedną z dostępnych stron'),
+                    'placeholder' => trans('Wybierz jedną z dostępnych stron'),
                 ])?>
             </div>
             <div class="modal-footer">
@@ -169,7 +166,6 @@ unset($frame);
 <script>
 $(function(){
 
-
     var refreshThemeUri = "<?=$uri->make("/admin/module/{$module_id}/type/see-also/theme")?>/";
     var addUri          = '<?=$uri->make("/admin/module/{$module_id}/type/see-also/item/add.json")?>';
     var sortUri         = '<?=$uri->make("/admin/module/{$module_id}/type/see-also/item/sort.json")?>';
@@ -186,11 +182,16 @@ $(function(){
     });
 
     $('#addModalForm').on('submit', function (event) {
-        $.post(addUri, $(this).serialize());
+        event.preventDefault();
+        $.post(addUri, $(this).serialize(), function () {
+            location.reload();
+        });
     });
 
     $('#deleteModalForm').on('submit', function (event) {
-        $.post(deleteUri, $(this).serialize());
+        $.post(deleteUri, $(this).serialize(), function () {
+            location.reload();
+        });
     });
 
     $('#deleteModal').on('show.bs.modal', function (event) {
