@@ -25,6 +25,28 @@ CREATE TABLE `gc_dumps` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
+DROP TABLE IF EXISTS `gc_files`;
+CREATE TABLE `gc_files` (
+  `file_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` tinytext NOT NULL,
+  `slug` tinytext NOT NULL,
+  `width` smallint(6) unsigned NOT NULL,
+  `height` smallint(6) unsigned NOT NULL,
+  `size` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`file_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+DROP TABLE IF EXISTS `gc_file_meta`;
+CREATE TABLE `gc_file_meta` (
+  `file_id` int(10) unsigned NOT NULL,
+  `name` varchar(32) NOT NULL,
+  `value` mediumtext NOT NULL,
+  UNIQUE KEY `file_id_name` (`file_id`,`name`),
+  CONSTRAINT `gc_file_meta_ibfk_1` FOREIGN KEY (`file_id`) REFERENCES `gc_files` (`file_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
 DROP TABLE IF EXISTS `gc_forms`;
 CREATE TABLE `gc_forms` (
   `form_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -84,22 +106,23 @@ CREATE TABLE `gc_form_sent` (
 
 DROP TABLE IF EXISTS `gc_frames`;
 CREATE TABLE `gc_frames` (
-  `frame_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` text NOT NULL,
-  `type` varchar(16) NOT NULL,
-  `theme` varchar(16) NOT NULL,
-  `lang` varchar(2) NOT NULL,
-  `visibility` varchar(16) NOT NULL,
-  `lock` varchar(16) NOT NULL,
-  `slug` tinytext NOT NULL,
-  `image` tinytext NOT NULL,
-  `keywords` text NOT NULL,
-  `description` text NOT NULL,
-  `creation_datetime` datetime NOT NULL,
-  `publication_datetime` datetime NOT NULL,
-  `modification_datetime` datetime NOT NULL,
+  `frame_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Klucz główny rusztowania',
+  `name` text NOT NULL COMMENT 'Nazwa rusztowania, może być pusta',
+  `type` varchar(32) NOT NULL DEFAULT 'page' COMMENT 'Typ rusztowania, ilość typów jest zmienna',
+  `theme` varchar(32) NOT NULL DEFAULT 'default' COMMENT 'Szablon rusztowania, w zależności od szablonu może załadować inny plik html wyglądu tego węzła',
+  `lang` varchar(2) NOT NULL DEFAULT 'en' COMMENT 'Język rusztowania, zgodny z ISO 639-1',
+  `visibility` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'Flaga, która określa dla kogo jest widoczne to rusztowanie (0 - dla każdego, 1 - dla każdego pracownika, 2 - dla pracownika z odpowiednim uprawnieniem, 3 - dla nikogo)',
+  `lock` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'Flaga, która blokuje możliwość (0 - nic nie blokuje, 1 - usuwania, 2 - edycji, 3 -  wyświetlania pracownikowi)',
+  `slug` tinytext NOT NULL COMMENT 'Adres relatywny do tego rusztowania, może być pusty',
+  `image` tinytext NOT NULL COMMENT 'Adres relatywny do zdjęcia wyróżniającego',
+  `title` tinytext NOT NULL COMMENT 'Tytuł, czyli treść znacznika "title", może być puste, wtedy tytuł jest pobierany z nazwy',
+  `keywords` tinytext NOT NULL COMMENT 'Słowa kluczowe, czyli treść meta tagu "keywords"',
+  `description` tinytext NOT NULL COMMENT 'Opis, czyli treść meta tagu "description"',
+  `creation_datetime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'Data utworzenia rusztowania',
+  `publication_datetime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'Data publikacji rusztowania, określa kiedy rusztowanie będzie widoczne',
+  `modification_datetime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'Data ostatniej modyfikacji jakiejkolwiek treści rusztowania',
   PRIMARY KEY (`frame_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Przechowuje wszystkie rusztowania, czyli strony różnego typu do wyświetlenia';
 
 
 DROP TABLE IF EXISTS `gc_frame_meta`;
@@ -110,6 +133,27 @@ CREATE TABLE `gc_frame_meta` (
   UNIQUE KEY `frame_id_name` (`frame_id`,`name`),
   CONSTRAINT `gc_frame_meta_ibfk_1` FOREIGN KEY (`frame_id`) REFERENCES `gc_frames` (`frame_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+DROP TABLE IF EXISTS `gc_frame_relations`;
+CREATE TABLE `gc_frame_relations` (
+  `frame_id` int(10) unsigned NOT NULL COMMENT 'Klucz obcy rusztowania, rusztowanie które posiada',
+  `node_id` int(10) unsigned NOT NULL COMMENT 'Klucz obcy rusztowania, rusztowanie które jest posiadane',
+  KEY `frame_id` (`frame_id`),
+  KEY `node_id` (`node_id`),
+  CONSTRAINT `gc_frame_relations_ibfk_4` FOREIGN KEY (`frame_id`) REFERENCES `gc_frames` (`frame_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `gc_frame_relations_ibfk_5` FOREIGN KEY (`node_id`) REFERENCES `gc_frames` (`frame_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Przechowuje przynależność rusztowania do innego rusztowania';
+
+
+DROP TABLE IF EXISTS `gc_frame_tree`;
+CREATE TABLE `gc_frame_tree` (
+  `taxonomy_id` int(10) unsigned NOT NULL COMMENT 'Klucz obcy rusztowania, taksonomia to podział rusztowań na jakieś konkretne grupy. Przykładem taksonomii może być "Kategoria produktu"',
+  `frame_id` int(10) unsigned NOT NULL COMMENT 'Klucz obcy rusztowania, jest to rusztowanie, które przynależy do jakiejś taksonomii i tworzy grupę pewnych rusztowań. Przykładem może być "Komputery" jako "Kategoria produktu"',
+  `parent_id` int(10) unsigned DEFAULT NULL COMMENT 'Klucz obcy rusztowania, określa węzeł nadrzędny w hierarchii drzewiastej. Na przykład "Procesory" należą do węzła "Komputery" w "Kategorii produktu"',
+  `position` int(10) unsigned NOT NULL COMMENT 'Pozycja względem innych węzłów w tej samej taksonomii i w tym samym węźle nadrzędnym',
+  UNIQUE KEY `taxonomy_id_frame_id_position` (`taxonomy_id`,`frame_id`,`position`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Przechowuje przynależność rusztowań do taksonomii oraz węzłów nadrzędnych';
 
 
 DROP TABLE IF EXISTS `gc_mail_sent`;
@@ -134,47 +178,6 @@ CREATE TABLE `gc_mail_to_send` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_menus`;
-CREATE TABLE `gc_menus` (
-  `menu_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` tinytext NOT NULL,
-  `type` varchar(32) NOT NULL,
-  `target` varchar(32) NOT NULL,
-  `destination` tinytext NOT NULL,
-  `frame_id` int(10) unsigned DEFAULT NULL,
-  PRIMARY KEY (`menu_id`),
-  KEY `frame_id` (`frame_id`),
-  CONSTRAINT `gc_menus_ibfk_1` FOREIGN KEY (`frame_id`) REFERENCES `gc_frames` (`frame_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-DROP TABLE IF EXISTS `gc_menu_taxonomies`;
-CREATE TABLE `gc_menu_taxonomies` (
-  `nav_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `workname` varchar(32) NOT NULL,
-  `lang` varchar(2) NOT NULL,
-  `name` tinytext NOT NULL,
-  `maxlevels` tinyint(3) unsigned NOT NULL,
-  PRIMARY KEY (`nav_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-DROP TABLE IF EXISTS `gc_menu_tree`;
-CREATE TABLE `gc_menu_tree` (
-  `nav_id` int(10) unsigned NOT NULL,
-  `menu_id` int(10) unsigned NOT NULL,
-  `parent_id` int(10) unsigned DEFAULT NULL,
-  `position` int(10) unsigned NOT NULL,
-  KEY `navigation_id` (`nav_id`),
-  KEY `node_id` (`menu_id`),
-  KEY `parent_id` (`parent_id`),
-  KEY `position` (`position`),
-  CONSTRAINT `gc_menu_tree_ibfk_1` FOREIGN KEY (`nav_id`) REFERENCES `gc_menu_taxonomies` (`nav_id`),
-  CONSTRAINT `gc_menu_tree_ibfk_4` FOREIGN KEY (`parent_id`) REFERENCES `gc_menu_tree` (`menu_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `gc_menu_tree_ibfk_5` FOREIGN KEY (`menu_id`) REFERENCES `gc_menus` (`menu_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
 DROP TABLE IF EXISTS `gc_modules`;
 CREATE TABLE `gc_modules` (
   `module_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -185,37 +188,15 @@ CREATE TABLE `gc_modules` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `gc_module_files`;
-CREATE TABLE `gc_module_files` (
-  `file_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` tinytext NOT NULL,
-  `slug` tinytext NOT NULL,
-  `width` smallint(6) unsigned NOT NULL,
-  `height` smallint(6) unsigned NOT NULL,
-  `size` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`file_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-DROP TABLE IF EXISTS `gc_module_file_meta`;
-CREATE TABLE `gc_module_file_meta` (
-  `file_id` int(10) unsigned NOT NULL,
-  `name` varchar(32) NOT NULL,
-  `value` mediumtext NOT NULL,
-  UNIQUE KEY `file_id_name` (`file_id`,`name`),
-  CONSTRAINT `gc_module_file_meta_ibfk_1` FOREIGN KEY (`file_id`) REFERENCES `gc_module_files` (`file_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-DROP TABLE IF EXISTS `gc_module_file_pos`;
-CREATE TABLE `gc_module_file_pos` (
+DROP TABLE IF EXISTS `gc_module_file_relations`;
+CREATE TABLE `gc_module_file_relations` (
   `module_id` int(10) unsigned NOT NULL,
   `file_id` int(10) unsigned NOT NULL,
   `position` int(10) unsigned NOT NULL,
   KEY `module_id` (`module_id`),
   KEY `file_id` (`file_id`),
-  CONSTRAINT `gc_module_file_pos_ibfk_1` FOREIGN KEY (`module_id`) REFERENCES `gc_modules` (`module_id`) ON DELETE CASCADE,
-  CONSTRAINT `gc_module_file_pos_ibfk_2` FOREIGN KEY (`file_id`) REFERENCES `gc_module_files` (`file_id`) ON DELETE CASCADE
+  CONSTRAINT `gc_module_file_relations_ibfk_1` FOREIGN KEY (`module_id`) REFERENCES `gc_modules` (`module_id`) ON DELETE CASCADE,
+  CONSTRAINT `gc_module_file_relations_ibfk_2` FOREIGN KEY (`file_id`) REFERENCES `gc_files` (`file_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -256,6 +237,49 @@ CREATE TABLE `gc_module_tabs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
+DROP TABLE IF EXISTS `gc_navigations`;
+CREATE TABLE `gc_navigations` (
+  `navigation_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Klucz główny',
+  `workname` varchar(32) NOT NULL DEFAULT '' COMMENT 'Nazwa wykorzystywana przez szablon do pobrania tej nawigacji',
+  `lang` varchar(2) NOT NULL DEFAULT 'en' COMMENT 'Język nawigacji, zgodny z ISO 639-1',
+  `name` tinytext NOT NULL COMMENT 'Nazwa nawigacji',
+  `maxlevels` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'Maksymalny poziom głębokości nawigacji',
+  PRIMARY KEY (`navigation_id`),
+  KEY `workname_lang` (`workname`,`lang`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Przechowuje nawigacje';
+
+
+DROP TABLE IF EXISTS `gc_navigation_nodes`;
+CREATE TABLE `gc_navigation_nodes` (
+  `node_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Klucz główny węzła',
+  `name` tinytext NOT NULL COMMENT 'Wyświetlana nazwa węzła, może być pusta jeżeli jest ustawiony frame_id, wtedy nazwa jest pobierana z tabelki frames',
+  `type` varchar(32) NOT NULL DEFAULT 'empty' COMMENT 'Typ węzła określa jego zachowanie (empty | homepage | external | frame)',
+  `theme` varchar(32) NOT NULL DEFAULT 'default' COMMENT 'Wyróżnienie węzła (szablon), w zależności od szablonu może załadować inny plik html wyglądu tego węzła',
+  `target` varchar(32) NOT NULL DEFAULT '_self' COMMENT 'Atrybut "target" znaczka "a"',
+  `frame_id` int(10) unsigned DEFAULT NULL COMMENT 'Klucz obcy rusztowania, na które kieruje węzeł',
+  `destination` tinytext NOT NULL COMMENT 'Adres na który kieruje węzeł, jeżeli jego typ to external',
+  PRIMARY KEY (`node_id`),
+  KEY `frame_id` (`frame_id`),
+  CONSTRAINT `gc_navigation_nodes_ibfk_1` FOREIGN KEY (`frame_id`) REFERENCES `gc_frames` (`frame_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Przechowuje węzły nawigacji, czyli jej elementy menu';
+
+
+DROP TABLE IF EXISTS `gc_navigation_tree`;
+CREATE TABLE `gc_navigation_tree` (
+  `navigation_id` int(10) unsigned NOT NULL COMMENT 'Klucz obcy nawigacji, określa do jakiej nawigacji przynależy węzeł',
+  `node_id` int(10) unsigned NOT NULL COMMENT 'Klucz obcy węzła nawigacji',
+  `parent_id` int(10) unsigned DEFAULT NULL COMMENT 'Klucz obcy węzła nawigacji, określa węzeł nadrzędny w hierarchii drzewiastej',
+  `position` int(10) unsigned NOT NULL COMMENT 'Pozycja względem innych węzłów w tej samej nawigacji i w tym samym węźle nadrzędnym',
+  KEY `navigation_id` (`navigation_id`),
+  KEY `node_id` (`node_id`),
+  KEY `parent_id` (`parent_id`),
+  KEY `position` (`position`),
+  CONSTRAINT `gc_navigation_tree_ibfk_4` FOREIGN KEY (`parent_id`) REFERENCES `gc_navigation_tree` (`node_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `gc_navigation_tree_ibfk_5` FOREIGN KEY (`node_id`) REFERENCES `gc_navigation_nodes` (`node_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `gc_navigation_tree_ibfk_6` FOREIGN KEY (`navigation_id`) REFERENCES `gc_navigations` (`navigation_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Przechowuje przynależność węzłów do nawigacji oraz węzłów nadrzędnych';
+
+
 DROP TABLE IF EXISTS `gc_popups`;
 CREATE TABLE `gc_popups` (
   `popup_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -279,80 +303,6 @@ CREATE TABLE `gc_popup_display` (
   KEY `frame_id` (`frame_id`),
   CONSTRAINT `gc_popup_display_ibfk_5` FOREIGN KEY (`popup_id`) REFERENCES `gc_popups` (`popup_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `gc_popup_display_ibfk_6` FOREIGN KEY (`frame_id`) REFERENCES `gc_frames` (`frame_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-DROP TABLE IF EXISTS `gc_post_membership`;
-CREATE TABLE `gc_post_membership` (
-  `frame_id` int(10) unsigned NOT NULL,
-  `node_id` int(10) unsigned NOT NULL,
-  KEY `post_id` (`frame_id`),
-  KEY `node_id` (`node_id`),
-  CONSTRAINT `gc_post_membership_ibfk_1` FOREIGN KEY (`frame_id`) REFERENCES `gc_frames` (`frame_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `gc_post_membership_ibfk_2` FOREIGN KEY (`node_id`) REFERENCES `gc_frames` (`frame_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-DROP TABLE IF EXISTS `gc_post_taxonomies`;
-CREATE TABLE `gc_post_taxonomies` (
-  `tax_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `workname` varchar(32) NOT NULL,
-  `lang` varchar(2) NOT NULL,
-  `name` tinytext NOT NULL,
-  `maxlevels` tinyint(3) unsigned NOT NULL,
-  PRIMARY KEY (`tax_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-DROP TABLE IF EXISTS `gc_post_tree`;
-CREATE TABLE `gc_post_tree` (
-  `tax_id` int(10) unsigned NOT NULL,
-  `frame_id` int(10) unsigned NOT NULL,
-  `parent_id` int(10) unsigned DEFAULT NULL,
-  `position` int(10) unsigned NOT NULL,
-  KEY `tax_id` (`tax_id`),
-  KEY `parent_id` (`parent_id`),
-  KEY `node_id` (`frame_id`),
-  CONSTRAINT `gc_post_tree_ibfk_1` FOREIGN KEY (`tax_id`) REFERENCES `gc_post_taxonomies` (`tax_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `gc_post_tree_ibfk_2` FOREIGN KEY (`frame_id`) REFERENCES `gc_frames` (`frame_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `gc_post_tree_ibfk_3` FOREIGN KEY (`parent_id`) REFERENCES `gc_post_tree` (`frame_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-DROP TABLE IF EXISTS `gc_product_membership`;
-CREATE TABLE `gc_product_membership` (
-  `frame_id` int(10) unsigned NOT NULL,
-  `node_id` int(10) unsigned NOT NULL,
-  KEY `product_id` (`frame_id`),
-  KEY `node_id` (`node_id`),
-  CONSTRAINT `gc_product_membership_ibfk_2` FOREIGN KEY (`frame_id`) REFERENCES `gc_frames` (`frame_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `gc_product_membership_ibfk_3` FOREIGN KEY (`node_id`) REFERENCES `gc_frames` (`frame_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-DROP TABLE IF EXISTS `gc_product_taxonomies`;
-CREATE TABLE `gc_product_taxonomies` (
-  `tax_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `workname` varchar(32) NOT NULL,
-  `lang` varchar(2) NOT NULL,
-  `name` tinytext NOT NULL,
-  `maxlevels` tinyint(3) unsigned NOT NULL,
-  PRIMARY KEY (`tax_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-DROP TABLE IF EXISTS `gc_product_tree`;
-CREATE TABLE `gc_product_tree` (
-  `tax_id` int(10) unsigned NOT NULL,
-  `frame_id` int(10) unsigned NOT NULL,
-  `parent_id` int(10) unsigned DEFAULT NULL,
-  `position` int(10) unsigned NOT NULL,
-  KEY `tax_id` (`tax_id`),
-  KEY `parent_id` (`parent_id`),
-  KEY `node_id` (`frame_id`),
-  CONSTRAINT `gc_product_tree_ibfk_5` FOREIGN KEY (`tax_id`) REFERENCES `gc_product_taxonomies` (`tax_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `gc_product_tree_ibfk_7` FOREIGN KEY (`frame_id`) REFERENCES `gc_frames` (`frame_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `gc_product_tree_ibfk_8` FOREIGN KEY (`parent_id`) REFERENCES `gc_product_tree` (`frame_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -420,4 +370,4 @@ CREATE TABLE `gc_widgets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
--- 2017-02-24 21:03:38
+-- 2017-03-17 17:50:44
