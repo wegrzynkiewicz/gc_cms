@@ -29,11 +29,20 @@ $_POST = GC\Staff::getInstance()->getData();
         <form action="<?=$request->uri?>" method="post" id="form" class="form-horizontal">
 
             <div class="simple-box">
-                <?=render(ROUTES_PATH.'/admin/_parts/input/select2-language.html.php', [
-                    'name' => 'lang',
-                    'label' => trans('Język'),
-                    'help' => trans('Wyświetla panel i komunikaty w tym języku'),
-                ])?>
+                <fieldset>
+                    <legend><?=trans('Ustawienia pracownika')?></legend>
+                    <?=render(ROUTES_PATH.'/admin/_parts/input/editbox.html.php', [
+                        'name' => 'name',
+                        'label' => trans('Nazwa pracownika'),
+                        'help' => trans('Zalecamy używanie imienia i nazwiska (Nazwa nie może być pusta)'),
+                    ])?>
+
+                    <?=render(ROUTES_PATH.'/admin/_parts/input/select2-language.html.php', [
+                        'name' => 'lang',
+                        'label' => trans('Język'),
+                        'help' => trans('Wyświetla panel i komunikaty w tym języku'),
+                    ])?>
+                </fieldset>
             </div>
 
             <?=render(ROUTES_PATH.'/admin/_parts/input/submitButtons.html.php', [

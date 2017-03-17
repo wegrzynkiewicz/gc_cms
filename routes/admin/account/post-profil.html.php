@@ -8,6 +8,7 @@ $staff_id = GC\Staff::getInstance()['staff_id'];
 
 # zaktualizuj profil pracownika
 GC\Model\Staff\Staff::updateByPrimaryId($staff_id, [
+    'name' => post('name'),
     'lang' => post('lang'),
 ]);
 
