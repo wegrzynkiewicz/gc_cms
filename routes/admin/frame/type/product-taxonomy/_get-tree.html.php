@@ -4,8 +4,8 @@ $taxonomy_id = $frame_id;
 
 require ROUTES_PATH."/admin/frame/_parts/taxonomy-breadcrumbs.php";
 
-$tree = GC\Model\Frame\Tree::select()
-    ->source('::nodes')
+$tree = GC\Model\Frame::select()
+    ->source('::tree')
     ->equals('taxonomy_id', $taxonomy_id)
     ->fetchTree();
 

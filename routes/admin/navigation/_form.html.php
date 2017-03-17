@@ -22,7 +22,10 @@
                     'name' => 'workname',
                     'label' => trans('Przyporządkuj nawigację do szablonu'),
                     'help' => trans('Wybierz w którym miejscu chcesz wyświetlać tą nawigację.'),
-                    'options' => array_trans($config['template']['navigations'])
+                    'options' => array_trans(array_merge(
+                        ['' => 'Brak przyporządkowania'],
+                        $config['template']['navigations']
+                    )),
                 ])?>
             </div>
 

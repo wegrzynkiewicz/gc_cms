@@ -4,6 +4,9 @@
 
 require TEMPLATE_PATH.'/functions.php';
 
+# pobierz ustawienia szablonu do configa
+$config['template'] = require TEMPLATE_PATH.'/config.php';
+
 # ustawienie katalogu dla nowych translacji
 GC\Translator::$domain = 'template-'.TEMPLATE;
 

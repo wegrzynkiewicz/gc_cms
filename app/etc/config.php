@@ -54,6 +54,9 @@ $config = [
         'enabled' => true, # zezwala na nietypowe akcje (np: zmiana hasła admina)
         'construction' => false, # wyświetla komunikat "strona w budowie" za każdym żądaniem
     ],
+    'template' => [ # ustwienia szablonu
+        # powinny być puste i zaktualizowane poprzez pliki szablonu
+    ],
     'seo' => [ # związane z nazwą adresu url witryny
 
         # kod odpowiedzi podczas przekierowywania seo, przydatne, aby przeglądarki nie cachowany przekierowań
@@ -162,13 +165,6 @@ $config = [
         'main' => 'pl', # główny język strony, który nie jest wyświetlany w slugu
         'visitorDefault' => 'pl', # domyśly język gdy nie wiadomo jakiego języka oczekuje odwiedzający
         'editorDefault' => 'pl', # domyślny język edytowania w panelu admina
-    ],
-    'template' => [ # ustwienia szablonu
-        'navigations' => [ # "workname", które mogą zostać wybrane dla nawigacji, która ma zostać wyświetlona w określonym miejscu szablonu
-            '' => 'Brak przyporządkowania',
-            'top' => 'Nawigacja górna',
-            'side' => 'Nawigacja boczna',
-        ],
     ],
     'frames' => [ # ustawienia i rodzaje rusztowań
         'page' => [
@@ -314,7 +310,7 @@ $config = [
         '~^/old-service/index\.php\?id=(\d+)\&theme=([a-z]+?)$~' => '/old-service/$1/$2',
     ],
     'elfinder' => [ # ustwienia dotyczące elfindera
-        'uri' => '/admin/elfinder/connector.json', # adres connectora
+        'uri' => '/admin/elfinder/connector.json', # adres relatywny connectora
     ],
     'dump' => [ # zawiera informacje dla eksportera bazy danych
         'path' => STORAGE_PATH.'/dumps/'.date('Y-m'), # ścieżka do katalogu z rzutami bazy danych

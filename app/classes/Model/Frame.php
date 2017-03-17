@@ -5,13 +5,14 @@ namespace GC\Model;
 use GC\Staff;
 use GC\Validate;
 use GC\Model\Module;
-use GC\Model\Frame\Tree;
-use GC\Storage\AbstractModel;
+use GC\Storage\AbstractNode;
 
-class Frame extends AbstractModel
+class Frame extends AbstractNode
 {
-    public static $table   = '::frames';
-    public static $primary = 'frame_id';
+    public static $table      = '::frames';
+    public static $primary    = 'frame_id';
+    public static $nodeIndex  = 'frame_id';
+    public static $tree       = '::frames LEFT JOIN ::frame_tree USING(frame_id)';
 
     public static function updateByFrameId($frame_id, array $data)
     {
@@ -65,16 +66,16 @@ class Frame extends AbstractModel
     }
 
     /**
-     * Usuwa rusztowanie, jego moduły i węzły, jeżeli rusztowanie jest taksonomią
+     * Usuwa rusztowanie, jego moduły i węzły jeżeli rusztowanie jest taksonomią
      */
     public static function deleteByFrameId($frame_id)
     {
         # pobierz wszystkie węzły tej taksonomii
-        $nodes = Tree::select()
+        $nodes = static::select()
             ->fields('frame_id')
-            ->source('::nodes')
+            ->source('::tree')
             ->equals('taxonomy_id', $frame_id)
-            ->fetchByKey('frame_id');
+            ->fetchByPrimaryKey();
 
         # usuń każdy węzeł tej taksonomii
         foreach ($nodes as $node_id => $node) {

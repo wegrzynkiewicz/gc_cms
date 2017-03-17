@@ -7,10 +7,7 @@ use GC\Storage\AbstractNode;
 
 class Tree extends AbstractNode
 {
-    public static $table      = '::frame_tree';
-    public static $nodeIndex  = 'frame_id';
-    public static $nodes      = '::frame_tree LEFT JOIN ::frames USING(frame_id)';
-    public static $aloneNodes = '::frame_tree RIGHT JOIN ::frames USING(frame_id)';
+    public static $table = '::frame_tree';
 
     /**
      *
@@ -60,27 +57,5 @@ class Tree extends AbstractNode
             'parent_id' => null,
             'position' => $position+1,
         ]);
-    }
-
-    /**
-     * Usuwa rusztowanie i wszystkie węzły potomne
-     */
-    public static function deleteByFrameId($frame_id)
-    {
-        # usuń węzeł produktu
-        Frame::deleteByFrameId($frame_id);
-
-        # pobierz węzły produktów, które nie są przypisane do drzewa
-        $frames = static::select()
-            ->fields(['frame_id'])
-            ->source('::aloneNodes')
-            ->equals('type', 'product-node')
-            ->equals('tax_id', null)
-            ->fetchAll();
-
-        # usuń każdy samotny węzeł produktu
-        foreach ($frames as $frame) {
-            Frame::deleteByFrameId($frame['frame_id']);
-        }
     }
 }

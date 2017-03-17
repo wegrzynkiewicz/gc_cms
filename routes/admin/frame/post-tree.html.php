@@ -11,7 +11,6 @@ $frame = GC\Model\Frame::select()
 
 # dekoduj nadesłaną wartość position
 $positions = json_decode(post('positions', []), true);
-
 GC\Model\Frame\Tree::insertPositionsToTaxonomy($positions, $frame_id);
 
 $type = $frame['type'];

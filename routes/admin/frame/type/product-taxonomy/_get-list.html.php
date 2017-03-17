@@ -8,9 +8,9 @@ $taxonomies = GC\Model\Frame::select()
     ->fetchByPrimaryKey();
 
 # pobierz wszystkie węzły przygotowane do budowy drzewa
-$nodes = GC\Model\Frame\Tree::select()
+$nodes = GC\Model\Frame::select()
     ->fields(['taxonomy_id', 'frame_id', 'parent_id', 'name'])
-    ->source('::nodes')
+    ->source('::tree')
     ->order('position', 'ASC')
     ->fetchAll();
 
@@ -23,7 +23,7 @@ foreach ($nodes as $node) {
 # zbuduj drzewa dla konkretnych taksonomii
 foreach ($taxonomies as $taxonomy_id => &$taxonomy) {
     $taxonomy['tree'] = isset($taxonomyNodes[$taxonomy_id])
-        ? GC\Model\Frame\Tree::createTree($taxonomyNodes[$taxonomy_id])
+        ? GC\Model\Frame::createTree($taxonomyNodes[$taxonomy_id])
         : null;
 }
 unset($taxonomy);
