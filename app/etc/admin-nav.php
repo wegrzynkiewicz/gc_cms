@@ -61,7 +61,7 @@ return [
     ],
     'nav' => [
         'name' => trans('Nawigacja'),
-        'path' => '/admin/nav/list',
+        'path' => '/admin/navigation/list',
         'icon' => 'sitemap',
         'perms' => [],
         'children' => [],

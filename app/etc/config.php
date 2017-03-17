@@ -163,6 +163,13 @@ $config = [
         'visitorDefault' => 'pl', # domyśly język gdy nie wiadomo jakiego języka oczekuje odwiedzający
         'editorDefault' => 'pl', # domyślny język edytowania w panelu admina
     ],
+    'template' => [ # ustwienia szablonu
+        'navigations' => [ # "workname", które mogą zostać wybrane dla nawigacji, która ma zostać wyświetlona w określonym miejscu szablonu
+            '' => 'Brak przyporządkowania',
+            'top' => 'Nawigacja górna',
+            'side' => 'Nawigacja boczna',
+        ],
+    ],
     'frames' => [ # ustawienia i rodzaje rusztowań
         'page' => [
             'name' => 'Strona',
@@ -244,11 +251,20 @@ $config = [
             ],
         ],
     ],
-    'nodeTypes' => [ # rodzaje węzłów nawigacji
-        'empty' => 'Nieklikalny węzeł',
-        'external' => 'Kieruj na adres',
-        'homepage' => 'Kieruj na stronę główną',
-        'page' => 'Kieruj na istniejącą stronę',
+    'navigation' => [ # ustawienia dla nawigacji
+        'nodeTypes' => [ # rodzaje węzłów nawigacji
+            'empty' => 'Nieklikalny węzeł',
+            'external' => 'Kieruj na adres',
+            'homepage' => 'Kieruj na stronę główną',
+            'frame' => 'Kieruj na stronę w serwisie',
+        ],
+        'nodeThemes' => [ # dostępne wyróżnienia węzłów
+            'default' => 'Domyślny węzeł',
+        ],
+        'nodeTargets' => [ # dostępne atrybuty target dla węzłów nawigacji
+            '_self' => 'Załaduj w tym samym oknie',
+            '_blank' => 'Załaduj w nowym oknie',
+        ],
     ],
     'formFieldTypes' => [ # rodzaje zainstalowanych pól formularzy
         'editbox' => 'Zwykłe pole tekstowe',
@@ -289,10 +305,6 @@ $config = [
     'permissions' => [ # zawiera uprawnienia dostępne dla pracownikow
         'manage_staff' => 'Zarządzanie pracownikami',
         'manage_staff_groups' => 'Zarządzanie grupami pracowników',
-    ],
-    'navNodeTargets' => [ # dostępne atrybuty target dla węzłów nawigacji
-        '_self' => 'Załaduj w tym samym oknie',
-        '_blank' => 'Załaduj w nowym oknie',
     ],
     'frameVisibility' => [ # dostępne atrybuty visibility dla rusztowań
         'all' => 'Widoczna dla wszystkich',

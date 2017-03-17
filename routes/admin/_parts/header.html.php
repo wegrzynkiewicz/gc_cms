@@ -9,5 +9,5 @@
 </head>
 <body>
     <div id="wrapper">
-        <?php require ROUTES_PATH.'/admin/_parts/navbar/main.html.php'; ?>
+        <?=render(ROUTES_PATH.'/admin/_parts/navbar/main.html.php')?>
         <div id="page-wrapper">

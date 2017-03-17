@@ -8,7 +8,7 @@ use GC\Storage\AbstractNode;
 class Tree extends AbstractNode
 {
     public static $table      = '::frame_tree';
-    public static $node       = 'frame_id';
+    public static $nodeIndex  = 'frame_id';
     public static $nodes      = '::frame_tree LEFT JOIN ::frames USING(frame_id)';
     public static $aloneNodes = '::frame_tree RIGHT JOIN ::frames USING(frame_id)';
 

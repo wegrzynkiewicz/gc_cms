@@ -29,7 +29,8 @@
                 placeholder: "<?=$placeholder?>",
             <?php endif ?>
             tags: true,
-            minimumResultsForSearch: Infinity
+            minimumResultsForSearch: Infinity,
+            theme: "bootstrap",
         });
         $('#<?=$name?>').on('select2:opening select2:close', function(e){
             $('body').toggleClass('kill-all-select2-dropdowns', e.type=='select2:opening');

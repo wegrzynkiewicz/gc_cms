@@ -20,7 +20,7 @@ abstract class AbstractNode extends AbstractModel
 
     public function getNodeId()
     {
-        return $this->getProperty(static::$node);
+        return $this->getProperty(static::$nodeIndex);
     }
 
     public function addChildAtPosition(AbstractNode $child, $position)
@@ -432,7 +432,7 @@ abstract class AbstractNode extends AbstractModel
             $parents = [];
             foreach ($list as $entity) {
                 $node = new static($entity);
-                $id = intval($entity[static::$node]);
+                $id = intval($entity[static::$nodeIndex]);
                 $pid = intval($entity['parent_id']);
                 $nodes[$id] = $node;
                 $parents[$pid][$id] = $node;
@@ -449,7 +449,7 @@ abstract class AbstractNode extends AbstractModel
     {
         $tree = [];
         foreach ($childrenOfNode as $child) {
-            $id = $child[static::$node];
+            $id = $child[static::$nodeIndex];
             if (isset($allChildrenOfParents[$id])) {
                 $child->pushChildren(static::createBranch(
                     $allChildrenOfParents, $allChildrenOfParents[$id]

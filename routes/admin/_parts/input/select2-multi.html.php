@@ -30,7 +30,8 @@
             <?php if (isset($placeholder)): ?>
                 placeholder: "<?=$placeholder?>",
             <?php endif ?>
-            allowClear: true
+            allowClear: true,            
+            theme: "bootstrap",
         });
     });
 </script>

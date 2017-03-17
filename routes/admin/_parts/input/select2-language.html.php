@@ -36,7 +36,8 @@
             templateSelection: format,
             escapeMarkup: function(m) {
                 return m;
-            }
+            },            
+            theme: "bootstrap",
         });
     });
 </script>

@@ -23,7 +23,7 @@ foreach ($nodes as $node) {
 # zbuduj drzewa dla konkretnych taksonomii
 foreach ($taxonomies as $taxonomy_id => &$taxonomy) {
     $taxonomy['tree'] = isset($taxonomyNodes[$taxonomy_id])
-        ? GC\Model\Product\Tree::createTree($taxonomyNodes[$taxonomy_id])
+        ? GC\Model\Frame\Tree::createTree($taxonomyNodes[$taxonomy_id])
         : null;
 }
 unset($taxonomy);

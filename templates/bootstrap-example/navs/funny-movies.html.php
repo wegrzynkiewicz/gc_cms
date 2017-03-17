@@ -1,13 +1,13 @@
 <?php
 
 # pobierz samą nawigację
-$nav = GC\Model\Menu\Taxonomy::select()
+$nav = GC\Model\Navigation\Taxonomy::select()
     ->equals('workname', 'funny-movies')
     ->equals('::menu_taxonomies.lang', getVisitorLang())
     ->fetch();
 
 # pobierz węzły nawigacji i zbuduj z nich drzewo
-$menu = GC\Model\Menu\Menu::select()
+$menu = GC\Model\Navigation\Node::select()
     ->fields('::fields')
     ->source('::tree_frame')
     ->equals('nav_id', $nav['nav_id'])

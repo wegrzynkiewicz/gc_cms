@@ -15,7 +15,7 @@ $removeDirRecursive = function ($dir) use (&$removeDirRecursive)
             if ($object != "." && $object != "..") {
                 $file = $dir.DIRECTORY_SEPARATOR.$object;
                 if (filetype($file) == "dir") {
-                    removeDirRecursive($file);
+                    $removeDirRecursive($file);
                 } else {
                     echo 'Deleting file: '.$file.PHP_EOL;
                     @unlink($file);

@@ -1,1 +1,0 @@
-<?=trans($config['nodeTypes']['empty'])?>

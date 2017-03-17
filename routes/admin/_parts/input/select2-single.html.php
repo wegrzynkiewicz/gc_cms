@@ -1,5 +1,5 @@
 <?php
-$selectedValue = request($name);
+$selectedValue = post($name);
 $errorMessage = (isset($error) and isset($error[$name])) ? $error[$name] : null;
 ?>
 <div class="form-group <?=$errorMessage ? 'has-error' : ''?>">
@@ -12,7 +12,7 @@ $errorMessage = (isset($error) and isset($error[$name])) ? $error[$name] : null;
         <select
             id="<?=$name?>"
             name="<?=$name?>"
-            class="form-control input">
+            class="form-control">
 
             <?php if (isset($placeholder)): ?>
                 <option value="" disabled="disabled" <?=selected(!$selectedValue)?>></option>
@@ -44,7 +44,11 @@ $errorMessage = (isset($error) and isset($error[$name])) ? $error[$name] : null;
             <?php if (isset($placeholder)): ?>
                 placeholder: "<?=$placeholder?>",
             <?php endif ?>
-            width: '100%'
+            width: '100%',
+            theme: "bootstrap",
+            <?php if (isset($hideSearch)): ?>
+                minimumResultsForSearch: -1
+            <?php endif ?>
         });
     });
 </script>
