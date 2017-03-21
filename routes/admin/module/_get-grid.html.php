@@ -55,7 +55,7 @@ foreach ($metas as $meta) {
                 <div class="grid-with-rows">
                     <div id="grid-rows-wrapper"></div>
                     <div class="grid-stack">
-                        <?php foreach ($modules as $module_id => $module): dd($module); ?>
+                        <?php foreach ($modules as $module_id => $module): ?>
                             <?=render(ROUTES_PATH.'/admin/module/_grid-item.html.php', $module)?>
                         <?php endforeach ?>
                     </div>

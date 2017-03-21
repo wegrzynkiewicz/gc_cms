@@ -35,15 +35,23 @@ class Node extends AbstractNode
      */
     public function getHref()
     {
-        if ($this->frame_id) {
+        if ($this->type === 'empty') {
+            return '#';
+        }
+
+        if ($this->type === 'frame' and $this->frame_id) {
             return $GLOBALS['uri']->make($this->slug);
         }
 
-        if ($this->destination === '/') {
+        if ($this->type === 'homepage') {
             return $GLOBALS['uri']->make('/');
         }
 
-        return $this->destination;
+        if ($this->type === 'external') {
+            return $this->destination;
+        }
+
+        return '#';
     }
 
     /**

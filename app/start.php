@@ -22,7 +22,7 @@ ob_start('ob_gzhandler') or ob_start();
 try {
     # jeżeli strona jest w budowie wtedy zwróć komunikat o budowie
     if ($config['debug']['construction'] and !isset($_SESSION['allowInConstruction'])) {
-        throw new \ResponseException(null, 503);
+        throw new \ResponseException(null, 503); # Service Unavailable
     }
 
     $router = new GC\Router($request->method, $request->slug);
@@ -31,17 +31,19 @@ try {
     $_SEGMENTS = $router->segments;
     $_PARAMETERS = $router->parameters;
 
+    logger('[ROUTING] '.relativePath($_ACTION));
+
     require $_ACTION;
 }
 catch (\GC\Exception\ResponseException $exception) {
     $code = $exception->getCode();
-    $code = $code > 0 ? $code : 404;
+    $code = $code > 0 ? $code : 404; # Not Found
     echo renderError($code, [
         'message' => $exception->getMessage(),
     ]);
 }
 catch (\Exception $exception) {
-    echo renderError(503);
+    echo renderError(500); # Internal Server Error
 }
 
 ob_end_flush();

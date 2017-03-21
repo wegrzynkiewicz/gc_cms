@@ -69,6 +69,9 @@ class Router
             ->equals('slug', $this->slug)
             ->fetch();
 
+        # dodanie rusztowania jako zmiennej globalnej
+        $GLOBALS['frame'] = $frame;
+
         # jeżeli nie uda się pobrać rusztowania
         if (!$frame) {
             throw new ResponseException(sprintf(

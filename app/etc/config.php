@@ -54,9 +54,6 @@ $config = [
         'enabled' => true, # zezwala na nietypowe akcje (np: zmiana hasła admina)
         'construction' => false, # wyświetla komunikat "strona w budowie" za każdym żądaniem
     ],
-    'template' => [ # ustwienia szablonu
-        # powinny być puste i zaktualizowane poprzez pliki szablonu
-    ],
     'seo' => [ # związane z nazwą adresu url witryny
 
         # kod odpowiedzi podczas przekierowywania seo, przydatne, aby przeglądarki nie cachowany przekierowań
@@ -354,3 +351,5 @@ $config = [
         ],
     ],
 ];
+
+$config['template'] = require TEMPLATE_PATH.'/config.php';

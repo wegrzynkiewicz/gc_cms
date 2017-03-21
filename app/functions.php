@@ -525,14 +525,17 @@ function render($templateName, array $arguments = [])
 function renderError($code, array $arguments = [])
 {
     http_response_code($code);
-    logger("[DISPLAY-ERROR] {$code}");
+    logger("[RENDER-ERROR] {$code}");
 
     $firstLetter = substr($code, 0, 1);
+    $extension = isset($GLOBALS['request'])
+        ? $GLOBALS['request']->extension
+        : 'html';
 
     $files = [
-        TEMPLATE_PATH."/errors/{$code}.html.php",
-        TEMPLATE_PATH."/errors/{$firstLetter}xx.html.php",
-        TEMPLATE_PATH."/errors/xxx.html.php",
+        TEMPLATE_PATH."/errors/{$code}.{$extension}.php",
+        TEMPLATE_PATH."/errors/{$firstLetter}xx.{$extension}.php",
+        TEMPLATE_PATH."/errors/xxx.{$extension}.php",
     ];
 
     foreach ($files as $file) {
