@@ -3,6 +3,7 @@
 namespace GC;
 
 use GC\Request;
+use GC\Exception\ResponseException;
 
 class Router
 {
@@ -70,7 +71,9 @@ class Router
 
         # jeżeli nie uda się pobrać rusztowania
         if (!$frame) {
-            return null;
+            throw new ResponseException(sprintf(
+                'Slug (%s) was not found', $this->slug
+            ), 404);
         }
 
         # jeżeli istnieje niestandardowy plik w folderze z szablonem
@@ -88,7 +91,7 @@ class Router
             return $file;
         }
 
-        return null;
+        throw new ResponseException('Unknown frame type', 503);
     }
 
     protected function getFile($path, $name, $theme = 'default')
