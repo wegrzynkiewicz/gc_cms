@@ -33,6 +33,11 @@
                     ])?>
 
                     <?=render(ROUTES_PATH.'/admin/_parts/input/editbox.html.php', [
+                        'name' => 'title',
+                        'label' => trans('Tytuł strony (meta title)'),
+                    ])?>
+
+                    <?=render(ROUTES_PATH.'/admin/_parts/input/editbox.html.php', [
                         'name' => 'keywords',
                         'label' => trans('Tagi i słowa kluczowe (meta keywords)'),
                     ])?>

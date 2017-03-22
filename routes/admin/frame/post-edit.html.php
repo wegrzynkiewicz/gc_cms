@@ -14,6 +14,7 @@ $type = $frame['type'];
 GC\Model\Frame::updateByFrameId($frame_id, [
     'name' => post('name'),
     'slug' => normalizeSlug(post('slug')),
+    'title' => post('title'),
     'keywords' => post('keywords'),
     'description' => post('description'),
     'image' => $uri->relative(post('image')),

@@ -122,7 +122,7 @@ function setValueByKeys(array &$array, array $keys, $value)
  */
 function server($name, $default = '')
 {
-    return (isset($_SERVER[$name]) and $_SERVER[$name]) ? $_SERVER[$name] : $default;
+    return (isset($_SERVER[$name])) ? $_SERVER[$name] : $default;
 }
 
 /**
@@ -130,7 +130,7 @@ function server($name, $default = '')
  */
 function post($name, $default = '')
 {
-    return (isset($_POST[$name]) and $_POST[$name]) ? $_POST[$name] : $default;
+    return (isset($_POST[$name])) ? $_POST[$name] : $default;
 }
 
 /**
@@ -138,7 +138,7 @@ function post($name, $default = '')
  */
 function request($name, $default = '')
 {
-    return (isset($_REQUEST[$name]) and $_REQUEST[$name]) ? $_REQUEST[$name] : $default;
+    return (isset($_REQUEST[$name])) ? $_REQUEST[$name] : $default;
 }
 
 /**
@@ -146,7 +146,7 @@ function request($name, $default = '')
  */
 function get($name, $default = '')
 {
-    return (isset($_GET[$name]) and $_GET[$name]) ? $_GET[$name] : $default;
+    return (isset($_GET[$name])) ? $_GET[$name] : $default;
 }
 
 /**
@@ -525,10 +525,9 @@ function render($templateName, array $arguments = [])
 function renderError($code, array $arguments = [])
 {
     http_response_code($code);
-    logger("[RENDER-ERROR] {$code}");
 
     $firstLetter = substr($code, 0, 1);
-    $extension = isset($GLOBALS['request'])
+    $extension = (isset($GLOBALS['request']) and $GLOBALS['request']->extension)
         ? $GLOBALS['request']->extension
         : 'html';
 
@@ -753,8 +752,8 @@ function thumbnail($imageUri, $width, $height, $mode = 'outbound')
             ->open($imagePath)
             ->thumbnail($size, $mode)
             ->save($thumnailPath, $GLOBALS['config']['thumbnail']['options']);
-    } catch (Imagine\Exception\Exception $e) {
-        logger("[THUMBNAIL] Exception ".$e->getMessage());
+    } catch (Imagine\Exception\Exception $exception) {
+        logException($exception);
     }
 
     logger("[THUMBNAIL] Generated {$thumbnailUri}");

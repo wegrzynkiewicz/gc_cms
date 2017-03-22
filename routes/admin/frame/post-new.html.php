@@ -9,6 +9,7 @@ $frame_id = GC\Model\Frame::insert([
     'name' => post('name'),
     'type' => $type,
     'slug' => normalizeSlug(post('slug')),
+    'title' => post('title'),
     'keywords' => post('keywords'),
     'description' => post('description'),
     'image' => $uri->relative(post('image')),

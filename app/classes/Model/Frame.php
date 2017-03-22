@@ -14,6 +14,15 @@ class Frame extends AbstractNode
     public static $nodeIndex  = 'frame_id';
     public static $tree       = '::frames LEFT JOIN ::frame_tree USING(frame_id)';
 
+    public function getTitle()
+    {
+        if ($this->title) {
+            return $this->title;
+        }
+
+        return $this->name;
+    }
+
     public static function updateByFrameId($frame_id, array $data)
     {
         $lang = Staff::getInstance()->getEditorLang();

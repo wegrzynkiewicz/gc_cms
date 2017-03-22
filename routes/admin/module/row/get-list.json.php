@@ -10,6 +10,9 @@ $rows = GC\Model\Module\Row::select()
     ->fetchByKey('position');
 
 foreach ($rows as &$row) {
+    if ($row['gutter'] == 30) {
+        unset($row['gutter']);
+    }
     $preview = empty($row['bg_image']) ? $config['noImageUri']: $row['bg_image'];
     $row['thumbnail'] = $uri->root(thumbnail($preview, 41, 41));
 }

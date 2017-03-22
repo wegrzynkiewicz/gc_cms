@@ -57,7 +57,7 @@ abstract class AbstractModel extends AbstractEntity
 
         $sql = static::sql("REPLACE INTO ::table ({$columns}) VALUES ({$values})");
 
-        Database::getInstance()->execute($sql, array_values($data));
+        return Database::getInstance()->execute($sql, array_values($data));
     }
 
     public static function select()
@@ -68,6 +68,13 @@ abstract class AbstractModel extends AbstractEntity
     public static function update()
     {
         return new Query\Update(static::class);
+    }
+
+    public static function execute($sql, array $params = [])
+    {
+        $sql = static::sql($sql);
+
+        return Database::getInstance()->execute($sql, $params);
     }
 
     /**

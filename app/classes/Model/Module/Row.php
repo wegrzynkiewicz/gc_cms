@@ -6,5 +6,5 @@ use GC\Storage\AbstractModel;
 
 class Row extends AbstractModel
 {
-    public static $table            = '::module_rows';
+    public static $table = '::module_rows';
 }

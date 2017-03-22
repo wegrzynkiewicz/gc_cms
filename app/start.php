@@ -17,12 +17,11 @@ if (isset($_REQUEST['allowInConstruction'])) {
     $_SESSION['allowInConstruction'] = true;
 }
 
-ob_start('ob_gzhandler') or ob_start();
 
 try {
     # jeżeli strona jest w budowie wtedy zwróć komunikat o budowie
     if ($config['debug']['construction'] and !isset($_SESSION['allowInConstruction'])) {
-        throw new \ResponseException(null, 503); # Service Unavailable
+        throw new \GC\Exception\ResponseException(null, 503); # Service Unavailable
     }
 
     $router = new GC\Router($request->method, $request->slug);
@@ -33,20 +32,32 @@ try {
 
     logger('[ROUTING] '.relativePath($_ACTION));
 
+    ob_start('ob_gzhandler');
     require $_ACTION;
+    ob_end_flush();
 }
-catch (\GC\Exception\ResponseException $exception) {
-    $code = $exception->getCode();
-    $code = $code > 0 ? $code : 404; # Not Found
+catch (\Exception $exception) {
+    logException($exception);
+
+    if ($exception instanceof \GC\Exception\ResponseException) {
+        $code = $exception->getCode();
+        $code = $code > 0 ? $code : 404; # Not Found
+    } else {
+        $code = 500; # Internal Server Error
+    }
+
+    # usuń wszystkie utworzone buffory
+    while (count(ob_get_status(true))) {
+        ob_end_clean();
+    }
+
+    # wyświetl bład
+    ob_start('ob_gzhandler');
     echo renderError($code, [
         'message' => $exception->getMessage(),
     ]);
+    ob_end_flush();
 }
-catch (\Exception $exception) {
-    echo renderError(500); # Internal Server Error
-}
-
-ob_end_flush();
 
 logger(sprintf('[RESPONSE] %s -- Time: %.3fs -- Memory: %sMiB',
     http_response_code(),

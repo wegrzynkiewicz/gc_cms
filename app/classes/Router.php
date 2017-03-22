@@ -67,10 +67,7 @@ class Router
         # pobierz rusztowanie po slugu
         $frame = \GC\Model\Frame::select()
             ->equals('slug', $this->slug)
-            ->fetch();
-
-        # dodanie rusztowania jako zmiennej globalnej
-        $GLOBALS['frame'] = $frame;
+            ->fetchObject();
 
         # jeżeli nie uda się pobrać rusztowania
         if (!$frame) {
@@ -78,6 +75,10 @@ class Router
                 'Slug (%s) was not found', $this->slug
             ), 404);
         }
+
+        # dodanie rusztowania jako zmiennej globalnej
+        $GLOBALS['frame'] = $frame;
+        $GLOBALS['frame_id'] = $frame['frame_id'];
 
         # jeżeli istnieje niestandardowy plik w folderze z szablonem
         if ($file = $this->getFile(TEMPLATE_PATH, "custom/".$frame['frame_id'], $frame['theme'])) {

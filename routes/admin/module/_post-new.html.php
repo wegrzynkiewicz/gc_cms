@@ -27,5 +27,12 @@ GC\Model\Module\Grid::insert([
     'h' => 1,
 ]);
 
+# wstaw ustawienia wiersza
+GC\Model\Module\Row::replace([
+    'frame_id' => $frame_id,
+    'position' => $y,
+    'gutter' => 30,
+]);
+
 flashBox(trans("%s został utworzony. Edytujesz go teraz.", [$config['modules'][$moduleType]['name']]));
 redirect($uri->mask("/{$module_id}/edit"));

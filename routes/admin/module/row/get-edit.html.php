@@ -21,10 +21,10 @@ if ($row) {
     'label' => trans('Szerokość wiersza'),
     'help' => trans('Określa zachowanie szerokości wiersza względem szerokości strony.'),
     'hideSearch' => true,
-    'options' => [
-        'wrap' => trans('Wyśrodkowany wiersz węższy od szerokości strony'),
-        'fluid' => trans('Rozciągnięty wiersz na całą szerokość strony'),
-    ],
+    'options' => array_filter([
+        'wrap' => trans('Wyśrodkowany wiersz węższy od dostępnej szerokości'),
+        'fluid' => trans('Rozciągnięty wiersz na całą dostępną szerokość'),
+    ]),
 ])?>
 
 <?=render(ROUTES_PATH.'/admin/_parts/input/editbox.html.php', [
