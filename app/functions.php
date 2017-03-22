@@ -722,6 +722,11 @@ function thumbnail($imageUri, $width, $height, $mode = 'outbound')
         return $imageUri;
     }
 
+    # jeżeli adres obrazka jest pusty
+    if (empty($imageUri)) {
+        return $imageUri;
+    }
+
     $path           = $GLOBALS['config']['thumbnail']['path'];
     $imagePath      = $path.$imageUri;
     $thumbnailUri   = makeThumbnailUri($imageUri, $width, $height);

@@ -124,21 +124,38 @@ foreach ($metas as $meta) {
 </div>
 
 <script id="grid-row-settings" type="text/html">
-    <a href="#"
-        data-toggle="modal"
-        data-y="{{y}}"
-        data-target="#rowSettingsModal"
-        class="simple-box grid-row-settings"
-        title="<?=trans('Ustawienia wiersza')?>"
-        style="top: {{top}}px">
-        <i class="fa fa-gear fa-fw"></i>
-    </a>
+    <div class="grid-row-settings-container" style="top: {{top}}px;">
+        <a href="#"
+            data-toggle="modal"
+            data-y="{{y}}"
+            data-target="#rowSettingsModal"
+            title="<?=trans('Ustawienia wiersza')?>"
+            class="simple-box grid-row-settings-item">
+            <i class="fa fa-gear fa-fw"></i>
+        </a>
+
+        {{#gutter}}
+        <span class="simple-box grid-row-settings-item">{{gutter}}</span>
+        {{/gutter}}
+
+        {{#bg_color}}
+        <span class="simple-box grid-row-settings-item"
+            style="background-color: {{bg_color}};"></span>
+        {{/bg_color}}
+
+        {{#bg_image}}
+        <span class="simple-box grid-row-settings-item"
+            style="background-image: url('{{thumbnail}}');"></span>
+        {{/bg_image}}
+    </div>
 </script>
 
 <?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
 
 <script>
     var rowSettingsTemplate = $('#grid-row-settings').html();
+    var editRowUri = "<?=$uri->make("/admin/module/row/edit/{$frame_id}")?>/";
+    var listRowsUri = "<?=$uri->make("/admin/module/row/{$frame_id}/list.json")?>";
 
     $('#deleteModal').on('show.bs.modal', function (event) {
         $(this).find('[name="module_id"]').val($(event.relatedTarget).data('id'));
@@ -153,17 +170,21 @@ foreach ($metas as $meta) {
         if (!grid) {
             return;
         }
-        var y = 0;
-        var content = '';
-        $('#grid-rows-wrapper').html();
-        while (!grid.isAreaEmpty(0, y, 12, 1)) {
-            content += Mustache.render(rowSettingsTemplate, {
-                y:y,
-                top: (y*215)+(y*20),
-            });
-            y++;
-        }
-        $('#grid-rows-wrapper').html(content);
+        $.get(listRowsUri, function(rows) {
+            var y = 0;
+            var content = '';
+            $('#grid-rows-wrapper').html();
+            while (!grid.isAreaEmpty(0, y, 12, 1)) {
+                var row = {
+                    y: y,
+                    top: (y*215)+(y*20),
+                };
+                row = $.extend(row, rows[y]);
+                content += Mustache.render(rowSettingsTemplate, row);
+                y++;
+            }
+            $('#grid-rows-wrapper').html(content);
+        });
     }
 
     refreshRows();
@@ -172,11 +193,12 @@ foreach ($metas as $meta) {
         event.preventDefault();
         $.post($(this).attr('action'), $(this).serialize(), function() {
             $('#rowSettingsModal').modal('hide');
+            refreshRows();
         });
     });
 
     $('#rowSettingsModal').on('show.bs.modal', function (event) {
-        var url = "<?=$uri->make("/admin/module/row/{$frame_id}/edit.json")?>/"+$(event.relatedTarget).data('y');
+        var url = editRowUri + $(event.relatedTarget).data('y');
         $.get(url, function(data) {
             $('#rowSettingsModalContent').html(data);
             $('#rowSettingsModalForm').attr('action', url);
