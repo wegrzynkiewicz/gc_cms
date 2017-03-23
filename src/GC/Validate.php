@@ -13,17 +13,17 @@ class Validate
 
     public static function installedLang(string $code): bool
     {
-        return in_array($code, array_keys($GLOBALS['config']['langs']));
+        return (bool) in_array($code, array_keys($GLOBALS['config']['langs']));
     }
 
     public static function ip(string $ip): bool
     {
-        return filter_var($ip, FILTER_VALIDATE_IP);
+        return (bool) filter_var($ip, FILTER_VALIDATE_IP);
     }
 
     public static function email(string $email): bool
     {
-        return filter_var($email, FILTER_VALIDATE_EMAIL);
+        return (bool) filter_var($email, FILTER_VALIDATE_EMAIL);
     }
 
     public static function slug(string $slug, int $frame_id = 0): bool
@@ -34,7 +34,7 @@ class Validate
 
         $frame = \GC\Model\Frame::select()
             ->equals('slug', normalizeSlug($slug))
-            ->condition('frame_id != ?', $frame_id)
+            ->condition('frame_id != ?', [$frame_id])
             ->fetch();
 
         return $frame === false;
@@ -48,7 +48,7 @@ class Validate
 
         $user = \GC\Model\Staff\Staff::select()
             ->equals('email', $email)
-            ->condition('staff_id != ?', $staff_id)
+            ->condition('staff_id != ?', [$staff_id])
             ->fetch();
 
         return !$user;

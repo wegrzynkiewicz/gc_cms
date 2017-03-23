@@ -1,4 +1,4 @@
--- Adminer 4.2.5 MySQL dump
+-- Adminer 4.3.0 MySQL dump
 
 SET NAMES utf8;
 SET time_zone = '+00:00';
@@ -225,6 +225,19 @@ CREATE TABLE `gc_module_meta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
+DROP TABLE IF EXISTS `gc_module_rows`;
+CREATE TABLE `gc_module_rows` (
+  `frame_id` int(10) unsigned NOT NULL,
+  `position` int(10) unsigned NOT NULL,
+  `gutter` smallint(5) unsigned NOT NULL DEFAULT '30',
+  `type` varchar(32) NOT NULL DEFAULT 'wrap',
+  `bg_color` varchar(24) NOT NULL DEFAULT '',
+  `bg_image` tinytext NOT NULL,
+  PRIMARY KEY (`frame_id`,`position`),
+  CONSTRAINT `gc_module_rows_ibfk_1` FOREIGN KEY (`frame_id`) REFERENCES `gc_frames` (`frame_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
 DROP TABLE IF EXISTS `gc_module_tabs`;
 CREATE TABLE `gc_module_tabs` (
   `module_id` int(10) unsigned NOT NULL,
@@ -370,4 +383,4 @@ CREATE TABLE `gc_widgets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
--- 2017-03-17 17:50:44
+-- 2017-03-23 21:02:14

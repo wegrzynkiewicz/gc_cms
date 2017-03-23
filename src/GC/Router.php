@@ -80,22 +80,29 @@ class Router
             ), 404);
         }
 
+        extract($frame->getData());
+
         # dodanie rusztowania jako zmiennej globalnej
         $GLOBALS['frame'] = $frame;
-        $GLOBALS['frame_id'] = $frame['frame_id'];
+        $GLOBALS['frame_id'] = $frame_id;
 
         # jeżeli istnieje niestandardowy plik w folderze z szablonem
-        if ($file = $this->getFile(TEMPLATE_PATH, "custom/".$frame['frame_id'], $frame['theme'])) {
+        if ($file = $this->getFile(TEMPLATE_PATH, "custom/{$frame_id}", $theme)) {
             return $file;
         }
 
         # jeżeli slug rusztowania wskazuje na stronę główną
-        if ($frame['slug'] == '/' and $file = $this->getFile(TEMPLATE_PATH, 'homepage', $frame['theme'])) {
+        if ($slug == '/' and $file = $this->getFile(TEMPLATE_PATH, 'homepage', $theme)) {
             return $file;
         }
 
         # jeżeli istnieje plik rusztowania w folderze z szablonem
-        if ($file = $this->getFile(TEMPLATE_PATH, "frames/".$frame['type'], $frame['theme'])) {
+        if ($file = $this->getFile(TEMPLATE_PATH."/frames/{$type}", '', $theme)) {
+            return $file;
+        }
+
+        # jeżeli istnieje plik główny każdego rusztowania
+        if ($file = $this->getFile(TEMPLATE_PATH, 'frame', $theme)) {
             return $file;
         }
 
@@ -109,6 +116,8 @@ class Router
             "{$path}/{$this->method}-{$name}-{$theme}.php",
             "{$path}/{$this->method}-{$name}.{$this->extension}.php",
             "{$path}/{$this->method}-{$name}.php",
+            "{$path}/{$this->method}-{$theme}.{$this->extension}.php",
+            "{$path}/{$this->method}-{$theme}.php",
             "{$path}/{$name}-{$theme}.{$this->extension}.php",
             "{$path}/{$name}-{$theme}.php",
             "{$path}/{$name}.{$this->extension}.php",
