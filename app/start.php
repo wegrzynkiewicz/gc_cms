@@ -63,8 +63,6 @@ catch (Exception $exception) {
     ob_end_flush();
 }
 
-dd(get_included_files());
-
 logger(sprintf('[RESPONSE] %s -- Time: %.3fs -- Memory: %sMiB',
     http_response_code(),
     microtime(true) - START_TIME,
