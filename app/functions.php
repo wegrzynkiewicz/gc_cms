@@ -162,17 +162,6 @@ function sqldate($timestamp = null)
 }
 
 /**
- * Zwraca obiekt DataTime z ustawionymi mikrosekundami
- */
-function getMicroDateTime()
-{
-    $time = microtime(true);
-    $micro = sprintf("%06d", ($time - floor($time)) * 1000000);
-
-    return new DateTime(date('Y-m-d H:i:s.'.$micro, $time));
-}
-
-/**
  * Ustawia krótkie wiadomości, które są wyświetlane po wykonaniu jakiejś akcji, np coś zostało usunięte.
  * $message należy przetłumaczyć samodzielnie. W rzeczywistości dodaje tylko dane do zmiennej sesyjnej.
  */
