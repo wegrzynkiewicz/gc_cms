@@ -105,13 +105,13 @@ class Router
     protected function getFile($path, $name, $theme = 'default')
     {
         $files = [
-            "{$path}/{$this->method}-{$name}-{$theme}.html.php",
+            "{$path}/{$this->method}-{$name}-{$theme}.{$this->extension}.php",
             "{$path}/{$this->method}-{$name}-{$theme}.php",
-            "{$path}/{$this->method}-{$name}.html.php",
+            "{$path}/{$this->method}-{$name}.{$this->extension}.php",
             "{$path}/{$this->method}-{$name}.php",
-            "{$path}/{$name}-{$theme}.html.php",
+            "{$path}/{$name}-{$theme}.{$this->extension}.php",
             "{$path}/{$name}-{$theme}.php",
-            "{$path}/{$name}.html.php",
+            "{$path}/{$name}.{$this->extension}.php",
             "{$path}/{$name}.php",
         ];
 
