@@ -83,7 +83,7 @@ $config = [
     ],
     'adminNavbarTitle' => 'Panel Administracyjny', # wyświetlana w prawym gornym rogu panelu admina
     'adminHeadTitleBase' => 'Acme Panel Administracyjny', # nazwa doklejana do <title> strony w panelu admina
-    'noImageUri' => '/assets/admin/images/no-image.jpg', # ścieżka do obrazka w przypadku braku obrazka
+    'imageNotAvailableUri' => '/assets/admin/image-not-available.jpg', # ścieżka do obrazka w przypadku braku obrazka
     'password' => [ # zawiera ustawienia dotyczące polityki haseł
         'minLength' => 8, # minimalna długość hasła
     ],
@@ -91,9 +91,6 @@ $config = [
         'staff' => [ # ustawienia sesji dla pracownika
             'lifetime' => 1800, # czas jaki musi upłynąć, aby sesja wygasło; w sekundach
         ],
-    ],
-    'avatar' => [
-        'noAvatarUrl' => '/admin/images/no-avatar.jpg', # ściezka do domyślnego obrazka avatara
     ],
     'database' => [ # zawiera parametry połączeniowe do bazy danych
         'dns' => 'mysql:host=localhost;dbname=_gc_cms;charset=utf8',

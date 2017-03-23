@@ -1,5 +1,5 @@
 <?php
-$type = isset($type) ? $type : 'text';
+$type = $_ARGUMENTS['type'] ?? 'text';
 $errorMessage = (isset($error) and isset($error[$name])) ? $error[$name] : null;
 ?>
 <div class="form-group <?=$errorMessage ? 'has-error' : ''?>">

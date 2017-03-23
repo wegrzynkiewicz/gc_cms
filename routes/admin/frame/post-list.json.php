@@ -11,7 +11,7 @@ $frames = GC\Model\Frame::select()
     ->fields('SQL_CALC_FOUND_ROWS frame_id, name, image, slug')
     ->equals('type', $type)
     ->equals('lang', GC\Staff::getInstance()->getEditorLang())
-    ->buildForDataTables($_GET)
+    ->buildForDataTables($_REQUEST)
     ->fetchAll();
 
 # pobierz ilość przefiltrowanych rekordów
@@ -31,7 +31,7 @@ $recordsTotal = intval(GC\Model\Frame::select()
 foreach ($frames as &$frame) {
     $frame_id = $frame['frame_id'];
     $image = empty($frame['image'])
-        ? $config['noImageUri']
+        ? $config['imageNotAvailableUri']
         : $frame['image'];
     $frame['hrefEdit'] = $uri->mask("/{$frame_id}/edit");
     $frame['hrefModule'] = $uri->mask("/{$frame_id}/module/grid");

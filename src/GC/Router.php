@@ -17,14 +17,23 @@ class Router
     public $parameters = [];
     public $segments = [];
 
+    public $mimeTypes = [
+       'html' => 'text/html',
+       'json' => 'application/json',
+       'xml' => 'application/xml',
+    ];
+
     public function __construct(string $method, string $slug, string $extension)
     {
         $this->method = strtolower($method);
         $this->slug = $slug;
         $this->extension = $extension;
+        $this->mimeType = $this->mimeTypes[$extension] ?? 'text/plain';
 
         $this->parts = explode('/', trim($this->slug, '/'));
         $this->parameters = array_filter($this->parts, 'ctype_digit');
+
+        header("Content-Type: {$this->mimeType}; charset=utf-8");
     }
 
     public function resolve(): string

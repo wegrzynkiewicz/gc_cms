@@ -41,12 +41,12 @@ $errorMessage = (isset($error) and isset($error[$name])) ? $error[$name] : null;
 <script>
     $(function() {
         $("#<?=$name?>").select2({
-            <?php if (isset($placeholder)): ?>
+            <?php if ($placeholder ?? false): ?>
                 placeholder: "<?=$placeholder?>",
             <?php endif ?>
             width: '100%',
             theme: "bootstrap",
-            <?php if (isset($hideSearch)): ?>
+            <?php if ($hideSearch ?? false): ?>
                 minimumResultsForSearch: -1
             <?php endif ?>
         });

@@ -41,8 +41,8 @@ class Request
             ->withPath($this->url->getPath())
             ->withQuery($this->url->getQuery());
 
-        logger("[URL] {$url}");
         logger("[REQUEST] {$method} {$this->slug}", $_REQUEST);
+        logger("[URL] {$url}");
     }
 
     public function detectLanguage(array $languageCodes): void

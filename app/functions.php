@@ -471,10 +471,10 @@ function geoIP(string $ip = null): array
 /**
  * Tworzy wrapper dla renderowania pliku
  */
-function render(string $templateName, array $arguments = []): string
+function render(string $templateName, array $_ARGUMENTS = []): string
 {
     extract($GLOBALS);
-    extract($arguments, EXTR_OVERWRITE);
+    extract($_ARGUMENTS, EXTR_OVERWRITE);
 
     ob_start();
     require $templateName;
@@ -699,6 +699,7 @@ function thumbnail(string $imageUri, int $width, int $height, string $mode = 'ou
             ->save($thumnailPath, $GLOBALS['config']['thumbnail']['options']);
     } catch (Imagine\Exception\Exception $exception) {
         logException($exception);
+        throw $exception;
     }
 
     logger("[THUMBNAIL] Generated {$thumbnailUri}");

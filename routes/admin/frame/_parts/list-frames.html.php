@@ -139,7 +139,7 @@
             autoWidth: false,
             ajax: {
                 url: '<?=$uri->mask("/list.json")?>',
-                type: 'GET',
+                type: 'POST',
                 data: {
                     type: '<?=$type?>',
                 },

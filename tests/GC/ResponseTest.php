@@ -51,7 +51,6 @@ final class ResponseTest extends TestCase
             ['/admin/widget/list'],
             ['/root/phpinfo'],
             ['/root/requirements'],
-            ['/root/checksum/list'],
         ];
     }
 

@@ -1,6 +1,6 @@
 <?php
 $image = empty($image)
-    ? $config['noImageUri']
+    ? $config['imageNotAvailableUri']
     : $image;
 ?>
 

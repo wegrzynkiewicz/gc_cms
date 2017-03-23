@@ -1,6 +1,6 @@
 <?php
 $avatarUri = empty($avatar)
-    ? $config['noImageUri']
+    ? $config['imageNotAvailableUri']
     : $avatar;
 ?>
 <tr>

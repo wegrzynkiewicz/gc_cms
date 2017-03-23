@@ -1,6 +1,6 @@
 <?php
 $preview = empty($settings['uri'])
-    ? $config['noImageUri']
+    ? $config['imageNotAvailableUri']
     : $settings['uri'];
 ?>
 <div class="text-center">

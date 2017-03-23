@@ -133,7 +133,7 @@ $count = GC\Model\PopUp\PopUp::select()
             autoWidth: false,
             ajax: {
                 url: '<?=$uri->mask("/list.json")?>',
-                type: 'GET'
+                type: 'POST'
             },
             createdRow: function (row, data, index) {
                 $(row).html(Mustache.render(rowTemplate, data));

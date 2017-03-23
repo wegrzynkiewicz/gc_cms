@@ -7,11 +7,11 @@ $errorMessage = (isset($error) and isset($error[$name])) ? $error[$name] : null;
     </label>
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="input-group">
-            <span class="input-group-addon" id="basic-addon2">
+            <span class="input-group-addon">
                 <?=e($_SERVER['HTTP_HOST'])?>
             </span>
             <input
-                id="<?=$name?>_source"
+                id="<?=$name?>"
                 name="<?=$name?>"
                 <?php if (isset($placeholder)): ?>
                     placeholder="<?=$placeholder?>"

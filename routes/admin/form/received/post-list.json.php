@@ -8,7 +8,7 @@ require ROUTES_PATH.'/admin/form/received/_import.php';
 $received = $query = GC\Model\Form\Sent::select()
     ->fields('SQL_CALC_FOUND_ROWS sent_id, name, status, sent_datetime')
     ->equals('form_id', $form_id)
-    ->buildForDataTables($_POST)
+    ->buildForDataTables($_REQUEST)
     ->fetchAll();
 
 # pobierz ilość przefiltrowanych zgłoszeń

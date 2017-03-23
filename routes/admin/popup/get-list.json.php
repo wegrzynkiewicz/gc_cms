@@ -7,7 +7,7 @@ require ROUTES_PATH.'/admin/popup/_import.php';
 $records = GC\Model\PopUp\PopUp::select()
     ->fields('SQL_CALC_FOUND_ROWS popup_id, name, type')
     ->equals('lang', GC\Staff::getInstance()->getEditorLang())
-    ->buildForDataTables($_GET)
+    ->buildForDataTables($_REQUEST)
     ->fetchAll();
 
 # pobierz ilość przefiltrowanych rekordów
