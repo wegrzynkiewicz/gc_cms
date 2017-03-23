@@ -1,0 +1,16 @@
+<phpunit
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.5/phpunit.xsd"
+     bootstrap="app/bootstrap.php">
+     stopOnError="false"
+     stopOnFailure="false"
+     colors="true">
+     <php>
+        <env name="testUrl" value="http://localhost:8080/web/index.php"/>
+     </php>
+     <testsuites>
+        <testsuite>
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
