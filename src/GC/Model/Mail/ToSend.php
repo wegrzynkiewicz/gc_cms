@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GC\Model\Mail;
 
 use GC\Storage\AbstractModel;

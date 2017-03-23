@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GC;
 
 use GC\Request;
@@ -9,21 +11,23 @@ class Router
 {
     public $method = '';
     public $slug = '';
+    public $extension = '';
 
     public $parts = [];
     public $parameters = [];
     public $segments = [];
 
-    public function __construct($method, $slug)
+    public function __construct(string $method, string $slug, string $extension)
     {
-        $this->method = $method;
+        $this->method = strtolower($method);
         $this->slug = $slug;
+        $this->extension = $extension;
 
         $this->parts = explode('/', trim($this->slug, '/'));
         $this->parameters = array_filter($this->parts, 'ctype_digit');
     }
 
-    public function resolve()
+    public function resolve(): string
     {
         $this->segments = array_filter($this->parts, function ($segment) {
             return !ctype_digit($segment);

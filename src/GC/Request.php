@@ -23,7 +23,7 @@ class Request
 
     public function __construct(string $method, Http $url, HierarchicalPath $script)
     {
-        $this->method = strtolower($method);
+        $this->method = strtoupper($method);
         $this->url = $url;
 
         $this->root = $script->withoutSegments([-1]);
@@ -42,7 +42,7 @@ class Request
             ->withQuery($this->url->getQuery());
 
         logger("[URL] {$url}");
-        logger('[REQUEST] '.strtoupper($method).' '.$this->slug, $_REQUEST);
+        logger("[REQUEST] {$method} {$this->slug}", $_REQUEST);
     }
 
     public function detectLanguage(array $languageCodes): void

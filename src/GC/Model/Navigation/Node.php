@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GC\Model\Navigation;
 
 use GC\Storage\AbstractNode;

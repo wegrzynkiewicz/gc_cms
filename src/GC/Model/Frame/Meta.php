@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GC\Model\Frame\Meta;
 
 use GC\Storage\AbstractModel;

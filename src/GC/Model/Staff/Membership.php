@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GC\Model\Staff;
 
 use GC\Storage\AbstractModel;

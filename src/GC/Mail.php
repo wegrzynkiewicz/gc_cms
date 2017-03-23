@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GC;
 
 use GC\Auth\Password;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GC\Storage\Query;
 
 class Update extends AbstractQuery

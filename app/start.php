@@ -28,7 +28,7 @@ try {
         throw new GC\Exception\ResponseException(null, 503); # Service Unavailable
     }
 
-    $router = new GC\Router($request->method, $request->slug);
+    $router = new GC\Router($request->method, (string) $request->slug, $request->extension);
 
     $_ACTION = $router->resolve();
     $_SEGMENTS = $router->segments;
