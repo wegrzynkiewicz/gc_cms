@@ -5,7 +5,7 @@
 /**
  * Zabezpiecza wyjście przed XSS zamieniając znaki specjalne na encje
  */
-function e($string)
+function e(string $string): string
 {
     return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
 }
@@ -13,7 +13,7 @@ function e($string)
 /**
  * Służy do debugowania, exportuje wynik print_r() do pliku logu
  */
-function dd($mixed = null)
+function dd($mixed = null): void
 {
     # pobiera informacje o pliku w którym wywoływana jest funkcja dd()
     $backtrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT);
@@ -27,7 +27,7 @@ function dd($mixed = null)
     ));
 }
 
-function purifyHtml($dirtyHtml)
+function purifyHtml(string $dirtyHtml): string
 {
     $config = HTMLPurifier_Config::createDefault();
     $purifier = new HTMLPurifier($config);
@@ -39,7 +39,7 @@ function purifyHtml($dirtyHtml)
 /**
  * Kompresuje kod HTMLa
  */
-function compressHtml($html)
+function compressHtml(string $html): string
 {
     return \zz\Html\HTMLMinify::minify($html, [
         'optimizationLevel' => \zz\Html\HTMLMinify::OPTIMIZATION_ADVANCED
@@ -49,7 +49,7 @@ function compressHtml($html)
 /**
  * Służy do prostrzego drukowania warunku
  */
-function selected($condition)
+function selected(bool $condition): string
 {
     return $condition ? ' selected="selected" ' : '';
 }
@@ -57,19 +57,9 @@ function selected($condition)
 /**
  * Służy do prostrzego drukowania warunku
  */
-function checked($condition)
+function checked(bool $condition): string
 {
     return $condition ? ' checked="checked" ' : '';
-}
-
-/**
- * Zwraca odpowiedni $key z tablicy $array, jeżeli istnieje i jest niepusty, w przeciwnym wypadku $default
- * Pomocna w przypadku gdy nie jesteśmy pewni czy istnieje klucz w tablicy.
- * Dla większej ilości kluczy użyj funkcji getValueByKeys
- */
-function def(array $array, $key, $default = '')
-{
-    return isset($array[$key]) ? $array[$key] : $default;
 }
 
 /**
@@ -118,17 +108,9 @@ function setValueByKeys(array &$array, array $keys, $value)
 }
 
 /**
- * Pomocna do sprawdzania czy dany element istnieje w tabeli $_SERVER
- */
-function server($name, $default = '')
-{
-    return (isset($_SERVER[$name])) ? $_SERVER[$name] : $default;
-}
-
-/**
  * Pomocna do sprawdzania czy dany element istnieje w tabeli $_POST
  */
-function post($name, $default = '')
+function post(string $name, $default = '')
 {
     return (isset($_POST[$name])) ? $_POST[$name] : $default;
 }
@@ -136,23 +118,15 @@ function post($name, $default = '')
 /**
  * Pomocna do sprawdzania czy dany element istnieje w tabeli $_REQUEST
  */
-function request($name, $default = '')
+function request(string $name, $default = '')
 {
     return (isset($_REQUEST[$name])) ? $_REQUEST[$name] : $default;
 }
 
 /**
- * Pomocna do sprawdzania czy dany element istnieje w tabeli $_GET
- */
-function get($name, $default = '')
-{
-    return (isset($_GET[$name])) ? $_GET[$name] : $default;
-}
-
-/**
  * Zwraca spreparowaną date dla MySQL. Można podać czas w zmiennej $timestamp
  */
-function sqldate($timestamp = null)
+function sqldate($timestamp = null): string
 {
     if ($timestamp === null) {
         $timestamp = time();
@@ -165,7 +139,7 @@ function sqldate($timestamp = null)
  * Ustawia krótkie wiadomości, które są wyświetlane po wykonaniu jakiejś akcji, np coś zostało usunięte.
  * $message należy przetłumaczyć samodzielnie. W rzeczywistości dodaje tylko dane do zmiennej sesyjnej.
  */
-function flashBox($message, $theme = 'success', $time = 4000)
+function flashBox(string $message, string $theme = 'success', int $time = 4000): void
 {
     $_SESSION['flashBox'] = [
         'message' => $message,
@@ -177,7 +151,7 @@ function flashBox($message, $theme = 'success', $time = 4000)
 /**
  * Usuwa sieroty z tekstu
  */
-function removeOrphan($text)
+function removeOrphan(string $text): string
 {
     return preg_replace('~ ([aiowzu]) ~', ' $1&nbsp;', $text);
 }
@@ -185,7 +159,7 @@ function removeOrphan($text)
 /**
  * Tłumaczy wprowadzony tekst na jego odpowiednik
  */
-function trans($text, array $params = [])
+function trans(string $text, array $params = []): string
 {
     return $GLOBALS['config']['translator']['enabled']
         ? GC\Translator::getInstance()->translate($text, $params)
@@ -195,7 +169,7 @@ function trans($text, array $params = [])
 /**
  * Tłumaczy wprowadzony tekst na jego odpowiednik
  */
-function logger($message, array $params = [])
+function logger(string $message, array $params = []): void
 {
     if ($GLOBALS['config']['logger']['enabled']) {
         GC\Logger::getInstance()->info($message, $params);
@@ -205,7 +179,7 @@ function logger($message, array $params = [])
 /**
  * Służy do zapisywania wyrzuconych wyjątków do loggera
  */
-function logException($exception)
+function logException(Throwable $exception): void
 {
     $previous = $exception->getPrevious();
     if ($previous) {
@@ -222,7 +196,7 @@ function logException($exception)
 /**
  * Zamienia ścieżkę absolutną na ścieżkę relatywną na podstawie katalogu głównego
  */
-function relativePath($absolutePath)
+function relativePath(string $absolutePath): string
 {
     $realpath = realpath($absolutePath);
     $documentRoot = $_SERVER['DOCUMENT_ROOT'];
@@ -243,12 +217,12 @@ function relativePath($absolutePath)
 /**
  * Generuje losowy kolor CSS zapisany jako "#000000"
  */
-function randomColor()
+function randomColor(): string
 {
     return sprintf('#%06X', mt_rand(0, 0xFFFFFF));
 }
 
-function random($length)
+function random(int $length): string
 {
     $string = openssl_random_pseudo_bytes(ceil($length));
     $string = base64_encode($string);
@@ -261,7 +235,7 @@ function random($length)
 /**
  * Formatuje rozmiar w bajtach, np. 5.42MB
  */
-function humanFilesize($bytes, $decimals = 3)
+function humanFilesize(int $bytes, int $decimals = 3): string
 {
     static $size = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
     $factor = floor((strlen($bytes) - 1) / 3);
@@ -272,7 +246,7 @@ function humanFilesize($bytes, $decimals = 3)
 /**
  * Zamienia wszystkie specialne znaki na ich odpowiedniki. Oczyszcza tekst
  */
-function normalize($unformattedString)
+function normalize(string $unformattedString): string
 {
     # usuń białe znaki na początku i na końcu
     $normalizing = trim($unformattedString);
@@ -344,7 +318,7 @@ function normalize($unformattedString)
 /**
  * Tworzy przyjazny adres dla wyszukiwarek na podstawie wprowadzonego ciągu
  */
-function normalizeSlug($string)
+function normalizeSlug(string $string): string
 {
     if (empty($string)) {
         return '';
@@ -358,7 +332,7 @@ function normalizeSlug($string)
 /**
  * Tworzy prawidłową ścieżkę do pliku z relatywnych katalogów
  */
-function normalizePath($path)
+function normalizePath(string $path): string
 {
     $parts = array(); # Array to build a new path from the good parts
     $path = str_replace('\\', '/', $path); # Replace backslashes with forwardslashes
@@ -391,7 +365,7 @@ function normalizePath($path)
 /**
  * Funkcja przekierowuje na odwiedzającego na adres
  */
-function redirect($location, $code = 303)
+function redirect(string $location, int $code = 303): void
 {
     http_response_code($code);
     header("Location: {$location}");
@@ -412,7 +386,7 @@ function redirect($location, $code = 303)
  * Tworzy nową tablice ze starymi kluczami, gdzie elementy tablicy
  * są przekazywane do $callback(), a zwracana wartość to nowy element tablicy
  */
-function array_rebuild(array $array, $callback)
+function array_rebuild(array $array, callable $callback): array
 {
     $results = [];
     foreach ($array as $key => $value) {
@@ -425,7 +399,7 @@ function array_rebuild(array $array, $callback)
 /**
  *
  */
-function array_trans(array $array)
+function array_trans(array $array): array
 {
     return array_rebuild($array, 'trans');
 }
@@ -433,7 +407,7 @@ function array_trans(array $array)
 /**
  * Dzieli tablice na $p równych tablic
  */
-function array_partition(array $array, $p)
+function array_partition(array $array, int $p): array
 {
     $listlen = count($array);
     $partlen = floor($listlen / $p);
@@ -452,7 +426,7 @@ function array_partition(array $array, $p)
 /**
  * Łączy wielowymiarową tablice w jedną tablicę
  */
-function array_unchunk(array $array)
+function array_unchunk(array $array): array
 {
     if (count($array)) {
         return call_user_func_array('array_merge', $array);
@@ -464,7 +438,7 @@ function array_unchunk(array $array)
 /**
  * Pobiera informacje geolokalizacyjne adresu IP
  */
-function geoIP($ip = null)
+function geoIP(string $ip = null): array
 {
     if (!filter_var($ip, FILTER_VALIDATE_IP)) {
         return [];
@@ -488,16 +462,16 @@ function geoIP($ip = null)
         "state" => $ipdat->geoplugin_regionName,
         "country" => $ipdat->geoplugin_countryName,
         "countryCode" => $ipdat->geoplugin_countryCode,
-        "continent" => def($continents, strtoupper($ipdat->geoplugin_continentCode)),
+        "continent" => $continents[strtoupper($ipdat->geoplugin_continentCode)] ?? '',
         "continentCode" => $ipdat->geoplugin_continentCode,
-        "userAgent" => server('HTTP_USER_AGENT', ''),
+        "userAgent" => $_SERVER['HTTP_USER_AGENT'] ?? '',
     ];
 }
 
 /**
  * Tworzy wrapper dla renderowania pliku
  */
-function render($templateName, array $arguments = [])
+function render(string $templateName, array $arguments = []): string
 {
     extract($GLOBALS);
     extract($arguments, EXTR_OVERWRITE);
@@ -511,7 +485,7 @@ function render($templateName, array $arguments = [])
 /**
  * Ustawia kod błędu i renderuje szablon z templates jeżeli istnieje
  */
-function renderError($code, array $arguments = [])
+function renderError(int $code, array $arguments = []): string
 {
     http_response_code($code);
 
@@ -538,7 +512,7 @@ function renderError($code, array $arguments = [])
 /**
  * Zapisuje zadane dane do pliku w formie łatwego do odczytu pliku PHP
  */
-function exportDataToPHPFile($data, $file)
+function exportDataToPHPFile(array $data, string $file): void
 {
     makeFile($file);
 
@@ -552,7 +526,7 @@ function exportDataToPHPFile($data, $file)
 /**
  * Wyszukuje wszystkie pliki rekursywnie w katalogu
  */
-function globRecursive($pattern, $flags = 0)
+function globRecursive(string $pattern, int $flags = 0): array
 {
     $files = glob($pattern, $flags);
     foreach (glob(dirname($pattern).'/*', GLOB_ONLYDIR|GLOB_NOSORT) as $dir) {
@@ -565,13 +539,13 @@ function globRecursive($pattern, $flags = 0)
 /**
  * Funkcja pobiera tylko pliki źródłowe aplikacji
  */
-function getSourceFiles()
+function getSourceFiles(): array
 {
     $webDataPath = realpath(WEB_PATH.'/data');
 
     return array_filter(globRecursive('*.*'), function ($value) use (&$webDataPath) {
         if (strpos(realpath($value), $webDataPath) !== false) {
-            return false;
+            return [];
         }
 
         return in_array(pathinfo($value, PATHINFO_EXTENSION), [
@@ -583,7 +557,7 @@ function getSourceFiles()
 /**
  * Zapisuje do bazy danych sumy kontrolne plików
  */
-function refreshChecksums()
+function refreshChecksums(): void
 {
     \GC\Storage\Database::getInstance()->transaction(function () {
         \GC\Model\Checksum::delete()
@@ -601,7 +575,7 @@ function refreshChecksums()
 /**
  * Tworzy rekursywnie katalogi
  */
-function makeDirRecursive($dir, $mode = 0775)
+function makeDirRecursive(string $dir, int $mode = 0775): void
 {
     $path = '';
     $dirs = explode('/', trim($dir, '/ '));
@@ -619,7 +593,7 @@ function makeDirRecursive($dir, $mode = 0775)
 /**
  * Tworzy plik oraz katalogi, jeżeli ich brakuje
  */
-function makeFile($filepath, $mode = 0775)
+function makeFile(string $filepath, int $mode = 0775): void
 {
     makeDirRecursive(dirname($filepath));
     if (!file_exists($filepath)) {
@@ -631,7 +605,7 @@ function makeFile($filepath, $mode = 0775)
 /**
  * Usuwa katalogu oraz pliki i katalogi wewnątrz
  */
-function removeDirRecursive($dir)
+function removeDirRecursive(string $dir): void
 {
     if (is_dir($dir)) {
         $objects = scandir($dir);
@@ -653,7 +627,7 @@ function removeDirRecursive($dir)
 /**
  * Wysyła request w celu zweryfikowania recatchy od Googla
  */
-function curlReCaptcha()
+function curlReCaptcha(): array
 {
     if (isset($_POST['g-recaptcha-response'])) {
         $url = 'https://www.google.com/recaptcha/api/siteverify';
@@ -686,7 +660,7 @@ function curlReCaptcha()
 /**
  * Tworzy adres miniaturki dla zadanego zdjęcia
  */
-function makeThumbnailUri($imageUri, $width, $height)
+function makeThumbnailUri(string $imageUri, int $width, int $height): string
 {
     $thumbsUri      = $GLOBALS['config']['thumbnail']['uri'];
     $imageUri       = urldecode($imageUri);
@@ -703,7 +677,7 @@ function makeThumbnailUri($imageUri, $width, $height)
 /**
  * Zwraca adres do miniaturki zadanego zdjęcia. Tworzy miniaturkę w razie potrzeby
  */
-function thumbnail($imageUri, $width, $height, $mode = 'outbound')
+function thumbnail(string $imageUri, int $width, int $height, string $mode = 'outbound'): string
 {
     # jeżeli generowanie minaturek jest wyłączone wtedy zwróć adres zdjęcia
     if (!$GLOBALS['config']['thumbnail']['enabled']) {
@@ -756,7 +730,7 @@ function thumbnail($imageUri, $width, $height, $mode = 'outbound')
  * wyrażanym w sekundach. Jeżeli trzeba odświeżyć wartość wtedy wywołuje
  * przekazanego $callback i zapisuje rezultat funkcji w cachu
  */
-function sessionCache($name, $ttl, $callback)
+function sessionCache(string $name, int $ttl, callable $callback)
 {
     # spróbuj pobrać tablice z sesji
     $pool = getValueByKeys($_SESSION, ['cache', $name], null);
@@ -787,7 +761,7 @@ function sessionCache($name, $ttl, $callback)
 /**
  * Zwraca język odwiedzającego stronę
  */
-function getVisitorLang()
+function getVisitorLang(): string
 {
     if (isset($GLOBALS['request']) and $GLOBALS['request']->lang) {
         return $GLOBALS['request']->lang;
@@ -799,7 +773,7 @@ function getVisitorLang()
 /**
  * Zwraca adres IP clienta
  */
-function getVisitorIP()
+function getVisitorIP(): string
 {
     if (!empty($_SERVER['HTTP_CLIENT_IP']) && GC\Validate::ip($_SERVER['HTTP_CLIENT_IP'])) {
         return $_SERVER['HTTP_CLIENT_IP'];

@@ -77,7 +77,7 @@ class Redirect
     /**
      * Przekierowuje jeżeli któryś z niestandardowych rewritów okaże się pasować
      */
-    public function ifRewriteCorrect(array $rewrites)
+    public function ifRewriteCorrect(array $rewrites): void
     {
         $target = (string) $this->request->uri;
 

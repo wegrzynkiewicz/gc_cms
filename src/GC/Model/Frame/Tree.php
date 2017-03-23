@@ -14,7 +14,7 @@ class Tree extends AbstractNode
     /**
      *
      */
-    public static function insertPositionsToTaxonomy(array $positions, $taxonomy_id)
+    public static function insertPositionsToTaxonomy(array $positions, int $taxonomy_id): void
     {
         # usuń wszystkie rekordy budujące drzewo
         static::delete()
@@ -43,7 +43,7 @@ class Tree extends AbstractNode
     /**
      *
      */
-    public static function insertFrameToTaxonomy($frame_id, $taxonomy_id)
+    public static function insertFrameToTaxonomy(int $frame_id, int $taxonomy_id): void
     {
         # pobierz największą pozycję dla węzła w drzewie
         $position = static::select()

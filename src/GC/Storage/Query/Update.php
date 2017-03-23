@@ -8,7 +8,7 @@ class Update extends AbstractQuery
 {
     protected $values = [];
 
-    public function set(array $values)
+    public function set(array $values): self
     {
         $this->values = $values;
         $this->addParams(array_values($this->values));
@@ -16,7 +16,7 @@ class Update extends AbstractQuery
         return $this;
     }
 
-    protected function buildSQL()
+    protected function buildSQL(): string
     {
         ob_start();
 

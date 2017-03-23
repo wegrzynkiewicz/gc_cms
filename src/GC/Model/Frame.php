@@ -11,12 +11,12 @@ use GC\Storage\AbstractNode;
 
 class Frame extends AbstractNode
 {
-    public static $table      = '::frames';
-    public static $primary    = 'frame_id';
-    public static $nodeIndex  = 'frame_id';
-    public static $tree       = '::frames LEFT JOIN ::frame_tree USING(frame_id)';
+    public static $table = '::frames';
+    public static $primary = 'frame_id';
+    public static $nodeIndex = 'frame_id';
+    public static $tree = '::frames LEFT JOIN ::frame_tree USING(frame_id)';
 
-    public function getTitle()
+    public function getTitle(): string
     {
         if ($this->title) {
             return $this->title;
@@ -25,7 +25,7 @@ class Frame extends AbstractNode
         return $this->name;
     }
 
-    public static function updateByFrameId($frame_id, array $data)
+    public static function updateByFrameId(int $frame_id, array $data): void
     {
         $lang = Staff::getInstance()->getEditorLang();
         $data['modification_datetime'] = sqldate();
@@ -33,10 +33,10 @@ class Frame extends AbstractNode
             $data['slug'] = static::proposeSlug($data['name'], $lang, $frame_id);
         }
 
-        return static::updateByPrimaryId($frame_id, $data);
+        static::updateByPrimaryId($frame_id, $data);
     }
 
-    public static function insert(array $data)
+    public static function insert(array $data): int
     {
         $lang = Staff::getInstance()->getEditorLang();
         $data['creation_datetime'] = sqldate();
@@ -52,7 +52,7 @@ class Frame extends AbstractNode
     /**
      * Zwraca wolny slug, lub pusty jeżeli jego brak
      */
-    public static function proposeSlug($name, $lang, $frame_id = 0)
+    public static function proposeSlug($name, $lang, int $frame_id = 0): string
     {
         $proposedSlug = normalizeSlug($name);
 
@@ -79,7 +79,7 @@ class Frame extends AbstractNode
     /**
      * Usuwa rusztowanie, jego moduły i węzły jeżeli rusztowanie jest taksonomią
      */
-    public static function deleteByFrameId($frame_id)
+    public static function deleteByFrameId(int $frame_id): void
     {
         # pobierz wszystkie węzły tej taksonomii
         $nodes = static::select()

@@ -8,10 +8,10 @@ use GC\Storage\AbstractModel;
 
 class Sent extends AbstractModel
 {
-    public static $table   = '::mail_sent';
+    public static $table = '::mail_sent';
     public static $primary = 'mail_id';
 
-    public static function insert(array $data)
+    public static function insert(array $data): int
     {
         $data['sent_datetime'] = sqldate();
 

@@ -12,14 +12,14 @@ use GC\Storage\AbstractModel;
 
 class Module extends AbstractModel
 {
-    public static $table   = '::modules';
+    public static $table = '::modules';
     public static $primary = 'module_id';
-    public static $grid    = '::modules LEFT JOIN ::module_grid USING (module_id)';
+    public static $grid = '::modules LEFT JOIN ::module_grid USING (module_id)';
 
     /**
      * Usuwa moduł i wszystkie jego pliki i zakładki
      */
-    public static function deleteByModuleId($module_id)
+    public static function deleteByModuleId(int $module_id): void
     {
         # pobierz zakładki tego modułu
         $tabs = Tab::select()
@@ -52,7 +52,7 @@ class Module extends AbstractModel
     /**
      * Usuwa moduły i ich dodatki dla całego rusztowania
      */
-    public static function deleteByFrameId($frame_id)
+    public static function deleteByFrameId(int $frame_id): void
     {
         # pobierz wszystkie moduły
         $modules = static::select()

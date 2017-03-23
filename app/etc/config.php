@@ -60,11 +60,11 @@ $config = [
         'responseCode' => 303,
 
         # null jeżeli możliwość wejścia z każdego protokolu, wartość logiczna,
-        # boolean, nakazuje przekierowywanie na adres z lub bez https,
+        # bool, nakazuje przekierowywanie na adres z lub bez https,
         'forceHTTPS' => false,
 
         # null jeżeli możliwość wejścia z każdego www, wartość logiczna,
-        # boolean, nakazuje przekierowywanie na adres z lub bez www,
+        # bool, nakazuje przekierowywanie na adres z lub bez www,
         'forceWWW' => false,
 
         # null jeżeli możliwość wejścia z każdej domeny,
@@ -72,7 +72,7 @@ $config = [
         'forceDomain' => null,
 
         # null jeżeli możliwość wejścia z i bez front controllera,
-        # boolean, nakazuje przekierowywanie front controller
+        # bool, nakazuje przekierowywanie front controller
         'forceIndexPhp' => null,
 
         # null jeżeli możliwość wejścia z każdego portu,

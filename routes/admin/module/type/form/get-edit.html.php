@@ -9,7 +9,7 @@ $installedForms = GC\Model\Form\Form::select()
     ->fetchByMap('form_id', 'name');
 
 $emails = [];
-foreach (def($settings, 'emails', []) as $email) {
+foreach ($settings['emails'] ?? [] as $email) {
     $emails[$email] = $email;
 }
 

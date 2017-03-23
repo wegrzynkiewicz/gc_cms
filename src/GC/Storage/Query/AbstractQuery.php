@@ -16,12 +16,12 @@ abstract class AbstractQuery
     protected $limit = null;
     protected $params = [];
 
-    public function __construct($modelClass)
+    public function __construct(string $modelClass)
     {
         $this->modelClass = $modelClass;
     }
 
-    public function condition($sqlPart, $passedParams = [])
+    public function condition(string $sqlPart, array $passedParams = []): self
     {
         $this->conditions[] = $sqlPart;
         $this->addParams($passedParams);
@@ -29,21 +29,21 @@ abstract class AbstractQuery
         return $this;
     }
 
-    public function clearLimit()
+    public function clearLimit(): self
     {
         $this->limit = null;
 
         return $this;
     }
 
-    public function clearSort()
+    public function clearSort(): self
     {
         $this->sort = [];
 
         return $this;
     }
 
-    public function equals($column, $passedParam)
+    public function equals(string $column, $passedParam): self
     {
         if ($passedParam === null) {
             $this->condition("{$column} IS NULL");
@@ -54,36 +54,36 @@ abstract class AbstractQuery
         return $this;
     }
 
-    public function execute()
+    public function execute(): int
     {
         return Database::getInstance()->execute($this->getSQL(), $this->params);
     }
 
-    public function source($sqlParts)
+    public function source(string $sqlParts): self
     {
         $this->source = $sqlParts;
 
         return $this;
     }
 
-    public function getParameters()
+    public function getParameters(): array
     {
         return $this->$params;
     }
 
-    public function getSQL()
+    public function getSQL(): string
     {
         return call_user_func([$this->modelClass, 'sql'], $this->buildSQL());
     }
 
-    public function limit($limit)
+    public function limit($limit): self
     {
         $this->limit = $limit;
 
         return $this;
     }
 
-    public function pagination($page, $epp)
+    public function pagination(int $page, int $epp): self
     {
         $page = intval($page > 0 ? $page : 1);
         $epp = intval($epp > 0 ? $epp : 1);
@@ -93,7 +93,7 @@ abstract class AbstractQuery
         return $this;
     }
 
-    public function order($column, $order)
+    public function order(string $column, string $order): self
     {
         Assert::column($column);
 
@@ -107,16 +107,12 @@ abstract class AbstractQuery
         return $this;
     }
 
-    protected function addParams($passedParams)
+    protected function addParams(array $passedParams): self
     {
-        if (!is_array($passedParams)) {
-            $passedParams = [$passedParams];
-        }
-
         $this->params = array_merge($this->params, $passedParams);
 
         return $this;
     }
 
-    abstract protected function buildSQL();
+    abstract protected function buildSQL(): string;
 }

@@ -8,22 +8,22 @@ class Breadcrumbs
 {
     protected $links = array();
 
-    public function getLinks()
+    public function getLinks(): array
     {
         return $this->links;
     }
 
-    public function push(array $data)
+    public function push(array $data): void
     {
         array_push($this->links, $data);
     }
 
-    public function unshift(array $data)
+    public function unshift(array $data): void
     {
         array_unshift($this->links, $data);
     }
 
-    public function getBeforeLast($index)
+    public function getBeforeLast(string $index): string
     {
         return getValueByKeys(
             $this->links,
@@ -32,7 +32,7 @@ class Breadcrumbs
         );
     }
 
-    public function getLast($index)
+    public function getLast(string $index): string
     {
         return getValueByKeys(
             $this->links,

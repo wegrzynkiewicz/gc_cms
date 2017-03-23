@@ -8,6 +8,6 @@ use GC\Storage\AbstractModel;
 
 class Dump extends AbstractModel
 {
-    public static $table       = '::dumps';
-    public static $primary     = 'dump_id';
+    public static $table = '::dumps';
+    public static $primary = 'dump_id';
 }

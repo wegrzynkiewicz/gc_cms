@@ -102,7 +102,7 @@ class Router
         throw new ResponseException('Unknown frame type', 503);
     }
 
-    protected function getFile($path, $name, $theme = 'default')
+    protected function getFile(string $path, string $name, string $theme = 'default'): string
     {
         $files = [
             "{$path}/{$this->method}-{$name}-{$theme}.{$this->extension}.php",
@@ -121,6 +121,6 @@ class Router
             }
         }
 
-        return null;
+        return '';
     }
 }

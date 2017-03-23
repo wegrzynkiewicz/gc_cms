@@ -8,14 +8,14 @@ class Delete extends AbstractQuery
 {
     protected $target = '';
 
-    public function target($target)
+    public function target(string $target): self
     {
         $this->target = $target;
 
         return $this;
     }
 
-    protected function buildSQL()
+    protected function buildSQL(): string
     {
         ob_start();
 

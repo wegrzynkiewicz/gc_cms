@@ -8,12 +8,11 @@ class Translator
 {
     private static $instance = null;
 
-    private $refresh = false;
     private $translations = [];
     private $translationPath = '';
     public static $domain = 'visitor';
 
-    private function __construct($translationPath)
+    private function __construct(string $translationPath)
     {
         $this->translationPath = $translationPath;
 
@@ -23,16 +22,14 @@ class Translator
         }
     }
 
-    public function __destruct()
+    public function dumpFile(): void
     {
-        if ($this->refresh) {
-            makeFile($this->translationPath);
-            $json = json_encode($this->translations, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-            file_put_contents($this->translationPath, $json);
-        }
+        makeFile($this->translationPath);
+        $json = json_encode($this->translations, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+        file_put_contents($this->translationPath, $json);
     }
 
-    public function translate($text, array $params = [])
+    public function translate(string $text, array $params = []): string
     {
         if (!isset($this->translations[static::$domain])) {
             logger('[TRANSLATOR] Missing domain', [static::$domain]);
@@ -41,7 +38,7 @@ class Translator
 
         if (!isset($this->translations[static::$domain][$text])) {
             $this->translations[static::$domain][$text] = $text;
-            $this->refresh = true;
+            $this->dumpFile();
             logger('[TRANSLATOR] Missing translation', [static::$domain, $text]);
         }
 
@@ -51,7 +48,7 @@ class Translator
     /**
      * Pobiera instancję translatora. Tworzy ją w razie potrzeby i zapamiętuje
      */
-    public static function getInstance()
+    public static function getInstance(): self
     {
         if (static::$instance === null) {
             static::$instance = new static(

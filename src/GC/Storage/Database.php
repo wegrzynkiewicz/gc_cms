@@ -18,7 +18,7 @@ class Database
     {
         $this->pdo = $pdo;
 
-        if (server('REQUEST_METHOD', 'GET') !== 'GET') {
+        if ($_SERVER['REQUEST_METHOD'] ?? 'GET' !== 'GET') {
             $this->pdo->beginTransaction();
         }
     }
@@ -34,17 +34,15 @@ class Database
 
         if (error_get_last() === null) {
             $this->pdo->commit();
-            logger('[DATABASE] Commit');
         } else {
             $this->pdo->rollBack();
-            logger('[DATABASE] RollBack');
         }
     }
 
     /**
      * Wykonuje zapytanie SQL i zwraca jeden wiersz z tego zapytania, przydatne dla pojedyńczych wywołań
      */
-    public function fetch($sql, array $values = [])
+    public function fetch(string $sql, array $values = [])
     {
         return $this->wrapQuery($sql, $values, function ($statement) {
             return $statement->fetch(\PDO::FETCH_ASSOC);
@@ -54,7 +52,7 @@ class Database
     /**
      * Wykonuje zapytanie SQL i zwraca tablice wierszy z tego zapytania, przydatne dla wielu rekordow
      */
-    public function fetchAll($sql, array $values = [])
+    public function fetchAll(string $sql, array $values = []): array
     {
         return $this->wrapQuery($sql, $values, function ($statement) {
             return $statement->fetchAll(\PDO::FETCH_ASSOC);
@@ -66,7 +64,7 @@ class Database
      * kluczem w tej tablicy jest columna przekazana jako $label,
      * przydatne dla wielu rekordow z dostępem swobodnym po kluczu w tablicy
      */
-    public function fetchByKey($sql, array $values, $label)
+    public function fetchByKey(string $sql, array $values, string $label): array
     {
         $data = [];
         foreach ($this->fetchAll($sql, $values) as $row) {
@@ -81,7 +79,7 @@ class Database
      * kluczem w tej tablicy jest columna przekazana jako $label a wartością jest $column
      * przydatne dla wielu rekordow z dostępem swobodnym po kluczu w tablicy
      */
-    public function fetchByMap($sql, array $values, $label, $column)
+    public function fetchByMap(string $sql, array $values, string $label, string $column): array
     {
         $data = [];
         foreach ($this->fetchAll($sql, $values) as $row) {
@@ -94,7 +92,7 @@ class Database
     /**
      * Wykonuje zapytanie SQL i zwraca ilość zmodyfikowanych rekordow
      */
-    public function execute($sql, array $values = [])
+    public function execute(string $sql, array $values = []): int
     {
         return $this->wrapQuery($sql, $values, function ($statement) {
             return $statement->rowCount();
@@ -104,7 +102,7 @@ class Database
     /**
      * Wykonuje zapytanie SQL i zwraca ID ostatniego wstawionego rekordu
      */
-    public function insert($sql, array $values = [])
+    public function insert(string $sql, array $values = []): int
     {
         $this->wrapQuery($sql, $values, function ($statement) {
         });
@@ -115,10 +113,12 @@ class Database
     /**
      * Przekazaną funkcje $callback otacza wewnątrz transakcji
      */
-    public function transaction($callback)
+    public function transaction(callable $callback): void
     {
         if ($this->pdo->inTransaction()) {
-            return $callback();
+            $callback();
+
+            return;
         }
 
         try {
@@ -134,7 +134,7 @@ class Database
     /**
      * Tworzy i pobiera tą samą instancję bazy danych dla aplikacji
      */
-    public static function getInstance()
+    public static function getInstance(): self
     {
         if (static::$instance === null) {
             $dbConfig = $GLOBALS['config']['database'];
@@ -157,7 +157,7 @@ class Database
     /**
      * Wywołuje i loguje zapytania
      */
-    private function wrapQuery($sql, array $values, $callback)
+    private function wrapQuery(string $sql, array $values, callable $callback)
     {
         # dodaje prefix do każdego wyrazu zaczynającego się od ::
         $sql = preg_replace_callback('/::([a-z_]+)/', function ($matches) {

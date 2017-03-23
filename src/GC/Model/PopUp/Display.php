@@ -10,7 +10,7 @@ class Display extends AbstractModel
 {
     public static $table = '::popup_display';
 
-    public static function updateFrames($popup_id, array $frames)
+    public static function updateFrames(int $popup_id, array $frames): void
     {
         # usuń wszystkie przynależności stron do okienek
         static::delete()

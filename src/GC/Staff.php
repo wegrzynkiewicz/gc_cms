@@ -61,7 +61,7 @@ class Staff extends AbstractEntity
     /**
      * Zwraca język edycji danych
      */
-    public function getEditorLang()
+    public function getEditorLang(): string
     {
         # jeżeli w sesji nie ma języka edytora wtedy ustaw go z configa
         if (isset($_SESSION['langEditor'])) {
@@ -74,7 +74,7 @@ class Staff extends AbstractEntity
     /**
      * Sprawdza czy pracownik ma uprawnienia do wykonania zadanych akcji
      */
-    public function hasPermissions(array $requiredPermissions = [])
+    public function hasPermissions(array $requiredPermissions = []): bool
     {
         if (empty($requiredPermissions)) {
             return true;
@@ -96,7 +96,7 @@ class Staff extends AbstractEntity
     /**
      * Przekierowuje jezeli uzytkownik nie posiada uprawnień
      */
-    public function redirectIfUnauthorized(array $permissions = [])
+    public function redirectIfUnauthorized(array $permissions = []): void
     {
         if (!$this->hasPermissions($permissions)) {
             logger('[DENY] Not authorized', $permissions);
@@ -108,7 +108,7 @@ class Staff extends AbstractEntity
     /**
      * Tworzy i pobiera tą samą instancję pracownika dla aplikacji
      */
-    public static function getInstance()
+    public static function getInstance(): self
     {
         if (static::$instance === null) {
             static::$instance = new static();
@@ -120,7 +120,7 @@ class Staff extends AbstractEntity
     /**
      * Przekierowuje i ustawia wiadomość w logach
      */
-    public static function abort($message, $location = '/auth/login')
+    public static function abort($message, $location = '/auth/login'): void
     {
         logger("[STAFF] {$message}");
         unset($_SESSION['staff']);

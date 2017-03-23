@@ -20,7 +20,7 @@ abstract class AbstractEntity implements ArrayAccess
         $this->data = $data;
     }
 
-    public function __call($offset, $params)
+    public function __call(string $offset, array $params)
     {
         throw new BadMethodCallException(
             sprintf(

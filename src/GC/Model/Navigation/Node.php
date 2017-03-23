@@ -8,18 +8,18 @@ use GC\Storage\AbstractNode;
 
 class Node extends AbstractNode
 {
-    public static $table        = '::navigation_nodes';
-    public static $primary      = 'node_id';
-    public static $nodeIndex    = 'node_id';
-    public static $tree         = '::navigation_nodes LEFT JOIN ::navigation_tree USING (node_id)';
+    public static $table = '::navigation_nodes';
+    public static $primary = 'node_id';
+    public static $nodeIndex = 'node_id';
+    public static $tree = '::navigation_nodes LEFT JOIN ::navigation_tree USING (node_id)';
     public static $withFrameFields = '::navigation_nodes.*, parent_id, ::frames.slug, ::frames.name AS frame_name, ::frames.type AS frame_type';
     public static $withFrameSource = '::navigation_nodes LEFT JOIN ::navigation_tree USING (node_id) LEFT JOIN ::frames USING (frame_id)';
-    public static $aloneNodes   = '::navigation_tree RIGHT JOIN ::navigation_nodes USING(node_id)';
+    public static $aloneNodes = '::navigation_tree RIGHT JOIN ::navigation_nodes USING(node_id)';
 
     /**
      * Zwraca poprawną nazwę
      */
-    public function getName()
+    public function getName(): string
     {
         if (isset($this->name) and $this->name) {
             return $this->name;
@@ -35,7 +35,7 @@ class Node extends AbstractNode
     /**
      * Zwraca odpowiedni adres docelowego odnośnika
      */
-    public function getHref()
+    public function getHref(): string
     {
         if ($this->type === 'empty') {
             return '#';
@@ -59,7 +59,7 @@ class Node extends AbstractNode
     /**
      * Usuwa węzeł i wszystkie węzły potomne
      */
-    public static function deleteByNodeId($node_id)
+    public static function deleteByNodeId(int $node_id): void
     {
         # usuń węzeł nawigacji
         static::deleteByPrimaryId($node_id);

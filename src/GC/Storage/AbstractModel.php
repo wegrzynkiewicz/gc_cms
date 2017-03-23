@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace GC\Storage;
 
 use GC\Assert;
-use GC\Storage\Query;
+use GC\Storage\Query\Select;
+use GC\Storage\Query\Update;
+use GC\Storage\Query\Delete;
 
 /**
  * Reprezentuje zarowno tablice jak i pojedynczy rekord z bazy danych
@@ -17,7 +19,7 @@ abstract class AbstractModel extends AbstractEntity
     /**
      * Wyszukuje w zapytaniu fraz :: i podstawia odpowiednie wartości statycznych pol klas.
      */
-    public static function sql($pseudoQuery)
+    public static function sql(string $pseudoQuery): string
     {
         return preg_replace_callback('/(::(\w+))/', function ($matches) {
             $property = $matches[2];
@@ -28,15 +30,15 @@ abstract class AbstractModel extends AbstractEntity
         }, $pseudoQuery);
     }
 
-    public static function delete()
+    public static function delete(): Delete
     {
-        return new Query\Delete(static::class);
+        return new Delete(static::class);
     }
 
     /**
      * Buduje i wykonuje zapytanie INSERT dla zadanych danych
      */
-    public static function insert(array $data)
+    public static function insert(array $data): int
     {
         $filled = array_fill(0, count($data), '?');
         $values = implode(', ', $filled);
@@ -51,7 +53,7 @@ abstract class AbstractModel extends AbstractEntity
     /**
      * Buduje i wykonuje zapytanie REPLACE dla zadanych danych
      */
-    public static function replace(array $data)
+    public static function replace(array $data): int
     {
         $filled = array_fill(0, count($data), '?');
         $values = implode(', ', $filled);
@@ -62,17 +64,17 @@ abstract class AbstractModel extends AbstractEntity
         return Database::getInstance()->execute($sql, array_values($data));
     }
 
-    public static function select()
+    public static function select(): Select
     {
-        return new Query\Select(static::class);
+        return new Select(static::class);
     }
 
-    public static function update()
+    public static function update(): Update
     {
-        return new Query\Update(static::class);
+        return new Update(static::class);
     }
 
-    public static function execute($sql, array $params = [])
+    public static function execute(string $sql, array $params = []): int
     {
         $sql = static::sql($sql);
 
@@ -82,7 +84,7 @@ abstract class AbstractModel extends AbstractEntity
     /**
      * Pobiera rekord o zadanym kluczu głownym
      */
-    public static function fetchByPrimaryId($primary_id)
+    public static function fetchByPrimaryId($primary_id): array
     {
         return static::select(static::class)
             ->equals(static::$primary, $primary_id)
@@ -93,9 +95,9 @@ abstract class AbstractModel extends AbstractEntity
     /**
      * Aktualizuje dane $data rekordu o zadanym kluczu głownym
      */
-    public static function updateByPrimaryId($primary_id, array $data = [])
+    public static function updateByPrimaryId(int $primary_id, array $data = []): int
     {
-        static::update(static::class)
+        return static::update(static::class)
             ->set($data)
             ->equals(static::$primary, $primary_id)
             ->limit(1)
@@ -105,7 +107,7 @@ abstract class AbstractModel extends AbstractEntity
     /**
      * Usuwa rekord o zadanym kluczu głownym
      */
-    public static function deleteByPrimaryId($primary_id)
+    public static function deleteByPrimaryId(int $primary_id): int
     {
         return static::delete(static::class)
             ->equals(static::$primary, $primary_id)
@@ -113,7 +115,7 @@ abstract class AbstractModel extends AbstractEntity
             ->execute();
     }
 
-    public static function fetchMeta($meta_id)
+    public static function fetchMeta(int $meta_id): array
     {
         return static::select(static::class)
             ->fields(['name', 'value'])
@@ -121,7 +123,7 @@ abstract class AbstractModel extends AbstractEntity
             ->fetchByMap('name', 'value');
     }
 
-    public static function updateMeta($meta_id, array $data)
+    public static function updateMeta(int $meta_id, array $data): void
     {
         foreach ($data as $name => $value) {
             static::replace([
@@ -132,7 +134,7 @@ abstract class AbstractModel extends AbstractEntity
         }
     }
 
-    public static function deleteMeta($meta_id, array $data)
+    public static function deleteMeta(int $meta_id, array $data): void
     {
         foreach ($data as $name) {
             static::delete()

@@ -12,14 +12,14 @@ class Select extends AbstractQuery
     protected $extract = '*';
     protected $groupBy = null;
 
-    public function fields($extract)
+    public function fields($extract): self
     {
         $this->extract = $extract;
 
         return $this;
     }
 
-    public function group($group)
+    public function group(string $group): self
     {
         $this->groupBy = $group;
 
@@ -33,12 +33,12 @@ class Select extends AbstractQuery
         return Database::getInstance()->fetch($this->getSQL(), $this->params);
     }
 
-    public function fetchAll()
+    public function fetchAll(): array
     {
         return Database::getInstance()->fetchAll($this->getSQL(), $this->params);
     }
 
-    public function fetchByKey($key)
+    public function fetchByKey($key): array
     {
         return Database::getInstance()->fetchByKey($this->getSQL(), $this->params, $key);
     }
@@ -52,7 +52,7 @@ class Select extends AbstractQuery
         );
     }
 
-    public function fetchByMap($keyLabel, $valueLabel)
+    public function fetchByMap($keyLabel, $valueLabel): array
     {
         return Database::getInstance()->fetchByMap(
             $this->getSQL(),
@@ -62,7 +62,7 @@ class Select extends AbstractQuery
         );
     }
 
-    public function fetchObject()
+    public function fetchObject(): Object
     {
         $record = $this->fetch();
         if ($record) {
@@ -74,7 +74,7 @@ class Select extends AbstractQuery
         return null;
     }
 
-    public function fetchTree()
+    public function fetchTree(): Object
     {
         $records = $this
             ->order('position', 'ASC')
@@ -83,7 +83,7 @@ class Select extends AbstractQuery
         return call_user_func([$this->modelClass, 'createTree'], $records);
     }
 
-    protected function buildSQL()
+    protected function buildSQL(): string
     {
         ob_start();
 
@@ -123,7 +123,7 @@ class Select extends AbstractQuery
         return ob_get_clean();
     }
 
-    public function buildForDataTables(array $data)
+    public function buildForDataTables(array $data): self
     {
         $columnNames = [];
         $searchableColumns = [];
@@ -137,7 +137,7 @@ class Select extends AbstractQuery
             }
         }
 
-        $this->pagination($data['start'], $data['length']);
+        $this->pagination(intval($data['start']), intval($data['length']));
 
         if (isset($data['order'])) {
             foreach ($data['order'] as $order) {

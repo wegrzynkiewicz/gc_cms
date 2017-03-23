@@ -8,9 +8,9 @@ use GC\Storage\AbstractModel;
 
 class Tree extends AbstractModel
 {
-    public static $table   = '::navigation_tree';
+    public static $table = '::navigation_tree';
 
-    public static function insertPositionsToNavigation(array $positions, $navigation_id)
+    public static function insertPositionsToNavigation(array $positions, int $navigation_id): void
     {
         # usuń wszystkie rekordy budujące drzewo
         static::delete()

@@ -42,7 +42,7 @@ unset($frame);
 
 # kontent jaki zostanie zwrócony
 echo json_encode([
-    'draw' => intval(get('draw', 1)),
+    'draw' => intval($_REQUEST['draw']),
     'recordsTotal' => $recordsTotal,
     'recordsFiltered' => $recordsFiltered,
     'data' => $frames,

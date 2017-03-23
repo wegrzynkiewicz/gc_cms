@@ -63,15 +63,15 @@ $_POST = $message;
                     </tr>
                     <tr>
                         <td>IP</td>
-                        <td><?=def($localization, 'ip')?></td>
+                        <td><?=$localization['ip'] ?? ''?></td>
                     </tr>
                     <tr>
                         <td><?=trans('Kraj / Miasto')?></td>
-                        <td><?=def($localization, 'country', '').' / '.def($localization, 'city', '')?></td>
+                        <td><?=($localization['country'] ?? '').' / '.($localization['city'] ?? '')?></td>
                     </tr>
                     <tr>
                         <td>User Agent</td>
-                        <td><?=def($localization, 'userAgent', '')?></td>
+                        <td><?=$localization['userAgent'] ?? ''?></td>
                     </tr>
                 </tbody>
             </table>

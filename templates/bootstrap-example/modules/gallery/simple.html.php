@@ -1,7 +1,7 @@
 <?php
     $images = GC\Model\Module\File::joinAllWithKeyByForeign($module_id);
-    $thumbsPerRow = def($settings, 'thumbsPerRow', 12);
-    $gutter = ceil(def($settings, 'gutter', 20)/2)*2;
+    $thumbsPerRow = $settings['thumbsPerRow'] ?? 12;
+    $gutter = ceil(($settings['gutter'] ?? 20)/2)*2;
     $colWidth = ceil(12/$thumbsPerRow);
     $chunks = array_chunk($images, $thumbsPerRow);
     $gutterHalf = ceil($gutter/2);

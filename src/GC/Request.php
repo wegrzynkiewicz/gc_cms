@@ -60,7 +60,7 @@ class Request
     /**
      * Zwraca true jeżeli metoda żądania jest równa $method
      */
-    public function isMethod(string $method): boolean
+    public function isMethod(string $method): bool
     {
         return $this->method === strtolower($method);
     }

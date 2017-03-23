@@ -2,7 +2,7 @@
 
 require ROUTES_PATH.'/admin/_import.php';
 
-$frame_id = intval(get('frame_id'));
+$frame_id = intval($_GET['frame_id']);
 
 # pobranie zakładki z ramką
 $item = GC\Model\Module\Tab::select()

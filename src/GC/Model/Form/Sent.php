@@ -8,10 +8,10 @@ use GC\Storage\AbstractModel;
 
 class Sent extends AbstractModel
 {
-    public static $table   = '::form_sent';
+    public static $table = '::form_sent';
     public static $primary = 'sent_id';
 
-    public static function insertToForm($form_id, $data, $localization)
+    public static function insertToForm(int $form_id, array $data, array $localization): int
     {
         $record = [
             'form_id' => $form_id,

@@ -3,7 +3,7 @@
 $module_id = intval(array_shift($_PARAMETERS));
 
 $meta = GC\Model\Module\Meta::fetchMeta($module_id);
-$meta['gutter'] = def($meta, 'gutter', 20);
+$meta['gutter'] = $meta['gutter'] ?: 20;
 
 $_POST = $meta;
 

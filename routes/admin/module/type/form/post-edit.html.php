@@ -2,7 +2,7 @@
 
 require ROUTES_PATH."/admin/module/type/form/_import.php";
 
-$emails = def($_POST, 'emails', []);
+$emails = post('emails', []);
 sort($emails);
 $settings['emails'] = $emails;
 

@@ -12,7 +12,7 @@ class Backup
 {
     public static $delimiter = ';';
 
-    public static function make($name)
+    public static function make(string $name): void
     {
         $dumpPath = $GLOBALS['config']['dump']['path'];
         $time = time();
@@ -28,7 +28,7 @@ class Backup
         ]);
     }
 
-    public static function export($filename)
+    public static function export(string $filename): void
     {
         makeFile($filename);
 
@@ -47,7 +47,7 @@ class Backup
         $dump->start($filename);
     }
 
-    public static function import($filepath)
+    public static function import(string $filepath): void
     {
         $file = $filepath;
 
@@ -66,7 +66,7 @@ class Backup
         static::openAndExecute($file);
     }
 
-    public static function openAndExecute($file)
+    public static function openAndExecute(string $file): void
     {
         $file = fopen($file, 'r');
         if (is_resource($file) === false) {
@@ -92,7 +92,7 @@ class Backup
         fclose($file);
     }
 
-    protected static function decompress($filepath, $destination)
+    protected static function decompress(string $filepath, string $destination): void
     {
         if (is_file($filepath) === false) {
             return;

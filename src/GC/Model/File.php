@@ -8,6 +8,6 @@ use GC\Storage\AbstractModel;
 
 class File extends AbstractModel
 {
-    public static $table        = '::files';
-    public static $primary      = 'file_id';
+    public static $table = '::files';
+    public static $primary = 'file_id';
 }

@@ -9,13 +9,13 @@ use GC\Storage\AbstractModel;
 
 class Navigation extends AbstractModel
 {
-    public static $table   = '::navigations';
+    public static $table = '::navigations';
     public static $primary = 'navigation_id';
 
     /**
      * Usuwa nawigację i wszystkie węzeł
      */
-    public static function deleteByNavigationId($navigation_id)
+    public static function deleteByNavigationId(int $navigation_id): void
     {
         # pobierz węzły nawigacji
         $nodes = Node::select()
