@@ -99,7 +99,7 @@ class Router
             return $file;
         }
 
-        throw new ResponseException('Unknown frame type', 503);
+        throw new ResponseException('Unknown frame type', 500);
     }
 
     protected function getFile(string $path, string $name, string $theme = 'default'): string

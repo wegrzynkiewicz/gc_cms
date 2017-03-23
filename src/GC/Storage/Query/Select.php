@@ -62,7 +62,7 @@ class Select extends AbstractQuery
         );
     }
 
-    public function fetchObject(): Object
+    public function fetchObject()
     {
         $record = $this->fetch();
         if ($record) {
@@ -74,7 +74,7 @@ class Select extends AbstractQuery
         return null;
     }
 
-    public function fetchTree(): Object
+    public function fetchTree()
     {
         $records = $this
             ->order('position', 'ASC')
