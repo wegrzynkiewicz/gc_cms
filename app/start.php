@@ -4,12 +4,17 @@
 
 require __DIR__.'/bootstrap.php';
 
-# żądanie, obiekt uri jest tym samym żądaniem, tylko o krótszej nazwie
-$uri = $request = new \GC\Request();
+# obiekt reprezentujący żądanie
+$request = GC\Request::createFromGlobals();
+$request->detectLanguage(array_keys($config['langs']));
+
+# obiekt pomocniczy do generowania adresów URI
+$uri = new GC\Uri($request);
 
 # przekierowuje na prawidłowe adresy w razie potrzeby
-$request->redirectIfSeoUrlIsInvalid();
-$request->redirectIfRewriteCorrect();
+$redirect = new GC\Redirect($request);
+$redirect->ifSeoPolicyFaild($config['seo']);
+$redirect->ifRewriteCorrect($config['rewrites']);
 
 session_start();
 
@@ -17,11 +22,10 @@ if (isset($_REQUEST['allowInConstruction'])) {
     $_SESSION['allowInConstruction'] = true;
 }
 
-
 try {
     # jeżeli strona jest w budowie wtedy zwróć komunikat o budowie
     if ($config['debug']['construction'] and !isset($_SESSION['allowInConstruction'])) {
-        throw new \GC\Exception\ResponseException(null, 503); # Service Unavailable
+        throw new GC\Exception\ResponseException(null, 503); # Service Unavailable
     }
 
     $router = new GC\Router($request->method, $request->slug);
@@ -36,10 +40,10 @@ try {
     require $_ACTION;
     ob_end_flush();
 }
-catch (\Exception $exception) {
+catch (Exception $exception) {
     logException($exception);
 
-    if ($exception instanceof \GC\Exception\ResponseException) {
+    if ($exception instanceof GC\Exception\ResponseException) {
         $code = $exception->getCode();
         $code = $code > 0 ? $code : 404; # Not Found
     } else {
@@ -58,6 +62,8 @@ catch (\Exception $exception) {
     ]);
     ob_end_flush();
 }
+
+dd(get_included_files());
 
 logger(sprintf('[RESPONSE] %s -- Time: %.3fs -- Memory: %sMiB',
     http_response_code(),
