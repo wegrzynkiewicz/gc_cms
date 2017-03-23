@@ -16,14 +16,12 @@
 define('START_TIME', $_SERVER["REQUEST_TIME_FLOAT"]); # początkowy czas uruchomienia aplikacji
 define('GCCMF_VERSION', '1.0.0'); # wersja systemu
 define('TEMPLATE', 'bootstrap-example'); # nazwa używanego szablonu
-define('ASSETS_URL', '/assets'); # adres do katalogu z zasobami
 define('ROOT_PATH', realpath(__DIR__.'/../../')); # ścieżka do katalogu głównego serwera www
 define('WEB_PATH', ROOT_PATH.'/web'); # ścieżka do katalogu an który jest nakierowana domena
 define('TEMP_PATH', ROOT_PATH.'/cache'); # ścieżka do katalogu tymczasowego
 define('ROUTES_PATH', ROOT_PATH.'/routes'); # ścieżka do katalogu z plikami kontrolerów i szablonów
 define('STORAGE_PATH', ROOT_PATH.'/storage'); # ścieżka do katalogu magazynu
 define('TEMPLATE_PATH', ROOT_PATH.'/templates/'.TEMPLATE); # ścieżka do katalogu z szablonem
-define('TEMPLATE_ASSETS_URL', '/assets/'.TEMPLATE); # adres do zasobów w katalogu z szablonem
 
 chdir(ROOT_PATH); # zmienia bieżący katalog na root
 
@@ -85,7 +83,7 @@ $config = [
     ],
     'adminNavbarTitle' => 'Panel Administracyjny', # wyświetlana w prawym gornym rogu panelu admina
     'adminHeadTitleBase' => 'Acme Panel Administracyjny', # nazwa doklejana do <title> strony w panelu admina
-    'noImageUri' => ASSETS_URL.'/admin/images/no-image.jpg', # ścieżka do obrazka w przypadku braku obrazka
+    'noImageUri' => '/assets/admin/images/no-image.jpg', # ścieżka do obrazka w przypadku braku obrazka
     'password' => [ # zawiera ustawienia dotyczące polityki haseł
         'minLength' => 8, # minimalna długość hasła
     ],

@@ -5,7 +5,7 @@
 require_once __DIR__.'/_import.php';
 
 echo PHP_EOL;
-echo 'IMPORTANT!! This command remove important data if exists!!'.PHP_EOL;
+echo 'IMPORTANT!! This command remove important data!!'.PHP_EOL;
 $areYouSure();
 
 # Usunięcie plików tymczasowych
@@ -60,7 +60,7 @@ require __DIR__.'/root-create.php';
 # Tworzenie sum kontrolnych
 echo PHP_EOL;
 echo "Calculating checksums...".PHP_EOL;
-refreshChecksums();
+GC\Model\Checksum::refreshChecksums();
 echo "Checksums were verified.".PHP_EOL;
 
 # finalizacja

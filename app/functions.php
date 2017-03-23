@@ -555,24 +555,6 @@ function getSourceFiles(): array
 }
 
 /**
- * Zapisuje do bazy danych sumy kontrolne plików
- */
-function refreshChecksums(): void
-{
-    \GC\Storage\Database::getInstance()->transaction(function () {
-        \GC\Model\Checksum::delete()
-            ->execute();
-
-        foreach (getSourceFiles() as $file) {
-            \GC\Model\Checksum::insert([
-                'file' => trim($file, '.'),
-                'hash' => sha1(file_get_contents($file)),
-            ]);
-        }
-    });
-}
-
-/**
  * Tworzy rekursywnie katalogi
  */
 function makeDirRecursive(string $dir, int $mode = 0775): void

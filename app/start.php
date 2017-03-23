@@ -18,6 +18,8 @@ $redirect->ifRewriteCorrect($config['rewrites']);
 
 session_start();
 
+$_SESSION['staff']['staff_id'] = 1; // TODO: usunąć, sprawia, że pracownik 1 jest zalogowany
+
 if (isset($_REQUEST['allowInConstruction'])) {
     $_SESSION['allowInConstruction'] = true;
 }
