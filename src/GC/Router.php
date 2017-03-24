@@ -27,7 +27,7 @@ class Router
     {
         $this->method = strtolower($method);
         $this->slug = $slug;
-        $this->extension = $extension;
+        $this->extension = $extension ?: 'html';
         $this->mimeType = $this->mimeTypes[$extension] ?? 'text/plain';
 
         $this->parts = explode('/', trim($this->slug, '/'));

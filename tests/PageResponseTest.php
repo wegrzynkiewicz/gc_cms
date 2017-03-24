@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace GC\Test;
-
 use GC\Model\Frame;
 use PHPUnit\Framework\TestCase;
 

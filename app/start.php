@@ -3,10 +3,11 @@
 /** Plik wejścia, ładuje aplikację i przetwarza żądanie */
 
 require __DIR__.'/bootstrap.php';
+require __DIR__.'/error-handler.php';
 
 # obiekt reprezentujący żądanie
 $request = GC\Request::createFromGlobals();
-$request->detectLanguage(array_keys($config['langs']));
+$request->detectLanguageCodes(array_keys($config['langs']));
 
 # obiekt pomocniczy do generowania adresów URI
 $uri = new GC\Uri($request);

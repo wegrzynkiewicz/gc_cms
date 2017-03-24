@@ -6,6 +6,7 @@ namespace GC;
 
 use League\Uri\Schemes\Http;
 use League\Uri\Components\Host;
+use League\Uri\Components\Path;
 use League\Uri\Components\HierarchicalPath;
 
 class Request
@@ -16,7 +17,7 @@ class Request
     public $front = false;
     public $lang = '';
     public $extension = '';
-    public $slug = '';
+    public $slug = null;
     public $root = null;
     public $url = null;
     public $uri = null;
@@ -26,16 +27,11 @@ class Request
         $this->method = strtoupper($method);
         $this->url = $url;
 
-        $this->root = $script->withoutSegments([-1]);
+        $this->root = new HierarchicalPath($script->getDirname());
         $this->slug = new HierarchicalPath($url->getPath());
-        $this->slug = $this->slug->withoutSegments($this->root->keys());
+        $this->slug = $this->removeRootPath($this->slug);
 
-        if ($this->slug->getSegment(0) === static::FRONT_CONTROLLER) {
-            $this->slug = $this->slug->withoutSegments([0]);
-            $this->front = true;
-        }
-
-        $this->extension = $this->slug->getExtension() ?: 'html';
+        $this->extension = $this->slug->getExtension();
         $this->slug = $this->slug->withExtension('');
         $this->uri = (string) Http::createFromString()
             ->withPath($this->url->getPath())
@@ -45,16 +41,33 @@ class Request
         logger("[URL] {$url}");
     }
 
-    public function detectLanguage(array $languageCodes): void
+    public function detectLanguageCodes(array $languageCodes): void
     {
         $propablyLanguageCode = $this->slug->getSegment(0);
         foreach ($languageCodes as $languageCode) {
             if ($propablyLanguageCode === $languageCode) {
-                $this->slug = $this->slug->withoutSegments([0]);
                 $this->lang = $languageCode;
                 break;
             }
         }
+    }
+
+    public function removeRootPath(HierarchicalPath $path): HierarchicalPath
+    {
+        foreach ($this->root->getSegments() as $rootSegment) {
+            $segment = $path->getSegment(0);
+            if ($segment !== $rootSegment) {
+                break;
+            }
+            $path = $path->withoutSegments([0]);
+        }
+
+        if ($path->getSegment(0) === Request::FRONT_CONTROLLER) {
+            $path = $path->withoutSegments([0]);
+            $this->front = true;
+        }
+
+        return $path;
     }
 
     /**

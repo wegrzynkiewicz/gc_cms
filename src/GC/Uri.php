@@ -61,22 +61,10 @@ class Uri
     public function relative(string $url): string
     {
         $url = Http::createFromString($url);
-        $uri = new HierarchicalPath($url->getPath());
+        $path = new HierarchicalPath($url->getPath());
+        $path = $this->request->removeRootPath($path);
 
-        foreach ($this->request->root->getSegments() as $rootSegment) {
-            $segment = $uri->getSegment(0);
-            if ($segment !== $rootSegment) {
-                break;
-            }
-            $uri = $uri->withoutSegments([0]);
-        }
-
-        $segment = $uri->getSegment(0);
-        if ($segment === Request::FRONT_CONTROLLER) {
-            $uri = $uri->withoutSegments([0]);
-        }
-
-        return (string) $uri;
+        return (string) $path;
     }
 
     /**
