@@ -25,7 +25,8 @@
         "vrana/adminer": "^4.3",
         "zaininnari/html-minifier": "^0.4.2",
         "league/uri": "^5.0",
-        "katzgrau/klogger": "^1.2"
+        "katzgrau/klogger": "^1.2",
+        "mpociot/botman": "^1.4"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.0"
