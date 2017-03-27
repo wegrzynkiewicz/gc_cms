@@ -1,11 +1,13 @@
 <?php
-    $value = post($name);
-    $preview = empty($value) ? $config['imageNotAvailableUri']: $value;
+$value = post($name);
+$preview = empty($value) ? $config['imageNotAvailableUri']: $value;
+$attributes['class'] = ($attributes['class'] ?? '').' form-control input';
+$attributes['type'] = ($attributes['type'] ?? 'text');
 ?>
 
 <div class="form-group">
 
-    <label class="col-md-12 col-sm-12 col-xs-12" for="<?=$name?>_source">
+    <label class="col-md-12 col-sm-12 col-xs-12" for="<?=$name?>">
         <?=$label?>
     </label>
 
@@ -22,21 +24,24 @@
 
             <div class="col-md-10">
 
-                <div class="input-group">
+                <div class="input-group" style="margin-bottom: 20px">
                     <span class="input-group-addon">
                         <?=e($_SERVER['HTTP_HOST'])?>
                     </span>
                     <input
-                        id="<?=$name?>_source"
+                        id="<?=$name?>"
                         name="<?=$name?>"
-                        <?php if (isset($placeholder)): ?>
-                            placeholder="<?=$placeholder?>"
-                        <?php endif ?>
-                        class="form-control input"
+                        readonly="readonly"
+                        <?php foreach ($attributes ?? [] as $attrName => $attrValue): ?>
+                            <?=$attrName?><?=$attrValue ? '="'.$attrValue.'"' : ''?>
+                        <?php endforeach ?>
+                        data-validation-error-msg-container="#error-<?=$name?>"
                         value="<?=e($value)?>"
                         type="text">
                 </div>
-                <br/>
+
+                <div id="error-<?=$name?>"></div>
+
                 <button type="button" id="<?=$name?>_select" class="btn btn-primary btn-xs">
                     <i class="fa fa-cog fa-fw"></i>
                     <?=trans('Wybierz zdjęcie')?>
@@ -54,16 +59,18 @@
 <script>
     $(function() {
 
+        var notAvailable = '<?=$uri->root($config['imageNotAvailableUri'])?>';
+
         $('#<?=$name?>_select').elfinderInput({
             title: '<?=trans('Wybierz plik')?>',
         }, function(file) {
             $('#<?=$name?>_preview').attr('src', file);
-            $('#<?=$name?>_source').val(file);
+            $('#<?=$name?>').val(file);
         });
 
         $('#<?=$name?>_delete').click( function(){
-            $('#<?=$name?>_preview').attr('src', '<?=$uri->root($config['imageNotAvailableUri'])?>');
-            $('#<?=$name?>_source').val('');
+            $('#<?=$name?>_preview').attr('src', notAvailable);
+            $('#<?=$name?>').val('');
         })
     });
 </script>

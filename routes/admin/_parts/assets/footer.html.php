@@ -34,3 +34,12 @@
         }
     });
 </script>
+
+<script>
+    $(function() {
+        $.validate({
+            modules : 'security',
+            lang : '<?=getVisitorLang()?>',
+        });
+    });
+</script>

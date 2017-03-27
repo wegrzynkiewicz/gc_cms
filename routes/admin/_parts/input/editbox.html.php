@@ -1,9 +1,9 @@
 <?php
-$type = $_ARGUMENTS['type'] ?? 'text';
-$errorMessage = (isset($error) and isset($error[$name])) ? $error[$name] : null;
+$attributes['class'] = ($attributes['class'] ?? '').' form-control input';
+$attributes['type'] = ($attributes['type'] ?? 'text');
 ?>
-<div class="form-group <?=$errorMessage ? 'has-error' : ''?>">
-    <?php if (isset($label)): ?>
+<div class="form-group">
+    <?php if ($label ?? false): ?>
         <label class="col-md-12 col-sm-12 col-xs-12" for="<?=$name?>">
             <?=$label?>
         </label>
@@ -12,19 +12,14 @@ $errorMessage = (isset($error) and isset($error[$name])) ? $error[$name] : null;
         <input
             id="<?=$name?>"
             name="<?=$name?>"
-            <?php if (isset($placeholder)): ?>
-                placeholder="<?=$placeholder?>"
-            <?php endif ?>
             value="<?=e(post($name))?>"
-            type="<?=$type?>"
             autocomplete="off"
-            class="form-control input">
-        <?php if ($errorMessage): ?>
-            <span class="help-block">
-                <?=$errorMessage?>
-            </span>
-        <?php elseif (isset($help)): ?>
-            <span class="help-block">
+            <?php foreach ($attributes ?? [] as $attrName => $attrValue): ?>
+                <?=$attrName?><?=$attrValue ? '="'.$attrValue.'"' : ''?>
+            <?php endforeach ?>
+            >
+        <?php if ($help ?? false): ?>
+            <span id="help-block" class="help-block">
                 <?=$help?>
             </span>
         <?php endif ?>

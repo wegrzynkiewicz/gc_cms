@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GC\Storage\Query;
 
-use GC\Assert;
+use GC\Validation\Assert;
 use GC\Storage\Database;
 
 class Select extends AbstractQuery

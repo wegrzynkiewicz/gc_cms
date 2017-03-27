@@ -6,7 +6,7 @@ require ROUTES_PATH.'/admin/_import.php';
 require ROUTES_PATH.'/admin/account/_import.php';
 
 $lang = array_shift($_SEGMENTS);
-GC\Assert::installedLang($lang);
+GC\Validation\Assert::installedLang($lang);
 $_SESSION['langEditor'] = $lang;
 
 redirect($_SERVER['HTTP_REFERER']);

@@ -11,12 +11,18 @@
                     <?=render(ROUTES_PATH.'/admin/_parts/input/editbox.html.php', [
                         'name' => 'name',
                         'label' => $nameCaption,
+                        'attributes' => [
+                            'data-validation' => 'required',
+                            'data-validation-error-msg-required' => trans('Nazwa strony jest wymagana'),
+                        ],
                     ])?>
 
                     <?=render(ROUTES_PATH.'/admin/_parts/input/image.html.php', [
                         'name' => 'image',
                         'label' => trans('Zdjęcie wyróżniające'),
-                        'placeholder' => trans('Ścieżka do pliku zdjęcia'),
+                        'attributes' => [
+                            'placeholder' => trans('Ścieżka do pliku zdjęcia'),
+                        ],
                     ])?>
                 </fieldset>
             </div>
@@ -30,6 +36,14 @@
                         'name' => 'slug',
                         'label' => trans('Adres wpisu'),
                         'help' => trans('Zostaw pusty, aby generować adres na podstawie nazwy'),
+                        'attributes' => [
+                            'placeholder' => trans('Ścieżka do pliku zdjęcia'),
+                            'data-validation' => 'server',
+                            'data-validation-url' => $uri->make("/admin/validate/slug.json", [
+                                'frame_id' => $frame_id,
+                            ]),
+                            'data-validation-optional' => 'true',
+                        ],
                     ])?>
 
                     <?=render(ROUTES_PATH.'/admin/_parts/input/editbox.html.php', [
@@ -57,7 +71,7 @@
                         'name' => 'visibility',
                         'label' => trans('Widoczność strony'),
                         'help' => trans('Decyduje o widoczności strony w nawigacji i mapie strony'),
-                        'options' => array_trans($config['frameVisibility'])
+                        'options' => array_trans($config['frame']['visibility'])
                     ])?>
 
                     <?=render(ROUTES_PATH.'/admin/_parts/input/datetimepicker.html.php', [

@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace GC\Model;
 
-use GC\Staff;
-use GC\Validate;
 use GC\Model\Module;
+use GC\Validation\Validate;
 use GC\Storage\AbstractNode;
 
 class Frame extends AbstractNode
@@ -23,30 +22,6 @@ class Frame extends AbstractNode
         }
 
         return $this->name;
-    }
-
-    public static function updateByFrameId(int $frame_id, array $data): void
-    {
-        $lang = Staff::getInstance()->getEditorLang();
-        $data['modification_datetime'] = sqldate();
-        if (isset($data['slug']) and empty($data['slug'])) {
-            $data['slug'] = static::proposeSlug($data['name'], $lang, $frame_id);
-        }
-
-        static::updateByPrimaryId($frame_id, $data);
-    }
-
-    public static function insert(array $data): int
-    {
-        $lang = Staff::getInstance()->getEditorLang();
-        $data['creation_datetime'] = sqldate();
-        $data['modification_datetime'] = sqldate();
-        $data['lang'] = $lang;
-        if (isset($data['slug']) and empty($data['slug'])) {
-            $data['slug'] = static::proposeSlug($data['name'], $lang);
-        }
-
-        return parent::insert($data);
     }
 
     /**

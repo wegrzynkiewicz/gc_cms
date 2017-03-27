@@ -158,27 +158,35 @@ $config = [
         'visitorDefault' => 'pl', # domyśly język gdy nie wiadomo jakiego języka oczekuje odwiedzający
         'editorDefault' => 'pl', # domyślny język edytowania w panelu admina
     ],
-    'frames' => [ # ustawienia i rodzaje rusztowań
-        'page' => [
-            'name' => 'Strona',
+    'frame' => [ # ustawienia i rodzaje rusztowań
+        'types' => [
+            'page' => [
+                'name' => 'Strona',
+            ],
+            'post' => [
+                'name' => 'Wpis',
+            ],
+            'post-node' => [ # węzeł podziału wpisu, czyli np. Aktualności
+                'name' => 'Węzeł wpisu',
+            ],
+            'post-taxonomy' => [ # podział wpisu, czyli np. Kategoria wpisu
+                'name' => 'Podział wpisu',
+            ],
+            'product' => [
+                'name' => 'Produkt',
+            ],
+            'product-node' => [ # węzeł podziału produktu, czyli np. Procesory
+                'name' => 'Węzeł produktu',
+            ],
+            'product-taxonomy' => [ # węzeł podziału produktu, czyli np. Kategoria produktu
+                'name' => 'Podział produktu',
+            ],
         ],
-        'post' => [
-            'name' => 'Wpis',
-        ],
-        'post-node' => [ # węzeł podziału wpisu, czyli np. Aktualności
-            'name' => 'Węzeł wpisu',
-        ],
-        'post-taxonomy' => [ # podział wpisu, czyli np. Kategoria wpisu
-            'name' => 'Podział wpisu',
-        ],
-        'product' => [
-            'name' => 'Produkt',
-        ],
-        'product-node' => [ # węzeł podziału produktu, czyli np. Procesory
-            'name' => 'Węzeł produktu',
-        ],
-        'product-taxonomy' => [ # węzeł podziału produktu, czyli np. Kategoria produktu
-            'name' => 'Podział produktu',
+        'visibility' => [ # dostępne atrybuty visibility dla rusztowań
+            0 => 'Widoczna dla wszystkich',
+            1 => 'Widoczna tylko dla pracowników',
+            2 => 'Widoczna tylko dla pracowników z odpowiednim uprawnieniem',
+            // 3 => 'Niewidoczna dla nikogo',
         ],
     ],
     'modules' => [ # rodzaje zainstalowanych modułów
@@ -293,10 +301,6 @@ $config = [
     'permissions' => [ # zawiera uprawnienia dostępne dla pracownikow
         'manage_staff' => 'Zarządzanie pracownikami',
         'manage_staff_groups' => 'Zarządzanie grupami pracowników',
-    ],
-    'frameVisibility' => [ # dostępne atrybuty visibility dla rusztowań
-        'all' => 'Widoczna dla wszystkich',
-        'hidden' => 'Ukryta',
     ],
     'rewrites' => [ # zawiera niestandardowe przekierowania $regex => $destination
         '~^/old-service/index\.php\?id=(\d+)\&theme=([a-z]+?)$~' => '/old-service/$1/$2',

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GC\Storage;
 
-use GC\Assert;
 use GC\Storage\Query\Select;
 use GC\Storage\Query\Update;
 use GC\Storage\Query\Delete;

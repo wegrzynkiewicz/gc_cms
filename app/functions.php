@@ -27,15 +27,6 @@ function dd($mixed = null): void
     ));
 }
 
-function purifyHtml(string $dirtyHtml): string
-{
-    $config = HTMLPurifier_Config::createDefault();
-    $purifier = new HTMLPurifier($config);
-    $cleanHtml = $purifier->purify($dirtyHtml);
-
-    return $cleanHtml;
-}
-
 /**
  * Kompresuje kod HTMLa
  */

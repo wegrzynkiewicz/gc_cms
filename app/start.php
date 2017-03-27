@@ -43,7 +43,7 @@ try {
     require $_ACTION;
     ob_end_flush();
 }
-catch (Exception $exception) {
+catch (Throwable $exception) {
     logException($exception);
 
     if ($exception instanceof GC\Exception\ResponseException) {
