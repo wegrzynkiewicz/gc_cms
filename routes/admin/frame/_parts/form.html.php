@@ -13,7 +13,7 @@
                         'label' => $nameCaption,
                         'attributes' => [
                             'data-validation' => 'required',
-                            'data-validation-error-msg-required' => trans('Nazwa strony jest wymagana'),
+                            'data-validation-error-msg-required' => trans('Nazwa jest wymagana'),
                         ],
                     ])?>
 
