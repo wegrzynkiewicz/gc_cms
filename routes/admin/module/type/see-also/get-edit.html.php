@@ -59,7 +59,7 @@ unset($frame);
                         'name' => 'theme',
                         'label' => trans('Szablon'),
                         'help' => trans('Szablon określa wygląd i zachowanie modułu'),
-                        'options' => array_trans($config['modules']['see-also']['themes']),
+                        'options' => array_trans($config['module']['types']['see-also']['themes']),
                         'firstOption' => trans('Wybierz jeden z dostępnych szablonów modułu'),
                     ])?>
                 </fieldset>

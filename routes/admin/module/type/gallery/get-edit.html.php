@@ -37,7 +37,7 @@ require ROUTES_PATH."/admin/module/type/gallery/_import.php";
                         'name' => 'theme',
                         'label' => trans('Szablon'),
                         'help' => trans('Szablon określa wygląd i zachowanie galerii'),
-                        'options' => array_trans($config['modules']['gallery']['themes']),
+                        'options' => array_trans($config['module']['types']['gallery']['themes']),
                         'firstOption' => trans('Wybierz jeden z dostępnych szablonów galerii'),
                     ])?>
                 </fieldset>

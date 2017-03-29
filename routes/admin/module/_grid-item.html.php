@@ -13,7 +13,7 @@
         <div class="panel panel-default panel-module">
             <div class="panel-heading">
                 <a href="<?=$uri->make("/admin/module/{$module_id}/edit")?>">
-                    <?=trans($config['modules'][$type]['name'])?>
+                    <?=trans($config['module']['types'][$type]['name'])?>
                 </a>
                 <button data-toggle="modal"
                     data-id="<?=$module_id?>"

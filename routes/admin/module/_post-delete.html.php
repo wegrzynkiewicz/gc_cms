@@ -8,5 +8,5 @@ $module = GC\Model\Module::fetchByPrimaryId($module_id);
 # usuń moduł i wszystkie jego dodatki
 GC\Model\Module::deleteByModuleId($module_id);
 
-flashBox(trans("%s został usunięty", [$config['modules'][$module['type']]['name']]));
+flashBox(trans("%s został usunięty", [$config['module']['types'][$module['type']]['name']]));
 redirect($breadcrumbs->getLast('uri'));

@@ -34,5 +34,5 @@ GC\Model\Module\Row::replace([
     'gutter' => 30,
 ]);
 
-flashBox(trans("%s został utworzony. Edytujesz go teraz.", [$config['modules'][$moduleType]['name']]));
+flashBox(trans("%s został utworzony. Edytujesz go teraz.", [$config['module']['types'][$moduleType]['name']]));
 redirect($uri->make("/admin/module/{$module_id}/edit"));

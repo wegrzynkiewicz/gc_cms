@@ -162,24 +162,73 @@ $config = [
         'types' => [
             'page' => [
                 'name' => 'Strona',
+                'icon' => 'files-o',
+                'breadcrumbs' => [
+                    'list' => 'Strony',
+                    'edit' => 'Edycja strony: %s',
+                    'module' => 'Moduły strony: %s',
+                    'deleted' => 'Strona "%s" została usunięta',
+                ],
             ],
             'post' => [
                 'name' => 'Wpis',
+                'icon' => 'pencil-square-o',
+                'breadcrumbs' => [
+                    'list' => 'Wpisy',
+                    'edit' => 'Edycja wpisu: %s',
+                    'module' => 'Moduły wpisu: %s',
+                    'deleted' => 'Strona "%s" została usunięta',
+                ],
             ],
             'post-node' => [ # węzeł podziału wpisu, czyli np. Aktualności
                 'name' => 'Węzeł wpisu',
+                'icon' => null,
+                'breadcrumbs' => [
+                    'list' => 'Węzły podziału wpisów',
+                    'edit' => 'Edycja węzła podziału wpisów: %s',
+                    'module' => 'Moduły w węźle wpisu: %s',
+                    'deleted' => 'Strona "%s" została usunięta',
+                ],
             ],
             'post-taxonomy' => [ # podział wpisu, czyli np. Kategoria wpisu
                 'name' => 'Podział wpisu',
+                'icon' => null,
+                'breadcrumbs' => [
+                    'list' => 'Podziały wpisów',
+                    'edit' => 'Edycja podziału wpisów: %s',
+                    'module' => 'Moduły podziału wpisów: %s',
+                    'deleted' => 'Strona "%s" została usunięta',
+                ],
             ],
             'product' => [
                 'name' => 'Produkt',
+                'icon' => 'shopping-basket',
+                'breadcrumbs' => [
+                    'list' => 'Produkty',
+                    'edit' => 'Edycja produktu: %s',
+                    'module' => 'Moduły produktu: %s',
+                    'deleted' => 'Produkt "%s" został usunięty.',
+                ],
             ],
             'product-node' => [ # węzeł podziału produktu, czyli np. Procesory
                 'name' => 'Węzeł produktu',
+                'icon' => null,
+                'breadcrumbs' => [
+                    'list' => 'Węzły podziału produktu',
+                    'edit' => 'Edycja węzła podziału produktów: %s',
+                    'module' => 'Moduły w węźle produktu: %s',
+                    'deleted' => 'Węzeł produktu "%s" został usunięty',
+                ],
             ],
             'product-taxonomy' => [ # węzeł podziału produktu, czyli np. Kategoria produktu
                 'name' => 'Podział produktu',
+                'icon' => null,
+                'breadcrumbs' => [
+                    'list' => 'Podziały produktu',
+                    'edit' => 'Edycja podziału produktów: %s',
+                    'module' => 'Moduły podziału produktów: %s',
+                    'deleted' => 'Podział produktów "%s" został usunięty',
+                ],
             ],
         ],
         'visibility' => [ # dostępne atrybuty visibility dla rusztowań
@@ -189,61 +238,71 @@ $config = [
             // 3 => 'Niewidoczna dla nikogo',
         ],
     ],
-    'modules' => [ # rodzaje zainstalowanych modułów
-        'html-editor' => [
-            'name' => 'Moduł tekstowy',
-            'description' => 'Wyświelta treść HTML poprzez edytor WYSIWYG.',
-            'themes' => [
-                'default' => 'Standardowa treść',
+    'module' => [ # rodzaje zainstalowanych modułów
+        'types' => [
+            'form' => [
+                'name' => 'Moduł formularza',
+                'description' => 'Wyświetla jeden z przygotowanych formularzy.',
+                'breadcrumbs' => 'Edycja modułu formularza',
+                'themes' => [
+                    'default' => 'Budowany automatycznie',
+                    'custom' => 'Specjalnie przygotowany (jeżeli istnieje, wtedy automatyczny)',
+                ],
             ],
-        ],
-        'gallery' => [
-            'name' => 'Moduł galerii zdjęć',
-            'description' => 'Wyświetla wiele zdjęć z możliwością podglądu.',
-            'themes' => [
-                'default' => 'Standardowa galeria',
-                'simple' => 'Zwykłe zdjęcia bez obramowań (z podglądem)'
+            'gallery' => [
+                'name' => 'Moduł galerii zdjęć',
+                'description' => 'Wyświetla wiele zdjęć z możliwością podglądu.',
+                'breadcrumbs' => 'Edycja modułu galerii zdjęć',
+                'themes' => [
+                    'default' => 'Standardowa galeria',
+                    'simple' => 'Zwykłe zdjęcia bez obramowań (z podglądem)'
+                ],
             ],
-        ],
-        'photo' => [
-            'name' => 'Moduł pojedyńczego zdjęcia',
-            'description' => 'Wyświetla jedno zdjęcie z możliwością podglądu.',
-            'themes' => [
-                'default' => 'Zdjęcie z poglądem',
-                'no-clickable' => 'Nieklikalne zdjęcie',
+            'html-editor' => [
+                'name' => 'Moduł tekstowy',
+                'description' => 'Wyświelta treść HTML poprzez edytor WYSIWYG.',
+                'breadcrumbs' => 'Edycja modułu tekstowego',
+                'themes' => [
+                    'default' => 'Standardowa treść',
+                ],
             ],
-        ],
-        'image-slider' => [
-            'name' => 'Moduł slajdów ze zdjęciami',
-            'description' => 'Wyświetla animowane slajdy zawierające tylko zdjęcia.',
-            'themes' => [
-                'default' => 'Standardowy slajder',
+            'image-slider' => [
+                'name' => 'Moduł slajdów ze zdjęciami',
+                'description' => 'Wyświetla animowane slajdy zawierające tylko zdjęcia.',
+                'breadcrumbs' => 'Edycja modułu slajdera zdjęć',
+                'themes' => [
+                    'default' => 'Standardowy slajder',
+                ],
             ],
-        ],
-        'form' => [
-            'name' => 'Moduł formularza',
-            'description' => 'Wyświetla jeden z przygotowanych formularzy.',
-            'themes' => [
-                'default' => 'Budowany automatycznie',
-                'custom' => 'Specjalnie przygotowany (jeżeli istnieje, wtedy automatyczny)',
+            'photo' => [
+                'name' => 'Moduł pojedyńczego zdjęcia',
+                'description' => 'Wyświetla jedno zdjęcie z możliwością podglądu.',
+                'breadcrumbs' => 'Edycja modułu zdjęcia',
+                'themes' => [
+                    'default' => 'Zdjęcie z poglądem',
+                    'no-clickable' => 'Nieklikalne zdjęcie',
+                ],
             ],
-        ],
-        'tabs' => [
-            'name' => 'Moduł zakładek',
-            'description' => 'Rozdziela treść pomiędzy klikalne zakładki.',
-            'themes' => [],
-        ],
-        'youtube' => [
-            'name' => 'Moduł YouTube',
-            'description' => 'Wyświetla film z serwisu YouTube.',
-            'themes' => [],
-        ],
-        'see-also' => [
-            'name' => 'Moduł: Zobacz także',
-            'description' => 'Wyświetla wybrane treści z możliwością przekierowania',
-            'themes' => [
-                'default' => 'Boksy z miniaturkami',
-                'links' => 'Zwykłe linki',
+            'see-also' => [
+                'name' => 'Moduł: Zobacz także',
+                'description' => 'Wyświetla wybrane treści z możliwością przekierowania',
+                'breadcrumbs' => 'Edycja modułu: Zobacz także',
+                'themes' => [
+                    'default' => 'Boksy z miniaturkami',
+                    'links' => 'Zwykłe linki',
+                ],
+            ],
+            'tabs' => [
+                'name' => 'Moduł zakładek',
+                'description' => 'Rozdziela treść pomiędzy klikalne zakładki.',
+                'breadcrumbs' => 'Edycja modułu zakładek',
+                'themes' => [],
+            ],
+            'youtube' => [
+                'name' => 'Moduł YouTube',
+                'description' => 'Wyświetla film z serwisu YouTube.',
+                'breadcrumbs' => 'Edycja modułu YouTube',
+                'themes' => [],
             ],
         ],
     ],
