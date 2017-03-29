@@ -35,4 +35,4 @@ GC\Model\Module\Row::replace([
 ]);
 
 flashBox(trans("%s został utworzony. Edytujesz go teraz.", [$config['modules'][$moduleType]['name']]));
-redirect($uri->mask("/{$module_id}/edit"));
+redirect($uri->make("/admin/module/{$module_id}/edit"));

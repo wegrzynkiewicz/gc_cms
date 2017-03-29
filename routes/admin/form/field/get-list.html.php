@@ -18,7 +18,7 @@ $fields = GC\Model\Form\Field::select()
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=$uri->mask("/new")?>" type="button" class="btn btn-success">
+                <a href="<?=$uri->make("/admin/form/{$form_id}/field/new")?>" type="button" class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
                     <?=trans('Dodaj nowe pole')?>
                 </a>
@@ -54,7 +54,7 @@ $fields = GC\Model\Form\Field::select()
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=$uri->mask("/delete")?>" class="modal-content">
+        <form id="deleteModalForm" method="post" action="<?=$uri->make("/admin/form/delete")?>" class="modal-content">
             <input name="field_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">

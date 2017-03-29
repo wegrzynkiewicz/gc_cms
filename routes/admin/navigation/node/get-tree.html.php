@@ -21,7 +21,7 @@ $tree = GC\Model\Navigation\Node::select()
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=$uri->mask("/{$navigation_id}/node/new")?>" type="button" class="btn btn-success">
+                <a href="<?=$uri->make("/admin/navigation/{$navigation_id}/node/new")?>" type="button" class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
                     <?=trans('Dodaj nowy węzeł')?>
                 </a>
@@ -60,7 +60,7 @@ $tree = GC\Model\Navigation\Node::select()
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=$uri->mask('/node/delete')?>" class="modal-content">
+        <form id="deleteModalForm" method="post" action="<?=$uri->make('/admin/navigation/node/delete')?>" class="modal-content">
             <input name="node_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">

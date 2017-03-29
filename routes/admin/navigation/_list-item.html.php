@@ -1,6 +1,6 @@
 <tr>
     <td>
-        <a href="<?=$uri->mask("/{$navigation_id}/edit")?>"
+        <a href="<?=$uri->make("/admin/navigation/{$navigation_id}/edit")?>"
             title="<?=trans('Edytuj nawigację')?>">
             <?=e($name)?></a>
     </td>
@@ -16,7 +16,7 @@
         <?php endif ?>
     </td>
     <td class="text-right">
-        <a href="<?=$uri->mask("/{$navigation_id}/node/tree")?>"
+        <a href="<?=$uri->make("/admin/navigation/{$navigation_id}/node/tree")?>"
             class="btn btn-primary btn-sm">
             <i class="fa fa-sitemap fa-fw"></i>
             <?=trans('Węzły nawigacji')?>

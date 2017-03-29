@@ -33,8 +33,8 @@ foreach ($frames as &$frame) {
     $image = empty($frame['image'])
         ? $config['imageNotAvailableUri']
         : $frame['image'];
-    $frame['hrefEdit'] = $uri->mask("/{$frame_id}/edit");
-    $frame['hrefModule'] = $uri->mask("/{$frame_id}/module/grid");
+    $frame['hrefEdit'] = $uri->make("/admin/frame/{$frame_id}/edit");
+    $frame['hrefModule'] = $uri->make("/admin/frame/{$frame_id}/module/grid");
     $frame['hrefSlug'] = $uri->make($frame['slug']);
     $frame['image'] = $uri->root(thumbnail($image, 64, 64));
 }

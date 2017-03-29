@@ -1,9 +1,8 @@
 <?php
 
 $headTitle = trans('Strony');
-$uri->extendMask('/frame%s');
 $breadcrumbs->push([
-    'uri' => $uri->mask("/list/{$type}"),
+    'uri' => $uri->make("/admin/frame/list/page"),
     'name' => $headTitle,
     'icon' => 'files-o',
 ]);

@@ -1,9 +1,8 @@
 <?php
 
 $headTitle = trans('Nawigacje');
-$uri->extendMask('/navigation%s');
 $breadcrumbs->push([
-    'uri' => $uri->mask('/list'),
+    'uri' => $uri->make('/admin/navigation/list'),
     'name' => $headTitle,
     'icon' => 'sitemap',
 ]);

@@ -45,7 +45,7 @@
 <script>
 $(function() {
     function refreshType(type) {
-        $.get("<?=$uri->mask("/node/{$node_id}/type")?>/"+type, function(data) {
+        $.get("<?=$uri->make("/admin/navigation/node/{$node_id}/type")?>/"+type, function(data) {
             $('#nodeType').html(data);
         });
     }

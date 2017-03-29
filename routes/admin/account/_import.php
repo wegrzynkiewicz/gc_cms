@@ -1,9 +1,8 @@
 <?php
 
 $headTitle = trans('Profil użytkownika');
-$uri->extendMask('/account%s');
 $breadcrumbs->push([
-    'uri' => $uri->mask('/profil'),
+    'uri' => $uri->make('/admin/account/profil'),
     'name' => $headTitle,
     'icon' => 'user',
 ]);

@@ -7,6 +7,6 @@ $navigation = GC\Model\Navigation::select()
 
 $headTitle = trans('Struktura nawigacji: %s', [$navigation['name']]);
 $breadcrumbs->push([
-    'uri' => $uri->mask("/{$navigation_id}/node/tree"),
+    'uri' => $uri->make("/admin/navigation/{$navigation_id}/node/tree"),
     'name' => $headTitle,
 ]);

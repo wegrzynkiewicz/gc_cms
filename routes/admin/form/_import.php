@@ -1,9 +1,8 @@
 <?php
 
 $headTitle = trans('Formularze');
-$uri->extendMask('/form%s');
 $breadcrumbs->push([
-    'uri' => $uri->mask('/list'),
+    'uri' => $uri->make('/admin/form/list'),
     'name' => $headTitle,
     'icon' => 'envelope-o',
 ]);

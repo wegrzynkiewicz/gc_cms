@@ -12,7 +12,6 @@ use League\Uri\Components\HierarchicalPath;
 
 class Uri
 {
-    private $mask = '%s';
     private $request = null;
 
     public function __construct(Request $request)
@@ -56,14 +55,6 @@ class Uri
     }
 
     /**
-     * Generuje przednie części adresu
-     */
-    public function mask(string $slug = ''): string
-    {
-        return $this->make(sprintf($this->mask, $slug));
-    }
-
-    /**
      * Usuwa przednie części adresu, aby nie zawierały domeny lub rootUri
      */
     public function relative(string $url): string
@@ -73,12 +64,5 @@ class Uri
         $path = $this->request->removeRootPath($path);
 
         return (string) $path;
-    }
-
-    /**
-     */
-    public function extendMask(string $mask): void
-    {
-        $this->mask = sprintf($this->mask, $mask);
     }
 }

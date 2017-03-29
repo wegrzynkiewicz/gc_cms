@@ -6,9 +6,8 @@ $form_id = intval(array_shift($_PARAMETERS));
 $form = GC\Model\Form\Form::fetchByPrimaryId($form_id);
 
 $headTitle = trans('Pola formularza: %s', [$form['name']]);
-$uri->extendMask("/{$form_id}/field%s");
 $breadcrumbs->push([
-    'uri' => $uri->mask('/list'),
+    'uri' => $uri->make("/admin/form/{$form_id}/field/list"),
     'name' => $headTitle,
     'icon' => 'envelope-open-o',
 ]);

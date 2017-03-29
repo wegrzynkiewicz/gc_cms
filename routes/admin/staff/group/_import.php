@@ -1,8 +1,7 @@
 <?php
 
 $headTitle = trans('Grupy pracowników');
-$uri->extendMask('/group%s');
 $breadcrumbs->push([
-    'uri' => $uri->mask('/list'),
+    'uri' => $uri->make('/admin/staff/group/list'),
     'name' => $headTitle,
 ]);

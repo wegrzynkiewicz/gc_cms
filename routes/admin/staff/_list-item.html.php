@@ -10,7 +10,7 @@ $avatarUri = empty($avatar)
             height="64"
             style="margin-right:5px"/>
 
-        <a href="<?=$uri->mask("/{$staff_id}/edit")?>"
+        <a href="<?=$uri->make("/admin/staff/{$staff_id}/edit")?>"
             title="<?=trans('Edytuj pracownika')?>">
             <?=e($name)?>
         </a>
@@ -18,7 +18,7 @@ $avatarUri = empty($avatar)
     <td>
         <?php if (isset($groups) and $groups): ?>
             <?php foreach ($groups as $group_id => $group): ?>
-                <a href="<?=$uri->mask("/group/{$group_id}/edit")?>"
+                <a href="<?=$uri->make("/admin/staff/group/{$group_id}/edit")?>"
                     title="<?=trans('Przejdź do grupy')?>">
                     <?=$group?></a><br>
             <?php endforeach ?>

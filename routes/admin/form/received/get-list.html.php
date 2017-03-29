@@ -61,7 +61,7 @@ $count = GC\Model\Form\Sent::select()
     <div class="modal-dialog" role="document">
         <form id="deleteModalForm"
             method="post"
-            action="<?=$uri->mask("/delete")?>"
+            action="<?=$uri->make("/admin/form/received/delete")?>"
             class="modal-content">
             <input name="sent_id" type="hidden" value="">
             <div class="modal-header">
@@ -90,7 +90,7 @@ $count = GC\Model\Form\Sent::select()
 
 <script id="options-template" type="text/html">
     <div class="text-right">
-        <a href="<?=$uri->mask("/")?>{{sent_id}}/show"
+        <a href="<?=$uri->make("/") //TODO: ?>{{sent_id}}/show"
             class="btn btn-primary btn-sm">
             <i class="fa fa-search fa-fw"></i>
             <?=trans('Podgląd')?>
@@ -121,7 +121,7 @@ $count = GC\Model\Form\Sent::select()
             serverSide: true,
             searchDelay: 500,
             ajax: {
-                url: '<?=$uri->mask("/list.json")?>',
+                url: '<?=$uri->make('/admin/form/received/list.json')?>',
                 type: 'POST'
             },
             createdRow: function (row, data, index) {

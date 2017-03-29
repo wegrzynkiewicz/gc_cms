@@ -9,12 +9,12 @@ $image = empty($image)
         <img src="<?=$uri->root(thumbnail($image, 64, 64))?>" width="64"/>
     </td>
     <td>
-        <a href="<?=$uri->mask("/{$frame_id}/edit")?>"
+        <a href="<?=$uri->make("/admin/frame/{$frame_id}/edit")?>"
             title="<?=trans('Edytuj ten podział')?>">
             <?=e($name)?></a>
     </td>
     <td>
-        <a href="<?=$uri->mask($slug)?>"
+        <a href="<?=$uri->make($slug)?>"
             title="<?=trans('Podejrzyj ten podział')?>"
             target="_blank">
             <?=$slug?></a>
@@ -32,14 +32,14 @@ $image = empty($image)
     </td>
     <td class="text-right">
 
-        <a href="<?=$uri->mask("/{$frame_id}/module/grid")?>"
+        <a href="<?=$uri->make("/admin/frame/{$frame_id}/module/grid")?>"
             title="<?=trans('Wyświetl moduły podziału')?>"
             class="btn btn-primary btn-sm">
             <i class="fa fa-table fa-fw"></i>
             <?=trans('Moduły')?>
         </a>
 
-        <a href="<?=$uri->mask("/{$frame_id}/tree")?>"
+        <a href="<?=$uri->make("/admin/frame/{$frame_id}/tree")?>"
             title="<?=trans('Wyświetl węzły podziału')?>"
             class="btn btn-primary btn-sm">
             <i class="fa fa-sitemap fa-fw"></i>

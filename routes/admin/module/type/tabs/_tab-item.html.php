@@ -10,7 +10,7 @@
             </a>
         </div>
         <div class="pull-right">
-            <a href="<?=$uri->mask("/tab/{$frame_id}/module/grid")?>"
+            <a href="<?=$uri->make("/tab/{$frame_id}/module/grid") // TODO:?>"
                 title="<?=trans('Wyświetl moduły zakładi')?>"
                 class="btn btn-primary btn-xs">
                 <i class="fa fa-table fa-fw"></i>

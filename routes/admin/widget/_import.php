@@ -1,9 +1,8 @@
 <?php
 
 $headTitle = trans('Widżety');
-$uri->extendMask('/widget%s');
 $breadcrumbs->push([
-    'uri' => $uri->mask('/list'),
+    'uri' => $uri->make('/admin/widget/list'),
     'name' => $headTitle,
     'icon' => 'cube',
 ]);

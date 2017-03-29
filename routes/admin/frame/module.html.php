@@ -12,7 +12,6 @@ $frame = GC\Model\Frame::select()
 $type = $frame['type'];
 require ROUTES_PATH."/admin/frame/type/{$type}/_import.php";
 
-$uri->extendMask("/{$frame_id}/module%s");
 require ROUTES_PATH."/admin/frame/type/{$type}/_module.html.php";
 
 $action = array_shift($_SEGMENTS);

@@ -2,6 +2,6 @@
 
 $headTitle = trans('Edycja modułu zakładek');
 $breadcrumbs->push([
-    'uri' => $uri->mask('/edit'),
+    'uri' => $uri->make("/admin/module/{$module_id}/edit"),
     'name' => $headTitle,
 ]);

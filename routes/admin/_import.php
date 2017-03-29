@@ -5,13 +5,12 @@
 # utworzenie obiektu repezentującego pracownika
 $staff = GC\Staff::getInstance();
 
-$uri->extendMask('/admin%s');
 GC\Translator::$domain = 'admin';
 
 # utworzenie okruszków chleba dla całego panelu admina
 $breadcrumbs = new GC\Breadcrumbs();
 $breadcrumbs->push([
-    'uri' => $uri->mask('/'),
+    'uri' => $uri->make('/'),
     'name' => 'Dashboard',
     'icon' => 'dashboard',
 ]);

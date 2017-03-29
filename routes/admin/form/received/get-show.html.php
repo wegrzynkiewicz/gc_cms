@@ -24,7 +24,7 @@ $_POST = $message;
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=$uri->mask("/{$sent_id}/delete")?>"
+                <a href="<?=$uri->make("/admin/form/received/{$sent_id}/delete")?>"
                     type="button"
                     class="btn btn-danger btn-md">
                     <i class="fa fa-trash fa-fw"></i>

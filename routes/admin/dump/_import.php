@@ -1,9 +1,8 @@
 <?php
 
 $headTitle = trans('Kopie zapasowe');
-$uri->extendMask('/dump%s');
 $breadcrumbs->push([
-    'uri' => $uri->mask('/list'),
+    'uri' => $uri->make('/admin/dump/list'),
     'name' => $headTitle,
     'icon' => 'database',
 ]);

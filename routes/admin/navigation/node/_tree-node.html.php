@@ -1,7 +1,7 @@
 <li id="node_<?=$node_id?>" data-id="<?=$node_id?>">
     <div class="sortable-content">
         <div class="col-lg-4">
-            <a href="<?=$uri->mask("/node/{$node_id}/edit")?>">
+            <a href="<?=$uri->make("/admin/navigation/node/{$node_id}/edit")?>">
                 <?=e($node->getName())?>
             </a>
         </div>

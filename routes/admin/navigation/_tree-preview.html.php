@@ -2,7 +2,7 @@
     <?php foreach ($tree->getChildren() as $node): ?>
         <?php $node_id = $node['node_id']; ?>
         <li>
-            <a href="<?=$uri->mask("/node/{$node_id}/edit")?>">
+            <a href="<?=$uri->make("/admin/navigation/node/{$node_id}/edit")?>">
                 <?=e($node->getName())?>
             </a>
             <?php if ($node->hasChildren()): ?>

@@ -9,6 +9,4 @@ $theme = $module['theme'];
 $meta = GC\Model\Module\Meta::fetchMeta($module_id);
 $_POST = array_merge($module, $meta);
 
-$uri->extendMask("/{$module_id}%s");
-
 require ROUTES_PATH."/admin/module/type/{$type}/{$request->method}-edit.html.php";

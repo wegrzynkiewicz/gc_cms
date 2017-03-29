@@ -1,14 +1,14 @@
 <li id="node_<?=$frame_id?>" data-id="<?=$frame_id?>">
     <div class="sortable-content">
         <div class="col-lg-4">
-            <a href="<?=$uri->mask("/{$frame_id}/edit")?>"
+            <a href="<?=$uri->make("/admin/frame/{$frame_id}/edit")?>"
                 title="<?=trans('Edytuj węzeł')?>">
                 <?=e($name)?>
             </a>
         </div>
 
         <div class="pull-right">
-            <a href="<?=$uri->mask("/{$frame_id}/module/grid")?>"
+            <a href="<?=$uri->make("/admin/frame/{$frame_id}/module/grid")?>"
                 title="<?=trans('Wyświetl moduły węzła')?>"
                 class="btn btn-primary btn-xs">
                 <i class="fa fa-table fa-fw"></i>

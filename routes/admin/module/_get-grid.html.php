@@ -29,7 +29,7 @@ foreach ($metas as $meta) {
                     <i class="fa fa-search fa-fw"></i>
                     <?=trans('Podgląd')?>
                 </a>
-                <a href="<?=$uri->mask("/new")?>"
+                <a href="<?=$uri->make("/admin/frame/{$frame_id}/module/new")?>"
                     type="button"
                     class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>
@@ -72,7 +72,7 @@ foreach ($metas as $meta) {
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=$uri->mask('/delete')?>" class="modal-content">
+        <form id="deleteModalForm" method="post" action="<?=$uri->make('/admin/module/delete')?>" class="modal-content">
             <input name="module_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">

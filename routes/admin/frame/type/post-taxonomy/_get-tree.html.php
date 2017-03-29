@@ -10,5 +10,5 @@ $tree = GC\Model\Frame::select()
     ->fetchTree();
 
 echo render(ROUTES_PATH.'/admin/frame/_parts/tree-taxonomy.html.php', [
-    'addHref' => $uri->mask("/new/post-node/{$frame_id}"),
+    'addHref' => $uri->make("/admin/frame/new/post-node/{$frame_id}"),
 ]);

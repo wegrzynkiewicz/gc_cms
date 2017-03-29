@@ -36,7 +36,7 @@ $widgets = GC\Model\Widget::select()
                         <?php foreach ($widgets as $widget_id => $widget): ?>
                             <tr>
                                 <td>
-                                    <a href="<?=$uri->mask("/{$widget_id}/edit")?>"
+                                    <a href="<?=$uri->make("/admin/widget/{$widget_id}/edit")?>"
                                         title="<?=trans('Edytuj widżet')?>">
                                         <?=e($widget['name'])?>
                                     </a>

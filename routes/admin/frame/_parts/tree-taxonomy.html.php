@@ -43,7 +43,7 @@
     <div class="modal-dialog" role="document">
         <form id="deleteModalForm"
             method="post"
-            action="<?=$uri->mask('/delete')?>"
+            action="<?=$uri->make('/admin/frame/delete')?>"
             class="modal-content">
             <input name="frame_id" type="hidden" value="">
             <div class="modal-header">

@@ -1,7 +1,7 @@
 <li id="node_<?=$field_id?>" data-id="<?=$field_id?>">
     <div class="sortable-content">
         <div class="col-lg-4">
-            <a href="<?=$uri->mask("/$field_id/edit")?>">
+            <a href="<?=$uri->make("/admin/form/field/{$field_id}/edit")?>">
                 <?=e($name)?>
             </a>
         </div>

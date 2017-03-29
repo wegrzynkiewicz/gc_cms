@@ -2,6 +2,6 @@
 
 $headTitle = trans('Moduły w węźle wpisu: %s', [$frame['name']]);
 $breadcrumbs->push([
-    'uri' => $uri->mask('/grid'),
+    'uri' => $uri->make("/admin/frame/{$frame_id}/module/grid"),
     'name' => $headTitle,
 ]);

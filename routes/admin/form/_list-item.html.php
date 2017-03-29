@@ -17,12 +17,12 @@
     </td>
 
     <td class="text-right">
-        <a href="<?=$uri->mask("/{$form_id}/received/list")?>"
+        <a href="<?=$uri->make("/admin/form/{$form_id}/received/list")?>"
             class="btn btn-primary btn-sm">
             <i class="fa fa-search fa-fw"></i>
             <?=trans('Pokaż nadesłane')?>
         </a>
-        <a href="<?=$uri->mask("/{$form_id}/field/list")?>"
+        <a href="<?=$uri->make("/admin/form/{$form_id}/field/list")?>"
             class="btn btn-success btn-sm">
             <i class="fa fa-file-text-o fa-fw"></i>
             <?=trans('Pola formularza')?>

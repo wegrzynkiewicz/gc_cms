@@ -29,7 +29,7 @@ $_POST = $user;
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=$uri->mask("/{$staff_id}/force-change-password")?>" type="button" class="btn btn-success">
+                <a href="<?=$uri->make("/admin/staff/{$staff_id}/force-change-password")?>" type="button" class="btn btn-success">
                     <i class="fa fa-unlock-alt fa-fw"></i>
                     <?=trans('Wymuś zmianę hasła')?>
                 </a>

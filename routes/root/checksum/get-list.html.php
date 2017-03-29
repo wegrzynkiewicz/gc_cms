@@ -72,7 +72,7 @@ usort($checksums, function ($a, $b) {
     <div class="modal-dialog" role="document">
         <form id="refreshAllModalForm"
             method="post"
-            action="<?=$uri->mask("/refresh-all")?>"
+            action="<?=$uri->make("/root/checksum/refresh-all")?>"
             class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
@@ -101,7 +101,7 @@ usort($checksums, function ($a, $b) {
     <div class="modal-dialog" role="document">
         <form id="refreshModalForm"
             method="post"
-            action="<?=$uri->mask("/refresh")?>"
+            action="<?=$uri->make("/root/checksum/refresh")?>"
             class="modal-content">
             <input name="file" type="hidden" value="">
             <div class="modal-header">

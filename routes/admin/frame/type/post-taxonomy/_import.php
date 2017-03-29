@@ -1,8 +1,7 @@
 <?php
 
 $headTitle = trans('Podziały wpisów');
-$uri->extendMask('/frame%s');
 $breadcrumbs->push([
-    'uri' => $uri->mask("/list/post-taxonomy"),
+    'uri' => $uri->make('/admin/frame/list/post-taxonomy'),
     'name' => $headTitle,
 ]);

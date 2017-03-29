@@ -1,6 +1,6 @@
 <tr>
     <td>
-        <a href="<?=$uri->mask("/{$group_id}/edit")?>"
+        <a href="<?=$uri->make("/admin/staff/group/{$group_id}/edit")?>"
             title="<?=trans('Edytuj grupę')?>">
             <?=e($group['name'])?>
         </a>

@@ -16,7 +16,7 @@ $count = GC\Model\PopUp\PopUp::select()
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=$uri->mask('/new')?>" type="button" class="btn btn-success btn-md">
+                <a href="<?=$uri->make('/admin/popup/new')?>" type="button" class="btn btn-success btn-md">
                     <i class="fa fa-plus fa-fw"></i>
                     <?=trans('Dodaj nowe wyskakujące okienko')?>
                 </a>
@@ -68,7 +68,7 @@ $count = GC\Model\PopUp\PopUp::select()
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=$uri->mask('/delete')?>" class="modal-content">
+        <form id="deleteModalForm" method="post" action="<?=$uri->make('/admin/popup/delete')?>" class="modal-content">
             <input name="popup_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
@@ -96,7 +96,7 @@ $count = GC\Model\PopUp\PopUp::select()
 
 <script id="row-template" type="text/html">
     <td>
-        <a href="<?=$uri->mask()?>/{{popup_id}}/edit"
+        <a href="<?=$uri->make('/admin/popup')?>/{{popup_id}}/edit"
             title="<?=trans('Edytuj wyskakujące okienko')?>">
             {{name}}
         </a>
@@ -132,7 +132,7 @@ $count = GC\Model\PopUp\PopUp::select()
             searchDelay: 500,
             autoWidth: false,
             ajax: {
-                url: '<?=$uri->mask("/list.json")?>',
+                url: '<?=$uri->make("/admin/popup/list.json")?>',
                 type: 'POST'
             },
             createdRow: function (row, data, index) {

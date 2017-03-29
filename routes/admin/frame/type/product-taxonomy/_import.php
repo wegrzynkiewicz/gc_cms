@@ -1,8 +1,7 @@
 <?php
 
 $headTitle = trans('Podziały produktów');
-$uri->extendMask('/frame%s');
 $breadcrumbs->push([
-    'uri' => $uri->mask("/list/product-taxonomy"),
+    'uri' => $uri->make("/admin/frame/list/product-taxonomy"),
     'name' => $headTitle,
 ]);

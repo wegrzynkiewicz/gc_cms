@@ -37,7 +37,7 @@ unset($navigation);
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=$uri->mask('/new')?>" type="button" class="btn btn-success btn-md">
+                <a href="<?=$uri->make('/admin/navigation/new')?>" type="button" class="btn btn-success btn-md">
                     <i class="fa fa-plus fa-fw"></i>
                     <?=trans('Dodaj nową nawigację')?>
                 </a>
@@ -80,7 +80,7 @@ unset($navigation);
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="deleteModalForm" method="post" action="<?=$uri->mask('/delete')?>" class="modal-content">
+        <form id="deleteModalForm" method="post" action="<?=$uri->make('/admin/navigation/delete')?>" class="modal-content">
             <input name="navigation_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">

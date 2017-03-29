@@ -15,13 +15,11 @@ $tab = GC\Model\Module\Tab::select()
     ->equals('frame_id', $frame_id)
     ->fetch();
 
-$uri->extendMask("/{$module_id}%s");
 require ROUTES_PATH."/admin/module/type/{$moduleType}/_import.php";
 
 $headTitle = trans('Moduły zakładki: %s', [$tab['name']]);
-$uri->extendMask("/tab/{$frame_id}/module%s");
 $breadcrumbs->push([
-    'uri' => $uri->mask("/grid"),
+    'uri' => $uri->make("/grid"), //TODO:
     'name' => $headTitle,
 ]);
 

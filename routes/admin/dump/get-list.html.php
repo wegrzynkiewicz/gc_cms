@@ -62,7 +62,7 @@ $dumps = GC\Model\Dump::select()
     <div class="modal-dialog">
         <form id="addModalForm"
             method="post"
-            action="<?=$uri->mask("/new")?>"
+            action="<?=$uri->make('/admin/dump/new')?>"
             class="modal-content form-horizontal">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
