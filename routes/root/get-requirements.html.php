@@ -74,8 +74,8 @@ function ini_access($access)
 }
 
 ?>
-<?php require ROUTES_PATH.'/admin/_parts/header.html.php'; ?>
-<?php require ROUTES_PATH.'/admin/_parts/page-header.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/parts/_header.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/parts/_page-header.html.php'; ?>
 
 <h2>System</h2>
 <table class="simple-box table table-condensed table-bordered" style="table-layout: fixed;">
@@ -135,5 +135,5 @@ function ini_access($access)
     </tbody>
 </table>
 
-<?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
-<?php require ROUTES_PATH.'/admin/_parts/end.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/parts/assets/_footer.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/parts/_end.html.php'; ?>

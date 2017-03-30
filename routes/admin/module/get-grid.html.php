@@ -9,7 +9,7 @@ $frame = GC\Model\Frame::select()
     ->equals('frame_id', $frame_id)
     ->fetch();
 
-require ROUTES_PATH."/admin/module/_breadcrumbs-loop.php";
+require ROUTES_PATH.'/admin/module/parts/_breadcrumbs-loop.php';
 
 $headTitle = $breadcrumbs->getLast()['name'];
 
@@ -29,7 +29,7 @@ foreach ($metas as $meta) {
 }
 
 ?>
-<?php require ROUTES_PATH.'/admin/_parts/header.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/parts/_header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -54,7 +54,7 @@ foreach ($metas as $meta) {
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/_parts/breadcrumbs.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/parts/_breadcrumbs.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -69,13 +69,13 @@ foreach ($metas as $meta) {
                     <div id="grid-rows-wrapper"></div>
                     <div class="grid-stack">
                         <?php foreach ($modules as $module_id => $module): ?>
-                            <?=render(ROUTES_PATH.'/admin/module/_grid-item.html.php', $module)?>
+                            <?=render(ROUTES_PATH.'/admin/module/parts/_grid-item.html.php', $module)?>
                         <?php endforeach ?>
                     </div>
                 </div>
             <?php endif ?>
 
-            <?=render(ROUTES_PATH.'/admin/_parts/input/submitButtons.html.php', [
+            <?=render(ROUTES_PATH.'/admin/parts/input/_submitButtons.html.php', [
                 'saveLabel' => empty($modules) ? null : trans('Zapisz pozycje kafelków'),
             ])?>
 
@@ -163,7 +163,7 @@ foreach ($metas as $meta) {
     </div>
 </script>
 
-<?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/parts/assets/_footer.html.php'; ?>
 
 <script>
     var rowSettingsTemplate = $('#grid-row-settings').html();
@@ -235,4 +235,4 @@ foreach ($metas as $meta) {
 
 </script>
 
-<?php require ROUTES_PATH.'/admin/_parts/end.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/parts/_end.html.php'; ?>

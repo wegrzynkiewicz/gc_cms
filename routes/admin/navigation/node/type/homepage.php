@@ -10,7 +10,7 @@ require ROUTES_PATH.'/admin/navigation/node/type/_import.php';
     <fieldset>
         <legend><?=trans('Ustawienia typu węzła')?></legend>
 
-        <?=render(ROUTES_PATH.'/admin/_parts/input/editbox.html.php', [
+        <?=render(ROUTES_PATH.'/admin/parts/input/_editbox.html.php', [
             'name' => 'name',
             'label' => trans('Nazwa węzła'),
             'help' => trans('Nazwa węzła jest wymagana w przypadku strony głównej')

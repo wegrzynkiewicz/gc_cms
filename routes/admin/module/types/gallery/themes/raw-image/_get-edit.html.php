@@ -2,7 +2,7 @@
     <fieldset>
         <legend><?=trans('Ustawienia szablonu galerii')?></legend>
 
-        <?=render(ROUTES_PATH.'/admin/_parts/input/select2-single.html.php', [
+        <?=render(ROUTES_PATH.'/admin/parts/input/_select2-single.html.php', [
             'name' => 'thumbnailsPerRow',
             'label' => trans('Ilość miniaturek na wiersz galerii'),
             'hideSearch' => true,
@@ -16,7 +16,7 @@
             ],
         ])?>
 
-        <?=render(ROUTES_PATH.'/admin/_parts/input/editbox.html.php', [
+        <?=render(ROUTES_PATH.'/admin/parts/input/_editbox.html.php', [
             'name' => 'gutter',
             'label' => trans('Odstęp pomiędzy miniaturkami (w pikselach)'),
             'help' => trans('Ustawia odstęp w pikselach pomiędzy miniaturkami w wierszu.'),

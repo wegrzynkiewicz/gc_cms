@@ -32,7 +32,7 @@ usort($checksums, function ($a, $b) {
 });
 
 ?>
-<?php require ROUTES_PATH.'/admin/_parts/header.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/parts/_header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -51,7 +51,7 @@ usort($checksums, function ($a, $b) {
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/_parts/breadcrumbs.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/parts/_breadcrumbs.html.php'; ?>
 
 <table class="simple-box table table-condensed">
     <thead>
@@ -128,7 +128,7 @@ usort($checksums, function ($a, $b) {
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/parts/assets/_footer.html.php'; ?>
 
 <script>
     $(function(){
@@ -139,4 +139,4 @@ usort($checksums, function ($a, $b) {
     });
 </script>
 
-<?php require ROUTES_PATH.'/admin/_parts/end.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/parts/_end.html.php'; ?>

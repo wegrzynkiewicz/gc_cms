@@ -16,7 +16,7 @@ require ROUTES_PATH.'/admin/_breadcrumbs.php'; ?>
 <body>
 	<div id="elfinder"></div>
 
-    <?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
+    <?php require ROUTES_PATH.'/admin/parts/assets/_footer.html.php'; ?>
 
     <script>
         function getUrlParam(paramName) {

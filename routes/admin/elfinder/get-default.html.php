@@ -7,7 +7,7 @@ require ROUTES_PATH.'/admin/_breadcrumbs.php'; ?>
 		<title>elFinder 2.1.x source version with PHP connector</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2" />
 
-        <?php require ROUTES_PATH.'/admin/_parts/assets/header.html.php'; ?>
+        <?php require ROUTES_PATH.'/admin/parts/assets/_header.html.php'; ?>
 
         <style>
             body{
@@ -19,7 +19,7 @@ require ROUTES_PATH.'/admin/_breadcrumbs.php'; ?>
 
 		<div id="elfinder"></div>
 
-        <?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
+        <?php require ROUTES_PATH.'/admin/parts/assets/_footer.html.php'; ?>
 
 		<script>
 			$(function() {

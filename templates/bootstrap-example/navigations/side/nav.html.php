@@ -23,7 +23,7 @@ if ($navigation) {
         <h4><?=e($navigation['name'])?></h4>
         <ol class="list-unstyled">
             <?php foreach ($tree->getChildren() as $node): ?>
-                <?=render(TEMPLATE_PATH.'/navigations/side/item.html.php', $node->getData())?>
+                <?=render(TEMPLATE_PATH."/navigations/side/_item.html.php", $node->getData())?>
             <?php endforeach ?>
         </ol>
     </div>

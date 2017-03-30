@@ -2,7 +2,7 @@
 
 $mail->Subject = trans('%s został wykorzystany w serwisie %s', [$form['name'], $_SERVER['HTTP_HOST']]);
 
-require ROUTES_PATH.'/admin/_parts/email/header.html.php'; ?>
+require ROUTES_PATH.'/admin/parts/email/_header.html.php'; ?>
 
 <div class="title">
     <?=e($form['name'])?>
@@ -22,10 +22,10 @@ require ROUTES_PATH.'/admin/_parts/email/header.html.php'; ?>
         <?php endforeach ?>
     </table>
     <br>
-    <?php require ROUTES_PATH.'/admin/_parts/email/localization.html.php'; ?>
+    <?php require ROUTES_PATH.'/admin/parts/email/_localization.html.php'; ?>
     <br>
     <strong><?=trans('Wiadomość została wygenerowana automatycznie. Prosimy nie odpowiadać')?></strong><br>
     <br>
 </div>
 
-<?php require ROUTES_PATH.'/admin/_parts/email/footer.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/parts/email/_footer.html.php'; ?>

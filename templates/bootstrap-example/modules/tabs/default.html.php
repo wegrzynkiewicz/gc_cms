@@ -16,7 +16,7 @@ $items = GC\Model\Module\Item::joinAllWithFrameByForeign($module_id);
         <div class="tab-content">
             <?php foreach ($items as $item_id => $item): ?>
                 <div role="tabpanel" class="tab-pane" id="tab_<?=$item_id?>">
-                    <?=render(TEMPLATE_PATH.'/_parts/module/wrapper.html.php', [
+                    <?=render(TEMPLATE_PATH, [ //TODO:
                         'frame_id' => $item['frame_id'],
                         'frame' => $item,
                         'container' => false,

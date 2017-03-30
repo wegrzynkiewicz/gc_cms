@@ -363,4 +363,4 @@ $config = [
     ],
 ];
 
-$config['template'] = require TEMPLATE_PATH.'/config.php';
+$config['template'] = require TEMPLATE_PATH."/config.php";

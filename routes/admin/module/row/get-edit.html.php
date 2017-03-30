@@ -17,7 +17,7 @@ if ($row) {
 
 ?>
 
-<?=render(ROUTES_PATH.'/admin/_parts/input/select2-single.html.php', [
+<?=render(ROUTES_PATH.'/admin/parts/input/_select2-single.html.php', [
     'name' => 'type',
     'label' => trans('Szerokość wiersza'),
     'help' => trans('Określa zachowanie szerokości wiersza względem szerokości strony.'),
@@ -28,19 +28,19 @@ if ($row) {
     ]),
 ])?>
 
-<?=render(ROUTES_PATH.'/admin/_parts/input/editbox.html.php', [
+<?=render(ROUTES_PATH.'/admin/parts/input/_editbox.html.php', [
     'name' => 'gutter',
     'label' => trans('Odstęp kafelków (w pikselach)'),
     'help' => trans('Ustawia odstęp w pikselach pomiędzy modułami w wierszu.'),
 ])?>
 
-<?=render(ROUTES_PATH.'/admin/_parts/input/colorpicker.html.php', [
+<?=render(ROUTES_PATH.'/admin/parts/input/_colorpicker.html.php', [
     'name' => 'bg_color',
     'label' => trans('Kolor tła'),
     'help' => trans('Pozwala na wybranie koloru tła wiersza. Zostaw puste jeżeli nie chcesz ustawiać koloru.'),
 ])?>
 
-<?=render(ROUTES_PATH.'/admin/_parts/input/image.html.php', [
+<?=render(ROUTES_PATH.'/admin/parts/input/_image.html.php', [
     'name' => 'bg_image',
     'label' => trans('Zdjęcie tła'),
     'placeholder' => trans('Ścieżka do pliku zdjęcia'),

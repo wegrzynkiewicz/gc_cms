@@ -13,7 +13,7 @@ $fields = GC\Model\Form\Field::select()
     ->fetchByPrimaryKey();
 
 ?>
-<?php require ROUTES_PATH.'/admin/_parts/header.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/parts/_header.html.php'; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -29,7 +29,7 @@ $fields = GC\Model\Form\Field::select()
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/_parts/breadcrumbs.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/parts/_breadcrumbs.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">
@@ -46,7 +46,7 @@ $fields = GC\Model\Form\Field::select()
                     <?php endforeach?>
                 </ol>
             <?php endif?>
-            <?=render(ROUTES_PATH.'/admin/_parts/input/submitButtons.html.php', [
+            <?=render(ROUTES_PATH.'/admin/parts/input/_submitButtons.html.php', [
                 'saveLabel' => trans('Zapisz pozycję'),
             ])?>
         </form>
@@ -81,7 +81,7 @@ $fields = GC\Model\Form\Field::select()
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/parts/assets/_footer.html.php'; ?>
 
 <script>
     $('#deleteModal').on('show.bs.modal', function (event) {
@@ -106,4 +106,4 @@ $(function(){
 });
 </script>
 
-<?php require ROUTES_PATH.'/admin/_parts/end.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/parts/_end.html.php'; ?>

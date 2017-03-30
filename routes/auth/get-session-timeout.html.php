@@ -7,7 +7,7 @@ $headTitle = trans('Czas trwania sesji minął');
 unset($_SESSION['staff']);
 
 ?>
-<?php require ROUTES_PATH.'/admin/_parts/header-login.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/parts/_header-login.html.php'; ?>
 
 <div class="vertical-center">
     <div class="container">
@@ -36,7 +36,7 @@ unset($_SESSION['staff']);
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/parts/assets/_footer.html.php'; ?>
 
 </body>
 </html>

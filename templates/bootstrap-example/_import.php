@@ -2,7 +2,7 @@
 
 /** Inicjalizacyjny plik dla plików szablonu */
 
-require TEMPLATE_PATH.'/functions.php';
+require TEMPLATE_PATH."/functions.php";
 
 # ustawienie katalogu dla nowych translacji
 GC\Translator::$domain = 'template-'.TEMPLATE;

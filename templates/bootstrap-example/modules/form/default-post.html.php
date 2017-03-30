@@ -4,7 +4,7 @@ $form_id = $content;
 $fields = GC\Model\Form\Field::joinAllWithKeyByForeign($form_id);
 
 if (!isset($_POST["formSubmit_$form_id"])) {
-    require TEMPLATE_PATH.'/modules/form/default-get.html.php';
+    require TEMPLATE_PATH."/modules/form/default-get.html.php";
 }
 
 $form = GC\Model\Form\Form::fetchByPrimaryId($form_id);
@@ -21,7 +21,7 @@ if (count($settings['emails']) > 0) {
         $mail = new GC\Mail();
         $mail->buildTemplate(
             ROUTES_PATH.'/admin/form/posted-form.email.html.php',
-            ROUTES_PATH.'/admin/_parts/email/styles.css', [
+            ROUTES_PATH.'/admin/parts/email/_styles.css', [
                 'form' => $form,
                 'data' => $data,
                 'localization' => $localization,

@@ -12,15 +12,15 @@ $count = GC\Model\Form\Sent::select()
     ->fetch()['count'];
 
 ?>
-<?php require ROUTES_PATH.'/admin/_parts/header.html.php'; ?>
-<?php require ROUTES_PATH.'/admin/_parts/page-header.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/parts/_header.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/parts/_page-header.html.php'; ?>
 
 <div class="row">
     <div class="col-md-12">
         <div class="simple-box">
             <?php if ($count == 0): ?>
                 <?=trans('Nie znaleziono żadnego wysłanego formularza w języku: ')?>
-                <?=render(ROUTES_PATH.'/admin/_parts/language.html.php', [
+                <?=render(ROUTES_PATH.'/admin/parts/_language.html.php', [
                     'lang' => GC\Staff::getInstance()->getEditorLang(),
                 ])?>
             <?php else: ?>
@@ -54,7 +54,7 @@ $count = GC\Model\Form\Sent::select()
                 </form>
             <?php endif ?>
         </div>
-        <?php require ROUTES_PATH.'/admin/_parts/input/submitButtons.html.php'; ?>
+        <?php require ROUTES_PATH.'/admin/parts/input/_submitButtons.html.php'; ?>
     </div>
 </div>
 
@@ -109,7 +109,7 @@ $count = GC\Model\Form\Sent::select()
     </div>
 </script>
 
-<?php require ROUTES_PATH.'/admin/_parts/assets/footer.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/parts/assets/_footer.html.php'; ?>
 
 <script>
     $(function(){
@@ -161,4 +161,4 @@ $count = GC\Model\Form\Sent::select()
     });
 </script>
 
-<?php require ROUTES_PATH.'/admin/_parts/end.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/parts/_end.html.php'; ?>

@@ -1,4 +1,4 @@
-<?php require TEMPLATE_PATH."/navigations/side/nav.html.php"; ?>
+<?php require TEMPLATE_PATH."/navigations/side/_nav.html.php"; ?>
 
 <?php if (isset($widgets['about'])): ?>
     <div class="well">

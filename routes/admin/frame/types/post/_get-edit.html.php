@@ -11,6 +11,6 @@ $checkedValues = array_keys(GC\Model\Frame\Relation::select()
     ->equals('frame_id', $frame_id)
     ->fetchByMap('node_id', 'node_id'));
 
-echo render(ROUTES_PATH.'/admin/frame/_parts/form.html.php', [
+echo render(ROUTES_PATH.'/admin/frame/parts/_form.html.php', [
     'nameCaption' => trans('Nazwa wpisu'),
 ]);

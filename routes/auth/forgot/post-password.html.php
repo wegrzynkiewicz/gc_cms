@@ -33,7 +33,7 @@ GC\Model\Staff\Meta::updateMeta($user['staff_id'], [
 $mail = new GC\Mail();
 $mail->buildTemplate(
     ROUTES_PATH.'/auth/forgot/_email-regeneration.html.php',
-    ROUTES_PATH.'/admin/_parts/email/styles.css', [
+    ROUTES_PATH.'/admin/parts/email/_styles.css', [
         'name' => $user['name'],
         'regenerateUrl' => $regenerateUrl,
     ]

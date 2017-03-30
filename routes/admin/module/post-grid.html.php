@@ -5,7 +5,7 @@ require ROUTES_PATH.'/admin/_breadcrumbs.php';
 
 $frame_id = intval(array_shift($_PARAMETERS));
 
-require ROUTES_PATH."/admin/module/_breadcrumbs-loop.php";
+require ROUTES_PATH.'/admin/module/parts/_breadcrumbs-loop.php';
 
 # dekoduj nadesłaną wartość
 $grid = json_decode(post('grid'), true);

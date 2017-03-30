@@ -43,7 +43,7 @@ if ($navigation) {
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <?php foreach ($tree->getChildren() as $node): ?>
-                        <?=render(TEMPLATE_PATH.'/navigations/top/item.html.php', $node->getData())?>
+                        <?=render(TEMPLATE_PATH."/navigations/top/_item.html.php", $node->getData())?>
                     <?php endforeach ?>
                 </ul>
             </div>

@@ -53,6 +53,6 @@ foreach ($rows as $y => $row) {
         $row['type'] = $forceContainerType;
     }
     if (isset($row['module']['types'])) {
-        echo render(TEMPLATE_PATH."/_parts/row.html.php", $row);
+        echo render(TEMPLATE_PATH."/parts/_row.html.php", $row);
     }
 }

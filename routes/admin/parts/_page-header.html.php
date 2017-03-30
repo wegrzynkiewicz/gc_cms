@@ -6,4 +6,4 @@
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/_parts/breadcrumbs.html.php'; ?>
+<?php require ROUTES_PATH.'/admin/parts/_breadcrumbs.html.php'; ?>
