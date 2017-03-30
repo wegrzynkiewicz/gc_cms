@@ -1,6 +1,7 @@
 <?php
 
 require ROUTES_PATH.'/admin/_import.php';
+require ROUTES_PATH.'/admin/_breadcrumbs.php';
 require ROUTES_PATH.'/admin/navigation/_import.php';
 
 $navigation_id = intval(post('navigation_id'));

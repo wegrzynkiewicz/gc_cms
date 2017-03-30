@@ -1,6 +1,7 @@
 <?php
 
 require ROUTES_PATH.'/admin/_import.php';
+require ROUTES_PATH.'/admin/_breadcrumbs.php';
 require ROUTES_PATH.'/admin/account/_import.php';
 
 $headTitle = trans('Zmiana hasła');

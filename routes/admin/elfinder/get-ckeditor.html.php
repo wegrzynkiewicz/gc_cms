@@ -1,4 +1,5 @@
-<?php require ROUTES_PATH.'/admin/_import.php'; ?>
+<?php require ROUTES_PATH.'/admin/_import.php';
+require ROUTES_PATH.'/admin/_breadcrumbs.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
