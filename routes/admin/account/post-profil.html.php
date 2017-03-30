@@ -14,4 +14,4 @@ GC\Model\Staff\Staff::updateByPrimaryId($staff_id, [
 ]);
 
 flashBox(trans('Twój profil został zaktualizowany.'));
-redirect($breadcrumbs->getLast('uri'));
+redirect($breadcrumbs->getLast()['uri']);

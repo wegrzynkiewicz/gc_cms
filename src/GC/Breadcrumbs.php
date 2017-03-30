@@ -23,22 +23,14 @@ class Breadcrumbs
         array_unshift($this->links, $data);
     }
 
-    public function getBeforeLast(string $index): string
+    public function getBeforeLast(): string
     {
-        return getValueByKeys(
-            $this->links,
-            [count($this->links)-2, $index],
-            '/'
-        );
+        return $this->links[count($this->links)-2] ?? null;
     }
 
-    public function getLast(string $index): string
+    public function getLast(): string
     {
-        return getValueByKeys(
-            $this->links,
-            [count($this->links)-1, $index],
-            '/'
-        );
+        return $this->links[count($this->links)-1] ?? null;
     }
 
     public function reverse(): void

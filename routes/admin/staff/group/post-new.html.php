@@ -21,4 +21,4 @@ foreach ($permissions as $permission) {
 }
 
 flashBox(trans('Nowa grupa pracowników "%s" została utworzona.', [post('name')]));
-redirect($breadcrumbs->getLast('uri'));
+redirect($breadcrumbs->getLast()['uri']);

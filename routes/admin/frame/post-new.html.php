@@ -31,4 +31,4 @@ $frame_id = GC\Model\Frame::insert($data);
 require ROUTES_PATH."/admin/frame/_breadcrumbs-list.php";
 require ROUTES_PATH."/admin/frame/type/{$frameType}/_post-new.html.php";
 
-redirect($breadcrumbs->getLast('uri'));
+redirect($breadcrumbs->getLast()['uri']);

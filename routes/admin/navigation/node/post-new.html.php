@@ -39,4 +39,4 @@ $node = GC\Model\Navigation\Node::select()
     ->fetchObject();
 
 flashBox(trans('Węzeł nawigacji "%s" został utworzony.', [$node->getName()]));
-redirect($breadcrumbs->getLast('uri'));
+redirect($breadcrumbs->getLast()['uri']);

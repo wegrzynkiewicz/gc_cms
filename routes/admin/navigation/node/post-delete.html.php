@@ -21,4 +21,4 @@ require ROUTES_PATH.'/admin/navigation/node/_import.php';
 GC\Model\Navigation\Node::deleteBynodeId($node_id);
 
 flashBox(trans('Węzeł nawigacji "%s" i wszystkie jego podwęzły zostały usunięte.', [$node->getName()]));
-redirect($breadcrumbs->getLast('uri'));
+redirect($breadcrumbs->getLast()['uri']);

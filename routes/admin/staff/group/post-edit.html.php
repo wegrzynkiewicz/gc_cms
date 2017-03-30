@@ -27,4 +27,4 @@ foreach ($permissions as $permission) {
 }
 
 flashBox(trans('Grupa pracowników "%s" została zaktualizowana.', [post('name')]));
-redirect($breadcrumbs->getLast('uri'));
+redirect($breadcrumbs->getLast()['uri']);

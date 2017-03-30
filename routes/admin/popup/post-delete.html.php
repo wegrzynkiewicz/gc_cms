@@ -15,4 +15,4 @@ $popup = GC\Model\PopUp\PopUp::select()
 GC\Model\PopUp\PopUp::deleteByPrimaryId($popup_id);
 
 flashBox(trans('Wyskakujące okienko "%s" zostało usunięte.', [$popup['name']]));
-redirect($breadcrumbs->getLast('uri'));
+redirect($breadcrumbs->getLast()['uri']);

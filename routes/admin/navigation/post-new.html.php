@@ -21,4 +21,4 @@ GC\Model\Navigation::insert([
 ]);
 
 flashBox(trans('Nawigacja "%s" została utworzona.', [post('name')]));
-redirect($breadcrumbs->getLast('uri'));
+redirect($breadcrumbs->getLast()['uri']);

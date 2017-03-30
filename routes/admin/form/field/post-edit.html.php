@@ -21,4 +21,4 @@ $type = $field['type'];
 require ROUTES_PATH."/admin/form/field/type/{$type}-post.php";
 
 flashBox(trans('Pole "%s" zostało zaktualizowane.', [$field['name']]));
-redirect($breadcrumbs->getLast('uri'));
+redirect($breadcrumbs->getLast()['uri']);

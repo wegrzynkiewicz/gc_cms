@@ -15,4 +15,4 @@ GC\Model\Module\Meta::updateMeta($module_id, [
     'height' => intval(post('height')),
 ]);
 
-redirect($breadcrumbs->getBeforeLast('uri'));
+redirect($breadcrumbs->getBeforeLast()['uri']);

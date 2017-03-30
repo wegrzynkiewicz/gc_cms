@@ -30,4 +30,4 @@ $theme = post('theme');
 require ROUTES_PATH."/admin/module/type/gallery/theme/post-{$theme}.html.php";
 
 flashBox(trans('Moduł galerii zdjęć został zaktualizowany.'));
-redirect($breadcrumbs->getBeforeLast('uri'));
+redirect($breadcrumbs->getBeforeLast()['uri']);

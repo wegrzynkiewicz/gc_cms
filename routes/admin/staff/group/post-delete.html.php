@@ -14,4 +14,4 @@ $group = GC\Model\Staff\Group::fetchByPrimaryId($group_id);
 GC\Model\Staff\Group::deleteByPrimaryId($group_id);
 
 flashBox(trans('Grupa pracowników "%s" została usunięta.', [$group['name']]));
-redirect($breadcrumbs->getLast('uri'));
+redirect($breadcrumbs->getLast()['uri']);

@@ -10,4 +10,4 @@ $type = $widget['type'];
 
 require ROUTES_PATH."/admin/widget/type/{$type}-post.html.php";
 
-redirect($breadcrumbs->getLast('uri'));
+redirect($breadcrumbs->getLast()['uri']);

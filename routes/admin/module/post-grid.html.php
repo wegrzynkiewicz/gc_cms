@@ -36,4 +36,4 @@ foreach ($grid as $module) {
 }
 
 flashBox(trans('Ustawienia kafelków zostały zapisane.'));
-redirect($breadcrumbs->getLast('uri'));
+redirect($breadcrumbs->getLast()['uri']);

@@ -8,4 +8,4 @@ require ROUTES_PATH.'/root/checksum/_import.php';
 GC\Model\Checksum::refreshChecksums();
 
 flashBox(trans('Odświeżono wszystkie pliki.'));
-redirect($breadcrumbs->getLast('uri'));
+redirect($breadcrumbs->getLast()['uri']);

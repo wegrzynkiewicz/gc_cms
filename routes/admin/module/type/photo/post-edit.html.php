@@ -17,4 +17,4 @@ GC\Model\Module::updateByPrimaryId($module_id, [
     'settings' => json_encode($settings),
 ]);
 
-redirect($breadcrumbs->getBeforeLast('uri'));
+redirect($breadcrumbs->getBeforeLast()['uri']);

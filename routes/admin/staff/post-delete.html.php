@@ -13,4 +13,4 @@ $user = GC\Model\Staff\Staff::fetchByPrimaryId($staff_id);
 GC\Model\Staff\Staff::deleteByPrimaryId($staff_id);
 
 flashBox(trans('Pracownik "%s" został usunięty.', [$user['name']]));
-redirect($breadcrumbs->getLast('uri'));
+redirect($breadcrumbs->getLast()['uri']);

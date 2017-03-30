@@ -13,4 +13,4 @@ GC\Model\Module::updateByPrimaryId($module_id, [
 ]);
 
 flashBox(trans('Moduł formularza został zaktualizowany.'));
-redirect($breadcrumbs->getLast('uri'));
+redirect($breadcrumbs->getLast()['uri']);

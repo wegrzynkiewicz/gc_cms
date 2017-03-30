@@ -15,4 +15,4 @@ $navigation = GC\Model\Navigation::select()
 GC\Model\Navigation::deleteByNavigationId($navigation_id);
 
 flashBox(trans('Nawigacja "%s" i wszystkie węzły zostały usunięte.', [$navigation['name']]));
-redirect($breadcrumbs->getLast('uri'));
+redirect($breadcrumbs->getLast()['uri']);

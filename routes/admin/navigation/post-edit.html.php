@@ -22,4 +22,4 @@ GC\Model\Navigation::updateByPrimaryId($navigation_id, [
 ]);
 
 flashBox(trans('Nawigacja "%s" została zaktualizowana.', [post('name')]));
-redirect($breadcrumbs->getLast('uri'));
+redirect($breadcrumbs->getLast()['uri']);

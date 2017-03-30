@@ -12,4 +12,4 @@ GC\Model\Form\Sent::updateByPrimaryId($sent_id, [
 
 flashBox(trans('Status wiadomośći został zaktualizowany.'));
 
-redirect($breadcrumbs->getLast('uri'));
+redirect($breadcrumbs->getLast()['uri']);

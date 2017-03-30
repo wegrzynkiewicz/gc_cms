@@ -23,4 +23,4 @@ $type = post('type');
 require ROUTES_PATH."/admin/popup/type/{$type}-post.php";
 
 flashBox(trans('Wyskakujące okienko "%s" zostało zaktualizowane.', [post('name')]));
-redirect($breadcrumbs->getLast('uri'));
+redirect($breadcrumbs->getLast()['uri']);

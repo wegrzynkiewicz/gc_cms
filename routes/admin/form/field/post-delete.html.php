@@ -14,4 +14,4 @@ $field = GC\Model\Form\Field::fetchByPrimaryId($field_id);
 GC\Model\Form\Field::deleteByPrimaryId($field_id);
 
 flashBox(trans('Pole "%s" zostało usunięte.', [$field['name']]));
-redirect($breadcrumbs->getLast('uri'));
+redirect($breadcrumbs->getLast()['uri']);

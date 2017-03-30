@@ -12,4 +12,4 @@ $module = GC\Model\Module::fetchByPrimaryId($module_id);
 GC\Model\Module::deleteByModuleId($module_id);
 
 flashBox(trans("%s został usunięty", [$config['module']['types'][$module['type']]['name']]));
-redirect($breadcrumbs->getLast('uri'));
+redirect($breadcrumbs->getLast()['uri']);

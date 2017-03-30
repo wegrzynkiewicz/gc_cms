@@ -17,4 +17,4 @@ GC\Model\Checksum::insert([
 ]);
 
 flashBox(trans('Plik "%s" został odświeżony.', [$file]));
-redirect($breadcrumbs->getLast('uri'));
+redirect($breadcrumbs->getLast()['uri']);

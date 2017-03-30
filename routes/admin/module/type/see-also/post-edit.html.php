@@ -32,4 +32,4 @@ $theme = post('theme');
 require ROUTES_PATH."/admin/module/type/see-also/theme/post-{$theme}.html.php";
 
 flashBox(trans('Moduł: Zobacz także został zaktualizowany.'));
-redirect($breadcrumbs->getBeforeLast('uri'));
+redirect($breadcrumbs->getBeforeLast()['uri']);

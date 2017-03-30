@@ -13,4 +13,4 @@ $positions = json_decode(post('positions', []), true);
 GC\Model\Navigation\Tree::insertPositionsToNavigation($positions, $navigation_id);
 
 flashBox(trans('Pozycja węzłów została zapisana.'));
-redirect($breadcrumbs->getLast('uri'));
+redirect($breadcrumbs->getLast()['uri']);

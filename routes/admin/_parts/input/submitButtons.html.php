@@ -2,7 +2,7 @@
 
 $cancelHref = isset($cancelHref)
     ? $uri->make($cancelHref)
-    : $breadcrumbs->getBeforeLast('uri');
+    : $breadcrumbs->getBeforeLast()['uri'];
 
 ?>
 <div class="row">

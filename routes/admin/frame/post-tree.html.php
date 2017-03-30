@@ -18,4 +18,4 @@ $frameType = $frame['type'];
 require ROUTES_PATH."/admin/frame/_breadcrumbs-list.php";
 require ROUTES_PATH."/admin/frame/type/{$frameType}/_post-tree.html.php";
 
-redirect($breadcrumbs->getLast('uri'));
+redirect($breadcrumbs->getLast()['uri']);

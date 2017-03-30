@@ -6,4 +6,4 @@ GC\Model\Module::updateByPrimaryId($module_id, [
     'theme' => post('theme'),
 ]);
 
-redirect($breadcrumbs->getBeforeLast('uri'));
+redirect($breadcrumbs->getBeforeLast()['uri']);

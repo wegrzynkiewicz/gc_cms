@@ -27,4 +27,4 @@ $navigation_id = $node['navigation_id'];
 require ROUTES_PATH.'/admin/navigation/node/_import.php';
 
 flashBox(trans('Węzeł nawigacji "%s" został zaktualizowany.', [$node->getName()]));
-redirect($breadcrumbs->getLast('uri'));
+redirect($breadcrumbs->getLast()['uri']);
