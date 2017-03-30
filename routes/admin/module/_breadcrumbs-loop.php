@@ -8,10 +8,12 @@ $makeRecursiveBreadcrumbs = function ($frame_id) use (&$breadcrumbs, $config, $u
             ->equals('frame_id', $frame_id)
             ->fetch();
 
-        require ROUTES_PATH."/admin/frame/_breadcrumbs-module.php";
+        $frameType = $frame['type'];
 
-        if ($frame['type'] !== 'tab') {
-            require ROUTES_PATH."/admin/frame/_breadcrumbs-edit.php";
+        require ROUTES_PATH."/admin/frame/types/{$frameType}/breadcrumbs/_module.php";
+
+        if ($frameType !== 'tab') {
+            require ROUTES_PATH."/admin/frame/types/{$frameType}/breadcrumbs/_edit.php";
             break;
         }
 
@@ -26,17 +28,19 @@ $makeRecursiveBreadcrumbs = function ($frame_id) use (&$breadcrumbs, $config, $u
 
         $module_id = $tab['module_id'];
         $module = GC\Model\Module::select()
+            ->fields('frame_id, type')
             ->source('::grid')
             ->equals('module_id', $module_id)
             ->fetch();
 
-        require ROUTES_PATH."/admin/module/_breadcrumbs-edit.php";
+        $moduleType = $module['type'];
+
+        require ROUTES_PATH."/admin/module/types/{$moduleType}/_breadcrumbs-edit.php";
 
         $frame_id = $module['frame_id'];
     }
 
-    $frameType = $frame['type'];
-    require ROUTES_PATH."/admin/frame/_breadcrumbs-list.php";
+    require ROUTES_PATH."/admin/frame/types/{$frameType}/breadcrumbs/_list.php";
     require ROUTES_PATH."/admin/_breadcrumbs.php";
 
     $breadcrumbs->reverse();

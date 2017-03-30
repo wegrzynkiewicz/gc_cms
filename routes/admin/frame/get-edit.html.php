@@ -13,5 +13,5 @@ $frame = GC\Model\Frame::select()
 $frameType = $frame['type'];
 $_POST = $frame;
 
-require ROUTES_PATH."/admin/frame/_breadcrumbs-list.php";
+require ROUTES_PATH."/admin/frame/types/{$frameType}/breadcrumbs/_list.php";
 require ROUTES_PATH."/admin/frame/types/{$frameType}/_get-edit.html.php";

@@ -162,83 +162,27 @@ $config = [
         'types' => [
             'page' => [
                 'name' => 'Strona',
-                'icon' => 'files-o',
-                'labels' => [
-                    'list' => 'Strony',
-                    'edit' => 'Edycja strony: %s',
-                    'module' => 'Moduły strony: %s',
-                    'deleted' => 'Strona "%s" została usunięta',
-                ],
             ],
             'post' => [
                 'name' => 'Wpis',
-                'icon' => 'pencil-square-o',
-                'labels' => [
-                    'list' => 'Wpisy',
-                    'edit' => 'Edycja wpisu: %s',
-                    'module' => 'Moduły wpisu: %s',
-                    'deleted' => 'Strona "%s" została usunięta',
-                ],
             ],
             'post-node' => [ # węzeł podziału wpisu, czyli np. Aktualności
                 'name' => 'Węzeł wpisu',
-                'icon' => null,
-                'labels' => [
-                    'list' => 'Węzły podziału wpisów',
-                    'edit' => 'Edycja węzła podziału wpisów: %s',
-                    'module' => 'Moduły w węźle wpisu: %s',
-                    'deleted' => 'Strona "%s" została usunięta',
-                ],
             ],
             'post-taxonomy' => [ # podział wpisu, czyli np. Kategoria wpisu
                 'name' => 'Podział wpisu',
-                'icon' => null,
-                'labels' => [
-                    'list' => 'Podziały wpisów',
-                    'edit' => 'Edycja podziału wpisów: %s',
-                    'module' => 'Moduły podziału wpisów: %s',
-                    'deleted' => 'Strona "%s" została usunięta',
-                ],
             ],
             'product' => [
                 'name' => 'Produkt',
-                'icon' => 'shopping-basket',
-                'labels' => [
-                    'list' => 'Produkty',
-                    'edit' => 'Edycja produktu: %s',
-                    'module' => 'Moduły produktu: %s',
-                    'deleted' => 'Produkt "%s" został usunięty.',
-                ],
             ],
             'product-node' => [ # węzeł podziału produktu, czyli np. Procesory
                 'name' => 'Węzeł produktu',
-                'icon' => null,
-                'labels' => [
-                    'list' => 'Węzły podziału produktu',
-                    'edit' => 'Edycja węzła podziału produktów: %s',
-                    'module' => 'Moduły w węźle produktu: %s',
-                    'deleted' => 'Węzeł produktu "%s" został usunięty',
-                ],
             ],
             'product-taxonomy' => [ # węzeł podziału produktu, czyli np. Kategoria produktu
                 'name' => 'Podział produktu',
-                'icon' => null,
-                'labels' => [
-                    'list' => 'Podziały produktu',
-                    'edit' => 'Edycja podziału produktów: %s',
-                    'module' => 'Moduły podziału produktów: %s',
-                    'deleted' => 'Podział produktów "%s" został usunięty',
-                ],
             ],
             'tab' => [ # pomocnicze rusztowanie będące pojedyńczą zakładką w module zakładek
                 'name' => 'Podział produktu',
-                'icon' => null,
-                'labels' => [
-                    'list' => 'Zakładki',
-                    'edit' => 'Edycja zakładki: %s',
-                    'module' => 'Moduły zakładki: %s',
-                    'deleted' => 'Podział produktów "%s" został usunięty',
-                ],
             ],
         ],
         'visibility' => [ # dostępne atrybuty visibility dla rusztowań
@@ -253,7 +197,6 @@ $config = [
             'form' => [
                 'name' => 'Moduł formularza',
                 'description' => 'Wyświetla jeden z przygotowanych formularzy.',
-                'labels' => 'Edycja modułu formularza',
                 'themes' => [
                     'default' => 'Budowany automatycznie',
                     'custom' => 'Specjalnie przygotowany (jeżeli istnieje, wtedy automatyczny)',
@@ -262,7 +205,6 @@ $config = [
             'gallery' => [
                 'name' => 'Moduł galerii zdjęć',
                 'description' => 'Wyświetla wiele zdjęć z możliwością podglądu.',
-                'labels' => 'Edycja modułu galerii zdjęć',
                 'themes' => [
                     'default' => 'Standardowa galeria',
                     'raw-image' => 'Zwykłe zdjęcia bez obramowań (bez podglądu)',
@@ -272,7 +214,6 @@ $config = [
             'html-editor' => [
                 'name' => 'Moduł tekstowy',
                 'description' => 'Wyświelta treść HTML poprzez edytor WYSIWYG.',
-                'labels' => 'Edycja modułu tekstowego',
                 'themes' => [
                     'default' => 'Standardowa treść',
                 ],
@@ -280,7 +221,6 @@ $config = [
             'image-slider' => [
                 'name' => 'Moduł slajdów ze zdjęciami',
                 'description' => 'Wyświetla animowane slajdy zawierające tylko zdjęcia.',
-                'labels' => 'Edycja modułu slajdera zdjęć',
                 'themes' => [
                     'default' => 'Standardowy slajder',
                 ],
@@ -288,7 +228,6 @@ $config = [
             'photo' => [
                 'name' => 'Moduł pojedyńczego zdjęcia',
                 'description' => 'Wyświetla jedno zdjęcie z możliwością podglądu.',
-                'labels' => 'Edycja modułu zdjęcia',
                 'themes' => [
                     'default' => 'Zdjęcie (z poglądem)',
                     'raw-image' => 'Zdjęcie (bez podglądu)',
@@ -297,7 +236,6 @@ $config = [
             'see-also' => [
                 'name' => 'Moduł: Zobacz także',
                 'description' => 'Wyświetla wybrane treści z możliwością przekierowania',
-                'labels' => 'Edycja modułu: Zobacz także',
                 'themes' => [
                     'default' => 'Boksy z miniaturkami',
                     'links' => 'Zwykłe linki',
@@ -306,7 +244,6 @@ $config = [
             'tab' => [
                 'name' => 'Moduł zakładek',
                 'description' => 'Rozdziela treść pomiędzy klikalne zakładki.',
-                'labels' => 'Edycja modułu zakładek',
                 'themes' => [
                     'default' => 'Zakładki w formie dokumentu',
                     'pills' => 'Zakładki w formie przycisków',
@@ -316,7 +253,6 @@ $config = [
             'youtube' => [
                 'name' => 'Moduł YouTube',
                 'description' => 'Wyświetla film z serwisu YouTube.',
-                'labels' => 'Edycja modułu YouTube',
                 'themes' => [
                     'default' => 'Zwykły odtwarzacz filmu'
                 ],

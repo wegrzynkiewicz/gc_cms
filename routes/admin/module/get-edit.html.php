@@ -11,10 +11,11 @@ $module = GC\Model\Module::select()
 $frame_id = $module['frame_id'];
 
 require ROUTES_PATH."/admin/module/_breadcrumbs-loop.php";
-require ROUTES_PATH."/admin/module/_breadcrumbs-edit.php";
 
 $moduleType = $module['type'];
 $moduleTheme = $module['theme'];
+
+require ROUTES_PATH."/admin/module/types/{$moduleType}/_breadcrumbs-edit.php";
 
 $meta = GC\Model\Module\Meta::fetchMeta($module_id);
 $_POST = array_merge($module, $meta);

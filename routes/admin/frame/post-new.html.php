@@ -28,7 +28,7 @@ $data['slug'] = empty($_POST['slug'] ?? '')
 # dodaj ramkę do bazy
 $frame_id = GC\Model\Frame::insert($data);
 
-require ROUTES_PATH."/admin/frame/_breadcrumbs-list.php";
+require ROUTES_PATH."/admin/frame/types/{$frameType}/breadcrumbs/_list.php";
 require ROUTES_PATH."/admin/frame/types/{$frameType}/_post-new.html.php";
 
 redirect($breadcrumbs->getLast()['uri']);
