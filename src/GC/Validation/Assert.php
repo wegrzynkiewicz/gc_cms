@@ -13,24 +13,28 @@ use GC\Exception\AssertException;
  */
 class Assert
 {
-    public static function column($probablyString): void
+    public static function column($column): void
     {
-        if (!preg_match("~^[a-z_]+$~", (string)$probablyString)) {
+        static::notNull($column);
+
+        if (!preg_match("~^[a-z_]+$~", (string)$column)) {
             throw new AssertException(
                 trans('Nazwa kolumny nie może zawierać innych znaków jak litery i _')
             );
         }
     }
 
-    public static function datetime($probablyDateTime): void
+    public static function datetime($datetime): void
     {
-        if (empty((string)$probablyDateTime)) {
+        static::notNull($datetime);
+
+        if (empty((string)$datetime)) {
             throw new AssertException(
                 trans('Podana data i czas jest pusta')
             );
         }
 
-        if (\DateTime::createFromFormat('Y-m-d H:i:s', $probablyDateTime) === false) {
+        if (\DateTime::createFromFormat('Y-m-d H:i:s', $datetime) === false) {
             throw new AssertException(
                 trans('Podana data i czas są nieprawidłowowe')
             );
@@ -39,6 +43,8 @@ class Assert
 
     public static function enum($value, array $array): void
     {
+        static::notNull($value);
+
         if (!in_array($value, $array)) {
             throw new AssertException(
                 trans('Podana wartość nie jest zdefiniowana w zbiorze')
@@ -46,85 +52,113 @@ class Assert
         }
     }
 
-    public static function email($probablyEmail): void
+    public static function email($email): void
     {
-        if (empty((string)$probablyEmail)) {
+        static::notNull($email);
+
+        if (empty((string)$email)) {
             throw new AssertException(
                 trans('Podany adres e-mail jest pusty')
             );
         }
 
-        if (filter_var((string)$probablyEmail, FILTER_VALIDATE_EMAIL) === false) {
+        if (filter_var((string)$email, FILTER_VALIDATE_EMAIL) === false) {
             throw new AssertException(
                 trans('Podany adres e-mail jest nieprawidłowy')
             );
         }
     }
 
-    public static function installedLang($probablyCode): void
+    public static function installedLang($lang): void
     {
-        if (!in_array($probablyCode, array_keys($GLOBALS['config']['langs']))) {
+        static::notNull($lang);
+
+        if (!in_array($lang, array_keys($GLOBALS['config']['langs']))) {
             throw new AssertException(
-                trans('Nie znaleziono języka (%s) w aplikacji', [$probablyCode])
+                trans('Nie znaleziono tego języka w aplikacji')
             );
         }
     }
 
-    public static function int($probablyInteger): void
+    public static function int($int): void
     {
-        if (empty($probablyInteger)) {
+        static::notNull($int);
+
+        if (empty($int)) {
             throw new AssertException(
                 trans('Podana wartość jest pusta, oczekiwano liczby')
             );
         }
 
-        if (filter_var($probablyInteger, FILTER_VALIDATE_INT) === false) {
+        if (filter_var($int, FILTER_VALIDATE_INT) === false) {
             throw new AssertException(
                 trans('Podana wartość nie jest prawidłową liczbą całkowitą')
             );
         }
     }
 
-    public static function ip($probablyIp): void
+    public static function ip($ip): void
     {
-        if (filter_var($probablyIp, FILTER_VALIDATE_IP) === false) {
+        static::notNull($ip);
+
+        if (empty($ip)) {
+            throw new AssertException(
+                trans('Podany adres IP jest pusty')
+            );
+        }
+
+        if (filter_var($ip, FILTER_VALIDATE_IP) === false) {
             throw new AssertException(
                 trans('Podany adres IP jest nieprawidłowy')
             );
         }
     }
 
-    public static function raw($probablyString): void
+    public static function notNull($value): void
     {
-        static::required($probablyString);
+        if ($value === null) {
+            throw new AssertException(
+                trans('Nie przekazano poprawnej wartości')
+            );
+        }
     }
 
-    public static function required($probablyString): void
+    public static function raw($string): void
     {
-        if (empty((string)$probablyString)) {
+        static::notNull($string);
+        static::required($string);
+    }
+
+    public static function required($required): void
+    {
+        static::notNull($required);
+
+        if (empty((string)$required)) {
             throw new AssertException(
                 trans('Podana wartość nie może być pusta')
             );
         }
     }
 
-    public static function slug($probablySlug, int $frame_id = 0): void
+    public static function slug($slug, $frame_id = 0): void
     {
-        if (empty($probablySlug)) {
+        static::notNull($slug);
+
+        if (empty($slug)) {
             throw new AssertException(
                 trans('Adres strony nie może być pusty')
             );
         }
 
-        if (!preg_match('~^[\/a-z0-9\-]+$~', $probablySlug)) {
+        if (!preg_match('~^[\/a-z0-9\-]+$~', $slug)) {
             throw new AssertException(
                 trans('Adres strony jest nieprawidłowy')
             );
         }
 
         $frame = \GC\Model\Frame::select()
-            ->equals('slug', normalizeSlug($probablySlug))
-            ->condition('frame_id != ?', [$frame_id])
+            ->equals('slug', normalizeSlug($slug))
+            ->condition('frame_id != ?', [intval($frame_id)])
             ->fetch();
 
         if ($frame) {
@@ -134,12 +168,13 @@ class Assert
         }
     }
 
-    public static function staffEmail($probablyEmail, int $staff_id = 0): void
+    public static function staffEmail($email, $staff_id = 0): void
     {
-        static::email($probablyEmail);
+        static::notNull($email);
+        static::email($email);
 
         $user = \GC\Model\Staff\Staff::select()
-            ->equals('email', $probablyEmail)
+            ->equals('email', $email)
             ->condition('staff_id != ?', [$staff_id])
             ->fetch();
 
@@ -150,19 +185,23 @@ class Assert
         }
     }
 
-    public static function uri($probablyUri): void
+    public static function uri($uri): void
     {
-        $http = Http::createFromString($probablyUri);
-        if ($http->getPath() !== $probablyUri) {
+        static::notNull($uri);
+
+        $http = Http::createFromString($uri);
+        if ($http->getPath() !== $uri) {
             throw new AssertException(
                 trans('Podany adres URI jest nieprawidłowy')
             );
         }
     }
 
-    public static function url($probablyUrl): void
+    public static function url($url): void
     {
-        if (filter_var($probablyUrl, FILTER_VALIDATE_URL) === false) {
+        static::notNull($url);
+
+        if (filter_var($url, FILTER_VALIDATE_URL) === false) {
             throw new AssertException(
                 trans('Podany adres URL jest nieprawidłowy')
             );

@@ -38,9 +38,8 @@
                         'help' => trans('Zostaw pusty, aby wygenerować adres na podstawie nazwy'),
                         'attributes' => [
                             'data-validation' => 'server',
-                            'data-validation-url' => $uri->make("/admin/validate/slug.json", [
-                                'frame_id' => $frame_id,
-                            ]),
+                            'data-validation-req-params' => e(json_encode(['frame_id' => $frame_id])),
+                            'data-validation-url' => $uri->make("/validate/slug.json"),
                             'data-validation-optional' => 'true',
                         ],
                     ])?>
