@@ -33,7 +33,7 @@ $fields = GC\Model\Form\Field::select()
 
 <div class="row">
     <div class="col-md-12">
-        <form id="savePosition" action="" method="post">
+        <form id="savePosition" action="<?=$request->uri?>" method="post">
             <?php if (empty($fields)):?>
                 <div class="simple-box">
                     <?=trans('Brak pól w formularzu: %s', [$form['name']])?>

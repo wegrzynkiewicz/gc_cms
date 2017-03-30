@@ -265,7 +265,8 @@ $config = [
                 'labels' => 'Edycja modułu galerii zdjęć',
                 'themes' => [
                     'default' => 'Standardowa galeria',
-                    'simple' => 'Zwykłe zdjęcia bez obramowań (z podglądem)'
+                    'raw-image' => 'Zwykłe zdjęcia bez obramowań (bez podglądu)',
+                    'raw-image-lightbox' => 'Zwykłe zdjęcia bez obramowań (z podglądem)'
                 ],
             ],
             'html-editor' => [
@@ -289,8 +290,8 @@ $config = [
                 'description' => 'Wyświetla jedno zdjęcie z możliwością podglądu.',
                 'labels' => 'Edycja modułu zdjęcia',
                 'themes' => [
-                    'default' => 'Zdjęcie z poglądem',
-                    'no-clickable' => 'Nieklikalne zdjęcie',
+                    'default' => 'Zdjęcie (z poglądem)',
+                    'raw-image' => 'Zdjęcie (bez podglądu)',
                 ],
             ],
             'see-also' => [
@@ -302,17 +303,23 @@ $config = [
                     'links' => 'Zwykłe linki',
                 ],
             ],
-            'tabs' => [
+            'tab' => [
                 'name' => 'Moduł zakładek',
                 'description' => 'Rozdziela treść pomiędzy klikalne zakładki.',
                 'labels' => 'Edycja modułu zakładek',
-                'themes' => [],
+                'themes' => [
+                    'default' => 'Zakładki w formie dokumentu',
+                    'pills' => 'Zakładki w formie przycisków',
+                    'accordion' => 'Lista rozwijana',
+                ],
             ],
             'youtube' => [
                 'name' => 'Moduł YouTube',
                 'description' => 'Wyświetla film z serwisu YouTube.',
                 'labels' => 'Edycja modułu YouTube',
-                'themes' => [],
+                'themes' => [
+                    'default' => 'Zwykły odtwarzacz filmu'
+                ],
             ],
         ],
     ],

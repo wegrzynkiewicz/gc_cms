@@ -58,7 +58,7 @@ foreach ($metas as $meta) {
 
 <div class="row">
     <div class="col-lg-12">
-        <form id="gridForm" action="" method="post" class="form-horizontal">
+        <form id="gridForm" action="<?=$request->uri?>" method="post" class="form-horizontal">
             <input type="hidden" name="grid">
             <?php if (empty($modules)): ?>
                 <div class="simple-box">
@@ -112,7 +112,7 @@ foreach ($metas as $meta) {
 
 <div id="rowSettingsModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form id="rowSettingsModalForm" method="post" action="" class="modal-content form-horizontal">
+        <form id="rowSettingsModalForm" method="post" action="<?=$request->uri?>" class="modal-content form-horizontal">
             <input name="module_id" type="hidden" value="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">

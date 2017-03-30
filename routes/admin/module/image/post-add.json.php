@@ -1,11 +1,12 @@
 <?php
 
 require ROUTES_PATH.'/admin/_import.php';
-require ROUTES_PATH.'/admin/_breadcrumbs.php';
 
 $module_id = intval(array_shift($_PARAMETERS));
 
-foreach (post('urls', []) as $imageUri) {
+$urls = $_POST['urls'] ?? [];
+
+foreach ($urls as $imageUri) {
 
     $imageUri = $uri->relative($imageUri);
 
@@ -18,6 +19,7 @@ foreach (post('urls', []) as $imageUri) {
         'slug' => $imageUri,
         'width' => $width,
         'height' => $height,
+        'name' => '',
         'size' => filesize($imagePath),
     ]);
 

@@ -16,6 +16,6 @@ GC\Model\Frame\Tree::insertPositionsToTaxonomy($positions, $frame_id);
 
 $frameType = $frame['type'];
 require ROUTES_PATH."/admin/frame/_breadcrumbs-list.php";
-require ROUTES_PATH."/admin/frame/type/{$frameType}/_post-tree.html.php";
+require ROUTES_PATH."/admin/frame/types/{$frameType}/_post-tree.html.php";
 
 redirect($breadcrumbs->getLast()['uri']);

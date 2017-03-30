@@ -29,6 +29,6 @@ $data['slug'] = empty($_POST['slug'] ?? '')
 $frame_id = GC\Model\Frame::insert($data);
 
 require ROUTES_PATH."/admin/frame/_breadcrumbs-list.php";
-require ROUTES_PATH."/admin/frame/type/{$frameType}/_post-new.html.php";
+require ROUTES_PATH."/admin/frame/types/{$frameType}/_post-new.html.php";
 
 redirect($breadcrumbs->getLast()['uri']);

@@ -19,4 +19,6 @@ $moduleTheme = $module['theme'];
 $meta = GC\Model\Module\Meta::fetchMeta($module_id);
 $_POST = array_merge($module, $meta);
 
-require ROUTES_PATH."/admin/module/type/{$moduleType}/_get-edit.html.php";
+$moduleThemeContent = render(ROUTES_PATH."/admin/module/types/{$moduleType}/themes/{$moduleTheme}/_get-edit.html.php");
+
+require ROUTES_PATH."/admin/module/types/{$moduleType}/_get-edit.html.php";

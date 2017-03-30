@@ -1,7 +1,6 @@
 <?php
 
 require ROUTES_PATH.'/admin/_import.php';
-require ROUTES_PATH.'/admin/_breadcrumbs.php';
 
 $module_id = intval(array_shift($_PARAMETERS));
 
@@ -18,4 +17,4 @@ foreach ($images as &$image) {
 }
 unset($image);
 
-echo json_encode($images);
+echo json_encode($images, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);

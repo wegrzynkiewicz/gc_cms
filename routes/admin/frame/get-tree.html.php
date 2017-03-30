@@ -13,4 +13,4 @@ $frame = GC\Model\Frame::select()
 $frameType = $frame['type'];
 
 require ROUTES_PATH."/admin/frame/_breadcrumbs-list.php";
-require ROUTES_PATH."/admin/frame/type/{$frameType}/_get-tree.html.php";
+require ROUTES_PATH."/admin/frame/types/{$frameType}/_get-tree.html.php";

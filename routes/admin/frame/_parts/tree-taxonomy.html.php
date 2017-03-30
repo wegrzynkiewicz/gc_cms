@@ -18,7 +18,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <form id="savePosition" action="" method="post">
+        <form id="savePosition" action="<?=$request->uri?>" method="post">
             <input name="positions" type="hidden"/>
             <?php if ($tree and $tree->hasChildren()):?>
                 <ol id="sortable" class="sortable">

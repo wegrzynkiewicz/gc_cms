@@ -3,7 +3,7 @@ $form_id = $content;
 $fields = GC\Model\Form\Field::joinAllWithKeyByForeign($form_id);
 ?>
 
-<form id="form_<?=$form_id?>" action="" method="post" class="form-horizontal">
+<form id="form_<?=$form_id?>" action="<?=$request->uri?>" method="post" class="form-horizontal">
     <?php foreach ($fields as $field_id => $field): $fieldType = $field['type']; ?>
         <?=render(TEMPLATE_PATH."/modules/form/default/{$fieldType}.html.php", [
             'name' => "formField_$field_id",
