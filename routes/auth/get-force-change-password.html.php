@@ -33,16 +33,20 @@ $_POST = [];
 
                             <?=render(ROUTES_PATH."/admin/parts/input/_editbox.html.php", [
                                 'name' => 'new_password',
-                                'type' => 'password',
                                 'label' => trans('Nowe hasło'),
                                 'help' => trans('Twoje hasło musi składać się z przynajmniej %s znaków', [$config['password']['minLength']]),
+                                'attributes' => [
+                                    'type' => 'password',
+                                ],
                             ])?>
 
                             <?=render(ROUTES_PATH."/admin/parts/input/_editbox.html.php", [
                                 'name' => 'confirm_password',
-                                'type' => 'password',
                                 'label' => trans('Powtórz nowe hasło'),
                                 'help' => trans('Powtórz swoje nowe hasło w celu wyeliminowania pomyłki'),
+                                'attributes' => [
+                                    'type' => 'password',
+                                ],
                             ])?>
 
                             <button type="submit" class="btn btn-md btn-success btn-block">

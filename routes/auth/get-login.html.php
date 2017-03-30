@@ -37,8 +37,10 @@ $headTitle = trans('Logowanie do panelu administracyjnego');
 
                             <?=render(ROUTES_PATH."/admin/parts/input/_editbox.html.php", [
                                 'name' => 'password',
-                                'type' => 'password',
                                 'placeholder' => trans('Hasło'),
+                                'attributes' => [
+                                    'type' => 'password',
+                                ],
                             ])?>
 
                             <button type="submit" class="btn btn-md btn-success btn-block">
