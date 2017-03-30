@@ -208,7 +208,7 @@ $config = [
                 'themes' => [
                     'default' => dummy_trans('Standardowa galeria'),
                     'raw-image' => dummy_trans('Zwykłe zdjęcia bez obramowań (bez podglądu)'),
-                    'raw-image-lightbox' => dummy_trans('Zwykłe zdjęcia bez obramowań (z podglądem)'
+                    'raw-image-lightbox' => dummy_trans('Zwykłe zdjęcia bez obramowań (z podglądem)'),
                 ],
             ],
             'html-editor' => [
@@ -254,7 +254,7 @@ $config = [
                 'name' => dummy_trans('Moduł YouTube'),
                 'description' => dummy_trans('Wyświetla film z serwisu YouTube.'),
                 'themes' => [
-                    'default' => dummy_trans('Zwykły odtwarzacz filmu'
+                    'default' => dummy_trans('Zwykły odtwarzacz filmu'),
                 ],
             ],
         ],
