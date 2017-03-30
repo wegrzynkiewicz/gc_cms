@@ -1,6 +1,6 @@
 <?php
 
-require ROUTES_PATH.'/admin/_import.php';
+require ROUTES_PATH."/admin/_import.php";
 
 $module_id = intval(post('module_id'));
 $module = GC\Model\Module::select()
@@ -10,7 +10,7 @@ $module = GC\Model\Module::select()
 
 $frame_id = $module['frame_id'];
 
-require ROUTES_PATH.'/admin/module/parts/_breadcrumbs-loop.php';
+require ROUTES_PATH."/admin/module/parts/_breadcrumbs-loop.php";
 
 # usuń moduł i wszystkie jego dodatki
 GC\Model\Module::deleteByModuleId($module_id);

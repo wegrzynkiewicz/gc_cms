@@ -1,5 +1,5 @@
-<?php require ROUTES_PATH.'/admin/parts/_header.html.php'; ?>
-<?php require ROUTES_PATH.'/admin/parts/_page-header.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_header.html.php"; ?>
+<?php require ROUTES_PATH."/admin/parts/_page-header.html.php"; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -8,7 +8,7 @@
             <div class="simple-box">
                 <fieldset>
                     <legend><?=trans('Ustawienia podstawowe')?></legend>
-                    <?=render(ROUTES_PATH.'/admin/parts/input/_select2-single.html.php', [
+                    <?=render(ROUTES_PATH."/admin/parts/input/_select2-single.html.php", [
                         'name' => 'type',
                         'label' => trans('Typ węzła'),
                         'help' => trans('Typ pozwala na wybranie niestandardowego zachowania linku.'),
@@ -18,7 +18,7 @@
                     ])?>
 
                     <?php if (count($config['navigation']['nodeThemes']) > 1): ?>
-                        <?=render(ROUTES_PATH.'/admin/parts/input/_select2-single.html.php', [
+                        <?=render(ROUTES_PATH."/admin/parts/input/_select2-single.html.php", [
                             'name' => 'theme',
                             'label' => trans('Wyróżnienie węzła'),
                             'help' => trans('Istnieje możliwość, aby wyróżnić wybrany węzeł poprzez nadanie odpowiedniej opcji'),
@@ -32,7 +32,7 @@
 
             <div id="nodeType"></div>
 
-            <?=render(ROUTES_PATH.'/admin/parts/input/_submitButtons.html.php', [
+            <?=render(ROUTES_PATH."/admin/parts/input/_submitButtons.html.php", [
                 'saveLabel' => trans('Zapisz węzeł'),
             ])?>
 
@@ -40,7 +40,7 @@
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/assets/_footer.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/assets/_footer.html.php"; ?>
 
 <script>
 $(function() {
@@ -60,4 +60,4 @@ $(function() {
 });
 </script>
 
-<?php require ROUTES_PATH.'/admin/parts/_end.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_end.html.php"; ?>

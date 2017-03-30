@@ -20,8 +20,8 @@ if (count($settings['emails']) > 0) {
     foreach ($settings['emails'] as $email) {
         $mail = new GC\Mail();
         $mail->buildTemplate(
-            ROUTES_PATH.'/admin/form/posted-form.email.html.php',
-            ROUTES_PATH.'/admin/parts/email/_styles.css', [
+            ROUTES_PATH."/admin/form/posted-form.email.html.php",
+            ROUTES_PATH."/admin/parts/email/_styles.css", [
                 'form' => $form,
                 'data' => $data,
                 'localization' => $localization,

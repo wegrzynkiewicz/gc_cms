@@ -1,9 +1,9 @@
 <?php
 
-require ROUTES_PATH.'/admin/_import.php';
-require ROUTES_PATH.'/admin/_breadcrumbs.php';
-require ROUTES_PATH.'/admin/form/_import.php';
-require ROUTES_PATH.'/admin/form/received/_import.php';
+require ROUTES_PATH."/admin/_import.php";
+require ROUTES_PATH."/admin/_breadcrumbs.php";
+require ROUTES_PATH."/admin/form/_import.php";
+require ROUTES_PATH."/admin/form/received/_import.php";
 
 # utwórz zapytanie dla datatables
 $received = $query = GC\Model\Form\Sent::select()

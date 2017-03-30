@@ -1,9 +1,9 @@
 <?php
 
-require ROUTES_PATH.'/admin/_import.php';
-require ROUTES_PATH.'/admin/_breadcrumbs.php';
-require ROUTES_PATH.'/admin/form/_import.php';
-require ROUTES_PATH.'/admin/form/field/_import.php';
+require ROUTES_PATH."/admin/_import.php";
+require ROUTES_PATH."/admin/_breadcrumbs.php";
+require ROUTES_PATH."/admin/form/_import.php";
+require ROUTES_PATH."/admin/form/field/_import.php";
 
 $options = [];
 if (isset($field_id) and $field_id > 0) {
@@ -15,7 +15,7 @@ if (isset($field_id) and $field_id > 0) {
 ?>
 <p><?=trans('Pole jednokrotnego wyboru wymaga wprowadzenia możliwych wyborów')?></p>
 
-<?=render(ROUTES_PATH.'/admin/parts/input/_select2-tags.html.php', [
+<?=render(ROUTES_PATH."/admin/parts/input/_select2-tags.html.php", [
     'id' => 'options',
     'name' => 'options',
     'label' => trans('Możliwe wybory'),

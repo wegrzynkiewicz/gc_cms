@@ -1,8 +1,8 @@
 <?php
 
-require ROUTES_PATH.'/admin/_import.php';
-require ROUTES_PATH.'/admin/_breadcrumbs.php';
-require ROUTES_PATH.'/admin/staff/_import.php';
+require ROUTES_PATH."/admin/_import.php";
+require ROUTES_PATH."/admin/_breadcrumbs.php";
+require ROUTES_PATH."/admin/staff/_import.php";
 
 $staff_id = intval(array_shift($_PARAMETERS));
 
@@ -24,7 +24,7 @@ $groups = array_keys(GC\Model\Staff\Group::select()
 $_POST = $user;
 
 ?>
-<?php require ROUTES_PATH.'/admin/parts/_header.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_header.html.php"; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -40,5 +40,5 @@ $_POST = $user;
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/_breadcrumbs.html.php'; ?>
-<?php require ROUTES_PATH.'/admin/staff/_form.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_breadcrumbs.html.php"; ?>
+<?php require ROUTES_PATH."/admin/staff/_form.html.php"; ?>

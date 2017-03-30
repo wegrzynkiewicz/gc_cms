@@ -5,7 +5,7 @@
 	<title><?=$headTitle.' - '.$config['adminHeadTitleBase']?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <?php require ROUTES_PATH.'/admin/parts/assets/_header.html.php'; ?>
+    <?php require ROUTES_PATH."/admin/parts/assets/_header.html.php"; ?>
 
     <style media="screen">
         body {

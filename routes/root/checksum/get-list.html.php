@@ -1,9 +1,9 @@
 <?php
 
-require ROUTES_PATH.'/root/_only-debug.php';
-require ROUTES_PATH.'/root/_only-root.php';
-require ROUTES_PATH.'/root/_import.php';
-require ROUTES_PATH.'/root/checksum/_import.php';
+require ROUTES_PATH."/root/_only-debug.php";
+require ROUTES_PATH."/root/_only-root.php";
+require ROUTES_PATH."/root/_import.php";
+require ROUTES_PATH."/root/checksum/_import.php";
 
 $stored = GC\Model\Checksum::select()
     ->fields(['file', 'hash'])
@@ -32,7 +32,7 @@ usort($checksums, function ($a, $b) {
 });
 
 ?>
-<?php require ROUTES_PATH.'/admin/parts/_header.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_header.html.php"; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -51,7 +51,7 @@ usort($checksums, function ($a, $b) {
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/_breadcrumbs.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_breadcrumbs.html.php"; ?>
 
 <table class="simple-box table table-condensed">
     <thead>
@@ -61,7 +61,7 @@ usort($checksums, function ($a, $b) {
     </thead>
     <tbody style="font-family: monospace;">
         <?php foreach ($checksums as $checksum): ?>
-            <?=render(ROUTES_PATH.'/root/checksum/_list-item.html.php', [
+            <?=render(ROUTES_PATH."/root/checksum/_list-item.html.php", [
                 'checksum' => $checksum,
             ])?>
         <?php endforeach ?>
@@ -128,7 +128,7 @@ usort($checksums, function ($a, $b) {
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/assets/_footer.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/assets/_footer.html.php"; ?>
 
 <script>
     $(function(){
@@ -139,4 +139,4 @@ usort($checksums, function ($a, $b) {
     });
 </script>
 
-<?php require ROUTES_PATH.'/admin/parts/_end.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_end.html.php"; ?>

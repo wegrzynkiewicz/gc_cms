@@ -14,12 +14,12 @@
 
     <ul class="nav navbar-top-links navbar-right text-right">
 
-        <?php require ROUTES_PATH.'/admin/parts/navbar/_editor-lang.html.php'; ?>
-        <?php require ROUTES_PATH.'/admin/parts/navbar/_session-timeout.html.php'; ?>
-        <?php require ROUTES_PATH.'/admin/parts/navbar/_staff.html.php'; ?>
+        <?php require ROUTES_PATH."/admin/parts/navbar/_editor-lang.html.php"; ?>
+        <?php require ROUTES_PATH."/admin/parts/navbar/_session-timeout.html.php"; ?>
+        <?php require ROUTES_PATH."/admin/parts/navbar/_staff.html.php"; ?>
 
     </ul>
 
-    <?php require ROUTES_PATH.'/admin/parts/sidebar/_main.html.php'; ?>
+    <?php require ROUTES_PATH."/admin/parts/sidebar/_main.html.php"; ?>
 
 </nav>

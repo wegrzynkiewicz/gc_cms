@@ -1,6 +1,6 @@
 <?php
 
-require ROUTES_PATH.'/auth/_import.php';
+require ROUTES_PATH."/auth/_import.php";
 
 if (isset($_SESSION['staff'])) {
     redirect($uri->make('/admin'));
@@ -15,7 +15,7 @@ $user = GC\Model\Staff\Staff::select()
 
 # jeżeli użytkownik nie istnieje, albo hasło jest nieprawidłowe
 if (!$user or !password_verify($password, $user['password'])) {
-    echo render(ROUTES_PATH.'/auth/login-get.php', [
+    echo render(ROUTES_PATH."/auth/login-get.php", [
         'error' => trans('Nieprawidłowy login lub hasło'),
     ]);
 

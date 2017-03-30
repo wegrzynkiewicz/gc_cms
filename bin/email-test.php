@@ -11,8 +11,8 @@ if (GC\Validate::email($email)) {
 
     $mail = new GC\Mail();
     $mail->buildTemplate(
-        ROUTES_PATH.'/root/_email-test.html.php',
-        ROUTES_PATH.'/admin/parts/email/_styles.css'
+        ROUTES_PATH."/root/_email-test.html.php",
+        ROUTES_PATH."/admin/parts/email/_styles.css"
     );
     $mail->addAddress($email);
     $mail->send();

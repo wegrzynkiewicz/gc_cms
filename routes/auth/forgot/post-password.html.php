@@ -1,6 +1,6 @@
 <?php
 
-require ROUTES_PATH.'/auth/_import.php';
+require ROUTES_PATH."/auth/_import.php";
 
 # pobierz pracownika po wprowadzonym adresie emailowym
 $user = GC\Model\Staff\Staff::select()
@@ -10,7 +10,7 @@ $user = GC\Model\Staff\Staff::select()
 # jeżeli nie znaleziono pracownika wtedy zwróć błąd
 if (!$user) {
     $error['login'] = trans('Nieprawidłowy adres e-mail');
-    echo render(ROUTES_PATH.'/auth/forgot/password-get.php');
+    echo render(ROUTES_PATH."/auth/forgot/password-get.php");
 
     return;
 }
@@ -32,8 +32,8 @@ GC\Model\Staff\Meta::updateMeta($user['staff_id'], [
 # wyślij maila z linkiem weryfikującym
 $mail = new GC\Mail();
 $mail->buildTemplate(
-    ROUTES_PATH.'/auth/forgot/_email-regeneration.html.php',
-    ROUTES_PATH.'/admin/parts/email/_styles.css', [
+    ROUTES_PATH."/auth/forgot/_email-regeneration.html.php",
+    ROUTES_PATH."/admin/parts/email/_styles.css", [
         'name' => $user['name'],
         'regenerateUrl' => $regenerateUrl,
     ]

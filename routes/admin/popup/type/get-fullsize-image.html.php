@@ -1,8 +1,8 @@
 <?php
 
-require ROUTES_PATH.'/admin/_import.php';
-require ROUTES_PATH.'/admin/_breadcrumbs.php';
-require ROUTES_PATH.'/admin/popup/_import.php';
+require ROUTES_PATH."/admin/_import.php";
+require ROUTES_PATH."/admin/_breadcrumbs.php";
+require ROUTES_PATH."/admin/popup/_import.php";
 
 $popup_id = intval(array_shift($_PARAMETERS));
 if ($popup_id) {
@@ -17,7 +17,7 @@ if ($popup_id) {
 ?>
 
 <div class="simple-box">
-    <?=render(ROUTES_PATH.'/admin/parts/input/_image.html.php', [
+    <?=render(ROUTES_PATH."/admin/parts/input/_image.html.php", [
         'name' => 'content',
         'label' => trans('Zdjęcie'),
         'placeholder' => trans('Ścieżka do pliku zdjęcia'),

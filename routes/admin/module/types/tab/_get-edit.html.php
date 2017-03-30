@@ -6,7 +6,7 @@ $tabs = GC\Model\Module\Tab::select()
     ->fetchByKey('frame_id');
 
 ?>
-<?php require ROUTES_PATH.'/admin/parts/_header.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_header.html.php"; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -25,7 +25,7 @@ $tabs = GC\Model\Module\Tab::select()
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/_breadcrumbs.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_breadcrumbs.html.php"; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -41,7 +41,7 @@ $tabs = GC\Model\Module\Tab::select()
             <?php else: ?>
                 <ol id="sortable" class="sortable">
                     <?php foreach ($tabs as $tab): ?>
-                        <?=render(ROUTES_PATH.'/admin/module/types/tab/_item.html.php', $tab)?>
+                        <?=render(ROUTES_PATH."/admin/module/types/tab/_item.html.php", $tab)?>
                     <?php endforeach?>
                 </ol>
                 <script>
@@ -54,7 +54,7 @@ $tabs = GC\Model\Module\Tab::select()
                 </script>
             <?php endif ?>
 
-            <?=render(ROUTES_PATH.'/admin/parts/input/_submitButtons.html.php', [
+            <?=render(ROUTES_PATH."/admin/parts/input/_submitButtons.html.php", [
                 'saveLabel' => trans('Zapisz położenie zakładek'),
             ])?>
         </form>
@@ -76,7 +76,7 @@ $tabs = GC\Model\Module\Tab::select()
                 </h2>
             </div>
             <div class="modal-body">
-                <?=render(ROUTES_PATH.'/admin/parts/input/_editbox.html.php', [
+                <?=render(ROUTES_PATH."/admin/parts/input/_editbox.html.php", [
                     'name' => 'name',
                     'label' => trans('Nazwa pojedyńczej zakładki'),
                 ])?>
@@ -153,7 +153,7 @@ $tabs = GC\Model\Module\Tab::select()
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/assets/_footer.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/assets/_footer.html.php"; ?>
 
 <script>
 $(function(){
@@ -206,4 +206,4 @@ $(function(){
 });
 </script>
 
-<?php require ROUTES_PATH.'/admin/parts/_end.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_end.html.php"; ?>

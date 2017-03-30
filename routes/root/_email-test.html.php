@@ -2,7 +2,7 @@
 
 $mail->Subject = trans('Zażółć gęślą jaźń, czyli test usługi mailowej');
 
-require ROUTES_PATH.'/admin/parts/email/_header.html.php'; ?>
+require ROUTES_PATH."/admin/parts/email/_header.html.php"; ?>
 
 <div class="title">
     <?=trans('Witaj')?>!
@@ -20,4 +20,4 @@ require ROUTES_PATH.'/admin/parts/email/_header.html.php'; ?>
     </div><br>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/email/_footer.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/email/_footer.html.php"; ?>

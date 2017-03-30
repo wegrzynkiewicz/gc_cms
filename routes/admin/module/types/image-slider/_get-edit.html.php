@@ -1,4 +1,4 @@
-<?php require ROUTES_PATH.'/admin/parts/_header.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_header.html.php"; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -14,7 +14,7 @@
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/_breadcrumbs.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_breadcrumbs.html.php"; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -24,7 +24,7 @@
             class="form-horizontal">
 
             <div class="simple-box">
-                <?=render(ROUTES_PATH.'/admin/parts/input/_selectbox.html.php', [
+                <?=render(ROUTES_PATH."/admin/parts/input/_selectbox.html.php", [
                     'name' => 'theme',
                     'label' => trans('Szablon'),
                     'help' => trans('Wybierz jeden z dostępnych szablonów slajdera zdjęć'),
@@ -37,7 +37,7 @@
                 </div>
             </div>
 
-            <?=render(ROUTES_PATH.'/admin/parts/input/_submitButtons.html.php', [
+            <?=render(ROUTES_PATH."/admin/parts/input/_submitButtons.html.php", [
                 'saveLabel' => trans('Zapisz'),
             ])?>
 
@@ -101,7 +101,7 @@
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/assets/_footer.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/assets/_footer.html.php"; ?>
 
 <script>
 $(function() {
@@ -174,4 +174,4 @@ $(function() {
 });
 </script>
 
-<?php require ROUTES_PATH.'/admin/parts/_end.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_end.html.php"; ?>

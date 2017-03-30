@@ -1,8 +1,8 @@
 <?php
 
-require ROUTES_PATH.'/admin/_import.php';
-require ROUTES_PATH.'/admin/_breadcrumbs.php';
-require ROUTES_PATH.'/admin/staff/_import.php';
+require ROUTES_PATH."/admin/_import.php";
+require ROUTES_PATH."/admin/_breadcrumbs.php";
+require ROUTES_PATH."/admin/staff/_import.php";
 
 # pobierz pracowników, którzy nie są kontem roota
 $users = GC\Model\Staff\Staff::select()
@@ -34,7 +34,7 @@ foreach ($permissions as $permission) {
 }
 
 ?>
-<?php require ROUTES_PATH.'/admin/parts/_header.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_header.html.php"; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -50,7 +50,7 @@ foreach ($permissions as $permission) {
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/_breadcrumbs.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_breadcrumbs.html.php"; ?>
 
 <div class="row">
     <div class="col-md-12">
@@ -75,13 +75,13 @@ foreach ($permissions as $permission) {
                     </thead>
                     <tbody>
                         <?php foreach ($users as $user): ?>
-                            <?=render(ROUTES_PATH.'/admin/staff/_list-item.html.php', $user)?>
+                            <?=render(ROUTES_PATH."/admin/staff/_list-item.html.php", $user)?>
                         <?php endforeach ?>
                     </tbody>
                 </table>
             <?php endif ?>
         </div>
-        <?php require ROUTES_PATH.'/admin/parts/input/_submitButtons.html.php'; ?>
+        <?php require ROUTES_PATH."/admin/parts/input/_submitButtons.html.php"; ?>
     </div>
 </div>
 
@@ -113,7 +113,7 @@ foreach ($permissions as $permission) {
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/assets/_footer.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/assets/_footer.html.php"; ?>
 
 <script>
 $(function(){
@@ -128,4 +128,4 @@ $(function(){
 });
 </script>
 
-<?php require ROUTES_PATH.'/admin/parts/_end.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_end.html.php"; ?>

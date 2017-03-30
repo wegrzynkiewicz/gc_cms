@@ -1,4 +1,4 @@
-<?php require ROUTES_PATH.'/admin/parts/_header.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_header.html.php"; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -14,14 +14,14 @@
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/_breadcrumbs.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_breadcrumbs.html.php"; ?>
 
 <div class="row">
     <div class="col-md-12">
         <div class="simple-box">
             <?php if (empty($taxonomies)): ?>
                 <?=trans('Nie znaleziono żadnych podziałów w języku: ')?>
-                <?=render(ROUTES_PATH.'/admin/parts/_language.html.php', [
+                <?=render(ROUTES_PATH."/admin/parts/_language.html.php", [
                     'lang' => GC\Staff::getInstance()->getEditorLang(),
                 ])?>
             <?php else: ?>
@@ -43,13 +43,13 @@
                     </thead>
                     <tbody>
                         <?php foreach ($taxonomies as $taxonomy): ?>
-                            <?=render(ROUTES_PATH.'/admin/frame/parts/_list-taxonomy-item.html.php', $taxonomy)?>
+                            <?=render(ROUTES_PATH."/admin/frame/parts/_list-taxonomy-item.html.php", $taxonomy)?>
                         <?php endforeach ?>
                     </tbody>
                 </table>
             <?php endif ?>
         </div>
-        <?php require ROUTES_PATH.'/admin/parts/input/_submitButtons.html.php'; ?>
+        <?php require ROUTES_PATH."/admin/parts/input/_submitButtons.html.php"; ?>
     </div>
 </div>
 
@@ -81,7 +81,7 @@
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/assets/_footer.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/assets/_footer.html.php"; ?>
 
 
 <script>
@@ -93,4 +93,4 @@
     });
 </script>
 
-<?php require ROUTES_PATH.'/admin/parts/_end.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_end.html.php"; ?>

@@ -1,4 +1,4 @@
-<?php require ROUTES_PATH.'/admin/parts/_header.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_header.html.php"; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -14,7 +14,7 @@
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/_breadcrumbs.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_breadcrumbs.html.php"; ?>
 
 <div class="row">
     <div class="col-md-12">
@@ -23,7 +23,7 @@
             <?php if ($tree and $tree->hasChildren()):?>
                 <ol id="sortable" class="sortable">
                     <?php foreach ($tree->getChildren() as $node): ?>
-                        <?=render(ROUTES_PATH.'/admin/frame/parts/_tree-taxonomy-node.html.php', $node->getData())?>
+                        <?=render(ROUTES_PATH."/admin/frame/parts/_tree-taxonomy-node.html.php", $node->getData())?>
                     <?php endforeach?>
                 </ol>
             <?php else:?>
@@ -32,7 +32,7 @@
                 </div>
             <?php endif?>
 
-            <?=render(ROUTES_PATH.'/admin/parts/input/_submitButtons.html.php', [
+            <?=render(ROUTES_PATH."/admin/parts/input/_submitButtons.html.php", [
                 'saveLabel' => $tree->hasChildren() ? trans('Zapisz pozycję') : null,
             ])?>
         </form>
@@ -71,7 +71,7 @@
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/assets/_footer.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/assets/_footer.html.php"; ?>
 
 <script>
 $(function(){
@@ -94,4 +94,4 @@ $(function(){
 });
 </script>
 
-<?php require ROUTES_PATH.'/admin/parts/_end.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_end.html.php"; ?>

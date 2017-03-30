@@ -10,7 +10,7 @@
         <?php endif ?>
         <?php if ($tree->hasChildren()): ?>
             <div id="taxonomy_<?=e($id)?>">
-                <?=render(ROUTES_PATH.'/admin/parts/input/_checkbox-tree-item.html.php', [
+                <?=render(ROUTES_PATH."/admin/parts/input/_checkbox-tree-item.html.php", [
                     'tree' => $tree,
                     'name' => $name,
                     'checkedValues' => $checkedValues,

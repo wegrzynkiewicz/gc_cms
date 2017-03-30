@@ -1,9 +1,9 @@
 <?php
 
-require ROUTES_PATH.'/admin/_import.php';
-require ROUTES_PATH.'/admin/_breadcrumbs.php';
-require ROUTES_PATH.'/admin/staff/_import.php';
-require ROUTES_PATH.'/admin/staff/group/_import.php';
+require ROUTES_PATH."/admin/_import.php";
+require ROUTES_PATH."/admin/_breadcrumbs.php";
+require ROUTES_PATH."/admin/staff/_import.php";
+require ROUTES_PATH."/admin/staff/group/_import.php";
 
 # pobierz wszystkie grupy
 $groups = GC\Model\Staff\Group::select()
@@ -21,7 +21,7 @@ foreach ($groupPermissions as $permission) {
 }
 
 ?>
-<?php require ROUTES_PATH.'/admin/parts/_header.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_header.html.php"; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -37,7 +37,7 @@ foreach ($groupPermissions as $permission) {
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/_breadcrumbs.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_breadcrumbs.html.php"; ?>
 
 <div class="row">
     <div class="col-md-12">
@@ -59,13 +59,13 @@ foreach ($groupPermissions as $permission) {
                     </thead>
                     <tbody>
                         <?php foreach ($groups as $group): ?>
-                            <?=render(ROUTES_PATH.'/admin/staff/group/_list-item.html.php', $group)?>
+                            <?=render(ROUTES_PATH."/admin/staff/group/_list-item.html.php", $group)?>
                         <?php endforeach ?>
                     </tbody>
                 </table>
             <?php endif ?>
         </div>
-        <?php require ROUTES_PATH.'/admin/parts/input/_submitButtons.html.php'; ?>
+        <?php require ROUTES_PATH."/admin/parts/input/_submitButtons.html.php"; ?>
     </div>
 </div>
 
@@ -97,7 +97,7 @@ foreach ($groupPermissions as $permission) {
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/assets/_footer.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/assets/_footer.html.php"; ?>
 
 <script>
 $(function(){
@@ -112,4 +112,4 @@ $(function(){
 });
 </script>
 
-<?php require ROUTES_PATH.'/admin/parts/_end.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_end.html.php"; ?>

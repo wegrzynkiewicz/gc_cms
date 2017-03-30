@@ -14,7 +14,7 @@ $images = GC\Model\Module\FileRelation::select()
 <?php else: ?>
     <div id="gallery_<?=$module_id?>" class="module-gallery-preview-row">
         <?php foreach ($images as $file_id => $image): ?>
-            <?=render(ROUTES_PATH.'/admin/module/types/gallery/_grid-item.html.php', $image)?>
+            <?=render(ROUTES_PATH."/admin/module/types/gallery/_grid-item.html.php", $image)?>
         <?php endforeach ?>
         <div class="clearfix"></div>
         <script type="text/javascript">

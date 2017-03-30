@@ -1,8 +1,8 @@
 <?php
 
-require ROUTES_PATH.'/admin/_import.php';
-require ROUTES_PATH.'/admin/_breadcrumbs.php';
-require ROUTES_PATH.'/admin/widget/_import.php';
+require ROUTES_PATH."/admin/_import.php";
+require ROUTES_PATH."/admin/_breadcrumbs.php";
+require ROUTES_PATH."/admin/widget/_import.php";
 
 $widgets = GC\Model\Widget::select()
     ->equals('lang', GC\Staff::getInstance()->getEditorLang())
@@ -10,15 +10,15 @@ $widgets = GC\Model\Widget::select()
     ->fetchByPrimaryKey();
 
 ?>
-<?php require ROUTES_PATH.'/admin/parts/_header.html.php'; ?>
-<?php require ROUTES_PATH.'/admin/parts/_page-header.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_header.html.php"; ?>
+<?php require ROUTES_PATH."/admin/parts/_page-header.html.php"; ?>
 
 <div class="row">
     <div class="col-md-12">
         <div class="simple-box">
             <?php if (empty($widgets)): ?>
                 <?=trans('Nie znaleziono żadnych widżetów w języku: ')?>
-                <?=render(ROUTES_PATH.'/admin/parts/_language.html.php', [
+                <?=render(ROUTES_PATH."/admin/parts/_language.html.php", [
                     'lang' => GC\Staff::getInstance()->getEditorLang(),
                 ])?>
             <?php else: ?>
@@ -51,9 +51,9 @@ $widgets = GC\Model\Widget::select()
                 </table>
             <?php endif ?>
         </div>
-        <?php require ROUTES_PATH.'/admin/parts/input/_submitButtons.html.php'; ?>
+        <?php require ROUTES_PATH."/admin/parts/input/_submitButtons.html.php"; ?>
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/assets/_footer.html.php'; ?>
-<?php require ROUTES_PATH.'/admin/parts/_end.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/assets/_footer.html.php"; ?>
+<?php require ROUTES_PATH."/admin/parts/_end.html.php"; ?>

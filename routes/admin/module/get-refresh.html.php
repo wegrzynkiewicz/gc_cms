@@ -1,6 +1,6 @@
 <?php
 
-require ROUTES_PATH.'/admin/_import.php';
+require ROUTES_PATH."/admin/_import.php";
 
 $module_id = intval(array_shift($_PARAMETERS));
 $module = GC\Model\Module::fetchByPrimaryId($module_id);

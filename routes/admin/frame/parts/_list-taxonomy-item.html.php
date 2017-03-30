@@ -22,7 +22,7 @@ $image = empty($image)
     <td>
         <?php if ($tree and $tree->hasChildren()): ?>
             <div style="margin-left:-20px">
-                <?=render(ROUTES_PATH.'/admin/frame/parts/_tree-taxonomy-preview.html.php', [
+                <?=render(ROUTES_PATH."/admin/frame/parts/_tree-taxonomy-preview.html.php", [
                     'tree' => $tree,
                 ])?>
             </div>

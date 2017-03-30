@@ -1,8 +1,8 @@
 <?php
 
-require ROUTES_PATH.'/admin/_import.php';
-require ROUTES_PATH.'/admin/_breadcrumbs.php';
-require ROUTES_PATH.'/admin/account/_import.php';
+require ROUTES_PATH."/admin/_import.php";
+require ROUTES_PATH."/admin/_breadcrumbs.php";
+require ROUTES_PATH."/admin/account/_import.php";
 
 $headTitle = trans('Zmiana hasła');
 $breadcrumbs->push([
@@ -13,8 +13,8 @@ $breadcrumbs->push([
 $_POST = [];
 
 ?>
-<?php require ROUTES_PATH.'/admin/parts/_header.html.php'; ?>
-<?php require ROUTES_PATH.'/admin/parts/_page-header.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_header.html.php"; ?>
+<?php require ROUTES_PATH."/admin/parts/_page-header.html.php"; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -26,21 +26,21 @@ $_POST = [];
                     </div>
                 <?php endif ?>
 
-                <?=render(ROUTES_PATH.'/admin/parts/input/_editbox.html.php', [
+                <?=render(ROUTES_PATH."/admin/parts/input/_editbox.html.php", [
                     'name' => 'old_password',
                     'type' => 'password',
                     'label' => trans('Stare hasło'),
                     'help' => trans('Wprowadź swoje stare hasło dla bezpieczeństwa'),
                 ])?>
 
-                <?=render(ROUTES_PATH.'/admin/parts/input/_editbox.html.php', [
+                <?=render(ROUTES_PATH."/admin/parts/input/_editbox.html.php", [
                     'name' => 'new_password',
                     'type' => 'password',
                     'label' => trans('Nowe hasło'),
                     'help' => trans('Twoje hasło musi składać się z przynajmniej %s znaków', [$config['password']['minLength']]),
                 ])?>
 
-                <?=render(ROUTES_PATH.'/admin/parts/input/_editbox.html.php', [
+                <?=render(ROUTES_PATH."/admin/parts/input/_editbox.html.php", [
                     'name' => 'confirm_password',
                     'type' => 'password',
                     'label' => trans('Powtórz nowe hasło'),
@@ -48,7 +48,7 @@ $_POST = [];
                 ])?>
             </div>
 
-            <?=render(ROUTES_PATH.'/admin/parts/input/_submitButtons.html.php', [
+            <?=render(ROUTES_PATH."/admin/parts/input/_submitButtons.html.php", [
                 'saveLabel' => trans('Zmień hasło'),
             ])?>
 
@@ -56,5 +56,5 @@ $_POST = [];
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/assets/_footer.html.php'; ?>
-<?php require ROUTES_PATH.'/admin/parts/_end.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/assets/_footer.html.php"; ?>
+<?php require ROUTES_PATH."/admin/parts/_end.html.php"; ?>

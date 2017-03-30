@@ -1,11 +1,11 @@
 <?php
 
-require ROUTES_PATH.'/admin/_import.php';
-require ROUTES_PATH.'/admin/_breadcrumbs.php';
+require ROUTES_PATH."/admin/_import.php";
+require ROUTES_PATH."/admin/_breadcrumbs.php";
 
 $frame_id = intval(array_shift($_PARAMETERS));
 
-require ROUTES_PATH.'/admin/module/parts/_breadcrumbs-loop.php';
+require ROUTES_PATH."/admin/module/parts/_breadcrumbs-loop.php";
 
 $moduleType = post('type');
 

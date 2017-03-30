@@ -1,8 +1,8 @@
 <?php
 
-require ROUTES_PATH.'/admin/_import.php';
-require ROUTES_PATH.'/admin/_breadcrumbs.php';
-require ROUTES_PATH.'/admin/navigation/_import.php';
+require ROUTES_PATH."/admin/_import.php";
+require ROUTES_PATH."/admin/_breadcrumbs.php";
+require ROUTES_PATH."/admin/navigation/_import.php";
 
 $node_id = intval(post('node_id'));
 
@@ -15,7 +15,7 @@ $node = GC\Model\Navigation\Node::select()
 
 $navigation_id = $node['navigation_id'];
 
-require ROUTES_PATH.'/admin/navigation/node/_import.php';
+require ROUTES_PATH."/admin/navigation/node/_import.php";
 
 # usuń węzeł i podwęzły nawigacji
 GC\Model\Navigation\Node::deleteBynodeId($node_id);

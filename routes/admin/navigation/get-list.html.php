@@ -1,8 +1,8 @@
 <?php
 
-require ROUTES_PATH.'/admin/_import.php';
-require ROUTES_PATH.'/admin/_breadcrumbs.php';
-require ROUTES_PATH.'/admin/navigation/_import.php';
+require ROUTES_PATH."/admin/_import.php";
+require ROUTES_PATH."/admin/_breadcrumbs.php";
+require ROUTES_PATH."/admin/navigation/_import.php";
 
 # pobierz wszystkie posortowane nawigacje z języka
 $navigations = GC\Model\Navigation::select()
@@ -32,7 +32,7 @@ foreach ($navigations as $navigation_id => &$navigation) {
 unset($navigation);
 
 ?>
-<?php require ROUTES_PATH.'/admin/parts/_header.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_header.html.php"; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -48,14 +48,14 @@ unset($navigation);
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/_breadcrumbs.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_breadcrumbs.html.php"; ?>
 
 <div class="row">
     <div class="col-md-12">
         <div class="simple-box">
             <?php if (empty($navigations)): ?>
                 <?=trans('Nie znaleziono żadnej nawigacji w języku: ')?>
-                <?=render(ROUTES_PATH.'/admin/parts/_language.html.php', [
+                <?=render(ROUTES_PATH."/admin/parts/_language.html.php", [
                     'lang' => GC\Staff::getInstance()->getEditorLang(),
                 ])?>
             <?php else: ?>
@@ -69,13 +69,13 @@ unset($navigation);
                     </thead>
                     <tbody>
                         <?php foreach ($navigations as $navigation_id => $navigation): ?>
-                            <?=render(ROUTES_PATH.'/admin/navigation/_list-item.html.php', $navigation)?>
+                            <?=render(ROUTES_PATH."/admin/navigation/_list-item.html.php", $navigation)?>
                         <?php endforeach ?>
                     </tbody>
                 </table>
             <?php endif ?>
         </div>
-        <?php require ROUTES_PATH.'/admin/parts/input/_submitButtons.html.php'; ?>
+        <?php require ROUTES_PATH."/admin/parts/input/_submitButtons.html.php"; ?>
     </div>
 </div>
 
@@ -107,7 +107,7 @@ unset($navigation);
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/assets/_footer.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/assets/_footer.html.php"; ?>
 
 <script>
     $(function(){
@@ -118,4 +118,4 @@ unset($navigation);
     });
 </script>
 
-<?php require ROUTES_PATH.'/admin/parts/_end.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_end.html.php"; ?>

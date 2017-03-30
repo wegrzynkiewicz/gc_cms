@@ -17,7 +17,7 @@ foreach ($frames as &$frame) {
 unset($frame);
 
 ?>
-<?php require ROUTES_PATH.'/admin/parts/_header.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_header.html.php"; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -36,7 +36,7 @@ unset($frame);
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/_breadcrumbs.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_breadcrumbs.html.php"; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -47,13 +47,13 @@ unset($frame);
                 <fieldset>
                     <legend><?=trans('Ustawienia modułu')?></legend>
 
-                    <?=render(ROUTES_PATH.'/admin/parts/input/_editbox.html.php', [
+                    <?=render(ROUTES_PATH."/admin/parts/input/_editbox.html.php", [
                         'name' => 'content',
                         'label' => trans('Nazwa'),
                         'help' => trans('Będzie wyświetlana nad boksem (np. Polecane produkty, Zobacz także)'),
                     ])?>
 
-                    <?=render(ROUTES_PATH.'/admin/parts/input/_selectbox.html.php', [
+                    <?=render(ROUTES_PATH."/admin/parts/input/_selectbox.html.php", [
                         'name' => 'theme',
                         'label' => trans('Szablon'),
                         'help' => trans('Szablon określa wygląd i zachowanie modułu'),
@@ -74,7 +74,7 @@ unset($frame);
             <?php else: ?>
                 <ol id="sortable" class="sortable">
                     <?php foreach ($tabs as $tab): ?>
-                        <?=render(ROUTES_PATH.'/admin/module/types/see-also/_item.html.php', $tab)?>
+                        <?=render(ROUTES_PATH."/admin/module/types/see-also/_item.html.php", $tab)?>
                     <?php endforeach?>
                 </ol>
                 <script>
@@ -87,7 +87,7 @@ unset($frame);
                 </script>
             <?php endif ?>
 
-            <?=render(ROUTES_PATH.'/admin/parts/input/_submitButtons.html.php', [
+            <?=render(ROUTES_PATH."/admin/parts/input/_submitButtons.html.php", [
                 'saveLabel' => trans('Zapisz zmiany'),
             ])?>
         </form>
@@ -109,7 +109,7 @@ unset($frame);
                 </h2>
             </div>
             <div class="modal-body">
-                <?=render(ROUTES_PATH.'/admin/parts/input/_select2-single.html.php', [
+                <?=render(ROUTES_PATH."/admin/parts/input/_select2-single.html.php", [
                     'name' => 'frame_id',
                     'label' => trans('Wybierz stronę'),
                     'options' => $frames,
@@ -159,7 +159,7 @@ unset($frame);
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/assets/_footer.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/assets/_footer.html.php"; ?>
 
 <script>
 $(function(){
@@ -204,4 +204,4 @@ $(function(){
 });
 </script>
 
-<?php require ROUTES_PATH.'/admin/parts/_end.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_end.html.php"; ?>

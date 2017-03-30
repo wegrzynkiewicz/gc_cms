@@ -1,8 +1,8 @@
 <?php
 
-require ROUTES_PATH.'/admin/_import.php';
-require ROUTES_PATH.'/admin/_breadcrumbs.php';
-require ROUTES_PATH.'/admin/staff/_import.php';
+require ROUTES_PATH."/admin/_import.php";
+require ROUTES_PATH."/admin/_breadcrumbs.php";
+require ROUTES_PATH."/admin/staff/_import.php";
 
 $password = random($config['password']['minLength']);
 $groups = post('groups', []);
@@ -28,8 +28,8 @@ foreach ($groups as $group_id) {
 # wyślij maila z hasłem
 $mail = new GC\Mail();
 $mail->buildTemplate(
-    ROUTES_PATH.'/admin/staff/_email-staff-created.html.php',
-    ROUTES_PATH.'/admin/parts/email/_styles.css', [
+    ROUTES_PATH."/admin/staff/_email-staff-created.html.php",
+    ROUTES_PATH."/admin/parts/email/_styles.css", [
         'name' => post('name'),
         'login' => post('email'),
         'password' => $password,

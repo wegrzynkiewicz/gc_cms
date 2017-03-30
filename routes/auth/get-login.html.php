@@ -1,6 +1,6 @@
 <?php
 
-require ROUTES_PATH.'/auth/_import.php';
+require ROUTES_PATH."/auth/_import.php";
 
 if (isset($_SESSION['staff'])) {
     redirect($uri->make('/admin'));
@@ -9,7 +9,7 @@ if (isset($_SESSION['staff'])) {
 $headTitle = trans('Logowanie do panelu administracyjnego');
 
 ?>
-<?php require ROUTES_PATH.'/admin/parts/_header-login.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_header-login.html.php"; ?>
 
 <div class="vertical-center">
     <div class="container">
@@ -30,12 +30,12 @@ $headTitle = trans('Logowanie do panelu administracyjnego');
                                 </p>
                             <?php endif ?>
 
-                            <?=render(ROUTES_PATH.'/admin/parts/input/_editbox.html.php', [
+                            <?=render(ROUTES_PATH."/admin/parts/input/_editbox.html.php", [
                                 'name' => 'login',
                                 'placeholder' => trans('Adres e-mail'),
                             ])?>
 
-                            <?=render(ROUTES_PATH.'/admin/parts/input/_editbox.html.php', [
+                            <?=render(ROUTES_PATH."/admin/parts/input/_editbox.html.php", [
                                 'name' => 'password',
                                 'type' => 'password',
                                 'placeholder' => trans('Hasło'),
@@ -59,7 +59,7 @@ $headTitle = trans('Logowanie do panelu administracyjnego');
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/assets/_footer.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/assets/_footer.html.php"; ?>
 
 </body>
 </html>

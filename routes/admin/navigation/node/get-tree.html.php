@@ -1,12 +1,12 @@
 <?php
 
-require ROUTES_PATH.'/admin/_import.php';
-require ROUTES_PATH.'/admin/_breadcrumbs.php';
-require ROUTES_PATH.'/admin/navigation/_import.php';
+require ROUTES_PATH."/admin/_import.php";
+require ROUTES_PATH."/admin/_breadcrumbs.php";
+require ROUTES_PATH."/admin/navigation/_import.php";
 
 $navigation_id = intval(array_shift($_PARAMETERS));
 
-require ROUTES_PATH.'/admin/navigation/node/_import.php';
+require ROUTES_PATH."/admin/navigation/node/_import.php";
 
 # pobierz węzły nawigacji i zbuduj z nich drzewo
 $tree = GC\Model\Navigation\Node::select()
@@ -16,7 +16,7 @@ $tree = GC\Model\Navigation\Node::select()
     ->fetchTree();
 
 ?>
-<?php require ROUTES_PATH.'/admin/parts/_header.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_header.html.php"; ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -32,7 +32,7 @@ $tree = GC\Model\Navigation\Node::select()
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/_breadcrumbs.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_breadcrumbs.html.php"; ?>
 
 <div class="row">
     <div class="col-md-12">
@@ -42,7 +42,7 @@ $tree = GC\Model\Navigation\Node::select()
             <?php if ($tree->hasChildren()):?>
                 <ol id="sortable" class="sortable">
                     <?php foreach ($tree->getChildren() as $node): ?>
-                        <?=render(ROUTES_PATH.'/admin/navigation/node/_tree-node.html.php', $node->getData())?>
+                        <?=render(ROUTES_PATH."/admin/navigation/node/_tree-node.html.php", $node->getData())?>
                     <?php endforeach ?>
                 </ol>
             <?php else:?>
@@ -51,7 +51,7 @@ $tree = GC\Model\Navigation\Node::select()
                 </div>
             <?php endif?>
 
-            <?=render(ROUTES_PATH.'/admin/parts/input/_submitButtons.html.php', [
+            <?=render(ROUTES_PATH."/admin/parts/input/_submitButtons.html.php", [
                 'saveLabel' => $tree->hasChildren() ? trans('Zapisz pozycję') : null,
             ])?>
 
@@ -88,7 +88,7 @@ $tree = GC\Model\Navigation\Node::select()
     </div>
 </div>
 
-<?php require ROUTES_PATH.'/admin/parts/assets/_footer.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/assets/_footer.html.php"; ?>
 
 <script>
     $('#deleteModal').on('show.bs.modal', function (event) {
@@ -114,4 +114,4 @@ $(function(){
 });
 </script>
 
-<?php require ROUTES_PATH.'/admin/parts/_end.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_end.html.php"; ?>

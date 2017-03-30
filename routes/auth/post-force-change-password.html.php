@@ -1,6 +1,6 @@
 <?php
 
-require ROUTES_PATH.'/auth/_import.php';
+require ROUTES_PATH."/auth/_import.php";
 
 $newPassword = $_POST['new_password'];
 

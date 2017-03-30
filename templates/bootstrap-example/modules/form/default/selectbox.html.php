@@ -5,7 +5,7 @@ foreach ($settings['options'] as $value) {
     $options[$value] = $value;
 }
 
-echo render(ROUTES_PATH.'/admin/parts/input/_selectbox.html.php', [
+echo render(ROUTES_PATH."/admin/parts/input/_selectbox.html.php", [
     'name' => $name,
     'label' => $field['name'],
     'help' => $field['help'],

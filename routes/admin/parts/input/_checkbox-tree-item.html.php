@@ -14,7 +14,7 @@
         </div>
         <div id="node_wrapper_<?=e($primary_id)?>" class="tree-checkbox-wrapper">
             <?php if ($node->hasChildren()): ?>
-                <?=render(ROUTES_PATH.'/admin/parts/input/_checkbox-tree-item.html.php', [
+                <?=render(ROUTES_PATH."/admin/parts/input/_checkbox-tree-item.html.php", [
                     'tree' => $node,
                     'name' => $name,
                     'checkedValues' => $checkedValues,

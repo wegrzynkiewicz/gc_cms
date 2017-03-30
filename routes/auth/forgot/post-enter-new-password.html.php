@@ -1,6 +1,6 @@
 <?php
 
-require ROUTES_PATH.'/auth/_import.php';
+require ROUTES_PATH."/auth/_import.php";
 
 # pobranie klucza głównego zalogowanego pracownika
 $staff_id = GC\Staff::getInstance()['staff_id'];

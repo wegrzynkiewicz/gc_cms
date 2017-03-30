@@ -34,7 +34,7 @@ unset($taxonomy);
     <?php $tree = $taxonomy['tree']?>
     <?php if ($tree and $tree->hasChildren()): ?>
         <div class="simple-box">
-            <?=render(ROUTES_PATH.'/admin/parts/input/_checkbox-tree.html.php', [
+            <?=render(ROUTES_PATH."/admin/parts/input/_checkbox-tree.html.php", [
                 'id' => $taxonomy_id,
                 'name' => "taxonomy[{$taxonomy_id}]",
                 'label' => $taxonomy['name'],

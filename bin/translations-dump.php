@@ -9,12 +9,12 @@ echo "Dumping translations...".PHP_EOL;
 
 $domains = [
     'admin' => [
-        ROUTES_PATH.'/admin',
-        ROUTES_PATH.'/root',
+        ROUTES_PATH."/admin",
+        ROUTES_PATH."/root",
         ROOT_PATH.'/app/etc',
     ],
     'auth' => [
-        ROUTES_PATH.'/auth',
+        ROUTES_PATH."/auth",
     ],
     'template-'.TEMPLATE => [
         TEMPLATE_PATH,

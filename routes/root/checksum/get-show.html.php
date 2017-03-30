@@ -1,9 +1,9 @@
 <?php
 
-require ROUTES_PATH.'/root/_only-debug.php';
-require ROUTES_PATH.'/root/_only-root.php';
-require ROUTES_PATH.'/root/_import.php';
-require ROUTES_PATH.'/root/checksum/_import.php';
+require ROUTES_PATH."/root/_only-debug.php";
+require ROUTES_PATH."/root/_only-root.php";
+require ROUTES_PATH."/root/_import.php";
+require ROUTES_PATH."/root/checksum/_import.php";
 
 $base64 = array_shift($_SEGMENTS);
 $file = base64_decode($base64);
@@ -25,8 +25,8 @@ $lineCount = count($lines);
 $padLength = strlen($lineCount);
 
 ?>
-<?php require ROUTES_PATH.'/admin/parts/_header.html.php'; ?>
-<?php require ROUTES_PATH.'/admin/parts/_page-header.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/_header.html.php"; ?>
+<?php require ROUTES_PATH."/admin/parts/_page-header.html.php"; ?>
 
 <div class="<?=$status ? 'bg-success' : 'bg-danger'?>">
     <pre class="simple-box" style="background-color: initial">SHA1: <span class=""><?=$checksum?></span></pre>
@@ -39,5 +39,5 @@ $padLength = strlen($lineCount);
 <?php endforeach ?>
 </pre>
 
-<?php require ROUTES_PATH.'/admin/parts/assets/_footer.html.php'; ?>
-<?php require ROUTES_PATH.'/admin/parts/_end.html.php'; ?>
+<?php require ROUTES_PATH."/admin/parts/assets/_footer.html.php"; ?>
+<?php require ROUTES_PATH."/admin/parts/_end.html.php"; ?>
