@@ -7,7 +7,7 @@ require_once __DIR__.'/_import.php';
 echo PHP_EOL;
 echo "Sending test email message...".PHP_EOL;
 $email = $inputValue('Enter email (empty to abort): ');
-if (GC\Validate::email($email)) {
+if (GC\Validation\Validate::email($email)) {
 
     $mail = new GC\Mail();
     $mail->buildTemplate(

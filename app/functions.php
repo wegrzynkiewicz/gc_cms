@@ -704,7 +704,7 @@ function getVisitorLang(): string
  */
 function getVisitorIP(): string
 {
-    if (!empty($_SERVER['HTTP_CLIENT_IP']) && GC\Validate::ip($_SERVER['HTTP_CLIENT_IP'])) {
+    if (!empty($_SERVER['HTTP_CLIENT_IP']) && GC\Validation\Validate::ip($_SERVER['HTTP_CLIENT_IP'])) {
         return $_SERVER['HTTP_CLIENT_IP'];
     }
 
@@ -712,28 +712,28 @@ function getVisitorIP(): string
         if (strpos($_SERVER['HTTP_X_FORWARDED_FOR'], ',') !== false) {
             $iplist = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
             foreach ($iplist as $ip) {
-                if (GC\Validate::ip($ip)) {
+                if (GC\Validation\Validate::ip($ip)) {
                     return $ip;
                 }
             }
-        } elseif (GC\Validate::ip($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        } elseif (GC\Validation\Validate::ip($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             return $_SERVER['HTTP_X_FORWARDED_FOR'];
         }
     }
 
-    if (!empty($_SERVER['HTTP_X_FORWARDED']) && GC\Validate::ip($_SERVER['HTTP_X_FORWARDED'])) {
+    if (!empty($_SERVER['HTTP_X_FORWARDED']) && GC\Validation\Validate::ip($_SERVER['HTTP_X_FORWARDED'])) {
         return $_SERVER['HTTP_X_FORWARDED'];
     }
 
-    if (!empty($_SERVER['HTTP_X_CLUSTER_CLIENT_IP']) && GC\Validate::ip($_SERVER['HTTP_X_CLUSTER_CLIENT_IP'])) {
+    if (!empty($_SERVER['HTTP_X_CLUSTER_CLIENT_IP']) && GC\Validation\Validate::ip($_SERVER['HTTP_X_CLUSTER_CLIENT_IP'])) {
         return $_SERVER['HTTP_X_CLUSTER_CLIENT_IP'];
     }
 
-    if (!empty($_SERVER['HTTP_FORWARDED_FOR']) && GC\Validate::ip($_SERVER['HTTP_FORWARDED_FOR'])) {
+    if (!empty($_SERVER['HTTP_FORWARDED_FOR']) && GC\Validation\Validate::ip($_SERVER['HTTP_FORWARDED_FOR'])) {
         return $_SERVER['HTTP_FORWARDED_FOR'];
     }
 
-    if (!empty($_SERVER['HTTP_FORWARDED']) && GC\Validate::ip($_SERVER['HTTP_FORWARDED'])) {
+    if (!empty($_SERVER['HTTP_FORWARDED']) && GC\Validation\Validate::ip($_SERVER['HTTP_FORWARDED'])) {
         return $_SERVER['HTTP_FORWARDED'];
     }
 

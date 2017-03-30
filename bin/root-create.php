@@ -7,7 +7,7 @@ require_once __DIR__.'/_import.php';
 echo PHP_EOL;
 echo "Creating root staff account...".PHP_EOL;
 $email = $inputValue('Enter root account email (empty to abort): ');
-if ($email and GC\Validate::staffEmail($email)) {
+if ($email and GC\Validation\Validate::staffEmail($email)) {
     echo 'Your password is: root'.PHP_EOL;
     $hash = password_hash('root', PASSWORD_DEFAULT);
 
