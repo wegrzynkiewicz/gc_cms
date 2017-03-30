@@ -2,7 +2,7 @@
 
 $headTitle = trans('Dashboard');
 $breadcrumbs->push([
-    'uri' => $uri->make('/'),
+    'uri' => $uri->make('/admin'),
     'name' => $headTitle,
     'icon' => 'dashboard',
 ]);

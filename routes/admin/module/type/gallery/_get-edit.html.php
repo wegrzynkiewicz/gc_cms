@@ -1,8 +1,3 @@
-<?php
-
-require ROUTES_PATH."/admin/module/type/gallery/_import.php";
-
-?>
 <?php require ROUTES_PATH.'/admin/_parts/header.html.php'; ?>
 
 <div class="row">

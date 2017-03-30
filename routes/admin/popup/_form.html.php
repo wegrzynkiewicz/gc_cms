@@ -8,7 +8,7 @@ $frames = GC\Model\Frame::select()
 foreach ($frames as &$frame) {
     $frame = sprintf('%s - %s',
         $frame['name'],
-        $config['frames'][$frame['type']]['name']
+        $config['frame']['types'][$frame['type']]['name']
     );
 }
 unset($frame);

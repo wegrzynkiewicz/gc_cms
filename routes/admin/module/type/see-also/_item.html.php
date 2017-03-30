@@ -19,7 +19,7 @@
         </div>
 
         <div class="pull-right" style="margin-right: 30px">
-            <?=trans($config['frames'][$type]['name'])?>
+            <?=trans($config['frame']['types'][$type]['name'])?>
             <?php if ($slug): ?>
                 <?=trans('o adresie')?>
                 <a href="<?=$uri->make($slug)?>"

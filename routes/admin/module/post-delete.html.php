@@ -1,12 +1,16 @@
 <?php
 
 require ROUTES_PATH.'/admin/_import.php';
-require ROUTES_PATH.'/admin/_breadcrumbs.php';
 
 $module_id = intval(post('module_id'));
+$module = GC\Model\Module::select()
+    ->source('::grid')
+    ->equals('module_id', $module_id)
+    ->fetch();
 
-# pobierz moduł po kluczu głównym
-$module = GC\Model\Module::fetchByPrimaryId($module_id);
+$frame_id = $module['frame_id'];
+
+require ROUTES_PATH."/admin/module/_breadcrumbs-loop.php";
 
 # usuń moduł i wszystkie jego dodatki
 GC\Model\Module::deleteByModuleId($module_id);

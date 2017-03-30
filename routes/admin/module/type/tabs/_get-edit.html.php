@@ -1,7 +1,5 @@
 <?php
 
-require ROUTES_PATH."/admin/module/type/tabs/_import.php";
-
 $tabs = GC\Model\Module\Tab::select()
     ->source('::frame')
     ->equals('module_id', $module_id)

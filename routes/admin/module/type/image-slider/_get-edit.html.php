@@ -1,10 +1,3 @@
-<?php
-
-require ROUTES_PATH."/admin/module/type/image-slider/_import.php";
-
-$_POST = $module;
-
-?>
 <?php require ROUTES_PATH.'/admin/_parts/header.html.php'; ?>
 
 <div class="row">

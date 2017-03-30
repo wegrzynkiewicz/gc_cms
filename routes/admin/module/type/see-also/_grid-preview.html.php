@@ -6,12 +6,14 @@ $frames = GC\Model\Module\Tab::select()
     ->fetchByKey('frame_id');
 
 ?>
-
-<?php if (empty($frames)): ?>
-    <?=trans('Moduł nie zawiera treści, które mogłyby być wyświetlone.')?>
-<?php else: ?>
-    <?php foreach ($frames as $frame_id => $frame): ?>
-        <a href="<?=$uri->make("/admin/frame/{$frame_id}/edit")?>">
-            <?=$frame['name']?> - <?=$config['frames'][$frame['type']]['name']?></a>,
-    <?php endforeach ?>
-<?php endif ?>
+<p class="text-center">
+    <?php if (empty($frames)): ?>
+        <?=trans('Moduł nie zawiera stron, które mogłyby być wyświetlone')?>
+    <?php else: ?>
+        <?=trans('Moduł zawiera następujące strony: ')?><br>
+        <?php foreach ($frames as $frame_id => $frame): ?>
+            <?=$config['frame']['types'][$frame['type']]['name']?>:
+            <a href="<?=$uri->make("/admin/frame/{$frame_id}/edit")?>"><?=$frame['name']?></a>,
+        <?php endforeach ?>
+    <?php endif ?>
+</p>

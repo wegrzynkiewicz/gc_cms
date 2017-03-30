@@ -1,7 +1,5 @@
 <?php
 
-require ROUTES_PATH."/admin/module/type/see-also/_import.php";
-
 $tabs = GC\Model\Module\Tab::select()
     ->source('::frame')
     ->equals('module_id', $module_id)
@@ -14,7 +12,7 @@ $frames = GC\Model\Frame::select()
     ->fetchByPrimaryKey();
 
 foreach ($frames as &$frame) {
-    $frame = sprintf('%s - %s', $frame['name'], $config['frames'][$frame['type']]['name']);
+    $frame = sprintf('%s - %s', $frame['name'], $config['frame']['types'][$frame['type']]['name']);
 }
 unset($frame);
 

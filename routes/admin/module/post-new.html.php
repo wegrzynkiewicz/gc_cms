@@ -5,6 +5,8 @@ require ROUTES_PATH.'/admin/_breadcrumbs.php';
 
 $frame_id = intval(array_shift($_PARAMETERS));
 
+require ROUTES_PATH."/admin/module/_breadcrumbs-loop.php";
+
 $moduleType = post('type');
 
 # wstaw moduł

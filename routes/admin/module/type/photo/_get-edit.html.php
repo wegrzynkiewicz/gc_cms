@@ -1,11 +1,3 @@
-<?php
-
-require ROUTES_PATH."/admin/module/type/photo/_import.php";
-
-$_POST = $settings;
-$_POST['theme'] = $module['theme'];
-
-?>
 <?php require ROUTES_PATH.'/admin/_parts/header.html.php'; ?>
 <?php require ROUTES_PATH.'/admin/_parts/page-header.html.php'; ?>
 

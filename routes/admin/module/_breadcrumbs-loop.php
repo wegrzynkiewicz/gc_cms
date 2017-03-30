@@ -12,6 +12,7 @@ $makeRecursiveBreadcrumbs = function ($frame_id) use (&$breadcrumbs, $config, $u
 
         if ($frame['type'] !== 'tab') {
             require ROUTES_PATH."/admin/frame/_breadcrumbs-edit.php";
+            break;
         }
 
         $tab = GC\Model\Module\Tab::select()
