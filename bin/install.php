@@ -39,7 +39,7 @@ require __DIR__.'/translations-dump.php';
 echo PHP_EOL;
 echo "Creating translation files...".PHP_EOL;
 $json = file_get_contents(TEMP_PATH.'/translations-dump.json');
-foreach ($config['langs'] as $code => $lang) {
+foreach ($config['lang']['installed'] as $code => $lang) {
     $path = $config['translator']['folder']."/{$code}.json";
     echo "Creating file: {$path}".PHP_EOL;
     makeDirRecursive(dirname($path));

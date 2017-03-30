@@ -7,7 +7,7 @@ require __DIR__.'/error-handler.php';
 
 # obiekt reprezentujący żądanie
 $request = GC\Request::createFromGlobals();
-$request->detectLanguageCodes(array_keys($config['langs']));
+$request->detectLanguageCodes(array_keys($config['lang']['installed']));
 
 # obiekt pomocniczy do generowania adresów URI
 $uri = new GC\Uri($request);

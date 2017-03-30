@@ -105,6 +105,14 @@ function trans(string $text, array $params = []): string
 }
 
 /**
+ * Atrapa tłumacza, a żeby parser szukający tłumaczeń wiedział o tym tłumaczeniu
+ */
+function dummy_trans(string $text): string
+{
+    return $text;
+}
+
+/**
  * Tłumaczy wprowadzony tekst na jego odpowiednik
  */
 function logger(string $message, array $params = []): void

@@ -9,7 +9,7 @@
             name="<?=$name?>"
             class="form-control input">
 
-            <?php foreach ($config['langs'] as $code => $lang): ?>
+            <?php foreach ($config['lang']['installed'] as $code => $lang): ?>
                 <option value="<?=$code?>" data-flag="<?=$lang['flag']?>"
                     <?=selected($selectedValue == $code)?>>
                     <?=trans($lang['name'])?>

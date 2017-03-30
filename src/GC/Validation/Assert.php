@@ -73,7 +73,7 @@ class Assert
     {
         static::notNull($lang);
 
-        if (!in_array($lang, array_keys($GLOBALS['config']['langs']))) {
+        if (!in_array($lang, array_keys($GLOBALS['config']['lang']['installed']))) {
             throw new AssertException(
                 trans('Nie znaleziono tego języka w aplikacji')
             );

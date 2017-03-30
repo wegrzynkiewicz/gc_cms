@@ -81,8 +81,8 @@ $config = [
         # string, nakazuje przekierowywanie na zadane rozszerzenie, jeżeli nie jest ono podane
         'forceDefaultExtension' => null,
     ],
-    'adminNavbarTitle' => 'Panel Administracyjny', # wyświetlana w prawym gornym rogu panelu admina
-    'adminHeadTitleBase' => 'Acme Panel Administracyjny', # nazwa doklejana do <title> strony w panelu admina
+    'adminNavbarTitle' => dummy_trans('Panel Administracyjny'), # wyświetlana w prawym gornym rogu panelu admina
+    'adminHeadTitleBase' => dummy_trans('Acme Panel Administracyjny'), # nazwa doklejana do <title> strony w panelu admina
     'imageNotAvailableUri' => '/assets/admin/image-not-available.jpg', # ścieżka do obrazka w przypadku braku obrazka
     'password' => [ # zawiera ustawienia dotyczące polityki haseł
         'minLength' => 8, # minimalna długość hasła
@@ -139,21 +139,21 @@ $config = [
     'dataTable' => [ # dotyczą pluginu DataTables
         'iDisplayLength' => 50, # ilość rekordów domyślnie wyświetlanych na jedną strone
     ],
-    'langs' => [ # zainstalowane języki w aplikacji
-        'pl' => [
-            'name' => 'Polski',
-            'flag' => 'pl',
-        ],
-        'en' => [
-            'name' => 'English',
-            'flag' => 'gb',
-        ],
-        'de' => [
-            'name' => 'Deutsch',
-            'flag' => 'de',
-        ],
-    ],
     'lang' => [ # ustawienia języków
+        'installed' => [ # zainstalowane języki w aplikacji
+            'pl' => [
+                'name' => dummy_trans('Polski'),
+                'flag' => 'pl',
+            ],
+            'en' => [
+                'name' => dummy_trans('English'),
+                'flag' => 'gb',
+            ],
+            'de' => [
+                'name' => dummy_trans('Deutsch'),
+                'flag' => 'de',
+            ],
+        ],
         'main' => 'pl', # główny język strony, który nie jest wyświetlany w slugu
         'visitorDefault' => 'pl', # domyśly język gdy nie wiadomo jakiego języka oczekuje odwiedzający
         'editorDefault' => 'pl', # domyślny język edytowania w panelu admina
@@ -161,158 +161,158 @@ $config = [
     'frame' => [ # ustawienia i rodzaje rusztowań
         'types' => [
             'page' => [
-                'name' => 'Strona',
+                'name' => dummy_trans('Strona'),
             ],
             'post' => [
-                'name' => 'Wpis',
+                'name' => dummy_trans('Wpis'),
             ],
             'post-node' => [ # węzeł podziału wpisu, czyli np. Aktualności
-                'name' => 'Węzeł wpisu',
+                'name' => dummy_trans('Węzeł wpisu'),
             ],
             'post-taxonomy' => [ # podział wpisu, czyli np. Kategoria wpisu
-                'name' => 'Podział wpisu',
+                'name' => dummy_trans('Podział wpisu'),
             ],
             'product' => [
-                'name' => 'Produkt',
+                'name' => dummy_trans('Produkt'),
             ],
             'product-node' => [ # węzeł podziału produktu, czyli np. Procesory
-                'name' => 'Węzeł produktu',
+                'name' => dummy_trans('Węzeł produktu'),
             ],
             'product-taxonomy' => [ # węzeł podziału produktu, czyli np. Kategoria produktu
-                'name' => 'Podział produktu',
+                'name' => dummy_trans('Podział produktu'),
             ],
             'tab' => [ # pomocnicze rusztowanie będące pojedyńczą zakładką w module zakładek
-                'name' => 'Podział produktu',
+                'name' => dummy_trans('Podział produktu'),
             ],
         ],
         'visibility' => [ # dostępne atrybuty visibility dla rusztowań
-            0 => 'Widoczna dla wszystkich',
-            1 => 'Widoczna tylko dla pracowników',
-            2 => 'Widoczna tylko dla pracowników z odpowiednim uprawnieniem',
+            0 => dummy_trans('Widoczna dla wszystkich'),
+            1 => dummy_trans('Widoczna tylko dla pracowników'),
+            2 => dummy_trans('Widoczna tylko dla pracowników z odpowiednim uprawnieniem'),
             // 3 => 'Niewidoczna dla nikogo',
         ],
     ],
     'module' => [ # rodzaje zainstalowanych modułów
         'types' => [
             'form' => [
-                'name' => 'Moduł formularza',
-                'description' => 'Wyświetla jeden z przygotowanych formularzy.',
+                'name' => dummy_trans('Moduł formularza'),
+                'description' => dummy_trans('Wyświetla jeden z przygotowanych formularzy.'),
                 'themes' => [
-                    'default' => 'Budowany automatycznie',
-                    'custom' => 'Specjalnie przygotowany (jeżeli istnieje, wtedy automatyczny)',
+                    'default' => dummy_trans('Budowany automatycznie'),
+                    'custom' => dummy_trans('Specjalnie przygotowany (jeżeli istnieje, wtedy automatyczny)'),
                 ],
             ],
             'gallery' => [
-                'name' => 'Moduł galerii zdjęć',
-                'description' => 'Wyświetla wiele zdjęć z możliwością podglądu.',
+                'name' => dummy_trans('Moduł galerii zdjęć'),
+                'description' => dummy_trans('Wyświetla wiele zdjęć z możliwością podglądu.'),
                 'themes' => [
-                    'default' => 'Standardowa galeria',
-                    'raw-image' => 'Zwykłe zdjęcia bez obramowań (bez podglądu)',
-                    'raw-image-lightbox' => 'Zwykłe zdjęcia bez obramowań (z podglądem)'
+                    'default' => dummy_trans('Standardowa galeria'),
+                    'raw-image' => dummy_trans('Zwykłe zdjęcia bez obramowań (bez podglądu)'),
+                    'raw-image-lightbox' => dummy_trans('Zwykłe zdjęcia bez obramowań (z podglądem)'
                 ],
             ],
             'html-editor' => [
-                'name' => 'Moduł tekstowy',
-                'description' => 'Wyświelta treść HTML poprzez edytor WYSIWYG.',
+                'name' => dummy_trans('Moduł tekstowy'),
+                'description' => dummy_trans('Wyświelta treść HTML poprzez edytor WYSIWYG.'),
                 'themes' => [
-                    'default' => 'Standardowa treść',
+                    'default' => dummy_trans('Standardowa treść'),
                 ],
             ],
             'image-slider' => [
-                'name' => 'Moduł slajdów ze zdjęciami',
-                'description' => 'Wyświetla animowane slajdy zawierające tylko zdjęcia.',
+                'name' => dummy_trans('Moduł slajdów ze zdjęciami'),
+                'description' => dummy_trans('Wyświetla animowane slajdy zawierające tylko zdjęcia.'),
                 'themes' => [
-                    'default' => 'Standardowy slajder',
+                    'default' => dummy_trans('Standardowy slajder'),
                 ],
             ],
             'photo' => [
-                'name' => 'Moduł pojedyńczego zdjęcia',
-                'description' => 'Wyświetla jedno zdjęcie z możliwością podglądu.',
+                'name' => dummy_trans('Moduł pojedyńczego zdjęcia'),
+                'description' => dummy_trans('Wyświetla jedno zdjęcie z możliwością podglądu.'),
                 'themes' => [
-                    'default' => 'Zdjęcie (z poglądem)',
-                    'raw-image' => 'Zdjęcie (bez podglądu)',
+                    'default' => dummy_trans('Zdjęcie (z poglądem)'),
+                    'raw-image' => dummy_trans('Zdjęcie (bez podglądu)'),
                 ],
             ],
             'see-also' => [
-                'name' => 'Moduł: Zobacz także',
-                'description' => 'Wyświetla wybrane treści z możliwością przekierowania',
+                'name' => dummy_trans('Moduł: Zobacz także'),
+                'description' => dummy_trans('Wyświetla wybrane treści z możliwością przekierowania'),
                 'themes' => [
-                    'default' => 'Boksy z miniaturkami',
-                    'links' => 'Zwykłe linki',
+                    'default' => dummy_trans('Boksy z miniaturkami'),
+                    'links' => dummy_trans('Zwykłe linki'),
                 ],
             ],
             'tab' => [
-                'name' => 'Moduł zakładek',
-                'description' => 'Rozdziela treść pomiędzy klikalne zakładki.',
+                'name' => dummy_trans('Moduł zakładek'),
+                'description' => dummy_trans('Rozdziela treść pomiędzy klikalne zakładki.'),
                 'themes' => [
-                    'default' => 'Zakładki w formie dokumentu',
-                    'pills' => 'Zakładki w formie przycisków',
-                    'accordion' => 'Lista rozwijana',
+                    'default' => dummy_trans('Zakładki w formie dokumentu'),
+                    'pills' => dummy_trans('Zakładki w formie przycisków'),
+                    'accordion' => dummy_trans('Lista rozwijana'),
                 ],
             ],
             'youtube' => [
-                'name' => 'Moduł YouTube',
-                'description' => 'Wyświetla film z serwisu YouTube.',
+                'name' => dummy_trans('Moduł YouTube'),
+                'description' => dummy_trans('Wyświetla film z serwisu YouTube.'),
                 'themes' => [
-                    'default' => 'Zwykły odtwarzacz filmu'
+                    'default' => dummy_trans('Zwykły odtwarzacz filmu'
                 ],
             ],
         ],
     ],
     'navigation' => [ # ustawienia dla nawigacji
         'nodeTypes' => [ # rodzaje węzłów nawigacji
-            'empty' => 'Nieklikalny węzeł',
-            'external' => 'Kieruj na adres',
-            'homepage' => 'Kieruj na stronę główną',
-            'list' => 'Kieruj na stronę w serwisie',
+            'empty' => dummy_trans('Nieklikalny węzeł'),
+            'external' => dummy_trans('Kieruj na adres'),
+            'homepage' => dummy_trans('Kieruj na stronę główną'),
+            'list' => dummy_trans('Kieruj na stronę w serwisie'),
         ],
         'nodeThemes' => [ # dostępne wyróżnienia węzłów
-            'default' => 'Domyślny węzeł',
+            'default' => dummy_trans('Domyślny węzeł'),
         ],
         'nodeTargets' => [ # dostępne atrybuty target dla węzłów nawigacji
-            '_self' => 'Załaduj w tym samym oknie',
-            '_blank' => 'Załaduj w nowym oknie',
+            '_self' => dummy_trans('Załaduj w tym samym oknie'),
+            '_blank' => dummy_trans('Załaduj w nowym oknie'),
         ],
     ],
     'formFieldTypes' => [ # rodzaje zainstalowanych pól formularzy
-        'editbox' => 'Zwykłe pole tekstowe',
-        'selectbox' => 'Pole jednokrotnego wyboru',
+        'editbox' => dummy_trans('Zwykłe pole tekstowe'),
+        'selectbox' => dummy_trans('Pole jednokrotnego wyboru'),
     ],
     'formStatuses' => [ # statusy jakie nadesłany formularz może otrzymać
         'unread' => [
-            'name' => 'Nieprzeczytana',
+            'name' => dummy_trans('Nieprzeczytana'),
             'class' => 'font-bold',
         ],
         'readed' => [
-            'name' => 'Przeczytana',
+            'name' => dummy_trans('Przeczytana'),
             'class' => 'text-muted',
         ],
         'processed' => [
-            'name' => 'W trakcie realizacji',
+            'name' => dummy_trans('W trakcie realizacji'),
             'class' => 'text-warning warning',
         ],
         'completed' => [
-            'name' => 'Zrealizowano',
+            'name' => dummy_trans('Zrealizowano'),
             'class' => 'text-success success',
         ],
         'rejected' => [
-            'name' => 'Odrzucono',
+            'name' => dummy_trans('Odrzucono'),
             'class' => 'text-danger danger',
         ],
     ],
     'widgetTypes' => [ # typy widżetów
-        'plain' => 'Zwykły tekst',
-        'html-editor' => 'Formatowany tekst HTML',
-        'image' => 'Zdjęcie',
+        'plain' => dummy_trans('Zwykły tekst'),
+        'html-editor' => dummy_trans('Formatowany tekst HTML'),
+        'image' => dummy_trans('Zdjęcie'),
     ],
     'popupTypes' => [ # typy wyskakujących okienek
-        'html-editor' => 'Formatowany tekst HTML',
-        'fullsize-image' => 'Zdjęcie na całą szerokość',
-        'custom' => 'Specjalnie przygotowany przez programistę',
+        'html-editor' => dummy_trans('Formatowany tekst HTML'),
+        'fullsize-image' => dummy_trans('Zdjęcie na całą szerokość'),
+        'custom' => dummy_trans('Specjalnie przygotowany przez programistę'),
     ],
     'permissions' => [ # zawiera uprawnienia dostępne dla pracownikow
-        'manage_staff' => 'Zarządzanie pracownikami',
-        'manage_staff_groups' => 'Zarządzanie grupami pracowników',
+        'manage_staff' => dummy_trans('Zarządzanie pracownikami'),
+        'manage_staff_groups' => dummy_trans('Zarządzanie grupami pracowników'),
     ],
     'rewrites' => [ # zawiera niestandardowe przekierowania $regex => $destination
         '~^/old-service/index\.php\?id=(\d+)\&theme=([a-z]+?)$~' => '/old-service/$1/$2',

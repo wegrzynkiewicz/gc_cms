@@ -1,5 +1,5 @@
 <?php
-$langs = $config['langs'];
+$langs = $config['lang']['installed'];
 ?>
 <?php if (count($langs) > 1): ?>
     <li class="dropdown">
