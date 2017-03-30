@@ -31,8 +31,13 @@
     $(function() {
         $('#nav_files').elfinderInput({
             title: '<?=trans('Przeglądaj pliki')?>',
-        }, function() {
-
+        }, function(file) {
+            var a = $("<a>")
+                .attr("href", file)
+                .attr("download", file.split(/(\\|\/)/g).pop())
+                .appendTo("body");
+            a[0].click();
+            a.remove();
         });
 
         $('#side-menu').metisMenu();

@@ -3,12 +3,6 @@
 GC\Translator::$domain = 'admin';
 
 $breadcrumbs = new GC\Breadcrumbs();
-$breadcrumbs->push([
-    'uri' => $uri->make('/admin'),
-    'name' => 'Dashboard',
-    'icon' => 'dashboard',
-]);
-$breadcrumbs->push([
-    'name' => 'Panel programisty',
-    'icon' => 'bug',
-]);
+
+require ROUTES_PATH."/admin/_breadcrumbs.php";
+require ROUTES_PATH."/root/_breadcrumbs.php";

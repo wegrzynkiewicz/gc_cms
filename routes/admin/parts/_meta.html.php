@@ -1,11 +1,6 @@
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title><?=$headTitle.' - '.trans($config['adminHeadTitleBase'])?></title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<meta name="description" content="">
-<meta name="author" content="">
-
-<title><?=$headTitle?> - Boostrap Example</title>
 
 <link rel="apple-touch-icon" sizes="180x180" href="<?=$uri->root('/apple-touch-icon.png')?>">
 <link rel="icon" type="image/png" href="<?=$uri->root('/favicon-32x32.png')?>" sizes="32x32">

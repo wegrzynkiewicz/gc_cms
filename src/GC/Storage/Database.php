@@ -18,7 +18,7 @@ class Database
     {
         $this->pdo = $pdo;
 
-        if ($_SERVER['REQUEST_METHOD'] ?? 'GET' !== 'GET') {
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'GET') {
             $this->pdo->beginTransaction();
         }
     }

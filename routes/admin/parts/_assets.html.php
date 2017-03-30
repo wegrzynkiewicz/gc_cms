@@ -43,6 +43,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.4.0/js/bootstrap-colorpicker.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.60/jquery.form-validator.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.fileDownload/1.4.2/jquery.fileDownload.min.js"></script>
 
 <script type="text/javascript">
 $(function() {
