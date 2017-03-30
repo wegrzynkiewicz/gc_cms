@@ -6,7 +6,7 @@ $headTitle = trans('Wymagana zmiana hasła');
 $_POST = [];
 
 ?>
-<?php require ROUTES_PATH."/admin/parts/_header-login.html.php"; ?>
+<?php require ROUTES_PATH."/auth/parts/_header.html.php"; ?>
 
 <div class="vertical-center">
     <div class="container">
@@ -57,7 +57,5 @@ $_POST = [];
     </div>
 </div>
 
-<?php require ROUTES_PATH."/admin/parts/assets/_footer.html.php"; ?>
-
-</body>
-</html>
+<?php require ROUTES_PATH."/admin/parts/_scripts.html.php"; ?>
+<?php require ROUTES_PATH."/auth/parts/_end.html.php"; ?>

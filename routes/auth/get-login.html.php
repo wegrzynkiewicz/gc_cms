@@ -9,7 +9,7 @@ if (isset($_SESSION['staff'])) {
 $headTitle = trans('Logowanie do panelu administracyjnego');
 
 ?>
-<?php require ROUTES_PATH."/admin/parts/_header-login.html.php"; ?>
+<?php require ROUTES_PATH."/auth/parts/_header.html.php"; ?>
 
 <div class="vertical-center">
     <div class="container">
@@ -59,7 +59,5 @@ $headTitle = trans('Logowanie do panelu administracyjnego');
     </div>
 </div>
 
-<?php require ROUTES_PATH."/admin/parts/assets/_footer.html.php"; ?>
-
-</body>
-</html>
+<?php require ROUTES_PATH."/admin/parts/_scripts.html.php"; ?>
+<?php require ROUTES_PATH."/auth/parts/_end.html.php"; ?>

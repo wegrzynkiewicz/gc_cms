@@ -45,5 +45,5 @@ $groupOptions = GC\Model\Staff\Group::select()
     </div>
 </div>
 
-<?php require ROUTES_PATH."/admin/parts/assets/_footer.html.php"; ?>
+<?php require ROUTES_PATH."/admin/parts/_scripts.html.php"; ?>
 <?php require ROUTES_PATH."/admin/parts/_end.html.php"; ?>

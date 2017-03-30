@@ -5,10 +5,10 @@ require TEMPLATE_PATH."/_import.php";
 $headTitle = $frame->getTitle();
 
 ?>
-<?php require TEMPLATE_PATH."/parts/_doctype.html.php"; ?>
+<?php require TEMPLATE_PATH."/parts/_html.html.php"; ?>
 <head>
     <?php require TEMPLATE_PATH."/parts/_meta.html.php"; ?>
-    <?php require TEMPLATE_PATH."/parts/_styles.html.php"; ?>
+    <?php require TEMPLATE_PATH."/parts/_assets.html.php"; ?>
 </head>
 <body>
     <?php require TEMPLATE_PATH."/navigations/top/_nav.html.php"; ?>
@@ -25,6 +25,6 @@ $headTitle = $frame->getTitle();
         </div>
     </div>
     <?php require TEMPLATE_PATH."/parts/_footer.html.php"; ?>
-    <?php require TEMPLATE_PATH."/parts/_assets.html.php"; ?>
+    <?php require TEMPLATE_PATH."/parts/_scripts.html.php"; ?>
 </body>
 <?php require TEMPLATE_PATH."/parts/_end.html.php"; ?>
