@@ -1,39 +1,44 @@
 <?php
 
-while (true) {
+$makeRecursiveBreadcrumbs = function ($frame_id) use (&$breadcrumbs, $config, $uri) {
 
-    $frame = GC\Model\Frame::select()
-        ->equals('frame_id', $frame_id)
-        ->fetch();
+    while (true) {
 
-    require ROUTES_PATH."/admin/frame/_breadcrumbs-module.php";
+        $frame = GC\Model\Frame::select()
+            ->equals('frame_id', $frame_id)
+            ->fetch();
 
-    if ($frame['type'] !== 'tab') {
-        require ROUTES_PATH."/admin/frame/_breadcrumbs-edit.php";
+        require ROUTES_PATH."/admin/frame/_breadcrumbs-module.php";
+
+        if ($frame['type'] !== 'tab') {
+            require ROUTES_PATH."/admin/frame/_breadcrumbs-edit.php";
+        }
+
+        $tab = GC\Model\Module\Tab::select()
+            ->fields('module_id')
+            ->equals('frame_id', $frame_id)
+            ->fetch();
+
+        if (!$tab) {
+            break;
+        }
+
+        $module_id = $tab['module_id'];
+        $module = GC\Model\Module::select()
+            ->source('::grid')
+            ->equals('module_id', $module_id)
+            ->fetch();
+
+        require ROUTES_PATH."/admin/module/_breadcrumbs-edit.php";
+
+        $frame_id = $module['frame_id'];
     }
 
-    $tab = GC\Model\Module\Tab::select()
-        ->fields('module_id')
-        ->equals('frame_id', $frame_id)
-        ->fetch();
+    $frameType = $frame['type'];
+    require ROUTES_PATH."/admin/frame/_breadcrumbs-list.php";
+    require ROUTES_PATH."/admin/_breadcrumbs.php";
 
-    if (!$tab) {
-        break;
-    }
+    $breadcrumbs->reverse();
+};
 
-    $module_id = $tab['module_id'];
-    $module = GC\Model\Module::select()
-        ->source('::grid')
-        ->equals('module_id', $module_id)
-        ->fetch();
-
-    require ROUTES_PATH."/admin/module/_breadcrumbs-edit.php";
-
-    $frame_id = $module['frame_id'];
-}
-
-$frameType = $frame['type'];
-require ROUTES_PATH."/admin/frame/_breadcrumbs-list.php";
-require ROUTES_PATH."/admin/_breadcrumbs.php";
-
-$breadcrumbs->reverse();
+$makeRecursiveBreadcrumbs($frame_id);
