@@ -44,10 +44,11 @@ try {
     ob_end_flush();
 }
 catch (Throwable $exception) {
-    logException($exception);
 
     if ($config['debug']['enabled']) {
         throw $exception;
+    } else {
+        logException($exception);
     }
 
     if ($exception instanceof GC\Exception\ResponseException) {

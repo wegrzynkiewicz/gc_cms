@@ -3,7 +3,8 @@
 require ROUTES_PATH."/admin/_import.php";
 require ROUTES_PATH."/admin/_breadcrumbs.php";
 
-$frameType = request('type');
+# przefiltrowanie nadesłanej zmiennej
+$frameType = GC\Validation\Required::enum('type', array_keys($config['frame']['types']));
 
 # utwórz zapytanie dla datatables
 $frames = GC\Model\Frame::select()

@@ -16,8 +16,8 @@ class Staff extends AbstractEntity
     public function __construct()
     {
         # pobierz wartość zmienną sesyjną
-        $staff_id = getValueByKeys($_SESSION, ['staff', 'staff_id']);
-        if (!$staff_id) {
+        $staff_id = $_SESSION['staff']['staff_id'] ?? null;
+        if ($staff_id === null) {
             static::abort('Session variable does not contain valid data');
         }
 
@@ -35,7 +35,7 @@ class Staff extends AbstractEntity
         parent::__construct($entity);
 
         # jeżeli czas wygaśnięcia sesji istnieje i minął czas trwania sesji
-        $expires = getValueByKeys($_SESSION, ['staff', 'expires']);
+        $expires = $_SESSION['staff']['expires'] ?? null;
         if ($expires and $expires <= time()) {
             static::abort('Session expired', '/auth/session-timeout');
         }

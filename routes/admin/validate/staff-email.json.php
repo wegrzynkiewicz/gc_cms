@@ -1,9 +1,18 @@
 <?php
 
 require ROUTES_PATH."/admin/_import.php";
-require ROUTES_PATH."/admin/_breadcrumbs.php";
 
-$staff_id = intval(array_shift($_PARAMETERS));
-$result = GC\Validate::staffEmail(request('email'), $staff_id);
+try {
+    $staff_id = GC\Validation\Optional::int('staff_id') ?? 0;
+    GC\Validation\Required::staffEmail('email', $staff_id);
+    $response = [
+        'valid' => true,
+    ];
+} catch (GC\Exception\AssertException $exception) {
+    $response = [
+        'valid' => false,
+        'message' => $exception->getMessage(),
+    ];
+}
 
-echo json_encode($result);
+echo json_encode($response);

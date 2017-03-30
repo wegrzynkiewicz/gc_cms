@@ -54,64 +54,11 @@ function checked(bool $condition): string
 }
 
 /**
- * Pobiera element z tablicy $array po kluczach $keys, zwraca $default jeżeli nie znajdzie elementu
- * getValueByKeys($_POST, ['sample', 'example']) === $_POST['sample']['example'];
- */
-function getValueByKeys(array $array, array $keys, $default = null)
-{
-    if (count($keys) == 0) {
-        return $default;
-    }
-
-    foreach ($keys as $key) {
-        if (!isset($array[$key])) {
-            return $default;
-        }
-        $array = $array[$key];
-    }
-
-    return $array;
-}
-
-/**
- * Ustawia wartość $value elementu w tablicy $array po kluczach $keys,
- * zwraca $default jeżeli nie znajdzie elementu
- * setValueByKeys($_POST, ['sample', 'example'], 'value');
- * $_POST['sample']['example'] = 'value';
- */
-function setValueByKeys(array &$array, array $keys, $value)
-{
-    if (count($keys) == 0) {
-        return;
-    }
-
-    $lastKey = array_pop($keys);
-    $arrayCurrent = &$array;
-
-    foreach ($keys as $key) {
-        if (!isset($arrayCurrent[$key])) {
-            $arrayCurrent[$key] = [];
-        }
-        $arrayCurrent = &$arrayCurrent[$key];
-    }
-
-    $arrayCurrent[$lastKey] = $value;
-}
-
-/**
  * Pomocna do sprawdzania czy dany element istnieje w tabeli $_POST
  */
 function post(string $name, $default = '')
 {
     return (isset($_POST[$name])) ? $_POST[$name] : $default;
-}
-
-/**
- * Pomocna do sprawdzania czy dany element istnieje w tabeli $_REQUEST
- */
-function request(string $name, $default = '')
-{
-    return (isset($_REQUEST[$name])) ? $_REQUEST[$name] : $default;
 }
 
 /**
@@ -707,7 +654,7 @@ function thumbnail(string $imageUri, int $width, int $height, string $mode = 'ou
 function sessionCache(string $name, int $ttl, callable $callback)
 {
     # spróbuj pobrać tablice z sesji
-    $pool = getValueByKeys($_SESSION, ['cache', $name], null);
+    $pool = $_SESSION['cache'][$name] ?? null;
 
     # jeżeli istnieje skeszowany $pool wtedy zwróć
     if ($pool and $pool['expires'] > time()) {

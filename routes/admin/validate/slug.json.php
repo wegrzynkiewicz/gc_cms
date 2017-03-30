@@ -1,13 +1,10 @@
 <?php
 
 require ROUTES_PATH."/admin/_import.php";
-require ROUTES_PATH."/admin/_breadcrumbs.php";
-
-$frame_id = intval(request('frame_id'));
-$slug = request('slug');
 
 try {
-    GC\Validation\Assert::slug($slug, $frame_id);
+    $frame_id = GC\Validation\Optional::int('frame_id') ?? 0;
+    GC\Validation\Required::slug('slug', $frame_id);
     $response = [
         'valid' => true,
     ];

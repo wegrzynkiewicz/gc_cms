@@ -35,9 +35,8 @@
                     <?=render(ROUTES_PATH."/admin/parts/input/_slug.html.php", [
                         'name' => 'slug',
                         'label' => trans('Adres wpisu'),
-                        'help' => trans('Zostaw pusty, aby generować adres na podstawie nazwy'),
+                        'help' => trans('Zostaw pusty, aby wygenerować adres na podstawie nazwy'),
                         'attributes' => [
-                            'placeholder' => trans('Ścieżka do pliku zdjęcia'),
                             'data-validation' => 'server',
                             'data-validation-url' => $uri->make("/admin/validate/slug.json", [
                                 'frame_id' => $frame_id,

@@ -43,9 +43,9 @@ class Request
 
     public function detectLanguageCodes(array $languageCodes): void
     {
-        $propablyLanguageCode = $this->slug->getSegment(0);
+        $probablyLanguageCode = $this->slug->getSegment(0);
         foreach ($languageCodes as $languageCode) {
-            if ($propablyLanguageCode === $languageCode) {
+            if ($probablyLanguageCode === $languageCode) {
                 $this->lang = $languageCode;
                 break;
             }
