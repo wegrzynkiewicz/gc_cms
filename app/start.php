@@ -46,6 +46,10 @@ try {
 catch (Throwable $exception) {
     logException($exception);
 
+    if ($config['debug']['enabled']) {
+        throw $exception;
+    }
+
     if ($exception instanceof GC\Exception\ResponseException) {
         $code = $exception->getCode();
         $code = $code > 0 ? $code : 404; # Not Found

@@ -13,8 +13,8 @@ $frame = GC\Model\Frame::select()
 # usuń rusztowanie i wszystkie jej moduły
 GC\Model\Frame::deleteByFrameId($frame_id);
 
-$type = $frame['type'];
-require ROUTES_PATH."/admin/frame/type/{$type}/_import.php";
-require ROUTES_PATH."/admin/frame/type/{$type}/_post-delete.html.php";
+$frameType = $frame['type'];
+require ROUTES_PATH."/admin/frame/_breadcrumbs-list.php";
+require ROUTES_PATH."/admin/frame/type/{$frameType}/_post-delete.html.php";
 
 redirect($breadcrumbs->getLast('uri'));

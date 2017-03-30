@@ -13,9 +13,8 @@ $frame = GC\Model\Frame::select()
 $positions = json_decode(post('positions', []), true);
 GC\Model\Frame\Tree::insertPositionsToTaxonomy($positions, $frame_id);
 
-$type = $frame['type'];
-
-require ROUTES_PATH."/admin/frame/type/{$type}/_import.php";
-require ROUTES_PATH."/admin/frame/type/{$type}/_post-tree.html.php";
+$frameType = $frame['type'];
+require ROUTES_PATH."/admin/frame/_breadcrumbs-list.php";
+require ROUTES_PATH."/admin/frame/type/{$frameType}/_post-tree.html.php";
 
 redirect($breadcrumbs->getLast('uri'));

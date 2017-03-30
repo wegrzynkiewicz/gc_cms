@@ -27,7 +27,7 @@
                 </fieldset>
             </div>
 
-            <?=render(ROUTES_PATH."/admin/frame/type/{$type}/_custom-form.html.php")?>
+            <?=render(ROUTES_PATH."/admin/frame/type/{$frameType}/_custom-form.html.php")?>
 
             <div class="simple-box">
                 <fieldset>

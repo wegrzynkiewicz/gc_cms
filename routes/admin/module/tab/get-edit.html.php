@@ -11,8 +11,9 @@ $item = GC\Model\Module\Tab::select()
     ->fetch();
 
 $_POST = $item;
+?>
 
-echo render(ROUTES_PATH.'/admin/_parts/input/editbox.html.php', [
+<?=render(ROUTES_PATH.'/admin/_parts/input/editbox.html.php', [
     'name' => 'name',
     'label' => trans('Nazwa pojedyńczej zakładki'),
 ])?>

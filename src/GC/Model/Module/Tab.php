@@ -10,4 +10,5 @@ class Tab extends AbstractModel
 {
     public static $table = '::module_tabs';
     public static $frame = '::module_tabs JOIN ::frames USING (frame_id)';
+    public static $module = '::module_tabs JOIN ::modules USING (module_id)';
 }

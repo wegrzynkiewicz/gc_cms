@@ -4,7 +4,7 @@
     <div class="col-lg-12">
         <div class="page-header">
             <div class="btn-toolbar pull-right">
-                <a href="<?=$uri->make("/admin/frame/new/{$type}")?>" type="button" class="btn btn-success btn-md">
+                <a href="<?=$uri->make("/admin/frame/new/{$frameType}")?>" type="button" class="btn btn-success btn-md">
                     <i class="fa fa-plus fa-fw"></i>
                     <?=$addCaption?>
                 </a>
@@ -141,7 +141,7 @@
                 url: '<?=$uri->make("/admin/frame/list.json")?>',
                 type: 'POST',
                 data: {
-                    type: '<?=$type?>',
+                    type: '<?=$frameType?>',
                 },
             },
             createdRow: function (row, data, index) {

@@ -9,8 +9,3 @@ GC\Translator::$domain = 'admin';
 
 # utworzenie okruszków chleba dla całego panelu admina
 $breadcrumbs = new GC\Breadcrumbs();
-$breadcrumbs->push([
-    'uri' => $uri->make('/'),
-    'name' => 'Dashboard',
-    'icon' => 'dashboard',
-]);

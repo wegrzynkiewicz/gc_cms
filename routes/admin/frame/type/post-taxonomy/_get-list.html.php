@@ -3,7 +3,7 @@
 # pobierz wszystkie posortowane taksonomie z języka
 $taxonomies = GC\Model\Frame::select()
     ->equals('lang', GC\Staff::getInstance()->getEditorLang())
-    ->equals('type', $type)
+    ->equals('type', $frameType)
     ->order('name', 'ASC')
     ->fetchByPrimaryKey();
 

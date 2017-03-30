@@ -1,11 +1,16 @@
 <?php
 
+require ROUTES_PATH.'/admin/_import.php';
+
+$frame_id = intval(array_shift($_PARAMETERS));
+
 $moduleType = post('type');
 
 # wstaw moduł
 $module_id = GC\Model\Module::insert([
     'type' => $moduleType,
     'theme' => 'default',
+    'content' => '',
 ]);
 
 # pobierz największą pozycję Y w gridzie
@@ -32,6 +37,7 @@ GC\Model\Module\Row::replace([
     'frame_id' => $frame_id,
     'position' => $y,
     'gutter' => 30,
+    'bg_image' => '',
 ]);
 
 flashBox(trans("%s został utworzony. Edytujesz go teraz.", [$config['module']['types'][$moduleType]['name']]));

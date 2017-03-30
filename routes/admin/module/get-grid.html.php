@@ -1,5 +1,11 @@
 <?php
 
+require ROUTES_PATH.'/admin/_import.php';
+
+$frame_id = intval(array_shift($_PARAMETERS));
+
+require ROUTES_PATH."/admin/module/_breadcrumbs-loop.php";
+
 # pobierz moduły wraz z pozycjami grida dla rusztowania $frame_id
 $modules = GC\Model\Module::select()
     ->source('::grid')
@@ -29,7 +35,7 @@ foreach ($metas as $meta) {
                     <i class="fa fa-search fa-fw"></i>
                     <?=trans('Podgląd')?>
                 </a>
-                <a href="<?=$uri->make("/admin/frame/{$frame_id}/module/new")?>"
+                <a href="<?=$uri->make("/admin/module/new/{$frame_id}")?>"
                     type="button"
                     class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i>

@@ -40,4 +40,9 @@ class Breadcrumbs
             '/'
         );
     }
+
+    public function reverse(): void
+    {
+        $this->links = array_reverse($this->links, true);
+    }
 }

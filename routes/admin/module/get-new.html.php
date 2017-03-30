@@ -1,5 +1,11 @@
 <?php
 
+require ROUTES_PATH.'/admin/_import.php';
+
+$frame_id = intval(array_shift($_PARAMETERS));
+
+require ROUTES_PATH."/admin/module/_breadcrumbs-loop.php";
+
 $headTitle = trans('Dodawanie nowego modułu');
 $breadcrumbs->push([
     'name' => $headTitle,

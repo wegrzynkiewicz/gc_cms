@@ -3,7 +3,7 @@
 # pobierz liczbę odpowiednich rusztowań
 $count = GC\Model\Frame::select()
     ->fields('COUNT(*) AS count')
-    ->equals('type', $type)
+    ->equals('type', $frameType)
     ->equals('lang', GC\Staff::getInstance()->getEditorLang())
     ->fetch()['count'];
 

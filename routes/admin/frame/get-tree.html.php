@@ -9,7 +9,7 @@ $frame = GC\Model\Frame::select()
     ->equals('frame_id', $frame_id)
     ->fetch();
 
-$type = $frame['type'];
+$frameType = $frame['type'];
 
-require ROUTES_PATH."/admin/frame/type/{$type}/_import.php";
-require ROUTES_PATH."/admin/frame/type/{$type}/_get-tree.html.php";
+require ROUTES_PATH."/admin/frame/_breadcrumbs-list.php";
+require ROUTES_PATH."/admin/frame/type/{$frameType}/_get-tree.html.php";

@@ -6,8 +6,17 @@ $module_id = intval(array_shift($_PARAMETERS));
 
 # dodanie ramki
 $frame_id = GC\Model\Frame::insert([
-    'name' => post('name'),
+    'name' => GC\Validation\Required::raw('name'),
     'type' => 'tab',
+    'slug' => '',
+    'lang' => GC\Staff::getInstance()->getEditorLang(),
+    'title' => '',
+    'keywords' => '',
+    'description' => '',
+    'image' => '',
+    'publication_datetime' => sqldate(),
+    'modification_datetime' => sqldate(),
+    'creation_datetime' => sqldate(),
 ]);
 
 # pobierz najstarszą pozycję dla zakładki w module

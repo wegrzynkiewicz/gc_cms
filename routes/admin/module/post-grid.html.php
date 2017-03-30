@@ -1,5 +1,19 @@
 <?php
 
+require ROUTES_PATH.'/admin/_import.php';
+
+$frame_id = intval(array_shift($_PARAMETERS));
+
+# pobierz stronę po kluczu głównym
+$frame = GC\Model\Frame::select()
+    ->equals('frame_id', $frame_id)
+    ->fetch();
+
+$frameType = $frame['type'];
+
+require ROUTES_PATH.'/admin/frame/_breadcrumbs.php';
+require ROUTES_PATH.'/admin/module/_breadcrumbs.php';
+
 # dekoduj nadesłaną wartość
 $grid = json_decode(post('grid'), true);
 

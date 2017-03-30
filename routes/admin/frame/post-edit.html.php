@@ -9,8 +9,6 @@ $frame = GC\Model\Frame::select()
     ->equals('frame_id', $frame_id)
     ->fetch();
 
-$type = $frame['type'];
-
 $data = [
     'name' => GC\Validation\Required::raw('name'),
     'title' => GC\Validation\Optional::raw('title') ?? '',
@@ -28,7 +26,8 @@ $data['slug'] = empty($_POST['slug'] ?? '')
 
 GC\Model\Frame::updateByPrimaryId($frame_id, $data);
 
-require ROUTES_PATH."/admin/frame/type/{$type}/_import.php";
-require ROUTES_PATH."/admin/frame/type/{$type}/_post-edit.html.php";
+$frameType = $frame['type'];
+require ROUTES_PATH."/admin/frame/_breadcrumbs-list.php";
+require ROUTES_PATH."/admin/frame/type/{$frameType}/_post-edit.html.php";
 
 redirect($breadcrumbs->getLast('uri'));

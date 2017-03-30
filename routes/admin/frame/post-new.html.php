@@ -2,12 +2,13 @@
 
 require ROUTES_PATH.'/admin/_import.php';
 
-$type = array_shift($_SEGMENTS);
-GC\Validation\Assert::enum($type, array_keys($config['frame']['types']));
+$frameType = array_shift($_SEGMENTS);
+
+GC\Validation\Assert::enum($frameType, array_keys($config['frame']['types']));
 
 $data = [
     'name' => GC\Validation\Required::raw('name'),
-    'type' => $type,
+    'type' => $frameType,
     'lang' => GC\Staff::getInstance()->getEditorLang(),
     'title' => GC\Validation\Optional::raw('title') ?? '',
     'keywords' => GC\Validation\Optional::raw('keywords') ?? '',
@@ -26,7 +27,7 @@ $data['slug'] = empty($_POST['slug'] ?? '')
 # dodaj ramkę do bazy
 $frame_id = GC\Model\Frame::insert($data);
 
-require ROUTES_PATH."/admin/frame/type/{$type}/_import.php";
-require ROUTES_PATH."/admin/frame/type/{$type}/_post-new.html.php";
+require ROUTES_PATH."/admin/frame/_breadcrumbs-list.php";
+require ROUTES_PATH."/admin/frame/type/{$frameType}/_post-new.html.php";
 
 redirect($breadcrumbs->getLast('uri'));

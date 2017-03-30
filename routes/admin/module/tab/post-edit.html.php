@@ -5,7 +5,7 @@ require ROUTES_PATH.'/admin/_import.php';
 $frame_id = intval(post('frame_id'));
 
 # zaktualizuj nazwę zakładki
-GC\Model\Frame::updateByFrameId($frame_id, [
+GC\Model\Frame::updateByPrimaryId($frame_id, [
     'name' => post('name'),
 ]);
 

@@ -2,14 +2,12 @@
 
 require ROUTES_PATH.'/admin/_import.php';
 
-$type = request('type');
-
-require ROUTES_PATH."/admin/frame/type/{$type}/_import.php";
+$frameType = request('type');
 
 # utwórz zapytanie dla datatables
 $frames = GC\Model\Frame::select()
     ->fields('SQL_CALC_FOUND_ROWS frame_id, name, image, slug')
-    ->equals('type', $type)
+    ->equals('type', $frameType)
     ->equals('lang', GC\Staff::getInstance()->getEditorLang())
     ->buildForDataTables($_REQUEST)
     ->fetchAll();
@@ -22,7 +20,7 @@ $recordsFiltered = intval(GC\Storage\Database::getInstance()
 # pobierz ilość wszystkich rekordów
 $recordsTotal = intval(GC\Model\Frame::select()
     ->fields('COUNT(*) AS count')
-    ->equals('type', $type)
+    ->equals('type', $frameType)
     ->equals('lang', GC\Staff::getInstance()->getEditorLang())
     ->fetch()['count']
 );
@@ -34,7 +32,7 @@ foreach ($frames as &$frame) {
         ? $config['imageNotAvailableUri']
         : $frame['image'];
     $frame['hrefEdit'] = $uri->make("/admin/frame/{$frame_id}/edit");
-    $frame['hrefModule'] = $uri->make("/admin/frame/{$frame_id}/module/grid");
+    $frame['hrefModule'] = $uri->make("/admin/module/grid/{$frame_id}");
     $frame['hrefSlug'] = $uri->make($frame['slug']);
     $frame['image'] = $uri->root(thumbnail($image, 64, 64));
 }
