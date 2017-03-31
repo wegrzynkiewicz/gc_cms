@@ -31,6 +31,10 @@ class Translator
 
     public function translate(string $text, array $params = []): string
     {
+        if (empty($text)) {
+            return '';
+        }
+
         if (!isset($this->translations[static::$domain])) {
             logger('[TRANSLATOR] Missing domain', [static::$domain]);
             $this->translations[static::$domain] = [];

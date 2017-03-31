@@ -18,6 +18,7 @@ class Router
     public $segments = [];
 
     public $mimeTypes = [
+       'txt' => 'text/plain',
        'html' => 'text/html',
        'json' => 'application/json',
        'xml' => 'application/xml',

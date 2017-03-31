@@ -82,7 +82,7 @@ $config = [
         'forceDefaultExtension' => null,
     ],
     'adminNavbarTitle' => dummy_trans('Panel Administracyjny'), # wyświetlana w prawym gornym rogu panelu admina
-    'adminHeadTitleBase' => dummy_trans('Acme Panel Administracyjny'), # nazwa doklejana do <title> strony w panelu admina
+    'adminPageCaption' => dummy_trans('Acme Panel Administracyjny'), # nazwa doklejana do <title> strony w panelu admina
     'imageNotAvailableUri' => '/assets/admin/image-not-available.jpg', # ścieżka do obrazka w przypadku braku obrazka
     'password' => [ # zawiera ustawienia dotyczące polityki haseł
         'minLength' => 8, # minimalna długość hasła
@@ -360,6 +360,9 @@ $config = [
             'skip-comments' => true,
             'skip-dump-date' => false,
         ],
+    ],
+    'var' => [ # jest kontenerem na wszystkie zmienne
+        'meta-robots' => 'index, follow',
     ],
 ];
 

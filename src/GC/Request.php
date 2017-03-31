@@ -26,6 +26,10 @@ class Request
     {
         $this->method = strtoupper($method);
         $this->url = $url;
+        $this->url = $this->url->withUserInfo('');
+        $this->url = $this->url->withPath('');
+        $this->url = $this->url->withQuery('');
+        $this->url = $this->url->withFragment('');
 
         $this->root = new HierarchicalPath($script->getDirname());
         $this->slug = new HierarchicalPath($url->getPath());
