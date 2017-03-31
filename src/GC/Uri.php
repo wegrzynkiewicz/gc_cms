@@ -19,7 +19,7 @@ class Uri
     public function __construct(Request $request)
     {
         $this->request = $request;
-        $this->root = (string) $this->request->root;
+        $this->root = rtrim((string) $this->request->root, '/');
         if ($this->request->front) {
             $this->front = '/'.Request::FRONT_CONTROLLER;
         }
