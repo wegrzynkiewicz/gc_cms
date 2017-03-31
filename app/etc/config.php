@@ -361,9 +361,6 @@ $config = [
             'skip-dump-date' => false,
         ],
     ],
-    'var' => [ # jest kontenerem na wszystkie zmienne
-        'meta-robots' => 'index, follow',
-    ],
 ];
 
 $config['template'] = require TEMPLATE_PATH."/config.php";

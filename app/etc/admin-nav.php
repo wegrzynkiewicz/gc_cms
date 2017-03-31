@@ -181,7 +181,7 @@ return [
                 'children' => [],
             ],
             'requirements' => [
-                'name' => 'Wymagania systemowe',
+                'name' => 'Panel kontrolny',
                 'path' => '/root/requirements',
                 'icon' => '',
                 'perms' => [],

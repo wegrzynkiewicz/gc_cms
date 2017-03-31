@@ -501,6 +501,21 @@ function getSourceFiles(): array
 }
 
 /**
+ * Funkcja pobiera tylko katalogi, które mają mieć prawo do odczytu
+ */
+function getWriteableDirs(): array
+{
+    return [
+        STORAGE_PATH.'/dumps',
+        STORAGE_PATH.'/locales',
+        STORAGE_PATH.'/sessions',
+        TEMP_PATH.'/logs',
+        WEB_PATH.'/uploads',
+        $GLOBALS['config']['thumbnail']['path'].$GLOBALS['config']['thumbnail']['uri'],
+    ];
+}
+
+/**
  * Tworzy rekursywnie katalogi
  */
 function makeDirRecursive(string $dir, int $mode = 0775): void
@@ -645,7 +660,6 @@ function thumbnail(string $imageUri, int $width, int $height, string $mode = 'ou
             ->save($thumnailPath, $GLOBALS['config']['thumbnail']['options']);
     } catch (Imagine\Exception\Exception $exception) {
         logException($exception);
-        throw $exception;
     }
 
     logger("[THUMBNAIL] Generated {$thumbnailUri}");

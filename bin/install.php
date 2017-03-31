@@ -19,15 +19,7 @@ echo "Sessions were deleted.".PHP_EOL;
 
 # Tworzenie katalogów
 echo PHP_EOL;
-$dirs = [
-    STORAGE_PATH.'/dumps',
-    STORAGE_PATH.'/locales',
-    STORAGE_PATH.'/sessions',
-    TEMP_PATH.'/logs',
-    WEB_PATH.'/uploads',
-    $config['thumbnail']['path'].$config['thumbnail']['uri'],
-];
-foreach ($dirs as $dir) {
+foreach (getWriteableDirs() ?? [] as $dir) {
     echo "Creating dir: {$dir}".PHP_EOL;
     makeDirRecursive($dir);
 }
