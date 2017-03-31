@@ -13,45 +13,36 @@ use League\Uri\Components\HierarchicalPath;
 class Uri
 {
     private $request = null;
+    private $root = '';
+    private $front = '';
 
     public function __construct(Request $request)
     {
         $this->request = $request;
+        $this->root = (string) $this->request->root;
+        if ($this->request->front) {
+            $this->front = '/'.Request::FRONT_CONTROLLER;
+        }
     }
 
     /**
      * Generuje przednie części adresu dla plików w katalogu głównym
      */
-    public function root(string $slug = '', array $query = []): string
+    public function root(string $slug = ''): string
     {
-        $path = new HierarchicalPath($slug);
-        $path = $path->prepend((string) $this->request->root);
-
-        $path = new Path((string)$path);
-        $path = $path->withoutTrailingSlash();
-
-        $query = Query::createFromPairs($query);
-        $uri = Http::createFromString((string) $path);
-        $uri = $uri->withQuery((string)$query);
-
-        return (string) $uri;
+        return $this->root.$slug;
     }
 
     /**
      * Generuje przednie części adresu
      */
-    public function make(string $slug, array $query = []): string
+    public function make(string $slug): string
     {
         if ($slug === "#") {
             return $slug;
         }
 
-        $path = new HierarchicalPath($slug);
-        if ($this->request->front) {
-            $path = $path->prepend(Request::FRONT_CONTROLLER);
-        }
-
-        return $this->root((string)$path, $query);
+        return $this->root.$this->front.$slug;
     }
 
     /**

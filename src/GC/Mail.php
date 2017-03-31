@@ -20,7 +20,7 @@ class Mail extends PHPMailer
 
         try {
             $emailConfig = $GLOBALS['config']['mailer'];
-            $this->SMTPDebug = false;
+            $this->SMTPDebug = 3;
 
             if ($emailConfig['smtp']) {
                 $this->isSMTP();

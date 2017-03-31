@@ -38,8 +38,8 @@ class Request
         $this->extension = $this->slug->getExtension();
         $this->slug = $this->slug->withExtension('');
         $this->uri = (string) Http::createFromString()
-            ->withPath($this->url->getPath())
-            ->withQuery($this->url->getQuery());
+            ->withPath($url->getPath())
+            ->withQuery($url->getQuery());
 
         logger("[REQUEST] {$method} {$this->slug}", $_REQUEST);
         logger("[URL] {$url}");
