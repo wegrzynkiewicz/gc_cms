@@ -1,6 +1,6 @@
 <?php
 
-# pobranie nawigacji o zadanym kluczu głównym
+// pobranie nawigacji o zadanym kluczu głównym
 $navigation = GC\Model\Navigation::select()
     ->equals('navigation_id', $navigation_id)
     ->fetch();

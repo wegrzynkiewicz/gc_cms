@@ -3,10 +3,10 @@
 require ROUTES_PATH."/admin/_import.php";
 require ROUTES_PATH."/admin/_breadcrumbs.php";
 
-# przefiltrowanie nadesłanej zmiennej
+// przefiltrowanie nadesłanej zmiennej
 $frameType = GC\Validation\Required::enum('type', array_keys($config['frame']['types']));
 
-# utwórz zapytanie dla datatables
+// utwórz zapytanie dla datatables
 $frames = GC\Model\Frame::select()
     ->fields('SQL_CALC_FOUND_ROWS frame_id, name, image, slug')
     ->equals('type', $frameType)
@@ -14,12 +14,12 @@ $frames = GC\Model\Frame::select()
     ->buildForDataTables($_REQUEST)
     ->fetchAll();
 
-# pobierz ilość przefiltrowanych rekordów
+// pobierz ilość przefiltrowanych rekordów
 $recordsFiltered = intval(GC\Storage\Database::getInstance()
     ->fetch("SELECT FOUND_ROWS() AS count;")['count']
 );
 
-# pobierz ilość wszystkich rekordów
+// pobierz ilość wszystkich rekordów
 $recordsTotal = intval(GC\Model\Frame::select()
     ->fields('COUNT(*) AS count')
     ->equals('type', $frameType)
@@ -27,7 +27,7 @@ $recordsTotal = intval(GC\Model\Frame::select()
     ->fetch()['count']
 );
 
-# dla każdego rusztowania utwórz miniaturkę i wygeneruj linki
+// dla każdego rusztowania utwórz miniaturkę i wygeneruj linki
 foreach ($frames as &$frame) {
     $frame_id = $frame['frame_id'];
     $image = empty($frame['image'])
@@ -40,7 +40,7 @@ foreach ($frames as &$frame) {
 }
 unset($frame);
 
-# kontent jaki zostanie zwrócony
+// kontent jaki zostanie zwrócony
 echo json_encode([
     'draw' => intval($_REQUEST['draw']),
     'recordsTotal' => $recordsTotal,

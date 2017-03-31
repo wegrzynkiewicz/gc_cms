@@ -5,7 +5,7 @@ require ROUTES_PATH."/admin/_breadcrumbs.php";
 
 $frame_id = intval(array_shift($_PARAMETERS));
 
-# pobierz rusztowanie po kluczu głównym
+// pobierz rusztowanie po kluczu głównym
 $frame = GC\Model\Frame::select()
     ->equals('frame_id', $frame_id)
     ->fetch();

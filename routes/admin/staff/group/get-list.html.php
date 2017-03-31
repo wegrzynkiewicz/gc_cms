@@ -5,17 +5,17 @@ require ROUTES_PATH."/admin/_breadcrumbs.php";
 require ROUTES_PATH."/admin/staff/_import.php";
 require ROUTES_PATH."/admin/staff/group/_import.php";
 
-# pobierz wszystkie grupy
+// pobierz wszystkie grupy
 $groups = GC\Model\Staff\Group::select()
     ->fields(['group_id', 'name'])
     ->fetchByPrimaryKey();
 
-# pobierz wszystkie uprawnienia
+// pobierz wszystkie uprawnienia
 $groupPermissions = GC\Model\Staff\Permission::select()
     ->fields(['group_id', 'name'])
     ->fetchAll();
 
-# przyporządkuj każdej grupie własne uprawnienia
+// przyporządkuj każdej grupie własne uprawnienia
 foreach ($groupPermissions as $permission) {
     $groups[$permission['group_id']]['permissions'][] = $permission['name'];
 }

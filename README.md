@@ -1,4 +1,4 @@
-# SECURE #
+// SECURE #
 * Używanie PDO
 * Hasła hashowane za pomocą password_hash()
 * Usunięcie nagłówka X-Powered-By
@@ -8,7 +8,7 @@
 * Nadanie session.cookie_httponly = 1, flaga HttpOnly
 * Generowanie unikatowego tokena CSRF za każdym żądaniem
 
-# TODO #
+// TODO #
 * Dodać regułę rewrite do .htaccess pliku sitemap.xml 
 * Usuwanie przestarzałych kopii zapasowych
 * ~~Dorobić ustawienia wiersza w modułach~~

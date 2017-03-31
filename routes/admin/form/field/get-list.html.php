@@ -5,7 +5,7 @@ require ROUTES_PATH."/admin/_breadcrumbs.php";
 require ROUTES_PATH."/admin/form/_import.php";
 require ROUTES_PATH."/admin/form/field/_import.php";
 
-# pobierz posortowane pola formularzy
+// pobierz posortowane pola formularzy
 $fields = GC\Model\Form\Field::select()
     ->source('::fields')
     ->equals('form_id', $form_id)

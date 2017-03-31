@@ -5,7 +5,7 @@ $breadcrumbs->push([
     'name' => $headTitle,
 ]);
 
-# pobranie kluczy node_id, do których przynależy rusztowanie
+// pobranie kluczy node_id, do których przynależy rusztowanie
 $checkedValues = array_keys(GC\Model\Frame\Relation::select()
     ->fields(['node_id'])
     ->equals('frame_id', $frame_id)

@@ -5,7 +5,7 @@ require ROUTES_PATH."/admin/_breadcrumbs.php";
 
 $frame_id = intval($_GET['frame_id']);
 
-# pobranie zakładki z ramką
+// pobranie zakładki z ramką
 $item = GC\Model\Module\Tab::select()
     ->source('::frame')
     ->equals('frame_id', $frame_id)

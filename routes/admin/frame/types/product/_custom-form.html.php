@@ -1,26 +1,26 @@
 <?php
 
-# pobierz wszystkie posortowane taksonomie z danego języka
+// pobierz wszystkie posortowane taksonomie z danego języka
 $taxonomies = GC\Model\Frame::select()
     ->equals('lang', GC\Staff::getInstance()->getEditorLang())
     ->equals('type', 'product-taxonomy')
     ->order('name', 'ASC')
     ->fetchByPrimaryKey();
 
-# pobierz wszystkie węzły przygotowane do budowy drzewa
+// pobierz wszystkie węzły przygotowane do budowy drzewa
 $nodes = GC\Model\Frame::select()
     ->fields(['taxonomy_id', 'frame_id', 'parent_id', 'name'])
     ->source('::tree')
     ->order('position', 'ASC')
     ->fetchAll();
 
-# umieść każdy węzeły dla konkretnych taksonomii
+// umieść każdy węzeły dla konkretnych taksonomii
 $taxonomyNodes = [];
 foreach ($nodes as $node) {
     $taxonomyNodes[$node['taxonomy_id']][] = $node;
 }
 
-# zbuduj drzewa dla konkretnych taksonomii
+// zbuduj drzewa dla konkretnych taksonomii
 foreach ($taxonomies as $taxonomy_id => &$taxonomy) {
     $taxonomy['tree'] = isset($taxonomyNodes[$taxonomy_id])
         ? GC\Model\Frame::createTree($taxonomyNodes[$taxonomy_id])

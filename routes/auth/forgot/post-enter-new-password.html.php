@@ -2,7 +2,7 @@
 
 require ROUTES_PATH."/auth/_import.php";
 
-# pobranie klucza głównego zalogowanego pracownika
+// pobranie klucza głównego zalogowanego pracownika
 $staff_id = GC\Staff::getInstance()['staff_id'];
 
 $new_password = post('new_password');

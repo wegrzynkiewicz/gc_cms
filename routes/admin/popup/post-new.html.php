@@ -7,7 +7,7 @@ require ROUTES_PATH."/admin/popup/_import.php";
 $frames = post('frames', []);
 $display = empty($frames) ? 'all' : 'frames';
 
-# wstaw wyskakujące okienko do bazy danych
+// wstaw wyskakujące okienko do bazy danych
 $popup_id = GC\Model\PopUp\PopUp::insert([
     'name' => post('name'),
     'type' => post('type'),

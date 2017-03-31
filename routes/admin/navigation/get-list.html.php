@@ -4,26 +4,26 @@ require ROUTES_PATH."/admin/_import.php";
 require ROUTES_PATH."/admin/_breadcrumbs.php";
 require ROUTES_PATH."/admin/navigation/_import.php";
 
-# pobierz wszystkie posortowane nawigacje z języka
+// pobierz wszystkie posortowane nawigacje z języka
 $navigations = GC\Model\Navigation::select()
     ->equals('lang', GC\Staff::getInstance()->getEditorLang())
     ->order('name', 'ASC')
     ->fetchByPrimaryKey();
 
-# pobierz wszystkie węzły przygotowane do budowy drzewa
+// pobierz wszystkie węzły przygotowane do budowy drzewa
 $nodes = GC\Model\Navigation\Node::select()
     ->fields('::withFrameFields, navigation_id')
     ->source('::withFrameSource')
     ->order('position', 'ASC')
     ->fetchAll();
 
-# umieść każdy węzeły dla konkretnych nawigacji
+// umieść każdy węzeły dla konkretnych nawigacji
 $navigationNodes = [];
 foreach ($nodes as $node) {
     $navigationNodes[$node['navigation_id']][] = $node;
 }
 
-# zbuduj drzewa dla konkretnych nawigacji
+// zbuduj drzewa dla konkretnych nawigacji
 foreach ($navigations as $navigation_id => &$navigation) {
     $navigation['tree'] = isset($navigationNodes[$navigation_id])
         ? GC\Model\Navigation\Node::createTree($navigationNodes[$navigation_id])

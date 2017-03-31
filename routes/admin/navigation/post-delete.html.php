@@ -6,12 +6,12 @@ require ROUTES_PATH."/admin/navigation/_import.php";
 
 $navigation_id = intval(post('navigation_id'));
 
-# pobierz nawigację po kluczu głównym
+// pobierz nawigację po kluczu głównym
 $navigation = GC\Model\Navigation::select()
     ->equals('navigation_id', $navigation_id)
     ->fetch();
 
-# usuń nawigację
+// usuń nawigację
 GC\Model\Navigation::deleteByNavigationId($navigation_id);
 
 flashBox(trans('Nawigacja "%s" i wszystkie węzły zostały usunięte.', [$navigation['name']]));

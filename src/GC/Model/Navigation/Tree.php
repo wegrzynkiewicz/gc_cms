@@ -12,15 +12,15 @@ class Tree extends AbstractModel
 
     public static function insertPositionsToNavigation(array $positions, int $navigation_id): void
     {
-        # usuń wszystkie rekordy budujące drzewo
+        // usuń wszystkie rekordy budujące drzewo
         static::delete()
             ->equals('navigation_id', $navigation_id)
             ->execute();
 
-        # każdą nadesłaną pozycję wstaw do bazy danych
+        // każdą nadesłaną pozycję wstaw do bazy danych
         foreach ($positions as $node) {
 
-            # pobierz największą pozycję dla węzła w drzewie
+            // pobierz największą pozycję dla węzła w drzewie
             $position = static::select()
                 ->fields('MAX(position) AS max')
                 ->equals('navigation_id', $navigation_id)

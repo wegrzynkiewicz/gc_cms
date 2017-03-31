@@ -5,14 +5,14 @@
 require __DIR__.'/bootstrap.php';
 require __DIR__.'/error-handler.php';
 
-# obiekt reprezentujący żądanie
+// obiekt reprezentujący żądanie
 $request = GC\Request::createFromGlobals();
 $request->detectLanguageCodes(array_keys($config['lang']['installed']));
 
-# obiekt pomocniczy do generowania adresów URI
+// obiekt pomocniczy do generowania adresów URI
 $uri = new GC\Uri($request);
 
-# przekierowuje na prawidłowe adresy w razie potrzeby
+// przekierowuje na prawidłowe adresy w razie potrzeby
 $redirect = new GC\Redirect($request);
 $redirect->ifSeoPolicyFaild($config['seo']);
 $redirect->ifRewriteCorrect($config['rewrites']);
@@ -26,9 +26,9 @@ if (isset($_REQUEST['allowInConstruction'])) {
 }
 
 try {
-    # jeżeli strona jest w budowie wtedy zwróć komunikat o budowie
+    // jeżeli strona jest w budowie wtedy zwróć komunikat o budowie
     if ($config['debug']['construction'] and !isset($_SESSION['allowInConstruction'])) {
-        throw new GC\Exception\ResponseException(null, 503); # Service Unavailable
+        throw new GC\Exception\ResponseException(null, 503); // Service Unavailable
     }
 
     $router = new GC\Router($request->method, (string) $request->slug, $request->extension);
@@ -53,17 +53,17 @@ catch (Throwable $exception) {
 
     if ($exception instanceof GC\Exception\ResponseException) {
         $code = $exception->getCode();
-        $code = $code > 0 ? $code : 404; # Not Found
+        $code = $code > 0 ? $code : 404; // Not Found
     } else {
-        $code = 500; # Internal Server Error
+        $code = 500; // Internal Server Error
     }
 
-    # usuń wszystkie utworzone buffory
+    // usuń wszystkie utworzone buffory
     while (count(ob_get_status(true))) {
         ob_end_clean();
     }
 
-    # wyświetl bład
+    // wyświetl bład
     ob_start('ob_gzhandler');
     echo renderError($code, [
         'message' => $exception->getMessage(),

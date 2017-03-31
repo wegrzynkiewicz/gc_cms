@@ -67,7 +67,7 @@ class Redirect
         $currentUrl = (string) $this->request->url;
         $targetUrl = (string) $this->getCorrectSeoUrl($seo);
 
-        # przekierowanie na prawidłowy adres
+        // przekierowanie na prawidłowy adres
         if ($currentUrl !== $targetUrl) {
             logger("[SEO] {$targetUrl}");
             redirect($targetUrl, $seo['responseCode']);
@@ -84,7 +84,7 @@ class Redirect
         foreach ($rewrites as $pattern => $destination) {
             if (preg_match($pattern, $target)) {
                 $result = preg_replace($pattern, $destination, $target);
-                redirect($result, 301); # 301 Moved Permanently
+                redirect($result, 301); // 301 Moved Permanently
             }
         }
     }

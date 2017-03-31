@@ -16,15 +16,15 @@ class Tree extends AbstractNode
      */
     public static function insertPositionsToTaxonomy(array $positions, int $taxonomy_id): void
     {
-        # usuń wszystkie rekordy budujące drzewo
+        // usuń wszystkie rekordy budujące drzewo
         static::delete()
             ->equals('taxonomy_id', $taxonomy_id)
             ->execute();
 
-        # każdą nadesłaną pozycję wstaw do bazy danych
+        // każdą nadesłaną pozycję wstaw do bazy danych
         foreach ($positions as $node) {
 
-            # pobierz największą pozycję dla węzła w drzewie
+            // pobierz największą pozycję dla węzła w drzewie
             $position = static::select()
                 ->fields('MAX(position) AS max')
                 ->equals('taxonomy_id', $taxonomy_id)
@@ -45,14 +45,14 @@ class Tree extends AbstractNode
      */
     public static function insertFrameToTaxonomy(int $frame_id, int $taxonomy_id): void
     {
-        # pobierz największą pozycję dla węzła w drzewie
+        // pobierz największą pozycję dla węzła w drzewie
         $position = static::select()
             ->fields('MAX(position) AS max')
             ->equals('taxonomy_id', $taxonomy_id)
             ->equals('parent_id', null)
             ->fetch()['max'];
 
-        # dodaj węzeł do pozycji w drzewie taksonomi
+        // dodaj węzeł do pozycji w drzewie taksonomi
         static::insert([
             'taxonomy_id' => $taxonomy_id,
             'frame_id' => $frame_id,

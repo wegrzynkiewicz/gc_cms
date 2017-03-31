@@ -1,6 +1,6 @@
 <?php
 
-# niestandardowy łapacz błędów, na każdym rodzaju błędu rzuca wyjątek
+// niestandardowy łapacz błędów, na każdym rodzaju błędu rzuca wyjątek
 set_error_handler(function ($severity, $msg, $file, $line, array $context) {
     logger("[ERROR] {$msg}", [relativePath($file), $line]);
     if ($severity & error_reporting()) {
@@ -10,7 +10,7 @@ set_error_handler(function ($severity, $msg, $file, $line, array $context) {
     return false;
 });
 
-# niestandardowy łapacz wyjątków, zapisuje tylko wyjątki do loggera
+// niestandardowy łapacz wyjątków, zapisuje tylko wyjątki do loggera
 set_exception_handler(function ($exception) {
     logException($exception);
     throw $exception;

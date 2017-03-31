@@ -5,7 +5,7 @@ require ROUTES_PATH."/admin/_breadcrumbs.php";
 require ROUTES_PATH."/admin/form/_import.php";
 require ROUTES_PATH."/admin/form/received/_import.php";
 
-# pobierz ilość wysłanych wiadomości dla formularza
+// pobierz ilość wysłanych wiadomości dla formularza
 $count = GC\Model\Form\Sent::select()
     ->fields('COUNT(*) AS count')
     ->equals('form_id', $form_id)

@@ -7,7 +7,7 @@ require ROUTES_PATH."/admin/form/field/_import.php";
 
 $options = [];
 if (isset($field_id) and $field_id > 0) {
-    # pobierz meta tagi dla pola formularza
+    // pobierz meta tagi dla pola formularza
     $meta = GC\Model\Form\Meta::fetchMeta($field_id);
     $options = json_decode($meta['options']);
 }

@@ -15,7 +15,7 @@ function e(string $string): string
  */
 function dd($mixed = null): void
 {
-    # pobiera informacje o pliku w którym wywoływana jest funkcja dd()
+    // pobiera informacje o pliku w którym wywoływana jest funkcja dd()
     $backtrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT);
     $execution = array_shift($backtrace);
 
@@ -194,7 +194,7 @@ function humanFilesize(int $bytes, int $decimals = 3): string
  */
 function normalize(string $unformattedString): string
 {
-    # usuń białe znaki na początku i na końcu
+    // usuń białe znaki na początku i na końcu
     $normalizing = trim($unformattedString);
 
     static $replace = [
@@ -236,24 +236,24 @@ function normalize(string $unformattedString): string
         'ǽ' => 'ae', 'Ǿ' => 'O', 'ǿ' => 'o',
     ];
 
-    # zamień znak niestandardowy na jego odpowiednik
+    // zamień znak niestandardowy na jego odpowiednik
     $normalizing = str_replace(array_keys($replace), $replace, $normalizing);
 
-    # zamień wszystkie wielkie litery na małe
+    // zamień wszystkie wielkie litery na małe
     $normalizing = mb_strtolower($normalizing);
 
-    # zamień znaki na myślnik
+    // zamień znaki na myślnik
     static $whitespaces = [' ', '&', '\r\n', '\n', '+', ',', '//'];
     $normalizing = str_replace($whitespaces, '-', $normalizing);
 
-    # zastosuj wyrażenia na ich odpowiedniki
+    // zastosuj wyrażenia na ich odpowiedniki
     static $regex = [
-        # usuwa wszystkie znaki oprócz:
-        # cyfr, liter, kropki, myślnika, podkreślnika
+        // usuwa wszystkie znaki oprócz:
+        // cyfr, liter, kropki, myślnika, podkreślnika
         '/[^a-z0-9\._\-\/]/' => '',
-        # redukuje nadmiar myślinków
+        // redukuje nadmiar myślinków
         '/[\-]+/' => '-',
-        # redukuje nadmiar kropek
+        // redukuje nadmiar kropek
         '/[\.]+/' => '.',
     ];
     $normalizing = preg_replace(array_keys($regex), $regex, $normalizing);
@@ -280,11 +280,11 @@ function normalizeSlug(string $string): string
  */
 function normalizePath(string $path): string
 {
-    $parts = array(); # Array to build a new path from the good parts
-    $path = str_replace('\\', '/', $path); # Replace backslashes with forwardslashes
-    $path = preg_replace('/\/+/', '/', $path); # Combine multiple slashes into a single slash
-    $segments = explode('/', $path); # Collect path segments
-    $test = ''; # Initialize testing variable
+    $parts = array(); // Array to build a new path from the good parts
+    $path = str_replace('\\', '/', $path); // Replace backslashes with forwardslashes
+    $path = preg_replace('/\/+/', '/', $path); // Combine multiple slashes into a single slash
+    $segments = explode('/', $path); // Collect path segments
+    $test = ''; // Initialize testing variable
 
     foreach ($segments as $segment) {
         if ($segment != '.') {
@@ -622,12 +622,12 @@ function makeThumbnailUri(string $imageUri, int $width, int $height): string
  */
 function thumbnail(string $imageUri, int $width, int $height, string $mode = 'outbound'): string
 {
-    # jeżeli generowanie minaturek jest wyłączone wtedy zwróć adres zdjęcia
+    // jeżeli generowanie minaturek jest wyłączone wtedy zwróć adres zdjęcia
     if (!$GLOBALS['config']['thumbnail']['enabled']) {
         return $imageUri;
     }
 
-    # jeżeli adres obrazka jest pusty
+    // jeżeli adres obrazka jest pusty
     if (empty($imageUri)) {
         return $imageUri;
     }
@@ -637,20 +637,20 @@ function thumbnail(string $imageUri, int $width, int $height, string $mode = 'ou
     $thumbnailUri   = makeThumbnailUri($imageUri, $width, $height);
     $thumnailPath   = $path.$thumbnailUri;
 
-    # jeżeli istnieje miniaturka to zwróć jej adres
+    // jeżeli istnieje miniaturka to zwróć jej adres
     if (is_readable($thumnailPath)) {
         return $thumbnailUri;
     }
 
-    # jeżeli nie istnieje plik zdjęcia to zwróć oryginalny adres
+    // jeżeli nie istnieje plik zdjęcia to zwróć oryginalny adres
     if (!is_readable($imagePath)) {
         return $imageUri;
     }
 
-    # utwórz katalogi do pliku z miniaturką
+    // utwórz katalogi do pliku z miniaturką
     makeDirRecursive(pathinfo($thumnailPath, PATHINFO_DIRNAME));
 
-    # tworzenie miniaturki
+    // tworzenie miniaturki
     try {
         $imagine = new Imagine\Gd\Imagine();
         $size    = new Imagine\Image\Box($width, $height);
@@ -664,7 +664,7 @@ function thumbnail(string $imageUri, int $width, int $height, string $mode = 'ou
 
     logger("[THUMBNAIL] Generated {$thumbnailUri}");
 
-    # zwróć adres miniaturki
+    // zwróć adres miniaturki
     return $thumbnailUri;
 }
 
@@ -675,21 +675,21 @@ function thumbnail(string $imageUri, int $width, int $height, string $mode = 'ou
  */
 function sessionCache(string $name, int $ttl, callable $callback)
 {
-    # spróbuj pobrać tablice z sesji
+    // spróbuj pobrać tablice z sesji
     $pool = $_SESSION['cache'][$name] ?? null;
 
-    # jeżeli istnieje skeszowany $pool wtedy zwróć
+    // jeżeli istnieje skeszowany $pool wtedy zwróć
     if ($pool and $pool['expires'] > time()) {
         logger("[SESSION-CACHE] {$name} was load from cache");
 
-        # zwróć skeszowane dane
+        // zwróć skeszowane dane
         return $_SESSION['cache'][$name]['data'];
     }
 
-    # wywołaj długi callback
+    // wywołaj długi callback
     $result = $callback();
 
-    # zapisz w sesji dane, czyli skeszuj
+    // zapisz w sesji dane, czyli skeszuj
     $_SESSION['cache'][$name] = [
         'data' => $result,
         'expires' => time() + $ttl,
@@ -697,7 +697,7 @@ function sessionCache(string $name, int $ttl, callable $callback)
 
     logger("[SESSION-CACHE] {$name} was regenerate");
 
-    # zwróć wytworzone dane
+    // zwróć wytworzone dane
     return $result;
 }
 

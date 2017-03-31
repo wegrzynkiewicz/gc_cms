@@ -159,7 +159,7 @@ class Database
      */
     private function wrapQuery(string $sql, array $values, callable $callback)
     {
-        # dodaje prefix do każdego wyrazu zaczynającego się od ::
+        // dodaje prefix do każdego wyrazu zaczynającego się od ::
         $sql = preg_replace_callback('/::([a-z_]+)/', function ($matches) {
             return $this->prefix.$matches[1];
         }, $sql);

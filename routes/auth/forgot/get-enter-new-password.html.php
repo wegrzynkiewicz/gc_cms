@@ -4,13 +4,13 @@ require ROUTES_PATH."/auth/_import.php";
 
 $headTitle = trans('Resetowanie hasła');
 
-# pobranie klucza głównego zalogowanego pracownika
+// pobranie klucza głównego zalogowanego pracownika
 $staff_id = GC\Staff::getInstance()['staff_id'];
 
-# pobierz wszystkie meta dane
+// pobierz wszystkie meta dane
 $meta = GC\Model\Staff\Meta::fetchMeta($staff_id);
 
-# jeżeli regeneracja jest nieaktualna wtedy przekieruj
+// jeżeli regeneracja jest nieaktualna wtedy przekieruj
 if (!isset($meta['regenerationVerifyHash'])) {
     unset($_SESSION['staff']);
     redirect($uri->make('/login'));

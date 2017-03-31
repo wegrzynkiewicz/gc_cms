@@ -11,10 +11,10 @@ $breadcrumbs->push([
     'name' => $headTitle,
 ]);
 
-# przeparsowanie pliku composer.lock
+// przeparsowanie pliku composer.lock
 $composer = json_decode(file_get_contents(ROOT_PATH."/composer.lock"), true);
 
-# ustawienie wymagań systemowych
+// ustawienie wymagań systemowych
 $requiredCore = [
     [
         'name' => 'PHP',
@@ -28,7 +28,7 @@ $requiredCore = [
     ],
 ];
 
-# pobranie wymaganych rozszerzeń z pliku composer.lock
+// pobranie wymaganych rozszerzeń z pliku composer.lock
 $requiredExtensions = array_filter($composer['platform'], function($version, $extension) {
     return (bool) preg_match("~ext\-~", $extension);
 }, ARRAY_FILTER_USE_BOTH);

@@ -8,7 +8,7 @@ $navigation_id = intval(array_shift($_PARAMETERS));
 
 require ROUTES_PATH."/admin/navigation/node/_import.php";
 
-# pobierz węzły nawigacji i zbuduj z nich drzewo
+// pobierz węzły nawigacji i zbuduj z nich drzewo
 $tree = GC\Model\Navigation\Node::select()
     ->fields('::withFrameFields')
     ->source('::withFrameSource')

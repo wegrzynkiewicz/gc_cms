@@ -7,7 +7,7 @@ require ROUTES_PATH."/admin/form/field/_import.php";
 
 $field_id = intval(array_shift($_PARAMETERS));
 
-# pobierz pole po kluczu głównym
+// pobierz pole po kluczu głównym
 $field = GC\Model\Form\Field::fetchByPrimaryId($field_id);
 
 $headTitle = trans('Edycja pola: %s', [$field['name']]);

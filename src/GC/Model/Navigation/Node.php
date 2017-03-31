@@ -61,17 +61,17 @@ class Node extends AbstractNode
      */
     public static function deleteByNodeId(int $node_id): void
     {
-        # usuń węzeł nawigacji
+        // usuń węzeł nawigacji
         static::deleteByPrimaryId($node_id);
 
-        # pobierz węzły nawigacji, które nie są przypisane do drzewa
+        // pobierz węzły nawigacji, które nie są przypisane do drzewa
         $nodes = static::select()
             ->fields(['node_id'])
             ->source('::aloneNodes')
             ->equals('navigation_id', null)
             ->fetchByPrimaryKey();
 
-        # usuń każdy samotny węzeł nawigacji
+        // usuń każdy samotny węzeł nawigacji
         foreach ($nodes as $node_id => $node) {
             static::deleteByPrimaryId($node_id);
         }

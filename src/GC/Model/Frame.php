@@ -56,22 +56,22 @@ class Frame extends AbstractNode
      */
     public static function deleteByFrameId(int $frame_id): void
     {
-        # pobierz wszystkie węzły tej taksonomii
+        // pobierz wszystkie węzły tej taksonomii
         $nodes = static::select()
             ->fields('frame_id')
             ->source('::tree')
             ->equals('taxonomy_id', $frame_id)
             ->fetchByPrimaryKey();
 
-        # usuń każdy węzeł tej taksonomii
+        // usuń każdy węzeł tej taksonomii
         foreach ($nodes as $node_id => $node) {
             static::deleteByFrameId($node_id);
         }
 
-        # usuń wszystkie moduły dla rusztowania o frame_id
+        // usuń wszystkie moduły dla rusztowania o frame_id
         Module::deleteByFrameId($frame_id);
 
-        # usuń rusztowanie o id głownym
+        // usuń rusztowanie o id głownym
         static::deleteByPrimaryId($frame_id);
     }
 }

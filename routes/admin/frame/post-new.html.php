@@ -25,7 +25,7 @@ $data['slug'] = empty($_POST['slug'] ?? '')
     ? GC\Model\Frame::proposeSlug($data['name'], $data['lang'])
     : GC\Validation\Required::slug('slug');
 
-# dodaj ramkę do bazy
+// dodaj ramkę do bazy
 $frame_id = GC\Model\Frame::insert($data);
 
 require ROUTES_PATH."/admin/frame/types/{$frameType}/breadcrumbs/_list.php";

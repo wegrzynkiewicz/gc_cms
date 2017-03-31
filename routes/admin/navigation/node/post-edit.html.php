@@ -15,7 +15,7 @@ GC\Model\Navigation\Node::updateByPrimaryId($node_id, [
     'destination' => post('destination', ''),
 ]);
 
-# pobierz węzeł po kluczu głównym
+// pobierz węzeł po kluczu głównym
 $node = GC\Model\Navigation\Node::select()
     ->fields('::withFrameFields, navigation_id')
     ->source('::withFrameSource')

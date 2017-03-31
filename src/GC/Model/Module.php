@@ -21,31 +21,31 @@ class Module extends AbstractModel
      */
     public static function deleteByModuleId(int $module_id): void
     {
-        # pobierz zakładki tego modułu
+        // pobierz zakładki tego modułu
         $tabs = Tab::select()
             ->fields('frame_id')
             ->source('::frame')
             ->equals('module_id', $module_id)
             ->fetchAll();
 
-        # dla każdej zakładki usuń rusztowanie
+        // dla każdej zakładki usuń rusztowanie
         foreach ($tabs as $tab) {
             Frame::deleteByFrameId($tab['frame_id']);
         }
 
-        # pobierz pliki tego modułu
+        // pobierz pliki tego modułu
         $files = FileRelation::select()
             ->fields('file_id')
             ->source('::files')
             ->equals('module_id', $module_id)
             ->fetchAll();
 
-        # dla każdego pliku usuń rusztowanie
+        // dla każdego pliku usuń rusztowanie
         foreach ($files as $file) {
             File::deleteByPrimaryId($file['file_id']);
         }
 
-        # usuń właściwy moduł
+        // usuń właściwy moduł
         static::deleteByPrimaryId($module_id);
     }
 
@@ -54,13 +54,13 @@ class Module extends AbstractModel
      */
     public static function deleteByFrameId(int $frame_id): void
     {
-        # pobierz wszystkie moduły
+        // pobierz wszystkie moduły
         $modules = static::select()
             ->source('::grid')
             ->equals('frame_id', $frame_id)
             ->fetchByPrimaryKey();
 
-        # dla każdego modułu usuń jego dodatki
+        // dla każdego modułu usuń jego dodatki
         foreach ($modules as $module_id => $modules) {
             static::deleteByModuleId($module_id);
         }

@@ -12,7 +12,7 @@ $frame_id = $module['frame_id'];
 
 require ROUTES_PATH."/admin/module/parts/_breadcrumbs-loop.php";
 
-# usuń moduł i wszystkie jego dodatki
+// usuń moduł i wszystkie jego dodatki
 GC\Model\Module::deleteByModuleId($module_id);
 
 flashBox(trans("%s został usunięty", [$config['module']['types'][$module['type']]['name']]));

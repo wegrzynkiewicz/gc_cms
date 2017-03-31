@@ -17,7 +17,7 @@ $node_id = GC\Model\Navigation\Node::insert([
     'destination' => post('destination', ''),
 ]);
 
-# pobierz największą pozycję dla węzła w drzewie
+// pobierz największą pozycję dla węzła w drzewie
 $position = GC\Model\Navigation\Tree::select()
     ->fields('MAX(position) AS max')
     ->equals('navigation_id', $navigation_id)
@@ -31,7 +31,7 @@ GC\Model\Navigation\Tree::insert([
     'position' => $position + 1,
 ]);
 
-# pobierz węzeł po kluczu głównym
+// pobierz węzeł po kluczu głównym
 $node = GC\Model\Navigation\Node::select()
     ->fields('::withFrameFields')
     ->source('::withFrameSource')

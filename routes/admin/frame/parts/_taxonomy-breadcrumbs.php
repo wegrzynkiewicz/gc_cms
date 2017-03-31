@@ -1,6 +1,6 @@
 <?php
 
-# pobranie taksonomii po kluczu głównym
+// pobranie taksonomii po kluczu głównym
 $taxonomy = GC\Model\Frame::fetchByPrimaryId($taxonomy_id);
 
 $headTitle = trans('Struktura węzłów: %s', [$taxonomy['name']]);

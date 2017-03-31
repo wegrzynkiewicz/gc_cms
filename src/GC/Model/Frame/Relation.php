@@ -12,12 +12,12 @@ class Relation extends AbstractModel
 
     public static function updateRelations(int $frame_id, array $relations): void
     {
-        # usuń wszyskie przynależności
+        // usuń wszyskie przynależności
         static::delete()
             ->equals('frame_id', $frame_id)
             ->execute();
 
-        # wstaw przynależności wpisu do węzłów taksonomii
+        // wstaw przynależności wpisu do węzłów taksonomii
         foreach ($relations as $node_id) {
             static::insert([
                 'frame_id' => $frame_id,

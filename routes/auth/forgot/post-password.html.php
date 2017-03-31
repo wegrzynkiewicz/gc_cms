@@ -2,12 +2,12 @@
 
 require ROUTES_PATH."/auth/_import.php";
 
-# pobierz pracownika po wprowadzonym adresie emailowym
+// pobierz pracownika po wprowadzonym adresie emailowym
 $user = GC\Model\Staff\Staff::select()
     ->equals('email', post('login'))
     ->fetch();
 
-# jeżeli nie znaleziono pracownika wtedy zwróć błąd
+// jeżeli nie znaleziono pracownika wtedy zwróć błąd
 if (!$user) {
     $error['login'] = trans('Nieprawidłowy adres e-mail');
     echo render(ROUTES_PATH."/auth/forgot/password-get.php");
@@ -23,13 +23,13 @@ $regenerateUrl = sprintf(
     $_SERVER['HTTP_HOST'], $email64, $regenerationVerifyHash
 );
 
-# zapisz dane regeneracyjne w bazie danych
+// zapisz dane regeneracyjne w bazie danych
 GC\Model\Staff\Meta::updateMeta($user['staff_id'], [
     'regenerationVerifyHash' => $regenerationVerifyHash,
     'regenerationVerifyTime' => $regenerationVerifyTime,
 ]);
 
-# wyślij maila z linkiem weryfikującym
+// wyślij maila z linkiem weryfikującym
 $mail = new GC\Mail();
 $mail->buildTemplate(
     ROUTES_PATH."/auth/forgot/_email-regeneration.html.php",

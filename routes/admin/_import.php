@@ -2,10 +2,10 @@
 
 /* Plik ładowany przed każdą akcją w panelu admina */
 
-# utworzenie obiektu repezentującego pracownika
+// utworzenie obiektu repezentującego pracownika
 $staff = GC\Staff::getInstance();
 
 GC\Translator::$domain = 'admin';
 
-# utworzenie okruszków chleba dla całego panelu admina
+// utworzenie okruszków chleba dla całego panelu admina
 $breadcrumbs = new GC\Breadcrumbs();

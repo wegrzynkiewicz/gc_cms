@@ -4,7 +4,7 @@ require ROUTES_PATH."/admin/_import.php";
 require ROUTES_PATH."/admin/_breadcrumbs.php";
 require ROUTES_PATH."/admin/navigation/node/type/_import.php";
 
-# pobierz wszystkie rusztowania i dopisz typ do nazwy
+// pobierz wszystkie rusztowania i dopisz typ do nazwy
 $frames = GC\Model\Frame::select()
     ->fields(['frame_id', 'name', 'type'])
     ->equals('lang', GC\Staff::getInstance()->getEditorLang())

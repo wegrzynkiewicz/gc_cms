@@ -5,7 +5,7 @@ require ROUTES_PATH."/admin/_breadcrumbs.php";
 
 $module_id = intval(array_shift($_PARAMETERS));
 
-# dodanie ramki
+// dodanie ramki
 $frame_id = GC\Model\Frame::insert([
     'name' => GC\Validation\Required::raw('name'),
     'type' => 'tab',
@@ -20,13 +20,13 @@ $frame_id = GC\Model\Frame::insert([
     'creation_datetime' => sqldate(),
 ]);
 
-# pobierz najstarszą pozycję dla zakładki w module
+// pobierz najstarszą pozycję dla zakładki w module
 $position = GC\Model\Module\Tab::select()
     ->fields('MAX(position) AS max')
     ->equals('module_id', $module_id)
     ->fetch()['max'];
 
-# wstawienie pozycji zakładki
+// wstawienie pozycji zakładki
 GC\Model\Module\Tab::insert([
     'module_id' => $module_id,
     'frame_id' => $frame_id,

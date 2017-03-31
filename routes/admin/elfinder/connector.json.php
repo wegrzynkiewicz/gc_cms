@@ -10,7 +10,7 @@ elFinder::$netDrivers['ftp'] = 'FTP';
 // ===============================================
 
 /**
- * # Dropbox volume driver need `composer require dropbox-php/dropbox-php:dev-master@dev`
+ * // Dropbox volume driver need `composer require dropbox-php/dropbox-php:dev-master@dev`
  *  OR "dropbox-php's Dropbox" and "PHP OAuth extension" or "PEAR's HTTP_OAUTH package"
  * * dropbox-php: http://www.dropbox-php.com/
  * * PHP OAuth extension: http://pecl.php.net/package/oauth

@@ -8,7 +8,7 @@ $navigation_id = intval(array_shift($_PARAMETERS));
 
 require ROUTES_PATH."/admin/navigation/node/_import.php";
 
-# dekoduj nadesłaną wartość position
+// dekoduj nadesłaną wartość position
 $positions = json_decode(post('positions', []), true);
 GC\Model\Navigation\Tree::insertPositionsToNavigation($positions, $navigation_id);
 

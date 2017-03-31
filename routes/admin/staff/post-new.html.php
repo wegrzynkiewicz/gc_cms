@@ -7,7 +7,7 @@ require ROUTES_PATH."/admin/staff/_import.php";
 $password = random($config['password']['minLength']);
 $groups = post('groups', []);
 
-# wstaw nowego pracownika do bazy
+// wstaw nowego pracownika do bazy
 $staff_id = GC\Model\Staff\Staff::insert([
     'name' => post('name'),
     'password' => password_hash($password, \PASSWORD_DEFAULT),
@@ -17,7 +17,7 @@ $staff_id = GC\Model\Staff\Staff::insert([
     'force_change_password' => 1,
 ]);
 
-# wstaw przynależność pracownika do grup
+// wstaw przynależność pracownika do grup
 foreach ($groups as $group_id) {
     GC\Model\Staff\Membership::insert([
         'group_id' => $group_id,
@@ -25,7 +25,7 @@ foreach ($groups as $group_id) {
     ]);
 }
 
-# wyślij maila z hasłem
+// wyślij maila z hasłem
 $mail = new GC\Mail();
 $mail->buildTemplate(
     ROUTES_PATH."/admin/staff/_email-staff-created.html.php",

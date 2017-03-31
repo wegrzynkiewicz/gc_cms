@@ -1,12 +1,12 @@
 <?php
 
-# pobierz samą nawigację
+// pobierz samą nawigację
 $navigation = GC\Model\Navigation::select()
     ->equals('workname', 'side')
     ->equals('lang', getVisitorLang())
     ->fetch();
 
-# pobierz węzły nawigacji i zbuduj z nich drzewo, jeżeli nawigacja istnieje
+// pobierz węzły nawigacji i zbuduj z nich drzewo, jeżeli nawigacja istnieje
 $tree = false;
 if ($navigation) {
     $tree = GC\Model\Navigation\Node::select()

@@ -5,7 +5,7 @@ require ROUTES_PATH."/admin/_breadcrumbs.php";
 
 $frame_id = intval(post('frame_id'));
 
-# zaktualizuj nazwę zakładki
+// zaktualizuj nazwę zakładki
 GC\Model\Frame::updateByFrameId($frame_id, [
     'name' => post('name'),
 ]);

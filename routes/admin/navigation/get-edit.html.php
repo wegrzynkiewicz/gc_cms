@@ -6,7 +6,7 @@ require ROUTES_PATH."/admin/navigation/_import.php";
 
 $navigation_id = intval(array_shift($_PARAMETERS));
 
-# pobierz okienko po kluczu głównym
+// pobierz okienko po kluczu głównym
 $navigation = GC\Model\Navigation::select()
     ->equals('navigation_id', $navigation_id)
     ->fetch();

@@ -4,10 +4,10 @@ require ROUTES_PATH."/admin/_import.php";
 require ROUTES_PATH."/admin/_breadcrumbs.php";
 require ROUTES_PATH."/admin/account/_import.php";
 
-# pobranie klucza głównego zalogowanego pracownika
+// pobranie klucza głównego zalogowanego pracownika
 $staff_id = GC\Staff::getInstance()['staff_id'];
 
-# zaktualizuj profil pracownika
+// zaktualizuj profil pracownika
 GC\Model\Staff\Staff::updateByPrimaryId($staff_id, [
     'name' => post('name'),
     'lang' => post('lang'),

@@ -7,12 +7,12 @@ require ROUTES_PATH."/admin/staff/group/_import.php";
 
 $permissions = post('permissions', []);
 
-# wstaw grupę
+// wstaw grupę
 $group_id = GC\Model\Staff\Group::insert([
     'name' => post('name'),
 ]);
 
-# wstaw uprawnienia grupy
+// wstaw uprawnienia grupy
 foreach ($permissions as $permission) {
     GC\Model\Staff\Permission::insert([
         'group_id' => $group_id,

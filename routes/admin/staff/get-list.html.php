@@ -4,31 +4,31 @@ require ROUTES_PATH."/admin/_import.php";
 require ROUTES_PATH."/admin/_breadcrumbs.php";
 require ROUTES_PATH."/admin/staff/_import.php";
 
-# pobierz pracowników, którzy nie są kontem roota
+// pobierz pracowników, którzy nie są kontem roota
 $users = GC\Model\Staff\Staff::select()
     ->fields(['staff_id', 'name'])
     ->equals('root', 0)
     ->fetchByPrimaryKey();
 
-# pobierz wszystkie grupy pracowników
+// pobierz wszystkie grupy pracowników
 $groups = GC\Model\Staff\Group::select()
     ->fields(['staff_id', 'name', 'group_id'])
     ->source('::groups')
     ->order('name', 'ASC')
     ->fetchAll();
 
-# przypisz każdemu pracownikowi jego grupy
+// przypisz każdemu pracownikowi jego grupy
 foreach ($groups as $group) {
     $users[$group['staff_id']]['groups'][$group['group_id']] = $group['name'];
 }
 
-# pobierz wszystkie uprawnienia dla pracownika
+// pobierz wszystkie uprawnienia dla pracownika
 $permissions = GC\Model\Staff\Permission::select()
     ->fields('DISTINCT name, staff_id')
     ->source('::staff_membership JOIN ::staff_permissions USING(group_id)')
     ->fetchAll();
 
-# przypisz każdemu pracownikowi jego uprawnienia
+// przypisz każdemu pracownikowi jego uprawnienia
 foreach ($permissions as $permission) {
     $users[$permission['staff_id']]['permissions'][] = $permission['name'];
 }

@@ -4,7 +4,7 @@ require ROUTES_PATH."/admin/_import.php";
 
 $frame_id = intval(array_shift($_PARAMETERS));
 
-# pobierz rusztowanie po kluczu głównym
+// pobierz rusztowanie po kluczu głównym
 $frame = GC\Model\Frame::select()
     ->equals('frame_id', $frame_id)
     ->fetch();
@@ -13,7 +13,7 @@ require ROUTES_PATH."/admin/module/parts/_breadcrumbs-loop.php";
 
 $headTitle = $breadcrumbs->getLast()['name'];
 
-# pobierz moduły wraz z pozycjami grida dla rusztowania $frame_id
+// pobierz moduły wraz z pozycjami grida dla rusztowania $frame_id
 $modules = GC\Model\Module::select()
     ->source('::grid')
     ->equals('frame_id', $frame_id)

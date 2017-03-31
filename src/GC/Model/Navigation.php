@@ -17,19 +17,19 @@ class Navigation extends AbstractModel
      */
     public static function deleteByNavigationId(int $navigation_id): void
     {
-        # pobierz węzły nawigacji
+        // pobierz węzły nawigacji
         $nodes = Node::select()
             ->fields(['node_id'])
             ->source('::tree')
             ->equals('navigation_id', $navigation_id)
             ->fetchByPrimaryKey();
 
-        # usuń każdy węzeł nawigacji
+        // usuń każdy węzeł nawigacji
         foreach ($nodes as $node_id => $node) {
             Node::deleteByNodeId($node_id);
         }
 
-        # usuń nawigację
+        // usuń nawigację
         static::deleteByPrimaryId($navigation_id);
     }
 }

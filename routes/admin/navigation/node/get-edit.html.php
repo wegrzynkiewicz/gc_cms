@@ -6,7 +6,7 @@ require ROUTES_PATH."/admin/navigation/_import.php";
 
 $node_id = intval(array_shift($_PARAMETERS));
 
-# pobranie węzła o zadanym kluczu
+// pobranie węzła o zadanym kluczu
 $node = GC\Model\Navigation\Node::select()
     ->fields('::withFrameFields, navigation_id')
     ->source('::withFrameSource')

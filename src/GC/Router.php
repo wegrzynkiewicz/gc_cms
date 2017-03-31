@@ -43,24 +43,24 @@ class Router
             return !ctype_digit($segment);
         });
 
-        # wyszukaj plik w katalogu akcji, który pasuje do adresu uri
+        // wyszukaj plik w katalogu akcji, który pasuje do adresu uri
         $path = ROUTES_PATH;
         while (count($this->segments) > 0) {
             $segment = array_shift($this->segments);
 
-            # jeżeli istnieje jakikolwiek z pasujących plików
+            // jeżeli istnieje jakikolwiek z pasujących plików
             if ($file = $this->getFile($path, $segment)) {
                 return $file;
             }
 
-            # jeżeli istnieje folder, wtedy kontynuuj pętlę, ale nie wykonuj dalej
+            // jeżeli istnieje folder, wtedy kontynuuj pętlę, ale nie wykonuj dalej
             $folder = "{$path}/{$segment}";
             if (is_dir($folder) and count($this->segments)) {
                 $path = $folder;
                 continue;
             }
 
-            # jeżeli nie istnieje akcja to spróbuj załadować plik start
+            // jeżeli nie istnieje akcja to spróbuj załadować plik start
             if ($file = $this->getFile("{$path}/{$segment}", 'start')) {
                 return $file;
             }
@@ -68,22 +68,22 @@ class Router
             break;
         }
 
-        # jeżeli istnieje statyczna strona główna
+        // jeżeli istnieje statyczna strona główna
         if ($this->slug === '/' and $file = $this->getFile(TEMPLATE_PATH, 'static/homepage')) {
             return $file;
         }
 
-        # jeżeli istnieje statyczna strona o takim samym slugu
+        // jeżeli istnieje statyczna strona o takim samym slugu
         if ($file = $this->getFile(TEMPLATE_PATH, "static{$this->slug}")) {
             return $file;
         }
 
-        # pobierz rusztowanie po slugu
+        // pobierz rusztowanie po slugu
         $frame = \GC\Model\Frame::select()
             ->equals('slug', $this->slug)
             ->fetchObject();
 
-        # jeżeli nie uda się pobrać rusztowania
+        // jeżeli nie uda się pobrać rusztowania
         if (!$frame) {
             throw new ResponseException(sprintf(
                 'Slug (%s) was not found', $this->slug
@@ -92,26 +92,26 @@ class Router
 
         extract($frame->getData());
 
-        # dodanie rusztowania jako zmiennej globalnej
+        // dodanie rusztowania jako zmiennej globalnej
         $GLOBALS['frame'] = $frame;
         $GLOBALS['frame_id'] = $frame_id;
 
-        # jeżeli istnieje niestandardowy plik w folderze z szablonem
+        // jeżeli istnieje niestandardowy plik w folderze z szablonem
         if ($file = $this->getFile(TEMPLATE_PATH, "custom/{$frame_id}", $theme)) {
             return $file;
         }
 
-        # jeżeli slug rusztowania wskazuje na stronę główną
+        // jeżeli slug rusztowania wskazuje na stronę główną
         if ($slug == '/' and $file = $this->getFile(TEMPLATE_PATH, 'homepage', $theme)) {
             return $file;
         }
 
-        # jeżeli istnieje plik rusztowania w folderze z szablonem
+        // jeżeli istnieje plik rusztowania w folderze z szablonem
         if ($file = $this->getFile(TEMPLATE_PATH."/frames/{$type}", '', $theme)) {
             return $file;
         }
 
-        # jeżeli istnieje plik główny każdego rusztowania
+        // jeżeli istnieje plik główny każdego rusztowania
         if ($file = $this->getFile(TEMPLATE_PATH, 'frame', $theme)) {
             return $file;
         }

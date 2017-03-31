@@ -4,7 +4,7 @@ require ROUTES_PATH."/admin/_import.php";
 require ROUTES_PATH."/admin/_breadcrumbs.php";
 require ROUTES_PATH."/admin/popup/_import.php";
 
-# pobierz liczbę wyskakujących okienek
+// pobierz liczbę wyskakujących okienek
 $count = GC\Model\PopUp\PopUp::select()
     ->fields('COUNT(*) AS count')
     ->equals('lang', GC\Staff::getInstance()->getEditorLang())

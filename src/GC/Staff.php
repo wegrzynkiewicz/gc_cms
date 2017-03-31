@@ -15,42 +15,42 @@ class Staff extends AbstractEntity
 
     public function __construct()
     {
-        # pobierz wartość zmienną sesyjną
+        // pobierz wartość zmienną sesyjną
         $staff_id = $_SESSION['staff']['staff_id'] ?? null;
         if ($staff_id === null) {
             static::abort('Session variable does not contain valid data');
         }
 
-        # pobierz dane o pracowniku z tabelki sesji
+        // pobierz dane o pracowniku z tabelki sesji
         $entity = ModelStaff::select()
             ->equals('staff_id', $staff_id)
             ->fetch();
 
-        # jezeli sesja pracownika nie istnieje w bazie danych
+        // jezeli sesja pracownika nie istnieje w bazie danych
         if (!$entity) {
             static::abort('Staff does not exists in database');
         }
 
-        # całość jest łatwym do odczytu obiektem Entity
+        // całość jest łatwym do odczytu obiektem Entity
         parent::__construct($entity);
 
-        # jeżeli czas wygaśnięcia sesji istnieje i minął czas trwania sesji
+        // jeżeli czas wygaśnięcia sesji istnieje i minął czas trwania sesji
         $expires = $_SESSION['staff']['expires'] ?? null;
         if ($expires and $expires <= time()) {
             static::abort('Session expired', '/auth/session-timeout');
         }
 
-        # aktualizacja czasu wygaśnięcia sesji
+        // aktualizacja czasu wygaśnięcia sesji
         $_SESSION['staff']['expires'] = time() + $GLOBALS['config']['session']['staff']['lifetime'];
 
-        # pobiera uprawnienia pracownika
+        // pobiera uprawnienia pracownika
         $this->permissions = Permission::select()
             ->fields('DISTINCT name')
             ->source('::staff_membership JOIN ::staff_permissions USING(group_id)')
             ->equals('staff_id', $staff_id)
             ->fetchByMap('name', 'name');
 
-        # jezeli istnieje flaga, ze trzeba zmienić hasło wtedy przekieruj
+        // jezeli istnieje flaga, ze trzeba zmienić hasło wtedy przekieruj
         if ($this->getProperty('force_change_password', false)) {
             redirect($GLOBALS['uri']->make('/auth/force-change-password'));
         }
@@ -63,7 +63,7 @@ class Staff extends AbstractEntity
      */
     public function getEditorLang(): string
     {
-        # jeżeli w sesji nie ma języka edytora wtedy ustaw go z configa
+        // jeżeli w sesji nie ma języka edytora wtedy ustaw go z configa
         if (isset($_SESSION['langEditor'])) {
             return $_SESSION['langEditor'];
         }

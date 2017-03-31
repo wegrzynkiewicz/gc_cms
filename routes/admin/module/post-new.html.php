@@ -9,23 +9,23 @@ require ROUTES_PATH."/admin/module/parts/_breadcrumbs-loop.php";
 
 $moduleType = post('type');
 
-# wstaw moduł
+// wstaw moduł
 $module_id = GC\Model\Module::insert([
     'type' => $moduleType,
     'theme' => 'default',
     'content' => '',
 ]);
 
-# pobierz największą pozycję Y w gridzie
+// pobierz największą pozycję Y w gridzie
 $y = GC\Model\Module\Grid::select()
     ->fields('MAX(y) AS max')
     ->equals('frame_id', $frame_id)
     ->fetch();
 
-# wylicz pozycję Y jako ostatni element grida
+// wylicz pozycję Y jako ostatni element grida
 $y = (isset($y['max'])) ? $y['max'] + 1 : 0;
 
-# wstaw pozycję modułu w gridzie
+// wstaw pozycję modułu w gridzie
 GC\Model\Module\Grid::insert([
     'frame_id' => $frame_id,
     'module_id' => $module_id,
@@ -35,7 +35,7 @@ GC\Model\Module\Grid::insert([
     'h' => 1,
 ]);
 
-# wstaw ustawienia wiersza
+// wstaw ustawienia wiersza
 GC\Model\Module\Row::replace([
     'frame_id' => $frame_id,
     'position' => $y,

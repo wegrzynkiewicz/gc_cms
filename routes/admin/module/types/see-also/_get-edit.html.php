@@ -5,7 +5,7 @@ $tabs = GC\Model\Module\Tab::select()
     ->equals('module_id', $module_id)
     ->fetchByKey('frame_id');
 
-# pobierz wszystkie rusztowania i dopisz typ do nazwy
+// pobierz wszystkie rusztowania i dopisz typ do nazwy
 $frames = GC\Model\Frame::select()
     ->fields(['frame_id', 'name', 'type'])
     ->equals('lang', GC\Staff::getInstance()->getEditorLang())

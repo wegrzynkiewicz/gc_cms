@@ -13,12 +13,12 @@ class FileRelation extends AbstractModel
 
     public static function updateRelations(int $module_id, array $relations): void
     {
-        # usuń wszyskie przynależności
+        // usuń wszyskie przynależności
         static::delete()
             ->equals('module_id', $module_id)
             ->execute();
 
-        # każdą nadesłaną pozycję wstaw do bazy danych
+        // każdą nadesłaną pozycję wstaw do bazy danych
         $position = 1;
         foreach ($relations as $file) {
             static::insert([

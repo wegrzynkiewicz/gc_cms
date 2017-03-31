@@ -4,7 +4,7 @@ require ROUTES_PATH."/admin/_import.php";
 require ROUTES_PATH."/admin/_breadcrumbs.php";
 require ROUTES_PATH."/admin/navigation/_import.php";
 
-# usuń każdy istniejący workname, aby nie było identycznego
+// usuń każdy istniejący workname, aby nie było identycznego
 GC\Model\Navigation::update()
     ->set([
         'workname' => ''
@@ -12,7 +12,7 @@ GC\Model\Navigation::update()
     ->equals('workname', post('workname'))
     ->execute();
 
-# wstaw nawigację
+// wstaw nawigację
 GC\Model\Navigation::insert([
     'name' => post('name'),
     'lang' => GC\Staff::getInstance()->getEditorLang(),

@@ -12,12 +12,12 @@ class Display extends AbstractModel
 
     public static function updateFrames(int $popup_id, array $frames): void
     {
-        # usuń wszystkie przynależności stron do okienek
+        // usuń wszystkie przynależności stron do okienek
         static::delete()
             ->equals('popup_id', $popup_id)
             ->execute();
 
-        # wstaw przynależność wyświetlania na zadanej podstronie
+        // wstaw przynależność wyświetlania na zadanej podstronie
         foreach ($frames as $frame_id) {
             static::insert([
                 'popup_id' => $popup_id,

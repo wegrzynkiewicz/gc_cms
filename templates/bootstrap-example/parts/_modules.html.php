@@ -1,6 +1,6 @@
 <?php
 
-# funkcja która wybiera najodpowiedniejszy szablon dla modułu
+// funkcja która wybiera najodpowiedniejszy szablon dla modułu
 $getModuleTemplate = function ($type, $theme) use ($request) {
     $templates = [
         TEMPLATE_PATH."/modules/{$type}/{$request->method}-{$theme}.html.php",
@@ -16,18 +16,18 @@ $getModuleTemplate = function ($type, $theme) use ($request) {
     throw new RuntimeException("Not found module template for ({$type}, {$theme})");
 };
 
-# pobierz moduły wraz z pozycjami grida dla rusztowania
+// pobierz moduły wraz z pozycjami grida dla rusztowania
 $modules = GC\Model\Module::select()
     ->source('::grid')
     ->equals('frame_id', $frame_id)
     ->fetchByPrimaryKey();
 
-# jeżeli żaden moduł nie istnieje, wtedy przerwij
+// jeżeli żaden moduł nie istnieje, wtedy przerwij
 if (empty($modules)) {
     return;
 }
 
-# pobierz meta tagi dla wszystkich modułów w rusztowaniu
+// pobierz meta tagi dla wszystkich modułów w rusztowaniu
 $metas = GC\Model\Module\Meta::select()
     ->source('::forFrameModules')
     ->equals('frame_id', $frame_id)
@@ -37,7 +37,7 @@ foreach ($metas as $meta) {
     $modules[$meta['module_id']]['meta'][$meta['name']] = $meta['value'];
 }
 
-# pobierz ustawienia wierszy dla rusztowania
+// pobierz ustawienia wierszy dla rusztowania
 $rows = GC\Model\Module\Row::select()
     ->equals('frame_id', $frame_id)
     ->order('position', 'ASC')
