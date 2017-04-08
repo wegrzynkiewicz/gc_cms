@@ -1,7 +1,7 @@
 <?php
 
 $yt = post('content');
-$yt = preg_match('/[a-zA-Z0-9]+$/', $yt, $matches);
+$yt = preg_match('/[a-zA-Z0-9\-]+$/', $yt, $matches);
 
 GC\Model\Module::updateByPrimaryId($module_id, [
     'content' => $matches[0],
