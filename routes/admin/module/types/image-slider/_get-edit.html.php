@@ -24,11 +24,12 @@
             class="form-horizontal">
 
             <div class="simple-box">
-                <?=render(ROUTES_PATH."/admin/parts/input/_selectbox.html.php", [
+                <?=render(ROUTES_PATH."/admin/parts/input/_select2-single.html.php", [
                     'name' => 'theme',
                     'label' => trans('Szablon'),
                     'help' => trans('Wybierz jeden z dostępnych szablonów slajdera zdjęć'),
-                    'options' => $config['moduleThemes']['image-slider'],
+                    'options' => array_trans($config['module']['types']['image-slider']['themes']),
+                    'hideSearch' => true,
                 ])?>
             </div>
 

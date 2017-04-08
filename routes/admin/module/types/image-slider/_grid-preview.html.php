@@ -1,28 +1,32 @@
-<?php $images = GC\Model\Module\File::joinAllWithKeyByForeign($module_id) ?>
+<?php
 
+$images = GC\Model\Module\FileRelation::select()
+    ->source('::files')
+    ->equals('module_id', $module_id)
+    ->order('position', 'asc')
+    ->fetchByKey('file_id');
+
+?>
 <?php if (empty($images)): ?>
     <div class="text-center">
-        <?=trans('Nie znaleziono zdjęć slajdera') ?>
+        <?=trans('Nie znaleziono zdjęć w sliderze') ?>
     </div>
 <?php else: ?>
-    <div class="module-gallery-preview-row" data-gallery="photoswipe">
-        <?php foreach ($images as $image): $is = json_decode($image['settings'], true) ?>
-            <div class="module-gallery-preview-wrapper">
-                <a href="<?=e($image['uri'])?>"
-                    target="_blank"
-                    title="<?=e($image['name'])?>"
-                    data-photoswipe-item=""
-                    data-width="<?=e($is['width'])?>"
-                    data-height="<?=e($is['height'])?>"
-                    class="thumb-wrapper">
-                    <img src="<?=$uri->root(thumbnail($image['uri'], 120, 70))?>"
-                        width="120"
-                        width="70"
-                        alt="<?=e($image['name'])?>"
-                        class="module-gallery-preview-image">
-                </a>
-            </div>
+    <div id="image-slider_<?=$module_id?>" class="module-gallery-preview-row">
+        <?php foreach ($images as $file_id => $image): ?>
+            <?=render(ROUTES_PATH."/admin/module/types/image-slider/_grid-item.html.php", $image)?>
         <?php endforeach ?>
         <div class="clearfix"></div>
+        <script type="text/javascript">
+            $(function() {
+                $('#image-slider_<?=$module_id?>').magnificPopup({
+                    delegate: 'a[data-gallery-item]',
+                    type: 'image',
+                    gallery: {
+                        enabled: true,
+                    },
+                });
+            });
+        </script>
     </div>
 <?php endif ?>
