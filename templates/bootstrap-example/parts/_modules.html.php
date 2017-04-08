@@ -45,14 +45,14 @@ $rows = GC\Model\Module\Row::select()
 
 foreach ($modules as $module_id => $module) {
     $module['template'] = $getModuleTemplate($module['type'], $module['theme']);
-    $rows[$module['y']]['module']['types'][$module['x']] = $module;
+    $rows[$module['y']]['modules'][$module['x']] = $module;
 }
 
 foreach ($rows as $y => $row) {
     if (isset($forceContainerType)) {
         $row['type'] = $forceContainerType;
     }
-    if (isset($row['module']['types'])) {
+    if (isset($row['modules'])) {
         echo render(TEMPLATE_PATH."/parts/_row.html.php", $row);
     }
 }

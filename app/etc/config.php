@@ -257,6 +257,13 @@ $config = [
                     'default' => dummy_trans('Zwykły odtwarzacz filmu'),
                 ],
             ],
+            'fontawesome' => [
+                'name' => dummy_trans('Moduł ikon'),
+                'description' => dummy_trans('Wyświetla wybraną ikonę z możliwością podpisu'),
+                'themes' => [
+                    'default' => dummy_trans('Ikona specjalna'),
+                ],
+            ],
         ],
     ],
     'navigation' => [ // ustawienia dla nawigacji
@@ -264,7 +271,7 @@ $config = [
             'empty' => dummy_trans('Nieklikalny węzeł'),
             'external' => dummy_trans('Kieruj na adres'),
             'homepage' => dummy_trans('Kieruj na stronę główną'),
-            'list' => dummy_trans('Kieruj na stronę w serwisie'),
+            'frame' => dummy_trans('Kieruj na stronę w serwisie'),
         ],
         'nodeThemes' => [ // dostępne wyróżnienia węzłów
             'default' => dummy_trans('Domyślny węzeł'),

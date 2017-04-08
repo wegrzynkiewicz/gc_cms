@@ -2,6 +2,7 @@
 
 require TEMPLATE_PATH."/_import.php";
 
+
 $headTitle = $frame->getTitle();
 
 ?>

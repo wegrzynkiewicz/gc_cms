@@ -15,7 +15,7 @@
                     'name' => 'theme',
                     'label' => trans('Szablon'),
                     'help' => trans('Wybierz jeden z dostępnych szablonów dla zdjęcia'),
-                    'options' => $config['moduleThemes']['photo'],
+                    'options' => $config['module']['types']['photo']['themes'],
                 ])?>
 
                 <?=render(ROUTES_PATH."/admin/parts/input/_image.html.php", [
