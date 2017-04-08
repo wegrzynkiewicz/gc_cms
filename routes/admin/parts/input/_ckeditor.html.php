@@ -29,5 +29,7 @@ $errorMessage = (isset($error) and isset($error[$name])) ? $error[$name] : null;
 <script type="text/javascript">
     $(function(){
         CKEDITOR.replace('<?=$name?>', <?=json_encode($options)?>);
+
+        CKEDITOR.plugins.addExternal( "justify", "\/ckeditorPlugins\/justify\/plugin.js");
     });
 </script>
