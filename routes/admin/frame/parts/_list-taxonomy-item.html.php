@@ -32,7 +32,7 @@ $image = empty($image)
     </td>
     <td class="text-right">
 
-        <a href="<?=$uri->make("/admin/frame/{$frame_id}/module/grid")?>"
+        <a href="<?=$uri->make("/admin/module/grid/{$frame_id}")?>"
             title="<?=trans('Wyświetl moduły podziału')?>"
             class="btn btn-primary btn-sm">
             <i class="fa fa-table fa-fw"></i>
