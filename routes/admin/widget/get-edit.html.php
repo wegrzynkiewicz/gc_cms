@@ -9,4 +9,4 @@ $widget = GC\Model\Widget::fetchByPrimaryId($widget_id);
 $type = $widget['type'];
 $_POST = $widget;
 
-require ROUTES_PATH."/admin/widget/type/{$type}-get.html.php";
+require ROUTES_PATH."/admin/widget/type/get-{$type}.html.php";
