@@ -18,6 +18,6 @@
             <?php foreach ($node->getChildren() as $child): ?>
                 <?=render(__FILE__, $child->getData())?>
             <?php endforeach ?>
-        </ol>
+        </ul>
     <?php endif ?>
 </li>
