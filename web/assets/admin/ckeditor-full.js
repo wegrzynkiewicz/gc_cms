@@ -6,27 +6,27 @@
 
 
 
-    CKEDITOR.plugins.addExternal('dialog','/assets/admin/ckeditorPlugins/dialog/', 'plugin.js');
-    CKEDITOR.plugins.addExternal('contextmenu','/assets/admin/ckeditorPlugins/contextmenu/', 'plugin.js');
-    CKEDITOR.plugins.addExternal('clipboard','/assets/admin/ckeditorPlugins/clipboard/', 'plugin.js');
-    CKEDITOR.plugins.addExternal('justify','/assets/admin/ckeditorPlugins/justify/', 'plugin.js');
-    CKEDITOR.plugins.addExternal('table','/assets/admin/ckeditorPlugins/table/', 'plugin.js');
-    CKEDITOR.plugins.addExternal('tableresize','/assets/admin/ckeditorPlugins/tableresize/', 'plugin.js');
-    CKEDITOR.plugins.addExternal('panel','/assets/admin/ckeditorPlugins/panel/', 'plugin.js');
-    CKEDITOR.plugins.addExternal('floatpanel','/assets/admin/ckeditorPlugins/floatpanel/', 'plugin.js');
-    CKEDITOR.plugins.addExternal('panelbutton','/assets/admin/ckeditorPlugins/panelbutton/', 'plugin.js');
-    CKEDITOR.plugins.addExternal('quicktable','/assets/admin/ckeditorPlugins/quicktable/', 'plugin.js');
-    CKEDITOR.plugins.addExternal('button','/assets/admin/ckeditorPlugins/button/', 'plugin.js');
-    CKEDITOR.plugins.addExternal('smiley','/assets/admin/ckeditorPlugins/smiley/', 'plugin.js');
-    CKEDITOR.plugins.addExternal('font','/assets/admin/ckeditorPlugins/font/', 'plugin.js');
-    CKEDITOR.plugins.addExternal('colorbutton','/assets/admin/ckeditorPlugins/colorbutton/', 'plugin.js');
-    CKEDITOR.plugins.addExternal('colordialog','/assets/admin/ckeditorPlugins/colordialog/', 'plugin.js');
-    CKEDITOR.plugins.addExternal('backgrounds','/assets/admin/ckeditorPlugins/backgrounds/', 'plugin.js');
-    CKEDITOR.plugins.addExternal('autogrow','/assets/admin/ckeditorPlugins/autogrow/', 'plugin.js');
-    CKEDITOR.plugins.addExternal('widget','/assets/admin/ckeditorPlugins/widget/', 'plugin.js');
-    CKEDITOR.plugins.addExternal('pastefromexcel','/assets/admin/ckeditorPlugins/pastefromexcel/', 'plugin.js');
-    CKEDITOR.plugins.addExternal('menu','/assets/admin/ckeditorPlugins/menu/', 'plugin.js');
-    CKEDITOR.plugins.addExternal('dialogadvtab','/assets/admin/ckeditorPlugins/dialogadvtab/', 'plugin.js');
+    CKEDITOR.plugins.addExternal('dialog','http://cdn.grafcenter.pl/ckeditorPlugins/dialog/', 'plugin.js');
+    CKEDITOR.plugins.addExternal('contextmenu','http://cdn.grafcenter.pl/ckeditorPlugins/contextmenu/', 'plugin.js');
+    CKEDITOR.plugins.addExternal('clipboard','http://cdn.grafcenter.pl/ckeditorPlugins/clipboard/', 'plugin.js');
+    CKEDITOR.plugins.addExternal('justify','http://cdn.grafcenter.pl/ckeditorPlugins/justify/', 'plugin.js');
+    CKEDITOR.plugins.addExternal('table','http://cdn.grafcenter.pl/ckeditorPlugins/table/', 'plugin.js');
+    CKEDITOR.plugins.addExternal('tableresize','http://cdn.grafcenter.pl/ckeditorPlugins/tableresize/', 'plugin.js');
+    CKEDITOR.plugins.addExternal('panel','http://cdn.grafcenter.pl/ckeditorPlugins/panel/', 'plugin.js');
+    CKEDITOR.plugins.addExternal('floatpanel','http://cdn.grafcenter.pl/ckeditorPlugins/floatpanel/', 'plugin.js');
+    CKEDITOR.plugins.addExternal('panelbutton','http://cdn.grafcenter.pl/ckeditorPlugins/panelbutton/', 'plugin.js');
+    CKEDITOR.plugins.addExternal('quicktable','http://cdn.grafcenter.pl/ckeditorPlugins/quicktable/', 'plugin.js');
+    CKEDITOR.plugins.addExternal('button','http://cdn.grafcenter.pl/ckeditorPlugins/button/', 'plugin.js');
+    CKEDITOR.plugins.addExternal('smiley','http://cdn.grafcenter.pl/ckeditorPlugins/smiley/', 'plugin.js');
+    CKEDITOR.plugins.addExternal('font','http://cdn.grafcenter.pl/ckeditorPlugins/font/', 'plugin.js');
+    CKEDITOR.plugins.addExternal('colorbutton','http://cdn.grafcenter.pl/ckeditorPlugins/colorbutton/', 'plugin.js');
+    CKEDITOR.plugins.addExternal('colordialog','http://cdn.grafcenter.pl/ckeditorPlugins/colordialog/', 'plugin.js');
+    CKEDITOR.plugins.addExternal('backgrounds','http://cdn.grafcenter.pl/ckeditorPlugins/backgrounds/', 'plugin.js');
+    CKEDITOR.plugins.addExternal('autogrow','http://cdn.grafcenter.pl/ckeditorPlugins/autogrow/', 'plugin.js');
+    CKEDITOR.plugins.addExternal('widget','http://cdn.grafcenter.pl/ckeditorPlugins/widget/', 'plugin.js');
+    CKEDITOR.plugins.addExternal('pastefromexcel','http://cdn.grafcenter.pl/ckeditorPlugins/pastefromexcel/', 'plugin.js');
+    CKEDITOR.plugins.addExternal('menu','http://cdn.grafcenter.pl/ckeditorPlugins/menu/', 'plugin.js');
+    CKEDITOR.plugins.addExternal('dialogadvtab','http://cdn.grafcenter.pl/ckeditorPlugins/dialogadvtab/', 'plugin.js');
 
 
 
