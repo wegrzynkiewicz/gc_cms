@@ -1,18 +1,12 @@
-// SECURE #
-* Używanie PDO
-* Hasła hashowane za pomocą password_hash()
-* Usunięcie nagłówka X-Powered-By
-* Użycie nagłówka X-Frame-Options: Deny - _Zabrania na wyświetlenie w ramce_
-* Użycie nagłówka X-Content-Type-Options: nosniff - _Zabrania zgadywania typu MIME_
-* Użycie nagłówka X-XSS-Protection: 1; mode=block - _Chroni przed XSS_
-* Nadanie session.cookie_httponly = 1, flaga HttpOnly
-* Generowanie unikatowego tokena CSRF za każdym żądaniem
+# GrafCenter CMS
 
-// TODO #
-* Dodać regułę rewrite do .htaccess pliku sitemap.xml 
-* Usuwanie przestarzałych kopii zapasowych
-* ~~Dorobić ustawienia wiersza w modułach~~
-* Nadać wszystkim funkcjonalnością odpowiednie uprawnienia
-* Dodać krótki tekst pomocniczy dla każdej funkcjonalności
-* Dodać więcej typów pól w formularzu
-* Dodać walidację danych
+Simple CMS system for individual deployments.
+This project was created on a special order, now it is considered outdated.
+
+# Overview
+
+![](/docs/0.jpg)
+![](/docs/1.jpg)
+![](/docs/2.jpg)
+![](/docs/3.jpg)
+![](/docs/4.jpg)
